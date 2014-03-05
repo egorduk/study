@@ -1,0 +1,27 @@
+{% extends "AcmeRssBundle::layout.html.twig" %}
+
+    {% block title "Rss reader" %}
+
+    {% block content %}
+        <div class="container">
+            <div class="row">
+                <div class="navbar navbar-fixed-top">
+                    <div class="navbar-inner">
+                        <div class="container">
+                            <ul class="nav">
+                                <li><a href="{{ path('setting_view') }}">Control resources</a></li>
+                                <li><a href="{{ path('setting_add') }}">Add new resource</a></li>
+                                <li  class="active"><a href="{{ path('read_short') }}">Read RSS by titles</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="rowNews" class="span9">
+                    {{ text|raw }}
+                </div>
+                <div id="cloudTags" class="span3">
+                    {{ cloud|raw }}
+                </div>
+            </div>
+        </div>
+    {% endblock %}

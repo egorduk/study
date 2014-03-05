@@ -1,0 +1,27 @@
+read:
+    pattern:   /read
+    defaults:  { _controller: AcmeRssBundle:Rss:read }
+
+setting_add:
+    pattern:   /setting/add
+    defaults:  { _controller: AcmeRssBundle:Rss:add }
+
+setting_view:
+    pattern:   /setting/view
+    defaults:  { _controller: AcmeRssBundle:Rss:view }
+
+setting_edit:
+    pattern:   /setting/edit
+    defaults:  { _controller: AcmeRssBundle:Rss:edit }
+
+read_filter:
+    pattern:   /filter/{param}
+    defaults:  { _controller: AcmeRssBundle:Rss:filter }
+
+read_short:
+    pattern:   /short
+    defaults:  { _controller: AcmeRssBundle:Rss:short }
+
+read_full:
+    pattern:   /full/{id}
+    defaults:  { _controller: AcmeRssBundle:Rss:full }
