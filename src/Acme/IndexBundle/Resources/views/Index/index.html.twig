@@ -5,6 +5,12 @@
 {% block content_header '' %}
 
 {% block content %}
-    HELLO!
-
+    <div id="main">
+        <div id="content-index">
+            <p><a href="{{ path('client_login') }}">Клиент вход</a></p>
+            <p><a href="{{ path('client_reg') }}">Клиент регистрация</a></p>
+            <p><a href="{{ path('author_login') }}">Автор вход</a></p>
+            <p><a href="{{ path('author_reg') }}">Автор регистрация</a></p>
+        </div>
+    </div>
 {% endblock %}
