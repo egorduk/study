@@ -1,6 +1,10 @@
+index:
+  pattern:   /index
+  defaults:  { _controller: AcmeIndexBundle:Index:index }
+
 read:
-    pattern:   /read
-    defaults:  { _controller: AcmeRssBundle:Rss:read }
+  pattern:   /read
+  defaults:  { _controller: AcmeRssBundle:Rss:read }
 
 setting_add:
     pattern:   /setting/add

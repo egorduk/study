@@ -1,0 +1,67 @@
+{% extends "AcmeRssBundle::layout.html.twig" %}
+
+{% block title "Rss reader" %}
+
+{% block content %}
+    <div class="container" id="view-page">
+        <div class="row">
+            <div class="navbar navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <ul class="nav">
+                            <li class="active"><a href="{{ path('setting_view') }}">Control resources</a></li>
+                            <li><a href="{{ path('setting_add') }}">Add new resource</a></li>
+                            <li><a href="{{ path('read_short') }}">Read RSS by titles</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="span11" id="block-table">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>Название</td>
+                            <td>URL</td>
+                            <td>Редактировать</td>
+                            <td>Удалить</td>
+                            <td>Активен</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in 0..count-1 %}
+                            <tr>
+                                <td>
+                                    {{ sources[i].name }}
+                                </td>
+                                <td>
+                                    {{ sources[i].url }}
+                                </td>
+                                <td>
+                                    <form action="{{ path('setting_edit') }}" method="post">
+                                        <input type="submit" name="btnEdit" value="Edit" class="btn btn-info">
+                                        <input type="hidden" name="sourceId" value={{ sources[i].id }}>
+                                    </form>
+                                </td>
+                                <td>
+                                    <input type="checkbox" class="checkDelete" value={{ sources[i].id }}>
+                                </td>
+                                <td>
+                                    <input type="checkbox" class="checkSave" value={{ sources[i].id }}>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div id="block-button">
+                <div class="btn-toolbar" role="toolbar">
+                    <div class="btn-group">
+                        <form action="{{ path('setting_view') }}" method="post" id="form">
+                            {{ form_widget(formView) }}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

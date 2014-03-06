@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
             $bundles[] = new Acme\RssBundle\AcmeRssBundle();
+            $bundles[] = new Acme\IndexBundle\AcmeIndexBundle();
         }
 
         return $bundles;
