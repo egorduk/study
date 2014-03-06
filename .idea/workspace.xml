@@ -2,83 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbda89f2-5a23-43ba-8e74-77b721b61073" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/public/images/blue-arrow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/public/images/field-background.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/public/images/search.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/manual/img/tab.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/app/js/images/treeview-default-line.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/app/js/images/treeview-default.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/public/images/welcome-configure.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/public/images/welcome-demo.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/public/images/welcome-quick-tour.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/DependencyInjection/AcmeDemoExtension.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/AcmeIndexBundle.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Form/AddForm.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/Cloud.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/EventListener/ControllerListener.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Twig/Extension/DemoExtension.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Form/EditForm.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Command/HelloWorldCommand.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Controller/IndexController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Entity/News.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/Rss.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Entity/Source.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Form/ViewForm.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/views/Index/add.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/all_test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/reader/all_test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/public/css/bootstrap-responsive.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/public/css/bootstrap.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/public/js/bootstrap.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/callback_testcase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/manual/css/default.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/public/css/demo.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/dom_testcase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/views/Index/edit.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/element_testcase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/reader/element_testcase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/views/Index/filter.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/views/Index/full.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/app/google.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/views/Index/index.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/app/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/invalid_testcase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/manual/js/jquery-1.2.3.pack.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/jquery-1.2.3.pack.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/app/js/jquery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/app/js/jquery.treeview.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/app/js/jquery.treeview.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/public/js/json.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/views/layout.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/manual/manual.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/manual/manual_api.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/manual/manual_faq.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/mass_test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/memory_test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/reader/memory_test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/misc_testcase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/performance_test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/reader/performance_test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/views/Index/read.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/config/routing.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/app/js/screen.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/public/js/script.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/selector_testcase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/reader/selector_testcase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/config/services.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/views/Index/short.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/slick_test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/slickspeed.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/std_testcase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/strip_testcase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/manual/css/ui.tabs.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/manual/js/ui.tabs.pack.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/views/Index/view.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/AppKernel.php" afterPath="$PROJECT_DIR$/app/AppKernel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/views/Index/index.html.twig" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/views/Index/index.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="study.iws" />
@@ -101,7 +25,17 @@
     <favorites_list name="study" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="index.html.twig" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Acme/IndexBundle/Resources/views/Index/index.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="12" selection-start="495" selection-end="495" vertical-scroll-proportion="0.29885057" vertical-offset="0" max-vertical-offset="870">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -117,11 +51,11 @@
         <option value="$PROJECT_DIR$/app/AppKernel.php" />
         <option value="$PROJECT_DIR$/app/config/parameters.yml" />
         <option value="$PROJECT_DIR$/src/Acme/IndexBundle/AcmeIndexBundle.php" />
-        <option value="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/views/Index/index.html.twig" />
         <option value="$PROJECT_DIR$/src/Acme/RssBundle/Resources/config/routing.yml" />
         <option value="$PROJECT_DIR$/app/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/Acme/IndexBundle/Controller/IndexController.php" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
+        <option value="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/views/Index/index.html.twig" />
       </list>
     </option>
   </component>
@@ -252,6 +186,10 @@
               <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -279,7 +217,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rss" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -298,6 +240,178 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Acme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RssBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Acme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RssBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Acme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RssBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Command" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Acme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IndexBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Acme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IndexBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Acme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IndexBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Index" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Acme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IndexBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -355,6 +469,11 @@
       <created>1394101284672</created>
       <updated>1394101284672</updated>
     </task>
+    <task id="LOCAL-00001" summary="route">
+      <created>1394103044103</created>
+      <updated>1394103044103</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -379,9 +498,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32972974" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -413,6 +533,8 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+    <MESSAGE value="route" />
+    <option name="LAST_COMMIT_MESSAGE" value="route" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -481,19 +603,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/IndexBundle/Resources/views/Index/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="10" selection-start="144" selection-end="144" vertical-scroll-proportion="0.16091955" vertical-offset="0" max-vertical-offset="870">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/IndexBundle/Controller/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="32" column="5" selection-start="1013" selection-end="1013" vertical-scroll-proportion="0.43678162" vertical-offset="260" max-vertical-offset="8480">
           <folding>
             <element signature="e#152#209#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/RssBundle/Resources/views/Rss/full.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="32" selection-start="397" selection-end="464" vertical-scroll-proportion="0.25287357" vertical-offset="0" max-vertical-offset="870">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/IndexBundle/Resources/views/Index/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="12" selection-start="495" selection-end="495" vertical-scroll-proportion="0.29885057" vertical-offset="0" max-vertical-offset="870">
+          <folding />
         </state>
       </provider>
     </entry>
