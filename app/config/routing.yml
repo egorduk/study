@@ -2,6 +2,25 @@ index:
   pattern:   /index
   defaults:  { _controller: AcmeIndexBundle:Index:index }
 
+client_login:
+  pattern:   /client_login
+  defaults:  { _controller: AcmeIndexBundle:Index:index }
+
+author_login:
+  pattern:   /author_login
+  defaults:  { _controller: AcmeIndexBundle:Index:index }
+
+client_reg:
+  pattern:   /client_reg
+  defaults:  { _controller: AcmeIndexBundle:Index:index }
+
+author_reg:
+  pattern:   /author_reg
+  defaults:  { _controller: AcmeIndexBundle:Index:index }
+
+
+
+
 read:
   pattern:   /read
   defaults:  { _controller: AcmeRssBundle:Rss:read }
@@ -29,3 +48,4 @@ read_short:
 read_full:
     pattern:   /full/{id}
     defaults:  { _controller: AcmeRssBundle:Rss:full }
+
