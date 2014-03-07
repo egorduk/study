@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
             $bundles[] = new Acme\RssBundle\AcmeRssBundle();
             $bundles[] = new Acme\IndexBundle\AcmeIndexBundle();
+            $bundles[] = new Acme\AuthBundle\AcmeAuthBundle();
         }
 
         return $bundles;
