@@ -2,9 +2,7 @@
 
 namespace Acme\AuthBundle\Controller;
 
-/*use Acme\RssBundle\Form\AddForm;
-use Acme\RssBundle\Form\ViewForm;
-use Acme\RssBundle\Form\EditForm;*/
+use Acme\AuthBundle\Form\LoginForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\ExpressionLanguage\Parser;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,9 +27,22 @@ class ClientController extends Controller
      * @Template()
      * @return Response
      */
-    public function loginAction()
+    public function loginAction(Request $request)
     {
-        return array();
+        $formLogin = $this->createForm(new LoginForm());
+        $formLogin->handleRequest($request);
+
+        if ($request->isMethod('POST'))
+        {
+            if ($formLogin->get('enter')->isClicked())
+            {
+                $postData = $request->request->get('enter');
+                $userLogin = $postData['fieldLogin'];
+                $userPass = $postData['fieldPass'];
+            }
+        }
+
+        return array('formLogin' => $formLogin->createView());
     }
 
 
