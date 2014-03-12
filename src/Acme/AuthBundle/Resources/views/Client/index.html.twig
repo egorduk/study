@@ -1,0 +1,11 @@
+{% extends "AcmeAuthBundle::layout.html.twig" %}
+    {% block content %}
+        <div class="container">
+            <div class="row">
+                <form action="{{ path('client_login') }}" method="post">
+                    {{ form_widget(formLogin) }}
+                </form>
+                <p><a href="{{ path('client_reg') }}">Зарегистрироваться</a></p>
+            </div>
+        </div>
+    {% endblock %}

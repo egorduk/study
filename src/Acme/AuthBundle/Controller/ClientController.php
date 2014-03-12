@@ -2,16 +2,14 @@
 
 namespace Acme\AuthBundle\Controller;
 
-use Acme\AuthBundle\Form\LoginForm;
+use Acme\AuthBundle\Form\Client\LoginForm;
+use Acme\AuthBundle\Form\Client\RegForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\ExpressionLanguage\Parser;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Finder\Iterator\SortableIterator;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-/*use Acme\RssBundle\Helper\Rss;
-use Acme\RssBundle\Entity\Source;
-use Acme\RssBundle\Entity\News;*/
 use Doctrine\ORM\Query;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -23,11 +21,12 @@ class ClientController extends Controller
     private $tableSource = 'AcmeRssBundle:Source';
     private $tableNews = 'AcmeRssBundle:News';
 
+
     /**
      * @Template()
      * @return Response
      */
-    public function loginAction(Request $request)
+    public function indexAction(Request $request)
     {
         $formLogin = $this->createForm(new LoginForm());
         $formLogin->handleRequest($request);
@@ -36,13 +35,39 @@ class ClientController extends Controller
         {
             if ($formLogin->get('enter')->isClicked())
             {
-                $postData = $request->request->get('enter');
-                $userLogin = $postData['fieldLogin'];
-                $userPass = $postData['fieldPass'];
+                return new RedirectResponse($this->generateUrl('client_login'));
             }
         }
 
         return array('formLogin' => $formLogin->createView());
+    }
+
+    /**
+     * @Template()
+     * @return Response
+     */
+    public function loginAction(Request $request)
+    {
+        //$formLogin = $this->createForm(new LoginForm());
+        //$formLogin->handleRequest($request);
+
+        if ($request->isMethod('POST'))
+        {
+            //if ($formLogin->get('enter')->isClicked())
+            {
+                $postData = $request->request->get('enter');
+                $userLogin = $postData['fieldLogin'];
+                $userPass = $postData['fieldPass'];
+
+                //return new RedirectResponse($this->generateUrl('client_index'));
+            }
+            /*elseif($formLogin->get('reg')->isClicked())
+            {
+                return new RedirectResponse($this->generateUrl('client_reg'));
+            }*/
+        }
+
+        //return array('formLogin' => $formLogin->createView());
     }
 
 
@@ -50,9 +75,24 @@ class ClientController extends Controller
      * @Template()
      * @return array
      */
-    public function regAction()
+    public function regAction(Request $request)
     {
-        return array();
+        $formReg = $this->createForm(new RegForm());
+        $formReg->handleRequest($request);
+
+        if ($request->isMethod('POST'))
+        {
+            if ($formReg->get('reg')->isClicked())
+            {
+                /*$postData = $request->request->get('reg');
+                $userLogin = $postData['fieldLogin'];
+                $userPass = $postData['fieldPass'];
+
+                return new RedirectResponse($this->generateUrl('client_index'));*/
+            }
+        }
+
+        return array('formReg' => $formReg->createView());
     }
 
     /**

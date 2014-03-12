@@ -2,17 +2,28 @@ index:
   pattern:   /index
   defaults:  { _controller: AcmeIndexBundle:Index:index }
 
+#------------------Client------------------------#
+
 client_login:
   pattern:   /client/login
   defaults:  { _controller: AcmeAuthBundle:Client:login }
 
-author_login:
-  pattern:   /author/login
-  defaults:  { _controller: AcmeAuthBundle:Author:login }
-
 client_reg:
   pattern:   /client/reg
   defaults:  { _controller: AcmeAuthBundle:Client:reg }
+
+client_index:
+  pattern:   /client/index
+  defaults:  { _controller: AcmeAuthBundle:Client:index }
+
+
+
+
+#------------------Author------------------------#
+
+author_login:
+  pattern:   /author/login
+  defaults:  { _controller: AcmeAuthBundle:Author:login }
 
 author_reg:
   pattern:   /author/reg
