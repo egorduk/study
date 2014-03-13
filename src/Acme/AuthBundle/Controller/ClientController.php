@@ -14,6 +14,7 @@ use Doctrine\ORM\Query;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Acme\AuthBundle\Entity\Client;
 
 
 class ClientController extends Controller
@@ -28,7 +29,7 @@ class ClientController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $formLogin = $this->createForm(new LoginForm());
+        /*$formLogin = $this->createForm(new LoginForm());
         $formLogin->handleRequest($request);
 
         if ($request->isMethod('POST'))
@@ -39,7 +40,27 @@ class ClientController extends Controller
             }
         }
 
-        return array('formLogin' => $formLogin->createView());
+        return array('formLogin' => $formLogin->createView());*/
+
+        $obj = new Client();
+        $formLogin = $this->createForm(new LoginForm(), $obj);
+
+        $formLogin->handleRequest($request);
+
+        if ($request->isMethod('POST'))
+        {
+            if ($formLogin->isValid())
+            {
+                //return $this->redirect($this->generateUrl(''));
+                return array('test' => 'good', 'formLogin' => $formLogin->createView());
+            }
+            else
+            {
+                return array('test' => '', 'formLogin' => $formLogin->createView());
+            }
+        }
+
+        return array('test' => 'prep', 'formLogin' => $formLogin->createView());
     }
 
     /**

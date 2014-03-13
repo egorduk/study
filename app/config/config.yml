@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
 
 framework:
+    validation: { enable_annotations: true }
     #esi:             ~
     #translator:      { fallback: "%locale%" }
     secret:          "%secret%"
@@ -85,3 +86,8 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+
+# DMS Filter
+#dms_filter:
+ #   auto_filter_forms: false
