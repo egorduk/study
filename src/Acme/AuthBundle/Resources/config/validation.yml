@@ -1,0 +1,13 @@
+Acme\AuthBundle\Entity\Client:
+    properties:
+        fieldLogin:
+          #- Length: { min: 5, minMessage: "Слишком короткий логин!" }
+          #- Regex: { pattern: "/^[a-zA-Z]+$/u", message: "Только латинские буквы!" }
+        fieldPass:
+          - Length: { min: 5, minMessage: "Слишком короткий пароль!" }
+
+
+
+
+
+
