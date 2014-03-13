@@ -2,800 +2,100 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbda89f2-5a23-43ba-8e74-77b721b61073" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ - Copy.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/AC.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/AD.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/AE.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/AF.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/AG.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/AI.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/AL.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/AM.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/AO.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/AR.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/AS.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/AT.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/AU.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/AW.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/AX.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/AZ.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/AbstractAdapter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-serializer/Zend/Serializer/Adapter/AbstractAdapter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Compress/AbstractCompressionAlgorithm.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/AbstractFactoryInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/AbstractFilter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/AbstractHydrator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/AbstractListenerAggregate.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Filter/AbstractLocale.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/AbstractOptions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Pattern/AbstractPattern.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Plugin/AbstractPlugin.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/AbstractPluginManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Word/AbstractSeparator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/StringWrapper/AbstractStringWrapper.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/View/Helper/AbstractTranslatorHelper.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/AbstractUnicode.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Writer/AbstractWriter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/AbstractZendServer.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-math/Zend/Math/BigInteger/Adapter/AdapterInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-serializer/Zend/Serializer/Adapter/AdapterInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/AdapterOptions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-serializer/Zend/Serializer/Adapter/AdapterOptions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/AdapterPluginManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-math/Zend/Math/BigInteger/AdapterPluginManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-serializer/Zend/Serializer/AdapterPluginManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/Aggregate/AggregateHydrator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Filters/Alnum.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Rules/Alnum.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Alnum.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/Alnum.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Filter/Alnum.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/Alnum.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Filter/Filters/AlnumTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Filters/Alpha.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Rules/Alpha.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Alpha.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/Alpha.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Filter/Alpha.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/Alpha.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Filter/Filters/AlphaTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Tests/Dummy/Classes/AnnotatedClass.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Tests/Dummy/Classes/AnnotatedInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Mapping/Loader/AnnotationLoader.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Mapping/Loader/AnnotationLoader.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/Apc.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/ApcIterator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/ApcOptions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/ArrayObject.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/ArraySerializable.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/ArraySerializableInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/ArrayStack.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/ArrayUtils.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/AvailableSpaceCapableInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/BA.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/BB.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/BD.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/BE.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/BF.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/BG.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/BH.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/BI.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/BJ.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/BL.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/BM.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/BN.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/BO.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/BQ.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/BR.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/BS.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/BT.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/BW.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/BY.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/BZ.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Exception/BadMethodCallException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Exception/BadMethodCallException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Exception/BadMethodCallException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Exception/BadMethodCallException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Filters/BaseFilter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/BaseFilter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/BaseName.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-math/Zend/Math/BigInteger/Adapter/Bcmath.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-math/Zend/Math/BigInteger/BigInteger.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Encrypt/BlockCipher.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Filters/Boolean.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Rules/Boolean.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Boolean.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/Boolean.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Boolean.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Filter/Filters/BooleanTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Compress/Bz2.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/CA.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/CC.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/CD.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/CF.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/CG.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/CH.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/CI.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/CK.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/CL.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/CM.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/CN.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/CO.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/CR.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/CU.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/CV.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/CW.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/CX.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/CY.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/CZ.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Server/Cache.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Filters/Callback.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Rules/Callback.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Callback.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/Callback.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Callback.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Pattern/CallbackCache.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/CallbackHandler.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Filter/Filters/CallbackTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Filter/Rules/CallbackTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Word/CamelCaseToDash.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Word/CamelCaseToSeparator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Word/CamelCaseToUnderscore.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Capabilities.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Pattern/CaptureCache.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Tests/Dummy/Classes/ChildAnnotatedClass.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/Exception/CircularDependencyFoundException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/Exception/CircularReferenceException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Pattern/ClassCache.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Mapping/ClassMetadata.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Mapping/ClassMetadata.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Mapping/ClassMetadataFactory.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Mapping/ClassMetadataFactory.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Mapping/ClassMetadataFactoryInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Mapping/ClassMetadataFactoryInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Filter/Mapping/ClassMetadataFactoryTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Mapping/ClassMetadataInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Mapping/ClassMetadataInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/ClassMethods.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/ClearByNamespaceInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/ClearByPrefixInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Plugin/ClearExpiredByFactor.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/ClearExpiredInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Server/Client.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/Strategy/ClosureStrategy.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Compress.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Compress/CompressionAlgorithmInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Config.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/Config.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/ConfigInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Processor/Constant.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/View/Helper/CurrencyFormat.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/DE.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/DJ.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/DK.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/DM.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/DO.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/DZ.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Word/DashToCamelCase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Word/DashToSeparator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Word/DashToUnderscore.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/View/Helper/DateFormat.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/DateTime.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/DateTime.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/DateTimeFormatter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/Dba.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/DbaIterator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/DbaOptions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Decoder.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Decompress.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Decrypt.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/File/Decrypt.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Tests/Dummy/Rules/DefaultOptionRule.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/Strategy/DefaultStrategy.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/DelegatorFactoryInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/Di/DiAbstractServiceFactory.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/Di/DiInstanceManagerProxy.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/Di/DiServiceFactory.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/Di/DiServiceInitializer.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Filters/Digits.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Rules/Digits.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Digits.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/Digits.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Digits.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Filter/Filters/DigitsTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Dir.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/DispatchableInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-math/Zend/Math/BigInteger/Exception/DivisionByZeroException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/Exception/DomainException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Exception/DomainException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-math/Zend/Math/Exception/DomainException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Exception/DomainException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/EC.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/EE.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/EG.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/EH.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/ER.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/ES.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/ET.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Encoder.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Encrypt.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/File/Encrypt.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Encrypt/EncryptionAlgorithmInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Server/Error.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Server/Exception/ErrorException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/ErrorHandler.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Event.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/Event.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/EventInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/EventManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/EventManagerAwareInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/EventManagerAwareTrait.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/EventManagerInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/EventsCapableInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/ExceptionEvent.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Plugin/ExceptionHandler.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Exception/ExceptionInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Exception/ExceptionInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/Exception/ExceptionInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Exception/ExceptionInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Exception/ExceptionInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Exception/ExceptionInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Server/Exception/ExceptionInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-math/Zend/Math/BigInteger/Exception/ExceptionInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-math/Zend/Math/Exception/ExceptionInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-serializer/Zend/Serializer/Exception/ExceptionInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/Exception/ExceptionInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Exception/ExceptionInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Expr.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Exception/ExtensionNotLoadedException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Exception/ExtensionNotLoadedException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Exception/ExtensionNotLoadedException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-serializer/Zend/Serializer/Exception/ExtensionNotLoadedException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Exception/ExtensionNotLoadedException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/Aggregate/ExtractEvent.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/FI.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/FJ.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/FK.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/FM.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/FO.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/FR.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Factory.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/FactoryInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Translator/Loader/FileLoaderInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/Filesystem.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/FilesystemIterator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/FilesystemOptions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Filter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Processor/Filter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/FilterChain.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/FilterChain.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/Filter/FilterComposite.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Exception/FilterException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Exception/FilterException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/FilterInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/FilterInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/Filter/FilterInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/FilterInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/Filter/FilterInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/Filter/FilterIterator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Filters/Loader/FilterLoader.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Loader/FilterLoader.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Filters/Loader/FilterLoaderInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Loader/FilterLoaderInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Filter/Filters/Loader/FilterLoaderTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/FilterPluginManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/Filter/FilterProviderInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Filter/FilterTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Tests/FilterTestCase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Filters/Float.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Rules/Float.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Float.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/Float.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/Float.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Filter/Filters/FloatTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/FlushableInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/GA.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/GB.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/GD.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/GE.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/GF.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/GG.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/GH.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/GI.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/GL.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/GM.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/GN.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/GP.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/GQ.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/GR.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/GT.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/GU.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/GW.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/GY.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/Filter/GetFilter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Translator/Loader/Gettext.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Glob.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/GlobalEventManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-math/Zend/Math/BigInteger/Adapter/Gmp.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Compress/Gz.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/HK.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/HN.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/HR.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/HT.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/HU.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/Filter/HasFilter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-math/Zend/Math/Source/HashTiming.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/View/HelperConfig.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Filters/HtmlEntities.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Rules/HtmlEntities.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/HtmlEntities.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/HtmlEntities.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/HtmlEntities.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Filter/Filters/HtmlEntitiesTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Server/Request/Http.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Server/Response/Http.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Server/Exception/HttpException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/Aggregate/HydrateEvent.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/HydratorAwareInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/HydratorInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/Aggregate/HydratorListener.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/HydratorOptionsInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/HydratorPluginManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/ID.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/IE.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/IL.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/IM.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/IN.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/IO.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/IQ.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/IR.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/IS.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/IT.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/StringWrapper/Iconv.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-serializer/Zend/Serializer/Adapter/IgBinary.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Plugin/IgnoreUserAbort.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Inflector.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Reader/Ini.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Writer/Ini.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Translator/Loader/Ini.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/InitializableInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/InitializerInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Filters/Int.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Rules/Int.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Int.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/Int.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Int.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/Int.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Filter/Filters/IntTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/StringWrapper/Intl.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Exception/InvalidArgumentException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Exception/InvalidArgumentException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/Exception/InvalidArgumentException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Exception/InvalidArgumentException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Exception/InvalidArgumentException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Exception/InvalidArgumentException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Server/Exception/InvalidArgumentException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-math/Zend/Math/BigInteger/Exception/InvalidArgumentException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-math/Zend/Math/Exception/InvalidArgumentException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-serializer/Zend/Serializer/Exception/InvalidArgumentException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/Exception/InvalidArgumentException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Exception/InvalidArgumentException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Exception/InvalidCallbackException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Exception/InvalidCallbackException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/Exception/InvalidCallbackException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Exception/InvalidCallbackException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Tests/Dummy/Rules/InvalidDefaultOptionRule.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Exception/InvalidOptionsException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Exception/InvalidOptionsException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/Exception/InvalidServiceNameException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Exception/InvalidZendFilterException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Exception/InvalidZendFilterException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/Filter/IsFilter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/IterableInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/IteratorInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/JE.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/JM.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/JO.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/JP.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Reader/Json.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Writer/Json.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Json.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-serializer/Zend/Serializer/Adapter/Json.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-serializer/Zend/Serializer/Adapter/JsonOptions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/KE.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/KG.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/KH.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/KI.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/KM.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/KN.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/KP.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/KR.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/KW.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/KY.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/KZ.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/KeyListIterator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/LA.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/LB.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/LC.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/LI.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/LK.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/LR.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/LS.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/LT.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/LU.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/LV.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/LY.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/Proxy/LazyServiceFactory.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/Proxy/LazyServiceFactoryFactory.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/ListenerAggregateInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/ListenerAggregateTrait.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Mapping/Loader/LoaderInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Mapping/Loader/LoaderInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Translator/LoaderPluginManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Exception/LogicException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Exception/LogicException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/File/LowerCase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Compress/Lzf.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/MA.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/MC.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/MD.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/ME.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/MF.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/MG.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/MH.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/MK.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/ML.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/MM.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/MN.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/MO.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/MP.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/MQ.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/MR.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/MS.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/MT.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/MU.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/MV.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/MW.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/MX.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/MY.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/MZ.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/StringWrapper/MbString.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/Memcached.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/MemcachedOptions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/MemcachedResourceManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/Memory.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/MemoryOptions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Message.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/MessageInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/Filter/MethodMatchFilter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Exception/MissingDependencyException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Exception/MissingKeyException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Exception/MissingOptionsException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Exception/MissingOptionsException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-serializer/Zend/Serializer/Adapter/MsgPack.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Tests/Dummy/Rules/MultipleOptionsRule.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/MutableCreationOptionsInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/NA.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/NC.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/NE.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/NF.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/NG.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/NI.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/NL.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/NO.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/NP.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/NR.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/NU.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/NZ.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/StringWrapper/Native.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Tests/Dummy/Rules/NoOptionsRule.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Null.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Filter/NumberFormat.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/View/Helper/NumberFormat.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/Filter/NumberOfParameterFilter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/OM.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Filters/ObjectAwareFilter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/ObjectAwareFilter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Pattern/ObjectCache.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/ObjectProperty.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/ObjectWalker.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/ObjectWalker.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Encrypt/Openssl.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/OptimizableInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Plugin/OptimizeByFactor.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/Filter/OptionalParametersFilter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Exception/OutOfBoundsException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Exception/OutOfSpaceException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Pattern/OutputCache.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/PA.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/PE.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/PF.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/PG.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/PH.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/PK.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/PL.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/PM.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/PR.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/PS.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/PT.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/PW.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/PY.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/ParameterObjectInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Parameters.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/ParametersInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Exception/ParseException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Translator/Plural/Parser.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/PatternFactory.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Pattern/PatternInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Pattern/PatternOptions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/PatternPluginManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Writer/PhpArray.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Translator/Loader/PhpArray.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-serializer/Zend/Serializer/Adapter/PhpCode.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/ArrayObject/PhpLegacyCompatibility.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/ArrayObject/PhpReferenceCompatibility.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-serializer/Zend/Serializer/Adapter/PhpSerialize.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Plugin/PluginInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/PluginManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Plugin/PluginOptions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/View/Helper/Plural.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PostCode.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/PostEvent.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Filters/PregReplace.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Rules/PregReplace.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/PregReplace.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/PregReplace.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/PregReplace.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Filter/Filters/PregReplaceTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/PriorityQueue.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Processor/ProcessorInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/ProvidesEvents.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-serializer/Zend/Serializer/Adapter/PythonPickle.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-serializer/Zend/Serializer/Adapter/PythonPickleOptions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/QA.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Processor/Queue.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/RE.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-math/Zend/Math/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-serializer/Zend/Serializer/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/RO.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/RS.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/RU.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/RW.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-math/Zend/Math/Rand.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Exception/RangeException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Compress/Rar.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Reader/ReaderInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/ReaderPluginManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/RealPath.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Exception/RecursionException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/Redis.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/RedisOptions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/RedisResourceManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/Reflection.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Filters/RegExp.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Rules/RegExp.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/RegExp.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/RegExp.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Translator/Loader/RemoteLoaderInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/File/Rename.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/File/RenameUpload.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Server/Request.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Request.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/RequestInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Tests/Dummy/Rules/RequiredOptionsRule.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Server/Response.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Response.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/ResponseCollection.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/ResponseInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Rules/Rule.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/Rule.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Translator/Plural/Rule.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Exception/RuleDefinitionException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Exception/RuleDefinitionException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Exception/RuleOptionsException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Exception/RuleOptionsException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Filter/Rules/RuleTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Exception/RuntimeException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Exception/RuntimeException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Exception/RuntimeException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Exception/RuntimeException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Exception/RuntimeException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Server/Exception/RuntimeException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-math/Zend/Math/BigInteger/Exception/RuntimeException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-math/Zend/Math/Exception/RuntimeException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-serializer/Zend/Serializer/Exception/RuntimeException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/Exception/RuntimeException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Exception/RuntimeException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/SA.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/SB.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/SC.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/SD.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/SE.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/SG.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/SH.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/SI.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/SJ.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/SK.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/SL.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/SM.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/SN.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/SO.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/SR.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/SS.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/ST.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/SV.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/SX.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/SY.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/SZ.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Word/SeparatorToCamelCase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Word/SeparatorToDash.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Word/SeparatorToSeparator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/Strategy/SerializableStrategy.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Plugin/Serializer.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-serializer/Zend/Serializer/Serializer.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Server/Server.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Server/Smd/Service.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/ServiceLocatorAwareInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/ServiceLocatorAwareTrait.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/ServiceLocatorInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/ServiceManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/ServiceManagerAwareInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/Exception/ServiceNotCreatedException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/Exception/ServiceNotFoundException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/Session.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/SessionOptions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/SharedEventAggregateAwareInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/SharedEventManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/SharedEventManagerAwareInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/SharedEventManagerInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/SharedListenerAggregateInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/Server/Smd.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Compress/Snappy.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/SplPriorityQueue.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/SplQueue.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/SplStack.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/StaticEventManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/StaticFilter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Service/StorageCacheAbstractServiceFactory.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Service/StorageCacheFactory.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/StorageFactory.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/StorageInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/StrategyEnabledInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/Hydrator/Strategy/StrategyInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/StringToLower.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/StringToUpper.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/StringTrim.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/StringUtils.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/StringWrapper/StringWrapperInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Filters/StripNewlines.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Rules/StripNewlines.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/StripNewlines.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/StripNewlines.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/StripNewlines.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Filter/Filters/StripNewlinesTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Filters/StripTags.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Rules/StripTags.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/StripTags.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/StripTags.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/StripTags.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Filter/Filters/StripTagsTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Translator/Plural/Symbol.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/TC.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/TD.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/TG.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/TH.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/TJ.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/TK.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/TL.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/TM.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/TN.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/TO.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/TR.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/TT.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/TV.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/TW.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/TZ.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/TaggableInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Compress/Tar.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Translator/TextDomain.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Filters/ToLower.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Rules/ToLower.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/ToLower.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/ToLower.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Filter/Filters/ToLowerTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Filters/ToUpper.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Rules/ToUpper.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/ToUpper.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/ToUpper.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Filter/Filters/ToUpperTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Processor/Token.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/TotalSpaceCapableInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/View/Helper/Translate.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/View/Helper/TranslatePlural.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Processor/Translator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Translator/Translator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Translator/TranslatorAwareInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Translator/TranslatorAwareTrait.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Translator/TranslatorServiceFactory.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Filters/Trim.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Rules/Trim.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Trim.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/Trim.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Filter/Filters/TrimTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/UA.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/UG.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/US.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/UY.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/UZ.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Word/UnderscoreToCamelCase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Word/UnderscoreToDash.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Word/UnderscoreToSeparator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Exception/UnexpectedValueException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Exception/UnsupportedMethodCallException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/File/UpperCase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/UriNormalize.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/VA.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/VC.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/VE.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/VG.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/VI.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/VN.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/VU.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/WF.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/WS.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-serializer/Zend/Serializer/Adapter/Wddx.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-serializer/Zend/Serializer/Adapter/WddxOptions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/WinCache.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/WinCacheOptions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Writer/WriterInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/WriterPluginManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/XCache.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/XCacheOptions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Reader/Xml.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Writer/Xml.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/YE.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/YT.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Reader/Yaml.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/Writer/Yaml.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/ZA.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/ZM.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/Validator/PhoneNumber/ZW.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Filters/Zend.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/src/DMS/Filter/Rules/Zend.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Zend.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/Zend.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/ZendServerDisk.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/Storage/Adapter/ZendServerShm.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/tests/DMS/Filter/Filters/ZendTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/Compress/Zip.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/compatibility/autoload.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/composer.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-cache/Zend/Cache/composer.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-config/Zend/Config/composer.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager/Zend/EventManager/composer.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/composer.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-i18n/Zend/I18n/composer.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-json/Zend/Json/composer.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-math/Zend/Math/composer.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-serializer/Zend/Serializer/composer.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager/Zend/ServiceManager/composer.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/zendframework/zend-stdlib/Zend/Stdlib/composer.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/composer.lock" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dms/phpunit.xml" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\.travis.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\README.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\composer.json" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\composer.lock" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\phpunit.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Exception\FilterException.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Exception\InvalidCallbackException.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Exception\InvalidOptionsException.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Exception\InvalidZendFilterException.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Exception\MissingOptionsException.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Exception\RuleDefinitionException.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Exception\RuleOptionsException.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Filter.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\FilterInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Filters\Alnum.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Filters\Alpha.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Filters\BaseFilter.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Filters\Boolean.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Filters\Callback.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Filters\Digits.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Filters\Float.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Filters\HtmlEntities.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Filters\Int.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Filters\Loader\FilterLoader.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Filters\Loader\FilterLoaderInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Filters\ObjectAwareFilter.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Filters\PregReplace.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Filters\RegExp.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Filters\StripNewlines.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Filters\StripTags.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Filters\ToLower.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Filters\ToUpper.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Filters\Trim.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Filters\Zend.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Mapping\ClassMetadata.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Mapping\ClassMetadataFactory.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Mapping\ClassMetadataFactoryInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Mapping\ClassMetadataInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Mapping\Loader\AnnotationLoader.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Mapping\Loader\LoaderInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\ObjectWalker.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Rules\Alnum.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Rules\Alpha.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Rules\Boolean.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Rules\Callback.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Rules\Digits.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Rules\Float.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Rules\HtmlEntities.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Rules\Int.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Rules\PregReplace.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Rules\RegExp.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Rules\Rule.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Rules\StripNewlines.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Rules\StripTags.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Rules\ToLower.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Rules\ToUpper.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Rules\Trim.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\src\DMS\Filter\Rules\Zend.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Filter\FilterTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Filter\Filters\AlnumTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Filter\Filters\AlphaTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Filter\Filters\BooleanTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Filter\Filters\CallbackTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Filter\Filters\DigitsTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Filter\Filters\FloatTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Filter\Filters\HtmlEntitiesTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Filter\Filters\IntTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Filter\Filters\Loader\FilterLoaderTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Filter\Filters\PregReplaceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Filter\Filters\StripNewlinesTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Filter\Filters\StripTagsTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Filter\Filters\ToLowerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Filter\Filters\ToUpperTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Filter\Filters\TrimTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Filter\Filters\ZendTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Filter\Mapping\ClassMetadataFactoryTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Filter\Rules\CallbackTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Filter\Rules\RuleTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Tests\Dummy\Classes\AnnotatedClass.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Tests\Dummy\Classes\AnnotatedInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Tests\Dummy\Classes\ChildAnnotatedClass.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Tests\Dummy\Rules\DefaultOptionRule.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Tests\Dummy\Rules\InvalidDefaultOptionRule.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Tests\Dummy\Rules\MultipleOptionsRule.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Tests\Dummy\Rules\NoOptionsRule.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Tests\Dummy\Rules\RequiredOptionsRule.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\dms\tests\DMS\Tests\FilterTestCase.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Client.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Client.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/logs/dev.log" afterPath="$PROJECT_DIR$/app/logs/dev.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="c7144f1f-42bd-44b2-8e06-9a249476846a" name="New changelist" comment="" />
     <ignored path="study.iws" />
@@ -830,10 +130,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientController.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ClientController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="22" selection-start="1878" selection-end="1878" vertical-scroll-proportion="0.7079646" vertical-offset="760" max-vertical-offset="6600">
+            <state line="50" column="9" selection-start="1528" selection-end="1528" vertical-scroll-proportion="-14.4827585" vertical-offset="580" max-vertical-offset="6600">
               <folding>
                 <element signature="e#46#88#0" expanded="true" />
               </folding>
@@ -841,10 +141,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Client.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Client.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Client.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="1" selection-start="279" selection-end="279" vertical-scroll-proportion="-12.413794" vertical-offset="0" max-vertical-offset="480">
+            <state line="14" column="23" selection-start="236" selection-end="236" vertical-scroll-proportion="0.3218391" vertical-offset="0" max-vertical-offset="870">
               <folding />
             </state>
           </provider>
@@ -853,12 +153,8 @@
       <file leaf-file-name="validation.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="11" selection-start="149" selection-end="149" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="380">
-              <folding>
-                <marker date="1394713156342" expanded="true" signature="0:319" placeholder="Acme\AuthBundle\Entity\Client:" />
-                <marker date="1394713156342" expanded="true" signature="35:319" placeholder="properties:" />
-                <marker date="1394713156342" expanded="true" signature="232:319" placeholder="fieldPass:" />
-              </folding>
+            <state line="3" column="10" selection-start="77" selection-end="77" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="380">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -903,7 +199,6 @@
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/index.html.twig" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Author.php" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml" />
         <option value="$PROJECT_DIR$/DMS/Bundle/FilterBundle/DMSFilterBundle.php" />
         <option value="$PROJECT_DIR$/vendor/DMS/Bundle/FilterBundle/DMSFilterBundle.php" />
         <option value="$PROJECT_DIR$/vendor/composer/composer.json" />
@@ -911,8 +206,9 @@
         <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/app/autoload.php" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/LoginForm.php" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Client.php" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Client.php" />
       </list>
     </option>
   </component>
@@ -1376,9 +672,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1627,17 +923,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="11" selection-start="149" selection-end="149" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="380">
-          <folding>
-            <marker date="1394713156342" expanded="true" signature="0:319" placeholder="Acme\AuthBundle\Entity\Client:" />
-            <marker date="1394713156342" expanded="true" signature="35:319" placeholder="properties:" />
-            <marker date="1394713156342" expanded="true" signature="232:319" placeholder="fieldPass:" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/TwigBundle.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="25" column="6" selection-start="773" selection-end="773" vertical-scroll-proportion="0.29885057" vertical-offset="0" max-vertical-offset="870">
@@ -1698,13 +983,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms/src/DMS/Filter/Rules/Alnum.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="21" selection-start="28" selection-end="28" vertical-scroll-proportion="0.04597701" vertical-offset="0" max-vertical-offset="870">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="28" column="14" selection-start="1275" selection-end="1275" vertical-scroll-proportion="-19.310345" vertical-offset="0" max-vertical-offset="900">
@@ -1714,10 +992,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Client.php">
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="1" selection-start="279" selection-end="279" vertical-scroll-proportion="-12.413794" vertical-offset="0" max-vertical-offset="480">
-          <folding />
+        <state line="50" column="9" selection-start="1528" selection-end="1528" vertical-scroll-proportion="-14.4827585" vertical-offset="580" max-vertical-offset="6600">
+          <folding>
+            <element signature="e#46#88#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1730,12 +1010,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php">
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="22" selection-start="1878" selection-end="1878" vertical-scroll-proportion="0.7079646" vertical-offset="760" max-vertical-offset="6600">
-          <folding>
-            <element signature="e#46#88#0" expanded="true" />
-          </folding>
+        <state line="3" column="10" selection-start="77" selection-end="77" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="380">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Client.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="23" selection-start="236" selection-end="236" vertical-scroll-proportion="0.3218391" vertical-offset="0" max-vertical-offset="870">
+          <folding />
         </state>
       </provider>
     </entry>
