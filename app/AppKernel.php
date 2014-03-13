@@ -16,7 +16,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new DMS\Bundle\FilterBundle\DMSFilterBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             $bundles[] = new Acme\RssBundle\AcmeRssBundle();
             $bundles[] = new Acme\IndexBundle\AcmeIndexBundle();
             $bundles[] = new Acme\AuthBundle\AcmeAuthBundle();
+            //$bundles[] = new DMS\Bundle\FilterBundle\DMSFilterBundle();
         }
 
         return $bundles;

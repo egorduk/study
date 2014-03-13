@@ -1,7 +1,7 @@
 <?php
 
 namespace Acme\AuthBundle\Entity;
-use DMS\Bundle\FilterBundle\Service\Filter as filter;
+use DMS\Filter\Rules as Filter;
 
 class Client
 {

@@ -21,7 +21,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "winzou/cache-bundle": "dev-master",
         "liip/doctrine-cache-bundle": "~1.0",
-        "phpdocumentor/phpdocumentor": "2.*"
+        "phpdocumentor/phpdocumentor": "2.*",
+        "dms/dms-filter": "~1.0,>=1.0.2"
     },
     "scripts": {
         "post-install-cmd": [

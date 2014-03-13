@@ -49,14 +49,20 @@ class ClientController extends Controller
 
         if ($request->isMethod('POST'))
         {
-            if ($formLogin->isValid())
+            if ($formLogin->get('enter')->isClicked())
             {
-                //return $this->redirect($this->generateUrl(''));
-                return array('test' => 'good', 'formLogin' => $formLogin->createView());
-            }
-            else
-            {
-                return array('test' => '', 'formLogin' => $formLogin->createView());
+                if ($formLogin->isValid())
+                {
+                    //return $this->redirect($this->generateUrl(''));
+                    $postData = $request->request->get('formLogin');
+                    $userLogin = $postData['fieldLogin'];
+                    //print_r($request->request);
+                    return array('test' => $userLogin, 'formLogin' => $formLogin->createView());
+                }
+                else
+                {
+                    return array('test' => 'Bad', 'formLogin' => $formLogin->createView());
+                }
             }
         }
 
