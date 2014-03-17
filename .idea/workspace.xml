@@ -1,168 +1,190 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cbda89f2-5a23-43ba-8e74-77b721b61073" name="Default" comment="">
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\src\Acme\AuthBundle\Entity\Client.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/AcmeAuthBundle.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/AcmeAuthBundle.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/DependencyInjection/AcmeDemoExtension.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/DependencyInjection/AcmeDemoExtension.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/DependencyInjection/AcmeDemoExtension.php" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/DependencyInjection/AcmeDemoExtension.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/DependencyInjection/AcmeDemoExtension.php" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/DependencyInjection/AcmeDemoExtension.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/AcmeIndexBundle.php" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/AcmeIndexBundle.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/AcmeRssBundle.php" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/AcmeRssBundle.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Form/AddForm.php" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Form/AddForm.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Form/AddForm.php" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Form/AddForm.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Filters/Alnum.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Alnum.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Rules/Alnum.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/Alnum.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Filters/Alpha.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Alpha.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Rules/Alpha.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/Alpha.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Mapping/Loader/AnnotationLoader.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Mapping/Loader/AnnotationLoader.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Filters/BaseFilter.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/BaseFilter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Filters/Boolean.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Boolean.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Rules/Boolean.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/Boolean.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Filters/Callback.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Callback.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Rules/Callback.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/Callback.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Mapping/ClassMetadata.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Mapping/ClassMetadata.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Mapping/ClassMetadataFactory.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Mapping/ClassMetadataFactory.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Mapping/ClassMetadataFactoryInterface.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Mapping/ClassMetadataFactoryInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Mapping/ClassMetadataInterface.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Mapping/ClassMetadataInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/EventListener/ControllerListener.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/EventListener/ControllerListener.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/EventListener/ControllerListener.php" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/EventListener/ControllerListener.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/EventListener/ControllerListener.php" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/EventListener/ControllerListener.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Twig/Extension/DemoExtension.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Twig/Extension/DemoExtension.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Twig/Extension/DemoExtension.php" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Twig/Extension/DemoExtension.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Twig/Extension/DemoExtension.php" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Twig/Extension/DemoExtension.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Filters/Digits.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Digits.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Rules/Digits.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/Digits.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Form/EditForm.php" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Form/EditForm.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Form/EditForm.php" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Form/EditForm.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Filter.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Exception/FilterException.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Exception/FilterException.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/FilterInterface.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/FilterInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Filters/Loader/FilterLoader.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Loader/FilterLoader.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Filters/Loader/FilterLoaderInterface.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Loader/FilterLoaderInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Filters/Float.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Float.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Rules/Float.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/Float.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Command/HelloWorldCommand.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Command/HelloWorldCommand.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Command/HelloWorldCommand.php" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Command/HelloWorldCommand.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Command/HelloWorldCommand.php" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Command/HelloWorldCommand.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Filters/HtmlEntities.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/HtmlEntities.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Rules/HtmlEntities.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/HtmlEntities.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Controller/IndexController.php" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Controller/IndexController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Filters/Int.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Int.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Rules/Int.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/Int.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Exception/InvalidCallbackException.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Exception/InvalidCallbackException.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Exception/InvalidOptionsException.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Exception/InvalidOptionsException.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Exception/InvalidZendFilterException.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Exception/InvalidZendFilterException.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Mapping/Loader/LoaderInterface.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Mapping/Loader/LoaderInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/LoginForm.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/LoginForm.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Exception/MissingOptionsException.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Exception/MissingOptionsException.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/News.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/News.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Entity/News.php" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Entity/News.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Entity/News.php" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Entity/News.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Filters/ObjectAwareFilter.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/ObjectAwareFilter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/ObjectWalker.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/ObjectWalker.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Filters/PregReplace.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/PregReplace.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Rules/PregReplace.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/PregReplace.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Filters/RegExp.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/RegExp.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Rules/RegExp.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/RegExp.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Controller/RssController.php" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Controller/RssController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Rules/Rule.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/Rule.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Exception/RuleDefinitionException.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Exception/RuleDefinitionException.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Exception/RuleOptionsException.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Exception/RuleOptionsException.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Source.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Source.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Entity/Source.php" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Entity/Source.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Entity/Source.php" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Entity/Source.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Filters/StripNewlines.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/StripNewlines.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Rules/StripNewlines.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/StripNewlines.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Filters/StripTags.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/StripTags.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Rules/StripTags.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/StripTags.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Filters/ToLower.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/ToLower.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Rules/ToLower.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/ToLower.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Filters/ToUpper.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/ToUpper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Rules/ToUpper.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/ToUpper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Filters/Trim.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Trim.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Rules/Trim.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/Trim.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Form/ViewForm.php" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Form/ViewForm.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Form/ViewForm.php" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Form/ViewForm.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Filters/Zend.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Filters/Zend.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DMS/Filter/Rules/Zend.php" afterPath="$PROJECT_DIR$/src/DMS/Filter/Rules/Zend.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/views/Rss/add.html.twig" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/views/Rss/add.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/public/css/bootstrap-responsive.css" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/public/css/bootstrap-responsive.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/public/css/bootstrap-responsive.css" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/public/css/bootstrap-responsive.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/css/bootstrap-theme.css" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/css/bootstrap-theme.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/css/bootstrap-theme.min.css" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/css/bootstrap-theme.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/css/bootstrap.css" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/css/bootstrap.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/public/css/bootstrap.css" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/public/css/bootstrap.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/public/css/bootstrap.css" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/public/css/bootstrap.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/js/bootstrap.js" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/js/bootstrap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/css/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/js/bootstrap.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/public/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/public/js/bootstrap.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/public/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/public/js/bootstrap.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/css/demo.css" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/css/demo.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/public/css/demo.css" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/public/css/demo.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/public/css/demo.css" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/public/css/demo.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/views/Rss/edit.html.twig" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/views/Rss/edit.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/views/Rss/filter.html.twig" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/views/Rss/filter.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/views/Rss/full.html.twig" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/views/Rss/full.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/fonts/glyphicons-halflings-regular.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/app/google.htm" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/app/google.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/app/google.htm" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/app/google.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/app/google.htm" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/app/google.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/index.html.twig" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/index.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/views/Index/index.html.twig" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/views/Index/index.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/views/Rss/index.html.twig" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/views/Rss/index.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/manual/js/jquery-1.2.3.pack.js" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/manual/js/jquery-1.2.3.pack.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/testcase/jquery-1.2.3.pack.js" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/testcase/jquery-1.2.3.pack.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/manual/js/jquery-1.2.3.pack.js" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/manual/js/jquery-1.2.3.pack.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/jquery-1.2.3.pack.js" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/jquery-1.2.3.pack.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/manual/js/jquery-1.2.3.pack.js" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/manual/js/jquery-1.2.3.pack.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/testcase/jquery-1.2.3.pack.js" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/testcase/jquery-1.2.3.pack.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/app/js/jquery.js" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/app/js/jquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/app/js/jquery.js" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/app/js/jquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/app/js/jquery.js" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/app/js/jquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/app/js/jquery.treeview.css" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/app/js/jquery.treeview.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/app/js/jquery.treeview.css" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/app/js/jquery.treeview.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/app/js/jquery.treeview.css" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/app/js/jquery.treeview.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/app/js/jquery.treeview.js" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/app/js/jquery.treeview.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/app/js/jquery.treeview.js" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/app/js/jquery.treeview.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/app/js/jquery.treeview.js" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/app/js/jquery.treeview.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/layout.html.twig" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/layout.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/views/layout.html.twig" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/views/layout.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/views/layout.html.twig" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/views/layout.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/login.html.twig" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/login.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/manual/manual.htm" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/manual/manual.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/manual/manual.htm" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/manual/manual.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/manual/manual.htm" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/manual/manual.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/manual/manual_api.htm" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/manual/manual_api.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/manual/manual_api.htm" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/manual/manual_api.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/manual/manual_api.htm" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/manual/manual_api.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/manual/manual_faq.htm" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/manual/manual_faq.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/manual/manual_faq.htm" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/manual/manual_faq.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/manual/manual_faq.htm" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/manual/manual_faq.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/views/Rss/read.html.twig" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/views/Rss/read.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/reg.html.twig" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/reg.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/app/js/screen.css" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/app/js/screen.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/app/js/screen.css" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/app/js/screen.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/app/js/screen.css" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/app/js/screen.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/services.xml" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/services.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/config/services.xml" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Resources/config/services.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/config/services.xml" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/config/services.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/views/Rss/short.html.twig" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/views/Rss/short.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/testcase/slickspeed.htm" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/testcase/slickspeed.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/slickspeed.htm" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/testcase/slickspeed.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/testcase/slickspeed.htm" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/testcase/slickspeed.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/study.iml" afterPath="$PROJECT_DIR$/.idea/study.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/manual/css/ui.tabs.css" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/manual/css/ui.tabs.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/manual/css/ui.tabs.css" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/manual/css/ui.tabs.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/manual/css/ui.tabs.css" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/manual/css/ui.tabs.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/manual/js/ui.tabs.pack.js" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Helper/manual/js/ui.tabs.pack.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/manual/js/ui.tabs.pack.js" afterPath="$PROJECT_DIR$/src/Acme/IndexBundle/Helper/manual/js/ui.tabs.pack.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/manual/js/ui.tabs.pack.js" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Helper/manual/js/ui.tabs.pack.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/views/Rss/view.html.twig" afterPath="$PROJECT_DIR$/src/Acme/RssBundle/Resources/views/Rss/view.html.twig" />
+    <list default="true" id="cbda89f2-5a23-43ba-8e74-77b721b61073" name="Default" comment="17-03&#10;">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/images/ajax-loader.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/fonts/akbar.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Fixtures/fonts/akbar.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Fixtures/upload/black.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/fonts/brushcut.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Fixtures/fonts/brushcut.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/images/cancel.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/color/images/default.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/rating/images/default.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/images/default.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/images/edit.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/images/icons.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/fonts/molten.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Fixtures/fonts/molten.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/fonts/planetbe.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Fixtures/fonts/planetbe.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/images/select.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Fixtures/upload/symfony.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Fixtures/upload/white.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/fonts/whoobub.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Fixtures/fonts/whoobub.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/.travis.yml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Doctrine/Type/AbstractAutocompleteTypeTestCase.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Geolocation/AddressGeolocation.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Doctrine/Type/AjaxDocumentType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Doctrine/ChoiceList/AjaxEntityChoiceList.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Doctrine/Type/AjaxEntityType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Model/ChoiceList/AjaxModelChoiceList.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Model/Type/AjaxModelType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Core/ChoiceList/AjaxSimpleChoiceList.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/DataTransformer/ArrayToStringTransformer.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/AutocompleteType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/JQuery/Type/AutocompleteTypeTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/AutocompleterType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/JQuery/Type/AutocompleterTypeTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Background.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/Filter/BackgroundTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Controller/Base64Controller.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Blur.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Border.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/Filter/BorderTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/CHANGELOG 2.1.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/CHANGELOG 2.2.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/CONTRIBUTING.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Type/Captcha.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Core/Type/CaptchaType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Core/Type/CaptchaTypeTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Core/Validator/CaptchaValidator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Core/DataTransformer/ChoiceToJsonTransformer.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Core/DataTransformer/ChoiceToJsonTransformerTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/ChosenType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/JQuery/Type/ChosenTypeTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/ClientValidate.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/ColorType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Colorize.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/Filter/ColorizeTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/DependencyInjection/Configuration.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Crop.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/Filter/CropTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/DateType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/JQuery/Type/DateTypeTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Distort.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Extension/DoctrineMongoExtensionTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/DoctrineMongoTestCase.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Extension/DoctrineOrmExtensionTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/DoctrineOrmTestCase.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Doctrine/Type/DocumentAutocompleteTypeTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Doctrine/Type/DocumentAutocompleterTypeTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Doctrine/Type/EntityAutocompleteTypeTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Doctrine/Type/EntityAutocompleterTypeTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Core/EventListener/FileListener.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/DataTransformer/FileToValueTransformer.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/FileType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/JQuery/Type/FileTypeTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Filter.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Twig/Extension/FormExtension.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/DependencyInjection/Compiler/FormPass.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Gd.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/GdInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/GdTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/GenemuFormBundle.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/DependencyInjection/GenemuFormExtension.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Core/EventListener/GeolocationListener.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/GeolocationType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/GrayScale.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/Filter/GrayScaleTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/File/Image.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Controller/ImageController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/File/ImageTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/ImageType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/JQuery/Type/ImageTypeTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/meta/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Negate.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/Filter/NegateTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Opacity.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Core/Type/PlainType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/RatingType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Core/Type/ReCaptchaType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Core/Type/ReCaptchaTypeTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Core/Validator/ReCaptchaValidator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Rotate.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/Filter/RotateTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/Select2Type.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/JQuery/Type/Select2TypeTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Fixtures/Document/SingleIdentDocument.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Fixtures/Entity/SingleIdentEntity.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/SliderType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/JQuery/Type/SliderTypeTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Strip.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/Filter/StripTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Text.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/Filter/TextTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Core/Type/TinymceType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Core/Type/TinymceTypeTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/TokeninputType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/JQuery/Type/TokeninputTypeTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Extension/TypeExtensionTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Type/TypeTestCase.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/UPGRADE 2.1.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/UPGRADE 2.2.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Controller/UploadController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/select2/ajax.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/routing/base64.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/bootstrap.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/choices.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/chosen/choices.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/choices_ajax.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/composer.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/select2/config.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/captcha_gd/default.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/file/default.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/image/default.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/tinymce/default.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/recaptcha/default.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/views/Form/div_layout.html.twig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/entity.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/chosen/entity.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/file/entity.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/entity.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/entity_ajax.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/form.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/tips/form_prototype.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/schema/genemuform-1.0.xsd" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/routing/image.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/imagine.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/captcha_gd/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/chosen/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/color/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/datepicker/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/file/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/geolocation/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/image/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/rating/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/select2/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/slider/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/tinymce/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/recaptcha/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/tinymce/jquery.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/jquery.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/views/Form/jquery_layout.html.twig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/model.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/mongodb.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/chosen/mongodb.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/mongodb.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/mongodb_ajax.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/phpunit.xml.dist" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/propel.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/chosen/propel.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/propel_ajax.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Lib/recaptchalib.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/views/Form/stylesheet_layout.html.twig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/template.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/text.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/text_ajax.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/twig.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/routing/upload.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/translations/validators.de.yml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/translations/validators.en.yml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/translations/validators.fr.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="c7144f1f-42bd-44b2-8e06-9a249476846a" name="New changelist" comment="" />
     <ignored path="study.iws" />
@@ -189,7 +211,7 @@
       <file leaf-file-name="ClientValidate.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/ClientValidate.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="0" selection-start="73" selection-end="73" vertical-scroll-proportion="0.09195402" vertical-offset="0" max-vertical-offset="870">
+            <state line="4" column="0" selection-start="73" selection-end="73" vertical-scroll-proportion="0.14159292" vertical-offset="0" max-vertical-offset="565">
               <folding />
             </state>
           </provider>
@@ -234,6 +256,7 @@
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Client.php" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/LoginForm.php" />
+        <option value="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/.gitignore" />
       </list>
     </option>
   </component>
@@ -679,9 +702,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -725,18 +748,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/LoginForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="68" selection-start="495" selection-end="495" vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="620">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/login.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="227" selection-end="227" vertical-scroll-proportion="0.0" vertical-offset="200" max-vertical-offset="320" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/config_dev.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="61" max-vertical-offset="960" />
@@ -961,13 +972,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="38" column="9" selection-start="1214" selection-end="1214" vertical-scroll-proportion="-1.3793104" vertical-offset="720" max-vertical-offset="6400">
@@ -996,9 +1000,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="594">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/ClientValidate.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="73" selection-end="73" vertical-scroll-proportion="0.09195402" vertical-offset="0" max-vertical-offset="870">
+        <state line="4" column="0" selection-start="73" selection-end="73" vertical-scroll-proportion="0.14159292" vertical-offset="0" max-vertical-offset="565">
           <folding />
         </state>
       </provider>
