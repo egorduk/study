@@ -86,3 +86,10 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+
+#FOS
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Acme\AuthBundle\Entity\Client

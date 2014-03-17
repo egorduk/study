@@ -1,29 +1,18 @@
 [
     {
         "name": "jdorn/sql-formatter",
-        "version": "v1.2.16",
-        "version_normalized": "1.2.16.0",
+        "version": "v1.2.17",
+        "version_normalized": "1.2.17.0",
         "source": {
             "type": "git",
             "url": "https://github.com/jdorn/sql-formatter.git",
-            "reference": "8859d664737492d313c34796731b35eca851b362"
+            "reference": "64990d96e0959dff8e059dfcdc1af130728d92bc"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/jdorn/sql-formatter/zipball/8859d664737492d313c34796731b35eca851b362",
-            "reference": "8859d664737492d313c34796731b35eca851b362",
+            "url": "https://api.github.com/repos/jdorn/sql-formatter/zipball/64990d96e0959dff8e059dfcdc1af130728d92bc",
+            "reference": "64990d96e0959dff8e059dfcdc1af130728d92bc",
             "shasum": ""
-        },
-        "name": "phpmaster/console_demo",
-        "description": "PhpMaster.com symfony/console tutorial",
-        "require": {
-            "php": ">=5.3.3",
-            "symfony/console": "2.4.x-dev"
-        },
-        "autoload": {
-            "psr-0": {
-                "": "src/"
-            }
         },
         "require": {
             "php": ">=5.2.4"
@@ -31,7 +20,7 @@
         "require-dev": {
             "phpunit/phpunit": "3.7.*"
         },
-        "time": "2013-11-27 22:51:13",
+        "time": "2014-01-12 16:20:24",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -104,23 +93,23 @@
     },
     {
         "name": "twig/twig",
-        "version": "v1.15.0",
-        "version_normalized": "1.15.0.0",
+        "version": "v1.15.1",
+        "version_normalized": "1.15.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/fabpot/Twig.git",
-            "reference": "85e4ff98000157ff753d934b9f13659a953f5666"
+            "reference": "1fb5784662f438d7d96a541e305e28b812e2eeed"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/fabpot/Twig/zipball/85e4ff98000157ff753d934b9f13659a953f5666",
-            "reference": "85e4ff98000157ff753d934b9f13659a953f5666",
+            "url": "https://api.github.com/repos/fabpot/Twig/zipball/1fb5784662f438d7d96a541e305e28b812e2eeed",
+            "reference": "1fb5784662f438d7d96a541e305e28b812e2eeed",
             "shasum": ""
         },
         "require": {
             "php": ">=5.2.4"
         },
-        "time": "2013-12-06 07:47:10",
+        "time": "2014-02-13 10:19:29",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -140,11 +129,19 @@
         "authors": [
             {
                 "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
+                "email": "fabien@symfony.com",
+                "homepage": "http://fabien.potencier.org",
+                "role": "Lead Developer"
             },
             {
                 "name": "Armin Ronacher",
-                "email": "armin.ronacher@active-4.com"
+                "email": "armin.ronacher@active-4.com",
+                "role": "Project Founder"
+            },
+            {
+                "name": "Twig Team",
+                "homepage": "https://github.com/fabpot/Twig/graphs/contributors",
+                "role": "Contributors"
             }
         ],
         "description": "Twig, the flexible, fast, and secure template language for PHP",
@@ -196,7 +193,7 @@
             {
                 "name": "Johannes Schmitt",
                 "email": "schmittjoh@gmail.com",
-                "homepage": "https://github.com/schmittjoh",
+                "homepage": "http://jmsyst.com",
                 "role": "Developer of wrapped JMSSerializerBundle"
             }
         ],
@@ -283,27 +280,27 @@
     },
     {
         "name": "doctrine/collections",
-        "version": "v1.1",
-        "version_normalized": "1.1.0.0",
+        "version": "v1.2",
+        "version_normalized": "1.2.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/collections.git",
-            "reference": "560f29c39cfcfbcd210e5d549d993a39d898b04b"
+            "reference": "b99c5c46c87126201899afe88ec490a25eedd6a2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/collections/zipball/560f29c39cfcfbcd210e5d549d993a39d898b04b",
-            "reference": "560f29c39cfcfbcd210e5d549d993a39d898b04b",
+            "url": "https://api.github.com/repos/doctrine/collections/zipball/b99c5c46c87126201899afe88ec490a25eedd6a2",
+            "reference": "b99c5c46c87126201899afe88ec490a25eedd6a2",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.2"
         },
-        "time": "2013-03-07 12:15:54",
+        "time": "2014-02-03 23:07:43",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.1.x-dev"
+                "dev-master": "1.2.x-dev"
             }
         },
         "installation-source": "dist",
@@ -572,17 +569,17 @@
     },
     {
         "name": "symfony/symfony",
-        "version": "v2.4.1",
-        "version_normalized": "2.4.1.0",
+        "version": "v2.4.2",
+        "version_normalized": "2.4.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/symfony.git",
-            "reference": "377a5fb23bfdc2fb616610b7b7ab7cc9a50e614d"
+            "reference": "b70633f92ff71ef490af4c17e7ca3f3bf3d0f304"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/symfony/zipball/377a5fb23bfdc2fb616610b7b7ab7cc9a50e614d",
-            "reference": "377a5fb23bfdc2fb616610b7b7ab7cc9a50e614d",
+            "url": "https://api.github.com/repos/symfony/symfony/zipball/b70633f92ff71ef490af4c17e7ca3f3bf3d0f304",
+            "reference": "b70633f92ff71ef490af4c17e7ca3f3bf3d0f304",
             "shasum": ""
         },
         "require": {
@@ -645,7 +642,7 @@
             "ocramius/proxy-manager": ">=0.3.1,<0.6-dev",
             "propel/propel1": "1.6.*"
         },
-        "time": "2014-01-05 02:12:11",
+        "time": "2014-02-12 19:27:03",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -672,7 +669,9 @@
         "authors": [
             {
                 "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
+                "email": "fabien@symfony.com",
+                "homepage": "http://fabien.potencier.org",
+                "role": "Lead Developer"
             },
             {
                 "name": "Symfony Community",
@@ -687,26 +686,25 @@
     },
     {
         "name": "symfony/icu",
-        "version": "v1.2.0",
-        "version_normalized": "1.2.0.0",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
         "target-dir": "Symfony/Component/Icu",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/Icu.git",
-            "reference": "7299cd3d8d6602103d1ebff5d0a9917b7bc6de72"
+            "reference": "cac3fdfb111adbe590155f491594636d45129783"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/Icu/zipball/7299cd3d8d6602103d1ebff5d0a9917b7bc6de72",
-            "reference": "7299cd3d8d6602103d1ebff5d0a9917b7bc6de72",
+            "url": "https://api.github.com/repos/symfony/Icu/zipball/cac3fdfb111adbe590155f491594636d45129783",
+            "reference": "cac3fdfb111adbe590155f491594636d45129783",
             "shasum": ""
         },
         "require": {
-            "lib-icu": ">=4.4",
             "php": ">=5.3.3",
             "symfony/intl": "~2.3"
         },
-        "time": "2013-06-03 18:32:58",
+        "time": "2013-06-03 18:32:07",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -855,7 +853,9 @@
         "authors": [
             {
                 "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
+                "email": "fabien@symfony.com",
+                "homepage": "http://fabien.potencier.org",
+                "role": "Lead Developer"
             },
             {
                 "name": "Symfony Community",
@@ -1061,7 +1061,9 @@
         "authors": [
             {
                 "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
+                "email": "fabien@symfony.com",
+                "homepage": "http://fabien.potencier.org",
+                "role": "Lead Developer"
             }
         ],
         "description": "This bundle provides a way to configure your controllers with annotations",
@@ -1071,18 +1073,67 @@
         ]
     },
     {
-        "name": "doctrine/orm",
-        "version": "v2.4.1",
-        "version_normalized": "2.4.1.0",
+        "name": "winzou/cache-bundle",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "target-dir": "winzou/CacheBundle",
         "source": {
             "type": "git",
-            "url": "https://github.com/doctrine/doctrine2.git",
-            "reference": "84373d05a4198ec380918d535abf83c454c3867f"
+            "url": "https://github.com/winzou/CacheBundle.git",
+            "reference": "d34422605fc53931ec0bbc810071583e3d390aa6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/84373d05a4198ec380918d535abf83c454c3867f",
-            "reference": "84373d05a4198ec380918d535abf83c454c3867f",
+            "url": "https://api.github.com/repos/winzou/CacheBundle/zipball/d34422605fc53931ec0bbc810071583e3d390aa6",
+            "reference": "d34422605fc53931ec0bbc810071583e3d390aa6",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/common": ">=2.2",
+            "php": ">=5.3.0",
+            "symfony/symfony": ">=2.0"
+        },
+        "time": "2013-08-27 10:59:03",
+        "type": "symfony-bundle",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "winzou\\CacheBundle": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "winzou",
+                "homepage": "http://www.tutoriel-symfony2.fr/"
+            }
+        ],
+        "description": "This bundle provides a simple cache management to Symfony2. Now you can use a cache system without reinventing it. It supports Apc, XCache, File, ZendData and Array..",
+        "homepage": "https://github.com/winzou/CacheBundle",
+        "keywords": [
+            "Symfony2",
+            "apc",
+            "cache",
+            "filecache",
+            "memcache"
+        ]
+    },
+    {
+        "name": "doctrine/orm",
+        "version": "v2.4.2",
+        "version_normalized": "2.4.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/doctrine2.git",
+            "reference": "0363a5548d9263f979f9ca149decb9cfc66419ab"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/0363a5548d9263f979f9ca149decb9cfc66419ab",
+            "reference": "0363a5548d9263f979f9ca149decb9cfc66419ab",
             "shasum": ""
         },
         "require": {
@@ -1099,7 +1150,7 @@
         "suggest": {
             "symfony/yaml": "If you want to use YAML Metadata Mapping Driver"
         },
-        "time": "2013-11-12 12:40:13",
+        "time": "2014-02-08 16:35:09",
         "bin": [
             "bin/doctrine",
             "bin/doctrine.php"
@@ -1186,7 +1237,9 @@
         "authors": [
             {
                 "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
+                "email": "fabien@symfony.com",
+                "homepage": "http://fabien.potencier.org",
+                "role": "Lead Developer"
             }
         ],
         "description": "Common additional features for Twig that do not directly belong in core",
@@ -1235,7 +1288,9 @@
         "authors": [
             {
                 "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
+                "email": "fabien@symfony.com",
+                "homepage": "http://fabien.potencier.org",
+                "role": "Lead Developer"
             },
             {
                 "name": "Chris Corbyn"
@@ -1250,18 +1305,18 @@
     },
     {
         "name": "symfony/swiftmailer-bundle",
-        "version": "v2.3.4",
-        "version_normalized": "2.3.4.0",
+        "version": "v2.3.5",
+        "version_normalized": "2.3.5.0",
         "target-dir": "Symfony/Bundle/SwiftmailerBundle",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/SwiftmailerBundle.git",
-            "reference": "f5e5d12629c26a835c7aa1d74e2e041486b92d93"
+            "reference": "fcefa9dbd5a1ed20547b0f8a2afd5ad6837ea321"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/SwiftmailerBundle/zipball/f5e5d12629c26a835c7aa1d74e2e041486b92d93",
-            "reference": "f5e5d12629c26a835c7aa1d74e2e041486b92d93",
+            "url": "https://api.github.com/repos/symfony/SwiftmailerBundle/zipball/fcefa9dbd5a1ed20547b0f8a2afd5ad6837ea321",
+            "reference": "fcefa9dbd5a1ed20547b0f8a2afd5ad6837ea321",
             "shasum": ""
         },
         "require": {
@@ -1275,7 +1330,7 @@
             "symfony/http-kernel": "~2.1",
             "symfony/yaml": "~2.1"
         },
-        "time": "2013-08-22 13:32:58",
+        "time": "2013-11-21 12:29:01",
         "type": "symfony-bundle",
         "extra": {
             "branch-alias": {
@@ -1295,7 +1350,9 @@
         "authors": [
             {
                 "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
+                "email": "fabien@symfony.com",
+                "homepage": "http://fabien.potencier.org",
+                "role": "Lead Developer"
             },
             {
                 "name": "Symfony Community",
@@ -1376,18 +1433,18 @@
     },
     {
         "name": "symfony/monolog-bundle",
-        "version": "v2.4.1",
-        "version_normalized": "2.4.1.0",
+        "version": "v2.5.1",
+        "version_normalized": "2.5.1.0",
         "target-dir": "Symfony/Bundle/MonologBundle",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/MonologBundle.git",
-            "reference": "e81c2e9c4dc0a9ff794674017069e036f575f278"
+            "reference": "71ad844ac29401f86619f9d643393265451e858b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/MonologBundle/zipball/e81c2e9c4dc0a9ff794674017069e036f575f278",
-            "reference": "e81c2e9c4dc0a9ff794674017069e036f575f278",
+            "url": "https://api.github.com/repos/symfony/MonologBundle/zipball/71ad844ac29401f86619f9d643393265451e858b",
+            "reference": "71ad844ac29401f86619f9d643393265451e858b",
             "shasum": ""
         },
         "require": {
@@ -1402,11 +1459,11 @@
             "symfony/console": "~2.3",
             "symfony/yaml": "~2.3"
         },
-        "time": "2013-08-26 10:15:04",
+        "time": "2014-02-19 14:49:26",
         "type": "symfony-bundle",
         "extra": {
             "branch-alias": {
-                "dev-master": "2.4.x-dev"
+                "dev-master": "2.5.x-dev"
             }
         },
         "installation-source": "dist",
@@ -1422,7 +1479,9 @@
         "authors": [
             {
                 "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
+                "email": "fabien@symfony.com",
+                "homepage": "http://fabien.potencier.org",
+                "role": "Lead Developer"
             },
             {
                 "name": "Symfony Community",
@@ -1475,7 +1534,9 @@
         "authors": [
             {
                 "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
+                "email": "fabien@symfony.com",
+                "homepage": "http://fabien.potencier.org",
+                "role": "Lead Developer"
             }
         ],
         "description": "The base bundle for the Symfony Distributions",
@@ -1529,7 +1590,9 @@
         "authors": [
             {
                 "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
+                "email": "fabien@symfony.com",
+                "homepage": "http://fabien.potencier.org",
+                "role": "Lead Developer"
             }
         ],
         "description": "This bundle generates code for you"
@@ -1586,6 +1649,150 @@
         "homepage": "https://github.com/Incenteev/ParameterHandler",
         "keywords": [
             "parameters management"
+        ]
+    },
+    {
+        "name": "genemu/form-bundle",
+        "version": "v2.2.1",
+        "version_normalized": "2.2.1.0",
+        "target-dir": "Genemu/Bundle/FormBundle",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/genemu/GenemuFormBundle.git",
+            "reference": "78fcd307a69b499241d7f0fa5c1b378e77358f16"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/genemu/GenemuFormBundle/zipball/78fcd307a69b499241d7f0fa5c1b378e77358f16",
+            "reference": "78fcd307a69b499241d7f0fa5c1b378e77358f16",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2",
+            "symfony/form": "~2.3",
+            "symfony/framework-bundle": "~2.3"
+        },
+        "require-dev": {
+            "doctrine/doctrine-bundle": "1.*",
+            "doctrine/mongodb-odm-bundle": "*",
+            "doctrine/orm": "2.*",
+            "phpunit/phpunit": "3.7.*",
+            "propel/propel-bundle": "*",
+            "symfony/doctrine-bridge": "~2.3",
+            "symfony/finder": "2.*"
+        },
+        "suggest": {
+            "symfony/doctrine-bundle": "In order to use some form types with Doctrine",
+            "symfony/finder": "For an image type",
+            "symfony/mongodb-odm-bundle": "For MongoDB integration",
+            "symfony/twig-bridge": "For integration into Twig templates"
+        },
+        "time": "2013-07-31 22:28:58",
+        "type": "symfony-bundle",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.2-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Genemu\\Bundle\\FormBundle": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Olivier Chauvel",
+                "email": "olivier@generation-multiple.com"
+            },
+            {
+                "name": "Community contributions",
+                "homepage": "https://github.com/genemu/GenemuFormBundle/contributors"
+            },
+            {
+                "name": "Bilal Amarni",
+                "email": "bilal.amarni@gmail.com"
+            }
+        ],
+        "description": "Extra form types for your Symfony2 projects",
+        "keywords": [
+            "extra form",
+            "form"
+        ]
+    },
+    {
+        "name": "friendsofsymfony/user-bundle",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "target-dir": "FOS/UserBundle",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
+            "reference": "9b8bbbcf50620f7c8af9c7588d9fe29247c2fa42"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/9b8bbbcf50620f7c8af9c7588d9fe29247c2fa42",
+            "reference": "9b8bbbcf50620f7c8af9c7588d9fe29247c2fa42",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2",
+            "symfony/form": "~2.1",
+            "symfony/framework-bundle": "~2.1",
+            "symfony/security-bundle": "~2.1"
+        },
+        "require-dev": {
+            "doctrine/doctrine-bundle": "*",
+            "swiftmailer/swiftmailer": ">=4.3, <6.0",
+            "symfony/validator": "~2.1",
+            "symfony/yaml": "~2.1",
+            "twig/twig": "~1.5",
+            "willdurand/propel-typehintable-behavior": "dev-master"
+        },
+        "suggest": {
+            "willdurand/propel-typehintable-behavior": "Needed when using the propel implementation"
+        },
+        "time": "2014-03-16 19:14:47",
+        "type": "symfony-bundle",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "FOS\\UserBundle": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Christophe Coevoet",
+                "email": "stof@notk.org"
+            },
+            {
+                "name": "Thibault Duplessis",
+                "email": "thibault.duplessis@gmail.com",
+                "homepage": "http://ornicar.github.com"
+            },
+            {
+                "name": "FriendsOfSymfony Community",
+                "homepage": "https://github.com/friendsofsymfony/FOSUserBundle/contributors"
+            }
+        ],
+        "description": "Symfony FOSUserBundle",
+        "homepage": "http://friendsofsymfony.github.com",
+        "keywords": [
+            "User management"
         ]
     }
 ]

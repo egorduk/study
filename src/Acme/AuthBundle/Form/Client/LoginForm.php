@@ -24,7 +24,7 @@ class LoginForm extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'      => 'Acme\AuthBundle\Entity\Client',
+            'data_class'      => 'Acme\AuthBundle\Entity\ClientFormValidate',
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
             'intention'       => 'task_item',

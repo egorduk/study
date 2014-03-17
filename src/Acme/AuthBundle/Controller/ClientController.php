@@ -3,6 +3,7 @@
 namespace Acme\AuthBundle\Controller;
 
 use Acme\AuthBundle\Entity\Client;
+use Acme\AuthBundle\Entity\ClientFormValidate;
 use Acme\AuthBundle\Form\Client\LoginForm;
 use Acme\AuthBundle\Form\Client\RegForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -30,7 +31,7 @@ class ClientController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $client = new Client();
+        $client = new ClientFormValidate();
         $formLogin = $this->createForm(new LoginForm(), $client);
 
         $formLogin->handleRequest($request);
@@ -63,7 +64,7 @@ class ClientController extends Controller
      */
     public function loginAction(Request $request)
     {
-
+        //echo phpinfo();
     }
 
     /**

@@ -19,7 +19,15 @@
         "sensio/framework-extra-bundle": "~3.0",
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
-        "winzou/cache-bundle": "dev-master"
+        "winzou/cache-bundle": "dev-master",
+        "genemu/form-bundle": "2.2.*",
+        "friendsofsymfony/user-bundle": "~2.0@dev"
+    },
+    "config":{
+        "bin-dir": "bin",
+        "github-oauth":{
+            "github.com":"5ddb1a3691859acf470d05b73177c40c0749cd51"
+        }
     },
     "scripts": {
         "post-install-cmd": [
@@ -37,9 +45,6 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
         ]
     },
-    "config": {
-        "bin-dir": "bin"
-    },
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
@@ -48,17 +53,6 @@
         },
         "branch-alias": {
             "dev-master": "2.4-dev"
-        }
-    },
-    "name": "phpmaster/console_demo",
-    "description": "PhpMaster.com symfony/console tutorial",
-    "require": {
-        "php": ">=5.3.3",
-        "symfony/console": "2.4.x-dev"
-    },
-    "autoload": {
-        "psr-0": {
-            "": "src/"
         }
     }
 }

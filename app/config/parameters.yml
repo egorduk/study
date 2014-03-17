@@ -12,11 +12,10 @@ parameters:
     mailer_password: null
     locale: en
     secret: ThisTokenIsNotSoSecretChangeIt
-
 doctrine:
     dbal:
-        driver:   %database_driver%
-        host:     %database_host%
-        dbname:   %database_name%
-        user:     %database_user%
-        password: %database_password%
+        driver: '%database_driver%'
+        host: '%database_host%'
+        dbname: '%database_name%'
+        user: '%database_user%'
+        password: '%database_password%'
