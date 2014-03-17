@@ -2,10 +2,10 @@
     {% block content %}
         <div class="container">
             <div class="row">
-                <form action="" method="post">
+                {{ form_start(formLogin) }}
+                    {{ form_errors(formLogin) }}
                     {{ form_widget(formLogin) }}
-                </form>
-                {{ test|raw }}
+                {{ form_end(formLogin) }}
                 <p><a href="{{ path('client_reg') }}">Зарегистрироваться</a></p>
             </div>
         </div>

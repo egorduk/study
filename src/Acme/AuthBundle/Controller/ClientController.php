@@ -2,6 +2,7 @@
 
 namespace Acme\AuthBundle\Controller;
 
+use Acme\AuthBundle\Entity\ClientValidate;
 use Acme\AuthBundle\Form\Client\LoginForm;
 use Acme\AuthBundle\Form\Client\RegForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -14,7 +15,7 @@ use Doctrine\ORM\Query;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Acme\AuthBundle\Entity\Client;
+require_once '..\src\Acme\AuthBundle\Lib\recaptchalib.php';
 
 
 class ClientController extends Controller
@@ -29,21 +30,8 @@ class ClientController extends Controller
      */
     public function indexAction(Request $request)
     {
-        /*$formLogin = $this->createForm(new LoginForm());
-        $formLogin->handleRequest($request);
-
-        if ($request->isMethod('POST'))
-        {
-            if ($formLogin->get('enter')->isClicked())
-            {
-                return new RedirectResponse($this->generateUrl('client_login'));
-            }
-        }
-
-        return array('formLogin' => $formLogin->createView());*/
-
-        $obj = new Client();
-        $formLogin = $this->createForm(new LoginForm(), $obj);
+        $client = new ClientValidate();
+        $formLogin = $this->createForm(new LoginForm(), $client);
 
         $formLogin->handleRequest($request);
 
@@ -56,17 +44,17 @@ class ClientController extends Controller
                     //return $this->redirect($this->generateUrl(''));
                     $postData = $request->request->get('formLogin');
                     $userLogin = $postData['fieldLogin'];
-                    //print_r($request->request);
-                    return array('test' => $userLogin, 'formLogin' => $formLogin->createView());
+                    $userPass = $postData['fieldPass'];
+                    return array('formLogin' => $formLogin->createView());
                 }
-                else
+                /*else
                 {
-                    return array('test' => 'Bad', 'formLogin' => $formLogin->createView());
-                }
+                    return array('formLogin' => $formLogin->createView());
+                }*/
             }
         }
 
-        return array('test' => 'prep', 'formLogin' => $formLogin->createView());
+        return array('formLogin' => $formLogin->createView());
     }
 
     /**
@@ -75,28 +63,8 @@ class ClientController extends Controller
      */
     public function loginAction(Request $request)
     {
-        //$formLogin = $this->createForm(new LoginForm());
-        //$formLogin->handleRequest($request);
 
-        if ($request->isMethod('POST'))
-        {
-            //if ($formLogin->get('enter')->isClicked())
-            {
-                $postData = $request->request->get('enter');
-                $userLogin = $postData['fieldLogin'];
-                $userPass = $postData['fieldPass'];
-
-                //return new RedirectResponse($this->generateUrl('client_index'));
-            }
-            /*elseif($formLogin->get('reg')->isClicked())
-            {
-                return new RedirectResponse($this->generateUrl('client_reg'));
-            }*/
-        }
-
-        //return array('formLogin' => $formLogin->createView());
     }
-
 
     /**
      * @Template()
@@ -107,19 +75,41 @@ class ClientController extends Controller
         $formReg = $this->createForm(new RegForm());
         $formReg->handleRequest($request);
 
+        $publickey = "6LcYmecSAAAAAJlYNqogbOXJVMvGgim5JoM0hcAi";
+        $captcha = recaptcha_get_html($publickey);
+
         if ($request->isMethod('POST'))
         {
             if ($formReg->get('reg')->isClicked())
             {
-                /*$postData = $request->request->get('reg');
-                $userLogin = $postData['fieldLogin'];
-                $userPass = $postData['fieldPass'];
+                $privatekey = "6LcYmecSAAAAANaq8JFPxT3xEA_urO6st1gfVOXL";
+                $resp = recaptcha_check_answer($privatekey, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
 
-                return new RedirectResponse($this->generateUrl('client_index'));*/
+                if ($formReg->isValid())
+                {
+                    if ($resp->is_valid)
+                    {
+                        $postData = $request->request->get('formReg');
+                        $userLogin = $postData['fieldLogin'];
+                        $userPass = $postData['fieldPass'];
+                        $userEmail = $postData['fieldEmail'];
+
+                        return $this->redirect($this->generateUrl('client_index'));
+                    }
+                    else
+                    {
+                        return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $resp->error);
+                    }
+                }
+                /*else
+                czxczxczxcsdfsdfsdfgdfggzxczxczxcvxcv
+                {
+                    return array('formLogin' => $formReg->createView());
+                }*/
             }
         }
 
-        return array('formReg' => $formReg->createView());
+        return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => '');
     }
 
     /**

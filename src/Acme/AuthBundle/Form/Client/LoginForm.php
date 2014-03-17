@@ -4,9 +4,7 @@ namespace Acme\AuthBundle\Form\Client;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Tests\Fixtures\Entity;
-use Symfony\Component\Validator\Constraint;
-use Symfony\Component\Validator\Exception\MissingOptionsException;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 
 class LoginForm extends AbstractType
@@ -21,5 +19,15 @@ class LoginForm extends AbstractType
     public function getName()
     {
         return 'formLogin';
+    }
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class'      => 'Acme\AuthBundle\Entity\ClientValidate',
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
+            'intention'       => 'task_item',
+        ));
     }
 }
