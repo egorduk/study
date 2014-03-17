@@ -2,6 +2,7 @@
 
 namespace Acme\AuthBundle\Entity;
 
+use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 
 class ClientFormValidate
 {
@@ -10,4 +11,7 @@ class ClientFormValidate
     public $fieldEmail;
     public $fieldPassApprove;
     public $checkAgreeRules;
+    public $current_password;
+    public $plainPassword;
+
 }

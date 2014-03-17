@@ -94,12 +94,20 @@ class ClientController extends Controller
                         $userLogin = $postData['fieldLogin'];
                         $userPass = $postData['fieldPass'];
                         $userEmail = $postData['fieldEmail'];
+                        $userPassApprove = $postData['fieldPassApprove'];
 
-                        return $this->redirect($this->generateUrl('client_index'));
+                        /*if ($userPass == $userPassApprove)
+                        {
+                            return $this->redirect($this->generateUrl('client_index'));
+                        }
+                        else
+                        {
+                            return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => '', 'approvePassError' => 'Введенные пароли не совпадают!');
+                        }*/
                     }
                     else
                     {
-                        return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $resp->error);
+                        return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $resp->error, 'approvePassError' => '');
                     }
                 }
                 /*else
@@ -110,7 +118,7 @@ class ClientController extends Controller
             }
         }
 
-        return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => '');
+        return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => '', 'approvePassError' => '');
     }
 
     /**

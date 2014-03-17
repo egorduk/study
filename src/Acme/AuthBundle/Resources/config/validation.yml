@@ -1,4 +1,4 @@
-Acme\AuthBundle\Entity\Client:
+Acme\AuthBundle\Entity\ClientFormValidate:
     properties:
         fieldLogin:
           - Length: { min: 5, minMessage: "Слишком короткий логин!" }
@@ -6,7 +6,10 @@ Acme\AuthBundle\Entity\Client:
         fieldPass:
           - Length: { min: 5, minMessage: "Слишком короткий пароль!" }
           - Regex: { pattern: "/^[a-zA-Z0-9]+$/u", message: "Только латинские буквы и цифры!" }
-
+        fieldEmail:
+          - Email: { message: "Указана неверная почта!", checkMX: true }
+        #fieldPassApprove:
+         # - Symfony\Component\Security\Core\Validator\Constraints\UserPassword: { message: "Wrong value for your current password" }
 
 
 

@@ -12,7 +12,12 @@
                     {{ form_errors(formReg) }}
                         {{ form_row(formReg.fieldLogin) }}
                         {{ form_row(formReg.fieldPass) }}
-                        {{ form_row(formReg.fieldPassApprove) }}
+                        {% block errorPassApprove %}
+                            <div>
+                                {{ approvePassError|raw }}
+                                {{ form_row(formReg.fieldPassApprove) }}
+                            </div>
+                        {% endblock %}
                         {{ form_row(formReg.fieldEmail) }}
                         {% block form_label %}
                             {{ parent() }}
