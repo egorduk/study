@@ -2,189 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbda89f2-5a23-43ba-8e74-77b721b61073" name="Default" comment="17-03&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/images/ajax-loader.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/fonts/akbar.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Fixtures/fonts/akbar.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Fixtures/upload/black.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/fonts/brushcut.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Fixtures/fonts/brushcut.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/images/cancel.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/color/images/default.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/rating/images/default.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/images/default.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/images/edit.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/images/icons.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/fonts/molten.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Fixtures/fonts/molten.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/fonts/planetbe.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Fixtures/fonts/planetbe.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/images/select.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Fixtures/upload/symfony.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Fixtures/upload/white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/public/fonts/whoobub.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Fixtures/fonts/whoobub.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Doctrine/Type/AbstractAutocompleteTypeTestCase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Geolocation/AddressGeolocation.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Doctrine/Type/AjaxDocumentType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Doctrine/ChoiceList/AjaxEntityChoiceList.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Doctrine/Type/AjaxEntityType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Model/ChoiceList/AjaxModelChoiceList.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Model/Type/AjaxModelType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Core/ChoiceList/AjaxSimpleChoiceList.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/DataTransformer/ArrayToStringTransformer.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/AutocompleteType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/JQuery/Type/AutocompleteTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/AutocompleterType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/JQuery/Type/AutocompleterTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Background.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/Filter/BackgroundTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Controller/Base64Controller.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Blur.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Border.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/Filter/BorderTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/CHANGELOG 2.1.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/CHANGELOG 2.2.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/CONTRIBUTING.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Type/Captcha.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Core/Type/CaptchaType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Core/Type/CaptchaTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Core/Validator/CaptchaValidator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Core/DataTransformer/ChoiceToJsonTransformer.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Core/DataTransformer/ChoiceToJsonTransformerTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/ChosenType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/JQuery/Type/ChosenTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/ClientValidate.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/ColorType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Colorize.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/Filter/ColorizeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/DependencyInjection/Configuration.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Crop.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/Filter/CropTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/DateType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/JQuery/Type/DateTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Distort.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Extension/DoctrineMongoExtensionTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/DoctrineMongoTestCase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Extension/DoctrineOrmExtensionTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/DoctrineOrmTestCase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Doctrine/Type/DocumentAutocompleteTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Doctrine/Type/DocumentAutocompleterTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Doctrine/Type/EntityAutocompleteTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Doctrine/Type/EntityAutocompleterTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Core/EventListener/FileListener.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/DataTransformer/FileToValueTransformer.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/FileType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/JQuery/Type/FileTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Filter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Twig/Extension/FormExtension.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/DependencyInjection/Compiler/FormPass.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Gd.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/GdInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/GdTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/GenemuFormBundle.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/DependencyInjection/GenemuFormExtension.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Core/EventListener/GeolocationListener.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/GeolocationType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/GrayScale.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/Filter/GrayScaleTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/File/Image.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Controller/ImageController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/File/ImageTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/ImageType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/JQuery/Type/ImageTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/meta/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Negate.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/Filter/NegateTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Opacity.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Core/Type/PlainType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/RatingType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Core/Type/ReCaptchaType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Core/Type/ReCaptchaTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Core/Validator/ReCaptchaValidator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Rotate.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/Filter/RotateTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/Select2Type.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/JQuery/Type/Select2TypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Fixtures/Document/SingleIdentDocument.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Fixtures/Entity/SingleIdentEntity.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/SliderType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/JQuery/Type/SliderTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Strip.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/Filter/StripTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Gd/Filter/Text.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Gd/Filter/TextTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/Core/Type/TinymceType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Core/Type/TinymceTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Form/JQuery/Type/TokeninputType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/JQuery/Type/TokeninputTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Extension/TypeExtensionTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/Form/Type/TypeTestCase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/UPGRADE 2.1.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/UPGRADE 2.2.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Controller/UploadController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/select2/ajax.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/routing/base64.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Tests/bootstrap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/choices.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/chosen/choices.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/choices_ajax.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/composer.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/select2/config.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/captcha_gd/default.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/file/default.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/image/default.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/tinymce/default.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/recaptcha/default.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/views/Form/div_layout.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/entity.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/chosen/entity.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/file/entity.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/entity.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/entity_ajax.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/form.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/tips/form_prototype.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/schema/genemuform-1.0.xsd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/routing/image.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/imagine.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/captcha_gd/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/chosen/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/color/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/datepicker/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/file/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/geolocation/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/image/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/rating/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/select2/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/slider/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/tinymce/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/recaptcha/index.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/tinymce/jquery.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/jquery.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/views/Form/jquery_layout.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/model.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/mongodb.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/chosen/mongodb.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/mongodb.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/mongodb_ajax.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/phpunit.xml.dist" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/propel.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/chosen/propel.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/propel_ajax.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Lib/recaptchalib.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/views/Form/stylesheet_layout.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/template.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/text.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/doc/jquery/autocomplete/text_ajax.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/twig.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/config/routing/upload.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/translations/validators.de.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/translations/validators.en.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/Resources/translations/validators.fr.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\src\Acme\AuthBundle\Entity\ClientValidate.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/LoginForm.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/LoginForm.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
     </list>
     <list id="c7144f1f-42bd-44b2-8e06-9a249476846a" name="New changelist" comment="" />
     <ignored path="study.iws" />
@@ -207,17 +29,7 @@
     <favorites_list name="study" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="ClientValidate.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/ClientValidate.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="0" selection-start="73" selection-end="73" vertical-scroll-proportion="0.14159292" vertical-offset="0" max-vertical-offset="565">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -243,20 +55,20 @@
         <option value="$PROJECT_DIR$/app/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/login.html.twig" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/reg.html.twig" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/index.html.twig" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Author.php" />
         <option value="$PROJECT_DIR$/DMS/Bundle/FilterBundle/DMSFilterBundle.php" />
         <option value="$PROJECT_DIR$/vendor/DMS/Bundle/FilterBundle/DMSFilterBundle.php" />
         <option value="$PROJECT_DIR$/vendor/composer/composer.json" />
         <option value="$PROJECT_DIR$/app/AppKernel.php" />
-        <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/app/autoload.php" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Client.php" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/LoginForm.php" />
         <option value="$PROJECT_DIR$/src/Genemu/Bundle/FormBundle/.gitignore" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/LoginForm.php" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Client.php" />
+        <option value="$PROJECT_DIR$/app/config/config.yml" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php" />
       </list>
     </option>
   </component>
@@ -704,12 +516,12 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1799787" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18051118" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -770,7 +582,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="24" selection-start="418" selection-end="418" vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="1140" />
+        <state line="17" column="24" selection-start="418" selection-end="418" vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="1140">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/IndexBundle/AcmeIndexBundle.php">
@@ -810,11 +624,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/app_dev.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/app.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899" />
@@ -830,11 +639,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1360" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/AppCache.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="980" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/config_dev.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.06785317" vertical-offset="61" max-vertical-offset="960" />
@@ -843,11 +647,6 @@
     <entry file="file://$PROJECT_DIR$/app/config/config_prod.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="24" selection-start="178" selection-end="178" vertical-scroll-proportion="0.1112347" vertical-offset="0" max-vertical-offset="899" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
@@ -900,11 +699,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="26" selection-start="372" selection-end="372" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1360" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/reg.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="49" selection-start="285" selection-end="285" vertical-scroll-proportion="-6.8965516" vertical-offset="0" max-vertical-offset="460" />
@@ -940,11 +734,6 @@
         <state line="44" column="0" selection-start="944" selection-end="944" vertical-scroll-proportion="1.0114943" vertical-offset="0" max-vertical-offset="1000" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="2" selection-start="2402" selection-end="2402" vertical-scroll-proportion="0.8665184" vertical-offset="1061" max-vertical-offset="1960" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/autoload.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="0" selection-start="183" selection-end="183" vertical-scroll-proportion="0.16091955" vertical-offset="0" max-vertical-offset="870" />
@@ -958,46 +747,6 @@
     <entry file="file://$PROJECT_DIR$/vendor/zendframework/zend-filter/Zend/Filter/StringTrim.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="20" selection-start="625" selection-end="625" vertical-scroll-proportion="0.4827586" vertical-offset="0" max-vertical-offset="2160" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/autoload.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="131" selection-end="131" vertical-scroll-proportion="0.18390805" vertical-offset="0" max-vertical-offset="870" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="10" selection-start="77" selection-end="77" vertical-scroll-proportion="0.066740826" vertical-offset="0" max-vertical-offset="899">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="9" selection-start="1214" selection-end="1214" vertical-scroll-proportion="-1.3793104" vertical-offset="720" max-vertical-offset="6400">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="202" selection-end="202" vertical-scroll-proportion="-2.275862" vertical-offset="74" max-vertical-offset="840">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/LoginForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="201" selection-end="201" vertical-scroll-proportion="0.11494253" vertical-offset="0" max-vertical-offset="870">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="28" selection-start="1161" selection-end="1161" vertical-scroll-proportion="0.57471263" vertical-offset="0" max-vertical-offset="880">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
@@ -1014,10 +763,102 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/ClientValidate.php">
+    <entry file="file://$PROJECT_DIR$/app/AppCache.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="73" selection-end="73" vertical-scroll-proportion="0.14159292" vertical-offset="0" max-vertical-offset="565">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="980">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/autoload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="3" selection-start="130" selection-end="130" vertical-scroll-proportion="0.16091955" vertical-offset="0" max-vertical-offset="870">
+          <folding>
+            <element signature="e#7#58#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="28" selection-start="1161" selection-end="1161" vertical-scroll-proportion="-17.241379" vertical-offset="0" max-vertical-offset="880">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="24" selection-start="178" selection-end="178" vertical-scroll-proportion="0.1112347" vertical-offset="0" max-vertical-offset="899">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="42" selection-start="575" selection-end="575" vertical-scroll-proportion="-0.15684094" vertical-offset="501" max-vertical-offset="1880">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="26" selection-start="372" selection-end="372" vertical-scroll-proportion="0.3337041" vertical-offset="0" max-vertical-offset="1360">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Client.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="33" selection-start="40" selection-end="40" vertical-scroll-proportion="0.04597701" vertical-offset="0" max-vertical-offset="870">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/LoginForm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="0" selection-start="202" selection-end="202" vertical-scroll-proportion="0.18390805" vertical-offset="0" max-vertical-offset="870">
+          <folding>
+            <element signature="e#47#87#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app_dev.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="6" selection-start="1010" selection-end="1010" vertical-scroll-proportion="0.57471263" vertical-offset="0" max-vertical-offset="870">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="10" selection-start="77" selection-end="77" vertical-scroll-proportion="0.066740826" vertical-offset="0" max-vertical-offset="899">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="23" selection-start="939" selection-end="939" vertical-scroll-proportion="26.241379" vertical-offset="1321" max-vertical-offset="6400">
+          <folding>
+            <element signature="e#46#80#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="63" selection-start="1964" selection-end="1964" vertical-scroll-proportion="0.7001167" vertical-offset="0" max-vertical-offset="860">
+          <folding>
+            <element signature="e#47#87#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

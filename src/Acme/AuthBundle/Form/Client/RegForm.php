@@ -28,7 +28,7 @@ class RegForm extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'      => 'Acme\AuthBundle\Entity\ClientValidate',
+            'data_class'      => 'Acme\AuthBundle\Entity\Client',
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
             'intention'       => 'task_item',
