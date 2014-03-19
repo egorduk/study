@@ -96,14 +96,7 @@ class ClientController extends Controller
                         $userEmail = $postData['fieldEmail'];
                         $userPassApprove = $postData['fieldPassApprove'];
 
-                        /*if ($userPass == $userPassApprove)
-                        {
-                            return $this->redirect($this->generateUrl('client_index'));
-                        }
-                        else
-                        {
-                            return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => '', 'approvePassError' => 'Введенные пароли не совпадают!');
-                        }*/
+                        return $this->redirect($this->generateUrl('client_index'));
                     }
                     else
                     {
