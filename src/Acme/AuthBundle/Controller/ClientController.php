@@ -20,6 +20,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
+use Symfony\Component\Security\Core\Util\SecureRandom;
 require_once '..\src\Acme\AuthBundle\Lib\recaptchalib.php';
 
 
@@ -113,7 +114,7 @@ class ClientController extends Controller
 
                 if ($formReg->isValid())
                 {
-                    //if ($resp->is_valid)
+                    if ($resp->is_valid)
                     {
                         $postData = $request->request->get('formReg');
                         $userLogin = $postData['fieldLogin'];
@@ -125,11 +126,12 @@ class ClientController extends Controller
                         $user->setEmail($userEmail);
                         $user->setRole(2);
 
-                        // шифрует и устанавливает пароль для пользователя,
-                        // эти настройки совпадают с конфигурационными файлами
-                        /*$encoder = new MessageDigestPasswordEncoder('sha512', true, 10);
-                        $password = $encoder->encodePassword('admin', $user->getSalt());*/
-                        $user->setPassword($userPassword);
+                        $encoder = new MessageDigestPasswordEncoder('sha512', true, 10);
+                        $generator = new SecureRandom();
+                        $salt = bin2hex($generator->nextBytes(32));
+                        $password = $encoder->encodePassword($userPassword, $salt);
+                        $user->setPassword($password);
+                        $user->setSalt($salt);
 
                         $em = $this->getDoctrine()->getManager();
                         $em->persist($user);
@@ -137,14 +139,12 @@ class ClientController extends Controller
 
                         //$user->getUserRoles()->add($role);
 
-                        //$manager->persist($user);
-
                         return $this->redirect($this->generateUrl('client_index'));
                     }
-                    /*else
+                    else
                     {
                         return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $resp->error, 'approvePassError' => '');
-                    }*/
+                    }
                 }
                 /*else
                 czxczxczxcsdfsdfsdfgdfggzxczxczxcvxcv

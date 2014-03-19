@@ -6,12 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="user")
  */
-class User implements UserInterface
+class User implements AdvancedUserInterface
 {
     /**
      * @ORM\Id
@@ -48,12 +49,18 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string")
      */
-    //protected $salt;
+    protected $salt;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $is_active;
 
     public function __construct()
     {
         //parent::__construct();
         $this->date_reg = new \DateTime();
+        $this->is_active = 0;
     }
 
     public function getUsername()
@@ -63,12 +70,12 @@ class User implements UserInterface
 
     public function getSalt()
     {
-        //return $this->salt;
+        return $this->salt;
     }
 
     public function setSalt($value)
     {
-       // $this->salt = $value;
+        $this->salt = $value;
     }
 
     public function getRole()
@@ -130,6 +137,31 @@ class User implements UserInterface
     public function eraseCredentials()
     {
 
+    }
+
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->is_active;
+    }
+
+    public function setIsEnabled($active)
+    {
+        $this->is_active = $active;
     }
 
     /**

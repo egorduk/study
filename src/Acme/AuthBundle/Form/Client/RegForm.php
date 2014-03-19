@@ -4,11 +4,13 @@ namespace Acme\AuthBundle\Form\Client;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Security\Core\Util\StringUtils;
+require_once '..\src\Acme\AuthBundle\Lib\recaptchalib.php';
 
 
 class RegForm extends AbstractType
