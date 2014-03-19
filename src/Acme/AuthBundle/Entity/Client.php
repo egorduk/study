@@ -2,24 +2,16 @@
 
 namespace Acme\AuthBundle\Entity;
 
-use FOS\UserBundle\Entity\User as BaseUser;
-use Doctrine\ORM\Mapping as ORM;
-
-/**
- * @ORM\Entity
- * @ORM\Table(name="client")
- */
-class Client extends BaseUser
+class Client
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
     protected $id;
+    protected $login;
+    protected $password;
+    protected $email;
+    protected $date_reg;
 
-    public function __construct()
+    /*public function __construct()
     {
         parent::__construct();
-    }
+    }*/
 }

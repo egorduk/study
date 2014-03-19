@@ -8,8 +8,6 @@ Acme\AuthBundle\Entity\ClientFormValidate:
           - Regex: { pattern: "/^[a-zA-Z0-9]+$/u", message: "Только латинские буквы и цифры!" }
         fieldEmail:
           - Email: { message: "Указана неверная почта!", checkMX: true }
-        #fieldPassApprove:
-         # - Symfony\Component\Security\Core\Validator\Constraints\UserPassword: { message: "Wrong value for your current password" }
 
 
 

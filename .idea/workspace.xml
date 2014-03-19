@@ -2,9 +2,287 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbda89f2-5a23-43ba-8e74-77b721b61073" name="Default" comment="17-03&#10;">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/services1.xml" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\.travis.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Changelog.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Command\ActivateUserCommand.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Command\ChangePasswordCommand.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Command\CreateUserCommand.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Command\DeactivateUserCommand.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Command\DemoteUserCommand.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Command\PromoteUserCommand.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Command\RoleCommand.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Controller\ChangePasswordController.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Controller\GroupController.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Controller\ProfileController.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Controller\RegistrationController.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Controller\ResettingController.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Controller\SecurityController.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\DependencyInjection\Compiler\RegisterMappingsPass.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\DependencyInjection\Compiler\ValidationPass.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\DependencyInjection\Configuration.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\DependencyInjection\FOSUserExtension.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Doctrine\AbstractUserListener.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Doctrine\CouchDB\UserListener.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Doctrine\GroupManager.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Doctrine\MongoDB\UserListener.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Doctrine\Orm\UserListener.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Doctrine\UserManager.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Document\Group.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Document\User.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Entity\Group.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Entity\User.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\EventListener\AuthenticationListener.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\EventListener\EmailConfirmationListener.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\EventListener\FlashListener.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\EventListener\LastLoginListener.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\EventListener\ResettingListener.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Event\FilterGroupResponseEvent.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Event\FilterUserResponseEvent.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Event\FormEvent.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Event\GetResponseGroupEvent.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Event\GetResponseUserEvent.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Event\GroupEvent.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Event\UserEvent.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\FOSUserBundle.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\FOSUserEvents.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Form\DataTransformer\UserToUsernameTransformer.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Form\Factory\FactoryInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Form\Factory\FormFactory.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Form\Type\ChangePasswordFormType.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Form\Type\GroupFormType.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Form\Type\ProfileFormType.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Form\Type\RegistrationFormType.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Form\Type\ResettingFormType.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Form\Type\UsernameFormType.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Mailer\Mailer.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Mailer\MailerInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Mailer\NoopMailer.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Mailer\TwigSwiftMailer.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Model\Group.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Model\GroupInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Model\GroupManager.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Model\GroupManagerInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Model\GroupableInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Model\User.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Model\UserInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Model\UserManager.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Model\UserManagerInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Propel\Group.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Propel\GroupManager.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Propel\GroupPeer.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Propel\GroupQuery.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Propel\User.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Propel\UserGroup.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Propel\UserGroupPeer.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Propel\UserGroupQuery.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Propel\UserManager.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Propel\UserPeer.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Propel\UserQuery.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\README.markdown" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\change_password.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\couchdb.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\couchdb_group.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\doctrine\Group.couchdb.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\doctrine\Group.mongodb.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\doctrine\Group.orm.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\doctrine\User.couchdb.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\doctrine\User.mongodb.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\doctrine\User.orm.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\doctrine\model\Group.couchdb.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\doctrine\model\Group.mongodb.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\doctrine\model\Group.orm.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\doctrine\model\User.couchdb.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\doctrine\model\User.mongodb.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\doctrine\model\User.orm.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\email_confirmation.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\flash_notifications.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\group.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\listeners.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\mailer.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\mongodb.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\mongodb_group.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\orm.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\orm_group.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\profile.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\propel.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\propel\schema.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\propel_group.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\registration.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\resetting.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\routing\change_password.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\routing\group.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\routing\profile.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\routing\registration.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\routing\resetting.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\routing\security.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\security.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\username_form_type.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\util.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\validation.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\validation\couchdb.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\validation\mongodb.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\validation\orm.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\validation\propel.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\validator.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\doc\adding_invitation_registration.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\doc\canonicalizer.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\doc\command_line_tools.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\doc\configuration_reference.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\doc\controller_events.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\doc\custom_storage_layer.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\doc\doctrine.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\doc\emails.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\doc\form_type.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\doc\groups.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\doc\index.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\doc\logging_by_username_or_email.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\doc\overriding_controllers.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\doc\overriding_forms.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\doc\overriding_templates.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\doc\supplemental.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\doc\user_manager.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\meta\LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.ar.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.bg.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.ca.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.cs.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.da.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.de.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.en.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.es.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.et.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.fa.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.fi.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.fr.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.he.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.hr.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.hu.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.id.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.it.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.ja.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.lb.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.lt.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.lv.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.nb.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.nl.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.pl.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.pt_BR.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.pt_PT.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.ro.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.ru.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.sk.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.sl.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.sr_Latn.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.sv.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.tr.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.uk.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.vi.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\FOSUserBundle.zh_CN.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.ar.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.bg.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.ca.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.cs.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.da.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.de.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.en.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.es.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.fa.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.fi.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.fr.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.he.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.hr.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.hu.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.id.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.it.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.ja.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.lt.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.lv.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.nb.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.nl.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.pl.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.pt.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.pt_BR.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.ro.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.ru.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.sk.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.sl.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.sr_Latn.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.sv.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.tr.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.uk.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.vi.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\translations\validators.zh_CN.yml" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\ChangePassword\changePassword.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\ChangePassword\changePassword_content.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Group\edit.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Group\edit_content.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Group\list.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Group\list_content.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Group\new.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Group\new_content.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Group\show.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Group\show_content.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Profile\edit.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Profile\edit_content.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Profile\show.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Profile\show_content.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Registration\checkEmail.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Registration\confirmed.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Registration\email.txt.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Registration\register.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Registration\register_content.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Resetting\checkEmail.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Resetting\email.txt.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Resetting\passwordAlreadyRequested.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Resetting\request.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Resetting\request_content.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Resetting\reset.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Resetting\reset_content.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\Security\login.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\views\layout.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Security\EmailUserProvider.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Security\LoginManager.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Security\LoginManagerInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Security\UserProvider.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Tests\DependencyInjection\FOSUserExtensionTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Tests\Doctrine\UserManagerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Tests\Model\UserManagerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Tests\Model\UserTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Tests\Propel\PropelUserManagerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Tests\Propel\UserTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Tests\Security\EmailUserProviderTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Tests\Security\UserProviderTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Tests\TestUser.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Tests\Util\UserManipulatorTest.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Tests\bootstrap.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Upgrade.md" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Util\Canonicalizer.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Util\CanonicalizerInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Util\TokenGenerator.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Util\TokenGeneratorInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Util\UserManipulator.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Validator\Initializer.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\composer.json" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\phpunit.xml.dist" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/AppKernel.php" afterPath="$PROJECT_DIR$/app/AppKernel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Client.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Client.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/ClientFormValidate.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/ClientFormValidate.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/autoload.php" afterPath="$PROJECT_DIR$/vendor/autoload.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_real.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_real.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/installed.json" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/layout.html.twig" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/layout.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/login.html.twig" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/login.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/security.yml" afterPath="$PROJECT_DIR$/app/config/security.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="c7144f1f-42bd-44b2-8e06-9a249476846a" name="New changelist" comment="" />
@@ -29,19 +307,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="config.yml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="5" selection-start="1002" selection-end="1002" vertical-scroll-proportion="0.0" vertical-offset="61" max-vertical-offset="2020">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClientController.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ClientController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="98" column="83" selection-start="3353" selection-end="3353" vertical-scroll-proportion="-20.172413" vertical-offset="1375" max-vertical-offset="6440">
+            <state line="120" column="61" selection-start="4260" selection-end="4260" vertical-scroll-proportion="0.5797101" vertical-offset="2080" max-vertical-offset="7300">
               <folding>
                 <element signature="e#46#80#0" expanded="true" />
               </folding>
@@ -49,30 +318,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Client.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Client.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="0" selection-start="333" selection-end="333" vertical-scroll-proportion="-13.103448" vertical-offset="0" max-vertical-offset="600">
-              <folding>
-                <element signature="e#42#85#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="reg.html.twig" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/reg.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="25" selection-start="1317" selection-end="1317" vertical-scroll-proportion="-20.0" vertical-offset="0" max-vertical-offset="900">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RegForm.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="RegForm.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="227" selection-start="1357" selection-end="1357" vertical-scroll-proportion="-0.11668611" vertical-offset="520" max-vertical-offset="1600">
+            <state line="46" column="0" selection-start="2832" selection-end="2832" vertical-scroll-proportion="-13.793103" vertical-offset="520" max-vertical-offset="1580">
               <folding>
                 <element signature="e#47#87#0" expanded="true" />
               </folding>
@@ -80,10 +329,57 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientFormValidate.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/ClientFormValidate.php">
+      <file leaf-file-name="User.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="33" selection-start="40" selection-end="40" vertical-scroll-proportion="-1.3793104" vertical-offset="0" max-vertical-offset="660">
+            <state line="80" column="30" selection-start="1374" selection-end="1374" vertical-scroll-proportion="-55.172413" vertical-offset="0" max-vertical-offset="3300">
+              <folding>
+                <element signature="e#42#74#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.html.twig" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/login.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="8" selection-start="81" selection-end="81" vertical-scroll-proportion="-1.3793104" vertical-offset="0" max-vertical-offset="280">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="security.yml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/security.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="73" selection-start="729" selection-end="729" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="740">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.yml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="74" column="8" selection-start="1997" selection-end="1997" vertical-scroll-proportion="0.0" vertical-offset="1281" max-vertical-offset="2180">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="routing.yml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="12" selection-start="138" selection-end="150" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="1460">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="reg.html.twig" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/reg.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="39" selection-start="235" selection-end="235" vertical-scroll-proportion="-6.206897" vertical-offset="0" max-vertical-offset="900">
               <folding />
             </state>
           </provider>
@@ -110,10 +406,7 @@
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/AcmeAuthBundle.php" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/AuthController.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/layout.html.twig" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Form/LoginForm.php" />
-        <option value="$PROJECT_DIR$/app/config/routing.yml" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/login.html.twig" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/index.html.twig" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Author.php" />
         <option value="$PROJECT_DIR$/DMS/Bundle/FilterBundle/DMSFilterBundle.php" />
@@ -124,15 +417,21 @@
         <option value="$PROJECT_DIR$/../../../modules/php/PHP-5.5.6/composer.json" />
         <option value="C:/Webservers/home/localhost/www/study/composer.json" />
         <option value="$PROJECT_DIR$/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/.gitignore" />
-        <option value="$PROJECT_DIR$/composer.json" />
-        <option value="$PROJECT_DIR$/app/AppKernel.php" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/LoginForm.php" />
-        <option value="$PROJECT_DIR$/app/config/security.yml" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Client.php" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/reg.html.twig" />
-        <option value="$PROJECT_DIR$/app/config/config.yml" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/ClientFormValidate.php" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegFormHandler.php" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/services.xml" />
+        <option value="$PROJECT_DIR$/app/config/routing.yml" />
+        <option value="$PROJECT_DIR$/app/AppKernel.php" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Client.php" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/layout.html.twig" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/login.html.twig" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/app/config/config.yml" />
+        <option value="$PROJECT_DIR$/app/config/security.yml" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/reg.html.twig" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php" />
       </list>
@@ -520,6 +819,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\OpenServer\domains\localhost\study\src\Acme\AuthBundle\Form\Client" />
+      <recent name="D:\OpenServer\domains\localhost\study\src\Acme\AuthBundle\Resources\config" />
       <recent name="D:\OpenServer\domains\localhost\study\src\Acme\AuthBundle\Entity" />
       <recent name="D:\OpenServer\domains\localhost\study\src\Acme\AuthBundle\Resources\views\Client" />
     </key>
@@ -581,14 +882,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16027689" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17039403" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -603,6 +904,27 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17412141" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -623,52 +945,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Acme/RssBundle/Resources/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/IndexBundle/Controller/IndexController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="5" selection-start="1013" selection-end="1013" vertical-scroll-proportion="0.43678162" vertical-offset="260" max-vertical-offset="8480" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/AcmeAuthBundle.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="1" selection-start="121" selection-end="121" vertical-scroll-proportion="0.16091955" vertical-offset="0" max-vertical-offset="870" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/RssBundle/Resources/views/Rss/read.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="84" selection-end="84" vertical-scroll-proportion="0.06896552" vertical-offset="0" max-vertical-offset="870" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/services.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config_test.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/app.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.14002334" vertical-offset="120" max-vertical-offset="2600" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/check.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1360" />
@@ -689,19 +969,9 @@
         <state line="4" column="40" selection-start="107" selection-end="107" vertical-scroll-proportion="0.09195402" vertical-offset="0" max-vertical-offset="870" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/layout.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="28" selection-start="668" selection-end="668" vertical-scroll-proportion="0.3448276" vertical-offset="0" max-vertical-offset="870" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/IndexBundle/Resources/views/Index/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="12" selection-start="419" selection-end="482" vertical-scroll-proportion="0.27586207" vertical-offset="0" max-vertical-offset="870" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/login.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="135" selection-end="135" vertical-scroll-proportion="0.09195402" vertical-offset="0" max-vertical-offset="870" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/RssBundle/Form/ViewForm.php">
@@ -769,34 +1039,14 @@
         <state line="27" column="20" selection-start="625" selection-end="625" vertical-scroll-proportion="0.4827586" vertical-offset="0" max-vertical-offset="2160" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/AppCache.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="980" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="24" selection-start="178" selection-end="178" vertical-scroll-proportion="0.1112347" vertical-offset="0" max-vertical-offset="899" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="26" selection-start="372" selection-end="372" vertical-scroll-proportion="0.3337041" vertical-offset="0" max-vertical-offset="1360" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/app_dev.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="26" column="6" selection-start="1010" selection-end="1010" vertical-scroll-proportion="0.57471263" vertical-offset="0" max-vertical-offset="870" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../../modules/php/PHP-5.5.6/composer.json">
@@ -811,30 +1061,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/autoload.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="94" selection-end="94" vertical-scroll-proportion="0.06896552" vertical-offset="0" max-vertical-offset="870">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/autoload.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="0" selection-start="183" selection-end="183" vertical-scroll-proportion="0.16091955" vertical-offset="0" max-vertical-offset="870">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/FOSUserBundle.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="6" selection-start="931" selection-end="931" vertical-scroll-proportion="0.27586207" vertical-offset="0" max-vertical-offset="1180">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="50" selection-start="877" selection-end="877" vertical-scroll-proportion="0.52873564" vertical-offset="0" max-vertical-offset="1280">
           <folding />
         </state>
       </provider>
@@ -848,20 +1077,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="39" selection-start="831" selection-end="831" vertical-scroll-proportion="0.41379312" vertical-offset="0" max-vertical-offset="900">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/security.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="748" selection-end="748" vertical-scroll-proportion="0.57842046" vertical-offset="0" max-vertical-offset="899">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Lib/recaptchalib.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="0" selection-start="248" selection-end="248" vertical-scroll-proportion="-4.0204325" vertical-offset="3505" max-vertical-offset="5020">
@@ -869,57 +1084,181 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="5" selection-start="1002" selection-end="1002" vertical-scroll-proportion="0.0" vertical-offset="61" max-vertical-offset="2020">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/services.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="831" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/services1.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/layout.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="16" selection-start="656" selection-end="656" vertical-scroll-proportion="0.3448276" vertical-offset="0" max-vertical-offset="870">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Client.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="0" selection-start="333" selection-end="333" vertical-scroll-proportion="-13.103448" vertical-offset="0" max-vertical-offset="600">
+        <state line="15" column="7" selection-start="251" selection-end="251" vertical-scroll-proportion="0.3448276" vertical-offset="0" max-vertical-offset="870">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Controller/Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="217" column="20" selection-start="7072" selection-end="7072" vertical-scroll-proportion="0.34367815" vertical-offset="3681" max-vertical-offset="4920">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="0" selection-start="7" selection-end="7" vertical-scroll-proportion="0.04597701" vertical-offset="0" max-vertical-offset="920">
           <folding>
-            <element signature="e#42#85#0" expanded="true" />
+            <element signature="e#7#47#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/autoload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="94" selection-end="94" vertical-scroll-proportion="0.06896552" vertical-offset="0" max-vertical-offset="870">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.lock">
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="35440">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="24" selection-start="178" selection-end="178" vertical-scroll-proportion="0.1112347" vertical-offset="0" max-vertical-offset="899">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml.dist">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="41" selection-start="548" selection-end="548" vertical-scroll-proportion="0.2413793" vertical-offset="110" max-vertical-offset="1280">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Core/User/UserInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="10" selection-start="1070" selection-end="1070" vertical-scroll-proportion="-0.37931034" vertical-offset="850" max-vertical-offset="1720">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="8" selection-start="1997" selection-end="1997" vertical-scroll-proportion="0.0" vertical-offset="1281" max-vertical-offset="2180">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="12" selection-start="138" selection-end="150" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="1460">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/reg.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="25" selection-start="1317" selection-end="1317" vertical-scroll-proportion="-20.0" vertical-offset="0" max-vertical-offset="900">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="10" selection-start="550" selection-end="550" vertical-scroll-proportion="0.24471635" vertical-offset="0" max-vertical-offset="899">
+        <state line="9" column="39" selection-start="235" selection-end="235" vertical-scroll-proportion="-6.206897" vertical-offset="0" max-vertical-offset="900">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/ClientFormValidate.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="33" selection-start="40" selection-end="40" vertical-scroll-proportion="-1.3793104" vertical-offset="0" max-vertical-offset="660">
+        <state line="2" column="33" selection-start="40" selection-end="40" vertical-scroll-proportion="0.04597701" vertical-offset="0" max-vertical-offset="870">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php">
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="98" column="83" selection-start="3353" selection-end="3353" vertical-scroll-proportion="-20.172413" vertical-offset="1375" max-vertical-offset="6440">
+        <state line="9" column="72" selection-start="512" selection-end="512" vertical-scroll-proportion="0.20022246" vertical-offset="0" max-vertical-offset="899">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/security.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="73" selection-start="729" selection-end="729" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="740">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="30" selection-start="1374" selection-end="1374" vertical-scroll-proportion="-55.172413" vertical-offset="0" max-vertical-offset="3300">
           <folding>
-            <element signature="e#46#80#0" expanded="true" />
+            <element signature="e#42#74#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/login.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="8" selection-start="81" selection-end="81" vertical-scroll-proportion="-1.3793104" vertical-offset="0" max-vertical-offset="280">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="227" selection-start="1357" selection-end="1357" vertical-scroll-proportion="-0.11668611" vertical-offset="520" max-vertical-offset="1600">
+        <state line="46" column="0" selection-start="2832" selection-end="2832" vertical-scroll-proportion="-13.793103" vertical-offset="520" max-vertical-offset="1580">
           <folding>
             <element signature="e#47#87#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="120" column="61" selection-start="4260" selection-end="4260" vertical-scroll-proportion="0.5797101" vertical-offset="2080" max-vertical-offset="7300">
+          <folding>
+            <element signature="e#46#80#0" expanded="true" />
           </folding>
         </state>
       </provider>

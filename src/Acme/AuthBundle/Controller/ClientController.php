@@ -3,6 +3,7 @@
 namespace Acme\AuthBundle\Controller;
 
 use Acme\AuthBundle\Entity\Client;
+use Acme\AuthBundle\Entity\User;
 use Acme\AuthBundle\Entity\ClientFormValidate;
 use Acme\AuthBundle\Form\Client\LoginForm;
 use Acme\AuthBundle\Form\Client\RegForm;
@@ -16,6 +17,9 @@ use Doctrine\ORM\Query;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 require_once '..\src\Acme\AuthBundle\Lib\recaptchalib.php';
 
 
@@ -64,7 +68,27 @@ class ClientController extends Controller
      */
     public function loginAction(Request $request)
     {
-        //echo phpinfo();
+        //$user = $this->getUser();
+
+        /*if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException();
+        }*/
+
+        /*$session = $request->getSession();
+
+        // get the login error if there is one
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR))
+        {
+            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+        }
+        else
+        {
+            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
+        }
+
+        $user = $this->get('security.context')->getToken()->getUser();
+        return array('test' => $session->get(SecurityContext::LAST_USERNAME));*/
     }
 
     /**
@@ -73,7 +97,8 @@ class ClientController extends Controller
      */
     public function regAction(Request $request)
     {
-        $formReg = $this->createForm(new RegForm());
+        $clientValidate = new ClientFormValidate();
+        $formReg = $this->createForm(new RegForm(), $clientValidate);
         $formReg->handleRequest($request);
 
         $publickey = "6LcYmecSAAAAAJlYNqogbOXJVMvGgim5JoM0hcAi";
@@ -88,20 +113,38 @@ class ClientController extends Controller
 
                 if ($formReg->isValid())
                 {
-                    if ($resp->is_valid)
+                    //if ($resp->is_valid)
                     {
                         $postData = $request->request->get('formReg');
                         $userLogin = $postData['fieldLogin'];
-                        $userPass = $postData['fieldPass'];
+                        $userPassword = $postData['fieldPass'];
                         $userEmail = $postData['fieldEmail'];
-                        $userPassApprove = $postData['fieldPassApprove'];
+
+                        $user = new User();
+                        $user->setLogin($userLogin);
+                        $user->setEmail($userEmail);
+                        $user->setRole(2);
+
+                        // шифрует и устанавливает пароль для пользователя,
+                        // эти настройки совпадают с конфигурационными файлами
+                        /*$encoder = new MessageDigestPasswordEncoder('sha512', true, 10);
+                        $password = $encoder->encodePassword('admin', $user->getSalt());*/
+                        $user->setPassword($userPassword);
+
+                        $em = $this->getDoctrine()->getManager();
+                        $em->persist($user);
+                        $em->flush();
+
+                        //$user->getUserRoles()->add($role);
+
+                        //$manager->persist($user);
 
                         return $this->redirect($this->generateUrl('client_index'));
                     }
-                    else
+                    /*else
                     {
                         return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $resp->error, 'approvePassError' => '');
-                    }
+                    }*/
                 }
                 /*else
                 czxczxczxcsdfsdfsdfgdfggzxczxczxcvxcv

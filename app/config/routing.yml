@@ -30,6 +30,11 @@ author_reg:
   defaults:  { _controller: AcmeAuthBundle:Author:reg }
 
 
+#---------------Auth----------------------------#
+
+
+#----------------------------------------------#
+
 
 
 read:
