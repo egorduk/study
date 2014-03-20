@@ -7,12 +7,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NoResultException;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="user")
+ * @ORM\Table(name="User")
  */
-class User implements AdvancedUserInterface
+class User extends EntityRepository implements AdvancedUserInterface
 {
     /**
      * @ORM\Id
@@ -61,6 +66,16 @@ class User implements AdvancedUserInterface
         //parent::__construct();
         $this->date_reg = new \DateTime();
         $this->is_active = 0;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     public function getUsername()
@@ -132,6 +147,7 @@ class User implements AdvancedUserInterface
     public function getRoles()
     {
         //return $this->getUserRoles()->toArray();
+        return array('ROLE_CLIENT');
     }
 
     public function eraseCredentials()

@@ -14,6 +14,7 @@ use Symfony\Component\Finder\Iterator\SortableIterator;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -21,6 +22,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use Symfony\Component\Security\Core\Util\SecureRandom;
+
 require_once '..\src\Acme\AuthBundle\Lib\recaptchalib.php';
 
 
@@ -28,7 +30,7 @@ class ClientController extends Controller
 {
     private $tableSource = 'AcmeRssBundle:Source';
     private $tableNews = 'AcmeRssBundle:News';
-
+    private $tableUser = 'AcmeAuthBundle:User';
 
     /**
      * @Template()
@@ -49,18 +51,93 @@ class ClientController extends Controller
                 {
                     //return $this->redirect($this->generateUrl(''));
                     $postData = $request->request->get('formLogin');
+                    $user = new User();
                     $userLogin = $postData['fieldLogin'];
-                    $userPass = $postData['fieldPass'];
-                    return array('formLogin' => $formLogin->createView());
+                    $userPassword = $postData['fieldPass'];
+                    //return array('formLogin' => $formLogin->createView());
+
+                    $encoder = new MessageDigestPasswordEncoder('sha512', true, 10);
+                    /*$generator = new SecureRandom();
+                    $salt = bin2hex($generator->nextBytes(32));
+                    $password = $encoder->encodePassword($userPassword, $salt);
+
+                    $em = $this->getDoctrine()->getManager();
+                    $client = $em->getRepository('AcmeAuthBundle:User')->findBy(
+                        array('login' => $userLogin),
+                        array('password' => $password)
+                    );
+
+                    if (!$client)
+                    {
+                        throw $this->createNotFoundException
+                        (
+                            'No client found'
+                        );
+                    }
+
+                    $em->flush();*/
+
+                    /*$user = ;
+
+                    $encoder = $encoder->getEncoder($user);
+
+                    // will return $weakEncoder (see above)
+
+                    $encodedPassword = $encoder->encodePassword($password, $user->getSalt());
+
+                    // check if the password is valid:
+
+                    $validPassword = $encoder->isPasswordValid(
+                        $user->getPassword(),
+                        $password,
+                        $user->getSalt());
+
+                    return array('formLogin' => $formLogin->createView(), 'test' => $client);*/
                 }
-                /*else
+                else
                 {
-                    return array('formLogin' => $formLogin->createView());
-                }*/
+                    return array('formLogin' => $formLogin->createView());*/
+
+                    //$em = $this->getDoctrine()->getManager();
+                    //$user = $em->getRepository('AcmeAuthBundle:User')
+                    //    ->findByLogin($userLogin);
+
+                    $em = $this->getDoctrine()->getEntityManager();
+                    $user = $em->getRepository($this->tableUser)
+                        ->findOneByLogin($userLogin);
+
+                    if (!$user)
+                    {
+                        return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный логин или пароль!');
+                    }
+                    else
+                    {
+                        $userId = $user->getId();
+
+
+                    }
+
+                    /*$validPassword = $encoder->isPasswordValid(
+                        $user->getPassword(),
+                        $userPassword,
+                        $user->getSalt()
+                    );*/
+
+                    /*if ($this->get('request')->attributes->has(SecurityContext::AUTHENTICATION_ERROR))
+                    {
+                        $error = $this->get('request')->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+                    }
+                    else
+                    {
+                        $error = $this->get('request')->getSession()->get(SecurityContext::AUTHENTICATION_ERROR);
+                    }*/
+
+                    return array('formLogin' => $formLogin->createView(), 'errorData' => '');
+                }
             }
         }
 
-        return array('formLogin' => $formLogin->createView());
+        return array('formLogin' => $formLogin->createView(), 'errorData' => '');
     }
 
     /**
@@ -90,6 +167,28 @@ class ClientController extends Controller
 
         $user = $this->get('security.context')->getToken()->getUser();
         return array('test' => $session->get(SecurityContext::LAST_USERNAME));*/
+
+
+        /*$q = $this
+            ->createQueryBuilder('u')
+            ->where('u.username = :username OR u.email = :email')
+            ->setParameter('username', $username)
+            ->setParameter('email', $username)
+            ->getQuery();
+
+        try {
+            // The Query::getSingleResult() method throws an exception
+            // if there is no record matching the criteria.
+            $user = $q->getSingleResult();
+        } catch (NoResultException $e) {
+            $message = sprintf(
+                'Unable to find an active admin AcmeUserBundle:User object identified by "%s".',
+                $username
+            );
+            throw new UsernameNotFoundException($message, 0, $e);
+        }
+
+        return $user;*/
     }
 
     /**

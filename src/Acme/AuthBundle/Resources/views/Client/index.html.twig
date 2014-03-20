@@ -4,9 +4,12 @@
             <div class="row">
                 {{ form_start(formLogin) }}
                     {{ form_errors(formLogin) }}
-                    {{ form_widget(formLogin) }}
+                        {{ form_row(formLogin.fieldLogin) }}
+                        {{ form_row(formLogin.fieldPass) }}
+                        {{ errorData }}
                 {{ form_end(formLogin) }}
                 <p><a href="{{ path('client_reg') }}">Зарегистрироваться</a></p>
+                <p>Войти с помощью</p>
             </div>
         </div>
     {% endblock %}
