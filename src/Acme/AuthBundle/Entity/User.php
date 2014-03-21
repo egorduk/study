@@ -17,7 +17,8 @@ use Doctrine\ORM\NoResultException;
  * @ORM\Entity
  * @ORM\Table(name="User")
  */
-class User extends EntityRepository implements AdvancedUserInterface
+//class User extends EntityRepository implements AdvancedUserInterface
+class User extends EntityRepository implements UserInterface
 {
     /**
      * @ORM\Id

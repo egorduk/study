@@ -22,6 +22,20 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use Symfony\Component\Security\Core\Util\SecureRandom;
+use Symfony\Component\Security\Core\Util\StringUtils;
+use Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider;
+use Symfony\Component\Security\Core\User\UserChecker;
+use Symfony\Component\Security\Core\User\InMemoryUserProvider;
+use Symfony\Component\Security\Core\Encoder\EncoderFactory;
+use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
+use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\BrowserKit\Cookie;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Bundle\FrameworkBundle\Test;
+use Zend\Cache\Storage\Adapter\Session;
 
 require_once '..\src\Acme\AuthBundle\Lib\recaptchalib.php';
 
@@ -49,62 +63,13 @@ class ClientController extends Controller
             {
                 if ($formLogin->isValid())
                 {
-                    //return $this->redirect($this->generateUrl(''));
                     $postData = $request->request->get('formLogin');
-                    $user = new User();
                     $userLogin = $postData['fieldLogin'];
                     $userPassword = $postData['fieldPass'];
-                    //return array('formLogin' => $formLogin->createView());
 
-                    $encoder = new MessageDigestPasswordEncoder('sha512', true, 10);
-                    /*$generator = new SecureRandom();
-                    $salt = bin2hex($generator->nextBytes(32));
-                    $password = $encoder->encodePassword($userPassword, $salt);
-
-                    $em = $this->getDoctrine()->getManager();
-                    $client = $em->getRepository('AcmeAuthBundle:User')->findBy(
-                        array('login' => $userLogin),
-                        array('password' => $password)
-                    );
-
-                    if (!$client)
-                    {
-                        throw $this->createNotFoundException
-                        (
-                            'No client found'
-                        );
-                    }
-
-                    $em->flush();*/
-
-                    /*$user = ;
-
-                    $encoder = $encoder->getEncoder($user);
-
-                    // will return $weakEncoder (see above)
-
-                    $encodedPassword = $encoder->encodePassword($password, $user->getSalt());
-
-                    // check if the password is valid:
-
-                    $validPassword = $encoder->isPasswordValid(
-                        $user->getPassword(),
-                        $password,
-                        $user->getSalt());
-
-                    return array('formLogin' => $formLogin->createView(), 'test' => $client);*/
-                }
-                else
-                {
-                    return array('formLogin' => $formLogin->createView());*/
-
-                    //$em = $this->getDoctrine()->getManager();
-                    //$user = $em->getRepository('AcmeAuthBundle:User')
-                    //    ->findByLogin($userLogin);
-
-                    $em = $this->getDoctrine()->getEntityManager();
-                    $user = $em->getRepository($this->tableUser)
-                        ->findOneByLogin($userLogin);
+                    $user = $this->getDoctrine()->getRepository($this->tableUser)
+                       // ->findOneBy(array('login' => $userLogin, 'password' => $userPassword))
+                          ->findOneByLogin($userLogin);
 
                     if (!$user)
                     {
@@ -112,17 +77,82 @@ class ClientController extends Controller
                     }
                     else
                     {
-                        $userId = $user->getId();
+                        $encoder = new MessageDigestPasswordEncoder('sha512', true, 10);
+                        $encodedPassword = $encoder->encodePassword($userPassword, $user->getSalt());
+
+                        /*$validPassword = $encoder->isPasswordValid(
+                            $user->getPassword(),
+                            $password,
+                            $user->getSalt());*/
+
+                        if(!StringUtils::equals($encodedPassword, $user->getPassword()))
+                        {
+                            $session = $request->getSession();
+                            $session->clear();
+                            return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный логин или пароль!');
+                        }
+                        else
+                        {
+                            //$a = new WebTestCase();
+                            //$a::createClient();
+                            //$session = $request->getSession();
+                            //$session->start();
+                            //$session = new Session();
+                            $firewall = 'secured_area';
+                            $token = new UsernamePasswordToken($userLogin, null, $firewall, array('ROLE_CLIENT'));
+                            //$session->set('_security_'.$firewall, serialize($token));
+                            $this->get('security.context')->setToken($token);
+                            //$session->save();
+                            //$cookie = new Cookie($session->getName(), $session->getId());
+                            //$request->cookies('test')->set($cookie);
+                            //$session->
+                            return new RedirectResponse($this->generateUrl('client_login'));
+
+                            //print_r($cookie);
+                            //$this->client->getCookieJar()->set($cookie);
+                            //$cookie->
 
 
+                            /*$aclProvider = $this->get('security.acl.provider');
+                            $objectIdentity = ObjectIdentity::fromDomainObject($user);
+                            $acl = $aclProvider->createAcl($objectIdentity);*/
+
+                            // retrieving the security identity of the currently logged-in user
+                            /*$securityContext = $this->get('security.context');
+                            $user = $securityContext->getToken()->getUser();
+                            $securityIdentity = UserSecurityIdentity::fromAccount($user);*/
+
+                            // grant owner access
+                            //$acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
+                            //$aclProvider->updateAcl($acl);
+
+                            /*$builder = new MaskBuilder();
+                            $builder
+                                ->add('view')
+                                ->add('edit')
+                                ->add('delete')
+                                ->add('undelete');
+                            $mask = $builder->get();
+
+                            $identity = new UserSecurityIdentity('johannes', 'Acme\UserBundle\Entity\User');
+                            $acl->insertObjectAce($identity, $mask);*/
+
+                            //return array('formLogin' => $formLogin->createView(), 'errorData' => '');
+                        }
                     }
 
-                    /*$validPassword = $encoder->isPasswordValid(
-                        $user->getPassword(),
-                        $userPassword,
-                        $user->getSalt()
-                    );*/
+                    /*if (!$client)
+                    {
+                        throw $this->createNotFoundException
+                        (
+                            'No client found'
+                        );
+                    }
 
+                    return array('formLogin' => $formLogin->createView(), 'test' => $client);*/
+                }
+                else
+                {
                     /*if ($this->get('request')->attributes->has(SecurityContext::AUTHENTICATION_ERROR))
                     {
                         $error = $this->get('request')->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
@@ -146,6 +176,25 @@ class ClientController extends Controller
      */
     public function loginAction(Request $request)
     {
+        $session = $request->getSession();
+        //print_r($this->get('security.context')->getToken()->getRole());
+        //$user = $this->get('security.context')->getToken()->getUser();
+        //$user = $this->get('security.context');
+        //return array('test' => $session->get(SecurityContext::LAST_USERNAME));
+
+// get the login error if there is one
+        /*if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+        } else {
+            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+        }*/
+
+        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException();
+        }
+
+        return array('test' => $this->get('security.context')->getToken()->getUser());
+
         //$user = $this->getUser();
 
         /*if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {

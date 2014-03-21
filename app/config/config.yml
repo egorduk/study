@@ -25,6 +25,10 @@ framework:
         handler_id:  ~
     fragments:       ~
     http_method_override: true
+    #session:
+    #        default_locale: %locale%
+     #       lifetime:       3600
+     #       auto_start:     true
 
 services:
     cache:
@@ -74,7 +78,7 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: false
+        auto_mapping: true
         #metadata_cache_driver: apc
         #result_cache_driver: apc
         #query_cache_driver: apc

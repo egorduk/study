@@ -20,8 +20,8 @@
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
         "winzou/cache-bundle": "dev-master",
-        "genemu/form-bundle": "2.2.*"
-
+        "genemu/form-bundle": "2.2.*",
+        "symfony/finder": "2.3.*"
     },
     "config":{
         "bin-dir": "bin",
