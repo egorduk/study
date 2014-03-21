@@ -54,8 +54,19 @@ class ClientController extends Controller
     {
         $client = new ClientFormValidate();
         $formLogin = $this->createForm(new LoginForm(), $client);
-
         $formLogin->handleRequest($request);
+
+        $socialToken = $request->request->get('token');
+        if (isset($socialToken) && $socialToken != null)
+        {
+            $socialResponse = file_get_contents('http://ulogin.ru/token.php?token=' . $socialToken . '&host=' . $_SERVER['HTTP_HOST']);
+            $socialData = json_decode($socialResponse, true);
+
+            if (!isset($socialData['error']))
+            {
+                print_r($socialData);
+            }
+        }
 
         if ($request->isMethod('POST'))
         {
@@ -250,15 +261,17 @@ class ClientController extends Controller
         $formReg = $this->createForm(new RegForm(), $clientValidate);
         $formReg->handleRequest($request);
 
-        $publickey = "6LcYmecSAAAAAJlYNqogbOXJVMvGgim5JoM0hcAi";
-        $captcha = recaptcha_get_html($publickey);
+        //$publickey = "6LcYmecSAAAAAJlYNqogbOXJVMvGgim5JoM0hcAi";
+        $publicKeyRecaptcha = $this->container->getParameter('publicKeyRecaptcha');
+        $captcha = recaptcha_get_html($publicKeyRecaptcha);
 
         if ($request->isMethod('POST'))
         {
             if ($formReg->get('reg')->isClicked())
             {
-                $privatekey = "6LcYmecSAAAAANaq8JFPxT3xEA_urO6st1gfVOXL";
-                $resp = recaptcha_check_answer($privatekey, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
+                $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
+                //$privatekey = "6LcYmecSAAAAANaq8JFPxT3xEA_urO6st1gfVOXL";
+                $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
 
                 if ($formReg->isValid())
                 {
