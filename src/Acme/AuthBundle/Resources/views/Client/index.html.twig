@@ -10,6 +10,12 @@
                 {{ form_end(formLogin) }}
                 <p><a href="{{ path('client_reg') }}">Зарегистрироваться</a></p>
                 <p>Войти с помощью</p>
+                <div id="openID">
+                    <div id="uLogin" data-ulogin="display=panel;fields=first_name,email,photo,photo_big,city,country;
+				        providers=vkontakte,odnoklassniki,twitter,facebook,google;hidden=mailru,yandex;
+				        redirect_uri=http%3A%2F%2Flocalhost%2Floginza%2Fpublic%2Findex%2Fauth"
+                    </div>
+                </div>
             </div>
         </div>
     {% endblock %}
