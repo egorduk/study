@@ -146,14 +146,14 @@ class ClientController extends Controller
         $sessionCreated = $session->getMetadataBag()->getCreated();
         $sessionLifeTime = $session->getMetadataBag()->getLifetime();
         $whenLogin = Helper::getDateFromTimestamp($sessionCreated, "d/m/Y H:i:s");
-        echo "Заходил в систему в " . $whenLogin;
+        echo "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ " . $whenLogin;
         echo "</br>";
         $sessionRemaining = $sessionCreated + $sessionLifeTime;
         $a = strtotime("now");
         //$sessionRemaining = Helper::getDateFromTimestamp($a, "d/m/Y H:i:s");
         $r = $sessionRemaining - $a;
         $sessionRemaining = Helper::getDateFromTimestamp($r, "i:s");
-        echo "Осталось " . $sessionRemaining;
+        echo "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " . $sessionRemaining;
         echo "</br>";
 
         //print_r($session->get('_security_secured_area'));
@@ -193,6 +193,15 @@ class ClientController extends Controller
         $session = $request->getSession();
         $session->clear();
 
+        return array();
+    }
+
+    /**
+     * @Template()
+     * @return Response
+     */
+    public function rulesAction()
+    {
         return array();
     }
 
