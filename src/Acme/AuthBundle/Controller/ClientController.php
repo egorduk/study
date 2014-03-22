@@ -29,6 +29,7 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 //use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 //use Symfony\Bundle\FrameworkBundle\Test;
 use Helper\Helper;
+use Symfony\Component\Validator\Constraints\Date;
 
 require_once '..\src\Acme\AuthBundle\Lib\recaptchalib.php';
 
@@ -50,6 +51,7 @@ class ClientController extends Controller
         $formLogin->handleRequest($request);
 
         $socialToken = $request->request->get('token');
+
         if (isset($socialToken) && $socialToken != null)
         {
             $socialResponse = file_get_contents('http://ulogin.ru/token.php?token=' . $socialToken . '&host=' . $_SERVER['HTTP_HOST']);
@@ -77,7 +79,7 @@ class ClientController extends Controller
 
                     if (!$user)
                     {
-                        return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный логин или пароль!');
+                        return array('formLogin' => $formLogin->createView(), 'errorData' => '?????? ???????????? ????? ??? ??????!');
                     }
                     else
                     {
@@ -92,17 +94,18 @@ class ClientController extends Controller
 
                         if(!StringUtils::equals($encodedPassword, $user->getPassword()))
                         {
-                            return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный логин или пароль!');
+                            return array('formLogin' => $formLogin->createView(), 'errorData' => '?????? ???????????? ????? ??? ??????!');
                         }
                         else
                         {
-                            $session = $request->getSession();
+                           // $session = $request->getSession();
                             $firewall = 'secured_area';
                             $token = new UsernamePasswordToken($userLogin, null, $firewall, array('ROLE_CLIENT'));
+                            //$session->
                             //$session->set('_security_'.$firewall, serialize($token));
                             //$session->set('TEST', serialize(123));
                             $this->get('security.context')->setToken($token);
-                            $session->save();
+                            //$session->save();
 
                             return new RedirectResponse($this->generateUrl('client_login'));
                         }
@@ -140,12 +143,22 @@ class ClientController extends Controller
             throw new AccessDeniedException();
         }*/
 
-        //$timestamp = $session->getMetadataBag()->getLastUsed();
-        //echo date( "d/m/Y H:m", $timestamp);
+        $sessionCreated = $session->getMetadataBag()->getCreated();
+        $sessionLifeTime = $session->getMetadataBag()->getLifetime();
+        $whenLogin = Helper::getDateFromTimestamp($sessionCreated, "d/m/Y H:i:s");
+        echo "������� � ������� � " . $whenLogin;
+        echo "</br>";
+        $sessionRemaining = $sessionCreated + $sessionLifeTime;
+        $a = strtotime("now");
+        //$sessionRemaining = Helper::getDateFromTimestamp($a, "d/m/Y H:i:s");
+        $r = $sessionRemaining - $a;
+        $sessionRemaining = Helper::getDateFromTimestamp($r, "i:s");
+        echo "�������� " . $sessionRemaining;
+        echo "</br>";
 
         //print_r($session->get('_security_secured_area'));
-        //print_r($session);
-
+        print_r($session);
+        //print_r($this->get('security.context')->getToken());
 
         return array('test' => '');
 

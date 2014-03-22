@@ -36,4 +36,9 @@ class Helper
         return array('algorithm' => $algorithm, 'baseAs64' => $baseAs64, 'iterations' => $iterations);
     }
 
+    public static function getDateFromTimestamp($timestamp, $format)
+    {
+        return date($format, $timestamp);
+    }
+
 }
