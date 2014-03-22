@@ -1,10 +1,12 @@
 security:
+    access_denied_url: /unauthorized
     firewalls:
         secured_area:
             pattern:    ^/
             anonymous: ~
             http_basic:
                 realm: "Secured Area"
+            #stateless: true
             logout:
                 path:   /logout
                 target: /

@@ -16,6 +16,10 @@ client_index:
   pattern:   /client/index
   defaults:  { _controller: AcmeAuthBundle:Client:index }
 
+client_logout:
+  pattern:   /client/logout
+  defaults:  { _controller: AcmeAuthBundle:Client:logout }
+
 
 
 
@@ -32,6 +36,12 @@ author_reg:
 
 #---------------Auth----------------------------#
 
+unauthorized:
+  pattern:  /unauthorized
+  defaults: { _controller: AcmeAuthBundle:Client:unauthorized }
+
+logout:
+  pattern:  /logout
 
 #----------------------------------------------#
 

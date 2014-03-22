@@ -21,7 +21,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "winzou/cache-bundle": "dev-master",
         "genemu/form-bundle": "2.2.*",
-        "symfony/finder": "2.3.*"
+        "symfony/finder": "2.3.*",
+        "jms/security-extra-bundle": "dev-master"
     },
     "config":{
         "bin-dir": "bin",

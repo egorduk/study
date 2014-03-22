@@ -12,13 +12,14 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
+use Symfony\Component\Serializer;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="User")
  */
 //class User extends EntityRepository implements AdvancedUserInterface
-class User extends EntityRepository implements UserInterface
+class User extends EntityRepository implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id

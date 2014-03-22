@@ -107,3 +107,6 @@ swiftmailer:
 #        form:
 #            type: acme_user_registration
 
+
+#jms_security_extra:
+#    secure_all_services: false

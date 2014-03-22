@@ -12,8 +12,6 @@ parameters:
     mailer_password: null
     locale: en
     secret: ThisTokenIsNotSoSecretChangeIt
-    publicKeyRecaptcha: 6LcYmecSAAAAAJlYNqogbOXJVMvGgim5JoM0hcAi
-    privateKeyRecaptcha: 6LcYmecSAAAAANaq8JFPxT3xEA_urO6st1gfVOXL
 doctrine:
     dbal:
         driver: '%database_driver%'
