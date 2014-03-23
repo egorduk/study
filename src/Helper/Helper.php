@@ -41,4 +41,9 @@ class Helper
         return date($format, $timestamp);
     }
 
+    public static function getOpenIdData($data)
+    {
+
+    }
+
 }

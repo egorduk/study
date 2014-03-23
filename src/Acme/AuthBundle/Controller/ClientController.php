@@ -287,7 +287,7 @@ class ClientController extends Controller
         if (!isset($socialData['error']))
         {
             print_r($socialData);
-            
+
         }
 
         return array();
