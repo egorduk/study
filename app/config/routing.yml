@@ -20,7 +20,9 @@ client_rules:
   pattern:   /client/rules
   defaults:  { _controller: AcmeAuthBundle:Client:rules }
 
-
+client_openid_auth:
+  pattern:   /client/auth/openid
+  defaults:  { _controller: AcmeAuthBundle:Client:openid }
 
 
 #------------------Author------------------------#

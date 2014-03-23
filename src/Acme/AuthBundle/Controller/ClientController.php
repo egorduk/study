@@ -54,13 +54,11 @@ class ClientController extends Controller
 
         if (isset($socialToken) && $socialToken != null)
         {
-            $socialResponse = file_get_contents('http://ulogin.ru/token.php?token=' . $socialToken . '&host=' . $_SERVER['HTTP_HOST']);
-            $socialData = json_decode($socialResponse, true);
+            $session = $request->getSession();
+            $session->set('socialToken', $socialToken);
+            $session->save();
 
-            if (!isset($socialData['error']))
-            {
-                print_r($socialData);
-            }
+            return new RedirectResponse($this->generateUrl('client_openid_auth'));
         }
 
         if ($request->isMethod('POST'))
@@ -271,6 +269,27 @@ class ClientController extends Controller
      */
     public function unauthorizedAction(Request $request)
     {
+        return array();
+    }
+
+    /**
+     * @Template()
+     * @return array
+     */
+    public function openidAction(Request $request)
+    {
+        $session = $request->getSession();
+        $socialToken = $session->get('socialToken');
+        $socialResponse = file_get_contents('http://ulogin.ru/token.php?token=' . $socialToken . '&host=' . $_SERVER['HTTP_HOST']);
+        $socialData = json_decode($socialResponse, true);
+        //$session->remove('socialToken');
+
+        if (!isset($socialData['error']))
+        {
+            print_r($socialData);
+            
+        }
+
         return array();
     }
 
