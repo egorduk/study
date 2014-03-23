@@ -6,6 +6,8 @@ use Symfony\Component\Yaml\Yaml;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Util\SecureRandom;
+use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 
 
 class Helper
@@ -101,6 +103,23 @@ class Helper
         self::$kernel = new \AppKernel($environment, false);
         self::$kernel->boot();
         return self::$kernel->getContainer();
+    }
+
+    public static function getSalt()
+    {
+        $generator = new SecureRandom();
+        $salt = bin2hex($generator->nextBytes(32));
+
+        return $salt;
+    }
+
+    public static function getRegPassword($userPassword, $salt)
+    {
+        $parsedYml = Helper::readEncodersParam();
+        $encoder = new MessageDigestPasswordEncoder($parsedYml['algorithm'], $parsedYml['baseAs64'], $parsedYml['iterations']);
+        $regPassword = $encoder->encodePassword($userPassword, $salt);
+
+        return $regPassword;
     }
 
 

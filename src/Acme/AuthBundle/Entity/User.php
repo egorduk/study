@@ -63,11 +63,24 @@ class User extends EntityRepository implements UserInterface, \Serializable
      */
     protected $is_active;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $ip_reg;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $openid_id;
+
+
     public function __construct()
     {
-        //parent::__construct();
         $this->date_reg = new \DateTime();
         $this->is_active = 0;
+        $this->ip_reg = ip2long($_SERVER['REMOTE_ADDR']);
+        $this->openid_id = 1;
+        $this->role_id = 2;
     }
 
     public function getId()
@@ -83,6 +96,11 @@ class User extends EntityRepository implements UserInterface, \Serializable
     public function getUsername()
     {
 
+    }
+
+    public function getIpReg()
+    {
+        return $this->ip_reg;
     }
 
     public function getSalt()

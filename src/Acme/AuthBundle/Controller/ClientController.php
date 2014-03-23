@@ -21,7 +21,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
-use Symfony\Component\Security\Core\Util\SecureRandom;
+//use Symfony\Component\Security\Core\Util\SecureRandom;
 use Symfony\Component\Security\Core\Util\StringUtils;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\BrowserKit\Cookie;
@@ -81,14 +81,7 @@ class ClientController extends Controller
                     }
                     else
                     {
-                        $parsedYml = Helper::readEncodersParam();
-                        $encoder = new MessageDigestPasswordEncoder($parsedYml['algorithm'], $parsedYml['baseAs64'], $parsedYml['iterations']);
-                        $encodedPassword = $encoder->encodePassword($userPassword, $user->getSalt());
-
-                        /*$validPassword = $encoder->isPasswordValid(
-                            $user->getPassword(),
-                            $password,
-                            $user->getSalt());*/
+                        $encodedPassword = Helper::getRegPassword($userPassword, $user->getSalt());
 
                         if(!StringUtils::equals($encodedPassword, $user->getPassword()))
                         {
@@ -235,13 +228,9 @@ class ClientController extends Controller
                         $user = new User();
                         $user->setLogin($userLogin);
                         $user->setEmail($userEmail);
-                        $user->setRole(2);
 
-                        $parsedYml = Helper::readEncodersParam($this->container);
-                        $encoder = new MessageDigestPasswordEncoder($parsedYml['algorithm'], $parsedYml['baseAs64'], $parsedYml['iterations']);
-                        $generator = new SecureRandom();
-                        $salt = bin2hex($generator->nextBytes(32));
-                        $password = $encoder->encodePassword($userPassword, $salt);
+                        $salt = Helper::getSalt();
+                        $password = Helper::getRegPassword($userPassword, $salt);
                         $user->setPassword($password);
                         $user->setSalt($salt);
 
@@ -305,6 +294,24 @@ class ClientController extends Controller
 
                         if ($formReg->isValid())
                         {
+                            $postData = $request->request->get('formReg');
+                            $userLogin = $postData['fieldLogin'];
+                            $userPassword = $postData['fieldPass'];
+                            $userEmail = $postData['fieldEmail'];
+
+                            $user = new User();
+                            $user->setLogin($userLogin);
+                            $user->setEmail($userEmail);
+
+                            $salt = Helper::getSalt();
+                            $password = Helper::getRegPassword($userPassword, $salt);
+                            $user->setPassword($password);
+                            $user->setSalt($salt);
+
+                            $em = $this->getDoctrine()->getManager();
+                            $em->persist($user);
+                            $em->flush();
+
                             return $this->redirect($this->generateUrl('client_index'));
                         }
                     }
