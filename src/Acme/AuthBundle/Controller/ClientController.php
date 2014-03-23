@@ -77,11 +77,11 @@ class ClientController extends Controller
 
                     if (!$user)
                     {
-                        return array('formLogin' => $formLogin->createView(), 'errorData' => '?????? ???????????? ????? ??? ??????!');
+                        return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный логин или пароль!');
                     }
                     else
                     {
-                        $parsedYml = Helper::readEncodersParam($this->container);
+                        $parsedYml = Helper::readEncodersParam();
                         $encoder = new MessageDigestPasswordEncoder($parsedYml['algorithm'], $parsedYml['baseAs64'], $parsedYml['iterations']);
                         $encodedPassword = $encoder->encodePassword($userPassword, $user->getSalt());
 
@@ -92,7 +92,7 @@ class ClientController extends Controller
 
                         if(!StringUtils::equals($encodedPassword, $user->getPassword()))
                         {
-                            return array('formLogin' => $formLogin->createView(), 'errorData' => '?????? ???????????? ????? ??? ??????!');
+                            return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный логин или пароль!');
                         }
                         else
                         {
@@ -144,14 +144,14 @@ class ClientController extends Controller
         $sessionCreated = $session->getMetadataBag()->getCreated();
         $sessionLifeTime = $session->getMetadataBag()->getLifetime();
         $whenLogin = Helper::getDateFromTimestamp($sessionCreated, "d/m/Y H:i:s");
-        echo "������� � ������� � " . $whenLogin;
+        echo "Create " . $whenLogin;
         echo "</br>";
         $sessionRemaining = $sessionCreated + $sessionLifeTime;
         $a = strtotime("now");
         //$sessionRemaining = Helper::getDateFromTimestamp($a, "d/m/Y H:i:s");
         $r = $sessionRemaining - $a;
         $sessionRemaining = Helper::getDateFromTimestamp($r, "i:s");
-        echo "�������� " . $sessionRemaining;
+        echo "Remaining " . $sessionRemaining;
         echo "</br>";
 
         //print_r($session->get('_security_secured_area'));
@@ -253,13 +253,13 @@ class ClientController extends Controller
                     }
                     else
                     {
-                        return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $resp->error, 'approvePassError' => '');
+                        return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $resp->error);
                     }
                 }
             }
         }
 
-        return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => '', 'approvePassError' => '');
+        return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => '');
     }
 
 
@@ -279,18 +279,48 @@ class ClientController extends Controller
     public function openidAction(Request $request)
     {
         $session = $request->getSession();
-        $socialToken = $session->get('socialToken');
-        $socialResponse = file_get_contents('http://ulogin.ru/token.php?token=' . $socialToken . '&host=' . $_SERVER['HTTP_HOST']);
-        $socialData = json_decode($socialResponse, true);
-        //$session->remove('socialToken');
 
-        if (!isset($socialData['error']))
+        if($session->has('socialToken'))
         {
-            print_r($socialData);
+            $socialToken = $session->get('socialToken');
+            $socialResponse = file_get_contents('http://ulogin.ru/token.php?token=' . $socialToken . '&host=' . $_SERVER['HTTP_HOST']);
+            $socialData = json_decode($socialResponse, true);
+            //$session->remove('socialToken');
 
+            if (!isset($socialData['error']))
+            {
+                $clientValidate = new ClientFormValidate();
+                $clientValidate->setLogin($socialData['nickname']);
+                $clientValidate->setEmail($socialData['email']);
+
+                $formReg = $this->createForm(new RegForm(), $clientValidate);
+                $formReg->handleRequest($request);
+
+                if ($request->isMethod('POST'))
+                {
+                    if ($formReg->get('reg')->isClicked())
+                    {
+                        //$privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
+                        //$resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
+
+                        if ($formReg->isValid())
+                        {
+                            return $this->redirect($this->generateUrl('client_index'));
+                        }
+                    }
+                }
+            }
+            else
+            {
+                return $this->redirect($this->generateUrl('client_index'));
+            }
+        }
+        else
+        {
+            return $this->redirect($this->generateUrl('client_index'));
         }
 
-        return array();
+        return array('formReg' => $formReg->createView());
     }
 
     /**

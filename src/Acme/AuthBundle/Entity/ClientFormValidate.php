@@ -6,23 +6,43 @@ class ClientFormValidate
 {
     public $fieldLogin;
     public $fieldPass;
-    public $fieldEmail;
     public $fieldPassApprove;
+    public $fieldEmail;
     public $checkAgreeRules;
 
     public function __construct()
     {
-        //parent::__construct();
     }
 
-    public function getFieldPass()
+    public function getPassword()
     {
         return $this->fieldPass;
     }
 
-    public function getFieldApprovePass()
+    public function getApprovePassword()
     {
         return $this->fieldPassApprove;
     }
+
+    public function setLogin($login)
+    {
+        $this->fieldLogin = $login;
+    }
+
+    public function getLogin()
+    {
+        return $this->fieldLogin;
+    }
+
+    public function setEmail($email)
+    {
+        $this->fieldEmail = $email;
+    }
+
+    public function getEmail()
+    {
+        return $this->fieldEmail;
+    }
+
 
 }

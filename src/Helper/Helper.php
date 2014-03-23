@@ -3,12 +3,17 @@
 namespace Helper;
 
 use Symfony\Component\Yaml\Yaml;
+use Doctrine\ORM\EntityManager;
+use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\HttpFoundation\Request;
 
 
 class Helper
 {
     private static $_container;
     private static $_ymFile;
+    private static $_tableUser = 'AcmeAuthBundle:User';
+    private static $kernel;
 
     public function __construct()
     {
@@ -23,8 +28,9 @@ class Helper
         return $parsed;
     }
 
-    public static function readEncodersParam($container)
+    public static function readEncodersParam()
     {
+        $container = self::getContainer();
         self::$_container = $container;
         self::$_ymFile = 'security';
 
@@ -41,9 +47,61 @@ class Helper
         return date($format, $timestamp);
     }
 
-    public static function getOpenIdData($data)
+    public static function getOpenIdData($openIdData)
     {
 
     }
+
+    public static function isExistsUserLogin($userLogin)
+    {
+        $container = self::getContainer();
+        $user = $container->get('doctrine')->getRepository(self::$_tableUser)
+            ->findOneByLogin($userLogin);
+
+        if(!$user)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static function isExistsUserEmail($userEmail)
+    {
+        $container = self::getContainer();
+        $user = $container->get('doctrine')->getRepository(self::$_tableUser)
+            ->findOneByEmail($userEmail);
+
+        if(!$user)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static function getContainer()
+    {
+        if(self::$kernel instanceof \AppKernel)
+        {
+            if(!self::$kernel->getContainer() instanceof Container)
+            {
+                self::$kernel->boot();
+            }
+
+            return self::$kernel->getContainer();
+        }
+
+        /*$environment = 'prod';
+        if (!array_key_exists('REMOTE_ADDR', $_SERVER) || in_array(@$_SERVER['REMOTE_ADDR'], array('127.0.0.1', '::1', 'localhost'))) {
+            $environment = 'dev';
+        }*/
+
+        $environment = 'dev';
+        self::$kernel = new \AppKernel($environment, false);
+        self::$kernel->boot();
+        return self::$kernel->getContainer();
+    }
+
 
 }

@@ -2,6 +2,24 @@
     {% block content %}
         <div class="container">
             <div class="row">
+                {{ form_start(formReg) }}
+                {{ form_errors(formReg) }}
+                {{ form_row(formReg.fieldLogin) }}
+                {{ form_row(formReg.fieldPass) }}
+                {% block errorPassApprove %}
+                    <div>
+                        {{ form_row(formReg.fieldPassApprove) }}
+                    </div>
+                {% endblock %}
+                {{ form_row(formReg.fieldEmail) }}
+                {% block form_label %}
+                    {{ parent() }}
+                    {% if(formReg.checkAgreeRules) %}
+                        <span class="required" title="Нажмите для прочтения правил"><a href="client_rules">Правила системы</a>&nbsp;прочитаны</span>
+                        {{ form_widget(formReg.checkAgreeRules) }}
+                    {% endif %}
+                {% endblock %}
+                {{ form_end(formReg) }}
             </div>
         </div>
     {% endblock %}
