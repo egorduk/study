@@ -54,13 +54,11 @@ class ClientController extends Controller
 
         if (isset($socialToken) && $socialToken != null)
         {
-            $socialResponse = file_get_contents('http://ulogin.ru/token.php?token=' . $socialToken . '&host=' . $_SERVER['HTTP_HOST']);
-            $socialData = json_decode($socialResponse, true);
+            $session = $request->getSession();
+            $session->set('socialToken', $socialToken);
+            $session->save();
 
-            if (!isset($socialData['error']))
-            {
-                print_r($socialData);
-            }
+            return new RedirectResponse($this->generateUrl('client_openid_auth'));
         }
 
         if ($request->isMethod('POST'))
@@ -146,14 +144,14 @@ class ClientController extends Controller
         $sessionCreated = $session->getMetadataBag()->getCreated();
         $sessionLifeTime = $session->getMetadataBag()->getLifetime();
         $whenLogin = Helper::getDateFromTimestamp($sessionCreated, "d/m/Y H:i:s");
-        echo "Заходил в систему в " . $whenLogin;
+        echo "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ " . $whenLogin;
         echo "</br>";
         $sessionRemaining = $sessionCreated + $sessionLifeTime;
         $a = strtotime("now");
         //$sessionRemaining = Helper::getDateFromTimestamp($a, "d/m/Y H:i:s");
         $r = $sessionRemaining - $a;
         $sessionRemaining = Helper::getDateFromTimestamp($r, "i:s");
-        echo "Осталось " . $sessionRemaining;
+        echo "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " . $sessionRemaining;
         echo "</br>";
 
         //print_r($session->get('_security_secured_area'));
@@ -193,6 +191,15 @@ class ClientController extends Controller
         $session = $request->getSession();
         $session->clear();
 
+        return array();
+    }
+
+    /**
+     * @Template()
+     * @return Response
+     */
+    public function rulesAction()
+    {
         return array();
     }
 
@@ -262,6 +269,27 @@ class ClientController extends Controller
      */
     public function unauthorizedAction(Request $request)
     {
+        return array();
+    }
+
+    /**
+     * @Template()
+     * @return array
+     */
+    public function openidAction(Request $request)
+    {
+        $session = $request->getSession();
+        $socialToken = $session->get('socialToken');
+        $socialResponse = file_get_contents('http://ulogin.ru/token.php?token=' . $socialToken . '&host=' . $_SERVER['HTTP_HOST']);
+        $socialData = json_decode($socialResponse, true);
+        //$session->remove('socialToken');
+
+        if (!isset($socialData['error']))
+        {
+            print_r($socialData);
+
+        }
+
         return array();
     }
 

@@ -16,11 +16,13 @@ client_index:
   pattern:   /client/index
   defaults:  { _controller: AcmeAuthBundle:Client:index }
 
-client_logout:
-  pattern:   /client/logout
-  defaults:  { _controller: AcmeAuthBundle:Client:logout }
+client_rules:
+  pattern:   /client/rules
+  defaults:  { _controller: AcmeAuthBundle:Client:rules }
 
-
+client_openid_auth:
+  pattern:   /client/auth/openid
+  defaults:  { _controller: AcmeAuthBundle:Client:openid }
 
 
 #------------------Author------------------------#
@@ -33,6 +35,9 @@ author_reg:
   pattern:   /author/reg
   defaults:  { _controller: AcmeAuthBundle:Author:reg }
 
+author_rules:
+  pattern:   /author/rules
+  defaults:  { _controller: AcmeAuthBundle:Author:rules }
 
 #---------------Auth----------------------------#
 
