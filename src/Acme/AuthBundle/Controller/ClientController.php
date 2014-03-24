@@ -30,6 +30,7 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 //use Symfony\Bundle\FrameworkBundle\Test;
 use Helper\Helper;
 use Symfony\Component\Validator\Constraints\Date;
+//use Symfony\Bundle\SecurityBundle\SecurityBundle;
 
 require_once '..\src\Acme\AuthBundle\Lib\recaptchalib.php';
 
