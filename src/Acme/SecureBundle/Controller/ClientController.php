@@ -18,12 +18,14 @@ use Doctrine\ORM\QueryBuilder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Util\StringUtils;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Helper\Helper;
 use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 class ClientController extends Controller
@@ -36,10 +38,9 @@ class ClientController extends Controller
      */
     public function indexAction(Request $request)
     {
-        /*if (false === $this->get('security.context')->isGranted('ROLE_ADMIN'))
-        {
-            throw new AccessDeniedException();
-        }*/
+        //throw new NotFoundHttpException('Sorry not existing!');
+        //throw new AccessException;
+        //throw new AccessDeniedException;
 
         return array();
     }

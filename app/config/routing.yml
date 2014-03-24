@@ -47,7 +47,7 @@ author_rules:
 
 unauthorized:
   pattern:  /unauthorized
-  defaults: { _controller: AcmeAuthBundle:Client:unauthorized }
+  defaults: { _controller: AcmeSecureBundle:Client:unauthorized }
 
 logout:
   pattern:  /logout

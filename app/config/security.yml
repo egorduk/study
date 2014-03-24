@@ -7,10 +7,22 @@ security:
         #    anonymous: ~
         #    security: true
 
+        #test:
+         #   access_denied_url: /unauthorized
+            #provider: user_db
+          #  pattern:    ^/secure/client/$
+           # anonymous: ~
+            #user: true
+            #security: true
+            #http_basic: ~
+            #    realm: "Secured Demo Area"
+            #    provider: user_db
+
+
         secured_area:
-            access_denied_url: /unauthorized
+            #access_denied_url: /unauthorized
            #access_denied_handler: some.service.id
-            pattern:    ^/
+            pattern:    ^/secure/*
             anonymous: ~
             http_basic:
                 realm: "Secured Area"
@@ -29,9 +41,9 @@ security:
     #    connection: default
 
     access_control:
-        - { path: ^/client/reg, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/client/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/client/index, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+       # - { path: ^/client/reg, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+       # - { path: ^/client/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+       # - { path: ^/client/index, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/secure/client/index, roles: ROLE_CLIENT }
 
     encoders:
