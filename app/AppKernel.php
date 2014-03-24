@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             $bundles[] = new Acme\RssBundle\AcmeRssBundle();
             $bundles[] = new Acme\IndexBundle\AcmeIndexBundle();
             $bundles[] = new Acme\AuthBundle\AcmeAuthBundle();
+            $bundles[] = new Acme\SecureBundle\AcmeSecureBundle();
             //$bundles[] = new DMS\Bundle\FilterBundle\DMSFilterBundle();
         }
 

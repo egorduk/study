@@ -24,6 +24,10 @@ client_openid_auth:
   pattern:   /client/auth/openid
   defaults:  { _controller: AcmeAuthBundle:Client:openid }
 
+secure_client_index:
+  pattern:   /secure/client/index
+  defaults:  { _controller: AcmeSecureBundle:Client:index }
+
 
 #------------------Author------------------------#
 
@@ -47,6 +51,7 @@ unauthorized:
 
 logout:
   pattern:  /logout
+  defaults: { _controller: AcmeAuthBundle:Client:logout }
 
 #----------------------------------------------#
 

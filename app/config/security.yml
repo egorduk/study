@@ -1,15 +1,26 @@
 security:
     access_denied_url: /unauthorized
     firewalls:
+        #secure:
+        #    access_denied_url: /unauthorized
+        #    pattern:  ^/
+        #    anonymous: ~
+        #    security: true
+
         secured_area:
+            access_denied_url: /unauthorized
+           #access_denied_handler: some.service.id
             pattern:    ^/
             anonymous: ~
             http_basic:
                 realm: "Secured Area"
+                #provider: user_db
             #stateless: true
             logout:
                 path:   /logout
-                target: /
+                target: client_index
+                invalidate_session: true
+            #security: true
             #form_login:
             #    login_path: client_login
             #form_reg:
@@ -21,6 +32,7 @@ security:
         - { path: ^/client/reg, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/client/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/client/index, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/secure/client/index, roles: ROLE_CLIENT }
 
     encoders:
         Acme\AuthBundle\Entity\User:

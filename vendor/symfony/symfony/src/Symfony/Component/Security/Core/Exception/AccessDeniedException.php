@@ -22,4 +22,11 @@ class AccessDeniedException extends \RuntimeException
     {
         parent::__construct($message, 403, $previous);
     }
+
+    /*public function handle(Request $request, AccessDeniedException $accessDeniedException)
+    {
+        return $this->kernel->forward('AcmeCoreBundle:Default:accessDenied', array(
+            'exception' => $accessDeniedException
+        ));
+    }*/
 }

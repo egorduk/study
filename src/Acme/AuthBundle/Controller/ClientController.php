@@ -285,37 +285,49 @@ class ClientController extends Controller
                 $formReg = $this->createForm(new RegForm(), $clientValidate);
                 $formReg->handleRequest($request);
 
+                $publicKeyRecaptcha = $this->container->getParameter('publicKeyRecaptcha');
+                $captcha = recaptcha_get_html($publicKeyRecaptcha);
+
                 if ($request->isMethod('POST'))
                 {
                     if ($formReg->get('reg')->isClicked())
                     {
-                        //$privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
-                        //$resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
+                        $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
+                        $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
 
-                        if ($formReg->isValid())
+                        if ($resp->is_valid)
                         {
-                            $postData = $request->request->get('formReg');
-                            $userLogin = $postData['fieldLogin'];
-                            $userPassword = $postData['fieldPass'];
-                            $userEmail = $postData['fieldEmail'];
+                            if ($formReg->isValid())
+                            {
+                                $postData = $request->request->get('formReg');
+                                $userLogin = $postData['fieldLogin'];
+                                $userPassword = $postData['fieldPass'];
+                                $userEmail = $postData['fieldEmail'];
 
-                            $user = new User();
-                            $user->setLogin($userLogin);
-                            $user->setEmail($userEmail);
+                                $user = new User();
+                                $user->setLogin($userLogin);
+                                $user->setEmail($userEmail);
 
-                            $salt = Helper::getSalt();
-                            $password = Helper::getRegPassword($userPassword, $salt);
-                            $user->setPassword($password);
-                            $user->setSalt($salt);
+                                $salt = Helper::getSalt();
+                                $password = Helper::getRegPassword($userPassword, $salt);
+                                $user->setPassword($password);
+                                $user->setSalt($salt);
 
-                            $em = $this->getDoctrine()->getManager();
-                            $em->persist($user);
-                            $em->flush();
+                                $em = $this->getDoctrine()->getManager();
+                                $em->persist($user);
+                                $em->flush();
 
-                            return $this->redirect($this->generateUrl('client_index'));
+                                return $this->redirect($this->generateUrl('client_index'));
+                            }
+                        }
+                        else
+                        {
+                            return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $resp->error);
                         }
                     }
                 }
+
+                return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => '');
             }
             else
             {
@@ -326,8 +338,6 @@ class ClientController extends Controller
         {
             return $this->redirect($this->generateUrl('client_index'));
         }
-
-        return array('formReg' => $formReg->createView());
     }
 
     /**
