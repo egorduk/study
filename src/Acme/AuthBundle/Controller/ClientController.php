@@ -18,6 +18,7 @@ use Doctrine\ORM\QueryBuilder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
@@ -29,8 +30,6 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 //use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 //use Symfony\Bundle\FrameworkBundle\Test;
 use Helper\Helper;
-use Symfony\Component\Validator\Constraints\Date;
-//use Symfony\Bundle\SecurityBundle\SecurityBundle;
 
 require_once '..\src\Acme\AuthBundle\Lib\recaptchalib.php';
 
@@ -47,6 +46,11 @@ class ClientController extends Controller
      */
     public function indexAction(Request $request)
     {
+        /*if (false === $this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            //throw new AccessDeniedException();
+            throw new AccessException();
+        }*/
+
         $client = new ClientFormValidate();
         $formLogin = $this->createForm(new LoginForm(), $client);
         $formLogin->handleRequest($request);
@@ -99,7 +103,7 @@ class ClientController extends Controller
                             $this->get('security.context')->setToken($token);
                             //$session->save();
 
-                            return new RedirectResponse($this->generateUrl('client_login'));
+                            return new RedirectResponse($this->generateUrl('secure_client_index'));
                         }
                     }
                 }
@@ -134,19 +138,6 @@ class ClientController extends Controller
         {
             throw new AccessDeniedException();
         }*/
-
-        $sessionCreated = $session->getMetadataBag()->getCreated();
-        $sessionLifeTime = $session->getMetadataBag()->getLifetime();
-        $whenLogin = Helper::getDateFromTimestamp($sessionCreated, "d/m/Y H:i:s");
-        echo "Create " . $whenLogin;
-        echo "</br>";
-        $sessionRemaining = $sessionCreated + $sessionLifeTime;
-        $a = strtotime("now");
-        //$sessionRemaining = Helper::getDateFromTimestamp($a, "d/m/Y H:i:s");
-        $r = $sessionRemaining - $a;
-        $sessionRemaining = Helper::getDateFromTimestamp($r, "i:s");
-        echo "Remaining " . $sessionRemaining;
-        echo "</br>";
 
         //print_r($session->get('_security_secured_area'));
         print_r($session);

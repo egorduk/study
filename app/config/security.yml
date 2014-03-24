@@ -1,5 +1,6 @@
 security:
-    access_denied_url: /unauthorized
+    #access_denied_url: ~
+    #always_authenticate_before_granting: true
     firewalls:
         #secure:
         #    access_denied_url: /unauthorized
@@ -20,18 +21,20 @@ security:
 
 
         secured_area:
-            #access_denied_url: /unauthorized
-           #access_denied_handler: some.service.id
-            pattern:    ^/secure/*
+            pattern:  ^/
             anonymous: ~
+            form_login:
+                login_path: unauthorized
+                #login_path: client_login
+            #provider: user_db
             http_basic:
                 realm: "Secured Area"
                 #provider: user_db
-            #stateless: true
+                #provider: in_memory
             logout:
                 path:   /logout
                 target: client_index
-                invalidate_session: true
+                #invalidate_session: true
             #security: true
             #form_login:
             #    login_path: client_login
@@ -40,11 +43,14 @@ security:
     #acl:
     #    connection: default
 
+    #access_decision_manager:
+    #    strategy: unanimous
+
     access_control:
        # - { path: ^/client/reg, roles: IS_AUTHENTICATED_ANONYMOUSLY }
        # - { path: ^/client/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-       # - { path: ^/client/index, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/secure/client/index, roles: ROLE_CLIENT }
+        - { path: ^/client/index, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/secure/client/index, roles: ROLE_CLIENT } #ROLE_CLIENT
 
     encoders:
         Acme\AuthBundle\Entity\User:
@@ -53,6 +59,11 @@ security:
     providers:
            user_db:
                 entity: { class: Acme\AuthBundle\Entity\User, property: login }
+           in_memory:
+              memory:
+                  users:
+                    foo: { password: test }
+
     role_hierarchy:
         #ROLE_ADMIN: ROLE_ADMIN
         ROLE_CLIENT: ROLE_CLIENT

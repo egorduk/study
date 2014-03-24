@@ -24,13 +24,12 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Util\StringUtils;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Helper\Helper;
-use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 class ClientController extends Controller
 {
-    private $tableUser = 'AcmeAuthBundle:User';
+    private $tableUser = 'AcmeSecureBundle:User';
 
     /**
      * @Template()
@@ -39,10 +38,25 @@ class ClientController extends Controller
     public function indexAction(Request $request)
     {
         //throw new NotFoundHttpException('Sorry not existing!');
-        //throw new AccessException;
-        //throw new AccessDeniedException;
+        $userLogin = $this->get('security.context')->getToken()->getUser();
+        //$userRole = $this->get('security.context')->getToken()->getRoles();
+       // print_r($userRole[0]->getRole());
+        $session = $request->getSession();
+        $sessionCreated = $session->getMetadataBag()->getCreated();
+        $sessionLifeTime = $session->getMetadataBag()->getLifetime();
+        $sessionUpdated = $session->getMetadataBag()->getLastUsed();
+        $whenLogin = Helper::getDateFromTimestamp($sessionCreated, "d/m/Y H:i:s");
+        $sessionRemaining = $sessionCreated + $sessionLifeTime;
+        $a = strtotime("now");
+        //$sessionRemaining = Helper::getDateFromTimestamp($a, "d/m/Y H:i:s");
+        $r = $sessionRemaining - $a;
+        $sessionRemaining = Helper::getDateFromTimestamp($r, "i:s");
+        echo "Remaining " . $sessionRemaining;
+        echo "</br>";
+        echo "Updating " . $sessionUpdated;
+        echo "</br>";
 
-        return array();
+        return array('userLogin' => $userLogin, 'userRole' => 'Заказчик', 'whenLogin' => $whenLogin);
     }
 
     /**

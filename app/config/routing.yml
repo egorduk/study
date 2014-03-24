@@ -28,6 +28,14 @@ secure_client_index:
   pattern:   /secure/client/index
   defaults:  { _controller: AcmeSecureBundle:Client:index }
 
+secure_client_profile:
+  pattern:   /secure/client/profile
+  defaults:  { _controller: AcmeSecureBundle:Client:profile }
+
+secure_client_settings:
+  pattern:   /secure/client/settings
+  defaults:  { _controller: AcmeSecureBundle:Client:settings }
+
 
 #------------------Author------------------------#
 
@@ -47,7 +55,8 @@ author_rules:
 
 unauthorized:
   pattern:  /unauthorized
-  defaults: { _controller: AcmeSecureBundle:Client:unauthorized }
+  #defaults: { _controller: AcmeSecureBundle:Client:unauthorized }
+  defaults: { _controller: AcmeAuthBundle:Client:unauthorized }
 
 logout:
   pattern:  /logout

@@ -51,6 +51,10 @@ framework:
 services:
     cache:
         class: Doctrine\Common\Cache\ApcCache
+    #kernel.listener.access_denied.handler:
+    #    class: Acme\AuthBundle\Service\LoginEntryPoint
+    #        tags:
+    #            - { name: kernel.event_listener, event: security.kernel_response, method: handle}
 
 # Twig Configuration
 twig:
@@ -61,9 +65,9 @@ twig:
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
-    use_controller: false
+    use_controller: true
     bundles:
-       -  AcmeRssBundle
+       #-  AcmeRssBundle
        -  AcmeIndexBundle
        -  AcmeAuthBundle
        -  AcmeSecureBundle
@@ -120,7 +124,3 @@ swiftmailer:
 #    registration:
 #        form:
 #            type: acme_user_registration
-
-
-#jms_security_extra:
-#    secure_all_services: false

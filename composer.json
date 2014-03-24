@@ -12,6 +12,8 @@
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "~1.2",
         "twig/extensions": "~1.0",
+        "symfony/security-csrf": "~2.4",
+        "twig/twig": "~1.12",
         "symfony/assetic-bundle": "~2.3",
         "symfony/swiftmailer-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.4",
@@ -21,8 +23,7 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "winzou/cache-bundle": "dev-master",
         "genemu/form-bundle": "2.2.*",
-        "symfony/finder": "2.3.*",
-        "jms/security-extra-bundle": "dev-master"
+        "symfony/finder": "2.3.*"
     },
     "config":{
         "bin-dir": "bin",

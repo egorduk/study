@@ -11,10 +11,7 @@ parameters:
     mailer_user: null
     mailer_password: null
     locale: ru_RU
-    charset: UTF-8
     secret: 6LcYmecSAAAAAJlYNqogbOXJVMvGgim5JoegorLcYmecSAAAAANaq8JFPxT3xEA_urO6st1gfVOXL
-    publicKeyRecaptcha: 6LcYmecSAAAAAJlYNqogbOXJVMvGgim5JoM0hcAi
-    privateKeyRecaptcha: 6LcYmecSAAAAANaq8JFPxT3xEA_urO6st1gfVOXL
 doctrine:
     dbal:
         driver: '%database_driver%'
@@ -23,5 +20,3 @@ doctrine:
         user: '%database_user%'
         password: '%database_password%'
         charset: UTF-8
-        #options:
-        #    1002:  "SET NAMES 'UTF8'"
