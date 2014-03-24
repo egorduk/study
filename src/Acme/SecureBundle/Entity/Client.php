@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\AuthBundle\Entity;
+namespace Acme\SecureBundle\Entity;
 
 class Client
 {
@@ -9,9 +9,4 @@ class Client
     protected $password;
     protected $email;
     protected $date_reg;
-
-    /*public function __construct()
-    {
-        parent::__construct();
-    }*/
 }
