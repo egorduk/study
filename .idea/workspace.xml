@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8afd0a94-95b4-4a96-ada0-8cfaf8ccf8b0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/security.yml" afterPath="$PROJECT_DIR$/app/config/security.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/unauthorized.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/unauthorized.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="09bdd184-ad02-4762-8397-2c72ed3a09aa" name="New changelist" comment="" />
@@ -154,7 +149,7 @@
       <file leaf-file-name="security.yml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/config/security.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="59" selection-start="1456" selection-end="1456" vertical-scroll-proportion="0.8148148" vertical-offset="528" max-vertical-offset="1430">
+            <state line="46" column="59" selection-start="1456" selection-end="1456" vertical-scroll-proportion="0.6666667" vertical-offset="528" max-vertical-offset="1430">
               <folding />
             </state>
           </provider>
@@ -536,10 +531,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32900432" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18614718" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -741,7 +736,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/config/security.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="59" selection-start="1456" selection-end="1456" vertical-scroll-proportion="0.8148148" vertical-offset="528" max-vertical-offset="1430">
+        <state line="46" column="59" selection-start="1456" selection-end="1456" vertical-scroll-proportion="0.6666667" vertical-offset="528" max-vertical-offset="1430">
           <folding />
         </state>
       </provider>
