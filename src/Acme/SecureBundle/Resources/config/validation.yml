@@ -1,0 +1,15 @@
+Acme\AuthBundle\Entity\ClientFormValidate:
+    properties:
+        fieldLogin:
+          - Length: { min: 5, minMessage: "Слишком короткий логин!" }
+          - Regex: { pattern: "/^[a-zA-Z]+$/u", message: "Только латинские буквы!" }
+        fieldPass:
+          - Length: { min: 5, minMessage: "Слишком короткий пароль!" }
+          - Regex: { pattern: "/^[a-zA-Z0-9]+$/u", message: "Только латинские буквы и цифры!" }
+        fieldEmail:
+          - Email: { message: "Указана неверная почта!", checkMX: true }
+
+
+
+
+

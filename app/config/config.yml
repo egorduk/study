@@ -66,6 +66,7 @@ assetic:
        -  AcmeRssBundle
        -  AcmeIndexBundle
        -  AcmeAuthBundle
+       -  AcmeSecureBundle
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
