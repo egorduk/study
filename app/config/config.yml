@@ -114,6 +114,11 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+    encryption: ssl
+    disable_delivery: false #true if off mail send
+    #spool:
+    #    type:   file
+    #    path:   "%kernel.cache_dir%/swiftmailer/spool"
 
 
 #FOS

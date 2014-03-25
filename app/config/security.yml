@@ -49,8 +49,9 @@ security:
     access_control:
        # - { path: ^/client/reg, roles: IS_AUTHENTICATED_ANONYMOUSLY }
        # - { path: ^/client/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/client/recovery, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/client/index, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/secure/client/index, roles: ROLE_CLIENT } #ROLE_CLIENT
+        - { path: ^/secure/client/index, roles: IS_AUTHENTICATED_ANONYMOUSLY } #ROLE_CLIENT
 
     encoders:
         Acme\AuthBundle\Entity\User:

@@ -18,13 +18,13 @@ use Doctrine\ORM\QueryBuilder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\PropertyAccess\Exception\AccessException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+//use Symfony\Component\PropertyAccess\Exception\AccessException;
+//use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Util\StringUtils;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+//use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Helper\Helper;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+//use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 class ClientController extends Controller
@@ -44,19 +44,15 @@ class ClientController extends Controller
         $session = $request->getSession();
         $sessionCreated = $session->getMetadataBag()->getCreated();
         $sessionLifeTime = $session->getMetadataBag()->getLifetime();
-        $sessionUpdated = $session->getMetadataBag()->getLastUsed();
+        //$sessionUpdated = $session->getMetadataBag()->getLastUsed();
+        //$whenUpdated = Helper::getDateFromTimestamp($sessionUpdated, "d/m/Y H:i:s");
         $whenLogin = Helper::getDateFromTimestamp($sessionCreated, "d/m/Y H:i:s");
         $sessionRemaining = $sessionCreated + $sessionLifeTime;
-        $a = strtotime("now");
-        //$sessionRemaining = Helper::getDateFromTimestamp($a, "d/m/Y H:i:s");
-        $r = $sessionRemaining - $a;
-        $sessionRemaining = Helper::getDateFromTimestamp($r, "i:s");
-        echo "Remaining " . $sessionRemaining;
-        echo "</br>";
-        echo "Updating " . $sessionUpdated;
-        echo "</br>";
+        $nowTimestamp = strtotime("now");
+        $sessionRemaining = $sessionRemaining - $nowTimestamp;
+        $sessionRemaining = Helper::getDateFromTimestamp($sessionRemaining, "i:s");
 
-        return array('userLogin' => $userLogin, 'userRole' => 'Заказчик', 'whenLogin' => $whenLogin);
+        return array('userLogin' => $userLogin, 'userRole' => 'Заказчик', 'whenLogin' => $whenLogin, 'remainingTime' => $sessionRemaining);
     }
 
     /**
@@ -66,23 +62,6 @@ class ClientController extends Controller
     public function loginAction(Request $request)
     {
 
-    }
-
-    /**
-     * @Template()
-     * @return Response
-     */
-    public function logoutAction(Request $request)
-    {
-    }
-
-    /**
-     * @Template()
-     * @return Response
-     */
-    public function rulesAction()
-    {
-        return array();
     }
 
     /**

@@ -7,11 +7,13 @@ parameters:
     database_user: root
     database_password: null
     mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: null
-    mailer_password: null
+    mailer_host: smtp.gmail.com
+    mailer_user: egorduk91@gmail.com
+    mailer_password: rezistor
     locale: ru_RU
     secret: 6LcYmecSAAAAAJlYNqogbOXJVMvGgim5JoegorLcYmecSAAAAANaq8JFPxT3xEA_urO6st1gfVOXL
+    publicKeyRecaptcha: 6LcYmecSAAAAAJlYNqogbOXJVMvGgim5JoM0hcAi
+    privateKeyRecaptcha: 6LcYmecSAAAAANaq8JFPxT3xEA_urO6st1gfVOXL
 doctrine:
     dbal:
         driver: '%database_driver%'

@@ -1,12 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aeb714aa-03a9-4af9-a685-afd493e118d8" name="Default" comment="24-03-3&#10;" />
+    <list default="true" id="aeb714aa-03a9-4af9-a685-afd493e118d8" name="Default" comment="24-03-3&#10;">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/992dce1c6eb713cab754785988280283.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/ChangeLog.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/src/GeoIP.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/facebook.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/facebookB.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/google.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/googleB.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/mailru.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/mailruapiB.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/twitter.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/twitterB.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/vkontakte.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/vkontakteB.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/yandex.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/yandexB.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Country.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Openid.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Provider.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RecoveryForm.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/asn-v6.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/benchmark.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/city-v6.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/city.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/composer.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/country-v6.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/country.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/distributed.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/domain.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/admin/generate_geoipregionvars.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/src/geoip.inc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/src/geoipcity.inc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/src/geoipregionvars.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/timezone/make_time_zone_php_code.pl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/netspeed.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/netspeedcell.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/org.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/recovery.html.twig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/region.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/timezone/test_timezone.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/src/timezone.php" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\src\Acme\IndexBundle\Entity\News.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\src\Acme\IndexBundle\Entity\Source.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/AppKernel.php" afterPath="$PROJECT_DIR$/app/AppKernel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/ClientFormValidate.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/ClientFormValidate.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Helper/Helper.php" afterPath="$PROJECT_DIR$/src/Helper/Helper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/autoload.php" afterPath="$PROJECT_DIR$/vendor/autoload.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_real.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_real.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/index.html.twig" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/index.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/installed.json" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/parameters.yml" afterPath="$PROJECT_DIR$/app/config/parameters.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/security.yml" afterPath="$PROJECT_DIR$/app/config/security.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/unauthorized.html.twig" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/unauthorized.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/unauthorized.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/unauthorized.html.twig" />
+    </list>
     <list id="ee24dc55-43c1-4676-b406-0ccc3fb4cb0c" name="New changelist" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="study.iws" />
     <ignored path=".idea/workspace.xml" />
+    <file path="$PROJECT_DIR$/.idea/workspace.xml" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,19 +92,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="routing.yml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
+      <file leaf-file-name="index.html.twig" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="36" selection-start="943" selection-end="943" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="2040">
+            <state line="13" column="112" selection-start="698" selection-end="698" vertical-scroll-proportion="-8.965517" vertical-offset="0" max-vertical-offset="540">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientController.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ClientController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="137" column="9" selection-start="5495" selection-end="5495" vertical-scroll-proportion="-14.655172" vertical-offset="2315" max-vertical-offset="10800">
+            <state line="276" column="12" selection-start="9967" selection-end="9967" vertical-scroll-proportion="-1.0778985" vertical-offset="6115" max-vertical-offset="9040">
               <folding>
                 <element signature="e#46#80#0" expanded="true" />
               </folding>
@@ -46,31 +112,66 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="security.yml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/security.yml">
+      <file leaf-file-name="Openid.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Openid.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="59" selection-start="1591" selection-end="1591" vertical-scroll-proportion="0.0" vertical-offset="621" max-vertical-offset="1520">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClientController.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="61" selection-start="2283" selection-end="2283" vertical-scroll-proportion="1.0869565" vertical-offset="440" max-vertical-offset="8740">
+            <state line="37" column="7" selection-start="606" selection-end="606" vertical-scroll-proportion="-1.0344827" vertical-offset="710" max-vertical-offset="2720">
               <folding>
-                <element signature="e#251#308#0" expanded="true" />
+                <element signature="e#41#75#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.twig" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/index.html.twig">
+      <file leaf-file-name="Country.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Country.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="55" selection-start="292" selection-end="292" vertical-scroll-proportion="-4.137931" vertical-offset="0" max-vertical-offset="380">
+            <state line="30" column="7" selection-start="486" selection-end="486" vertical-scroll-proportion="-20.689655" vertical-offset="0" max-vertical-offset="1220">
+              <folding>
+                <element signature="e#42#76#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Provider.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Provider.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="32" column="73" selection-start="627" selection-end="627" vertical-scroll-proportion="-17.586206" vertical-offset="130" max-vertical-offset="1000">
+              <folding>
+                <element signature="e#42#76#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RssController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Acme/RssBundle/Controller/RssController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="84" column="31" selection-start="2708" selection-end="2708" vertical-scroll-proportion="-20.068966" vertical-offset="1098" max-vertical-offset="8520">
+              <folding>
+                <element signature="e#45#77#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="News.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Acme/RssBundle/Entity/News.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="47" column="20" selection-start="850" selection-end="850" vertical-scroll-proportion="-8.965517" vertical-offset="660" max-vertical-offset="1680">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Source.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Acme/RssBundle/Entity/Source.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="46" column="5" selection-start="755" selection-end="755" vertical-scroll-proportion="-12.75862" vertical-offset="550" max-vertical-offset="2020">
+              <folding>
+                <element signature="e#41#73#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -88,14 +189,11 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/layout.html.twig" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/logout.html.twig" />
         <option value="$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Core/SecurityContext.php" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/unauthorized.html.twig" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/index.html.twig" />
         <option value="$PROJECT_DIR$/web/.htaccess" />
         <option value="$PROJECT_DIR$/.htaccess" />
-        <option value="$PROJECT_DIR$/app/config/parameters.yml" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/reg.html.twig" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/ClientFormValidate.php" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php" />
@@ -111,14 +209,24 @@
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Service/LoginEntryPoint.php" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/services.xml" />
         <option value="$PROJECT_DIR$/app/AppKernel.php" />
-        <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/Client.php" />
         <option value="$PROJECT_DIR$/app/config/security.yml" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/app/config/routing.yml" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/index.html.twig" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/../config/parameters.yml" />
+        <option value="$PROJECT_DIR$/vendor/geoip/geoip/src/geoip.inc" />
+        <option value="$PROJECT_DIR$/app/config/parameters.yml" />
+        <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/ClientFormValidate.php" />
+        <option value="$PROJECT_DIR$/src/Acme/RssBundle/Entity/Source.php" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Openid.php" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Country.php" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Provider.php" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/layout.html.twig" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/index.html.twig" />
       </list>
     </option>
   </component>
@@ -263,6 +371,176 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Entity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Acme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RssBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Acme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RssBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Entity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Acme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RssBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Acme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Acme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AuthBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Acme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AuthBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Twig" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Extension" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Acme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AuthBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -289,7 +567,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="SecureBundle" />
+              <option name="myItemId" value="AuthBundle" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -323,189 +601,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="SecureBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SecureBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SecureBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Command" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="IndexBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="IndexBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="IndexBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Index" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="IndexBundle" />
+              <option name="myItemId" value="AuthBundle" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -532,6 +628,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="AuthBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EventListener" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Acme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AuthBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Entity" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -630,6 +756,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\OpenServer\domains\localhost\study\src\Acme\AuthBundle\Entity" />
       <recent name="D:\OpenServer\domains\localhost\study\src\Acme\AuthBundle\Resources\config" />
       <recent name="D:\OpenServer\domains\localhost\study\src\Acme\AuthBundle\Resources\views\Client" />
     </key>
@@ -739,92 +866,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/logout.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="29" selection-start="134" selection-end="134" vertical-scroll-proportion="0.06896552" vertical-offset="0" max-vertical-offset="870">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Serializer/SerializerInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="28" selection-start="266" selection-end="266" vertical-scroll-proportion="0.09195402" vertical-offset="0" max-vertical-offset="870">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/Core_c.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="144" column="10" selection-start="3833" selection-end="3833" vertical-scroll-proportion="0.34367815" vertical-offset="2581" max-vertical-offset="6960">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Core/SecurityContext.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="57" selection-start="933" selection-end="933" vertical-scroll-proportion="0.41073513" vertical-offset="28" max-vertical-offset="1680">
-          <folding>
-            <element signature="e#282#371#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/DependencyInjection/Container.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="20" selection-start="2891" selection-end="2891" vertical-scroll-proportion="0.3488915" vertical-offset="1121" max-vertical-offset="10680">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bundle/SecurityBundle/DependencyInjection/MainConfiguration.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="80" selection-start="1736" selection-end="1736" vertical-scroll-proportion="0.6757246" vertical-offset="587" max-vertical-offset="8480">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing_dev.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/.htaccess">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="42" selection-start="443" selection-end="2226" vertical-scroll-proportion="0.5995551" vertical-offset="261" max-vertical-offset="1160">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/.htaccess">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml.dist">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="380" selection-end="380" vertical-scroll-proportion="0.3337041" vertical-offset="0" max-vertical-offset="899">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/date.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="898" column="9" selection-start="25357" selection-end="25357" vertical-scroll-proportion="0.3325554" vertical-offset="17675" max-vertical-offset="26720">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.htaccess">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="0" selection-start="38" selection-end="38" vertical-scroll-proportion="0.1010101" vertical-offset="0" max-vertical-offset="594">
@@ -842,13 +883,6 @@
     <entry file="file://$PROJECT_DIR$/src/Acme/RssBundle/Form/EditForm.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="76" selection-start="300" selection-end="300" vertical-scroll-proportion="0.21003501" vertical-offset="0" max-vertical-offset="857">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Client.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899">
           <folding />
         </state>
       </provider>
@@ -878,13 +912,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="0" selection-start="2116" selection-end="2116" vertical-scroll-proportion="1.2643678" vertical-offset="780" max-vertical-offset="4460">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Lib/recaptchalib.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="150" column="49" selection-start="5144" selection-end="5144" vertical-scroll-proportion="1.1901984" vertical-offset="1980" max-vertical-offset="5080">
@@ -906,20 +933,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="16" selection-start="447" selection-end="511" vertical-scroll-proportion="0.22988506" vertical-offset="0" max-vertical-offset="870">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/openid.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="30" selection-start="1181" selection-end="1181" vertical-scroll-proportion="0.6067678" vertical-offset="0" max-vertical-offset="857">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Http/Authorization/AccessDeniedHandlerInterface.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="23" column="10" selection-start="638" selection-end="638" vertical-scroll-proportion="0.3382353" vertical-offset="96" max-vertical-offset="640">
@@ -937,13 +950,6 @@
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/login.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="63" selection-start="225" selection-end="225" vertical-scroll-proportion="0.11494253" vertical-offset="0" max-vertical-offset="870">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/layout.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="18" selection-start="703" selection-end="703" vertical-scroll-proportion="0.29885057" vertical-offset="0" max-vertical-offset="870">
           <folding />
         </state>
       </provider>
@@ -985,23 +991,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="27" selection-start="230" selection-end="230" vertical-scroll-proportion="0.23569024" vertical-offset="0" max-vertical-offset="594">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/config_dev.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="960">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="33" selection-start="931" selection-end="931" vertical-scroll-proportion="0.71681416" vertical-offset="95" max-vertical-offset="1320">
           <folding />
         </state>
       </provider>
@@ -1016,13 +1008,6 @@
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Entity/Client.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="1" selection-start="173" selection-end="173" vertical-scroll-proportion="0.25287357" vertical-offset="0" max-vertical-offset="870">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="15" selection-start="1793" selection-end="1797" vertical-scroll-proportion="0.37708566" vertical-offset="901" max-vertical-offset="2640">
           <folding />
         </state>
       </provider>
@@ -1071,39 +1056,197 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="36" selection-start="943" selection-end="943" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="2040">
+        <state line="40" column="36" selection-start="1062" selection-end="1062" vertical-scroll-proportion="0.0" vertical-offset="160" max-vertical-offset="1560">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="55" selection-start="412" selection-end="412" vertical-scroll-proportion="0.18390805" vertical-offset="0" max-vertical-offset="870">
+          <folding>
+            <marker date="1395738269721" expanded="true" signature="-1:-1" placeholder="{% block content ...%}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="15" selection-start="1793" selection-end="1797" vertical-scroll-proportion="0.37708566" vertical-offset="901" max-vertical-offset="2740">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/config/security.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="59" selection-start="1591" selection-end="1591" vertical-scroll-proportion="0.0" vertical-offset="621" max-vertical-offset="1520">
+        <state line="53" column="59" selection-start="1666" selection-end="1666" vertical-scroll-proportion="0.0" vertical-offset="641" max-vertical-offset="1540">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Client.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="79" column="29" selection-start="1735" selection-end="1735" vertical-scroll-proportion="0.16091955" vertical-offset="1440" max-vertical-offset="4660">
+          <folding>
+            <element signature="e#42#74#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="5" selection-start="2630" selection-end="2630" vertical-scroll-proportion="-0.49008167" vertical-offset="1620" max-vertical-offset="8240">
+          <folding>
+            <element signature="e#48#250#0" expanded="false" />
+            <element signature="e#251#308#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="34" selection-start="932" selection-end="932" vertical-scroll-proportion="0.46551725" vertical-offset="95" max-vertical-offset="1340">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_4.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="230" column="9" selection-start="7908" selection-end="7908" vertical-scroll-proportion="0.34367815" vertical-offset="4301" max-vertical-offset="21760">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/geoip/geoip/src/geoip.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1535" column="32" selection-start="32873" selection-end="32873" vertical-scroll-proportion="-15.827586" vertical-offset="30241" max-vertical-offset="37900">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/geoip.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="110" column="9" selection-start="3737" selection-end="3737" vertical-scroll-proportion="0.34367815" vertical-offset="1901" max-vertical-offset="4320">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="4" selection-start="469" selection-end="595" vertical-scroll-proportion="0.3189066" vertical-offset="0" max-vertical-offset="878">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="4" selection-start="534" selection-end="534" vertical-scroll-proportion="0.3337041" vertical-offset="0" max-vertical-offset="899">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/logout.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="878">
+          <folding>
+            <marker date="1395484366708" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1395484366708" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/openid.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="30" selection-start="1181" selection-end="1181" vertical-scroll-proportion="0.6067678" vertical-offset="0" max-vertical-offset="857">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Entity/ClientFormValidate.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="28" selection-start="200" selection-end="200" vertical-scroll-proportion="0.23557127" vertical-offset="0" max-vertical-offset="1060">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/RssBundle/Entity/Source.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="5" selection-start="755" selection-end="755" vertical-scroll-proportion="-12.75862" vertical-offset="550" max-vertical-offset="2020">
+          <folding>
+            <element signature="e#41#73#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/RssBundle/Entity/News.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="20" selection-start="850" selection-end="850" vertical-scroll-proportion="-8.965517" vertical-offset="660" max-vertical-offset="1680">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/RssBundle/Controller/RssController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="84" column="31" selection-start="2708" selection-end="2708" vertical-scroll-proportion="-20.068966" vertical-offset="1098" max-vertical-offset="8520">
+          <folding>
+            <element signature="e#45#77#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Openid.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="7" selection-start="606" selection-end="606" vertical-scroll-proportion="-1.0344827" vertical-offset="710" max-vertical-offset="2720">
+          <folding>
+            <element signature="e#41#75#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Provider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="73" selection-start="627" selection-end="627" vertical-scroll-proportion="-17.586206" vertical-offset="130" max-vertical-offset="1000">
+          <folding>
+            <element signature="e#42#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Country.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="7" selection-start="486" selection-end="486" vertical-scroll-proportion="-20.689655" vertical-offset="0" max-vertical-offset="1220">
+          <folding>
+            <element signature="e#42#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/layout.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="119" selection-start="456" selection-end="456" vertical-scroll-proportion="0.18390805" vertical-offset="0" max-vertical-offset="870">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="112" selection-start="698" selection-end="698" vertical-scroll-proportion="-8.965517" vertical-offset="0" max-vertical-offset="540">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="137" column="9" selection-start="5495" selection-end="5495" vertical-scroll-proportion="-14.655172" vertical-offset="2315" max-vertical-offset="10800">
+        <state line="276" column="12" selection-start="9967" selection-end="9967" vertical-scroll-proportion="-1.0778985" vertical-offset="6115" max-vertical-offset="9040">
           <folding>
             <element signature="e#46#80#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="55" selection-start="292" selection-end="292" vertical-scroll-proportion="-4.137931" vertical-offset="0" max-vertical-offset="380">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="61" selection-start="2283" selection-end="2283" vertical-scroll-proportion="1.0869565" vertical-offset="440" max-vertical-offset="8740">
-          <folding>
-            <element signature="e#251#308#0" expanded="true" />
           </folding>
         </state>
       </provider>

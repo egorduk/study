@@ -3,9 +3,13 @@
 namespace Acme\AuthBundle\Controller;
 
 use Acme\AuthBundle\Entity\Client;
+use Acme\AuthBundle\Entity\Country;
+use Acme\AuthBundle\Entity\Openid;
+use Acme\AuthBundle\Entity\Provider;
 use Acme\AuthBundle\Entity\User;
 use Acme\AuthBundle\Entity\ClientFormValidate;
 use Acme\AuthBundle\Form\Client\LoginForm;
+use Acme\AuthBundle\Form\Client\RecoveryForm;
 use Acme\AuthBundle\Form\Client\RegForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\ExpressionLanguage\Parser;
@@ -30,15 +34,16 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 //use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 //use Symfony\Bundle\FrameworkBundle\Test;
 use Helper\Helper;
+use Symfony\Component\Security\Core\Util\SecureRandom;
 
 require_once '..\src\Acme\AuthBundle\Lib\recaptchalib.php';
 
 
 class ClientController extends Controller
 {
-    private $tableSource = 'AcmeRssBundle:Source';
-    private $tableNews = 'AcmeRssBundle:News';
     private $tableUser = 'AcmeAuthBundle:User';
+    private $tableCountry = 'AcmeAuthBundle:Country';
+    private $tableProvider = 'AcmeAuthBundle:Provider';
 
     /**
      * @Template()
@@ -50,6 +55,8 @@ class ClientController extends Controller
             //throw new AccessDeniedException();
             throw new AccessException();
         }*/
+
+        //print_r(geoip_country_code_by_name('www.tut.by'));
 
         $client = new ClientFormValidate();
         $formLogin = $this->createForm(new LoginForm(), $client);
@@ -253,6 +260,7 @@ class ClientController extends Controller
         return array();
     }
 
+
     /**
      * @Template()
      * @return array
@@ -266,7 +274,7 @@ class ClientController extends Controller
             $socialToken = $session->get('socialToken');
             $socialResponse = file_get_contents('http://ulogin.ru/token.php?token=' . $socialToken . '&host=' . $_SERVER['HTTP_HOST']);
             $socialData = json_decode($socialResponse, true);
-            //$session->remove('socialToken');
+            print_r($socialData);
 
             if (!isset($socialData['error']))
             {
@@ -291,6 +299,7 @@ class ClientController extends Controller
                         {
                             if ($formReg->isValid())
                             {
+                                $session->remove('socialToken');
                                 $postData = $request->request->get('formReg');
                                 $userLogin = $postData['fieldLogin'];
                                 $userPassword = $postData['fieldPass'];
@@ -305,7 +314,30 @@ class ClientController extends Controller
                                 $user->setPassword($password);
                                 $user->setSalt($salt);
 
+                                $providerName = $socialData['network'];
+                                //$countryCode = geoip_country_code_by_name($_SERVER["REMOTE_ADDR"]);
+                                $countryCode = 'BY';
+
+                                $provider = $this->getDoctrine()->getRepository($this->tableProvider)
+                                    ->findOneByName($providerName);
+
+                                $country = $this->getDoctrine()->getRepository($this->tableCountry)
+                                    ->findOneByCode($countryCode);
+
+                                $openId = new Openid();
+                                $openId->setUid($socialData['uid']);
+                                $openId->setProfileUrl($socialData['profile']);
+                                $openId->setEmail($socialData['email']);
+                                $openId->setNickname($socialData['nickname']);
+                                $openId->setFirstName($socialData['first_name']);
+                                $openId->setIdentity($socialData['identity']);
+                                $openId->setPhotoBig($socialData['photo_big']);
+                                $openId->setPhoto($socialData['photo']);
+                                $openId->setProvider($provider);
+                                $openId->setCountry($country);
+
                                 $em = $this->getDoctrine()->getManager();
+                                $em->persist($openId);
                                 $em->persist($user);
                                 $em->flush();
 
@@ -332,203 +364,83 @@ class ClientController extends Controller
         }
     }
 
+
     /**
      * @Template()
-     * A function for adding a new source
-     * @param Request $request the data of client's request
-     * @return array|RedirectResponse
+     * @return array
      */
-    public function addAction(Request $request)
+    public function recoveryAction(Request $request)
     {
-        $formAdd = $this->createForm(new AddForm());
-        $formAdd->handleRequest($request);
+        //$client = new ClientFormValidate();
+        $formRecovery = $this->createForm(new RecoveryForm());
+        $formRecovery->handleRequest($request);
 
         if ($request->isMethod('POST'))
         {
-            if ($formAdd->get('Add')->isClicked()) //Add new source
+            if ($formRecovery->get('recovery')->isClicked())
             {
-                $postData = $request->request->get('formAdd');
-                $newName = $postData['fieldName'];
-                $newUrl = $postData['fieldUrl'];
-
-                $source = new Source();
-                $source->setName($newName);
-                $source->setUrl($newUrl);
-                $source->setActive(0);
-
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($source);
-                $em->flush();
-
-                return new RedirectResponse($this->generateUrl('setting_view'));
-            }
-        }
-
-        return array('formAdd' => $formAdd->createView());
-    }
-
-
-    /**
-     * @Template()
-     * A function for editing a selected source by user
-     * @param Request $request the data of client's request
-     * @return array|RedirectResponse
-     */
-    public function editAction(Request $request)
-    {
-        if ($request->isMethod('POST'))
-        {
-            $editId = $request->request->get('sourceId');
-
-            $em = $this->getDoctrine()->getManager();
-
-            if (isset($editId))
-            {
-                $source = $em->getRepository($this->tableSource)
-                    ->find($editId);
-
-                $element['name'] = $source->getName();
-                $element['url'] = $source->getUrl();
-                $element['sourceId'] = $editId;
-
-                $formEdit = $this->createForm(new EditForm(), $element);
-
-                return array('formEdit' => $formEdit->createView());
-            }
-            else
-            {
-                $postData = $request->request->get('formEdit');
-                $editName = $postData['fieldName'];
-                $editUrl = $postData['fieldUrl'];
-                $editId = $postData['fieldSourceId'];
-
-                $source = $em->getRepository($this->tableSource)
-                    ->find($editId);
-                $source->setName($editName);
-                $source->setUrl($editUrl);
-                $source->setActive(0);
-
-                $em->persist($source);
-                $em->flush();
-
-                return new RedirectResponse($this->generateUrl('setting_view'));
-            }
-        }
-    }
-
-
-    /**
-     * @Template()
-     * A function for viewing all sources and controlled them
-     * @param Request $request the data of client's request
-     * @return array|RedirectResponse
-     */
-    public function viewAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        if($request->isXmlHttpRequest())
-        {
-            $arrDeleteInd = (array)json_decode($request->request->get('arrDeleteInd'));
-
-            if (count($arrDeleteInd))
-            {
-                foreach($arrDeleteInd as $deleteId)
+                if ($formRecovery->isValid())
                 {
-                    $source = $em->getRepository($this->tableSource)
-                        ->find($deleteId);
+                    $postData = $request->request->get('formRecovery');
+                    $userEmail = $postData['fieldEmail'];
 
-                    $em->remove($source);
-                }
+                    $salt = Helper::getSalt();
+                    $genPassword = Helper::getRandomValue(3);
+                    $recoveryPassword = Helper::getRegPassword($genPassword, $salt);
+                    //print_r($recoveryPassword); die;
 
-                $em->flush();
+                    $mailer = $this->get('mailer');
+                    $message = \Swift_Message::newInstance()
+                        ->setSubject('Восстановление пароля в системе ...')
+                        ->setFrom('egorduk91@gmail.com')
+                        ->setTo('gzhelka777@mail.ru')
+                        //->setTo($userEmail)
+                        ->setBody('Ваш новый пароль для входа в ...' . $genPassword)
+                        //->setBody($this->renderView('HelloBundle:Hello:email', array('name' => $name)))
+                    ;
+                    $mailer->send($message);
 
-                $response = new Response();
-                $response->headers->set('Content-Type', 'application/json');
-                return $response;
-            }
+                    /*$user = $this->getDoctrine()->getRepository($this->tableUser)
+                        // ->findOneBy(array('login' => $userLogin, 'password' => $userPassword))
+                        ->findOneByLogin($userLogin);
 
-            $arrSaveInd = (array)json_decode($request->request->get('arrSaveInd'));
-
-            if (count($arrSaveInd) && ($arrSaveInd[0] != -1))
-            {
-                $sources = $em->getRepository($this->tableSource)
-                    ->findAll();
-
-                foreach($sources as $source)
-                {
-                    $source->setActive(0);
-                    $em->persist($source);
-                }
-
-                $em->flush();
-
-                foreach($arrSaveInd as $saveId)
-                {
-                    foreach($sources as $source)
+                    if (!$user)
                     {
-                        if ($source->getId() == $saveId)
-                        {
-                            $source->setActive(1);
-                            $em->persist($source);
-
-                            break;
-                        }
+                        return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный логин или пароль!');
                     }
+                    else
+                    {
+                        $encodedPassword = Helper::getRegPassword($userPassword, $user->getSalt());
+
+                        if(!StringUtils::equals($encodedPassword, $user->getPassword()))
+                        {
+                            return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный логин или пароль!');
+                        }
+                        else
+                        {
+                            // $session = $request->getSession();
+                            $firewall = 'secured_area';
+                            $token = new UsernamePasswordToken($userLogin, null, $firewall, array('ROLE_CLIENT'));
+                            //$session->
+                            //$session->set('_security_'.$firewall, serialize($token));
+                            //$session->set('TEST', serialize(123));
+                            $this->get('security.context')->setToken($token);
+                            //$session->save();
+
+                            return new RedirectResponse($this->generateUrl('secure_client_index'));
+                        }
+                    }*/
                 }
-
-                $em->flush();
-
-                $response = new Response();
-                $response->headers->set('Content-Type', 'application/json');
-                return $response;
-            }
-            else if (count($arrSaveInd) && ($arrSaveInd[0] == -1))
-            {
-                $sources = $em->getRepository($this->tableSource)
-                    ->findAll();
-
-                foreach($sources as $source)
+                else
                 {
-                    $source->setActive(0);
-                    $em->persist($source);
+                    return array('formRecovery' => $formRecovery->createView());
                 }
-
-                $em->flush();
-
-                $response = new Response();
-                $response->headers->set('Content-Type', 'application/json');
-                return $response;
             }
-
-            $loadActive = $request->request->get('loadActive');
-
-            if (isset($loadActive))
-            {
-                $sources = $em->getRepository($this->tableSource)
-                    ->findByActive(1);
-
-                $arrLoadActive = array();
-
-                foreach($sources as $source)
-                {
-                    $arrLoadActive[] = $source->getId();
-                }
-
-                $response = new Response(json_encode(array('arrLoadActive' => $arrLoadActive)));
-                $response->headers->set('Content-Type', 'application/json');
-                return $response;
-            }
-
         }
 
-        $formView = $this->createForm(new ViewForm());
-        $formView->handleRequest($request);
-
-        $sources = $em->getRepository($this->tableSource)
-            ->findAll();
-
-        return array('count' => count($sources), 'sources' => $sources, 'formView' => $formView->createView());
+        return array('formRecovery' => $formRecovery->createView());
     }
+
+
 
 }
