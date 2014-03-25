@@ -6,6 +6,7 @@ use Acme\AuthBundle\Entity\Client;
 use Acme\AuthBundle\Entity\User;
 use Acme\AuthBundle\Entity\ClientFormValidate;
 use Acme\AuthBundle\Form\Client\LoginForm;
+use Acme\AuthBundle\Form\Client\RecoveryForm;
 use Acme\AuthBundle\Form\Client\RegForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\ExpressionLanguage\Parser;
@@ -30,6 +31,7 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 //use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 //use Symfony\Bundle\FrameworkBundle\Test;
 use Helper\Helper;
+use Symfony\Component\Security\Core\Util\SecureRandom;
 
 require_once '..\src\Acme\AuthBundle\Lib\recaptchalib.php';
 
@@ -253,6 +255,7 @@ class ClientController extends Controller
         return array();
     }
 
+
     /**
      * @Template()
      * @return array
@@ -332,88 +335,83 @@ class ClientController extends Controller
         }
     }
 
-    /**
-     * @Template()
-     * A function for adding a new source
-     * @param Request $request the data of client's request
-     * @return array|RedirectResponse
-     */
-    public function addAction(Request $request)
-    {
-        $formAdd = $this->createForm(new AddForm());
-        $formAdd->handleRequest($request);
-
-        if ($request->isMethod('POST'))
-        {
-            if ($formAdd->get('Add')->isClicked()) //Add new source
-            {
-                $postData = $request->request->get('formAdd');
-                $newName = $postData['fieldName'];
-                $newUrl = $postData['fieldUrl'];
-
-                $source = new Source();
-                $source->setName($newName);
-                $source->setUrl($newUrl);
-                $source->setActive(0);
-
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($source);
-                $em->flush();
-
-                return new RedirectResponse($this->generateUrl('setting_view'));
-            }
-        }
-
-        return array('formAdd' => $formAdd->createView());
-    }
-
 
     /**
      * @Template()
-     * A function for editing a selected source by user
-     * @param Request $request the data of client's request
-     * @return array|RedirectResponse
+     * @return array
      */
-    public function editAction(Request $request)
+    public function recoveryAction(Request $request)
     {
+        //$client = new ClientFormValidate();
+        $formRecovery = $this->createForm(new RecoveryForm());
+        $formRecovery->handleRequest($request);
+
         if ($request->isMethod('POST'))
         {
-            $editId = $request->request->get('sourceId');
-
-            $em = $this->getDoctrine()->getManager();
-
-            if (isset($editId))
+            if ($formRecovery->get('recovery')->isClicked())
             {
-                $source = $em->getRepository($this->tableSource)
-                    ->find($editId);
+                if ($formRecovery->isValid())
+                {
+                    $postData = $request->request->get('formRecovery');
+                    $userEmail = $postData['fieldEmail'];
 
-                $element['name'] = $source->getName();
-                $element['url'] = $source->getUrl();
-                $element['sourceId'] = $editId;
+                    $salt = Helper::getSalt();
+                    $genPassword = Helper::getRandomValue(3);
+                    $recoveryPassword = Helper::getRegPassword($genPassword, $salt);
+                    //print_r($recoveryPassword); die;
 
-                $formEdit = $this->createForm(new EditForm(), $element);
+                    $mailer = $this->get('mailer');
+                    $message = \Swift_Message::newInstance()
+                        ->setSubject('Восстановление пароля в системе ...')
+                        ->setFrom('egorduk91@gmail.com')
+                        ->setTo('gzhelka777@mail.ru')
+                        //->setTo($userEmail)
+                        ->setBody('Ваш новый пароль для входа в ...' . $genPassword)
+                        //->setBody($this->renderView('HelloBundle:Hello:email', array('name' => $name)))
+                    ;
+                    $mailer->send($message);
 
-                return array('formEdit' => $formEdit->createView());
-            }
-            else
-            {
-                $postData = $request->request->get('formEdit');
-                $editName = $postData['fieldName'];
-                $editUrl = $postData['fieldUrl'];
-                $editId = $postData['fieldSourceId'];
+                    /*$user = $this->getDoctrine()->getRepository($this->tableUser)
+                        // ->findOneBy(array('login' => $userLogin, 'password' => $userPassword))
+                        ->findOneByLogin($userLogin);
 
-                $source = $em->getRepository($this->tableSource)
-                    ->find($editId);
-                $source->setName($editName);
-                $source->setUrl($editUrl);
-                $source->setActive(0);
+                    if (!$user)
+                    {
+                        return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный логин или пароль!');
+                    }
+                    else
+                    {
+                        $encodedPassword = Helper::getRegPassword($userPassword, $user->getSalt());
 
-                $em->persist($source);
-                $em->flush();
+                        if(!StringUtils::equals($encodedPassword, $user->getPassword()))
+                        {
+                            return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный логин или пароль!');
+                        }
+                        else
+                        {
+                            // $session = $request->getSession();
+                            $firewall = 'secured_area';
+                            $token = new UsernamePasswordToken($userLogin, null, $firewall, array('ROLE_CLIENT'));
+                            //$session->
+                            //$session->set('_security_'.$firewall, serialize($token));
+                            //$session->set('TEST', serialize(123));
+                            $this->get('security.context')->setToken($token);
+                            //$session->save();
 
-                return new RedirectResponse($this->generateUrl('setting_view'));
+                            return new RedirectResponse($this->generateUrl('secure_client_index'));
+                        }
+                    }*/
+                }
+                else
+                {
+                    return array('formRecovery' => $formRecovery->createView());
+                }
             }
         }
+
+        return array('formRecovery' => $formRecovery->createView());
+
+        return array();
     }
 
 

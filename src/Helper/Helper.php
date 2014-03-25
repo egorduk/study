@@ -113,6 +113,14 @@ class Helper
         return $salt;
     }
 
+    public static function getRandomValue($size)
+    {
+        $generator = new SecureRandom();
+        $genValue = bin2hex($generator->nextBytes($size));
+
+        return $genValue;
+    }
+
     public static function getRegPassword($userPassword, $salt)
     {
         $parsedYml = Helper::readEncodersParam();
@@ -121,6 +129,16 @@ class Helper
 
         return $regPassword;
     }
+
+    /*public static function getRecoveryPassword($userPassword, $salt)
+    {
+        $parsedYml = Helper::readEncodersParam();
+        $encoder = new MessageDigestPasswordEncoder($parsedYml['algorithm'], $parsedYml['baseAs64'], $parsedYml['iterations']);
+        //$recoveryPassword = $encoder->encodePassword($userPassword, $salt);
+        $encoder = new
+
+        return $recoveryPassword;
+    }*/
 
 
 }

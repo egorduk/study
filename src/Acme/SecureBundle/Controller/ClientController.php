@@ -46,17 +46,13 @@ class ClientController extends Controller
         $sessionLifeTime = $session->getMetadataBag()->getLifetime();
         $sessionUpdated = $session->getMetadataBag()->getLastUsed();
         $whenLogin = Helper::getDateFromTimestamp($sessionCreated, "d/m/Y H:i:s");
+        //$whenUpdated = Helper::getDateFromTimestamp($sessionUpdated, "d/m/Y H:i:s");
         $sessionRemaining = $sessionCreated + $sessionLifeTime;
-        $a = strtotime("now");
-        //$sessionRemaining = Helper::getDateFromTimestamp($a, "d/m/Y H:i:s");
-        $r = $sessionRemaining - $a;
-        $sessionRemaining = Helper::getDateFromTimestamp($r, "i:s");
-        echo "Remaining " . $sessionRemaining;
-        echo "</br>";
-        echo "Updating " . $sessionUpdated;
-        echo "</br>";
+        $nowTimestamp = strtotime("now");
+        $sessionRemaining = $sessionRemaining - $nowTimestamp;
+        $sessionRemaining = Helper::getDateFromTimestamp($sessionRemaining, "i:s");
 
-        return array('userLogin' => $userLogin, 'userRole' => 'Заказчик', 'whenLogin' => $whenLogin);
+        return array('userLogin' => $userLogin, 'userRole' => 'Заказчик', 'whenLogin' => $whenLogin, 'remainingTime' => $sessionRemaining);
     }
 
     /**
