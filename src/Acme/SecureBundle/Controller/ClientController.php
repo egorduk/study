@@ -18,13 +18,13 @@ use Doctrine\ORM\QueryBuilder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\PropertyAccess\Exception\AccessException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+//use Symfony\Component\PropertyAccess\Exception\AccessException;
+//use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Util\StringUtils;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+//use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Helper\Helper;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+//use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 class ClientController extends Controller
@@ -44,9 +44,9 @@ class ClientController extends Controller
         $session = $request->getSession();
         $sessionCreated = $session->getMetadataBag()->getCreated();
         $sessionLifeTime = $session->getMetadataBag()->getLifetime();
-        $sessionUpdated = $session->getMetadataBag()->getLastUsed();
-        $whenLogin = Helper::getDateFromTimestamp($sessionCreated, "d/m/Y H:i:s");
+        //$sessionUpdated = $session->getMetadataBag()->getLastUsed();
         //$whenUpdated = Helper::getDateFromTimestamp($sessionUpdated, "d/m/Y H:i:s");
+        $whenLogin = Helper::getDateFromTimestamp($sessionCreated, "d/m/Y H:i:s");
         $sessionRemaining = $sessionCreated + $sessionLifeTime;
         $nowTimestamp = strtotime("now");
         $sessionRemaining = $sessionRemaining - $nowTimestamp;
@@ -62,23 +62,6 @@ class ClientController extends Controller
     public function loginAction(Request $request)
     {
 
-    }
-
-    /**
-     * @Template()
-     * @return Response
-     */
-    public function logoutAction(Request $request)
-    {
-    }
-
-    /**
-     * @Template()
-     * @return Response
-     */
-    public function rulesAction()
-    {
-        return array();
     }
 
     /**

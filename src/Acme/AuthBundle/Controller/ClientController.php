@@ -3,6 +3,9 @@
 namespace Acme\AuthBundle\Controller;
 
 use Acme\AuthBundle\Entity\Client;
+use Acme\AuthBundle\Entity\Country;
+use Acme\AuthBundle\Entity\Openid;
+use Acme\AuthBundle\Entity\Provider;
 use Acme\AuthBundle\Entity\User;
 use Acme\AuthBundle\Entity\ClientFormValidate;
 use Acme\AuthBundle\Form\Client\LoginForm;
@@ -38,9 +41,9 @@ require_once '..\src\Acme\AuthBundle\Lib\recaptchalib.php';
 
 class ClientController extends Controller
 {
-    private $tableSource = 'AcmeRssBundle:Source';
-    private $tableNews = 'AcmeRssBundle:News';
     private $tableUser = 'AcmeAuthBundle:User';
+    private $tableCountry = 'AcmeAuthBundle:Country';
+    private $tableProvider = 'AcmeAuthBundle:Provider';
 
     /**
      * @Template()
@@ -52,6 +55,8 @@ class ClientController extends Controller
             //throw new AccessDeniedException();
             throw new AccessException();
         }*/
+
+        //print_r(geoip_country_code_by_name('www.tut.by'));
 
         $client = new ClientFormValidate();
         $formLogin = $this->createForm(new LoginForm(), $client);
@@ -269,7 +274,7 @@ class ClientController extends Controller
             $socialToken = $session->get('socialToken');
             $socialResponse = file_get_contents('http://ulogin.ru/token.php?token=' . $socialToken . '&host=' . $_SERVER['HTTP_HOST']);
             $socialData = json_decode($socialResponse, true);
-            //$session->remove('socialToken');
+            print_r($socialData);
 
             if (!isset($socialData['error']))
             {
@@ -294,6 +299,7 @@ class ClientController extends Controller
                         {
                             if ($formReg->isValid())
                             {
+                                $session->remove('socialToken');
                                 $postData = $request->request->get('formReg');
                                 $userLogin = $postData['fieldLogin'];
                                 $userPassword = $postData['fieldPass'];
@@ -308,7 +314,30 @@ class ClientController extends Controller
                                 $user->setPassword($password);
                                 $user->setSalt($salt);
 
+                                $providerName = $socialData['network'];
+                                //$countryCode = geoip_country_code_by_name($_SERVER["REMOTE_ADDR"]);
+                                $countryCode = 'BY';
+
+                                $provider = $this->getDoctrine()->getRepository($this->tableProvider)
+                                    ->findOneByName($providerName);
+
+                                $country = $this->getDoctrine()->getRepository($this->tableCountry)
+                                    ->findOneByCode($countryCode);
+
+                                $openId = new Openid();
+                                $openId->setUid($socialData['uid']);
+                                $openId->setProfileUrl($socialData['profile']);
+                                $openId->setEmail($socialData['email']);
+                                $openId->setNickname($socialData['nickname']);
+                                $openId->setFirstName($socialData['first_name']);
+                                $openId->setIdentity($socialData['identity']);
+                                $openId->setPhotoBig($socialData['photo_big']);
+                                $openId->setPhoto($socialData['photo']);
+                                $openId->setProvider($provider);
+                                $openId->setCountry($country);
+
                                 $em = $this->getDoctrine()->getManager();
+                                $em->persist($openId);
                                 $em->persist($user);
                                 $em->flush();
 
@@ -410,123 +439,8 @@ class ClientController extends Controller
         }
 
         return array('formRecovery' => $formRecovery->createView());
-
-        return array();
     }
 
 
-    /**
-     * @Template()
-     * A function for viewing all sources and controlled them
-     * @param Request $request the data of client's request
-     * @return array|RedirectResponse
-     */
-    public function viewAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        if($request->isXmlHttpRequest())
-        {
-            $arrDeleteInd = (array)json_decode($request->request->get('arrDeleteInd'));
-
-            if (count($arrDeleteInd))
-            {
-                foreach($arrDeleteInd as $deleteId)
-                {
-                    $source = $em->getRepository($this->tableSource)
-                        ->find($deleteId);
-
-                    $em->remove($source);
-                }
-
-                $em->flush();
-
-                $response = new Response();
-                $response->headers->set('Content-Type', 'application/json');
-                return $response;
-            }
-
-            $arrSaveInd = (array)json_decode($request->request->get('arrSaveInd'));
-
-            if (count($arrSaveInd) && ($arrSaveInd[0] != -1))
-            {
-                $sources = $em->getRepository($this->tableSource)
-                    ->findAll();
-
-                foreach($sources as $source)
-                {
-                    $source->setActive(0);
-                    $em->persist($source);
-                }
-
-                $em->flush();
-
-                foreach($arrSaveInd as $saveId)
-                {
-                    foreach($sources as $source)
-                    {
-                        if ($source->getId() == $saveId)
-                        {
-                            $source->setActive(1);
-                            $em->persist($source);
-
-                            break;
-                        }
-                    }
-                }
-
-                $em->flush();
-
-                $response = new Response();
-                $response->headers->set('Content-Type', 'application/json');
-                return $response;
-            }
-            else if (count($arrSaveInd) && ($arrSaveInd[0] == -1))
-            {
-                $sources = $em->getRepository($this->tableSource)
-                    ->findAll();
-
-                foreach($sources as $source)
-                {
-                    $source->setActive(0);
-                    $em->persist($source);
-                }
-
-                $em->flush();
-
-                $response = new Response();
-                $response->headers->set('Content-Type', 'application/json');
-                return $response;
-            }
-
-            $loadActive = $request->request->get('loadActive');
-
-            if (isset($loadActive))
-            {
-                $sources = $em->getRepository($this->tableSource)
-                    ->findByActive(1);
-
-                $arrLoadActive = array();
-
-                foreach($sources as $source)
-                {
-                    $arrLoadActive[] = $source->getId();
-                }
-
-                $response = new Response(json_encode(array('arrLoadActive' => $arrLoadActive)));
-                $response->headers->set('Content-Type', 'application/json');
-                return $response;
-            }
-
-        }
-
-        $formView = $this->createForm(new ViewForm());
-        $formView->handleRequest($request);
-
-        $sources = $em->getRepository($this->tableSource)
-            ->findAll();
-
-        return array('count' => count($sources), 'sources' => $sources, 'formView' => $formView->createView());
-    }
 
 }

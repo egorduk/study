@@ -12,6 +12,8 @@ parameters:
     mailer_password: rezistor
     locale: ru_RU
     secret: 6LcYmecSAAAAAJlYNqogbOXJVMvGgim5JoegorLcYmecSAAAAANaq8JFPxT3xEA_urO6st1gfVOXL
+    publicKeyRecaptcha: 6LcYmecSAAAAAJlYNqogbOXJVMvGgim5JoM0hcAi
+    privateKeyRecaptcha: 6LcYmecSAAAAANaq8JFPxT3xEA_urO6st1gfVOXL
 doctrine:
     dbal:
         driver: '%database_driver%'

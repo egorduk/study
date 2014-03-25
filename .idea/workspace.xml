@@ -1,7 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8afd0a94-95b4-4a96-ada0-8cfaf8ccf8b0" name="Default" comment="" />
+    <list default="true" id="8afd0a94-95b4-4a96-ada0-8cfaf8ccf8b0" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/992dce1c6eb713cab754785988280283.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/ChangeLog.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/src/GeoIP.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/facebook.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/facebookB.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/google.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/googleB.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/mailru.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/mailruapiB.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/twitter.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/twitterB.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/vkontakte.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/vkontakteB.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/yandex.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/yandexB.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Country.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Openid.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Provider.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/asn-v6.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/benchmark.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/city-v6.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/city.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/composer.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/country-v6.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/country.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/distributed.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/domain.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/admin/generate_geoipregionvars.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/src/geoip.inc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/src/geoipcity.inc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/src/geoipregionvars.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/timezone/make_time_zone_php_code.pl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/netspeed.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/netspeedcell.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/org.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/examples/region.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/timezone/test_timezone.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/geoip/geoip/src/timezone.php" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\src\Acme\IndexBundle\Entity\News.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\src\Acme\IndexBundle\Entity\Source.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/ClientFormValidate.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/ClientFormValidate.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/autoload.php" afterPath="$PROJECT_DIR$/vendor/autoload.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_real.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_real.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/index.html.twig" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/installed.json" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/parameters.yml" afterPath="$PROJECT_DIR$/app/config/parameters.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <list id="09bdd184-ad02-4762-8397-2c72ed3a09aa" name="New changelist" comment="" />
     <ignored path="study.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -92,7 +148,7 @@
       <file leaf-file-name="ClientController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="366" column="24" selection-start="13774" selection-end="13774" vertical-scroll-proportion="0.6422287" vertical-offset="7614" max-vertical-offset="11836">
+            <state line="395" column="24" selection-start="15430" selection-end="15430" vertical-scroll-proportion="0.6422287" vertical-offset="8252" max-vertical-offset="9944">
               <folding>
                 <element signature="e#46#80#0" expanded="true" />
               </folding>
@@ -114,7 +170,7 @@
       <file leaf-file-name="ClientController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="0" selection-start="1634" selection-end="1677" vertical-scroll-proportion="-6.387097" vertical-offset="726" max-vertical-offset="9526">
+            <state line="42" column="0" selection-start="1642" selection-end="1642" vertical-scroll-proportion="-6.387097" vertical-offset="726" max-vertical-offset="9152">
               <folding>
                 <element signature="e#251#308#0" expanded="true" />
               </folding>
@@ -396,7 +452,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18614718" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -480,9 +536,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="921">
           <folding>
-            <marker date="1395445259394" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1395445259394" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1395445259394" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1395770375389" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1395770375389" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1395770375389" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -594,7 +650,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="0" selection-start="1634" selection-end="1677" vertical-scroll-proportion="-6.387097" vertical-offset="726" max-vertical-offset="9526">
+        <state line="42" column="0" selection-start="1642" selection-end="1642" vertical-scroll-proportion="-6.387097" vertical-offset="726" max-vertical-offset="9152">
           <folding>
             <element signature="e#251#308#0" expanded="true" />
           </folding>
@@ -663,7 +719,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="366" column="24" selection-start="13774" selection-end="13774" vertical-scroll-proportion="0.6422287" vertical-offset="7614" max-vertical-offset="11836">
+        <state line="395" column="24" selection-start="15430" selection-end="15430" vertical-scroll-proportion="0.6422287" vertical-offset="8252" max-vertical-offset="9944">
           <folding>
             <element signature="e#46#80#0" expanded="true" />
           </folding>
