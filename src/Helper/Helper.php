@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use Symfony\Component\Security\Core\Util\StringUtils;
-
+use Doctrine\ORM\QueryBuilder;
 
 class Helper
 {
@@ -50,7 +50,7 @@ class Helper
         return date($format, $timestamp);
     }
 
-    public static function isExistsUserLogin($userLogin)
+    public static function getUserByLogin($userLogin)
     {
         $container = self::getContainer();
         $user = $container->get('doctrine')->getRepository(self::$_tableUser)
@@ -61,14 +61,49 @@ class Helper
             return false;
         }
 
+        return $user;
+    }
+
+    public static function isExistsUserByEmail($userEmail)
+    {
+        $container = self::getContainer();
+        $em = $container->get('doctrine')->getManager();
+        $query = $em->createQuery('SELECT u.id FROM AcmeAuthBundle:User u WHERE u.email = :email')
+            ->setParameter('email', $userEmail);
+        $user = $query->getResult();
+
+        if(!$user)
+        {
+            return false;
+        }
+
         return true;
     }
 
-    public static function isExistsUserEmail($userEmail)
+    public static function isExistsUserById($userId)
     {
         $container = self::getContainer();
-        $user = $container->get('doctrine')->getRepository(self::$_tableUser)
-            ->findOneByEmail($userEmail);
+        $em = $container->get('doctrine')->getManager();
+        $query = $em->createQuery('SELECT u.id FROM AcmeAuthBundle:User u WHERE u.id = :id')
+            ->setParameter('id', $userId);
+        $user = $query->getResult();
+
+        if(!$user)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public static function isExistsUserByLogin($userLogin)
+    {
+        $container = self::getContainer();
+        $em = $container->get('doctrine')->getManager();
+        $query = $em->createQuery('SELECT u.id FROM AcmeAuthBundle:User u WHERE u.login = :login')
+            ->setParameter('login', $userLogin);
+        $user = $query->getResult();
 
         if(!$user)
         {
@@ -137,10 +172,13 @@ class Helper
         $mailSender = $container->getParameter('mailSender');
         $mailTitle = $container->getParameter('mailTitle');
         $uniqCode = $container->getParameter('uniqCode');
+        $confirmPath = $container->getParameter('confirmPath');
+        //$encodePassword = str_replace('W', 'A', $encodePassword);
+        //$encodePassword = str_replace('Q', 'E', $encodePassword);
 
         $mailer = $container->get('mailer');
         $message = \Swift_Message::newInstance()
-            ->setSubject('Восстановление пароля в системе ...')
+            ->setSubject('Восстановление пароля в системе')
             ->setFrom($mailSender, $mailTitle)
             ->setTo($userEmail)
             ->setBody(
@@ -148,7 +186,7 @@ class Helper
                     '<head></head>' .
                     '<body>' .
                         '<p>Ваш новый пароль для входа ' . $unencodePassword . '</p>' .
-                        '<p>Для подтверждения смены пароля нажмите <a href="http://localhost/study/web/app_dev.php/client/confirm?uniq_code=' .$uniqCode. '&hash_code=' . $encodePassword . '&id=' .$userId. '">сюда</a></p>' .
+                        '<p>Для подтверждения смены пароля нажмите <a href="' . $confirmPath . '?uniq_code=' .$uniqCode. '&hash_code=' . $encodePassword . '&id=' .$userId. '">сюда</a></p>' .
                     '</body>' .
                 '</html>',
                 'text/html'
@@ -164,7 +202,7 @@ class Helper
         $user = self::getContainer()->get('doctrine')->getRepository(self::$_tableUser)
             ->findOneByEmail($userEmail);
 
-        if(!$user)
+        if (!$user)
         {
             return 0;
         }
@@ -174,7 +212,7 @@ class Helper
 
     public static function isCorrectConfirmUrl($container, $uniqCode, $hashCode, $userId)
     {
-        if(isset($uniqCode) && isset($hashCode) && isset($userId) && (iconv_strlen($uniqCode) == 17) && !empty($hashCode) && !empty($userId))
+        if (isset($uniqCode) && isset($hashCode) && isset($userId) && (iconv_strlen($uniqCode) == 17) && !empty($hashCode) && !empty($userId) && is_numeric($userId) && ($userId > 0))
         {
             $realUniqCode = $container->getParameter('uniqCode');
 
@@ -185,6 +223,29 @@ class Helper
         }
 
         return false;
+    }
+
+    public static function getUserById($userId)
+    {
+        //$user = self::getContainer()->get('doctrine')->getRepository(self::$_tableUser)
+            //->findOneById($userId);
+
+        //$user = self::getContainer()->get('doctrine')->getEntityManager()->findOneById($userId);
+
+        /*$em = self::getContainer()->get('doctrine')->getEntityManager();
+        $user = $em->getRepository(self::$_tableUser)
+            ->findOneById($userId);*/
+
+       /* $em = self::getContainer()->get('doctrine')->getManager();
+        $user = $em->getRepository(self::$_tableUser)
+            ->findOneById(3);
+
+        if (!$user)
+        {
+            return false;
+        }
+
+        return $user;*/
     }
 
 }

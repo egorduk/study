@@ -47,7 +47,7 @@ class RegForm extends AbstractType
             {
                 $newLogin = $form->get('fieldLogin')->getData();
 
-                if(Helper::isExistsUserLogin($newLogin))
+                if (Helper::isExistsUserByLogin($newLogin))
                 {
                     $form->get('fieldLogin')->addError(new FormError('Такой логин уже используется!'));
                 }
@@ -57,7 +57,7 @@ class RegForm extends AbstractType
             {
                 $newEmail = $form->get('fieldEmail')->getData();
 
-                if(Helper::isExistsUserEmail($newEmail))
+                if(Helper::isExistsUserByEmail($newEmail))
                 {
                     $form->get('fieldEmail')->addError(new FormError('Такой Email уже используется!'));
                 }

@@ -18,6 +18,7 @@ parameters:
     mailSender: egorduk91@gmail.com
     mailTitle: Study
     uniqCode: 60029911deo3102la
+    confirmPath: http://localhost/study/web/app_dev.php/client/confirm
 
 doctrine:
     dbal:

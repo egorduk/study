@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aeb714aa-03a9-4af9-a685-afd493e118d8" name="Default" comment="24-03-3&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/confirm.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Helper/Helper.php" afterPath="$PROJECT_DIR$/src/Helper/Helper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/User.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/confirm.html.twig" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/confirm.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/parameters.yml" afterPath="$PROJECT_DIR$/app/config/parameters.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/recovery.html.twig" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/recovery.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="ee24dc55-43c1-4676-b406-0ccc3fb4cb0c" name="New changelist" comment="" />
@@ -45,9 +45,44 @@
       <file leaf-file-name="ClientController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="282" column="12" selection-start="10190" selection-end="10190" vertical-scroll-proportion="-1.0778985" vertical-offset="6235" max-vertical-offset="9160">
+            <state line="348" column="21" selection-start="13801" selection-end="13801" vertical-scroll-proportion="1.4945652" vertical-offset="6135" max-vertical-offset="9540">
               <folding>
                 <element signature="e#46#80#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Helper.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="75" column="9" selection-start="2318" selection-end="2318" vertical-scroll-proportion="-37.24138" vertical-offset="420" max-vertical-offset="5140">
+              <folding>
+                <element signature="e#26#58#0" expanded="true" />
+                <marker date="1395842855275" expanded="true" signature="2139:2200" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1395842855275" expanded="true" signature="2578:2633" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1395842855275" expanded="true" signature="3012:3059" placeholder="SELECT u FRO..self..." />
+                <marker date="1395842855275" expanded="true" signature="3012:3073" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="parameters.yml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="21" column="0" selection-start="799" selection-end="799" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="88" column="30" selection-start="1961" selection-end="1961" vertical-scroll-proportion="-60.689655" vertical-offset="0" max-vertical-offset="4920">
+              <folding>
+                <element signature="e#42#74#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -64,54 +99,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Country.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Country.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="7" selection-start="486" selection-end="486" vertical-scroll-proportion="-20.689655" vertical-offset="0" max-vertical-offset="1220">
-              <folding>
-                <element signature="e#42#76#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Provider.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Provider.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="73" selection-start="627" selection-end="627" vertical-scroll-proportion="-17.586206" vertical-offset="130" max-vertical-offset="1000">
-              <folding>
-                <element signature="e#42#76#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="RssController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Acme/RssBundle/Controller/RssController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="84" column="31" selection-start="2708" selection-end="2708" vertical-scroll-proportion="-20.068966" vertical-offset="1098" max-vertical-offset="8520">
+            <state line="290" column="16" selection-start="8801" selection-end="8886" vertical-scroll-proportion="-20.862068" vertical-offset="5195" max-vertical-offset="8520">
               <folding>
                 <element signature="e#45#77#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="News.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Acme/RssBundle/Entity/News.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="20" selection-start="850" selection-end="850" vertical-scroll-proportion="-8.965517" vertical-offset="660" max-vertical-offset="1680">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Source.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Acme/RssBundle/Entity/Source.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="5" selection-start="755" selection-end="755" vertical-scroll-proportion="-12.75862" vertical-offset="550" max-vertical-offset="2020">
-              <folding>
-                <element signature="e#41#73#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -137,9 +130,6 @@
         <option value="$PROJECT_DIR$/.htaccess" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/reg.html.twig" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/ClientFormValidate.php" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php" />
-        <option value="$PROJECT_DIR$/src/Helper/Helper.php" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/openid.html.twig" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Lib/recaptchalib.php" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/AcmeSecureBundle.php" />
@@ -159,7 +149,6 @@
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/../config/parameters.yml" />
         <option value="$PROJECT_DIR$/vendor/geoip/geoip/src/geoip.inc" />
-        <option value="$PROJECT_DIR$/app/config/parameters.yml" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/ClientFormValidate.php" />
         <option value="$PROJECT_DIR$/src/Acme/RssBundle/Entity/Source.php" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Openid.php" />
@@ -167,6 +156,12 @@
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Provider.php" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/layout.html.twig" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/recovery.html.twig" />
+        <option value="$PROJECT_DIR$/app/config/parameters.yml" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/confirm.html.twig" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php" />
+        <option value="$PROJECT_DIR$/src/Helper/Helper.php" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" />
       </list>
     </option>
@@ -285,36 +280,6 @@
               <option name="myItemId" value="Acme" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SecureBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SecureBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Entity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -407,56 +372,8 @@
               <option name="myItemId" value="Acme" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="AuthBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AuthBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Twig" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Extension" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -572,7 +489,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="EventListener" />
+              <option name="myItemId" value="Form" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Client" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -599,32 +520,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Entity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AuthBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -747,7 +642,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -807,59 +702,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.htaccess">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="38" selection-end="38" vertical-scroll-proportion="0.1010101" vertical-offset="0" max-vertical-offset="594">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/rules.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/RssBundle/Form/EditForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="76" selection-start="300" selection-end="300" vertical-scroll-proportion="0.21003501" vertical-offset="0" max-vertical-offset="857">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/ClientFormValidate.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="32" selection-start="319" selection-end="319" vertical-scroll-proportion="0.34367815" vertical-offset="61" max-vertical-offset="1060">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="38" selection-start="3003" selection-end="3003" vertical-scroll-proportion="0.55659276" vertical-offset="503" max-vertical-offset="1780">
-          <folding>
-            <element signature="e#47#65#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="27" selection-start="833" selection-end="833" vertical-scroll-proportion="-1.2988505" vertical-offset="1770" max-vertical-offset="2640">
-          <folding>
-            <element signature="e#59#90#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Lib/recaptchalib.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="150" column="49" selection-start="5144" selection-end="5144" vertical-scroll-proportion="1.1901984" vertical-offset="1980" max-vertical-offset="5080">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/AcmeSecureBundle.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="22" selection-start="92" selection-end="108" vertical-scroll-proportion="0.14134276" vertical-offset="0" max-vertical-offset="849">
@@ -1032,15 +874,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="29" selection-start="1735" selection-end="1735" vertical-scroll-proportion="0.16091955" vertical-offset="1440" max-vertical-offset="4660">
-          <folding>
-            <element signature="e#42#74#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="64" column="5" selection-start="2630" selection-end="2630" vertical-scroll-proportion="-0.49008167" vertical-offset="1620" max-vertical-offset="8240">
@@ -1086,13 +919,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="4" selection-start="534" selection-end="534" vertical-scroll-proportion="0.3337041" vertical-offset="0" max-vertical-offset="899">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/logout.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="878">
@@ -1121,7 +947,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="46" column="5" selection-start="755" selection-end="755" vertical-scroll-proportion="-12.75862" vertical-offset="550" max-vertical-offset="2020">
           <folding>
-            <element signature="e#41#73#0" expanded="true" />
+            <element signature="e#41#73#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1130,15 +956,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="47" column="20" selection-start="850" selection-end="850" vertical-scroll-proportion="-8.965517" vertical-offset="660" max-vertical-offset="1680">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/RssBundle/Controller/RssController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="31" selection-start="2708" selection-end="2708" vertical-scroll-proportion="-20.068966" vertical-offset="1098" max-vertical-offset="8520">
-          <folding>
-            <element signature="e#45#77#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1155,7 +972,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="32" column="73" selection-start="627" selection-end="627" vertical-scroll-proportion="-17.586206" vertical-offset="130" max-vertical-offset="1000">
           <folding>
-            <element signature="e#42#76#0" expanded="true" />
+            <element signature="e#42#76#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1164,7 +981,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="30" column="7" selection-start="486" selection-end="486" vertical-scroll-proportion="-20.689655" vertical-offset="0" max-vertical-offset="1220">
           <folding>
-            <element signature="e#42#76#0" expanded="true" />
+            <element signature="e#42#76#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1176,6 +993,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Message.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="59" column="27" selection-start="1549" selection-end="1549" vertical-scroll-proportion="0.33333334" vertical-offset="777" max-vertical-offset="1700">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RecoveryForm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1240">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/recovery.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="32" selection-start="474" selection-end="474" vertical-scroll-proportion="0.3218391" vertical-offset="0" max-vertical-offset="870">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/confirm.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="39" selection-start="232" selection-end="232" vertical-scroll-proportion="0.20689656" vertical-offset="0" max-vertical-offset="870">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_9.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="860" column="9" selection-start="28483" selection-end="28483" vertical-scroll-proportion="0.34422404" vertical-offset="16905" max-vertical-offset="21280">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="0" selection-start="799" selection-end="799" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="112" selection-start="698" selection-end="698" vertical-scroll-proportion="-8.965517" vertical-offset="0" max-vertical-offset="540">
@@ -1183,9 +1042,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="30" selection-start="1961" selection-end="1961" vertical-scroll-proportion="-60.689655" vertical-offset="0" max-vertical-offset="4920">
+          <folding>
+            <element signature="e#42#74#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/RssBundle/Controller/RssController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="290" column="16" selection-start="8801" selection-end="8886" vertical-scroll-proportion="-20.862068" vertical-offset="5195" max-vertical-offset="8520">
+          <folding>
+            <element signature="e#45#77#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="0" selection-start="2964" selection-end="2964" vertical-scroll-proportion="0.67677945" vertical-offset="220" max-vertical-offset="1620">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="75" column="9" selection-start="2318" selection-end="2318" vertical-scroll-proportion="-37.24138" vertical-offset="420" max-vertical-offset="5140">
+          <folding>
+            <element signature="e#26#58#0" expanded="true" />
+            <marker date="1395842855275" expanded="true" signature="2139:2200" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1395842855275" expanded="true" signature="2578:2633" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1395842855275" expanded="true" signature="3012:3059" placeholder="SELECT u FRO..self..." />
+            <marker date="1395842855275" expanded="true" signature="3012:3073" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="282" column="12" selection-start="10190" selection-end="10190" vertical-scroll-proportion="-1.0778985" vertical-offset="6235" max-vertical-offset="9160">
+        <state line="348" column="21" selection-start="13801" selection-end="13801" vertical-scroll-proportion="1.4945652" vertical-offset="6135" max-vertical-offset="9540">
           <folding>
             <element signature="e#46#80#0" expanded="true" />
           </folding>

@@ -83,9 +83,11 @@ class ClientController extends Controller
                     $userLogin = $postData['fieldLogin'];
                     $userPassword = $postData['fieldPass'];
 
-                    $user = $this->getDoctrine()->getRepository($this->tableUser)
+                    /*$user = $this->getDoctrine()->getRepository($this->tableUser)
                        // ->findOneBy(array('login' => $userLogin, 'password' => $userPassword))
-                          ->findOneByLogin($userLogin);
+                          ->findOneByLogin($userLogin);*/
+
+                    $user = Helper::isExistsUserByLogin($userLogin);
 
                     if (!$user)
                     {
@@ -93,6 +95,8 @@ class ClientController extends Controller
                     }
                     else
                     {
+                        $user = Helper::getUserByLogin($userLogin);
+
                         $encodedPassword = Helper::getRegPassword($userPassword, $user->getSalt());
 
                         if(!StringUtils::equals($encodedPassword, $user->getPassword()))
@@ -274,7 +278,7 @@ class ClientController extends Controller
             $socialToken = $session->get('socialToken');
             $socialResponse = file_get_contents('http://ulogin.ru/token.php?token=' . $socialToken . '&host=' . $_SERVER['HTTP_HOST']);
             $socialData = json_decode($socialResponse, true);
-            print_r($socialData);
+            //print_r($socialData);
 
             if (!isset($socialData['error']))
             {
@@ -371,8 +375,8 @@ class ClientController extends Controller
      */
     public function recoveryAction(Request $request)
     {
-        //$client = new ClientFormValidate();
         $formRecovery = $this->createForm(new RecoveryForm());
+        $clonedFormRecovery = clone $formRecovery;
         $formRecovery->handleRequest($request);
 
         if ($request->isMethod('POST'))
@@ -393,20 +397,22 @@ class ClientController extends Controller
                         $encodePassword = Helper::getRegPassword($unencodePassword, $userSalt);
 
                         Helper::sendRecoveryPasswordMail($this->container, $userEmail, $userId, $unencodePassword, $encodePassword);
+
+                        return array('formRecovery' => $clonedFormRecovery->createView(), 'msgSuccess' => 'Проверьте почту!');
                     }
                     else
                     {
-                        return array('formRecovery' => $formRecovery->createView());
+                        return array('formRecovery' => $clonedFormRecovery->createView(), 'msgSuccess' => 'Проверьте почту!');
                     }
                 }
                 else
                 {
-                    return array('formRecovery' => $formRecovery->createView());
+                    return array('formRecovery' => $formRecovery->createView(), 'msgSuccess' => '');
                 }
             }
         }
 
-        return array('formRecovery' => $formRecovery->createView());
+        return array('formRecovery' => $formRecovery->createView(), 'msgSuccess' => '');
     }
 
     /**
@@ -419,29 +425,42 @@ class ClientController extends Controller
         $hashCode = $request->get('hash_code');
         $userId = $request->get('id');
 
-        /*if(isset($uniqCode) && isset($hashCode) && isset($userId) && (iconv_strlen($uniqCode) == 17) && !empty($hashCode) && !empty($userId))
-        {
-            $realUniqCode = $this->container->getParameter('uniqCode');
-
-            if(StringUtils::equals($realUniqCode, $uniqCode))
-            {
-
-            }
-            else
-            {
-                return array();
-            }
-        }*/
-
         $isCorrectUrl = Helper::isCorrectConfirmUrl($this->container, $uniqCode, $hashCode, $userId);
+
+        //echo $isCorrectUrl;die;
 
         if ($isCorrectUrl)
         {
-            echo "yo";
+            /**
+             * @var User $user
+             */
+            //$user = Helper::getUserById($userId);
+            //print_r($user);
+            $user = 1;
+
+            if ($user)
+            {
+                $encodePassword = $hashCode;
+
+                $em = $this->getDoctrine()->getManager();
+                $user = $em->getRepository($this->tableUser)
+                    ->findOneById($userId);
+
+                $user->setPassword($encodePassword);
+                $user->setIsConfirm(1);
+
+                $em->flush();
+
+                return array('msgError' => 'Активировано!');
+            }
+            else
+            {
+                return array('msgError' => 'Ошибка!');
+            }
         }
         else
         {
-
+            return array('msgError' => 'Ошибка11!');
         }
 
         //return array();
