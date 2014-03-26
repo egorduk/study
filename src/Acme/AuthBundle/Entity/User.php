@@ -73,6 +73,11 @@ class User extends EntityRepository implements UserInterface, \Serializable
      */
     protected $openid_id;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $is_confirm;
+
 
     public function __construct()
     {
@@ -81,6 +86,7 @@ class User extends EntityRepository implements UserInterface, \Serializable
         $this->ip_reg = ip2long($_SERVER['REMOTE_ADDR']);
         $this->openid_id = 1;
         $this->role_id = 2;
+        $this->is_confirm = 0;
     }
 
     public function getId()
@@ -95,7 +101,6 @@ class User extends EntityRepository implements UserInterface, \Serializable
 
     public function getUsername()
     {
-
     }
 
     public function getIpReg()
@@ -111,6 +116,16 @@ class User extends EntityRepository implements UserInterface, \Serializable
     public function setSalt($value)
     {
         $this->salt = $value;
+    }
+
+    public function setIsConfirm($value)
+    {
+        $this->is_confirm = $value;
+    }
+
+    public function getIsConfirm()
+    {
+        return $this->is_confirm;
     }
 
     public function getRole()
@@ -163,7 +178,6 @@ class User extends EntityRepository implements UserInterface, \Serializable
         return $this->date_reg;
     }
 
-
     public function getRoles()
     {
         //return $this->getUserRoles()->toArray();
@@ -172,7 +186,6 @@ class User extends EntityRepository implements UserInterface, \Serializable
 
     public function eraseCredentials()
     {
-
     }
 
     public function isAccountNonExpired()
