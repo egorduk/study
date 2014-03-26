@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aeb714aa-03a9-4af9-a685-afd493e118d8" name="Default" comment="24-03-3&#10;" />
+    <list default="true" id="aeb714aa-03a9-4af9-a685-afd493e118d8" name="Default" comment="24-03-3&#10;">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/confirm.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Helper/Helper.php" afterPath="$PROJECT_DIR$/src/Helper/Helper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/User.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/User.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/parameters.yml" afterPath="$PROJECT_DIR$/app/config/parameters.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <list id="ee24dc55-43c1-4676-b406-0ccc3fb4cb0c" name="New changelist" comment="" />
     <ignored path="study.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,7 +45,7 @@
       <file leaf-file-name="ClientController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="276" column="12" selection-start="9967" selection-end="9967" vertical-scroll-proportion="-1.0778985" vertical-offset="6115" max-vertical-offset="9040">
+            <state line="282" column="12" selection-start="10190" selection-end="10190" vertical-scroll-proportion="-1.0778985" vertical-offset="6235" max-vertical-offset="9160">
               <folding>
                 <element signature="e#46#80#0" expanded="true" />
               </folding>
@@ -157,8 +166,8 @@
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Country.php" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Provider.php" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/layout.html.twig" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" />
       </list>
     </option>
   </component>
@@ -739,7 +748,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -839,7 +848,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="32" column="27" selection-start="833" selection-end="833" vertical-scroll-proportion="-1.2988505" vertical-offset="1770" max-vertical-offset="2640">
           <folding>
-            <element signature="e#26#58#0" expanded="false" />
+            <element signature="e#59#90#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1176,7 +1185,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="276" column="12" selection-start="9967" selection-end="9967" vertical-scroll-proportion="-1.0778985" vertical-offset="6115" max-vertical-offset="9040">
+        <state line="282" column="12" selection-start="10190" selection-end="10190" vertical-scroll-proportion="-1.0778985" vertical-offset="6235" max-vertical-offset="9160">
           <folding>
             <element signature="e#46#80#0" expanded="true" />
           </folding>

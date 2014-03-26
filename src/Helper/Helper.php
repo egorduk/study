@@ -8,6 +8,7 @@ use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
+use Symfony\Component\Security\Core\Util\StringUtils;
 
 
 class Helper
@@ -19,6 +20,7 @@ class Helper
 
     public function __construct()
     {
+
     }
 
     public static function readYamlFile()
@@ -30,10 +32,9 @@ class Helper
         return $parsed;
     }
 
-    public static function readEncodersParam()
+    public static function getEncodersParam()
     {
-        $container = self::getContainer();
-        self::$_container = $container;
+        self::$_container = self::getContainer();
         self::$_ymFile = 'security';
 
         $parsedYml = self::readYamlFile();
@@ -47,11 +48,6 @@ class Helper
     public static function getDateFromTimestamp($timestamp, $format)
     {
         return date($format, $timestamp);
-    }
-
-    public static function getOpenIdData($openIdData)
-    {
-
     }
 
     public static function isExistsUserLogin($userLogin)
@@ -94,14 +90,10 @@ class Helper
             return self::$kernel->getContainer();
         }
 
-        /*$environment = 'prod';
-        if (!array_key_exists('REMOTE_ADDR', $_SERVER) || in_array(@$_SERVER['REMOTE_ADDR'], array('127.0.0.1', '::1', 'localhost'))) {
-            $environment = 'dev';
-        }*/
-
         $environment = 'dev';
         self::$kernel = new \AppKernel($environment, false);
         self::$kernel->boot();
+
         return self::$kernel->getContainer();
     }
 
@@ -123,7 +115,7 @@ class Helper
 
     public static function getRegPassword($userPassword, $salt)
     {
-        $parsedYml = Helper::readEncodersParam();
+        $parsedYml = Helper::getEncodersParam();
         $encoder = new MessageDigestPasswordEncoder($parsedYml['algorithm'], $parsedYml['baseAs64'], $parsedYml['iterations']);
         $regPassword = $encoder->encodePassword($userPassword, $salt);
 
@@ -140,5 +132,59 @@ class Helper
         return $recoveryPassword;
     }*/
 
+    public static function sendRecoveryPasswordMail($container, $userEmail, $userId, $unencodePassword, $encodePassword)
+    {
+        $mailSender = $container->getParameter('mailSender');
+        $mailTitle = $container->getParameter('mailTitle');
+        $uniqCode = $container->getParameter('uniqCode');
+
+        $mailer = $container->get('mailer');
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Восстановление пароля в системе ...')
+            ->setFrom($mailSender, $mailTitle)
+            ->setTo($userEmail)
+            ->setBody(
+                '<html>' .
+                    '<head></head>' .
+                    '<body>' .
+                        '<p>Ваш новый пароль для входа ' . $unencodePassword . '</p>' .
+                        '<p>Для подтверждения смены пароля нажмите <a href="http://localhost/study/web/app_dev.php/client/confirm?uniq_code=' .$uniqCode. '&hash_code=' . $encodePassword . '&id=' .$userId. '">сюда</a></p>' .
+                    '</body>' .
+                '</html>',
+                'text/html'
+            );
+        //->setBody($this->renderView('HelloBundle:Hello:email', array('name' => $name)));
+        $mailer->send($message);
+
+        return true;
+    }
+
+    public static function getUserByEmail($userEmail)
+    {
+        $user = self::getContainer()->get('doctrine')->getRepository(self::$_tableUser)
+            ->findOneByEmail($userEmail);
+
+        if(!$user)
+        {
+            return 0;
+        }
+
+        return $user;
+    }
+
+    public static function isCorrectConfirmUrl($container, $uniqCode, $hashCode, $userId)
+    {
+        if(isset($uniqCode) && isset($hashCode) && isset($userId) && (iconv_strlen($uniqCode) == 17) && !empty($hashCode) && !empty($userId))
+        {
+            $realUniqCode = $container->getParameter('uniqCode');
+
+            if(StringUtils::equals($realUniqCode, $uniqCode))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 }

@@ -383,53 +383,21 @@ class ClientController extends Controller
                 {
                     $postData = $request->request->get('formRecovery');
                     $userEmail = $postData['fieldEmail'];
+                    $user = Helper::getUserByEmail($userEmail);
 
-                    $salt = Helper::getSalt();
-                    $genPassword = Helper::getRandomValue(3);
-                    $recoveryPassword = Helper::getRegPassword($genPassword, $salt);
-                    //print_r($recoveryPassword); die;
-
-                    $mailer = $this->get('mailer');
-                    $message = \Swift_Message::newInstance()
-                        ->setSubject('Восстановление пароля в системе ...')
-                        ->setFrom('egorduk91@gmail.com')
-                        ->setTo('gzhelka777@mail.ru')
-                        //->setTo($userEmail)
-                        ->setBody('Ваш новый пароль для входа в ...' . $genPassword)
-                        //->setBody($this->renderView('HelloBundle:Hello:email', array('name' => $name)))
-                    ;
-                    $mailer->send($message);
-
-                    /*$user = $this->getDoctrine()->getRepository($this->tableUser)
-                        // ->findOneBy(array('login' => $userLogin, 'password' => $userPassword))
-                        ->findOneByLogin($userLogin);
-
-                    if (!$user)
+                    if ($user)
                     {
-                        return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный логин или пароль!');
+                        $userId = $user->getId();
+                        $userSalt = $user->getSalt();
+                        $unencodePassword = Helper::getRandomValue(3);
+                        $encodePassword = Helper::getRegPassword($unencodePassword, $userSalt);
+
+                        Helper::sendRecoveryPasswordMail($this->container, $userEmail, $userId, $unencodePassword, $encodePassword);
                     }
                     else
                     {
-                        $encodedPassword = Helper::getRegPassword($userPassword, $user->getSalt());
-
-                        if(!StringUtils::equals($encodedPassword, $user->getPassword()))
-                        {
-                            return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный логин или пароль!');
-                        }
-                        else
-                        {
-                            // $session = $request->getSession();
-                            $firewall = 'secured_area';
-                            $token = new UsernamePasswordToken($userLogin, null, $firewall, array('ROLE_CLIENT'));
-                            //$session->
-                            //$session->set('_security_'.$firewall, serialize($token));
-                            //$session->set('TEST', serialize(123));
-                            $this->get('security.context')->setToken($token);
-                            //$session->save();
-
-                            return new RedirectResponse($this->generateUrl('secure_client_index'));
-                        }
-                    }*/
+                        return array('formRecovery' => $formRecovery->createView());
+                    }
                 }
                 else
                 {
@@ -439,6 +407,44 @@ class ClientController extends Controller
         }
 
         return array('formRecovery' => $formRecovery->createView());
+    }
+
+    /**
+     * @Template()
+     * @return array
+     */
+    public function confirmAction(Request $request)
+    {
+        $uniqCode = $request->get('uniq_code');
+        $hashCode = $request->get('hash_code');
+        $userId = $request->get('id');
+
+        /*if(isset($uniqCode) && isset($hashCode) && isset($userId) && (iconv_strlen($uniqCode) == 17) && !empty($hashCode) && !empty($userId))
+        {
+            $realUniqCode = $this->container->getParameter('uniqCode');
+
+            if(StringUtils::equals($realUniqCode, $uniqCode))
+            {
+
+            }
+            else
+            {
+                return array();
+            }
+        }*/
+
+        $isCorrectUrl = Helper::isCorrectConfirmUrl($this->container, $uniqCode, $hashCode, $userId);
+
+        if ($isCorrectUrl)
+        {
+            echo "yo";
+        }
+        else
+        {
+
+        }
+
+        //return array();
     }
 
 

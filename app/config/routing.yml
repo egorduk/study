@@ -41,6 +41,11 @@ secure_client_settings:
   pattern:   /secure/client/settings
   defaults:  { _controller: AcmeSecureBundle:Client:settings }
 
+client_confirm_password:
+  pattern:   /client/confirm
+  defaults:  { _controller: AcmeAuthBundle:Client:confirm }
+
+
 
 #------------------Author------------------------#
 
