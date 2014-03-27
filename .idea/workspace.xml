@@ -2,13 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aeb714aa-03a9-4af9-a685-afd493e118d8" name="Default" comment="24-03-3&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Helper/Helper.php" afterPath="$PROJECT_DIR$/src/Helper/Helper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RegForm.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/confirm.html.twig" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/confirm.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/parameters.yml" afterPath="$PROJECT_DIR$/app/config/parameters.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/recovery.html.twig" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/recovery.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="ee24dc55-43c1-4676-b406-0ccc3fb4cb0c" name="New changelist" comment="" />
@@ -642,7 +635,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
