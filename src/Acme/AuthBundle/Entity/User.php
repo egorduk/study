@@ -49,6 +49,16 @@ class User extends EntityRepository implements UserInterface, \Serializable
     protected $date_reg;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $date_confirm_reg;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $date_confirm_recovery;
+
+    /**
      * @ORM\Column(type="integer")
      */
     protected $role_id;
@@ -84,7 +94,7 @@ class User extends EntityRepository implements UserInterface, \Serializable
         $this->date_reg = new \DateTime();
         $this->is_active = 0;
         $this->ip_reg = ip2long($_SERVER['REMOTE_ADDR']);
-        $this->openid_id = 1;
+        //$this->openid_id = 1;
         $this->role_id = 2;
         $this->is_confirm = 0;
     }
@@ -116,6 +126,16 @@ class User extends EntityRepository implements UserInterface, \Serializable
     public function setSalt($value)
     {
         $this->salt = $value;
+    }
+
+    public function getOpenId()
+    {
+        return $this->openid_id;
+    }
+
+    public function setOpenId($openId)
+    {
+        $this->openid_id = $openId;
     }
 
     public function setIsConfirm($value)
@@ -211,6 +231,16 @@ class User extends EntityRepository implements UserInterface, \Serializable
     public function setIsEnabled($active)
     {
         $this->is_active = $active;
+    }
+
+    public function getDateConfirmRecovery()
+    {
+        return $this->date_confirm_recovery;
+    }
+
+    public function setDateConfirmRecovery($date)
+    {
+        $this->date_confirm_recovery = $date;
     }
 
     /**

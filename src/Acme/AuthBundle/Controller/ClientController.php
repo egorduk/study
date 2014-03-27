@@ -56,8 +56,6 @@ class ClientController extends Controller
             throw new AccessException();
         }*/
 
-        //print_r(geoip_country_code_by_name('www.tut.by'));
-
         $client = new ClientFormValidate();
         $formLogin = $this->createForm(new LoginForm(), $client);
         $formLogin->handleRequest($request);
@@ -342,6 +340,9 @@ class ClientController extends Controller
 
                                 $em = $this->getDoctrine()->getManager();
                                 $em->persist($openId);
+                                $em->flush();
+
+                                $user->setOpenId($openId->getId());
                                 $em->persist($user);
                                 $em->flush();
 
@@ -375,6 +376,8 @@ class ClientController extends Controller
      */
     public function recoveryAction(Request $request)
     {
+        phpinfo();
+
         $formRecovery = $this->createForm(new RecoveryForm());
         $clonedFormRecovery = clone $formRecovery;
         $formRecovery->handleRequest($request);
@@ -424,46 +427,31 @@ class ClientController extends Controller
         $uniqCode = $request->get('uniq_code');
         $hashCode = $request->get('hash_code');
         $userId = $request->get('id');
+        $hashCode = htmlspecialchars(rawurldecode($hashCode));
+
+        print_r($hashCode);
 
         $isCorrectUrl = Helper::isCorrectConfirmUrl($this->container, $uniqCode, $hashCode, $userId);
 
-        //echo $isCorrectUrl;die;
-
         if ($isCorrectUrl)
         {
-            /**
-             * @var User $user
-             */
-            //$user = Helper::getUserById($userId);
-            //print_r($user);
-            $user = 1;
+            $isExistsUser = Helper::isExistsUserById($userId);
 
-            if ($user)
+            if ($isExistsUser)
             {
-                $encodePassword = $hashCode;
-
-                $em = $this->getDoctrine()->getManager();
-                $user = $em->getRepository($this->tableUser)
-                    ->findOneById($userId);
-
-                $user->setPassword($encodePassword);
-                $user->setIsConfirm(1);
-
-                $em->flush();
+                Helper::updateUserAfterConfirmRecovery($userId, $hashCode);
 
                 return array('msgError' => 'Активировано!');
             }
             else
             {
-                return array('msgError' => 'Ошибка!');
+                return array('msgError' => 'Ошибка2!');
             }
         }
         else
         {
-            return array('msgError' => 'Ошибка11!');
+            return array('msgError' => 'Ошибка1!');
         }
-
-        //return array();
     }
 
 

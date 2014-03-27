@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\Util\SecureRandom;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use Symfony\Component\Security\Core\Util\StringUtils;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Helper
 {
@@ -175,6 +176,7 @@ class Helper
         $confirmPath = $container->getParameter('confirmPath');
         //$encodePassword = str_replace('W', 'A', $encodePassword);
         //$encodePassword = str_replace('Q', 'E', $encodePassword);
+        $encodePassword = htmlspecialchars(rawurlencode($encodePassword));
 
         $mailer = $container->get('mailer');
         $message = \Swift_Message::newInstance()
@@ -204,7 +206,8 @@ class Helper
 
         if (!$user)
         {
-            return 0;
+            //throw new NotFoundHttpException('Error!');
+            return false;
         }
 
         return $user;
@@ -227,25 +230,32 @@ class Helper
 
     public static function getUserById($userId)
     {
-        //$user = self::getContainer()->get('doctrine')->getRepository(self::$_tableUser)
-            //->findOneById($userId);
-
-        //$user = self::getContainer()->get('doctrine')->getEntityManager()->findOneById($userId);
-
-        /*$em = self::getContainer()->get('doctrine')->getEntityManager();
-        $user = $em->getRepository(self::$_tableUser)
-            ->findOneById($userId);*/
-
-       /* $em = self::getContainer()->get('doctrine')->getManager();
-        $user = $em->getRepository(self::$_tableUser)
-            ->findOneById(3);
+        $container = self::getContainer();
+        $user = $container->get('doctrine')->getRepository(self::$_tableUser)
+            ->findOneByLogin($userId);
 
         if (!$user)
         {
+            //throw new NotFoundHttpException('Error!');
             return false;
         }
 
-        return $user;*/
+        return $user;
     }
+
+    public static function updateUserAfterConfirmRecovery($userId, $password)
+    {
+        $container = self::getContainer();
+        $em = $container->get('doctrine')->getManager();
+        $user = $em->getRepository(self::$_tableUser)
+            ->findOneById($userId);
+
+        $user->setPassword($password);
+        $user->setIsConfirm(1);
+        $user->setDateConfirmRecovery(new \DateTime());
+
+        $em->flush();
+    }
+
 
 }

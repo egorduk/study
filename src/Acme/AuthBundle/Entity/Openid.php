@@ -125,7 +125,15 @@ class Openid extends EntityRepository
         $this->country = $id;
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
 
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
 
 }
