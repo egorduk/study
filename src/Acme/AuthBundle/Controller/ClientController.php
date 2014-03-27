@@ -376,7 +376,7 @@ class ClientController extends Controller
      */
     public function recoveryAction(Request $request)
     {
-        phpinfo();
+        //phpinfo();
 
         $formRecovery = $this->createForm(new RecoveryForm());
         $clonedFormRecovery = clone $formRecovery;
