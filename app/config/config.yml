@@ -28,14 +28,8 @@ framework:
     trusted_proxies: ~
     #charset:  UTF-8
     session:
-        cookie_lifetime: 3600
-        gc_maxlifetime: 3600
-        #cookie_httponly: false
-        #cookie_path: "%kernel.cache_dir%/cookies"
-        #save_path:  ~
-        # handler_id set to null will use default session handler from php.ini
-        #domain: 'localhost'
-        #handler_id:  ~
+        cookie_lifetime: 3600 #crsf msg view then more low
+        gc_maxlifetime: 60
         storage_id: session.storage.native
         handler_id: session.handler.native_file
         save_path: "%kernel.cache_dir%/sessions"

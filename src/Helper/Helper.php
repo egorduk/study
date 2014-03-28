@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\Util\SecureRandom;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use Symfony\Component\Security\Core\Util\StringUtils;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Helper
 {
@@ -175,6 +176,7 @@ class Helper
         $confirmPath = $container->getParameter('confirmPath');
         //$encodePassword = str_replace('W', 'A', $encodePassword);
         //$encodePassword = str_replace('Q', 'E', $encodePassword);
+        $encodePassword = htmlspecialchars(rawurlencode($encodePassword));
 
         $mailer = $container->get('mailer');
         $message = \Swift_Message::newInstance()
@@ -204,7 +206,8 @@ class Helper
 
         if (!$user)
         {
-            return 0;
+            //throw new NotFoundHttpException('Error!');
+            return false;
         }
 
         return $user;
@@ -227,25 +230,92 @@ class Helper
 
     public static function getUserById($userId)
     {
-        //$user = self::getContainer()->get('doctrine')->getRepository(self::$_tableUser)
-            //->findOneById($userId);
-
-        //$user = self::getContainer()->get('doctrine')->getEntityManager()->findOneById($userId);
-
-        /*$em = self::getContainer()->get('doctrine')->getEntityManager();
-        $user = $em->getRepository(self::$_tableUser)
-            ->findOneById($userId);*/
-
-       /* $em = self::getContainer()->get('doctrine')->getManager();
-        $user = $em->getRepository(self::$_tableUser)
-            ->findOneById(3);
+        $container = self::getContainer();
+        $user = $container->get('doctrine')->getRepository(self::$_tableUser)
+            ->findOneByLogin($userId);
 
         if (!$user)
+        {
+            //throw new NotFoundHttpException('Error!');
+            return false;
+        }
+
+        return $user;
+    }
+
+    public static function updateUserAfterConfirmRecovery($userId, $password)
+    {
+        $container = self::getContainer();
+        $em = $container->get('doctrine')->getManager();
+        $user = $em->getRepository(self::$_tableUser)
+            ->findOneById($userId);
+
+        $user->setPassword($password);
+        $user->setIsConfirm(1);
+        $user->setDateConfirmRecovery(new \DateTime());
+
+        $em->flush();
+    }
+
+    public static function updateUserAfterConfirmReg($userId)
+    {
+        $container = self::getContainer();
+        $em = $container->get('doctrine')->getManager();
+        $user = $em->getRepository(self::$_tableUser)
+            ->findOneById($userId);
+
+        $user->setIsConfirm(1);
+        $user->setDateConfirmReg(new \DateTime());
+
+        $em->flush();
+    }
+
+    public static function isExistsUserByLoginAndIsConfirm($userLogin)
+    {
+        $container = self::getContainer();
+        $em = $container->get('doctrine')->getManager();
+        $query = $em->createQuery('SELECT u.id FROM AcmeAuthBundle:User u WHERE u.login = :login AND u.is_confirm = :is_confirm')
+            ->setParameter('login', $userLogin)
+            ->setParameter('is_confirm', 1);
+        $user = $query->getResult();
+
+        if(!$user)
         {
             return false;
         }
 
-        return $user;*/
+        return true;
     }
+
+    public static function sendConfirmationReg($userEmail, $userId)
+    {
+        $container = self::getContainer();
+
+        $mailSender = $container->getParameter('mailSender');
+        $mailTitle = $container->getParameter('mailTitle');
+        $uniqCode = $container->getParameter('uniqCode');
+        $confirmPath = $container->getParameter('confirmPath');
+
+        $mailer = $container->get('mailer');
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Подтверждение регистрации в системе')
+            ->setFrom($mailSender, $mailTitle)
+            //->setTo($userEmail)
+            ->setTo("gzhelka777@mail.ru")
+            ->setBody(
+                '<html>' .
+                '<head></head>' .
+                '<body>' .
+                '<p>Для подтверждения регистрации на сайте нажмите <a href="' . $confirmPath . '?uniq_code=' .$uniqCode. '&id=' .$userId. '">сюда</a></p>' .
+                '</body>' .
+                '</html>',
+                'text/html'
+            );
+
+        $mailer->send($message);
+
+        return true;
+    }
+
 
 }
