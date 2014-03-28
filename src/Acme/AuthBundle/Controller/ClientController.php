@@ -85,7 +85,7 @@ class ClientController extends Controller
                        // ->findOneBy(array('login' => $userLogin, 'password' => $userPassword))
                           ->findOneByLogin($userLogin);*/
 
-                    $user = Helper::isExistsUserByLogin($userLogin);
+                    $user = Helper::isExistsUserByLoginAndIsConfirm($userLogin);
 
                     if (!$user)
                     {
@@ -239,7 +239,11 @@ class ClientController extends Controller
                         $em->persist($user);
                         $em->flush();
 
-                        return $this->redirect($this->generateUrl('client_index'));
+                        $userId = $user->getId();
+
+                        Helper::sendConfirmationReg($userEmail, $userId);
+
+                        //return $this->redirect($this->generateUrl('client_index'));
                     }
                     else
                     {
@@ -429,7 +433,7 @@ class ClientController extends Controller
         $userId = $request->get('id');
         $hashCode = htmlspecialchars(rawurldecode($hashCode));
 
-        print_r($hashCode);
+        //print_r($hashCode);
 
         $isCorrectUrl = Helper::isCorrectConfirmUrl($this->container, $uniqCode, $hashCode, $userId);
 
@@ -441,16 +445,16 @@ class ClientController extends Controller
             {
                 Helper::updateUserAfterConfirmRecovery($userId, $hashCode);
 
-                return array('msgError' => 'Активировано!');
+                return array('msgError' => 'Активировано!', 'viewLink' => true);
             }
             else
             {
-                return array('msgError' => 'Ошибка2!');
+                return array('msgError' => 'Ошибка!', 'viewLink' => false);
             }
         }
         else
         {
-            return array('msgError' => 'Ошибка1!');
+            return array('msgError' => 'Ошибка!', 'viewLink' => false);
         }
     }
 

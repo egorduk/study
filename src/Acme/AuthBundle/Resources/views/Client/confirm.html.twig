@@ -9,6 +9,9 @@
         <div class="row">
             <div class="span2 centred">
                 {{ msgError }}
+                {% if viewLink %}
+                    <p>Теперь вы можете <a href="{{ path('client_index') }}">зайти</a> в систему</p>
+                {% endif %}
             </div>
         </div>
     </div>

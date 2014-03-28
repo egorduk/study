@@ -257,5 +257,65 @@ class Helper
         $em->flush();
     }
 
+    public static function updateUserAfterConfirmReg($userId)
+    {
+        $container = self::getContainer();
+        $em = $container->get('doctrine')->getManager();
+        $user = $em->getRepository(self::$_tableUser)
+            ->findOneById($userId);
+
+        $user->setIsConfirm(1);
+        $user->setDateConfirmReg(new \DateTime());
+
+        $em->flush();
+    }
+
+    public static function isExistsUserByLoginAndIsConfirm($userLogin)
+    {
+        $container = self::getContainer();
+        $em = $container->get('doctrine')->getManager();
+        $query = $em->createQuery('SELECT u.id FROM AcmeAuthBundle:User u WHERE u.login = :login AND u.is_confirm = :is_confirm')
+            ->setParameter('login', $userLogin)
+            ->setParameter('is_confirm', 1);
+        $user = $query->getResult();
+
+        if(!$user)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static function sendConfirmationReg($userEmail, $userId)
+    {
+        $container = self::getContainer();
+
+        $mailSender = $container->getParameter('mailSender');
+        $mailTitle = $container->getParameter('mailTitle');
+        $uniqCode = $container->getParameter('uniqCode');
+        $confirmPath = $container->getParameter('confirmPath');
+
+        $mailer = $container->get('mailer');
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Подтверждение регистрации в системе')
+            ->setFrom($mailSender, $mailTitle)
+            //->setTo($userEmail)
+            ->setTo("gzhelka777@mail.ru")
+            ->setBody(
+                '<html>' .
+                '<head></head>' .
+                '<body>' .
+                '<p>Для подтверждения регистрации на сайте нажмите <a href="' . $confirmPath . '?uniq_code=' .$uniqCode. '&id=' .$userId. '">сюда</a></p>' .
+                '</body>' .
+                '</html>',
+                'text/html'
+            );
+
+        $mailer->send($message);
+
+        return true;
+    }
+
 
 }
