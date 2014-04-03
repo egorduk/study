@@ -174,8 +174,6 @@ class Helper
         $mailTitle = $container->getParameter('mailTitle');
         $uniqCode = $container->getParameter('uniqCode');
         $confirmPath = $container->getParameter('confirmPath');
-        //$encodePassword = str_replace('W', 'A', $encodePassword);
-        //$encodePassword = str_replace('Q', 'E', $encodePassword);
         $encodePassword = htmlspecialchars(rawurlencode($encodePassword));
 
         $mailer = $container->get('mailer');
@@ -213,16 +211,11 @@ class Helper
         return $user;
     }
 
-    public static function isCorrectConfirmUrl($container, $uniqCode, $hashCode, $userId)
+    public static function isCorrectConfirmUrl($hashCode, $userId, $type)
     {
-        if (isset($uniqCode) && isset($hashCode) && isset($userId) && (iconv_strlen($uniqCode) == 17) && !empty($hashCode) && !empty($userId) && is_numeric($userId) && ($userId > 0))
+        if (isset($hashCode) && isset($userId) && ($type == "reg" || $type == "rec") && (iconv_strlen($hashCode) == 24) && !empty($hashCode) && !empty($userId) && is_numeric($userId) && ($userId > 0))
         {
-            $realUniqCode = $container->getParameter('uniqCode');
-
-            if(StringUtils::equals($realUniqCode, $uniqCode))
-            {
-                return true;
-            }
+            return true;
         }
 
         return false;
@@ -257,17 +250,28 @@ class Helper
         $em->flush();
     }
 
-    public static function updateUserAfterConfirmReg($userId)
+    public static function updateUserAfterConfirmReg($userId, $hashCode)
     {
         $container = self::getContainer();
+
         $em = $container->get('doctrine')->getManager();
         $user = $em->getRepository(self::$_tableUser)
-            ->findOneById($userId);
+            ->findOneBy(array('id' => $userId, 'hash_code' => $hashCode));
 
-        $user->setIsConfirm(1);
-        $user->setDateConfirmReg(new \DateTime());
+        if (!$user)
+        {
+            return false;
+        }
+        else
+        {
+            $user->setIsConfirm(1);
+            $user->setDateConfirmReg(new \DateTime());
+            $user->setHash('');
 
-        $em->flush();
+            $em->flush();
+
+            return true;
+        }
     }
 
     public static function isExistsUserByLoginAndIsConfirm($userLogin)
@@ -287,34 +291,29 @@ class Helper
         return true;
     }
 
-    public static function sendConfirmationReg($userEmail, $userId)
+    public static function sendConfirmationReg($container, $userEmail, $userId, $hash)
     {
-        $container = self::getContainer();
-
         $mailSender = $container->getParameter('mailSender');
         $mailTitle = $container->getParameter('mailTitle');
-        $uniqCode = $container->getParameter('uniqCode');
         $confirmPath = $container->getParameter('confirmPath');
 
         $mailer = $container->get('mailer');
         $message = \Swift_Message::newInstance()
             ->setSubject('Подтверждение регистрации в системе')
             ->setFrom($mailSender, $mailTitle)
-            //->setTo($userEmail)
-            ->setTo("gzhelka777@mail.ru")
+            ->setTo($userEmail)
+            //->setTo("gzhelka777@mail.ru")
             ->setBody(
                 '<html>' .
                 '<head></head>' .
                 '<body>' .
-                '<p>Для подтверждения регистрации на сайте нажмите <a href="' . $confirmPath . '?uniq_code=' .$uniqCode. '&id=' .$userId. '">сюда</a></p>' .
+                '<p>Для подтверждения регистрации на сайте нажмите <a href="' . $confirmPath . '?hash_code=' . $hash . '&type=reg&id=' .$userId. '">сюда</a></p>' .
                 '</body>' .
                 '</html>',
                 'text/html'
             );
 
         $mailer->send($message);
-
-        return true;
     }
 
 

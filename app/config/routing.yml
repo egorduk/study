@@ -13,6 +13,18 @@ client_reg:
   pattern:   /client/reg
   defaults:  { _controller: AcmeAuthBundle:Client:reg }
 
+client_success_reg:
+  pattern:   /reg/success
+  defaults:  { _controller: AcmeAuthBundle:Client:successreg }
+
+client_success_rec:
+  pattern:   /recovery/success
+  defaults:  { _controller: AcmeAuthBundle:Client:successrec }
+
+client_confirm_success:
+  pattern:   /confirm/success/{type}
+  defaults:  { _controller: AcmeAuthBundle:Client:successconfirm }
+
 client_index:
   pattern:   /client/index
   defaults:  { _controller: AcmeAuthBundle:Client:index }
@@ -44,7 +56,6 @@ secure_client_settings:
 client_confirm_password:
   pattern:   /client/confirm
   defaults:  { _controller: AcmeAuthBundle:Client:confirm }
-
 
 
 #------------------Author------------------------#
