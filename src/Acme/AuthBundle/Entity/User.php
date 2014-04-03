@@ -69,6 +69,11 @@ class User extends EntityRepository implements UserInterface, \Serializable
     protected $salt;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    protected $hash_code;
+
+    /**
      * @ORM\Column(type="integer")
      */
     protected $is_active;
@@ -116,6 +121,16 @@ class User extends EntityRepository implements UserInterface, \Serializable
     public function getIpReg()
     {
         return $this->ip_reg;
+    }
+
+    public function getHash()
+    {
+        return $this->hash_code;
+    }
+
+    public function setHash($hash)
+    {
+        $this->hash_code = $hash;
     }
 
     public function getSalt()
@@ -196,6 +211,16 @@ class User extends EntityRepository implements UserInterface, \Serializable
     public function getDateReg()
     {
         return $this->date_reg;
+    }
+
+    public function setDateConfirmReg($dateReg)
+    {
+        $this->date_confirm_reg = $dateReg;
+    }
+
+    public function getDateConfirmReg()
+    {
+        return $this->date_confirm_reg;
     }
 
     public function getRoles()
