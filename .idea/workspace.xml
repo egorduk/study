@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="aeb714aa-03a9-4af9-a685-afd493e118d8" name="Default" comment="24-03-3&#10;" />
+=======
+<<<<<<< HEAD
+    <list default="true" id="8afd0a94-95b4-4a96-ada0-8cfaf8ccf8b0" name="Default" comment="" />
+    <list id="09bdd184-ad02-4762-8397-2c72ed3a09aa" name="New changelist" comment="" />
+=======
+    <list default="true" id="aeb714aa-03a9-4af9-a685-afd493e118d8" name="Default" comment="24-03-3&#10;">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Helper/Helper.php" afterPath="$PROJECT_DIR$/src/Helper/Helper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php" />
+    </list>
+>>>>>>> 7b5f36f6f2057977b0e20bb3d0c498bd5a02fd82
     <list id="ee24dc55-43c1-4676-b406-0ccc3fb4cb0c" name="New changelist" comment="" />
+>>>>>>> cf0bdde430825e91d9e9e024c2bcfc147af5d111
     <ignored path="study.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -77,8 +89,19 @@
       <file leaf-file-name="User.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state line="299" column="48" selection-start="9400" selection-end="9400" vertical-scroll-proportion="0.41348973" vertical-offset="6296" max-vertical-offset="7194">
+              <folding>
+                <element signature="e#26#58#0" expanded="true" />
+                <marker date="1395962005875" expanded="true" signature="2205:2266" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1395962005875" expanded="true" signature="2644:2699" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1395962005875" expanded="true" signature="3078:3139" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1395962005875" expanded="true" signature="8624:8716" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+              </folding>
+=======
             <state line="262" column="44" selection-start="4807" selection-end="4807" vertical-scroll-proportion="0.0" vertical-offset="5240" max-vertical-offset="6020">
               <folding />
+>>>>>>> cf0bdde430825e91d9e9e024c2bcfc147af5d111
             </state>
           </provider>
         </entry>
@@ -1034,8 +1057,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state line="203" column="20" selection-start="7300" selection-end="7300" vertical-scroll-proportion="-0.36756125" vertical-offset="3735" max-vertical-offset="8740">
           <folding />
+=======
+<<<<<<< HEAD
+        <state line="299" column="48" selection-start="9400" selection-end="9400" vertical-scroll-proportion="0.41348973" vertical-offset="6296" max-vertical-offset="7194">
+=======
+        <state line="328" column="0" selection-start="12568" selection-end="12568" vertical-scroll-proportion="0.25670946" vertical-offset="6340" max-vertical-offset="9380">
+>>>>>>> cf0bdde430825e91d9e9e024c2bcfc147af5d111
+          <folding>
+            <element signature="e#46#80#0" expanded="true" />
+          </folding>
+>>>>>>> 7b5f36f6f2057977b0e20bb3d0c498bd5a02fd82
         </state>
       </provider>
     </entry>
