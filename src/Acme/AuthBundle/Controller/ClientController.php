@@ -234,6 +234,8 @@ class ClientController extends Controller
                         $password = Helper::getRegPassword($userPassword, $salt);
                         $user->setPassword($password);
                         $user->setSalt($salt);
+                        $hashCode = Helper::getRandomValue(15);
+                        $user->setHash($hashCode);
 
                         $em = $this->getDoctrine()->getManager();
                         $em->persist($user);
@@ -241,9 +243,9 @@ class ClientController extends Controller
 
                         $userId = $user->getId();
 
-                        Helper::sendConfirmationReg($userEmail, $userId);
+                        Helper::sendConfirmationReg($this->container, $userEmail, $userId, $hashCode);
 
-                        //return $this->redirect($this->generateUrl('client_index'));
+                        //return $this->redirect($this->generateUrl('client_success_reg'));
                     }
                     else
                     {
@@ -380,8 +382,6 @@ class ClientController extends Controller
      */
     public function recoveryAction(Request $request)
     {
-        //phpinfo();
-
         $formRecovery = $this->createForm(new RecoveryForm());
         $clonedFormRecovery = clone $formRecovery;
         $formRecovery->handleRequest($request);
@@ -402,8 +402,16 @@ class ClientController extends Controller
                         $userSalt = $user->getSalt();
                         $unencodePassword = Helper::getRandomValue(3);
                         $encodePassword = Helper::getRegPassword($unencodePassword, $userSalt);
+                        $hashCode = Helper::getRandomValue(15);
 
-                        Helper::sendRecoveryPasswordMail($this->container, $userEmail, $userId, $unencodePassword, $encodePassword);
+                        $user->setHash($hashCode);
+                        $user->setRecoveryPassword($encodePassword);
+
+                        $em = $this->getDoctrine()->getManager();
+                        $em->merge($user);
+                        $em->flush();
+
+                        Helper::sendRecoveryPasswordMail($this->container, $userEmail, $userId, $unencodePassword, $hashCode);
 
                         return array('formRecovery' => $clonedFormRecovery->createView(), 'msgSuccess' => 'Проверьте почту!');
                     }
@@ -423,34 +431,57 @@ class ClientController extends Controller
     }
 
     /**
+     * Confirm register and recovery password by Email
+     *
      * @Template()
      * @return array
      */
     public function confirmAction(Request $request)
     {
-        $uniqCode = $request->get('uniq_code');
         $hashCode = $request->get('hash_code');
         $userId = $request->get('id');
-        $hashCode = htmlspecialchars(rawurldecode($hashCode));
+        $type = $request->get('type');
 
-        //print_r($hashCode);
-
-        $isCorrectUrl = Helper::isCorrectConfirmUrl($this->container, $uniqCode, $hashCode, $userId);
+        $isCorrectUrl = Helper::isCorrectConfirmUrl($hashCode, $userId, $type);
 
         if ($isCorrectUrl)
         {
-            $isExistsUser = Helper::isExistsUserById($userId);
+                if ($type == "reg")
+                {
+                    $isExistsUser = Helper::isExistsUserByHashAndByIdAndConfirm($userId, $hashCode, 0);
 
-            if ($isExistsUser)
-            {
-                Helper::updateUserAfterConfirmRecovery($userId, $hashCode);
+                    if ($isExistsUser)
+                    {
+                        $isSuccess = Helper::updateUserAfterConfirmByMail($userId, $hashCode, $type);
 
-                return array('msgError' => 'Активировано!', 'viewLink' => true);
-            }
-            else
-            {
-                return array('msgError' => 'Ошибка!', 'viewLink' => false);
-            }
+                        if ($isSuccess)
+                        {
+                            return array('msgError' => 'Аккаунт активирован!', 'viewLink' => true);
+                        }
+                    }
+
+                    return array('msgError' => 'Ошибка подтверждения регистрации!', 'viewLink' => false);
+                }
+                elseif ($type == "rec")
+                {
+                    $isExistsUser = Helper::isExistsUserByHashAndByIdAndConfirm($userId, $hashCode, 1);
+
+                    if ($isExistsUser)
+                    {
+                        $isSuccess = Helper::updateUserAfterConfirmByMail($userId, $hashCode, $type);
+
+                        if ($isSuccess)
+                        {
+                            return array('msgError' => 'Новый пароль активирован!', 'viewLink' => true);
+                        }
+                    }
+
+                    return array('msgError' => 'Ошибка смены пароля!', 'viewLink' => false);
+                }
+                else
+                {
+                    return array('msgError' => 'Ошибка!', 'viewLink' => false);
+                }
         }
         else
         {
