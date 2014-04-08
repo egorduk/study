@@ -114,6 +114,7 @@ class Helper
         return true;
     }
 
+
     public static function getContainer()
     {
         if(self::$kernel instanceof \AppKernel)
@@ -133,6 +134,7 @@ class Helper
         return self::$kernel->getContainer();
     }
 
+
     public static function getSalt()
     {
         $generator = new SecureRandom();
@@ -141,6 +143,7 @@ class Helper
         return $salt;
     }
 
+
     public static function getRandomValue($size)
     {
         $generator = new SecureRandom();
@@ -148,6 +151,7 @@ class Helper
 
         return $genValue;
     }
+
 
     public static function getRegPassword($userPassword, $salt)
     {
@@ -168,13 +172,12 @@ class Helper
         return $recoveryPassword;
     }*/
 
-    public static function sendRecoveryPasswordMail($container, $userEmail, $userId, $unencodePassword, $encodePassword)
+    public static function sendRecoveryPasswordMail($container, $userEmail, $userId, $unencodePassword, $hashCode)
     {
         $mailSender = $container->getParameter('mailSender');
         $mailTitle = $container->getParameter('mailTitle');
-        $uniqCode = $container->getParameter('uniqCode');
         $confirmPath = $container->getParameter('confirmPath');
-        $encodePassword = htmlspecialchars(rawurlencode($encodePassword));
+        //$encodePassword = htmlspecialchars(rawurlencode($encodePassword));
 
         $mailer = $container->get('mailer');
         $message = \Swift_Message::newInstance()
@@ -186,7 +189,7 @@ class Helper
                     '<head></head>' .
                     '<body>' .
                         '<p>Ваш новый пароль для входа ' . $unencodePassword . '</p>' .
-                        '<p>Для подтверждения смены пароля нажмите <a href="' . $confirmPath . '?uniq_code=' .$uniqCode. '&hash_code=' . $encodePassword . '&id=' .$userId. '">сюда</a></p>' .
+                        '<p>Для подтверждения смены пароля нажмите <a href="' . $confirmPath . '?type=rec&hash_code=' . $hashCode . '&id=' .$userId. '">сюда</a></p>' .
                     '</body>' .
                 '</html>',
                 'text/html'
@@ -196,6 +199,7 @@ class Helper
 
         return true;
     }
+
 
     public static function getUserByEmail($userEmail)
     {
@@ -211,15 +215,17 @@ class Helper
         return $user;
     }
 
+
     public static function isCorrectConfirmUrl($hashCode, $userId, $type)
     {
-        if (isset($hashCode) && isset($userId) && ($type == "reg" || $type == "rec") && (iconv_strlen($hashCode) == 24) && !empty($hashCode) && !empty($userId) && is_numeric($userId) && ($userId > 0))
+        if (isset($hashCode) && isset($userId) && ($type == "reg" || $type == "rec") && (iconv_strlen($hashCode) == 30) && !empty($hashCode) && !empty($userId) && is_numeric($userId) && ($userId > 0))
         {
             return true;
         }
 
         return false;
     }
+
 
     public static function getUserById($userId)
     {
@@ -236,9 +242,11 @@ class Helper
         return $user;
     }
 
-    public static function updateUserAfterConfirmRecovery($userId, $password)
+
+    /*public static function updateUserAfterConfirmRecovery($userId, $hashCode)
     {
         $container = self::getContainer();
+
         $em = $container->get('doctrine')->getManager();
         $user = $em->getRepository(self::$_tableUser)
             ->findOneById($userId);
@@ -248,9 +256,10 @@ class Helper
         $user->setDateConfirmRecovery(new \DateTime());
 
         $em->flush();
-    }
+    }*/
 
-    public static function updateUserAfterConfirmReg($userId, $hashCode)
+
+    public static function updateUserAfterConfirmByMail($userId, $hashCode, $type)
     {
         $container = self::getContainer();
 
@@ -264,15 +273,28 @@ class Helper
         }
         else
         {
-            $user->setIsConfirm(1);
-            $user->setDateConfirmReg(new \DateTime());
-            $user->setHash('');
+            if ($type == "reg")
+            {
+                $user->setPassword($hashCode);
+                $user->setIsConfirm(1);
+                $user->setDateConfirmReg(new \DateTime());
+                $user->setHash('');
+            }
+            elseif ($type == "rec")
+            {
+                $encodePassword = $user->getRecoveryPassword();
+                $user->setPassword($encodePassword);
+                $user->setDateConfirmRecovery(new \DateTime());
+                $user->setHash('');
+                $user->setRecoveryPassword('');
+            }
 
             $em->flush();
 
             return true;
         }
     }
+
 
     public static function isExistsUserByLoginAndIsConfirm($userLogin)
     {
@@ -290,6 +312,26 @@ class Helper
 
         return true;
     }
+
+
+    public static function isExistsUserByHashAndByIdAndConfirm($userId, $hashCode, $isConfirm)
+    {
+        $container = self::getContainer();
+        $em = $container->get('doctrine')->getManager();
+        $query = $em->createQuery('SELECT u.id FROM AcmeAuthBundle:User u WHERE u.id = :id AND u.is_confirm = :is_confirm AND u.hash_code = :hash_code')
+            ->setParameter('id', $userId)
+            ->setParameter('is_confirm', $isConfirm)
+            ->setParameter('hash_code', $hashCode);
+        $user = $query->getResult();
+
+        if(!$user)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
 
     public static function sendConfirmationReg($container, $userEmail, $userId, $hash)
     {

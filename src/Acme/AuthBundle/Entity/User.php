@@ -74,6 +74,11 @@ class User extends EntityRepository implements UserInterface, \Serializable
     protected $hash_code;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    protected $recovery_password;
+
+    /**
      * @ORM\Column(type="integer")
      */
     protected $is_active;
@@ -99,9 +104,14 @@ class User extends EntityRepository implements UserInterface, \Serializable
         $this->date_reg = new \DateTime();
         $this->is_active = 0;
         $this->ip_reg = ip2long($_SERVER['REMOTE_ADDR']);
-        //$this->openid_id = 1;
+        $this->openid_id = 0;
         $this->role_id = 2;
         $this->is_confirm = 0;
+        $this->recovery_password = '';
+        //$this->hash_code = '';
+        //$this->date_confirm_recovery = 'NULL';
+        //$this->date_confirm_reg = 'NULL';
+        //$this->fio = '';
     }
 
     public function getId()
@@ -141,6 +151,16 @@ class User extends EntityRepository implements UserInterface, \Serializable
     public function setSalt($value)
     {
         $this->salt = $value;
+    }
+
+    public function setRecoveryPassword($password)
+    {
+        $this->recovery_password = $password;
+    }
+
+    public function getRecoveryPassword()
+    {
+        return $this->recovery_password;
     }
 
     public function getOpenId()
