@@ -3,43 +3,51 @@ index:
   defaults:  { _controller: AcmeIndexBundle:Index:index }
 
 
-#------------------Client------------------------#
+#------------------------------------------------Client----------------------------------------------------#
+
+##--------------------AuthBundle-----------------------##
 
 client_login:
   pattern:   /client/login
-  defaults:  { _controller: AcmeAuthBundle:Client:login }
+  defaults:  { _controller: AcmeAuthBundle:Auth:login }
 
 client_reg:
-  pattern:   /client/reg
-  defaults:  { _controller: AcmeAuthBundle:Client:reg }
+  pattern:   /{type}/reg
+  defaults:  { _controller: AcmeAuthBundle:Auth:reg }
 
 client_success_reg:
   pattern:   /reg/success
-  defaults:  { _controller: AcmeAuthBundle:Client:successreg }
+  defaults:  { _controller: AcmeAuthBundle:Auth:successreg }
 
 client_success_rec:
   pattern:   /recovery/success
-  defaults:  { _controller: AcmeAuthBundle:Client:successrec }
+  defaults:  { _controller: AcmeAuthBundle:Auth:successrec }
 
 client_confirm_success:
   pattern:   /confirm/success/{type}
-  defaults:  { _controller: AcmeAuthBundle:Client:successconfirm }
+  defaults:  { _controller: AcmeAuthBundle:Auth:successconfirm }
 
 client_index:
   pattern:   /client/index
-  defaults:  { _controller: AcmeAuthBundle:Client:index }
+  defaults:  { _controller: AcmeAuthBundle:Auth:index }
 
 client_rules:
-  pattern:   /client/rules
-  defaults:  { _controller: AcmeAuthBundle:Client:rules }
+  pattern:   /{type}/rules
+  defaults:  { _controller: AcmeAuthBundle:Index:rules }
 
 client_recovery_password:
   pattern:   /client/recovery
-  defaults:  { _controller: AcmeAuthBundle:Client:recovery }
+  defaults:  { _controller: AcmeAuthBundle:Auth:recovery }
 
 client_openid_auth:
   pattern:   /client/auth/openid
-  defaults:  { _controller: AcmeAuthBundle:Client:openid }
+  defaults:  { _controller: AcmeAuthBundle:Auth:openid }
+
+client_confirm_password:
+  pattern:   /client/confirm
+  defaults:  { _controller: AcmeAuthBundle:Auth:confirm }
+
+##--------------------SecureBundle-----------------------##
 
 secure_client_index:
   pattern:   /secure/client/index
@@ -53,19 +61,17 @@ secure_client_settings:
   pattern:   /secure/client/settings
   defaults:  { _controller: AcmeSecureBundle:Client:settings }
 
-client_confirm_password:
-  pattern:   /client/confirm
-  defaults:  { _controller: AcmeAuthBundle:Client:confirm }
 
 
-#------------------Author------------------------#
+
+#--------------------------------------------------Author--------------------------------------------#
 
 author_login:
   pattern:   /author/login
-  defaults:  { _controller: AcmeAuthBundle:Author:login }
+  defaults:  { _controller: AcmeAuthBundle:Auth:login }
 
 author_reg:
-  pattern:   /author/reg
+  pattern:   /{type}/reg
   defaults:  { _controller: AcmeAuthBundle:Author:reg }
 
 author_rules:
@@ -77,11 +83,11 @@ author_rules:
 unauthorized:
   pattern:  /unauthorized
   #defaults: { _controller: AcmeSecureBundle:Client:unauthorized }
-  defaults: { _controller: AcmeAuthBundle:Client:unauthorized }
+  defaults: { _controller: AcmeAuthBundle:Auth:unauthorized }
 
 logout:
   pattern:  /logout
-  defaults: { _controller: AcmeAuthBundle:Client:logout }
+  defaults: { _controller: AcmeAuthBundle:Auth:logout }
 
 #----------------------------------------------#
 

@@ -35,16 +35,13 @@ img {
 }
 .header {
     padding: 30px 30px 20px 30px;
-
 }
 .header-logo {
     float: left;
-    display: none;
 }
 .search {
     float: right;
     padding-top: 20px;
-    display: none;
 }
 .search label {
     line-height: 28px;
