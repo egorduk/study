@@ -16,7 +16,7 @@ class Helper
 {
     private static $_container;
     private static $_ymFile;
-    private static $_tableUser = 'AcmeAuthBundle:User';
+    //private static $_tableUser = 'AcmeEntity:User';
     private static $kernel;
 
     public function __construct()
@@ -243,22 +243,6 @@ class Helper
     }
 
 
-    /*public static function updateUserAfterConfirmRecovery($userId, $hashCode)
-    {
-        $container = self::getContainer();
-
-        $em = $container->get('doctrine')->getManager();
-        $user = $em->getRepository(self::$_tableUser)
-            ->findOneById($userId);
-
-        $user->setPassword($password);
-        $user->setIsConfirm(1);
-        $user->setDateConfirmRecovery(new \DateTime());
-
-        $em->flush();
-    }*/
-
-
     public static function updateUserAfterConfirmByMail($userId, $hashCode, $type)
     {
         $container = self::getContainer();
@@ -357,6 +341,5 @@ class Helper
 
         $mailer->send($message);
     }
-
 
 }

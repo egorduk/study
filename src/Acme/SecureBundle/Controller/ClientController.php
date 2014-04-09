@@ -29,7 +29,7 @@ use Helper\Helper;
 
 class ClientController extends Controller
 {
-    private $tableUser = 'AcmeSecureBundle:User';
+    //private $tableUser = 'AcmeSecureBundle:User';
 
     /**
      * @Template()

@@ -9,7 +9,11 @@ Acme\AuthBundle\Entity\ClientFormValidate:
         fieldEmail:
           - Email: { message: "Указана неверная почта!", checkMX: true }
 
-
+#Acme\AuthBundle\Entity\AuthorFormValidate:
+#    properties:
+#        fieldMobileTel:
+#          - Length: { min: 7, minMessage: "Слишком короткий номер!" }
+#          - Regex: { pattern: "/^((8|\+7|\+375)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,14}$/", message: "Только цифры!" }
 
 
 

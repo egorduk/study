@@ -45,10 +45,6 @@ framework:
 services:
     cache:
         class: Doctrine\Common\Cache\ApcCache
-    #kernel.listener.access_denied.handler:
-    #    class: Acme\AuthBundle\Service\LoginEntryPoint
-    #        tags:
-    #            - { name: kernel.event_listener, event: security.kernel_response, method: handle}
 
 # Twig Configuration
 twig:
@@ -61,7 +57,6 @@ assetic:
     debug:          "%kernel.debug%"
     use_controller: true
     bundles:
-       #-  AcmeRssBundle
        -  AcmeIndexBundle
        -  AcmeAuthBundle
        -  AcmeSecureBundle
@@ -93,6 +88,8 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
+        #mappings:
+        #    AcmeAuthBundle: ~
         #metadata_cache_driver: apc
         #result_cache_driver: apc
         #query_cache_driver: apc

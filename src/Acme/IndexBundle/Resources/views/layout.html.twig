@@ -2,12 +2,12 @@
 
 {% block head %}
     <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
-    {% stylesheets '@AcmeRssBundle/Resources/public/css/*'  %}
+    {% stylesheets '@AcmeAuthBundle/Resources/public/css/*'  %}
         <link type="text/css" rel="stylesheet" media="all" href="{{ asset_url }}" />
     {% endstylesheets %}
     {% block javascripts %}
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-        {% javascripts '@AcmeRssBundle/Resources/public/js/*'  %}
+        {% javascripts '@AcmeAuthBundle/Resources/public/js/*'  %}
             <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
     {% endblock %}
