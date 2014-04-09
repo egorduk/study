@@ -33,7 +33,7 @@ security:
                 #provider: in_memory
             logout:
                 path:   /logout
-                target: client_index
+                target: login
                 #invalidate_session: true
             #security: true
             #form_login:
@@ -59,11 +59,11 @@ security:
 
     providers:
            user_db:
-                entity: { class: Acme\AuthBundle\Entity\User, property: login }
-           in_memory:
-              memory:
-                  users:
-                    foo: { password: test }
+                entity: { class: Acme\AuthBundle\Entity\User, property: email }
+           #in_memory:
+           #   memory:
+           #       users:
+           #         foo: { password: test }
 
     role_hierarchy:
         #ROLE_ADMIN: ROLE_ADMIN

@@ -3,11 +3,11 @@ imports:
     - { resource: security.yml }
 
 framework:
-    validation:
-        enabled: true
-        enable_annotations: true
-        cache: ~
-        translation_domain: validators
+    #validation:
+    #    enabled: true
+    #    enable_annotations: true
+    #    cache: ~
+    #    translation_domain: validators
     #esi:             ~
     #translator:      { fallback: "%locale%" }
     secret:          "%secret%"
@@ -29,7 +29,7 @@ framework:
     #charset:  UTF-8
     session:
         cookie_lifetime: 3600 #crsf msg view then more low
-        gc_maxlifetime: 60
+        gc_maxlifetime: 3600
         storage_id: session.storage.native
         handler_id: session.handler.native_file
         save_path: "%kernel.cache_dir%/sessions"

@@ -16,7 +16,7 @@ class Helper
 {
     private static $_container;
     private static $_ymFile;
-    //private static $_tableUser = 'AcmeEntity:User';
+    private static $_tableUser = 'AcmeAuthBundle:User';
     private static $kernel;
 
     public function __construct()
@@ -51,11 +51,18 @@ class Helper
         return date($format, $timestamp);
     }
 
-    public static function getUserByLogin($userLogin)
+    public static function getUserByEmailAndIsConfirm($userEmail)
     {
-        $container = self::getContainer();
-        $user = $container->get('doctrine')->getRepository(self::$_tableUser)
-            ->findOneByLogin($userLogin);
+        $user = self::getContainer()->get('doctrine')->getRepository(self::$_tableUser)
+            ->findOneByEmail($userEmail);
+
+       /*$em = self::getContainer()->get('doctrine')->getManager();
+        $query = $em->createQuery('SELECT u.id, u.role_id, u.login, u.salt, u.password
+            FROM AcmeAuthBundle:User u
+            WHERE u.email = :email AND u.is_confirm = 1')
+            ->setParameter('email', $userEmail);
+            //->setParameter('is_confirm', 1);
+        $user = $query->getResult();*/
 
         if(!$user)
         {
@@ -280,12 +287,12 @@ class Helper
     }
 
 
-    public static function isExistsUserByLoginAndIsConfirm($userLogin)
+    public static function isExistsUserByEmailAndIsConfirm($userEmail)
     {
         $container = self::getContainer();
         $em = $container->get('doctrine')->getManager();
-        $query = $em->createQuery('SELECT u.id FROM AcmeAuthBundle:User u WHERE u.login = :login AND u.is_confirm = :is_confirm')
-            ->setParameter('login', $userLogin)
+        $query = $em->createQuery('SELECT u.id FROM AcmeAuthBundle:User u WHERE u.email = :email AND u.is_confirm = :is_confirm')
+            ->setParameter('email', $userEmail)
             ->setParameter('is_confirm', 1);
         $user = $query->getResult();
 

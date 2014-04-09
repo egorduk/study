@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\AuthBundle\Form\Client;
+namespace Acme\AuthBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -11,8 +11,8 @@ class LoginForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('fieldLogin', 'text', array('label'=>'Логин:', 'required' => true, 'attr' => array('size' => 20, 'maxlength' => 12, 'placeholder' => 'Введите логин...')))
-                ->add('fieldPass', 'password', array('label'=>'Пароль:', 'required' => true, 'attr' => array('size' => 20, 'maxlength' => 12, 'placeholder' => 'Введите пароль...')))
+        $builder->add('fieldEmail', 'text', array('label'=>'Email:', 'required' => true, 'attr' => array('size' => 20, 'maxlength' => 25, 'placeholder' => 'Введите Email...')))
+                ->add('fieldPass', 'password', array('label'=>'Пароль:', 'required' => true, 'attr' => array('size' => 20, 'maxlength' => 10, 'placeholder' => 'Введите пароль...')))
                 ->add('enter', 'submit', array('label'=>'Войти', 'attr' => array('class' => 'btn btn-success')));
     }
 
@@ -23,11 +23,11 @@ class LoginForm extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        /*$resolver->setDefaults(array(
             'data_class'      => 'Acme\AuthBundle\Entity\ClientFormValidate',
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
             'intention'       => 'task_item',
-        ));
+        ));*/
     }
 }

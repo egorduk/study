@@ -98,6 +98,13 @@ class User extends EntityRepository implements UserInterface, \Serializable
      */
     protected $is_confirm;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $user_info_id;
+
+
+
 
     public function __construct()
     {
@@ -105,9 +112,10 @@ class User extends EntityRepository implements UserInterface, \Serializable
         $this->is_active = 0;
         $this->ip_reg = ip2long($_SERVER['REMOTE_ADDR']);
         $this->openid_id = 0;
-        $this->role_id = 2;
+        //$this->role_id = 0;
         $this->is_confirm = 0;
         $this->recovery_password = '';
+        //$this->user_info_id = 0;
         //$this->hash_code = '';
         //$this->date_confirm_recovery = 'NULL';
         //$this->date_confirm_reg = 'NULL';
@@ -287,6 +295,12 @@ class User extends EntityRepository implements UserInterface, \Serializable
     {
         $this->date_confirm_recovery = $date;
     }
+
+    public function setUserInfoId($id)
+    {
+        $this->user_info_id = $id;
+    }
+
 
     /**
      * @see \Serializable::serialize()

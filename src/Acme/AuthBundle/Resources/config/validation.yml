@@ -1,4 +1,4 @@
-Acme\AuthBundle\Entity\ClientFormValidate:
+Acme\AuthBundle\Entity\ClientRegFormValidate:
     properties:
         fieldLogin:
           - Length: { min: 5, minMessage: "Слишком короткий логин!" }
@@ -7,13 +7,21 @@ Acme\AuthBundle\Entity\ClientFormValidate:
           - Length: { min: 5, minMessage: "Слишком короткий пароль!" }
           - Regex: { pattern: "/^[a-zA-Z0-9]+$/u", message: "Только латинские буквы и цифры!" }
         fieldEmail:
-          - Email: { message: "Указана неверная почта!", checkMX: true }
+          - Email: { message: "Указана неверная почта!", checkMX: false }
 
-#Acme\AuthBundle\Entity\AuthorFormValidate:
-#    properties:
-#        fieldMobileTel:
-#          - Length: { min: 7, minMessage: "Слишком короткий номер!" }
-#          - Regex: { pattern: "/^((8|\+7|\+375)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,14}$/", message: "Только цифры!" }
+Acme\AuthBundle\Entity\AuthorRegFormValidate:
+    properties:
+        fieldMobileTel:
+          - Length: { min: 7, minMessage: "Слишком короткий номер!" }
+          - Regex: { pattern: "/^((8|\+7|\+375)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,14}$/", message: "Некорректный номер!" }
+        fieldIcq:
+          - Length: { min: 6, minMessage: "Слишком короткий номер!" }
+          - Regex: { pattern: "/^[\d]+$/", message: "Только цифры!" }
 
-
-
+Acme\AuthBundle\Entity\LoginFormValidate:
+    properties:
+        fieldEmail:
+          - Email: { message: "Указана неверная почта!", checkMX: false }
+        fieldPass:
+          - Length: { min: 5, minMessage: "Слишком короткий пароль!" }
+          - Regex: { pattern: "/^[a-zA-Z0-9]+$/u", message: "Только латинские буквы и цифры!" }

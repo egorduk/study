@@ -22,6 +22,8 @@ class AuthorRegForm extends AbstractType
                 ->add('fieldPassApprove', 'password', array('label'=>'Подтвердите пароль:', 'required' => true, 'attr' => array('title' => 'Введите Ваш пароль еще раз', 'size' => 20, 'maxlength' => 12, 'placeholder' => 'Введите пароль...')))
                 ->add('fieldEmail', 'text', array('label'=>'Email:', 'required' => true, 'data' => $options['data']->fieldEmail, 'attr' => array('title' => 'Введите Ваш email', 'size' => 20, 'maxlength' => 25, 'placeholder' => 'Введите Email...')))
                 ->add('fieldMobileTel', 'text', array('label'=>'Мобильный телефон:', 'required' => true, 'data' => $options['data']->fieldMobileTel, 'attr' => array('title' => 'Введите номер Вашего мобильного телефона', 'size' => 22, 'maxlength' => 14, 'placeholder' => 'Введите номер...')))
+                ->add('fieldSkype', 'text', array('label'=>'Skype:', 'required' => false, 'data' => $options['data']->fieldSkype, 'attr' => array('title' => 'Введите Ваш Skype', 'size' => 22, 'maxlength' => 20, 'placeholder' => 'Введите Skype...')))
+                ->add('fieldIcq', 'text', array('label'=>'Icq:', 'required' => false, 'data' => $options['data']->fieldIcq, 'attr' => array('title' => 'Введите Ваш Icq', 'size' => 20, 'maxlength' => 10, 'placeholder' => 'Введите Icq...')))
                 ->add('checkAgreeRules', 'checkbox', array('label'=>' ', 'required' => true, 'attr' => array('title' => 'Если Вы согласны с правилами, то установите тут флажок', 'class' => '')))
                 ->add('reg', 'submit', array('label'=>'Регистрация', 'attr' => array('class' => 'btn btn-success')))
                 ->add('reset', 'reset', array('label'=>'Очистить', 'attr' => array('class' => 'btn btn-success')));

@@ -2,7 +2,7 @@
 
 namespace Acme\AuthBundle\Entity;
 
-class ClientFormValidate
+class ClientRegFormValidate
 {
     public $fieldLogin;
     public $fieldPass;
