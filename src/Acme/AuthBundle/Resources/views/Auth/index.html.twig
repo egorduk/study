@@ -2,20 +2,8 @@
     {% block content %}
         <div class="container">
             <div class="row">
-                {{ form_start(formLogin) }}
-                    {{ form_errors(formLogin) }}
-                        {{ form_row(formLogin.fieldLogin) }}
-                        {{ form_row(formLogin.fieldPass) }}
-                        {{ errorData }}
-                {{ form_end(formLogin) }}
-                <p><a href="{{ path('client_reg') }}">Зарегистрироваться</a></p>
-                <p>Войти с помощью:</p>
-                <div id="openID">
-                    <div id="uLogin" data-ulogin="display=panel;fields=first_name,nickname,email,photo,photo_big;
-				        providers=vkontakte,odnoklassniki,twitter,facebook,google;hidden=mailru,yandex;
-				        redirect_uri=http%3A%2F%2Flocalhost%2Fstudy%2Fweb%2Fapp_dev.php%2Fclient%2Findex"
-                    </div>
-                </div>
+                {{ test }}
+                <p><a href="{{ path('logout') }}">�����</a></p>
             </div>
         </div>
     {% endblock %}

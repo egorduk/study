@@ -1,6 +1,6 @@
 {% extends "AcmeAuthBundle::layout.html.twig" %}
 
-{% block title "Author registration" %}
+{% block title "Client registration" %}
 
 {% block content_header '' %}
 
@@ -18,13 +18,10 @@
                             </div>
                         {% endblock %}
                         {{ form_row(formReg.fieldEmail) }}
-                        {{ form_row(formReg.fieldMobileTel) }}
-                        {{ form_row(formReg.fieldSkype) }}
-                        {{ form_row(formReg.fieldIcq) }}
                         {% block form_label %}
                             {{ parent() }}
                             {% if(formReg.checkAgreeRules) %}
-                                <span class="required" title="Нажмите для прочтения правил"><a href="author_rules">Правила системы</a>&nbsp;прочитаны</span>
+                                <span class="required" title="Нажмите для прочтения правил"><a href="client_rules">Правила системы</a>&nbsp;прочитаны</span>
                                {{ form_widget(formReg.checkAgreeRules) }}
                             {% endif %}
                         {% endblock %}
@@ -37,29 +34,5 @@
                 {{ form_end(formReg) }}
             </div>
         </div>
-        <script>
-            $(document).ready(function() {
-                function format(state) {
-                if (!state.id){
-                    return state.text;
-                }
-;
-                return "<img class='flag' src='{{ asset('bundles/acmeauth/images/flags/') }}" + state.id.toLowerCase() + ".png'/>" /*+ state.text*/;
-            }
-            $("#e4").select2({
-                minimumResultsForSearch: -1,
-                formatResult: format,
-                formatSelection: format,
-                escapeMarkup: function(m) { return m; }
-            });
-            });
-        </script>
-        <select id="e4">
-            <option value="by">Беларусь</option>
-            <option value="ru">Россия</option>
-            <option value="uk">Украина</option>
-            <option value="kz">Казахстан</option>
-        </select>
-
     </div>
 {% endblock %}

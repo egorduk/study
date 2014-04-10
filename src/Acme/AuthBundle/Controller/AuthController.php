@@ -2,15 +2,17 @@
 
 namespace Acme\AuthBundle\Controller;
 
-use Acme\AuthBundle\Entity\Client;
+//use Acme\AuthBundle\Entity\Client;
 use Acme\AuthBundle\Entity\Country;
 use Acme\AuthBundle\Entity\Openid;
 use Acme\AuthBundle\Entity\User;
 use Acme\AuthBundle\Entity\Provider;
-use Acme\AuthBundle\Entity\ClientFormValidate;
-use Acme\AuthBundle\Entity\AuthorFormValidate;
-use Acme\AuthBundle\Form\Client\LoginForm;
-use Acme\AuthBundle\Form\Client\RecoveryForm;
+use Acme\AuthBundle\Entity\ClientRegFormValidate;
+use Acme\AuthBundle\Entity\AuthorRegFormValidate;
+use Acme\AuthBundle\Entity\LoginFormValidate;
+use Acme\AuthBundle\Form\LoginForm;
+use Acme\AuthBundle\Form\RecoveryForm;
+use Acme\AuthBundle\Entity\UserInfo;
 use Acme\AuthBundle\Form\ClientRegForm;
 use Acme\AuthBundle\Form\AuthorRegForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -48,6 +50,92 @@ class AuthController extends Controller
     private $tableCountry = 'AcmeAuthBundle:Country';
     private $tableProvider = 'AcmeAuthBundle:Provider';
 
+
+
+    /**
+     * @Template()
+     * @return Response
+     */
+    public function loginAction(Request $request)
+    {
+        $loginValidate = new LoginFormValidate();
+        $formLogin = $this->createForm(new LoginForm(), $loginValidate);
+        $formLogin->handleRequest($request);
+
+        $socialToken = $request->request->get('token');
+
+        if (isset($socialToken) && $socialToken != null)
+        {
+            $session = $request->getSession();
+            $session->set('socialToken', $socialToken);
+            $session->save();
+
+            return new RedirectResponse($this->generateUrl('openid_auth'));
+        }
+
+        if ($request->isMethod('POST'))
+        {
+            if ($formLogin->get('enter')->isClicked())
+            {
+                if ($formLogin->isValid())
+                {
+                    $postData = $request->request->get('formLogin');
+                    $userEmail = $postData['fieldEmail'];
+                    $userPassword = $postData['fieldPass'];
+
+                    $user = Helper::getUserByEmailAndIsConfirm($userEmail);
+
+                    if (!$user)
+                    {
+                        return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный Email или пароль!');
+                    }
+                    else
+                    {
+                        $encodedPassword = Helper::getRegPassword($userPassword, $user->getSalt());
+
+                        if (!StringUtils::equals($encodedPassword, $user->getPassword()))
+                        {
+                            return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный Email или пароль!');
+                        }
+                        else
+                        {
+                            $firewall = 'secured_area';
+                            $role = $user->getRole();
+
+                            if ($role == 1)
+                            {
+                                $role = 'ROLE_AUTHOR';
+                            }
+                            else
+                            {
+                                $role = 'ROLE_CLIENT';
+                            }
+
+                            $token = new UsernamePasswordToken($userEmail, null, $firewall, array($role));
+                            $this->get('security.context')->setToken($token);
+
+                            if ($role == 'ROLE_AUTHOR')
+                            {
+                                return new RedirectResponse($this->generateUrl('secure_author_index'));
+                            }
+                            else
+                            {
+                                return new RedirectResponse($this->generateUrl('secure_client_index'));
+                            }
+                        }
+                    }
+                }
+                /*else
+                {
+                    return array('formLogin' => $formLogin->createView(), 'errorData' => '');
+                }*/
+            }
+        }
+
+        return array('formLogin' => $formLogin->createView(), 'errorData' => '');
+    }
+
+
     /**
      * @Template()
      * @return Response
@@ -59,82 +147,6 @@ class AuthController extends Controller
             throw new AccessException();
         }*/
 
-        $client = new ClientFormValidate();
-        $formLogin = $this->createForm(new LoginForm(), $client);
-        $formLogin->handleRequest($request);
-
-        $socialToken = $request->request->get('token');
-
-        if (isset($socialToken) && $socialToken != null)
-        {
-            $session = $request->getSession();
-            $session->set('socialToken', $socialToken);
-            $session->save();
-
-            return new RedirectResponse($this->generateUrl('client_openid_auth'));
-        }
-
-        if ($request->isMethod('POST'))
-        {
-            if ($formLogin->get('enter')->isClicked())
-            {
-                if ($formLogin->isValid())
-                {
-                    $postData = $request->request->get('formLogin');
-                    $userLogin = $postData['fieldLogin'];
-                    $userPassword = $postData['fieldPass'];
-
-                    /*$user = $this->getDoctrine()->getRepository($this->tableUser)
-                       // ->findOneBy(array('login' => $userLogin, 'password' => $userPassword))
-                          ->findOneByLogin($userLogin);*/
-
-                    $user = Helper::isExistsUserByLoginAndIsConfirm($userLogin);
-
-                    if (!$user)
-                    {
-                        return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный логин или пароль!');
-                    }
-                    else
-                    {
-                        $user = Helper::getUserByLogin($userLogin);
-
-                        $encodedPassword = Helper::getRegPassword($userPassword, $user->getSalt());
-
-                        if(!StringUtils::equals($encodedPassword, $user->getPassword()))
-                        {
-                            return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный логин или пароль!');
-                        }
-                        else
-                        {
-                           // $session = $request->getSession();
-                            $firewall = 'secured_area';
-                            $token = new UsernamePasswordToken($userLogin, null, $firewall, array('ROLE_CLIENT'));
-                            //$session->
-                            //$session->set('_security_'.$firewall, serialize($token));
-                            //$session->set('TEST', serialize(123));
-                            $this->get('security.context')->setToken($token);
-                            //$session->save();
-
-                            return new RedirectResponse($this->generateUrl('secure_client_index'));
-                        }
-                    }
-                }
-                else
-                {
-                    return array('formLogin' => $formLogin->createView(), 'errorData' => '');
-                }
-            }
-        }
-
-        return array('formLogin' => $formLogin->createView(), 'errorData' => '');
-    }
-
-    /**
-     * @Template()
-     * @return Response
-     */
-    public function loginAction(Request $request)
-    {
         $session = $request->getSession();
 
         /*if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
@@ -208,7 +220,7 @@ class AuthController extends Controller
     {
         if ($type == "client")
         {
-            $clientValidate = new ClientFormValidate();
+            $clientValidate = new ClientRegFormValidate();
             $formReg = $this->createForm(new ClientRegForm(), $clientValidate);
             $formReg->handleRequest($request);
 
@@ -231,9 +243,19 @@ class AuthController extends Controller
                             $userPassword = $postData['fieldPass'];
                             $userEmail = $postData['fieldEmail'];
 
+                            $em = $this->getDoctrine()->getManager();
+
+                            $userInfo = new UserInfo();
+
+                            $em->persist($userInfo);
+                            $em->flush();
+
+                            $userInfoId = $userInfo->getId();
+
                             $user = new User();
                             $user->setLogin($userLogin);
                             $user->setEmail($userEmail);
+                            $user->setRole(2);
 
                             $salt = Helper::getSalt();
                             $password = Helper::getRegPassword($userPassword, $salt);
@@ -241,8 +263,8 @@ class AuthController extends Controller
                             $user->setSalt($salt);
                             $hashCode = Helper::getRandomValue(15);
                             $user->setHash($hashCode);
+                            $user->setUserInfoId($userInfoId);
 
-                            $em = $this->getDoctrine()->getManager();
                             $em->persist($user);
                             $em->flush();
 
@@ -270,7 +292,7 @@ class AuthController extends Controller
         }
         elseif ($type == "author")
         {
-            $authorValidate = new AuthorFormValidate();
+            $authorValidate = new AuthorRegFormValidate();
             $formReg = $this->createForm(new AuthorRegForm(), $authorValidate);
             $formReg->handleRequest($request);
 
@@ -292,10 +314,26 @@ class AuthController extends Controller
                             $userLogin = $postData['fieldLogin'];
                             $userPassword = $postData['fieldPass'];
                             $userEmail = $postData['fieldEmail'];
+                            $userMobileTel = $postData['fieldMobileTel'];
+                            $userSkype = $postData['fieldSkype'];
+                            $userIcq = $postData['fieldIcq'];
+
+                            $em = $this->getDoctrine()->getManager();
+
+                            $userInfo = new UserInfo();
+                            $userInfo->setSkype($userSkype);
+                            $userInfo->setIcq($userIcq);
+                            $userInfo->setMobileTel($userMobileTel);
+
+                            $em->persist($userInfo);
+                            $em->flush();
+
+                            $userInfoId = $userInfo->getId();
 
                             $user = new User();
                             $user->setLogin($userLogin);
                             $user->setEmail($userEmail);
+                            $user->setRole(1);
 
                             $salt = Helper::getSalt();
                             $password = Helper::getRegPassword($userPassword, $salt);
@@ -303,14 +341,14 @@ class AuthController extends Controller
                             $user->setSalt($salt);
                             $hashCode = Helper::getRandomValue(15);
                             $user->setHash($hashCode);
+                            $user->setUserInfoId($userInfoId);
 
-                            $em = $this->getDoctrine()->getManager();
                             $em->persist($user);
                             $em->flush();
 
                             $userId = $user->getId();
 
-                            Helper::sendConfirmationReg($this->container, $userEmail, $userId, $hashCode);
+                            //Helper::sendConfirmationReg($this->container, $userEmail, $userId, $hashCode);
 
                             //return $this->redirect($this->generateUrl('client_success_reg'));
                         }
@@ -347,6 +385,8 @@ class AuthController extends Controller
 
 
     /**
+     * Auth by openID
+     *
      * @Template()
      * @return array
      */
@@ -354,7 +394,7 @@ class AuthController extends Controller
     {
         $session = $request->getSession();
 
-        if($session->has('socialToken'))
+        if ($session->has('socialToken'))
         {
             $socialToken = $session->get('socialToken');
             $socialResponse = file_get_contents('http://ulogin.ru/token.php?token=' . $socialToken . '&host=' . $_SERVER['HTTP_HOST']);
@@ -363,11 +403,11 @@ class AuthController extends Controller
 
             if (!isset($socialData['error']))
             {
-                $clientValidate = new ClientFormValidate();
+                $clientValidate = new ClientRegFormValidate();
                 $clientValidate->setLogin($socialData['nickname']);
                 $clientValidate->setEmail($socialData['email']);
 
-                $formReg = $this->createForm(new RegForm(), $clientValidate);
+                $formReg = $this->createForm(new ClientRegForm(), $clientValidate);
                 $formReg->handleRequest($request);
 
                 $publicKeyRecaptcha = $this->container->getParameter('publicKeyRecaptcha');
@@ -506,6 +546,7 @@ class AuthController extends Controller
 
         return array('formRecovery' => $formRecovery->createView(), 'msgSuccess' => '');
     }
+
 
     /**
      * Confirm register and recovery password by Email
