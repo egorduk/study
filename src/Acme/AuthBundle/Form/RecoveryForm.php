@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\AuthBundle\Form\Client;
+namespace Acme\AuthBundle\Form;
 
 use Helper\Helper;
 use Symfony\Component\Form\AbstractType;
@@ -22,7 +22,7 @@ class RecoveryForm extends AbstractType
         $builder->addEventListener(FormEvents::POST_BIND, function(FormEvent $event)
         {
             $form = $event->getForm();
-            $data = $event->getData();
+            //$data = $event->getData();
             $email = $form->get('fieldEmail')->getData();
 
             if ($email != null)

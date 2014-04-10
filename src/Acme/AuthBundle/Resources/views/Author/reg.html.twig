@@ -37,5 +37,29 @@
                 {{ form_end(formReg) }}
             </div>
         </div>
+        <script>
+            $(document).ready(function() {
+                function format(state) {
+                if (!state.id){
+                    return state.text;
+                }
+;
+                return "<img class='flag' src='{{ asset('bundles/acmeauth/images/flags/') }}" + state.id.toLowerCase() + ".png'/>" /*+ state.text*/;
+            }
+            $("#e4").select2({
+                minimumResultsForSearch: -1,
+                formatResult: format,
+                formatSelection: format,
+                escapeMarkup: function(m) { return m; }
+            });
+            });
+        </script>
+        <select id="e4">
+            <option value="by">Беларусь</option>
+            <option value="ru">Россия</option>
+            <option value="uk">Украина</option>
+            <option value="kz">Казахстан</option>
+        </select>
+
     </div>
 {% endblock %}

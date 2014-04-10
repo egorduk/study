@@ -8,6 +8,7 @@ class AuthorRegFormValidate extends ClientRegFormValidate
     public $fieldMobileTel;
     public $fieldSkype;
     public $fieldIcq;
+    public $choice;
 
     public function setMobileTel($tel)
     {

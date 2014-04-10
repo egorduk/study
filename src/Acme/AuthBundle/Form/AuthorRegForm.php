@@ -26,7 +26,17 @@ class AuthorRegForm extends AbstractType
                 ->add('fieldIcq', 'text', array('label'=>'Icq:', 'required' => false, 'data' => $options['data']->fieldIcq, 'attr' => array('title' => 'Введите Ваш Icq', 'size' => 20, 'maxlength' => 10, 'placeholder' => 'Введите Icq...')))
                 ->add('checkAgreeRules', 'checkbox', array('label'=>' ', 'required' => true, 'attr' => array('title' => 'Если Вы согласны с правилами, то установите тут флажок', 'class' => '')))
                 ->add('reg', 'submit', array('label'=>'Регистрация', 'attr' => array('class' => 'btn btn-success')))
-                ->add('reset', 'reset', array('label'=>'Очистить', 'attr' => array('class' => 'btn btn-success')));
+                ->add('reset', 'reset', array('label'=>'Очистить', 'attr' => array('class' => 'btn btn-success')))
+                /*->add('choice', 'genemu_jqueryselect2_entity', array(
+                'class' => 'Acme\AuthBundle\Entity\Country',
+                'property' => 'name'))*/
+                //->add('country', 'genemu_jqueryselect2_country')
+                /*->add('choice', 'genemu_jqueryselect2_choice', array(
+                    'choices' => array(
+                        'foo' => 'Foo',
+                        'bar' => 'Bar',
+                    )))*/
+            ;
 
         $builder->addEventListener(FormEvents::POST_BIND, function(FormEvent $event)
         {

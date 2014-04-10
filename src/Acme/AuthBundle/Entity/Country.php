@@ -53,4 +53,9 @@ class Country extends EntityRepository
         $this->id = $id;
     }
 
+    public function getName()
+    {
+        return $this->name;
+    }
+
 }

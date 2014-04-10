@@ -112,12 +112,5 @@ swiftmailer:
     #    type:   file
     #    path:   "%kernel.cache_dir%/swiftmailer/spool"
 
-
-#FOS
-#fos_user:
-#    db_driver: orm
-#    firewall_name: main
-#    user_class: Acme\AuthBundle\Entity\User
-#    registration:
-#        form:
-#            type: acme_user_registration
+genemu_form:
+    select2: ~

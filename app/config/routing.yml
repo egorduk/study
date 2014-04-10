@@ -10,6 +10,10 @@ openid_auth:
   pattern:   /auth/openid
   defaults:  { _controller: AcmeAuthBundle:Auth:openid }
 
+recovery_password:
+  pattern:   /recovery
+  defaults:  { _controller: AcmeAuthBundle:Auth:recovery }
+
 
 #------------------------------------------------Client----------------------------------------------------#
 
@@ -42,10 +46,6 @@ client_confirm_success:
 client_rules:
   pattern:   /{type}/rules
   defaults:  { _controller: AcmeAuthBundle:Index:rules }
-
-client_recovery_password:
-  pattern:   /client/recovery
-  defaults:  { _controller: AcmeAuthBundle:Auth:recovery }
 
 client_confirm_password:
   pattern:   /client/confirm

@@ -11,7 +11,7 @@ use Acme\AuthBundle\Entity\ClientRegFormValidate;
 use Acme\AuthBundle\Entity\AuthorRegFormValidate;
 use Acme\AuthBundle\Entity\LoginFormValidate;
 use Acme\AuthBundle\Form\LoginForm;
-//use Acme\AuthBundle\Form\Client\RecoveryForm;
+use Acme\AuthBundle\Form\RecoveryForm;
 use Acme\AuthBundle\Entity\UserInfo;
 use Acme\AuthBundle\Form\ClientRegForm;
 use Acme\AuthBundle\Form\AuthorRegForm;
@@ -385,6 +385,8 @@ class AuthController extends Controller
 
 
     /**
+     * Auth by openID
+     *
      * @Template()
      * @return array
      */
@@ -392,7 +394,7 @@ class AuthController extends Controller
     {
         $session = $request->getSession();
 
-        if($session->has('socialToken'))
+        if ($session->has('socialToken'))
         {
             $socialToken = $session->get('socialToken');
             $socialResponse = file_get_contents('http://ulogin.ru/token.php?token=' . $socialToken . '&host=' . $_SERVER['HTTP_HOST']);
@@ -401,11 +403,11 @@ class AuthController extends Controller
 
             if (!isset($socialData['error']))
             {
-                $clientValidate = new ClientFormValidate();
+                $clientValidate = new ClientRegFormValidate();
                 $clientValidate->setLogin($socialData['nickname']);
                 $clientValidate->setEmail($socialData['email']);
 
-                $formReg = $this->createForm(new RegForm(), $clientValidate);
+                $formReg = $this->createForm(new ClientRegForm(), $clientValidate);
                 $formReg->handleRequest($request);
 
                 $publicKeyRecaptcha = $this->container->getParameter('publicKeyRecaptcha');
@@ -544,6 +546,7 @@ class AuthController extends Controller
 
         return array('formRecovery' => $formRecovery->createView(), 'msgSuccess' => '');
     }
+
 
     /**
      * Confirm register and recovery password by Email
