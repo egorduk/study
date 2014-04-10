@@ -308,7 +308,7 @@ class AuthController extends Controller
 
                     if ($formReg->isValid())
                     {
-                        if ($resp->is_valid)
+                        if (!$resp->is_valid)
                         {
                             $postData = $request->request->get('formReg');
                             $userLogin = $postData['fieldLogin'];
@@ -317,6 +317,7 @@ class AuthController extends Controller
                             $userMobileTel = $postData['fieldMobileTel'];
                             $userSkype = $postData['fieldSkype'];
                             $userIcq = $postData['fieldIcq'];
+                            $userCountryCode = $postData['selectorCountry'];
 
                             $em = $this->getDoctrine()->getManager();
 
@@ -324,6 +325,11 @@ class AuthController extends Controller
                             $userInfo->setSkype($userSkype);
                             $userInfo->setIcq($userIcq);
                             $userInfo->setMobileTel($userMobileTel);
+
+                            $country = $this->getDoctrine()->getRepository($this->tableCountry)
+                                ->findOneByCode($userCountryCode);
+
+                            $userInfo->setCountry($country);
 
                             $em->persist($userInfo);
                             $em->flush();
@@ -403,92 +409,124 @@ class AuthController extends Controller
 
             if (!isset($socialData['error']))
             {
-                $clientValidate = new ClientRegFormValidate();
-                $clientValidate->setLogin($socialData['nickname']);
-                $clientValidate->setEmail($socialData['email']);
+                $userEmail = $socialData['email'];
+                $isExistsUser = Helper::isExistsUserByEmailAndIsConfirm($userEmail);
 
-                $formReg = $this->createForm(new ClientRegForm(), $clientValidate);
-                $formReg->handleRequest($request);
-
-                $publicKeyRecaptcha = $this->container->getParameter('publicKeyRecaptcha');
-                $captcha = recaptcha_get_html($publicKeyRecaptcha);
-
-                if ($request->isMethod('POST'))
+                if ($isExistsUser)
                 {
-                    if ($formReg->get('reg')->isClicked())
+                    $role = Helper::getUserRoleByEmail($userEmail);
+                    //print_r($role); die;
+
+                    if ($role == 1)
                     {
-                        $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
-                        $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
+                        $role = 'ROLE_AUTHOR';
+                    }
+                    else
+                    {
+                        $role = 'ROLE_CLIENT';
+                    }
 
-                        if ($resp->is_valid)
+                    $token = new UsernamePasswordToken($userEmail, null, 'secured_area', array($role));
+                    $this->get('security.context')->setToken($token);
+
+                    if ($role == 'ROLE_AUTHOR')
+                    {
+                        return new RedirectResponse($this->generateUrl('secure_author_index'));
+                    }
+                    else
+                    {
+                        return new RedirectResponse($this->generateUrl('secure_client_index'));
+                    }
+                }
+                else
+                {
+                    $clientValidate = new ClientRegFormValidate();
+                    $clientValidate->setLogin($socialData['nickname']);
+                    $clientValidate->setEmail($socialData['email']);
+
+                    $formReg = $this->createForm(new ClientRegForm(), $clientValidate);
+                    $formReg->handleRequest($request);
+
+                    $publicKeyRecaptcha = $this->container->getParameter('publicKeyRecaptcha');
+                    $captcha = recaptcha_get_html($publicKeyRecaptcha);
+
+                    if ($request->isMethod('POST'))
+                    {
+                        if ($formReg->get('reg')->isClicked())
                         {
-                            if ($formReg->isValid())
+                            $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
+                            $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
+
+                            if ($resp->is_valid)
                             {
-                                $session->remove('socialToken');
-                                $postData = $request->request->get('formReg');
-                                $userLogin = $postData['fieldLogin'];
-                                $userPassword = $postData['fieldPass'];
-                                $userEmail = $postData['fieldEmail'];
+                                if ($formReg->isValid())
+                                {
+                                    $session->remove('socialToken');
+                                    $postData = $request->request->get('formReg');
+                                    $userLogin = $postData['fieldLogin'];
+                                    $userPassword = $postData['fieldPass'];
+                                    $userEmail = $postData['fieldEmail'];
 
-                                $user = new User();
-                                $user->setLogin($userLogin);
-                                $user->setEmail($userEmail);
+                                    $user = new User();
+                                    $user->setLogin($userLogin);
+                                    $user->setEmail($userEmail);
 
-                                $salt = Helper::getSalt();
-                                $password = Helper::getRegPassword($userPassword, $salt);
-                                $user->setPassword($password);
-                                $user->setSalt($salt);
+                                    $salt = Helper::getSalt();
+                                    $password = Helper::getRegPassword($userPassword, $salt);
+                                    $user->setPassword($password);
+                                    $user->setSalt($salt);
 
-                                $providerName = $socialData['network'];
-                                //$countryCode = geoip_country_code_by_name($_SERVER["REMOTE_ADDR"]);
-                                $countryCode = 'BY';
+                                    $providerName = $socialData['network'];
+                                    //$countryCode = geoip_country_code_by_name($_SERVER["REMOTE_ADDR"]);
+                                    $countryCode = 'BY';
 
-                                $provider = $this->getDoctrine()->getRepository($this->tableProvider)
-                                    ->findOneByName($providerName);
+                                    $provider = $this->getDoctrine()->getRepository($this->tableProvider)
+                                        ->findOneByName($providerName);
 
-                                $country = $this->getDoctrine()->getRepository($this->tableCountry)
-                                    ->findOneByCode($countryCode);
+                                    $country = $this->getDoctrine()->getRepository($this->tableCountry)
+                                        ->findOneByCode($countryCode);
 
-                                $openId = new Openid();
-                                $openId->setUid($socialData['uid']);
-                                $openId->setProfileUrl($socialData['profile']);
-                                $openId->setEmail($socialData['email']);
-                                $openId->setNickname($socialData['nickname']);
-                                $openId->setFirstName($socialData['first_name']);
-                                $openId->setIdentity($socialData['identity']);
-                                $openId->setPhotoBig($socialData['photo_big']);
-                                $openId->setPhoto($socialData['photo']);
-                                $openId->setProvider($provider);
-                                $openId->setCountry($country);
+                                    $openId = new Openid();
+                                    $openId->setUid($socialData['uid']);
+                                    $openId->setProfileUrl($socialData['profile']);
+                                    $openId->setEmail($socialData['email']);
+                                    $openId->setNickname($socialData['nickname']);
+                                    $openId->setFirstName($socialData['first_name']);
+                                    $openId->setIdentity($socialData['identity']);
+                                    $openId->setPhotoBig($socialData['photo_big']);
+                                    $openId->setPhoto($socialData['photo']);
+                                    $openId->setProvider($provider);
+                                    $openId->setCountry($country);
 
-                                $em = $this->getDoctrine()->getManager();
-                                $em->persist($openId);
-                                $em->flush();
+                                    $em = $this->getDoctrine()->getManager();
+                                    $em->persist($openId);
+                                    $em->flush();
 
-                                $user->setOpenId($openId->getId());
-                                $em->persist($user);
-                                $em->flush();
+                                    $user->setOpenId($openId->getId());
+                                    $em->persist($user);
+                                    $em->flush();
 
-                                return $this->redirect($this->generateUrl('client_index'));
+                                    return $this->redirect($this->generateUrl('client_index'));
+                                }
                             }
-                        }
-                        else
-                        {
-                            return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $resp->error);
+                            else
+                            {
+                                return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $resp->error);
+                            }
                         }
                     }
                 }
 
                 return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => '');
             }
-            else
+            /*else
             {
                 return $this->redirect($this->generateUrl('client_index'));
-            }
+            }*/
         }
-        else
+        //else
         {
-            return $this->redirect($this->generateUrl('client_index'));
+            return $this->redirect($this->generateUrl('login'));
         }
     }
 

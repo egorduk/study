@@ -8,7 +8,7 @@ class AuthorRegFormValidate extends ClientRegFormValidate
     public $fieldMobileTel;
     public $fieldSkype;
     public $fieldIcq;
-    public $choice;
+    public $selectorCountry;
 
     public function setMobileTel($tel)
     {
@@ -38,6 +38,11 @@ class AuthorRegFormValidate extends ClientRegFormValidate
     public function getIcq()
     {
         return $this->fieldIcq;
+    }
+
+    public function getCountry()
+    {
+        return $this->selectorCountry;
     }
 
 

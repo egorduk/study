@@ -1,75 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="8afd0a94-95b4-4a96-ada0-8cfaf8ccf8b0" name="Default" comment="" />
     <list id="09bdd184-ad02-4762-8397-2c72ed3a09aa" name="New changelist" comment="" />
+=======
+    <list default="true" id="6dea2b0d-d2e4-4153-9c9c-927262db0e74" name="Default" comment="10-04-4&#10;">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/acmeauth/images/flags/ua.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/acmeauth/css/select2.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/acmeauth/js/select2.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/css/style.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/acmeauth/css/style.css" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\src\Acme\AuthBundle\Resources\public\css\demo.css" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\web\bundles\acmeauth\css\demo.css" afterPath="" />
+      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\web\bundles\acmeauth\images\flags\uk.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bundles/acmeauth/images/flags/by.png" afterPath="$PROJECT_DIR$/web/bundles/acmeauth/images/flags/by.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bundles/acmeauth/images/flags/ru.png" afterPath="$PROJECT_DIR$/web/bundles/acmeauth/images/flags/ru.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/AuthController.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/AuthController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Form/AuthorRegForm.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Form/AuthorRegForm.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/AuthorRegFormValidate.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/AuthorRegFormValidate.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Country.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Country.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Helper/Helper.php" afterPath="$PROJECT_DIR$/src/Helper/Helper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Openid.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Openid.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/UserInfo.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/UserInfo.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Author/reg.html.twig" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Author/reg.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/css/select2.css" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/css/select2.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
+>>>>>>> 7c8ecbf0b57d7492a780790dad2772be598a2b73
     <ignored path="study.iws" />
     <ignored path=".idea/workspace.xml" />
-    <ignored path="web/1/00/55/8e0106e414d6a3ed6cfe1994cf9341c16743b9621c0c1cf6fa8b6505d203.php" />
-    <ignored path="web/1/1e/66/191578f8580e9c45499dba6c7dc8896fa1fb98cb1defae908e986d88bb6a.php" />
-    <ignored path="web/1/29/57/3b66cc270f6f5aa7b49f485d8e5d5b55bbf56f7d860663ead1bb5154b4e0.php" />
-    <ignored path="web/1/30/d2/9c78c513f3dfb2c1e3297998d20286a3b44c062d492e51127f1a1f02f554.php" />
-    <ignored path="web/1/22/e1/86495682943482e25266dc6a8cdac5da98f93577566a239d06cd87a22aa8.php" />
-    <ignored path="web/1/25/6c/40160f7d4131c52d76e3b9d9e54c2c35ec2805af11950441d19a600bab02.php" />
-    <ignored path="web/1/54/98/99f38a2be8f8081cca6550ab730307962df0b6cb86fc5ffff21416baeb37.php" />
-    <ignored path="web/1/65/a1/f08adb4fb52f2d2465df807ef0dcf62df8f9803d32dfc9e05b1398213f2e.php" />
-    <ignored path="web/1/3a/74/b2d9d09caa326575ab82a144124ee63bcde397e531a19a4ff42f8ce56ee3.php" />
-    <ignored path="web/1/4b/97/7b7f574fc32986e46f36d9371f61d85947a9167169404739df937cd74c63.php" />
-    <ignored path="web/1/70/ad/c0a5cce699384e3c00d3e502a88efeca7b4a85d55cc6992f6b8a27dda53c.php" />
-    <ignored path="web/1/78/44/a03030c9dfcfedd772136384534d8c83a973696a9a61a983ef8a3b57b9e9.php" />
-    <ignored path="web/1/66/64/adad119919646d615e24002614c764b1d08f601819f6865e8682b77a1a9b.php" />
-    <ignored path="web/1/69/4f/948642aca310c93e30a8d0b227c1b47b1a618f81f7e93cf676bd2a244eda.php" />
-    <ignored path="web/1/cc/3a/5f86392eb89f0544da8e922ede300a6599293344d543b7dc0f181d67cb1a.php" />
-    <ignored path="web/1/93/01/d5c3a3eaa6c201d9c6f8dd907f445420e84b1a31277812472b65a7592b4e.php" />
-    <ignored path="web/1/62/cb0fa16506573fb52ce079ee1c3b88f191472477a7459dc177add6b1d029f6.tpl" />
-    <ignored path="web/1/2e/65613ff80d7e8ab788c8c901feac47946b1ae3b082550db4869b97fc3c78f2.tpl" />
-    <ignored path="web/1/8f/79/85caf5ba95f99e8fba3f75cb66d7cbf96f0d0f03103722a2ad8ae155d2fd.php" />
-    <ignored path="web/1/23/65823f64cc9f6802912e6669dbe833570772930fa727ff6b869d0402b4b6a2.tpl" />
-    <ignored path="web/1/23/31b2a12f61e2ab73bf2ce5cd272cc441140701dde849db7ab8ee8c6ccb1c24.tpl" />
-    <ignored path="web/1/86/c3/adb300c35d5d51cfb73f912f99756f218a68ecdadc8aace90861653f3b39.php" />
-    <ignored path="web/1/38/0aeb84863986a60f1a5c279b0e116b791c2dc29b67edf5d527fc3323985ecb.tpl" />
-    <ignored path="web/1/f0/62434a3914a69bd510e096cbb1f4fcd48fd4e0e1b146506b2e99024888b317.tpl" />
-    <ignored path="web/1/db/6b9c1bb1a7bf2adc880b525533a21936f9533d0fef4c9c80a6bca3ea2c6667.tpl" />
-    <ignored path="web/1/85/5a/757b345b66fec71ce383c7637f18d8ec0955fc6ed5e1d3c5ce2a3cba9c77.php" />
-    <ignored path="web/1/9f/fc99b17a3a119f43f7dfddacf62395df1b630f89a23f096d295e22d12bf0c6.tpl" />
-    <ignored path="web/1/da/fa1c8bf9d85238e4bd0f582cf3892804d5e689083d89f662282436cd8d9bba.tpl" />
-    <ignored path="web/1/b7/12/2ea97fd42fb0e485c08815761e66c08e1de46066f84ac3b4ff4f549d9cb2.php" />
-    <ignored path="web/1/13/23a390c72b222846922b725d32ab63b51f9a8dadf612b12ccc0fa1a345ccd0.tpl" />
-    <ignored path="web/1/b1/b4/f334c5bb698c951693ed89f1890334acd73921e1019f082d3f86f066c172.php" />
-    <ignored path="web/1/c4/5ad6bc1cc8681404434b12d924a40b849a27eca229a8502d99f5a98f02bd7b.tpl" />
-    <ignored path="web/1/58/090cd241fc130d02794a34144583429c206620707770d3551d11cc0bcb0ef1.tpl" />
-    <ignored path="web/1/74/57ff7f480e9b33b58afbcffd445e21512332ee76bd4d275937d1428074d89c.tpl" />
-    <ignored path="web/1/ab/b9/da3ba307bb66aac3329ba9dcd8586d4913d2848ae0935566d103a18c1bb2.php" />
-    <ignored path="web/1/16/e1811c91516fef9e3231a735a056df1102957dbe10809246c28d586a805f58.tpl" />
-    <ignored path="web/1/95/70/ca6d3fca59e573ca6698b44bbd9259305b061e39b6457bd581bbb9941523.php" />
-    <ignored path="web/1/dc/a883454ee2b7affc17258bad67383e3c9c564a46a531feb44336fd8f91836b.tpl" />
-    <ignored path="web/1/74/d30c5de3396fcc38a0013beecd1918a24dafb01ab5a0060ac16662830de4d3.tpl" />
-    <ignored path="web/1/ee/027abba0404106ea9b57e9d489a4b6812d49e8202d87a4224cc2ec55a0b390.tpl" />
-    <ignored path="web/1/ca/47/5b412158b41bd20609d9c8b9ef4c0d33ee0104eb7cc31e48c4871efcf8ee.php" />
-    <ignored path="web/1/c7/95/897e33f553330d370f6a44ca36cb920aa4ae467d2b38572c028c6d1ee5a5.php" />
-    <ignored path="web/1/ba/6b/01ea6b568a67d9c595605243b324e57d78b57ae85b0ed97267725e6b4997.php" />
-    <ignored path="web/1/ba/42/45671af1ef165ee677b30151d0139fc34d9e0a7be29c11f1b997644d6136.php" />
-    <ignored path="web/1/95/8f/f74e339885ec994b001541ec750898af9d9ea0eb9dc461144d0f109e9922.php" />
-    <ignored path="web/1/43/6d2522a324345587083b8e23d8bf67490ca74633876226abdbfd20d4ae4a16.tpl" />
-    <ignored path="web/1/ca/95/5a99e69d929379db5d7b4fd6aceaba648e9a526e805a4533498e404ab3cc.php" />
-    <ignored path="web/1/be/c3dc208e0d7ed4da8bd0e6065fb0b15192b72904530b03770d3e4ba8bfdcec.tpl" />
-    <ignored path="web/1/7e/882974cc8467e3756992e548a9b50346529402732df4e5702ee3efac25152f.tpl" />
-    <ignored path="web/1/bc/f9f7dbf2d93fa547c6830c2e37d39c0b422848d534323bdd9007918f7b67c5.tpl" />
-    <ignored path="web/1/4c/af/1aafe12be388f9d0293182816deff0d2be75e5dfdb477f0beb7787aa8473.php" />
-    <ignored path="web/1/53/90/80f9955d92746c328f9fc90463c2b3bd99df5ac419b6bd953bff59280df0.php" />
-    <ignored path="web/1/fc/41/51d91f9658829c7f8c4ef8de37c6e3f66d4ccce2884efb2a0ae329ed35bf.php" />
-    <ignored path="web/1/98/dbde782198a37d864f269898391a0eddb66e3d6c49001627551781237920e1.tpl" />
-    <ignored path="web/1/8b/2a/60a3237f32b63a659dc32b23bea9b1c564871bf95b43b199c1fa73b9a6cc.php" />
-    <ignored path="web/1/ee/99/6757199a4fcf6d95a80e487e71d6e473190d8262df668be839a79a845799.php" />
-    <ignored path="web/1/1d/85/39c68182840c6b403f775303bf61362a98f77d419b175fc2b22d0709693e.php" />
-    <ignored path="web/1/f1/32/5a8ac3042199eddf1f5b8558169145359ab847327298a7228b4074e31aaa.php" />
-    <ignored path="web/1/d6/55b76d114cc1f8456152c5835ec120def97840248fbbb944a7be104bec7f36.tpl" />
-    <ignored path="web/1/fb/58840726f64cc4e1d3061a7987539883483ccfa6e39508a13c8f2cd4615515.tpl" />
-    <ignored path="web/1/e0/bf6cb8756e95f19246564efe5dc0535ae6a84c9ac18d3a01e7b1de67e00ed2.tpl" />
-    <ignored path="web/1/79/a9eee3c8f3af9a320f9757018e102000d93587173e116133d00aa8c2150f13.tpl" />
-    <ignored path="web/1/31/1442b1096aa6380330a66a8872d8c3cfd81d377f84313ba6217be1d84ac8c6.tpl" />
-    <ignored path="web/1/e4/e5fc1c58fcfc2e57aed742ae0aced67025e0b6ce856091796f9ae4d0643514.tpl" />
-    <ignored path="web/1/50/5e/303939c5ba73069e32d41116048208ac934d143ed53ed8d7abab845d3b4c.php" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,19 +50,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="User.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="114" column="10" selection-start="2335" selection-end="2335" vertical-scroll-proportion="-20.580645" vertical-offset="1650" max-vertical-offset="7150">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AuthController.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="AuthController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/AuthController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="405" column="62" selection-start="15417" selection-end="15417" vertical-scroll-proportion="-20.516129" vertical-offset="8274" max-vertical-offset="13596">
+            <state line="417" column="22" selection-start="15939" selection-end="15939" vertical-scroll-proportion="0.37322834" vertical-offset="8103" max-vertical-offset="13120">
               <folding>
                 <element signature="e#83#118#0" expanded="true" />
               </folding>
@@ -109,20 +61,52 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AuthorRegForm.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Form/AuthorRegForm.php">
+      <file leaf-file-name="Helper.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="40" selection-start="2966" selection-end="2966" vertical-scroll-proportion="-16.32258" vertical-offset="0" max-vertical-offset="2024">
+<<<<<<< HEAD
+            <state line="32" column="11" selection-start="1449" selection-end="1449" vertical-scroll-proportion="0.046838406" vertical-offset="664" max-vertical-offset="1562">
+              <folding />
+=======
+            <state line="302" column="5" selection-start="9068" selection-end="9068" vertical-scroll-proportion="-7.7586207" vertical-offset="5655" max-vertical-offset="7320">
+              <folding>
+                <marker date="1397144320507" expanded="true" signature="2572:2633" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1397144320507" expanded="true" signature="3011:3066" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1397144320507" expanded="true" signature="3445:3506" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1397144320507" expanded="true" signature="7400:7466" placeholder="SELECT u.rol..AcmeAuthBundle..." />
+                <marker date="1397144320507" expanded="true" signature="9283:9375" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1397144320507" expanded="true" signature="9842:9957" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+              </folding>
+>>>>>>> 7c8ecbf0b57d7492a780790dad2772be598a2b73
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Country.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Country.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="63" column="24" selection-start="1199" selection-end="1199" vertical-scroll-proportion="-20.344828" vertical-offset="650" max-vertical-offset="1620">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="reg.html.twig" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="reg.html.twig" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Author/reg.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="11" selection-start="1449" selection-end="1449" vertical-scroll-proportion="0.046838406" vertical-offset="664" max-vertical-offset="1562">
+            <state line="46" column="38" selection-start="2027" selection-end="2027" vertical-scroll-proportion="-17.241379" vertical-offset="420" max-vertical-offset="1340">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AuthorRegForm.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Form/AuthorRegForm.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="106" column="37" selection-start="5523" selection-end="5523" vertical-scroll-proportion="-13.103448" vertical-offset="1740" max-vertical-offset="2820">
+              <folding>
+                <element signature="e#40#58#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -130,34 +114,7 @@
       <file leaf-file-name="AuthorRegFormValidate.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/AuthorRegFormValidate.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="23" selection-start="154" selection-end="154" vertical-scroll-proportion="-4.2580647" vertical-offset="44" max-vertical-offset="1078">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.yml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="115" column="14" selection-start="3107" selection-end="3107" vertical-scroll-proportion="0.0" vertical-offset="1786" max-vertical-offset="2684">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routing.yml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="0" selection-start="266" selection-end="266" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2332">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="validation.yml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="0" selection-start="958" selection-end="958" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="726">
+            <state line="32" column="32" selection-start="579" selection-end="579" vertical-scroll-proportion="-22.068966" vertical-offset="0" max-vertical-offset="1080">
               <folding />
             </state>
           </provider>
@@ -176,51 +133,19 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/rules.html.twig" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/openid.html.twig" />
-        <option value="$PROJECT_DIR$/web/app_dev.php" />
-        <option value="$PROJECT_DIR$/app/AppKernel.php" />
-        <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/unauthorized.html.twig" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/unauthorized.html.twig" />
-        <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RecoveryPassForm.php" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/recoverypassword.html.twig" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/recovery.html.twig" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Form/Client/RecoveryForm.php" />
-        <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/User.php" />
-        <option value="$PROJECT_DIR$/app/config/parameters.yml" />
-        <option value="$PROJECT_DIR$/../sms/UTF-8/example.php" />
-        <option value="$PROJECT_DIR$/../sms/UTF-8/test-frm.php" />
-        <option value="D:/DOWNLOAD/ssms_su_php/ssms_su_php/ssms_su — копия.php" />
-        <option value="D:/DOWNLOAD/ssms_su_php/ssms_su_php/1.php" />
-        <option value="D:/DOWNLOAD/ssms_su_php/ssms_su_php/ssms_su.php" />
-        <option value="$PROJECT_DIR$/../ssms_su_php/ssms_su.php" />
-        <option value="$PROJECT_DIR$/../ssms_su_php/1.php" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/confirm.html.twig" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/ClientController.php" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/AuthorFormValidate.php" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/ClientFormValidate.php" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User_info.php" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/ClientRegFormValidate.php" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/UserInfo.php" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Form/LoginForm.php" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/LoginFormValidate.php" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php" />
-        <option value="$PROJECT_DIR$/app/config/security.yml" />
-        <option value="$PROJECT_DIR$/src/Helper/Helper.php" />
-        <option value="$PROJECT_DIR$/app/config/routing.yml" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Form/RecoveryForm.php" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Auth/login.html.twig" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/AuthController.php" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/css/demo.css" />
+        <option value="$PROJECT_DIR$/web/bundles/acmeauth/css/demo.css" />
+        <option value="$PROJECT_DIR$/web/bundles/acmeauth/css/select2.css" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/css/select2.css" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/css/style.css" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/AuthorRegFormValidate.php" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Country.php" />
-        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/layout.html.twig" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Form/AuthorRegForm.php" />
-        <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Author/reg.html.twig" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Openid.php" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/UserInfo.php" />
+        <option value="$PROJECT_DIR$/src/Helper/Helper.php" />
+        <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/AuthController.php" />
       </list>
     </option>
   </component>
@@ -300,6 +225,72 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bundles" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bundles" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="acmeauth" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bundles" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="acmeauth" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -318,11 +309,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SecureBundle" />
+              <option name="myItemId" value="Helper" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -341,110 +328,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SecureBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SecureBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="IndexBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="IndexBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -497,40 +380,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AuthBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Client" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -627,6 +476,10 @@
               <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -654,7 +507,37 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Acme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AuthBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -750,43 +633,22 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="D:/main" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="Configurable.PHP.FrameworkIntegration" />
+    <property name="options.lastSelected" value="org.jetbrains.plugins.sass.extensions.compass.CompassConfigurableProvider$CompassModuleConfigurable" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
-    <property name="FullScreen" value="false" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\OpenServer\domains\localhost\study\src\Acme\AuthBundle\Entity" />
-      <recent name="D:\OpenServer\domains\localhost\study\src\Acme\AuthBundle\Resources\views\Client" />
-      <recent name="D:\OpenServer\domains\localhost\study\src\Acme\AuthBundle\Form\Client" />
-    </key>
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -807,63 +669,60 @@
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="8afd0a94-95b4-4a96-ada0-8cfaf8ccf8b0" name="Default" comment="" />
-      <changelist id="09bdd184-ad02-4762-8397-2c72ed3a09aa" name="New changelist" comment="" />
-      <created>1395529352745</created>
-      <updated>1395529352745</updated>
+      <changelist id="6dea2b0d-d2e4-4153-9c9c-927262db0e74" name="Default" comment="" />
+      <created>1397117029580</created>
+      <updated>1397117029580</updated>
     </task>
-    <task id="LOCAL-00001" summary="loginza&#10;">
-      <created>1395534838190</created>
-      <updated>1395534838190</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="TodoView" selected-index="3">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
+<<<<<<< HEAD
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19805194" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+=======
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+>>>>>>> 7c8ecbf0b57d7492a780790dad2772be598a2b73
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11075612" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19595315" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1171459" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18317358" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
     </layout>
-    <layout-to-restore>
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18614718" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.10756124" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19382322" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
-    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -874,334 +733,117 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="loginza&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="loginza&#10;" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="1" />
-    </breakpoint-manager>
+    <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/InsufficientAuthenticationException.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="53" selection-start="652" selection-end="652" vertical-scroll-proportion="0.3505535" vertical-offset="118" max-vertical-offset="660" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Resources/views/Exception/error.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="7" selection-start="582" selection-end="582" vertical-scroll-proportion="0.625222" vertical-offset="0" max-vertical-offset="563" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Resources/views/Exception/exception.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="5703" selection-end="5703" vertical-scroll-proportion="0.52" vertical-offset="0" max-vertical-offset="2838" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/AuthenticationException.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="6" selection-start="555" selection-end="555" vertical-scroll-proportion="0.11545293" vertical-offset="397" max-vertical-offset="2046" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Http/Firewall/ExceptionListener.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="16" selection-start="3581" selection-end="3581" vertical-scroll-proportion="1.2327273" vertical-offset="774" max-vertical-offset="4136" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/AppCache.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="28" selection-start="132" selection-end="132" vertical-scroll-proportion="0.15224913" vertical-offset="0" max-vertical-offset="1078" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/app_dev.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="35" selection-start="970" selection-end="974" vertical-scroll-proportion="0.5836217" vertical-offset="0" max-vertical-offset="867" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/unauthorized.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="0" selection-end="442" vertical-scroll-proportion="0.23185012" vertical-offset="0" max-vertical-offset="854" />
-      </provider>
-    </entry>
-    <entry file="file://D:/WebServers/home/localhost/www/project_hospital/modules/talon.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1034" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="56" selection-start="349" selection-end="349" vertical-scroll-proportion="0.17762399" vertical-offset="0" max-vertical-offset="867" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Validator/Constraint.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="20" selection-start="2802" selection-end="2802" vertical-scroll-proportion="-0.5175644" vertical-offset="2092" max-vertical-offset="4796" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Validator/Constraints/Email.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="26" selection-start="449" selection-end="449" vertical-scroll-proportion="0.38062283" vertical-offset="0" max-vertical-offset="867">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Message.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="6" selection-start="340" selection-end="340" vertical-scroll-proportion="0.27912343" vertical-offset="0" max-vertical-offset="1870" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="0" selection-start="1642" selection-end="1642" vertical-scroll-proportion="-6.387097" vertical-offset="726" max-vertical-offset="9152" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../sms/UTF-8/smsdelivery.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="7" selection-start="438" selection-end="438" vertical-scroll-proportion="-8.847539" vertical-offset="8052" max-vertical-offset="11044" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../sms/UTF-8/example.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="46" selection-start="520" selection-end="520" vertical-scroll-proportion="0.6597462" vertical-offset="0" max-vertical-offset="1628" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../sms/UTF-8/test-frm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="43" selection-start="29" selection-end="51" vertical-scroll-proportion="0.076124564" vertical-offset="0" max-vertical-offset="867" />
-      </provider>
-    </entry>
-    <entry file="file://D:/DOWNLOAD/ssms_su_php/ssms_su_php/ssms_su.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="19" selection-start="770" selection-end="770" vertical-scroll-proportion="0.37946942" vertical-offset="1" max-vertical-offset="3410" />
-      </provider>
-    </entry>
-    <entry file="file://D:/DOWNLOAD/ssms_su_php/ssms_su_php/1.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="20" selection-start="27" selection-end="27" vertical-scroll-proportion="0.05074971" vertical-offset="0" max-vertical-offset="1496" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../ssms_su_php/ssms_su.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="56" selection-start="484" selection-end="503" vertical-scroll-proportion="0.17762399" vertical-offset="0" max-vertical-offset="3410" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../ssms_su_php/1.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="18" selection-start="25" selection-end="25" vertical-scroll-proportion="0.05074971" vertical-offset="0" max-vertical-offset="1496">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Client/reg.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="968" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="14" selection-start="742" selection-end="742" vertical-scroll-proportion="0.0" vertical-offset="22" max-vertical-offset="792" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="7" selection-start="52" selection-end="52" vertical-scroll-proportion="0.092307694" vertical-offset="0" max-vertical-offset="715">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/routing.yml">
+    <entry file="file://$PROJECT_DIR$/web/bundles/acmeauth/css/select2.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="898">
+        <state line="29" column="4" selection-start="700" selection-end="700" vertical-scroll-proportion="0.24041812" vertical-offset="373" max-vertical-offset="13040">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/services.xml">
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/css/select2.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="898">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Form/ClientRegForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="9" selection-start="2169" selection-end="2169" vertical-scroll-proportion="0.36065573" vertical-offset="330" max-vertical-offset="1936">
-          <folding>
-            <element signature="e#40#58#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Provider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="130" selection-end="160" vertical-scroll-proportion="0.20803782" vertical-offset="0" max-vertical-offset="1078">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/ClientRegFormValidate.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="15" selection-start="57" selection-end="57" vertical-scroll-proportion="-2.8387096" vertical-offset="0" max-vertical-offset="1166">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/UserInfo.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="33" selection-start="523" selection-end="523" vertical-scroll-proportion="-21.290323" vertical-offset="0" max-vertical-offset="1914">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/LoginFormValidate.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="162" selection-end="162" vertical-scroll-proportion="-8.5161295" vertical-offset="0" max-vertical-offset="880">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Authentication/Token/UsernamePasswordToken.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="37" selection-start="1096" selection-end="1096" vertical-scroll-proportion="0.3457383" vertical-offset="328" max-vertical-offset="2332">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="114" column="10" selection-start="2335" selection-end="2335" vertical-scroll-proportion="-20.580645" vertical-offset="1650" max-vertical-offset="7150">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Auth/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="18" selection-start="278" selection-end="278" vertical-scroll-proportion="0.20299885" vertical-offset="0" max-vertical-offset="867">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/validation.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="0" selection-start="958" selection-end="958" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="726">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Form/LoginForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="169" selection-start="487" selection-end="487" vertical-scroll-proportion="-9.225806" vertical-offset="0" max-vertical-offset="858">
-          <folding>
-            <element signature="e#40#80#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/security.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="29" selection-start="988" selection-end="988" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1694">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../rss-reader/web/app_dev.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="37" selection-start="533" selection-end="533" vertical-scroll-proportion="0.25374857" vertical-offset="0" max-vertical-offset="867">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Form/RecoveryForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="19" selection-start="1343" selection-end="1343" vertical-scroll-proportion="0.6440281" vertical-offset="0" max-vertical-offset="1364">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="210" column="27" selection-start="6559" selection-end="6559" vertical-scroll-proportion="-9.16129" vertical-offset="4336" max-vertical-offset="7876">
-          <folding>
-            <element signature="e#26#58#0" expanded="true" />
-            <marker date="1397079988680" expanded="true" signature="-1:-1" placeholder="SELECT u.id,..AcmeAuthBundle..." />
-            <marker date="1397079988680" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1397079988680" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1397079988680" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1397079988680" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1397079988680" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Auth/login.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="95" selection-start="870" selection-end="870" vertical-scroll-proportion="-10.645162" vertical-offset="0" max-vertical-offset="594">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/genemu/form-bundle/Genemu/Bundle/FormBundle/GenemuFormBundle.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="37" selection-start="643" selection-end="643" vertical-scroll-proportion="0.33806145" vertical-offset="0" max-vertical-offset="846">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="8" selection-start="812" selection-end="812" vertical-scroll-proportion="-14.193548" vertical-offset="0" max-vertical-offset="968">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="266" selection-end="266" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2332">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/AuthorRegFormValidate.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="23" selection-start="154" selection-end="154" vertical-scroll-proportion="-4.2580647" vertical-offset="44" max-vertical-offset="1078">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Country.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="26" selection-start="989" selection-end="989" vertical-scroll-proportion="0.7659575" vertical-offset="584" max-vertical-offset="1430">
+        <state line="33" column="0" selection-start="788" selection-end="788" vertical-scroll-proportion="0.74492097" vertical-offset="0" max-vertical-offset="13040">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/layout.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="79" selection-start="536" selection-end="536" vertical-scroll-proportion="0.23404256" vertical-offset="0" max-vertical-offset="846">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="161" column="14" selection-start="3043" selection-end="3043" vertical-scroll-proportion="0.8442714" vertical-offset="2461" max-vertical-offset="3360">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/AuthorRegFormValidate.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="32" selection-start="579" selection-end="579" vertical-scroll-proportion="-22.068966" vertical-offset="0" max-vertical-offset="1080">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Form/AuthorRegForm.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="40" selection-start="2966" selection-end="2966" vertical-scroll-proportion="-16.32258" vertical-offset="0" max-vertical-offset="2024">
+        <state line="106" column="37" selection-start="5523" selection-end="5523" vertical-scroll-proportion="-13.103448" vertical-offset="1740" max-vertical-offset="2820">
+          <folding>
+            <element signature="e#40#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Author/reg.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="38" selection-start="2027" selection-end="2027" vertical-scroll-proportion="-17.241379" vertical-offset="420" max-vertical-offset="1340">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Openid.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="69" selection-start="1210" selection-end="1210" vertical-scroll-proportion="-17.206896" vertical-offset="801" max-vertical-offset="2840">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/UserInfo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="10" selection-start="898" selection-end="898" vertical-scroll-proportion="0.51724136" vertical-offset="470" max-vertical-offset="2080">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Country.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="24" selection-start="1199" selection-end="1199" vertical-scroll-proportion="-20.344828" vertical-offset="650" max-vertical-offset="1620">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="302" column="5" selection-start="9068" selection-end="9068" vertical-scroll-proportion="-7.7586207" vertical-offset="5655" max-vertical-offset="7320">
+          <folding>
+            <marker date="1397144320507" expanded="true" signature="2572:2633" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1397144320507" expanded="true" signature="3011:3066" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1397144320507" expanded="true" signature="3445:3506" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1397144320507" expanded="true" signature="7400:7466" placeholder="SELECT u.rol..AcmeAuthBundle..." />
+            <marker date="1397144320507" expanded="true" signature="9283:9375" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1397144320507" expanded="true" signature="9842:9957" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/AuthController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="405" column="62" selection-start="15417" selection-end="15417" vertical-scroll-proportion="-20.516129" vertical-offset="8274" max-vertical-offset="13596">
+        <state line="417" column="22" selection-start="15939" selection-end="15939" vertical-scroll-proportion="0.37322834" vertical-offset="8103" max-vertical-offset="13120">
           <folding>
             <element signature="e#83#118#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app/config/config.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="115" column="14" selection-start="3107" selection-end="3107" vertical-scroll-proportion="0.0" vertical-offset="1786" max-vertical-offset="2684">
@@ -1216,6 +858,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> 7c8ecbf0b57d7492a780790dad2772be598a2b73
   </component>
 </project>
 

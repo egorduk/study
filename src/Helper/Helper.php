@@ -234,6 +234,22 @@ class Helper
     }
 
 
+    public static function getUserRoleByEmail($userEmail)
+    {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $query = $em->createQuery('SELECT u.role_id FROM AcmeAuthBundle:User u WHERE u.email = :email')
+            ->setParameter('email', $userEmail);
+        $user = $query->getResult();
+
+        if(!$user)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+
     public static function getUserById($userId)
     {
         $container = self::getContainer();
@@ -305,7 +321,7 @@ class Helper
     }
 
 
-    public static function isExistsUserByHashAndByIdAndConfirm($userId, $hashCode, $isConfirm)
+    public static function isExistsUserByHashAndByIdAndIsConfirm($userId, $hashCode, $isConfirm)
     {
         $container = self::getContainer();
         $em = $container->get('doctrine')->getManager();

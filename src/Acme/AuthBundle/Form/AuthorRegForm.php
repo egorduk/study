@@ -11,10 +11,13 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Security\Core\Util\StringUtils;
+use Doctrine\ORM\EntityRepository;
 
 
 class AuthorRegForm extends AbstractType
 {
+    private static $kernel;
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('fieldLogin', 'text', array('label'=>'Логин:', 'required' => true, 'data' => $options['data']->fieldLogin, 'attr' => array('title' => 'Ваш логин должен состоять только из латинских букв', 'size' => 20, 'maxlength' => 12, 'placeholder' => 'Введите логин...')))
@@ -27,16 +30,21 @@ class AuthorRegForm extends AbstractType
                 ->add('checkAgreeRules', 'checkbox', array('label'=>' ', 'required' => true, 'attr' => array('title' => 'Если Вы согласны с правилами, то установите тут флажок', 'class' => '')))
                 ->add('reg', 'submit', array('label'=>'Регистрация', 'attr' => array('class' => 'btn btn-success')))
                 ->add('reset', 'reset', array('label'=>'Очистить', 'attr' => array('class' => 'btn btn-success')))
-                /*->add('choice', 'genemu_jqueryselect2_entity', array(
+               /* ->add('selectorCountry', 'genemu_jqueryselect2_entity', array(
+                'mapped'   => false,
                 'class' => 'Acme\AuthBundle\Entity\Country',
-                'property' => 'name'))*/
-                //->add('country', 'genemu_jqueryselect2_country')
-                /*->add('choice', 'genemu_jqueryselect2_choice', array(
-                    'choices' => array(
-                        'foo' => 'Foo',
-                        'bar' => 'Bar',
-                    )))*/
-            ;
+                'property' => 'code'
+            ))*/
+            ->add('selectorCountry', 'choice', array(
+                'mapped'   => false,
+                'choices' => $this->buildChoices()
+            ))
+                /*->add('selectorCountry', 'choice', array('label'=>' ', 'choices' => array(
+                    'ru'   => 'Россия',
+                    'by' => 'Беларусь',
+                    'uk'   => 'Украина',
+                    'kz'   => 'Казахстан'), 'attr' => array()))*/
+                ;
 
         $builder->addEventListener(FormEvents::POST_BIND, function(FormEvent $event)
         {
@@ -75,6 +83,39 @@ class AuthorRegForm extends AbstractType
                 }
             }
         });
+    }
+
+    /*public static function getContainer()
+    {
+        if (self::$kernel instanceof \AppKernel)
+        {
+            if (!self::$kernel->getContainer() instanceof Container)
+            {
+                self::$kernel->boot();
+            }
+
+            return self::$kernel->getContainer();
+        }
+
+        $environment = 'dev';
+        self::$kernel = new \AppKernel($environment, false);
+        self::$kernel->boot();
+
+        return self::$kernel->getContainer();
+    }*/
+
+    protected function buildChoices()
+    {
+        $container = Helper::getContainer();
+        $choices = [];
+        $table2Repository = $container->get('doctrine')->getRepository('Acme\AuthBundle\Entity\Country');
+        $table2Objects = $table2Repository->findAll();
+
+        foreach ($table2Objects as $table2Obj) {
+            $choices[$table2Obj->getCode()] = $table2Obj->getName();
+        }
+
+        return $choices;
     }
 
     public function getName()

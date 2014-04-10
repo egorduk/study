@@ -1,4 +1,7 @@
 /app/logs/*
+
 /app/cache/*
-.idea/workspace.xml
-.idea/*
+
+.idea
+
+/web/1

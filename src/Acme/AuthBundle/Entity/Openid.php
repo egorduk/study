@@ -65,7 +65,7 @@ class Openid extends EntityRepository
     protected $provider;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Country", inversedBy="link", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Country", inversedBy="link_openid", cascade={"all"})
      * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
      **/
     protected $country;
@@ -115,14 +115,14 @@ class Openid extends EntityRepository
         $this->photo = $url;
     }
 
-    public function setProvider($id)
+    public function setProvider($provider)
     {
-        $this->provider = $id;
+        $this->provider = $provider;
     }
 
-    public function setCountry($id)
+    public function setCountry($country)
     {
-        $this->country = $id;
+        $this->country = $country;
     }
 
     public function getId()
