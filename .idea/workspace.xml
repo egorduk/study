@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8afd0a94-95b4-4a96-ada0-8cfaf8ccf8b0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/acmeauth/images/flags/by.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/acmeauth/images/flags/kz.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/acmeauth/images/flags/ru.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/acmeauth/images/flags/uk.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/css/select2.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/public/js/select2.js" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\src\Acme\AuthBundle\Resources\public\js\script.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/AuthController.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/AuthController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Form/AuthorRegForm.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Form/AuthorRegForm.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/AuthorRegFormValidate.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/AuthorRegFormValidate.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Country.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/Country.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Form/RecoveryForm.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Form/RecoveryForm.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Auth/login.html.twig" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Auth/login.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Author/reg.html.twig" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Author/reg.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="8afd0a94-95b4-4a96-ada0-8cfaf8ccf8b0" name="Default" comment="" />
     <list id="09bdd184-ad02-4762-8397-2c72ed3a09aa" name="New changelist" comment="" />
     <ignored path="study.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -139,7 +121,7 @@
       <file leaf-file-name="reg.html.twig" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Author/reg.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="44" selection-start="2089" selection-end="2089" vertical-scroll-proportion="0.61698955" vertical-offset="664" max-vertical-offset="1562">
+            <state line="32" column="11" selection-start="1449" selection-end="1449" vertical-scroll-proportion="0.046838406" vertical-offset="664" max-vertical-offset="1562">
               <folding />
             </state>
           </provider>
@@ -838,10 +820,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="true" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19805194" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19805194" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1229,7 +1211,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Author/reg.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="44" selection-start="2089" selection-end="2089" vertical-scroll-proportion="0.61698955" vertical-offset="664" max-vertical-offset="1562">
+        <state line="32" column="11" selection-start="1449" selection-end="1449" vertical-scroll-proportion="0.046838406" vertical-offset="664" max-vertical-offset="1562">
           <folding />
         </state>
       </provider>
