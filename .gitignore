@@ -1,4 +1,7 @@
 /app/logs/*
+
 /app/cache/*
+
 .idea
+
 /web/1

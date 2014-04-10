@@ -31,11 +31,17 @@ class Country extends EntityRepository
     /**
      * @ORM\OneToMany(targetEntity="Openid", mappedBy="country")
      **/
-    protected $link;
+    protected $link_openid;
+
+    /**
+     * @ORM\OneToMany(targetEntity="UserInfo", mappedBy="country")
+     **/
+    protected $link_user_info;
 
     public function __construct()
     {
-        $this->link = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->link_openid = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->link_user_info = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function setName($name)
@@ -53,9 +59,19 @@ class Country extends EntityRepository
         $this->id = $id;
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function getName()
     {
         return $this->name;
+    }
+
+    public function getCode()
+    {
+        return $this->code;
     }
 
 }

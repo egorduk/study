@@ -33,12 +33,19 @@ class UserInfo extends EntityRepository
      */
     protected $mobile_tel;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Country", inversedBy="link_user_info", cascade={"all"})
+     * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
+     **/
+    protected $country;
+
 
     public function __construct()
     {
         $this->skype = "";
         $this->icq = "";
         $this->mobile_tel = "";
+        //$this->country =
     }
 
     public function getSkype()
@@ -79,5 +86,15 @@ class UserInfo extends EntityRepository
     public function getId()
     {
         return $this->id;
+    }
+
+    public function setCountry($country)
+    {
+        $this->country = $country;
+    }
+
+    public function getCountry()
+    {
+        return $this->country;
     }
 }
