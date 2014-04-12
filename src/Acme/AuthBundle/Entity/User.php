@@ -300,6 +300,10 @@ class User extends EntityRepository implements UserInterface, \Serializable
         $this->user_info_id = $id;
     }
 
+    public function getUserInfoId()
+    {
+        return $this->user_info_id;
+    }
 
     /**
      * @see \Serializable::serialize()

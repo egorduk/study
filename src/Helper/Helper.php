@@ -20,6 +20,7 @@ class Helper
     private static $_tableUser = 'AcmeAuthBundle:User';
     private static $_tableProvider = 'AcmeAuthBundle:Provider';
     private static $_tableCountry = 'AcmeAuthBundle:Country';
+    private static $_tableUserInfo = 'AcmeAuthBundle:UserInfo';
     private static $kernel;
 
     public function __construct()
@@ -255,13 +256,11 @@ class Helper
 
     public static function getUserById($userId)
     {
-        $container = self::getContainer();
-        $user = $container->get('doctrine')->getRepository(self::$_tableUser)
-            ->findOneByLogin($userId);
+        $user = self::getContainer()->get('doctrine')->getRepository(self::$_tableUser)
+            ->findOneById($userId);
 
         if (!$user)
         {
-            //throw new NotFoundHttpException('Error!');
             return false;
         }
 
@@ -396,5 +395,15 @@ class Helper
 
         return $openId->getId();
     }
+
+
+    public static function getUserInfoById($userId)
+    {
+        $userInfo = self::getContainer()->get('doctrine')->getRepository(self::$_tableUserInfo)
+            ->findOneById($userId);
+
+        return $userInfo;
+    }
+
 
 }

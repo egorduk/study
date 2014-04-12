@@ -5,19 +5,19 @@ namespace Acme\AuthBundle\Entity;
 
 class AuthorRegFormValidate extends ClientRegFormValidate
 {
-    public $fieldMobileTel;
+    public $fieldMobilePhone;
     public $fieldSkype;
     public $fieldIcq;
     public $selectorCountry;
 
-    public function setMobileTel($tel)
+    public function setMobilePhone($phone)
     {
-        $this->fieldMobileTel = $tel;
+        $this->$fieldMobilePhone = $phone;
     }
 
-    public function getMobileTel()
+    public function getMobilePhone()
     {
-        return $this->fieldMobileTel;
+        return $this->$fieldMobilePhone;
     }
 
     public function setSkype($skype)

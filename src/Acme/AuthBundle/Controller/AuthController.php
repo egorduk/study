@@ -106,7 +106,7 @@ class AuthController extends Controller
                                 $role = 'ROLE_CLIENT';
                             }
 
-                            $token = new UsernamePasswordToken($user->getId(), null, $firewall, array($role));
+                            $token = new UsernamePasswordToken((string)$user->getId(), null, $firewall, array($role));
                             $this->get('security.context')->setToken($token);
 
                             if ($role == 'ROLE_AUTHOR')
