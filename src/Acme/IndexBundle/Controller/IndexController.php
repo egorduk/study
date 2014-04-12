@@ -2,28 +2,21 @@
 
 namespace Acme\IndexBundle\Controller;
 
-/*use Acme\RssBundle\Form\AddForm;
-use Acme\RssBundle\Form\ViewForm;
-use Acme\RssBundle\Form\EditForm;*/
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\ExpressionLanguage\Parser;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Finder\Iterator\SortableIterator;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-/*use Acme\RssBundle\Helper\Rss;
-use Acme\RssBundle\Entity\Source;
-use Acme\RssBundle\Entity\News;*/
 use Doctrine\ORM\Query;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\PropertyAccess\Exception\AccessException;
 
 
 class IndexController extends Controller
 {
-    private $tableSource = 'AcmeRssBundle:Source';
-    private $tableNews = 'AcmeRssBundle:News';
 
     /**
      * @Template()
@@ -34,135 +27,30 @@ class IndexController extends Controller
         return array();
     }
 
-    /**
-     * @Template()
-     * A function for reading rss news from active sources, saving data in cache, creating tag cloud with limit 80 tags
-     * @return Response
-     */
-    public function readAction()
-    {
-        $text = '';
-        $rss = new Rss();
-        $items = array();
-        $names = array();
-
-        $sources = $this->getDoctrine()
-            ->getRepository($this->tableSource)
-            ->findByActive(1);
-
-        if (count($sources))
-        {
-            foreach($sources as $source)
-            {
-                $rss->load($source->getUrl());
-                $items[] = $rss->getItems();
-                $names[] = $source->getName();
-            }
-        }
-
-        $clearStr = '';
-        $cloud = new Cloud();
-
-        $em = $this->getDoctrine()->getManager();
-        $connection = $em->getConnection();
-        $platform = $connection->getDatabasePlatform();
-        $connection->executeUpdate($platform->getTruncateTableSQL('News', true));
-
-        foreach($items as $index=>$item)
-        {
-            $text .= '<br/><h2><span id="feedName">' . $names[$index] . '</span></h2><br/>';
-
-            foreach($item as $news)
-            {
-                $text .= '<strong><span id="rssTitle">'.$news['title'].'</span></strong><br/><div id="rssPost">'.$news['description'].'</div><br/>';
-
-                $clearStr .= $cloud->filterStr($news['title']) . ' ';
-
-                $title = $news['title'];
-                $content = $news['description'];
-                $source = $sources[$index];
-                $news = new News();
-                $news->setTitle($title);
-                $news->setContent($content);
-                $news->setSource($source);
-                $em->persist($news);
-           }
-        }
-
-        $em->flush();
-
-        $cloudTag = $cloud->buildCloud($clearStr);
-
-        $response = $this->render('AcmeRssBundle:Rss:read.html.twig', array('text' => $text, 'cloud' => $cloudTag));
-        return $response;
-    }
-
 
     /**
      * @Template()
-     * A function for viewing rss news as title-link
-     * @return array
+     * @return Array
      */
-    public function shortAction()
+    public function rulesAction($type)
     {
-        $text = '';
-        $rss = new Rss();
-        $items = array();
-        $names = array();
-
-        $sources = $this->getDoctrine()
-            ->getRepository($this->tableSource)
-            ->findByActive(1);
-
-        if (count($sources))
+        if ($type == "client")
         {
-            foreach($sources as $source)
-            {
-                $rss->load($source->getUrl());
-                $items[] = $rss->getItems();
-                $names[] = $source->getName();
-            }
+            return $this->render('AcmeIndexBundle:Index:clientRules.html.twig');
         }
-
-        $clearStr = '';
-        $cloud = new Cloud();
-
-        $em = $this->getDoctrine()->getManager();
-        $connection = $em->getConnection();
-        $platform = $connection->getDatabasePlatform();
-        $connection->executeUpdate($platform->getTruncateTableSQL('News', true));
-
-        $id = 1;
-
-        foreach($items as $index=>$item)
+        elseif ($type == "author")
         {
-            $text .= '<br/><h2><span id="feedName">' . $names[$index] . '</span></h2><br/>';
-
-            foreach($item as $news)
-            {
-                $text .= '<strong><span><a href=' . 'full/' . $id . '>' . $news['title'] . '</a></span></strong><br/>';
-
-                $clearStr .= $cloud->filterStr($news['title']) . ' ';
-
-                $title = $news['title'];
-                $content = $news['description'];
-                $source = $sources[$index];
-                $news = new News();
-                $news->setTitle($title);
-                $news->setContent($content);
-                $news->setSource($source);
-                $em->persist($news);
-
-                $id++;
-            }
+            return $this->render('AcmeIndexBundle:Index:authorRules.html.twig');
         }
-
-        $em->flush();
-
-        $cloudTag = $cloud->buildCloud($clearStr);
-
-        return array('text' => $text, 'cloud' => $cloudTag);
+        else
+        {
+            throw new AccessException();
+        }
     }
+
+
+
+
 
 
     /**

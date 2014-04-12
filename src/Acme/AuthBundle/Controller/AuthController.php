@@ -2,7 +2,6 @@
 
 namespace Acme\AuthBundle\Controller;
 
-//use Acme\AuthBundle\Entity\Client;
 use Acme\AuthBundle\Entity\Country;
 use Acme\AuthBundle\Entity\Openid;
 use Acme\AuthBundle\Entity\User;
@@ -30,14 +29,10 @@ use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\SecurityContext;
-use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
-//use Symfony\Component\Security\Core\Util\SecureRandom;
 use Symfony\Component\Security\Core\Util\StringUtils;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-//use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-//use Symfony\Bundle\FrameworkBundle\Test;
 use Helper\Helper;
 //use Symfony\Component\Security\Core\Util\SecureRandom;
 
@@ -203,14 +198,6 @@ class AuthController extends Controller
         return array();
     }
 
-    /**
-     * @Template()
-     * @return Response
-     */
-    public function rulesAction()
-    {
-        return array();
-    }
 
     /**
      * @Template()
@@ -236,7 +223,7 @@ class AuthController extends Controller
                         $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
                         $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
 
-                        if ($resp->is_valid)
+                        if (!$resp->is_valid)
                         {
                             $postData = $request->request->get('formReg');
                             $userLogin = $postData['fieldLogin'];
@@ -381,6 +368,8 @@ class AuthController extends Controller
 
 
     /**
+     * Template for denied area
+     *
      * @Template()
      * @return array
      */
@@ -419,23 +408,18 @@ class AuthController extends Controller
                     if ($role == 1)
                     {
                         $role = 'ROLE_AUTHOR';
+                        $pathRedirect = 'secure_author_index';
                     }
                     else
                     {
                         $role = 'ROLE_CLIENT';
+                        $pathRedirect = 'secure_client_index';
                     }
 
                     $token = new UsernamePasswordToken($userEmail, null, 'secured_area', array($role));
                     $this->get('security.context')->setToken($token);
 
-                    if ($role == 'ROLE_AUTHOR')
-                    {
-                        return new RedirectResponse($this->generateUrl('secure_author_index'));
-                    }
-                    else
-                    {
-                        return new RedirectResponse($this->generateUrl('secure_client_index'));
-                    }
+                    return new RedirectResponse($this->generateUrl($pathRedirect));
                 }
                 else
                 {
@@ -461,11 +445,17 @@ class AuthController extends Controller
                                 if (!$resp->is_valid)
                                 {
                                     $session->remove('socialToken');
+                                    $em = $this->getDoctrine()->getManager();
 
                                     $postData = $request->request->get('formReg');
                                     $userLogin = $postData['fieldLogin'];
                                     $userPassword = $postData['fieldPass'];
                                     $userEmail = $postData['fieldEmail'];
+
+                                    $userInfo = new UserInfo();
+                                    $em->persist($userInfo);
+                                    $em->flush();
+                                    $userInfoId = $userInfo->getId();
 
                                     $user = new User();
                                     $user->setLogin($userLogin);
@@ -476,6 +466,9 @@ class AuthController extends Controller
                                     $password = Helper::getRegPassword($userPassword, $salt);
                                     $user->setPassword($password);
                                     $user->setSalt($salt);
+                                    $hashCode = Helper::getRandomValue(15);
+                                    $user->setHash($hashCode);
+                                    $user->setUserInfoId($userInfoId);
 
                                     $providerName = $socialData['network'];
                                     //$countryCode = geoip_country_code_by_name($_SERVER["REMOTE_ADDR"]);
@@ -484,11 +477,16 @@ class AuthController extends Controller
                                     $openId = Helper::addNewOpenIdData($socialData, $providerName, $countryCode);
 
                                     $user->setOpenId($openId);
-                                    $em = $this->getDoctrine()->getManager();
+
                                     $em->persist($user);
                                     $em->flush();
+                                    $userId = $user->getId();
 
-                                    //return $this->redirect($this->generateUrl('client_index'));
+                                    Helper::sendConfirmationReg($this->container, $userEmail, $userId, $hashCode);
+
+                                    return $this->render(
+                                        'AcmeAuthBundle:Auth:successReg.html.twig', array('userLogin' => $userLogin)
+                                    );
                                 }
                                 else
                                 {
@@ -501,15 +499,9 @@ class AuthController extends Controller
 
                 return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => '');
             }
-            /*else
-            {
-                return $this->redirect($this->generateUrl('client_index'));
-            }*/
         }
-        //else
-        {
-            return $this->redirect($this->generateUrl('login'));
-        }
+
+        return $this->redirect($this->generateUrl('login'));
     }
 
 
@@ -586,7 +578,7 @@ class AuthController extends Controller
         {
                 if ($type == "reg")
                 {
-                    $isExistsUser = Helper::isExistsUserByHashAndByIdAndConfirm($userId, $hashCode, 0);
+                    $isExistsUser = Helper::isExistsUserByHashAndByIdAndIsConfirm($userId, $hashCode, 0);
 
                     if ($isExistsUser)
                     {
@@ -602,7 +594,7 @@ class AuthController extends Controller
                 }
                 elseif ($type == "rec")
                 {
-                    $isExistsUser = Helper::isExistsUserByHashAndByIdAndConfirm($userId, $hashCode, 1);
+                    $isExistsUser = Helper::isExistsUserByHashAndByIdAndIsConfirm($userId, $hashCode, 1);
 
                     if ($isExistsUser)
                     {

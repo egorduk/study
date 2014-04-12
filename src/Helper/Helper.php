@@ -240,7 +240,7 @@ class Helper
     public static function getUserRoleByEmail($userEmail)
     {
         $em = self::getContainer()->get('doctrine')->getManager();
-        $query = $em->createQuery('SELECT u.role_id FROM AcmeAuthBundle:User u WHERE u.email = :email')
+        $query = $em->createQuery('SELECT u.user_role_id FROM AcmeAuthBundle:User u WHERE u.email = :email')
             ->setParameter('email', $userEmail);
         $user = $query->getResult();
 
@@ -283,19 +283,19 @@ class Helper
         }
         else
         {
+            $user->setHash('');
+
             if ($type == "reg")
             {
-                $user->setPassword($hashCode);
+                //$user->setPassword($hashCode);
                 $user->setIsConfirm(1);
                 $user->setDateConfirmReg(new \DateTime());
-                $user->setHash('');
             }
             elseif ($type == "rec")
             {
                 $encodePassword = $user->getRecoveryPassword();
                 $user->setPassword($encodePassword);
                 $user->setDateConfirmRecovery(new \DateTime());
-                $user->setHash('');
                 $user->setRecoveryPassword('');
             }
 
