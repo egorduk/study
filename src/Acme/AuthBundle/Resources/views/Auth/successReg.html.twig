@@ -1,6 +1,6 @@
 {% extends "AcmeAuthBundle::layout.html.twig" %}
 
-{% block title "Confirm Password" %}
+{% block title "Success Registration" %}
 
 {% block content_header '' %}
 
@@ -8,10 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="span2 centred">
-                {{ msgError }}
-                {% if viewLink %}
-                    <p>Теперь вы можете <a href="{{ path('login') }}">зайти</a> в систему</p>
-                {% endif %}
+                <p>{{ userLogin }}, проверьте Вашу почту для подтверждения регистрации в системе!</p>
             </div>
         </div>
     </div>

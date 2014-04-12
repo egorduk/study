@@ -2,7 +2,6 @@
 
 namespace Acme\AuthBundle\Controller;
 
-//use Acme\AuthBundle\Entity\Client;
 use Acme\AuthBundle\Entity\Country;
 use Acme\AuthBundle\Entity\Openid;
 use Acme\AuthBundle\Entity\User;
@@ -30,14 +29,10 @@ use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\SecurityContext;
-use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
-//use Symfony\Component\Security\Core\Util\SecureRandom;
 use Symfony\Component\Security\Core\Util\StringUtils;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-//use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-//use Symfony\Bundle\FrameworkBundle\Test;
 use Helper\Helper;
 //use Symfony\Component\Security\Core\Util\SecureRandom;
 
@@ -46,9 +41,9 @@ require_once '..\src\Acme\AuthBundle\Lib\recaptchalib.php';
 
 class AuthController extends Controller
 {
-    private $tableUser = 'AcmeAuthBundle:User';
+    //private $tableUser = 'AcmeAuthBundle:User';
     private $tableCountry = 'AcmeAuthBundle:Country';
-    private $tableProvider = 'AcmeAuthBundle:Provider';
+    //private $tableProvider = 'AcmeAuthBundle:Provider';
 
 
 
@@ -111,7 +106,7 @@ class AuthController extends Controller
                                 $role = 'ROLE_CLIENT';
                             }
 
-                            $token = new UsernamePasswordToken($userEmail, null, $firewall, array($role));
+                            $token = new UsernamePasswordToken((string)$user->getId(), null, $firewall, array($role));
                             $this->get('security.context')->setToken($token);
 
                             if ($role == 'ROLE_AUTHOR')
@@ -203,14 +198,6 @@ class AuthController extends Controller
         return array();
     }
 
-    /**
-     * @Template()
-     * @return Response
-     */
-    public function rulesAction()
-    {
-        return array();
-    }
 
     /**
      * @Template()
@@ -231,12 +218,12 @@ class AuthController extends Controller
             {
                 if ($formReg->get('reg')->isClicked())
                 {
-                    $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
-                    $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
-
                     if ($formReg->isValid())
                     {
-                        if ($resp->is_valid)
+                        $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
+                        $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
+
+                        if (!$resp->is_valid)
                         {
                             $postData = $request->request->get('formReg');
                             $userLogin = $postData['fieldLogin'];
@@ -381,6 +368,8 @@ class AuthController extends Controller
 
 
     /**
+     * Template for denied area
+     *
      * @Template()
      * @return array
      */
@@ -405,7 +394,7 @@ class AuthController extends Controller
             $socialToken = $session->get('socialToken');
             $socialResponse = file_get_contents('http://ulogin.ru/token.php?token=' . $socialToken . '&host=' . $_SERVER['HTTP_HOST']);
             $socialData = json_decode($socialResponse, true);
-            //print_r($socialData);
+            //print_r($socialData); die;
 
             if (!isset($socialData['error']))
             {
@@ -415,28 +404,22 @@ class AuthController extends Controller
                 if ($isExistsUser)
                 {
                     $role = Helper::getUserRoleByEmail($userEmail);
-                    //print_r($role); die;
 
                     if ($role == 1)
                     {
                         $role = 'ROLE_AUTHOR';
+                        $pathRedirect = 'secure_author_index';
                     }
                     else
                     {
                         $role = 'ROLE_CLIENT';
+                        $pathRedirect = 'secure_client_index';
                     }
 
                     $token = new UsernamePasswordToken($userEmail, null, 'secured_area', array($role));
                     $this->get('security.context')->setToken($token);
 
-                    if ($role == 'ROLE_AUTHOR')
-                    {
-                        return new RedirectResponse($this->generateUrl('secure_author_index'));
-                    }
-                    else
-                    {
-                        return new RedirectResponse($this->generateUrl('secure_client_index'));
-                    }
+                    return new RedirectResponse($this->generateUrl($pathRedirect));
                 }
                 else
                 {
@@ -454,64 +437,61 @@ class AuthController extends Controller
                     {
                         if ($formReg->get('reg')->isClicked())
                         {
-                            $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
-                            $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
-
-                            if ($resp->is_valid)
+                            if ($formReg->isValid())
                             {
-                                if ($formReg->isValid())
+                                $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
+                                $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
+
+                                if (!$resp->is_valid)
                                 {
                                     $session->remove('socialToken');
+                                    $em = $this->getDoctrine()->getManager();
+
                                     $postData = $request->request->get('formReg');
                                     $userLogin = $postData['fieldLogin'];
                                     $userPassword = $postData['fieldPass'];
                                     $userEmail = $postData['fieldEmail'];
 
+                                    $userInfo = new UserInfo();
+                                    $em->persist($userInfo);
+                                    $em->flush();
+                                    $userInfoId = $userInfo->getId();
+
                                     $user = new User();
                                     $user->setLogin($userLogin);
                                     $user->setEmail($userEmail);
+                                    $user->setRole(2);
 
                                     $salt = Helper::getSalt();
                                     $password = Helper::getRegPassword($userPassword, $salt);
                                     $user->setPassword($password);
                                     $user->setSalt($salt);
+                                    $hashCode = Helper::getRandomValue(15);
+                                    $user->setHash($hashCode);
+                                    $user->setUserInfoId($userInfoId);
 
                                     $providerName = $socialData['network'];
                                     //$countryCode = geoip_country_code_by_name($_SERVER["REMOTE_ADDR"]);
-                                    $countryCode = 'BY';
+                                    $countryCode = 'by';
 
-                                    $provider = $this->getDoctrine()->getRepository($this->tableProvider)
-                                        ->findOneByName($providerName);
+                                    $openId = Helper::addNewOpenIdData($socialData, $providerName, $countryCode);
 
-                                    $country = $this->getDoctrine()->getRepository($this->tableCountry)
-                                        ->findOneByCode($countryCode);
+                                    $user->setOpenId($openId);
 
-                                    $openId = new Openid();
-                                    $openId->setUid($socialData['uid']);
-                                    $openId->setProfileUrl($socialData['profile']);
-                                    $openId->setEmail($socialData['email']);
-                                    $openId->setNickname($socialData['nickname']);
-                                    $openId->setFirstName($socialData['first_name']);
-                                    $openId->setIdentity($socialData['identity']);
-                                    $openId->setPhotoBig($socialData['photo_big']);
-                                    $openId->setPhoto($socialData['photo']);
-                                    $openId->setProvider($provider);
-                                    $openId->setCountry($country);
-
-                                    $em = $this->getDoctrine()->getManager();
-                                    $em->persist($openId);
-                                    $em->flush();
-
-                                    $user->setOpenId($openId->getId());
                                     $em->persist($user);
                                     $em->flush();
+                                    $userId = $user->getId();
 
-                                    return $this->redirect($this->generateUrl('client_index'));
+                                    Helper::sendConfirmationReg($this->container, $userEmail, $userId, $hashCode);
+
+                                    return $this->render(
+                                        'AcmeAuthBundle:Auth:successReg.html.twig', array('userLogin' => $userLogin)
+                                    );
                                 }
-                            }
-                            else
-                            {
-                                return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $resp->error);
+                                else
+                                {
+                                    return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $resp->error);
+                                }
                             }
                         }
                     }
@@ -519,15 +499,9 @@ class AuthController extends Controller
 
                 return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => '');
             }
-            /*else
-            {
-                return $this->redirect($this->generateUrl('client_index'));
-            }*/
         }
-        //else
-        {
-            return $this->redirect($this->generateUrl('login'));
-        }
+
+        return $this->redirect($this->generateUrl('login'));
     }
 
 
@@ -604,7 +578,7 @@ class AuthController extends Controller
         {
                 if ($type == "reg")
                 {
-                    $isExistsUser = Helper::isExistsUserByHashAndByIdAndConfirm($userId, $hashCode, 0);
+                    $isExistsUser = Helper::isExistsUserByHashAndByIdAndIsConfirm($userId, $hashCode, 0);
 
                     if ($isExistsUser)
                     {
@@ -620,7 +594,7 @@ class AuthController extends Controller
                 }
                 elseif ($type == "rec")
                 {
-                    $isExistsUser = Helper::isExistsUserByHashAndByIdAndConfirm($userId, $hashCode, 1);
+                    $isExistsUser = Helper::isExistsUserByHashAndByIdAndIsConfirm($userId, $hashCode, 1);
 
                     if ($isExistsUser)
                     {

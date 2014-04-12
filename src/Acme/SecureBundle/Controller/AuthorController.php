@@ -2,7 +2,11 @@
 
 namespace Acme\SecureBundle\Controller;
 
-
+/*use Acme\AuthBundle\Entity\Client;
+use Acme\AuthBundle\Entity\User;
+use Acme\AuthBundle\Entity\ClientFormValidate;
+use Acme\AuthBundle\Form\Client\LoginForm;
+use Acme\AuthBundle\Form\Client\RegForm;*/
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\ExpressionLanguage\Parser;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,13 +25,11 @@ use Symfony\Component\Security\Core\Util\StringUtils;
 //use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Helper\Helper;
 //use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Acme\SecureBundle\Form\Client\ClientProfileForm;
-use Acme\SecureBundle\Entity\ClientProfileFormValidate;
 
 
-class ClientController extends Controller
+class AuthorController extends Controller
 {
-    private $_tableUserInfo = 'AcmeAuthBundle:UserInfo';
+    //private $tableUser = 'AcmeSecureBundle:User';
 
     /**
      * @Template()
@@ -36,8 +38,9 @@ class ClientController extends Controller
     public function indexAction(Request $request)
     {
         //throw new NotFoundHttpException('Sorry not existing!');
-        $userId = $this->get('security.context')->getToken()->getUser();
+        $userLogin = $this->get('security.context')->getToken()->getUser();
         //$userRole = $this->get('security.context')->getToken()->getRoles();
+       // print_r($userRole[0]->getRole());
         $session = $request->getSession();
         $sessionCreated = $session->getMetadataBag()->getCreated();
         $sessionLifeTime = $session->getMetadataBag()->getLifetime();
@@ -49,59 +52,71 @@ class ClientController extends Controller
         $sessionRemaining = $sessionRemaining - $nowTimestamp;
         $sessionRemaining = Helper::getDateFromTimestamp($sessionRemaining, "i:s");
 
-        $user = Helper::getUserById($userId);
-
-        //print_r($this->get('security.context')->getToken()); //die;
-
-        return array('userId' => $userId, 'userLogin' => $user->getLogin(), 'userRole' => 'Заказчик', 'whenLogin' => $whenLogin, 'remainingTime' => $sessionRemaining);
+        return array('userLogin' => $userLogin, 'userRole' => 'Заказчик', 'whenLogin' => $whenLogin, 'remainingTime' => $sessionRemaining);
     }
 
+    /**
+     * @Template()
+     * @return Response
+     */
+    public function loginAction(Request $request)
+    {
+
+    }
 
     /**
      * @Template()
      * @return array
      */
-    public function profileAction(Request $request, $type)
+    public function regAction(Request $request)
     {
-        if ($type == "view" || $type == "edit")
+        $clientValidate = new ClientFormValidate();
+        $formReg = $this->createForm(new RegForm(), $clientValidate);
+        $formReg->handleRequest($request);
+
+        $publicKeyRecaptcha = $this->container->getParameter('publicKeyRecaptcha');
+        $captcha = recaptcha_get_html($publicKeyRecaptcha);
+
+        if ($request->isMethod('POST'))
         {
-            $userId = $this->get('security.context')->getToken()->getUser();
-            $user = Helper::getUserById($userId);
-            $userInfo = Helper::getUserInfoById($user->getUserInfoId());
-        }
-
-        if ($type == "view")
-        {
-            return array('formProfile' =>'', 'user' => $user, 'userInfo' => $userInfo);
-        }
-        elseif ($type == "edit")
-        {
-            $userInfo = Helper::getUserInfoById(5);
-
-            $profileValidate = new ClientProfileFormValidate();
-            $profileValidate->setIcq($userInfo->getIcq());
-            $formProfile = $this->createForm(new ClientProfileForm(), $profileValidate);
-            $formProfile->handleRequest($request);
-
-            //print_r($profileValidate); die;
-
-            if ($request->isMethod('POST'))
+            if ($formReg->get('reg')->isClicked())
             {
-                if ($formProfile->get('reg')->isClicked())
-                {
-                    if ($formProfile->isValid())
-                    {
+                $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
+                $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
 
+                if ($formReg->isValid())
+                {
+                    if ($resp->is_valid)
+                    {
+                        $postData = $request->request->get('formReg');
+                        $userLogin = $postData['fieldLogin'];
+                        $userPassword = $postData['fieldPass'];
+                        $userEmail = $postData['fieldEmail'];
+
+                        $user = new User();
+                        $user->setLogin($userLogin);
+                        $user->setEmail($userEmail);
+
+                        $salt = Helper::getSalt();
+                        $password = Helper::getRegPassword($userPassword, $salt);
+                        $user->setPassword($password);
+                        $user->setSalt($salt);
+
+                        $em = $this->getDoctrine()->getManager();
+                        $em->persist($user);
+                        $em->flush();
+
+                        return $this->redirect($this->generateUrl('client_index'));
+                    }
+                    else
+                    {
+                        return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $resp->error);
                     }
                 }
             }
-
-            return array('formProfile' => $formProfile->createView(), 'user' => $user, 'userInfo' => $userInfo);
         }
-        else
-        {
 
-        }
+        return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => '');
     }
 
 
@@ -114,7 +129,84 @@ class ClientController extends Controller
         return array();
     }
 
+    /**
+     * @Template()
+     * @return array
+     */
+    public function openidAction(Request $request)
+    {
+        $session = $request->getSession();
 
+        if($session->has('socialToken'))
+        {
+            $socialToken = $session->get('socialToken');
+            $socialResponse = file_get_contents('http://ulogin.ru/token.php?token=' . $socialToken . '&host=' . $_SERVER['HTTP_HOST']);
+            $socialData = json_decode($socialResponse, true);
+            //$session->remove('socialToken');
+
+            if (!isset($socialData['error']))
+            {
+                $clientValidate = new ClientFormValidate();
+                $clientValidate->setLogin($socialData['nickname']);
+                $clientValidate->setEmail($socialData['email']);
+
+                $formReg = $this->createForm(new RegForm(), $clientValidate);
+                $formReg->handleRequest($request);
+
+                $publicKeyRecaptcha = $this->container->getParameter('publicKeyRecaptcha');
+                $captcha = recaptcha_get_html($publicKeyRecaptcha);
+
+                if ($request->isMethod('POST'))
+                {
+                    if ($formReg->get('reg')->isClicked())
+                    {
+                        $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
+                        $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
+
+                        if ($resp->is_valid)
+                        {
+                            if ($formReg->isValid())
+                            {
+                                $postData = $request->request->get('formReg');
+                                $userLogin = $postData['fieldLogin'];
+                                $userPassword = $postData['fieldPass'];
+                                $userEmail = $postData['fieldEmail'];
+
+                                $user = new User();
+                                $user->setLogin($userLogin);
+                                $user->setEmail($userEmail);
+
+                                $salt = Helper::getSalt();
+                                $password = Helper::getRegPassword($userPassword, $salt);
+                                $user->setPassword($password);
+                                $user->setSalt($salt);
+
+                                $em = $this->getDoctrine()->getManager();
+                                $em->persist($user);
+                                $em->flush();
+
+                                return $this->redirect($this->generateUrl('client_index'));
+                            }
+                        }
+                        else
+                        {
+                            return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $resp->error);
+                        }
+                    }
+                }
+
+                return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => '');
+            }
+            else
+            {
+                return $this->redirect($this->generateUrl('client_index'));
+            }
+        }
+        else
+        {
+            return $this->redirect($this->generateUrl('client_index'));
+        }
+    }
 
     /**
      * @Template()

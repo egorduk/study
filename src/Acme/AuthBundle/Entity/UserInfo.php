@@ -31,7 +31,27 @@ class UserInfo extends EntityRepository
     /**
      * @ORM\Column(type="string")
      */
-    protected $mobile_tel;
+    protected $mobile_phone;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $static_phone;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $username;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $surname;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $lastname;
 
     /**
      * @ORM\ManyToOne(targetEntity="Country", inversedBy="link_user_info", cascade={"all"})
@@ -68,14 +88,14 @@ class UserInfo extends EntityRepository
         $this->icq = $icq;
     }
 
-    public function getMobileTel()
+    public function getMobilePhone()
     {
-        return $this->mobile_tel;
+        return $this->mobile_phone;
     }
 
-    public function setMobileTel($tel)
+    public function setMobilePhone($phone)
     {
-        $this->mobile_tel = $tel;
+        $this->mobile_phone = $phone;
     }
 
     public function setId($id)
@@ -96,5 +116,45 @@ class UserInfo extends EntityRepository
     public function getCountry()
     {
         return $this->country;
+    }
+
+    public function setStaticPhone($phone)
+    {
+        $this->static_phone = $phone;
+    }
+
+    public function getStaticPhone()
+    {
+        return $this->static_phone;
+    }
+
+    public function setUsername($name)
+    {
+        $this->username = $name;
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    public function setSurname($surname)
+    {
+        $this->surname = $surname;
+    }
+
+    public function getSurname()
+    {
+        return $this->surname;
+    }
+
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+    }
+
+    public function getLastname()
+    {
+        return $this->lastname;
     }
 }

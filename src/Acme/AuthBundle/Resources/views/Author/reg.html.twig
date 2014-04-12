@@ -27,7 +27,7 @@
                         {{ form_row(formReg.fieldIcq) }}
                         {% block form_label %}
                             {% if(formReg.checkAgreeRules) %}
-                                <span class="required" title="Нажмите для прочтения правил"><a href="author_rules">Правила системы</a>&nbsp;прочитаны</span>
+                                <span class="required" title="Нажмите для прочтения правил"><a href="{{ path('rules', {'type': 'author'}) }}" target="_blank">Правила системы</a>&nbsp;прочитаны</span>
                                {{ form_widget(formReg.checkAgreeRules) }}
                             {% endif %}
                         {% endblock %}

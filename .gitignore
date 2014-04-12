@@ -3,5 +3,8 @@
 /app/cache/*
 
 .idea/
+<<<<<<< HEAD
 
+=======
+>>>>>>> f7ab2e208b3d413cb89ba7a95400db6139ac0388
 /web/1

@@ -59,7 +59,7 @@ class Openid extends EntityRepository
     protected $photo;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Provider", inversedBy="link", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Provider", inversedBy="link_provider", cascade={"all"})
      * @ORM\JoinColumn(name="provider_id", referencedColumnName="id")
      **/
     protected $provider;

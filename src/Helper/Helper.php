@@ -11,12 +11,16 @@ use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use Symfony\Component\Security\Core\Util\StringUtils;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Acme\AuthBundle\Entity\Openid;
 
 class Helper
 {
     private static $_container;
     private static $_ymFile;
     private static $_tableUser = 'AcmeAuthBundle:User';
+    private static $_tableProvider = 'AcmeAuthBundle:Provider';
+    private static $_tableCountry = 'AcmeAuthBundle:Country';
+    private static $_tableUserInfo = 'AcmeAuthBundle:UserInfo';
     private static $kernel;
 
     public function __construct()
@@ -237,7 +241,7 @@ class Helper
     public static function getUserRoleByEmail($userEmail)
     {
         $em = self::getContainer()->get('doctrine')->getManager();
-        $query = $em->createQuery('SELECT u.role_id FROM AcmeAuthBundle:User u WHERE u.email = :email')
+        $query = $em->createQuery('SELECT u.user_role_id FROM AcmeAuthBundle:User u WHERE u.email = :email')
             ->setParameter('email', $userEmail);
         $user = $query->getResult();
 
@@ -252,13 +256,11 @@ class Helper
 
     public static function getUserById($userId)
     {
-        $container = self::getContainer();
-        $user = $container->get('doctrine')->getRepository(self::$_tableUser)
-            ->findOneByLogin($userId);
+        $user = self::getContainer()->get('doctrine')->getRepository(self::$_tableUser)
+            ->findOneById($userId);
 
         if (!$user)
         {
-            //throw new NotFoundHttpException('Error!');
             return false;
         }
 
@@ -280,19 +282,19 @@ class Helper
         }
         else
         {
+            $user->setHash('');
+
             if ($type == "reg")
             {
-                $user->setPassword($hashCode);
+                //$user->setPassword($hashCode);
                 $user->setIsConfirm(1);
                 $user->setDateConfirmReg(new \DateTime());
-                $user->setHash('');
             }
             elseif ($type == "rec")
             {
                 $encodePassword = $user->getRecoveryPassword();
                 $user->setPassword($encodePassword);
                 $user->setDateConfirmRecovery(new \DateTime());
-                $user->setHash('');
                 $user->setRecoveryPassword('');
             }
 
@@ -364,5 +366,44 @@ class Helper
 
         $mailer->send($message);
     }
+
+
+    public static function addNewOpenIdData($socialData, $providerName, $countryCode)
+    {
+        $provider = self::getContainer()->get('doctrine')->getRepository(self::$_tableProvider)
+            ->findOneByName($providerName);
+
+        $country = self::getContainer()->get('doctrine')->getRepository(self::$_tableCountry)
+            ->findOneByCode($countryCode);
+
+        $openId = new Openid();
+
+        $openId->setUid($socialData['uid']);
+        $openId->setProfileUrl($socialData['profile']);
+        $openId->setEmail($socialData['email']);
+        $openId->setNickname($socialData['nickname']);
+        $openId->setFirstName($socialData['first_name']);
+        $openId->setIdentity($socialData['identity']);
+        $openId->setPhotoBig($socialData['photo_big']);
+        $openId->setPhoto($socialData['photo']);
+        $openId->setProvider($provider);
+        $openId->setCountry($country);
+
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $em->persist($openId);
+        $em->flush();
+
+        return $openId->getId();
+    }
+
+
+    public static function getUserInfoById($userId)
+    {
+        $userInfo = self::getContainer()->get('doctrine')->getRepository(self::$_tableUserInfo)
+            ->findOneById($userId);
+
+        return $userInfo;
+    }
+
 
 }

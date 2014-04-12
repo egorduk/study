@@ -28,8 +28,8 @@ framework:
     trusted_proxies: ~
     #charset:  UTF-8
     session:
-        cookie_lifetime: 3600 #crsf msg view then more low
-        gc_maxlifetime: 3600
+        cookie_lifetime: ~ #crsf msg view then more low
+        gc_maxlifetime: ~
         storage_id: session.storage.native
         handler_id: session.handler.native_file
         save_path: "%kernel.cache_dir%/sessions"
