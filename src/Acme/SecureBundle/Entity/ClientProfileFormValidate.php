@@ -73,5 +73,23 @@ class ClientProfileFormValidate
         return $this->fieldLastname;
     }
 
+    public function setStaticPhone($phone)
+    {
+        $this->fieldStaticPhone = $phone;
+    }
 
+    public function setUsername($name)
+    {
+        $this->fieldUsername = $name;
+    }
+
+    public function setLastname($lastname)
+    {
+        $this->fieldLastname = $lastname;
+    }
+
+    public function setSurname($surname)
+    {
+        $this->fieldSurname = $surname;
+    }
 }

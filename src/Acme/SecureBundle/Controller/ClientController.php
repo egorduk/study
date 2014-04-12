@@ -76,10 +76,17 @@ class ClientController extends Controller
         }
         elseif ($type == "edit")
         {
-            $userInfo = Helper::getUserInfoById(5);
+            $userInfo = Helper::getUserInfoById($userId);
 
             $profileValidate = new ClientProfileFormValidate();
             $profileValidate->setIcq($userInfo->getIcq());
+            $profileValidate->setSkype($userInfo->getSkype());
+            $profileValidate->setMobilePhone($userInfo->getMobilePhone());
+            $profileValidate->setStaticPhone($userInfo->getStaticPhone());
+            $profileValidate->setUsername($userInfo->getUsername());
+            $profileValidate->setSurname($userInfo->getSurname());
+            $profileValidate->setLastname($userInfo->getLastname());
+
             $formProfile = $this->createForm(new ClientProfileForm(), $profileValidate);
             $formProfile->handleRequest($request);
 
