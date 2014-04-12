@@ -1,0 +1,14 @@
+{% extends "AcmeSecureBundle::layout.html.twig" %}
+    {% block content %}
+        <div class="container">
+            <div class="row">
+                <p>Ваш ник - {{ userLogin }}</p>
+                <p>Ваш статус - {{ userRole }}</p>
+                <p>Вход в систему - {{ whenLogin }}</p>
+                <p>Осталось в системе - {{ remainingTime }}</p>
+                <p><a href="{{ path('secure_client_profile') }}">Мой профиль</a></p>
+                <p><a href="{{ path('secure_client_settings') }}">Мои настройки</a></p>
+                <p><a href="{{ path('logout') }}">Выход</a></p>
+            </div>
+        </div>
+    {% endblock %}

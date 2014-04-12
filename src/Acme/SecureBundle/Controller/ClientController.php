@@ -2,11 +2,7 @@
 
 namespace Acme\SecureBundle\Controller;
 
-/*use Acme\AuthBundle\Entity\Client;
-use Acme\AuthBundle\Entity\User;
-use Acme\AuthBundle\Entity\ClientFormValidate;
-use Acme\AuthBundle\Form\Client\LoginForm;
-use Acme\AuthBundle\Form\Client\RegForm;*/
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\ExpressionLanguage\Parser;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,7 +36,6 @@ class ClientController extends Controller
         //throw new NotFoundHttpException('Sorry not existing!');
         $userLogin = $this->get('security.context')->getToken()->getUser();
         //$userRole = $this->get('security.context')->getToken()->getRoles();
-       // print_r($userRole[0]->getRole());
         $session = $request->getSession();
         $sessionCreated = $session->getMetadataBag()->getCreated();
         $sessionLifeTime = $session->getMetadataBag()->getLifetime();
@@ -51,6 +46,8 @@ class ClientController extends Controller
         $nowTimestamp = strtotime("now");
         $sessionRemaining = $sessionRemaining - $nowTimestamp;
         $sessionRemaining = Helper::getDateFromTimestamp($sessionRemaining, "i:s");
+
+        print_r($this->get('security.context')->getToken()); die;
 
         return array('userLogin' => $userLogin, 'userRole' => 'Заказчик', 'whenLogin' => $whenLogin, 'remainingTime' => $sessionRemaining);
     }

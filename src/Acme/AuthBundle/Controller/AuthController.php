@@ -41,9 +41,9 @@ require_once '..\src\Acme\AuthBundle\Lib\recaptchalib.php';
 
 class AuthController extends Controller
 {
-    private $tableUser = 'AcmeAuthBundle:User';
+    //private $tableUser = 'AcmeAuthBundle:User';
     private $tableCountry = 'AcmeAuthBundle:Country';
-    private $tableProvider = 'AcmeAuthBundle:Provider';
+    //private $tableProvider = 'AcmeAuthBundle:Provider';
 
 
 
@@ -106,7 +106,7 @@ class AuthController extends Controller
                                 $role = 'ROLE_CLIENT';
                             }
 
-                            $token = new UsernamePasswordToken($userEmail, null, $firewall, array($role));
+                            $token = new UsernamePasswordToken($user->getId(), null, $firewall, array($role));
                             $this->get('security.context')->setToken($token);
 
                             if ($role == 'ROLE_AUTHOR')
