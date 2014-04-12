@@ -26,11 +26,11 @@ class Provider extends EntityRepository
     /**
      * @ORM\OneToMany(targetEntity="Openid", mappedBy="provider")
      **/
-    protected $link;
+    protected $link_provider;
 
     public function __construct()
     {
-        $this->link = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->link_provider = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function setName($name)
@@ -41,5 +41,10 @@ class Provider extends EntityRepository
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 }

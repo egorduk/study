@@ -11,12 +11,15 @@ use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use Symfony\Component\Security\Core\Util\StringUtils;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Acme\AuthBundle\Entity\Openid;
 
 class Helper
 {
     private static $_container;
     private static $_ymFile;
     private static $_tableUser = 'AcmeAuthBundle:User';
+    private static $_tableProvider = 'AcmeAuthBundle:Provider';
+    private static $_tableCountry = 'AcmeAuthBundle:Country';
     private static $kernel;
 
     public function __construct()
@@ -363,6 +366,35 @@ class Helper
             );
 
         $mailer->send($message);
+    }
+
+
+    public static function addNewOpenIdData($socialData, $providerName, $countryCode)
+    {
+        $provider = self::getContainer()->get('doctrine')->getRepository(self::$_tableProvider)
+            ->findOneByName($providerName);
+
+        $country = self::getContainer()->get('doctrine')->getRepository(self::$_tableCountry)
+            ->findOneByCode($countryCode);
+
+        $openId = new Openid();
+
+        $openId->setUid($socialData['uid']);
+        $openId->setProfileUrl($socialData['profile']);
+        $openId->setEmail($socialData['email']);
+        $openId->setNickname($socialData['nickname']);
+        $openId->setFirstName($socialData['first_name']);
+        $openId->setIdentity($socialData['identity']);
+        $openId->setPhotoBig($socialData['photo_big']);
+        $openId->setPhoto($socialData['photo']);
+        $openId->setProvider($provider);
+        $openId->setCountry($country);
+
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $em->persist($openId);
+        $em->flush();
+
+        return $openId->getId();
     }
 
 }

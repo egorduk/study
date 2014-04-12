@@ -61,7 +61,7 @@ class User extends EntityRepository implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="integer")
      */
-    protected $role_id;
+    protected $user_role_id;
 
     /**
      * @ORM\Column(type="string")
@@ -112,11 +112,10 @@ class User extends EntityRepository implements UserInterface, \Serializable
         $this->is_active = 0;
         $this->ip_reg = ip2long($_SERVER['REMOTE_ADDR']);
         $this->openid_id = 0;
-        //$this->role_id = 0;
         $this->is_confirm = 0;
         $this->recovery_password = '';
-        //$this->user_info_id = 0;
-        //$this->hash_code = '';
+        $this->user_info_id = 0;
+        $this->hash_code = '';
         //$this->date_confirm_recovery = 'NULL';
         //$this->date_confirm_reg = 'NULL';
         //$this->fio = '';
@@ -193,12 +192,12 @@ class User extends EntityRepository implements UserInterface, \Serializable
 
     public function getRole()
     {
-        return $this->role_id;
+        return $this->user_role_id;
     }
 
     public function setRole($role)
     {
-        $this->role_id = $role;
+        $this->user_role_id = $role;
     }
 
     public function getPassword()

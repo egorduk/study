@@ -231,11 +231,11 @@ class AuthController extends Controller
             {
                 if ($formReg->get('reg')->isClicked())
                 {
-                    $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
-                    $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
-
                     if ($formReg->isValid())
                     {
+                        $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
+                        $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
+
                         if ($resp->is_valid)
                         {
                             $postData = $request->request->get('formReg');
@@ -405,7 +405,7 @@ class AuthController extends Controller
             $socialToken = $session->get('socialToken');
             $socialResponse = file_get_contents('http://ulogin.ru/token.php?token=' . $socialToken . '&host=' . $_SERVER['HTTP_HOST']);
             $socialData = json_decode($socialResponse, true);
-            //print_r($socialData);
+            //print_r($socialData); die;
 
             if (!isset($socialData['error']))
             {
@@ -415,7 +415,6 @@ class AuthController extends Controller
                 if ($isExistsUser)
                 {
                     $role = Helper::getUserRoleByEmail($userEmail);
-                    //print_r($role); die;
 
                     if ($role == 1)
                     {
@@ -454,14 +453,15 @@ class AuthController extends Controller
                     {
                         if ($formReg->get('reg')->isClicked())
                         {
-                            $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
-                            $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
-
-                            if ($resp->is_valid)
+                            if ($formReg->isValid())
                             {
-                                if ($formReg->isValid())
+                                $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
+                                $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
+
+                                if (!$resp->is_valid)
                                 {
                                     $session->remove('socialToken');
+
                                     $postData = $request->request->get('formReg');
                                     $userLogin = $postData['fieldLogin'];
                                     $userPassword = $postData['fieldPass'];
@@ -470,6 +470,7 @@ class AuthController extends Controller
                                     $user = new User();
                                     $user->setLogin($userLogin);
                                     $user->setEmail($userEmail);
+                                    $user->setRole(2);
 
                                     $salt = Helper::getSalt();
                                     $password = Helper::getRegPassword($userPassword, $salt);
@@ -478,40 +479,21 @@ class AuthController extends Controller
 
                                     $providerName = $socialData['network'];
                                     //$countryCode = geoip_country_code_by_name($_SERVER["REMOTE_ADDR"]);
-                                    $countryCode = 'BY';
+                                    $countryCode = 'by';
 
-                                    $provider = $this->getDoctrine()->getRepository($this->tableProvider)
-                                        ->findOneByName($providerName);
+                                    $openId = Helper::addNewOpenIdData($socialData, $providerName, $countryCode);
 
-                                    $country = $this->getDoctrine()->getRepository($this->tableCountry)
-                                        ->findOneByCode($countryCode);
-
-                                    $openId = new Openid();
-                                    $openId->setUid($socialData['uid']);
-                                    $openId->setProfileUrl($socialData['profile']);
-                                    $openId->setEmail($socialData['email']);
-                                    $openId->setNickname($socialData['nickname']);
-                                    $openId->setFirstName($socialData['first_name']);
-                                    $openId->setIdentity($socialData['identity']);
-                                    $openId->setPhotoBig($socialData['photo_big']);
-                                    $openId->setPhoto($socialData['photo']);
-                                    $openId->setProvider($provider);
-                                    $openId->setCountry($country);
-
+                                    $user->setOpenId($openId);
                                     $em = $this->getDoctrine()->getManager();
-                                    $em->persist($openId);
-                                    $em->flush();
-
-                                    $user->setOpenId($openId->getId());
                                     $em->persist($user);
                                     $em->flush();
 
-                                    return $this->redirect($this->generateUrl('client_index'));
+                                    //return $this->redirect($this->generateUrl('client_index'));
                                 }
-                            }
-                            else
-                            {
-                                return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $resp->error);
+                                else
+                                {
+                                    return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $resp->error);
+                                }
                             }
                         }
                     }
