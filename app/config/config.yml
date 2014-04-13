@@ -3,11 +3,11 @@ imports:
     - { resource: security.yml }
 
 framework:
-    #validation:
-    #    enabled: true
-    #    enable_annotations: true
-    #    cache: ~
-    #    translation_domain: validators
+    validation:
+        enabled: true
+        enable_annotations: true
+        cache: ~
+        translation_domain: validators
     #esi:             ~
     #translator:      { fallback: "%locale%" }
     secret:          "%secret%"

@@ -67,16 +67,17 @@ class ClientController extends Controller
         {
             $userId = $this->get('security.context')->getToken()->getUser();
             $user = Helper::getUserById($userId);
-            $userInfo = Helper::getUserInfoById($user->getUserInfoId());
+            $userInfoId = $user->getUserInfoId();
+            $userInfo = Helper::getUserInfoById($userInfoId);
         }
 
         if ($type == "view")
         {
-            return array('formProfile' =>'', 'user' => $user, 'userInfo' => $userInfo);
+            return array('formProfile' =>'', 'user' => $user, 'userInfo' => $userInfo, 'showWindow' => false);
         }
         elseif ($type == "edit")
         {
-            $userInfo = Helper::getUserInfoById($user->getUserInfoId());
+            $userInfo = Helper::getUserInfoById($userInfoId);
 
             $profileValidate = new ClientProfileFormValidate();
             $profileValidate->setIcq($userInfo->getIcq());
@@ -97,29 +98,21 @@ class ClientController extends Controller
                 {
                     if ($formProfile->isValid())
                     {
+                        $postData = $request->request->get('formProfile');
 
+                        Helper::updateUserInfo($postData, $userInfo);
+                        return array('formProfile' => $formProfile->createView(), 'user' => '', 'userInfo' => $userInfo, 'showWindow' => true);
                     }
                 }
             }
 
-            return array('formProfile' => $formProfile->createView(), 'user' => $user, 'userInfo' => $userInfo);
+            return array('formProfile' => $formProfile->createView(), 'user' => '', 'userInfo' => $userInfo, 'showWindow' => false);
         }
         else
         {
 
         }
     }
-
-
-    /**
-     * @Template()
-     * @return array
-     */
-    public function unauthorizedAction(Request $request)
-    {
-        return array();
-    }
-
 
 
     /**

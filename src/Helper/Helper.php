@@ -405,4 +405,33 @@ class Helper
     }
 
 
+    public static function updateUserInfo($postData, $userInfo)
+    {
+        $userName = $postData['fieldUsername'];
+        $userSurname = $postData['fieldSurname'];
+        $userLastname = $postData['fieldLastname'];
+        $userSkype = $postData['fieldSkype'];
+        $userIcq = $postData['fieldIcq'];
+        $userMobilePhone = $postData['fieldMobilePhone'];
+        $userStaticPhone = $postData['fieldStaticPhone'];
+        $userSelectedCountryCode = $postData['selectorCountry'];
+
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $country = $em->getRepository(self::$_tableCountry)
+            ->findOneByCode($userSelectedCountryCode);
+
+        $userInfo->setSkype($userSkype);
+        $userInfo->setIcq($userIcq);
+        $userInfo->setUsername($userName);
+        $userInfo->setLastname($userLastname);
+        $userInfo->setSurname($userSurname);
+        $userInfo->setMobilePhone($userMobilePhone);
+        $userInfo->setStaticPhone($userStaticPhone);
+        $userInfo->setCountry($country);
+
+        $em->merge($userInfo);
+        $em->flush();
+    }
+
+
 }

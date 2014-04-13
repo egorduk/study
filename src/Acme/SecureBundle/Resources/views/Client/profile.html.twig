@@ -3,7 +3,7 @@
 {% block title "Client profile" %}
 
     {% block content %}
-        <div class="container">
+        <div class="body">
             {% if (formProfile == null) %}
                 <div class="row">
                     <p>Ваш ID: {{ user.id }}</p>
@@ -24,6 +24,19 @@
                     <a href="{{ path('secure_client_profile', {'type': 'edit'}) }}">Изменить данные</a>
                 </div>
             {% else %}
+            {% if (showWindow) %}
+            <div id="success-window">
+                <div class="Message Message--green" id="js-timer">
+                    <div class="Message-icon">
+                        <i class="fa fa-check"></i>
+                    </div>
+                    <div class="Message-body">
+                        <p align="center">Ваши данные сохранены!</p>
+                    </div>
+                    <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            {% endif %}
             <div class="row">
                 {{ form_start(formProfile) }}
                     {{ form_errors(formProfile) }}
@@ -36,22 +49,33 @@
                         {{ form_row(formProfile.fieldStaticPhone) }}
                         {{ form_row(formProfile.selectorCountry) }}
                 {{ form_end(formProfile) }}
+                <a href="{{ path('secure_client_profile', {'type': 'view'}) }}">К профилю</a>
             </div>
             {% endif %}
             <script>
                 $(document).ready(function() {
                     function format(state) {
-                        /*if (!state.id){
-                         return state.text;
-                         };*/
                         return "<img title='" + state.text + "' class='flag' src='{{ asset('bundles/images/flags/') }}" + state.id.toLowerCase() + ".png'/>";
                     }
+
                     $("#formProfile_selectorCountry").select2({
                         minimumResultsForSearch: -1,
                         formatResult: format,
                         formatSelection: format,
                         escapeMarkup: function(m) { return m; }
                     });
+
+                    function closeMessage(el) {
+                        el.addClass('is-hidden');
+                    }
+
+                    $('.js-messageClose').on('click', function(e) {
+                        closeMessage($(this).closest('.Message'));
+                    });
+
+                    setTimeout(function() {
+                        closeMessage($('#js-timer'));
+                    }, 1500);
                 });
             </script>
         </div>
