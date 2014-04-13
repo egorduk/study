@@ -25,7 +25,6 @@ class Helper
 
     public function __construct()
     {
-
     }
 
     public static function readYamlFile()

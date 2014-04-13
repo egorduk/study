@@ -64,8 +64,12 @@ class UserInfo extends EntityRepository
     {
         $this->skype = "";
         $this->icq = "";
-        $this->mobile_tel = "";
-        //$this->country =
+        $this->mobile_phone = "";
+        $this->static_phone = "";
+        $this->username = "";
+        $this->surname = "";
+        $this->lastname = "";
+        //$this->country = "";
     }
 
     public function getSkype()

@@ -92,4 +92,9 @@ class ClientProfileFormValidate
     {
         $this->fieldSurname = $surname;
     }
+
+    public function setCountry($country)
+    {
+        $this->selectorCountry = $country;
+    }
 }

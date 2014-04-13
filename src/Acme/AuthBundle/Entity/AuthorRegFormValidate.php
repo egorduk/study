@@ -9,15 +9,19 @@ class AuthorRegFormValidate extends ClientRegFormValidate
     public $fieldSkype;
     public $fieldIcq;
     public $selectorCountry;
+    public $fieldUsername;
+    public $fieldSurname;
+    public $fieldLastname;
+
 
     public function setMobilePhone($phone)
     {
-        $this->$fieldMobilePhone = $phone;
+        $this->fieldMobilePhone = $phone;
     }
 
     public function getMobilePhone()
     {
-        return $this->$fieldMobilePhone;
+        return $this->fieldMobilePhone;
     }
 
     public function setSkype($skype)
@@ -45,5 +49,19 @@ class AuthorRegFormValidate extends ClientRegFormValidate
         return $this->selectorCountry;
     }
 
+    public function getUsername()
+    {
+        return $this->fieldUsername;
+    }
+
+    public function getSurname()
+    {
+        return $this->fieldSurname;
+    }
+
+    public function getLastname()
+    {
+        return $this->fieldLastname;
+    }
 
 }

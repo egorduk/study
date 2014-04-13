@@ -19,10 +19,13 @@
                         {% endblock %}
                         {{ form_row(formReg.fieldEmail) }}
                         {% block form_mobile_tel %}
-                            {{ form_label(formReg.fieldMobileTel) }}
+                            {{ form_label(formReg.fieldMobilePhone) }}
                             {{ form_widget(formReg.selectorCountry) }}
-                            {{ form_widget(formReg.fieldMobileTel) }}
+                            {{ form_widget(formReg.fieldMobilePhone) }}
                         {% endblock %}
+                        {{ form_row(formReg.fieldUsername) }}
+                        {{ form_row(formReg.fieldSurname) }}
+                        {{ form_row(formReg.fieldLastname) }}
                         {{ form_row(formReg.fieldSkype) }}
                         {{ form_row(formReg.fieldIcq) }}
                         {% block form_label %}
@@ -47,7 +50,7 @@
                     return state.text;
                 }*/
 ;
-                return "<img title='" + state.text + "' class='flag' src='{{ asset('bundles/acmeauth/images/flags/') }}" + state.id.toLowerCase() + ".png'/>";
+                return "<img title='" + state.text + "' class='flag' src='{{ asset('bundles/images/flags/') }}" + state.id.toLowerCase() + ".png'/>";
             }
             $("#formReg_selectorCountry").select2({
                 minimumResultsForSearch: -1,

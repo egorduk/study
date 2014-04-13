@@ -301,7 +301,7 @@ class AuthController extends Controller
                             $userLogin = $postData['fieldLogin'];
                             $userPassword = $postData['fieldPass'];
                             $userEmail = $postData['fieldEmail'];
-                            $userMobileTel = $postData['fieldMobileTel'];
+                            $userMobileTel = $postData['fieldMobilePhone'];
                             $userSkype = $postData['fieldSkype'];
                             $userIcq = $postData['fieldIcq'];
                             $userCountryCode = $postData['selectorCountry'];

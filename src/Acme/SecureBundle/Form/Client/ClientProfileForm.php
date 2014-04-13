@@ -25,49 +25,13 @@ class ClientProfileForm extends AbstractType
                 ->add('fieldSkype', 'text', array('label'=>'Skype:', 'required' => false, 'data' => $options['data']->fieldSkype, 'attr' => array('title' => 'Введите Ваш Skype', 'size' => 22, 'maxlength' => 20, 'placeholder' => 'Введите Skype...')))
                 ->add('fieldIcq', 'text', array('label'=>'Icq:', 'required' => false, 'data' => $options['data']->fieldIcq, 'attr' => array('title' => 'Введите Ваш Icq', 'size' => 20, 'maxlength' => 10, 'placeholder' => 'Введите Icq...')))
                 ->add('selectorCountry', 'choice', array(
+                    'label'=>'Страна:',
+                    'data' => $options['data']->selectorCountry,
                     'mapped'   => false,
                     'choices' => $this->buildChoices()
                 ))
                 ->add('save', 'submit', array('label'=>'Сохранить', 'attr' => array('class' => 'btn btn-success')))
                 ->add('reset', 'reset', array('label'=>'Очистить', 'attr' => array('class' => 'btn btn-success')));
-
-        $builder->addEventListener(FormEvents::POST_BIND, function(FormEvent $event)
-        {
-            /*$form = $event->getForm();
-            $data = $event->getData();
-
-            if ($data->getPassword() !== null && $data->getApprovePassword() != null)
-            {
-                $newPassword = $form->get('fieldPass')->getData();
-                $approvePassword = $form->get('fieldPassApprove')->getData();
-
-                if (!StringUtils::equals($newPassword, $approvePassword))
-                {
-                    $form->get('fieldPassApprove')->addError(new FormError('Введенные пароли не совпадают!'));
-                    $form->get('fieldPass')->addError(new FormError('Введенные пароли не совпадают!'));
-                }
-            }
-
-            if ($data->getLogin() !== null)
-            {
-                $newLogin = $form->get('fieldLogin')->getData();
-
-                if(Helper::isExistsUserLogin($newLogin))
-                {
-                    $form->get('fieldLogin')->addError(new FormError('Такой логин уже используется!'));
-                }
-            }
-
-            if ($data->getEmail() !== null)
-            {
-                $newEmail = $form->get('fieldEmail')->getData();
-
-                if(Helper::isExistsUserEmail($newEmail))
-                {
-                    $form->get('fieldEmail')->addError(new FormError('Такой Email уже используется!'));
-                }
-            }*/
-        });
     }
 
     public function getName()

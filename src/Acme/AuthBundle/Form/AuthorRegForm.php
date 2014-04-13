@@ -20,16 +20,19 @@ class AuthorRegForm extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('fieldLogin', 'text', array('label'=>'Логин:', 'required' => true, 'data' => $options['data']->fieldLogin, 'attr' => array('title' => 'Ваш логин должен состоять только из латинских букв', 'size' => 20, 'maxlength' => 12, 'placeholder' => 'Введите логин...')))
+        $builder->add('fieldLogin', 'text', array('label'=>'Логин:', 'required' => true, 'attr' => array('title' => 'Ваш логин должен состоять только из латинских букв', 'size' => 20, 'maxlength' => 12, 'placeholder' => 'Введите логин...')))
                 ->add('fieldPass', 'password', array('label'=>'Пароль:', 'required' => true, 'attr' => array('title' => 'Ваш пароль должен состоять только из латинских букв и цифр', 'size' => 20, 'maxlength' => 12, 'placeholder' => 'Введите пароль...')))
                 ->add('fieldPassApprove', 'password', array('label'=>'Подтвердите пароль:', 'required' => true, 'attr' => array('title' => 'Введите Ваш пароль еще раз', 'size' => 20, 'maxlength' => 12, 'placeholder' => 'Введите пароль...')))
-                ->add('fieldEmail', 'text', array('label'=>'Email:', 'required' => true, 'data' => $options['data']->fieldEmail, 'attr' => array('title' => 'Введите Ваш email', 'size' => 20, 'maxlength' => 25, 'placeholder' => 'Введите Email...')))
-                ->add('fieldMobileTel', 'text', array('label'=>'Мобильный телефон:', 'required' => true, 'data' => $options['data']->fieldMobileTel, 'attr' => array('title' => 'Введите номер Вашего мобильного телефона', 'size' => 22, 'maxlength' => 14, 'placeholder' => 'Введите номер...')))
-                ->add('fieldSkype', 'text', array('label'=>'Skype:', 'required' => false, 'data' => $options['data']->fieldSkype, 'attr' => array('title' => 'Введите Ваш Skype', 'size' => 22, 'maxlength' => 20, 'placeholder' => 'Введите Skype...')))
-                ->add('fieldIcq', 'text', array('label'=>'Icq:', 'required' => false, 'data' => $options['data']->fieldIcq, 'attr' => array('title' => 'Введите Ваш Icq', 'size' => 20, 'maxlength' => 10, 'placeholder' => 'Введите Icq...')))
+                ->add('fieldEmail', 'text', array('label'=>'Email:', 'required' => true, 'attr' => array('title' => 'Введите Ваш email', 'size' => 20, 'maxlength' => 25, 'placeholder' => 'Введите Email...')))
+                ->add('fieldMobilePhone', 'text', array('label'=>'Мобильный телефон:', 'required' => true, 'attr' => array('title' => 'Введите номер Вашего мобильного телефона', 'size' => 22, 'maxlength' => 14, 'placeholder' => 'Введите номер...')))
+                ->add('fieldSkype', 'text', array('label'=>'Skype:', 'required' => false, 'attr' => array('title' => 'Введите Ваш Skype', 'size' => 22, 'maxlength' => 20, 'placeholder' => 'Введите Skype...')))
+                ->add('fieldIcq', 'text', array('label'=>'Icq:', 'required' => false, 'attr' => array('title' => 'Введите Ваш Icq', 'size' => 20, 'maxlength' => 10, 'placeholder' => 'Введите Icq...')))
                 ->add('checkAgreeRules', 'checkbox', array('label'=>' ', 'required' => true, 'attr' => array('title' => 'Если Вы согласны с правилами, то установите тут флажок', 'class' => '')))
                 ->add('reg', 'submit', array('label'=>'Регистрация', 'attr' => array('class' => 'btn btn-success')))
                 ->add('reset', 'reset', array('label'=>'Очистить', 'attr' => array('class' => 'btn btn-success')))
+                ->add('fieldUsername', 'text', array('label'=>'Имя:', 'required' => false, 'attr' => array('title' => 'Ваше имя должно состоять только из русских букв', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Введите имя...')))
+                ->add('fieldSurname', 'text', array('label'=>'Фамилия:', 'required' => false, 'attr' => array('title' => 'Ваша фамилия должна состоять только из русских букв', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Введите фамилию...')))
+                ->add('fieldLastname', 'text', array('label'=>'Отчество:', 'required' => false, 'attr' => array('title' => 'Ваше отчество должно состоять только из русских букв', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Введите отчество...')))
                /* ->add('selectorCountry', 'genemu_jqueryselect2_entity', array(
                 'mapped'   => false,
                 'class' => 'Acme\AuthBundle\Entity\Country',
