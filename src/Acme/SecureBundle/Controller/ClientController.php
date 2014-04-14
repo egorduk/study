@@ -23,6 +23,8 @@ use Helper\Helper;
 //use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Acme\SecureBundle\Form\Client\ClientProfileForm;
 use Acme\SecureBundle\Entity\ClientProfileFormValidate;
+use Acme\SecureBundle\Form\Client\CreateOrderForm;
+use Acme\SecureBundle\Entity\OrderFormValidate;
 
 
 class ClientController extends Controller
@@ -117,87 +119,54 @@ class ClientController extends Controller
 
     /**
      * @Template()
-     * A function for adding a new source
-     * @param Request $request the data of client's request
-     * @return array|RedirectResponse
+     * @return array
      */
-    public function addAction(Request $request)
+    public function settingsAction(Request $request, $type)
     {
-        $formAdd = $this->createForm(new AddForm());
-        $formAdd->handleRequest($request);
 
-        if ($request->isMethod('POST'))
-        {
-            if ($formAdd->get('Add')->isClicked()) //Add new source
-            {
-                $postData = $request->request->get('formAdd');
-                $newName = $postData['fieldName'];
-                $newUrl = $postData['fieldUrl'];
-
-                $source = new Source();
-                $source->setName($newName);
-                $source->setUrl($newUrl);
-                $source->setActive(0);
-
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($source);
-                $em->flush();
-
-                return new RedirectResponse($this->generateUrl('setting_view'));
-            }
-        }
-
-        return array('formAdd' => $formAdd->createView());
     }
 
 
     /**
      * @Template()
-     * A function for editing a selected source by user
-     * @param Request $request the data of client's request
      * @return array|RedirectResponse
      */
-    public function editAction(Request $request)
+    public function orderAction(Request $request, $type)
     {
-        if ($request->isMethod('POST'))
+        if ($type == "view" || $type == "create")
         {
-            $editId = $request->request->get('sourceId');
-
-            $em = $this->getDoctrine()->getManager();
-
-            if (isset($editId))
-            {
-                $source = $em->getRepository($this->tableSource)
-                    ->find($editId);
-
-                $element['name'] = $source->getName();
-                $element['url'] = $source->getUrl();
-                $element['sourceId'] = $editId;
-
-                $formEdit = $this->createForm(new EditForm(), $element);
-
-                return array('formEdit' => $formEdit->createView());
-            }
-            else
-            {
-                $postData = $request->request->get('formEdit');
-                $editName = $postData['fieldName'];
-                $editUrl = $postData['fieldUrl'];
-                $editId = $postData['fieldSourceId'];
-
-                $source = $em->getRepository($this->tableSource)
-                    ->find($editId);
-                $source->setName($editName);
-                $source->setUrl($editUrl);
-                $source->setActive(0);
-
-                $em->persist($source);
-                $em->flush();
-
-                return new RedirectResponse($this->generateUrl('setting_view'));
-            }
+            $userId = $this->get('security.context')->getToken()->getUser();
+            $user = Helper::getUserById($userId);
+            //$userInfoId = $user->getUserInfoId();
+            //$userInfo = Helper::getUserInfoById($userInfoId);
         }
+
+        if ($type == "create")
+        {
+            $createOrderValidate = new OrderFormValidate();
+
+            $formOrder = $this->createForm(new CreateOrderForm(), $createOrderValidate);
+            $formOrder->handleRequest($request);
+
+            if ($request->isMethod('POST'))
+            {
+                if ($formOrder->get('create')->isClicked())
+                {
+                    if ($formOrder->isValid())
+                    {
+
+                    }
+                }
+            }
+
+            return $this->render(
+                'AcmeSecureBundle:Client:order_add.html.twig', array('formOrder' => $formOrder->createView(), 'showWindow' => false)
+            );
+        }
+
     }
+
+
 
 
     /**

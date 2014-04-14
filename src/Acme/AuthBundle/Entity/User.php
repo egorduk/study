@@ -103,7 +103,10 @@ class User extends EntityRepository implements UserInterface, \Serializable
      */
     protected $user_info_id;
 
-
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $account;
 
 
     public function __construct()
@@ -116,6 +119,7 @@ class User extends EntityRepository implements UserInterface, \Serializable
         $this->recovery_password = '';
         $this->user_info_id = 0;
         $this->hash_code = '';
+        $this->account = 0;
         //$this->date_confirm_recovery = 'NULL';
         //$this->date_confirm_reg = 'NULL';
         //$this->fio = '';
@@ -305,6 +309,19 @@ class User extends EntityRepository implements UserInterface, \Serializable
         return $this->user_info_id;
     }
 
+    public function setAccount($account)
+    {
+        $this->account = $account;
+    }
+
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
+
+
+
     /**
      * @see \Serializable::serialize()
      */
@@ -312,7 +329,6 @@ class User extends EntityRepository implements UserInterface, \Serializable
     {
         return serialize(array(
             $this->id,
-            $this->login,
             $this->password,
             $this->email
         ));
@@ -325,7 +341,6 @@ class User extends EntityRepository implements UserInterface, \Serializable
     {
         list (
             $this->id,
-            $this->login,
             $this->password,
             $this->email
             ) = unserialize($serialized);

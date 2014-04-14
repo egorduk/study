@@ -2,18 +2,31 @@
     {% block content %}
         <div class="container">
             <div class="row">
-                {{ form_start(formLogin) }}
-                    {{ form_errors(formLogin) }}
-                        {{ form_row(formLogin.fieldEmail) }}
-                        {{ form_row(formLogin.fieldPass) }}
+                <div id="form-login">
+                    {{ form_start(formLogin) }}
                         {{ errorData }}
-                {{ form_end(formLogin) }}
-                <p><a href="{{ path('index') }}">Зарегистрироваться</a></p>
-                <p>Войти с помощью:</p>
+                        {{ form_errors(formLogin.fieldEmail) }}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                            {{ form_widget(formLogin.fieldEmail) }}
+                        </div>
+                        {{ form_errors(formLogin.fieldPass) }}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                            {{ form_widget(formLogin.fieldPass) }}
+                        </div>
+                        <div class="input-group">
+                            <label for="formLogin_enter" class="btn btn-success"><i class="fa fa-sign-in fa-2x">&nbspВойти</i></label>
+                            {{ form_widget(formLogin.enter) }}
+                        </div>
+                    {{ form_end(formLogin) }}
+                </div>
+                <a class="btn btn-success" href="{{ path('login') }}"><i class="fa fa-pencil fa-2x">&nbspРегистрация</i></a>
                 <div id="openID">
+                    <p>Войти с помощью:</p>
                     <div id="uLogin" data-ulogin="display=panel;fields=first_name,nickname,email,photo,photo_big;
 				        providers=vkontakte,odnoklassniki,twitter,facebook,google;hidden=mailru,yandex;
-				        redirect_uri=http%3A%2F%2Flocalhost%2Fstudy%2Fweb%2Fapp_dev.php%2Flogin"
+				        redirect_uri=http%3A%2F%2Flocalhost%2Fstudy%2Fweb%2Fapp_dev.php%2Flogin">
                     </div>
                 </div>
             </div>

@@ -18,40 +18,19 @@ confirm_password:
   pattern:   /auth/confirm
   defaults:  { _controller: AcmeAuthBundle:Auth:confirm }
 
-
 rules:
   pattern:   /{type}/rules
   defaults:  { _controller: AcmeIndexBundle:Index:rules }
+
 
 
 #------------------------------------------------Client----------------------------------------------------#
 
 ##--------------------AuthBundle-----------------------##
 
-#client_login:
-#  pattern:   /client/login
-#  defaults:  { _controller: AcmeAuthBundle:Auth:login }
-
 client_reg:
   pattern:   /{type}/reg
   defaults:  { _controller: AcmeAuthBundle:Auth:reg }
-
-#client_success_reg:
-#  pattern:   /reg/success
-#  defaults:  { _controller: AcmeAuthBundle:Auth:successreg }
-
-#client_success_rec:
-#  pattern:   /recovery/success
-#  defaults:  { _controller: AcmeAuthBundle:Auth:successrec }
-
-#client_confirm_success:
-#  pattern:   /confirm/success/{type}
-#  defaults:  { _controller: AcmeAuthBundle:Auth:successconfirm }
-
-#client_index:
-#  pattern:   /client/index
-#  defaults:  { _controller: AcmeAuthBundle:Auth:index }
-
 
 
 ##--------------------SecureBundle-----------------------##
@@ -65,24 +44,23 @@ secure_client_profile:
   defaults:  { _controller: AcmeSecureBundle:Client:profile }
 
 secure_client_settings:
-  pattern:   /secure/client/settings
+  pattern:   /secure/client/settings/{type}
   defaults:  { _controller: AcmeSecureBundle:Client:settings }
 
-secure_client_settings_edit:
-  pattern:   /secure/client/settings/edit
-  defaults:  { _controller: AcmeSecureBundle:Client:settings }
+secure_client_order:
+  pattern:   /secure/client/order/{type}
+  defaults:  { _controller: AcmeSecureBundle:Client:order }
+
+
 
 
 
 #--------------------------------------------------Author---------------------------------------------------#
 
-#author_login:
-#  pattern:   /author/login
-#  defaults:  { _controller: AcmeAuthBundle:Auth:login }
-
 author_reg:
   pattern:   /{type}/reg
   defaults:  { _controller: AcmeAuthBundle:Author:reg }
+
 
 #---------------AuthBundle----------------------------#
 
