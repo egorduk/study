@@ -1,0 +1,53 @@
+
+Acme\AuthBundle\Entity\AuthorRegFormValidate:
+    properties:
+        fieldMobilePhone:
+          - Length: { min: 7, minMessage: "Слишком короткий номер!" }
+          - Regex: { pattern: "/^((8|\+7|\+375)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,14}$/", message: "Некорректный номер!" }
+        fieldIcq:
+          - Length: { min: 6, minMessage: "Слишком короткий номер!" }
+          - Regex: { pattern: "/^[\d]+$/", message: "Только цифры!" }
+        fieldUsername:
+          - Length: { min: 1, minMessage: "Слишком короткое имя!" }
+          - Regex: { pattern: "/^[а-яА-Я]+$/u", message: "Только русские буквы!" }
+        fieldSurname:
+          - Length: { min: 1, minMessage: "Слишком короткая фамилия!" }
+          - Regex: { pattern: "/^[а-яА-Я]+$/u", message: "Только русские буквы!" }
+        fieldLastname:
+          - Length: { min: 1, minMessage: "Слишком короткое отчество!" }
+          - Regex: { pattern: "/^[а-яА-Я]+$/u", message: "Только русские буквы!" }
+
+Acme\AuthBundle\Entity\LoginFormValidate:
+    properties:
+        fieldEmail:
+          - Email: { message: "Указана неверная почта!", checkMX: false }
+        fieldPass:
+          - Length: { min: 5, minMessage: "Слишком короткий пароль!" }
+          - Regex: { pattern: "/^[a-zA-Z0-9]+$/u", message: "Только латинские буквы и цифры!" }
+
+Acme\SecureBundle\Entity\ClientProfileFormValidate:
+    properties:
+        fieldMobilePhone:
+          - Length: { min: 7, minMessage: "Слишком короткий номер!" }
+          - Regex: { pattern: "/^((8|\+7|\+375)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,14}$/", message: "Некорректный номер!" }
+        fieldStaticPhone:
+          - Length: { min: 7, minMessage: "Слишком короткий номер!" }
+          - Regex: { pattern: "/^((8|\+7|\+375)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,14}$/", message: "Некорректный номер!" }
+        fieldIcq:
+          - Length: { min: 6, minMessage: "Слишком короткий номер!" }
+          - Regex: { pattern: "/^[\d]+$/", message: "Только цифры!" }
+        fieldUsername:
+          - Length: { min: 1, minMessage: "Слишком короткое имя!" }
+          - Regex: { pattern: "/^[а-яА-Я]+$/u", message: "Только русские буквы!" }
+        fieldSurname:
+          - Length: { min: 1, minMessage: "Слишком короткая фамилия!" }
+          - Regex: { pattern: "/^[а-яА-Я]+$/u", message: "Только русские буквы!" }
+        fieldLastname:
+          - Length: { min: 1, minMessage: "Слишком короткое отчество!" }
+          - Regex: { pattern: "/^[а-яА-Я]+$/u", message: "Только русские буквы!" }
+
+Acme\SecureBundle\Entity\CreateOrderFormValidate:
+    properties:
+        fieldTheme:
+          - Length: { min: 3, minMessage: "Слишком короткое название темы!" }
+          - Regex: { pattern: "/^[а-яА-Я]+$/u", message: "Только русские буквы!" }

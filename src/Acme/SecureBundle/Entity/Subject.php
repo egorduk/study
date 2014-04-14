@@ -23,20 +23,35 @@ class Subject extends EntityRepository
     /**
      * @ORM\Column(type="string")
      */
-    protected $name;
+    protected $parent_name;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $child_name;
 
 
     public function __construct(){
     }
 
-    public function setName($name)
+    public function setParentName($name)
     {
-        $this->name = $name;
+        $this->parent_name = $name;
     }
 
-    public function getName()
+    public function getParentName()
     {
-        return $this->name;
+        return $this->parent_name;
+    }
+
+    public function setChildName($name)
+    {
+        $this->child_name = $name;
+    }
+
+    public function getChildName()
+    {
+        return $this->child_name;
     }
 
     public function getId()

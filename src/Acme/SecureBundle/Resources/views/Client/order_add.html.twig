@@ -3,6 +3,20 @@
 {% block title "Create order" %}
 
     {% block content %}
+
+        <style>
+            .invalid{
+                border-color: #E9322D!important;
+                box-shadow: 0 0 6px #F8B9B7!important;
+            }
+
+            .popover {
+                position: inherit;
+                top: -30px !important;
+                left: 310px !important;
+            }
+        </style>
+
         <div class="body">
             {% if (showWindow) %}
             <div id="success-window">
@@ -17,19 +31,39 @@
                 </div>
             </div>
             {% endif %}
-            <div class="row">
-                {{ form_start(formOrder) }}
+            <div class="row" style="width: 300px">
+                {{ form_start(formOrder, {'attr': {'class': 'form'}}) }}
                     {{ form_errors(formOrder) }}
-                        {{ form_row(formOrder.fieldTheme) }}
-                        {{ form_row(formOrder.fieldDescribe) }}
-                        {{ form_row(formOrder.fieldDateExpire) }}
-                        {{ form_row(formOrder.fieldOriginality) }}
-                        {{ form_row(formOrder.fieldCountSheet) }}
-                        {{ form_row(formOrder.selectorSubject) }}
-                        {{ form_row(formOrder.selectorTypeWork) }}
+                        <div class="form-group">
+                                {{ form_row(formOrder.fieldTheme) }}
+                                {{ form_row(formOrder.fieldDescribe) }}
+                                {{ form_row(formOrder.fieldDateExpire) }}
+                                {{ form_row(formOrder.fieldOriginality) }}
+                                {{ form_row(formOrder.fieldCountSheet) }}
+                                <div style="height: 60px">
+                                    {{ form_row(formOrder.selectorSubject) }}
+                                </div>
+                                <div style="height: 60px">
+                                    {{ form_row(formOrder.selectorTypeOrder) }}
+                                </div>
+                        </div>
                 {{ form_end(formOrder) }}
                 <a href="{{ path('secure_client_profile', {'type': 'view'}) }}">К профилю</a>
             </div>
+
+            <!--<form class="form-horizontal col-sm-8">
+                <div class="form-group">
+                    <label>Gender</label>
+                    <!--<select class="form-control required gender" data-placement="top" data-trigger="manual" data-content="You must choose a gender.">
+                        <option value="">Please choose a gender</option>
+                        <option value="1">Male</option>
+                        <option value="2">Female</option>
+                        <option value="3">Unisex</option>
+                    </select>-
+                    <button type="submit" class="btn btn-default pull-left">Submit</button>
+                </div>
+            </form>-->
+
             <script>
                 $(document).ready(function() {
                     function sortingResults(results, container, query) {
@@ -47,23 +81,83 @@
                         return results;
                     }
 
+                    var d;
+
                     $("#formCreateOrder_selectorSubject").select2({
-                       // minimumResultsForSearch: -1,
                         placeholder: "Выберите предмет",
                         allowClear: true,
                         width: 300,
-                        //minimumInputLength: 2,
                         maximumSelectionSize: 2,
+                        formatNoMatches: "Не найден такой предмет",
                         sortResults: sortingResults
-
-                        //minimumResultsForSearch: 1
-
-                        //formatResult: format,
-                        //formatSelection: format
-                       // escapeMarkup: function(m) { return m; }
+                    })
+                    .on("select2-selecting", function(e) {
+                        var selectorSubject = $("#formCreateOrder_selectorSubject");
+                        selectorSubject.removeClass('invalid');
+                        selectorSubject.popover('hide');
                     });
 
-                    function closeMessage(el) {
+                    $("#formCreateOrder_selectorTypeOrder").select2({
+                        width: 300,
+                        allowClear: true,
+                        placeholder: "Выберите тип заказа",
+                        formatNoMatches: "Не найден такой тип заказа",
+                        maximumSelectionSize: 2,
+                        sortResults: sortingResults
+                    })
+                    .on("select2-selecting", function(e) {
+                        var selectorTypeOrder = $("#formCreateOrder_selectorTypeOrder");
+                        selectorTypeOrder.removeClass('invalid');
+                        selectorTypeOrder.popover('hide');
+                    });
+
+                    $('form').click(function(e) {
+                        var selectorSubject = $("#formCreateOrder_selectorSubject");
+                        var selectorTypeOrder = $("#formCreateOrder_selectorTypeOrder");
+
+                        if (!selectorSubject.val())
+                        {
+                            selectorSubject.addClass('invalid');
+                            selectorSubject.popover('show');
+                        }
+                        else
+                        {
+                            selectorSubject.removeClass('invalid');
+                            selectorSubject.popover('hide');
+                            //e.preventDefault();
+                        }
+
+                        if (!selectorTypeOrder.val())
+                        {
+                            selectorTypeOrder.popover('show');
+                            selectorTypeOrder.addClass('invalid');
+                        }
+                        else
+                        {
+                            selectorTypeOrder.removeClass('invalid');
+                            selectorTypeOrder.popover('hide');
+                        }
+
+                        $(".popover-title").css("color", "red" );
+                        $(".popover").css("text-align", "center");
+
+                        return true;
+                    });
+
+
+                    /*$("#formCreateOrder_selectorSubject").on("change", function () {
+                        if ($("#formCreateOrder_selectorSubject").hasClass("invalid"))
+                        {
+                            $("#formCreateOrder_selectorSubject").removeClass('invalid');
+                        }
+
+                        if ($("#formCreateOrder_selectorSubject").popover('show'))
+                        {
+                            $("#formCreateOrder_selectorSubject").popover('hide')
+                        }
+                    });*/
+
+                    /*function closeMessage(el) {
                         el.addClass('is-hidden');
                     }
 
@@ -73,7 +167,7 @@
 
                     setTimeout(function() {
                         closeMessage($('#js-timer'));
-                    }, 1500);
+                    }, 1500);*/
                 });
             </script>
         </div>

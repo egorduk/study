@@ -82,7 +82,6 @@ class Order
         return $this->selectorTypeOrder;
     }
 
-
     public function setTypeOrder($type)
     {
         $this->selectorTypeOrder = $type;

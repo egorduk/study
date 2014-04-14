@@ -18,4 +18,14 @@ class OrderFormValidate
     {
     }
 
+    public function getSubject()
+    {
+        return $this->selectorSubject;
+    }
+
+    public function getTypeOrder()
+    {
+        return $this->selectorTypeOrder;
+    }
+
 }
