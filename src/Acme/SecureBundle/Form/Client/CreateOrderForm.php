@@ -57,7 +57,7 @@ class CreateOrderForm extends AbstractType
 
         $builder->addEventListener(FormEvents::POST_BIND, function(FormEvent $event)
         {
-            $form = $event->getForm();
+            /*$form = $event->getForm();
 
             $selectedSubject = $form->get('selectorSubject')->getData();
             $selectedTypeOrder = $form->get('selectorTypeOrder')->getData();
@@ -70,7 +70,7 @@ class CreateOrderForm extends AbstractType
             if (!$selectedTypeOrder)
             {
                 $form->get('selectorTypeOrder')->addError(new FormError('Выберите тип заказа!'));
-            }
+            }*/
         });
     }
 
