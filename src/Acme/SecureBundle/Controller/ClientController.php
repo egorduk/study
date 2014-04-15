@@ -24,7 +24,7 @@ use Helper\Helper;
 use Acme\SecureBundle\Form\Client\ClientProfileForm;
 use Acme\SecureBundle\Entity\ClientProfileFormValidate;
 use Acme\SecureBundle\Form\Client\CreateOrderForm;
-use Acme\SecureBundle\Entity\OrderFormValidate;
+use Acme\SecureBundle\Entity\CreateOrderFormValidate;
 
 
 class ClientController extends Controller
@@ -143,10 +143,11 @@ class ClientController extends Controller
 
         if ($type == "create")
         {
-            $createOrderValidate = new OrderFormValidate();
+            $createOrderValidate = new CreateOrderFormValidate();
 
             $formOrder = $this->createForm(new CreateOrderForm(), $createOrderValidate);
             $formOrder->handleRequest($request);
+            $showWindow = false;
 
             if ($request->isMethod('POST'))
             {
@@ -154,13 +155,17 @@ class ClientController extends Controller
                 {
                     if ($formOrder->isValid())
                     {
-                        $postData = $request->request->get('formProfile');
+                        $postData = $request->request->get('formCreateOrder');
+
+                        Helper::createNewOrder($postData, $userId);
+
+                        $showWindow = true;
                     }
                 }
             }
 
             return $this->render(
-                'AcmeSecureBundle:Client:order_add.html.twig', array('formOrder' => $formOrder->createView(), 'showWindow' => false)
+                'AcmeSecureBundle:Client:order_add.html.twig', array('formOrder' => $formOrder->createView(), 'showWindow' => $showWindow)
             );
         }
 

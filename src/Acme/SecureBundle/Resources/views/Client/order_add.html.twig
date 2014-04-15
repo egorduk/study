@@ -7,7 +7,7 @@
         <style>
             .invalid{
                 border-color: #E9322D!important;
-                box-shadow: 0 0 6px #F8B9B7!important;
+                box-shadow: 0 0 6px #E9322D!important;
             }
 
             .popover {
@@ -25,7 +25,7 @@
                         <i class="fa fa-check"></i>
                     </div>
                     <div class="Message-body">
-                        <p align="center">Ваши данные сохранены!</p>
+                        <p align="center">Ваш заказ создан! Ожидайте ставок авторов!</p>
                     </div>
                     <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
                 </div>
@@ -35,17 +35,21 @@
                 {{ form_start(formOrder, {'attr': {'class': 'form'}}) }}
                     {{ form_errors(formOrder) }}
                         <div class="form-group">
-                                {{ form_row(formOrder.fieldTheme) }}
-                                {{ form_row(formOrder.fieldDescribe) }}
-                                {{ form_row(formOrder.fieldDateExpire) }}
-                                {{ form_row(formOrder.fieldOriginality) }}
-                                {{ form_row(formOrder.fieldCountSheet) }}
-                                <div style="height: 60px">
-                                    {{ form_row(formOrder.selectorSubject) }}
-                                </div>
-                                <div style="height: 60px">
-                                    {{ form_row(formOrder.selectorTypeOrder) }}
-                                </div>
+                            {{ form_row(formOrder.fieldTheme) }}
+                            {{ form_row(formOrder.fieldDescribe) }}
+                            {{ form_row(formOrder.fieldDateExpire) }}
+                            {{ form_row(formOrder.fieldOriginality) }}
+                            {{ form_row(formOrder.fieldCountSheet) }}
+                            <div style="height: 60px">
+                                {{ form_row(formOrder.selectorSubject) }}
+                            </div>
+                            <div style="height: 60px">
+                                {{ form_row(formOrder.selectorTypeOrder) }}
+                            </div>
+                            <div style="height: 20px">
+                            </div>
+                            {{ form_row(formOrder.create) }}
+                            {{ form_row(formOrder.reset) }}
                         </div>
                 {{ form_end(formOrder) }}
                 <a href="{{ path('secure_client_profile', {'type': 'view'}) }}">К профилю</a>
@@ -66,7 +70,7 @@
 
             <script>
                 $(document).ready(function() {
-                    function sortingResults(results, container, query) {
+                    /*function sortingResults(results, container, query) {
                         if (query.term) {
                             return results.sort(function(a, b) {
                                 if (a.text.length > b.text.length) {
@@ -79,9 +83,7 @@
                             });
                         }
                         return results;
-                    }
-
-                    var d;
+                    }*/
 
                     $("#formCreateOrder_selectorSubject").select2({
                         placeholder: "Выберите предмет",
@@ -115,49 +117,35 @@
                         var selectorSubject = $("#formCreateOrder_selectorSubject");
                         var selectorTypeOrder = $("#formCreateOrder_selectorTypeOrder");
 
-                        if (!selectorSubject.val())
-                        {
-                            selectorSubject.addClass('invalid');
-                            selectorSubject.popover('show');
-                        }
-                        else
-                        {
-                            selectorSubject.removeClass('invalid');
-                            selectorSubject.popover('hide');
-                            //e.preventDefault();
-                        }
-
-                        if (!selectorTypeOrder.val())
-                        {
-                            selectorTypeOrder.popover('show');
-                            selectorTypeOrder.addClass('invalid');
-                        }
-                        else
-                        {
-                            selectorTypeOrder.removeClass('invalid');
-                            selectorTypeOrder.popover('hide');
-                        }
-
-                        $(".popover-title").css("color", "red" );
-                        $(".popover").css("text-align", "center");
+                        triggerPopover(selectorSubject);
+                        triggerPopover(selectorTypeOrder);
 
                         return true;
                     });
 
-
-                    /*$("#formCreateOrder_selectorSubject").on("change", function () {
-                        if ($("#formCreateOrder_selectorSubject").hasClass("invalid"))
+                    function triggerPopover(a){
+                        if (!a.val())
                         {
-                            $("#formCreateOrder_selectorSubject").removeClass('invalid');
+                            a.popover('show');
+                            a.addClass('invalid');
+                            $(".popover-title").css("color", "red" );
+                            $(".popover").css("text-align", "center");
                         }
-
-                        if ($("#formCreateOrder_selectorSubject").popover('show'))
+                        else
                         {
-                            $("#formCreateOrder_selectorSubject").popover('hide')
+                            a.removeClass('invalid');
+                            a.popover('hide');
                         }
+                    }
+
+                    $(".select2-choice").addClass("form-control");
+                    $("#select2-chosen-1, #select2-chosen-2").css("line-height", "32px");
+
+                    /*$("#formCreateOrder_fieldTheme").on("focus", function(e) {
+
                     });*/
 
-                    /*function closeMessage(el) {
+                    function closeMessage(el) {
                         el.addClass('is-hidden');
                     }
 
@@ -167,8 +155,9 @@
 
                     setTimeout(function() {
                         closeMessage($('#js-timer'));
-                    }, 1500);*/
+                    }, 2000);
                 });
             </script>
+            <script type="text/javascript" src="{{ asset('bundles/js/sorting_select2.js') }}"></script>
         </div>
     {% endblock %}

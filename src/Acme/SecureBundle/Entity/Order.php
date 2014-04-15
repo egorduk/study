@@ -2,88 +2,133 @@
 
 namespace Acme\SecureBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Doctrine\ORM\EntityRepository;
+use Zend\I18n\Validator\DateTime;
 
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="order")
+ */
 class Order
 {
-    public $fieldTheme;
-    public $fieldDateExpire;
-    public $fieldDescribe;
-    public $fieldOriginality;
-    public $fieldCountSheet;
-    public $selectorSubject;
-    public $selectorTypeOrder;
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    public $theme;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    public $date_cxpire;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    public $date_create;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    public $describe;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    public $originality;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    public $count_sheet;
+
+
+    public $subject_id;
+
+
+    public $type_order_id;
 
 
     public function __construct(){
+        $this->date_create = new \DateTime();
     }
 
     public function setTheme($theme)
     {
-        $this->fieldTheme = $theme;
+        $this->theme = $theme;
     }
 
     public function getTheme()
     {
-        return $this->fieldTheme;
+        return $this->theme;
     }
 
     public function setDateExpire($date)
     {
-        $this->fieldDateExpire = $date;
+        $this->date_cxpire = $date;
     }
 
     public function getDateExpire()
     {
-        return $this->fieldDateExpire;
+        return $this->date_cxpire;
     }
 
     public function setDescribe($describe)
     {
-        $this->fieldDescribe = $describe;
+        $this->describe = $describe;
     }
 
     public function getDescribe()
     {
-        return $this->fieldDescribe;
+        return $this->describe;
     }
 
     public function setOriginality($originality)
     {
-        $this->fieldOriginality = $originality;
+        $this->originality = $originality;
     }
 
     public function getOriginality()
     {
-        return $this->fieldOriginality;
+        return $this->originality;
     }
 
     public function setCountSheet($count)
     {
-        $this->fieldCountSheet = $count;
+        $this->count_sheet = $count;
     }
 
     public function getCountSheet()
     {
-        return $this->fieldCountSheet;
+        return $this->count_sheet;
     }
 
     public function getSubject()
     {
-        return $this->selectorSubject;
+        return $this->subject_id;
     }
 
     public function setSubject($subject)
     {
-        $this->selectorSubject = $subject;
+        $this->subject_id = $subject;
     }
 
     public function getTypeOrder()
     {
-        return $this->selectorTypeOrder;
+        return $this->type_order_id;
     }
 
     public function setTypeOrder($type)
     {
-        $this->selectorTypeOrder = $type;
+        $this->type_order_id = $type;
     }
 }

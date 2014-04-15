@@ -9,7 +9,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Security\Core\Util\StringUtils;
 
 
 class CreateOrderForm extends AbstractType
@@ -19,13 +18,12 @@ class CreateOrderForm extends AbstractType
         $builder->add('fieldTheme', 'text', array('label'=>'Тема задания:', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Введите тему задания', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Введите название темы...')))
                 ->add('fieldDescribe', 'text', array('label'=>'Описание задания:', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Опишите требования к работе', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Введите требования...')))
                 ->add('fieldDateExpire', 'text', array('label'=>'Выполнение до:', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Укажите до какой даты выполняется задание', 'size' => 30, 'maxlength' => 20, 'placeholder' => '')))
-                ->add('fieldOriginality', 'text', array('label'=>'Оригинальность:', 'required' => false, 'attr' => array('class' => 'form-control', 'title' => 'Укажите процент оригинальности', 'size' => 3, 'maxlength' => 3, 'placeholder' => '')))
-                ->add('fieldCountSheet', 'text', array('label'=>'Количесто страниц:', 'required' => false, 'attr' => array('class' => 'form-control', 'title' => 'Укажите объем задания', 'size' => 3, 'maxlength' => 3, 'placeholder' => 'Число...')))
+                ->add('fieldOriginality', 'text', array('label'=>'Оригинальность:', 'required' => false, 'attr' => array('class' => 'form-control', 'title' => 'Укажите процент оригинальности', 'size' => 3, 'maxlength' => 3, 'placeholder' => 'Введите процент оригинальности...')))
+                ->add('fieldCountSheet', 'text', array('label'=>'Количесто страниц:', 'required' => false, 'attr' => array('class' => 'form-control', 'title' => 'Укажите объем задания', 'size' => 3, 'maxlength' => 3, 'placeholder' => 'Введите число страниц...')))
                 ->add('selectorSubject', 'genemu_jqueryselect2_entity', array(
                     'attr' => array(
-                        'class' => 'required',
+                        'class' => 'form-control',
                         'title' => 'Внимание!',
-                        //'data-placement' => "right",
                         'data-content' => "Вы должны выбрать предмет!",
                         'data-trigger' => 'hover',
                     ),
@@ -40,9 +38,8 @@ class CreateOrderForm extends AbstractType
                 ->add('selectorTypeOrder', 'genemu_jqueryselect2_entity', array(
                     'label'=>'Тип работы:',
                     'attr' => array(
-                        'class' => 'required',
+                        'class' => 'form-control',
                         'title' => 'Внимание!',
-                       // 'data-placement' => "right",
                         'data-content' => "Вы должны выбрать тип заказа!",
                         'data-trigger' => 'hover',
                     ),

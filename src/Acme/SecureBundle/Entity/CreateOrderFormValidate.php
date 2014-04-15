@@ -3,7 +3,7 @@
 namespace Acme\SecureBundle\Entity;
 
 
-class OrderFormValidate
+class CreateOrderFormValidate
 {
     public $fieldTheme;
     public $fieldDateExpire;

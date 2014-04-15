@@ -2,6 +2,7 @@
 
 namespace Helper;
 
+use Acme\SecureBundle\Entity\Order;
 use Symfony\Component\Yaml\Yaml;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\Container;
@@ -430,6 +431,31 @@ class Helper
         $userInfo->setCountry($country);
 
         $em->merge($userInfo);
+        $em->flush();
+    }
+
+
+    public static function createNewOrder($postData, $userId)
+    {
+        $theme = $postData['fieldTheme'];
+        $describe = $postData['fieldDescribe'];
+        $dateExpire = $postData['fieldDateExpire'];
+        $originality = $postData['fieldOriginality'];
+        $countSheet = $postData['fieldCountSheet'];
+        $subjectId = $postData['selectorSubject'];
+        $typeTypeOrderId = $postData['selectorTypeOrder'];
+
+        $order = new Order();
+        $order->setTheme($theme);
+        $order->setDescribe($describe);
+        $order->setDateExpire($dateExpire);
+        $order->setOriginality($originality);
+        $order->setCountSheet($countSheet);
+        $order->setSubject($subjectId);
+        $order->setTypeOrder($typeTypeOrderId);
+
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $em->persist();
         $em->flush();
     }
 
