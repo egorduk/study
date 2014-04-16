@@ -23,10 +23,16 @@ class TypeOrder extends EntityRepository
     /**
      * @ORM\Column(type="string")
      */
-    protected $name;
+    public $name;
+
+    /**
+     * @ORM\OneToMany(targetEntity="UserOrder", mappedBy="type_order")
+     **/
+    public $link_type_order;
 
 
     public function __construct(){
+        $this->link_type_order = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function setName($name)

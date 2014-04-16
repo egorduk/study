@@ -36,7 +36,7 @@
                     {{ form_errors(formOrder) }}
                         <div class="form-group">
                             {{ form_row(formOrder.fieldTheme) }}
-                            {{ form_row(formOrder.fieldDescribe) }}
+                            {{ form_row(formOrder.fieldTask) }}
                             {{ form_row(formOrder.fieldDateExpire) }}
                             {{ form_row(formOrder.fieldOriginality) }}
                             {{ form_row(formOrder.fieldCountSheet) }}
@@ -48,42 +48,33 @@
                             </div>
                             <div style="height: 20px">
                             </div>
-                            {{ form_row(formOrder.create) }}
+                            <div class="input-group">
+                                <label for="formCreateOrder_create" class="btn btn-success"><i class="fa fa-pencil-square-o fa-2x">&nbspСоздать</i></label>
+                                {{ form_widget(formOrder.create) }}
+                                <label for="formCreateOrder_reset" class="btn btn-success"><i class="fa fa-trash-o fa-2x">&nbspОчистить</i></label>
+                                {{ form_widget(formOrder.reset) }}
+                            </div>
                             {{ form_row(formOrder.reset) }}
                         </div>
                 {{ form_end(formOrder) }}
                 <a href="{{ path('secure_client_profile', {'type': 'view'}) }}">К профилю</a>
             </div>
 
-            <!--<form class="form-horizontal col-sm-8">
-                <div class="form-group">
-                    <label>Gender</label>
-                    <!--<select class="form-control required gender" data-placement="top" data-trigger="manual" data-content="You must choose a gender.">
-                        <option value="">Please choose a gender</option>
-                        <option value="1">Male</option>
-                        <option value="2">Female</option>
-                        <option value="3">Unisex</option>
-                    </select>-
-                    <button type="submit" class="btn btn-default pull-left">Submit</button>
-                </div>
-            </form>-->
-
+            <div class="well" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input class="span2" size="16" type="text" value="12-02-2012">
+                <span class="add-on"><i class="icon-th"></i></span>
+            </div>
             <script>
                 $(document).ready(function() {
-                    /*function sortingResults(results, container, query) {
-                        if (query.term) {
-                            return results.sort(function(a, b) {
-                                if (a.text.length > b.text.length) {
-                                    return 1;
-                                } else if (a.text.length < b.text.length) {
-                                    return -1;
-                                } else {
-                                    return 0;
-                                }
-                            });
-                        }
-                        return results;
-                    }*/
+
+                    $('#formCreateOrder_fieldDateExpire').datepicker({
+                        language: 'pt-BR'
+                    })
+                    .on('changeDate', function(ev) {
+                        $('.datepicker').hide();
+                    });
+
+                    $(".datepicker").css("width","225px");
 
                     $("#formCreateOrder_selectorSubject").select2({
                         placeholder: "Выберите предмет",
@@ -95,8 +86,7 @@
                     })
                     .on("select2-selecting", function(e) {
                         var selectorSubject = $("#formCreateOrder_selectorSubject");
-                        selectorSubject.removeClass('invalid');
-                        selectorSubject.popover('hide');
+                        hidePopover(selectorSubject);
                     });
 
                     $("#formCreateOrder_selectorTypeOrder").select2({
@@ -109,18 +99,21 @@
                     })
                     .on("select2-selecting", function(e) {
                         var selectorTypeOrder = $("#formCreateOrder_selectorTypeOrder");
-                        selectorTypeOrder.removeClass('invalid');
-                        selectorTypeOrder.popover('hide');
+                        hidePopover(selectorTypeOrder);
                     });
 
-                    $('form').click(function(e) {
+                    $('#formCreateOrder_create').click(function(e) {
                         var selectorSubject = $("#formCreateOrder_selectorSubject");
                         var selectorTypeOrder = $("#formCreateOrder_selectorTypeOrder");
-
                         triggerPopover(selectorSubject);
                         triggerPopover(selectorTypeOrder);
-
                         return true;
+                    });
+
+                    $('#formCreateOrder_reset').click(function(e) {
+                        $("#formCreateOrder_selectorSubject, #formCreateOrder_selectorTypeOrder ").select2("val", "");
+                        $("#formCreateOrder_selectorSubject, #formCreateOrder_selectorTypeOrder ").popover('hide');
+                        $("#formCreateOrder_selectorSubject, #formCreateOrder_selectorTypeOrder ").removeClass('invalid');
                     });
 
                     function triggerPopover(a){
@@ -141,9 +134,11 @@
                     $(".select2-choice").addClass("form-control");
                     $("#select2-chosen-1, #select2-chosen-2").css("line-height", "32px");
 
-                    /*$("#formCreateOrder_fieldTheme").on("focus", function(e) {
-
-                    });*/
+                    function hidePopover(a)
+                    {
+                        a.removeClass('invalid');
+                        a.popover('hide');
+                    }
 
                     function closeMessage(el) {
                         el.addClass('is-hidden');
@@ -155,9 +150,12 @@
 
                     setTimeout(function() {
                         closeMessage($('#js-timer'));
-                    }, 2000);
+                    }, 3000);
                 });
             </script>
             <script type="text/javascript" src="{{ asset('bundles/js/sorting_select2.js') }}"></script>
+
+
+
         </div>
     {% endblock %}

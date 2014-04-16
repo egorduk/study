@@ -7,18 +7,17 @@ class CreateOrderFormValidate
 {
     public $fieldTheme;
     public $fieldDateExpire;
-    public $fieldDescribe;
+    public $fieldTask;
     public $fieldOriginality;
     public $fieldCountSheet;
     public $selectorSubject;
     public $selectorTypeOrder;
 
 
-    public function __construct()
-    {
+    public function __construct(){
     }
 
-    public function getSubject()
+    /*public function getSubject()
     {
         return $this->selectorSubject;
     }
@@ -26,6 +25,6 @@ class CreateOrderFormValidate
     public function getTypeOrder()
     {
         return $this->selectorTypeOrder;
-    }
+    }*/
 
 }

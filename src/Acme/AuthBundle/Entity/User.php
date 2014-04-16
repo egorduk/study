@@ -257,7 +257,7 @@ class User extends EntityRepository implements UserInterface, \Serializable
     public function getRoles()
     {
         //return $this->getUserRoles()->toArray();
-        return array('ROLE_CLIENT');
+        //return array('ROLE_CLIENT');
     }
 
     public function eraseCredentials()

@@ -16,7 +16,7 @@ class CreateOrderForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('fieldTheme', 'text', array('label'=>'Тема задания:', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Введите тему задания', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Введите название темы...')))
-                ->add('fieldDescribe', 'text', array('label'=>'Описание задания:', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Опишите требования к работе', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Введите требования...')))
+                ->add('fieldTask', 'text', array('label'=>'Описание задания:', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Опишите требования к работе', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Введите требования...')))
                 ->add('fieldDateExpire', 'text', array('label'=>'Выполнение до:', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Укажите до какой даты выполняется задание', 'size' => 30, 'maxlength' => 20, 'placeholder' => '')))
                 ->add('fieldOriginality', 'text', array('label'=>'Оригинальность:', 'required' => false, 'attr' => array('class' => 'form-control', 'title' => 'Укажите процент оригинальности', 'size' => 3, 'maxlength' => 3, 'placeholder' => 'Введите процент оригинальности...')))
                 ->add('fieldCountSheet', 'text', array('label'=>'Количесто страниц:', 'required' => false, 'attr' => array('class' => 'form-control', 'title' => 'Укажите объем задания', 'size' => 3, 'maxlength' => 3, 'placeholder' => 'Введите число страниц...')))
@@ -49,8 +49,8 @@ class CreateOrderForm extends AbstractType
                     'property' => 'name',
                     'empty_value' => '',
                 ))
-                ->add('create', 'submit', array('label'=>'Создать', 'attr' => array('class' => 'btn btn-success')))
-                ->add('reset', 'reset', array('label'=>'Очистить', 'attr' => array('class' => 'btn btn-success')));
+                ->add('create', 'submit', array('label'=>'Создать', 'attr' => array('class' => 'hidden')))
+                ->add('reset', 'reset', array('label'=>'Очистить', 'attr' => array('class' => 'hidden')));
 
         $builder->addEventListener(FormEvents::POST_BIND, function(FormEvent $event)
         {

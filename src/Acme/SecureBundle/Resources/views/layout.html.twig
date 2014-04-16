@@ -3,15 +3,17 @@
 {% block head %}
     <link rel="icon" sizes="16x16" href="{{ asset('bundles/images/favicon.gif') }}" />
     {% block stylesheets %}
-        <link href="{{ asset('bundles/css/bootstrap.min.css') }}" rel="stylesheet" />
-        <link href="{{ asset('bundles/css/bootstrap-theme.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/css/bootstrap.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/css/bootstrap-theme.css') }}" rel="stylesheet" />
         <link href="{{ asset('bundles/css/window.css') }}" rel="stylesheet" />
         <link href="{{ asset('bundles/css/select2.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/css/datepicker.css') }}" rel="stylesheet" />
     {% endblock %}
     {% block javascripts %}
         <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/select2.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/bootstrap.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-datepicker.js') }}"></script>
     {% endblock %}
 {% endblock %}
 

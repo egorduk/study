@@ -2,7 +2,7 @@
 
 namespace Helper;
 
-use Acme\SecureBundle\Entity\Order;
+use Acme\SecureBundle\Entity\UserOrder;
 use Symfony\Component\Yaml\Yaml;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\Container;
@@ -22,6 +22,8 @@ class Helper
     private static $_tableProvider = 'AcmeAuthBundle:Provider';
     private static $_tableCountry = 'AcmeAuthBundle:Country';
     private static $_tableUserInfo = 'AcmeAuthBundle:UserInfo';
+    private static $_tableSubject = 'AcmeSecureBundle:Subject';
+    private static $_tableTypeOrder = 'AcmeSecureBundle:TypeOrder';
     private static $kernel;
 
     public function __construct()
@@ -438,24 +440,31 @@ class Helper
     public static function createNewOrder($postData, $userId)
     {
         $theme = $postData['fieldTheme'];
-        $describe = $postData['fieldDescribe'];
+        $task = $postData['fieldTask'];
         $dateExpire = $postData['fieldDateExpire'];
         $originality = $postData['fieldOriginality'];
         $countSheet = $postData['fieldCountSheet'];
         $subjectId = $postData['selectorSubject'];
         $typeTypeOrderId = $postData['selectorTypeOrder'];
 
-        $order = new Order();
+        $em = self::getContainer()->get('doctrine')->getManager();
+
+        $subject = $em->getRepository(self::$_tableSubject)
+            ->findOneById($subjectId);
+
+        $typeOrder = $em->getRepository(self::$_tableTypeOrder)
+            ->findOneById($typeTypeOrderId);
+
+        $order = new UserOrder(self::getContainer());
         $order->setTheme($theme);
-        $order->setDescribe($describe);
-        $order->setDateExpire($dateExpire);
+        $order->setTask($task);
+        //$order->setDateExpire($dateExpire);
         $order->setOriginality($originality);
         $order->setCountSheet($countSheet);
-        $order->setSubject($subjectId);
-        $order->setTypeOrder($typeTypeOrderId);
+        $order->setSubject($subject);
+        $order->setTypeOrder($typeOrder);
 
-        $em = self::getContainer()->get('doctrine')->getManager();
-        $em->persist();
+        $em->persist($order);
         $em->flush();
     }
 

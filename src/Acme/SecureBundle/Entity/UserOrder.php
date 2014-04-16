@@ -6,13 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Doctrine\ORM\EntityRepository;
-use Zend\I18n\Validator\DateTime;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="order")
+ * @ORM\Table(name="User_order")
  */
-class Order
+class UserOrder extends EntityRepository
 {
     /**
      * @ORM\Id
@@ -22,6 +21,11 @@ class Order
     protected $id;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    public $num;
+
+    /**
      * @ORM\Column(type="string")
      */
     public $theme;
@@ -29,7 +33,7 @@ class Order
     /**
      * @ORM\Column(type="date")
      */
-    public $date_cxpire;
+    public $date_expire;
 
     /**
      * @ORM\Column(type="date")
@@ -39,7 +43,7 @@ class Order
     /**
      * @ORM\Column(type="string")
      */
-    public $describe;
+    public $task;
 
     /**
      * @ORM\Column(type="string")
@@ -51,15 +55,30 @@ class Order
      */
     public $count_sheet;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="subject", inversedBy="link_subject", cascade={"all"})
+     * @ORM\JoinColumn(name="subject_id", referencedColumnName="id")
+     **/
+    public $subject;
 
-    public $subject_id;
+    /**
+     * @ORM\ManyToOne(targetEntity="TypeOrder", inversedBy="link_type_order", cascade={"all"})
+     * @ORM\JoinColumn(name="type_order_id", referencedColumnName="id")
+     **/
+    public $type_order;
 
 
-    public $type_order_id;
-
-
-    public function __construct(){
+    public function __construct($container){
+        $this->date_expire = new \DateTime();
         $this->date_create = new \DateTime();
+        $this->num = 1;
+
+        /*$em = $container->get('doctrine')->getManager();
+        $order = $em->getRepository('AcmeSecureBundle:UserOrder')
+            ->findOneById(1);
+        $num = $order->getNum();
+        $num++;
+        $this->num = $num;*/
     }
 
     public function setTheme($theme)
@@ -74,22 +93,22 @@ class Order
 
     public function setDateExpire($date)
     {
-        $this->date_cxpire = $date;
+        $this->date_expire = $date;
     }
 
     public function getDateExpire()
     {
-        return $this->date_cxpire;
+        return $this->date_expire;
     }
 
-    public function setDescribe($describe)
+    public function setTask($task)
     {
-        $this->describe = $describe;
+        $this->task = $task;
     }
 
-    public function getDescribe()
+    public function getTask()
     {
-        return $this->describe;
+        return $this->task;
     }
 
     public function setOriginality($originality)
@@ -114,21 +133,31 @@ class Order
 
     public function getSubject()
     {
-        return $this->subject_id;
+        return $this->subject;
     }
 
     public function setSubject($subject)
     {
-        $this->subject_id = $subject;
+        $this->subject = $subject;
     }
 
     public function getTypeOrder()
     {
-        return $this->type_order_id;
+        return $this->type_order;
     }
 
     public function setTypeOrder($type)
     {
-        $this->type_order_id = $type;
+        $this->type_order = $type;
+    }
+
+    public function setNum($num)
+    {
+        $this->num = $num;
+    }
+
+    public function getNum()
+    {
+        return $this->num;
     }
 }

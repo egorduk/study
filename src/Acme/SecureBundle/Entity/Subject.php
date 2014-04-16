@@ -23,15 +23,21 @@ class Subject extends EntityRepository
     /**
      * @ORM\Column(type="string")
      */
-    protected $parent_name;
+    public $parent_name;
 
     /**
      * @ORM\Column(type="string")
      */
-    protected $child_name;
+    public $child_name;
+
+    /**
+     * @ORM\OneToMany(targetEntity="UserOrder", mappedBy="subject")
+     **/
+    public $link_subject;
 
 
     public function __construct(){
+        $this->link_subject = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function setParentName($name)
