@@ -23,55 +23,74 @@ class UserOrder extends EntityRepository
     /**
      * @ORM\Column(type="integer")
      */
-    public $num;
+    private $num;
 
     /**
      * @ORM\Column(type="string")
      */
-    public $theme;
+    private $theme;
 
     /**
      * @ORM\Column(type="date")
      */
-    public $date_expire;
+    private $date_expire;
 
     /**
      * @ORM\Column(type="date")
      */
-    public $date_create;
+    private $date_create;
 
     /**
      * @ORM\Column(type="string")
      */
-    public $task;
+    private $task;
 
     /**
      * @ORM\Column(type="string")
      */
-    public $originality;
+    private $originality;
 
     /**
      * @ORM\Column(type="string")
      */
-    public $count_sheet;
+    private $count_sheet;
 
     /**
      * @ORM\ManyToOne(targetEntity="subject", inversedBy="link_subject", cascade={"all"})
      * @ORM\JoinColumn(name="subject_id", referencedColumnName="id")
      **/
-    public $subject;
+    private $subject;
 
     /**
      * @ORM\ManyToOne(targetEntity="TypeOrder", inversedBy="link_type_order", cascade={"all"})
      * @ORM\JoinColumn(name="type_order_id", referencedColumnName="id")
      **/
-    public $type_order;
+    private $type_order;
 
 
     public function __construct($container){
         $this->date_expire = new \DateTime();
         $this->date_create = new \DateTime();
         $this->num = 1;
+
+        $query = $this->createQueryBuilder('s');
+        $query->select('s, MAX(s.num) AS max_num');
+        $query->where('s.challenge = :challenge')->setParameter('challenge', $challenge);
+        $query->groupBy('s.user');
+        $query->orderBy('max_score', 'DESC');
+
+
+        $em = $this->getDoctrine()->getManager();
+        $obj = $em->getRepository($this->tableNews)->createQueryBuilder('n')
+            ->orWhere('n.title LIKE :filter1')
+            ->orWhere('n.title LIKE :filter2')
+            ->orWhere('n.title LIKE :filter3')
+            ->setParameter('filter1', $param . ' %')
+            ->setParameter('filter2', '% ' . $param)
+            ->setParameter('filter3', '% ' . $param . ' %')
+            ->getQuery()
+            ->getResult();
+        print_r($obj); die;
 
         /*$em = $container->get('doctrine')->getManager();
         $order = $em->getRepository('AcmeSecureBundle:UserOrder')

@@ -23,17 +23,17 @@ class Subject extends EntityRepository
     /**
      * @ORM\Column(type="string")
      */
-    public $parent_name;
+    private $parent_name;
 
     /**
      * @ORM\Column(type="string")
      */
-    public $child_name;
+    private $child_name;
 
     /**
      * @ORM\OneToMany(targetEntity="UserOrder", mappedBy="subject")
      **/
-    public $link_subject;
+    private $link_subject;
 
 
     public function __construct(){
