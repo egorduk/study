@@ -15,6 +15,14 @@
                 top: -30px !important;
                 left: 310px !important;
             }
+
+            .fs1 {
+                font-size: 32px;
+            }
+
+            .glyph {
+                font-size: 26px;
+            }
         </style>
 
         <div class="body">
@@ -31,19 +39,27 @@
                 </div>
             </div>
             {% endif %}
+            <div class="glyph fs1">
+                <div class="clearfix bshadow0 pbs">
+                    <span class="icon-bullhorn"></span>
+                </div>
+            </div>
             <div class="row" style="width: 300px">
                 {{ form_start(formOrder, {'attr': {'class': 'form'}}) }}
                     {{ form_errors(formOrder) }}
                         <div class="form-group">
                             {{ form_row(formOrder.fieldTheme) }}
                             {{ form_row(formOrder.fieldTask) }}
-
                             {{ form_label(formOrder.fieldDateExpire) }}
                             <div class="input-group">
                                 {{ form_widget(formOrder.fieldDateExpire) }}
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
-                            {{ form_row(formOrder.fieldOriginality) }}
+                            {{ form_label(formOrder.fieldOriginality) }}
+                            <div class="input-group">
+                                {{ form_widget(formOrder.fieldOriginality) }}
+                                <span class="input-group-addon"><i class="icon-cc-pd"></i></span>
+                            </div>
                             {{ form_row(formOrder.fieldCountSheet) }}
                             <div style="height: 60px">
                                 {{ form_row(formOrder.selectorSubject) }}
