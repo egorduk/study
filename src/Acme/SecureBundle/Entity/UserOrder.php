@@ -31,12 +31,12 @@ class UserOrder extends EntityRepository
     private $theme;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $date_expire;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $date_create;
 
@@ -67,37 +67,23 @@ class UserOrder extends EntityRepository
      **/
     private $type_order;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $is_show;
+
 
     public function __construct($container){
-        $this->date_expire = new \DateTime();
         $this->date_create = new \DateTime();
-        $this->num = 1;
+        $this->is_show = 1;
 
-        $query = $this->createQueryBuilder('s');
-        $query->select('s, MAX(s.num) AS max_num');
-        $query->where('s.challenge = :challenge')->setParameter('challenge', $challenge);
-        $query->groupBy('s.user');
-        $query->orderBy('max_score', 'DESC');
-
-
-        $em = $this->getDoctrine()->getManager();
-        $obj = $em->getRepository($this->tableNews)->createQueryBuilder('n')
-            ->orWhere('n.title LIKE :filter1')
-            ->orWhere('n.title LIKE :filter2')
-            ->orWhere('n.title LIKE :filter3')
-            ->setParameter('filter1', $param . ' %')
-            ->setParameter('filter2', '% ' . $param)
-            ->setParameter('filter3', '% ' . $param . ' %')
-            ->getQuery()
-            ->getResult();
-        print_r($obj); die;
-
-        /*$em = $container->get('doctrine')->getManager();
-        $order = $em->getRepository('AcmeSecureBundle:UserOrder')
-            ->findOneById(1);
-        $num = $order->getNum();
+        $em = $container->get('doctrine')->getManager();
+        $query = $em->getRepository('AcmeSecureBundle:UserOrder')->createQueryBuilder('s');
+        $query->select('MAX(s.num) AS max_num');
+        $obj = $query->getQuery()->getResult();
+        $num = $obj[0]['max_num'];
         $num++;
-        $this->num = $num;*/
+        $this->num = $num;
     }
 
     public function setTheme($theme)
@@ -112,7 +98,11 @@ class UserOrder extends EntityRepository
 
     public function setDateExpire($date)
     {
-        $this->date_expire = $date;
+        $format = 'd/m/Y';
+        $date = \DateTime::createFromFormat($format, $date);
+        $dietStartDate = $date->format('Y-m-d H:i:s');
+        $dietStartDate = new \Datetime($dietStartDate);
+        $this->date_expire = $dietStartDate;
     }
 
     public function getDateExpire()
@@ -178,5 +168,15 @@ class UserOrder extends EntityRepository
     public function getNum()
     {
         return $this->num;
+    }
+
+    public function setIsShow($val)
+    {
+        $this->is_show = $val;
+    }
+
+    public function getIsShow()
+    {
+        return $this->is_show;
     }
 }

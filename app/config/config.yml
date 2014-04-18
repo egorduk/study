@@ -114,3 +114,5 @@ swiftmailer:
 
 genemu_form:
     select2: ~
+    tinymce:
+        script_url: '/web/bundles/js/tinymce/tinymce.min.js'

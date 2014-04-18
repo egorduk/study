@@ -458,7 +458,7 @@ class Helper
         $order = new UserOrder(self::getContainer());
         $order->setTheme($theme);
         $order->setTask($task);
-        //$order->setDateExpire($dateExpire);
+        $order->setDateExpire($dateExpire);
         $order->setOriginality($originality);
         $order->setCountSheet($countSheet);
         $order->setSubject($subject);
