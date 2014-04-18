@@ -139,25 +139,3 @@ ul#demo-list a {
 #rssPost, #rssTitle{
     border-style: ridge;
 }
-
-/*#formReg_selectorCountry{
-    font-size:2em;
-    line-height:27px;
-    display:block;
-    float:left;
-    height:27px;
-    width:200px;
-}*/
-
-/*select {
-    display: block;
-    padding: 6px 4px;
-    -moz-box-sizing: content-box;
-    -webkit-box-sizing:content-box;
-    box-sizing:content-box;
-    height: 30px;
-}*/
-
-.select2-choice{
-    height: 40px;
-}

@@ -1,4 +1,5 @@
 <?php
+ini_set("display_errors", 0);
 	// Use installer
 	if (file_exists("../install"))
 		die("alert('You need to run the installer or rename/remove the \"install\" directory.');");

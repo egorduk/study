@@ -39,6 +39,8 @@ $man = new Moxiecode_ManagerEngine($type);
 require_once($basepath ."CorePlugin.php");
 require_once("config.php");
 
+//print_r($man);
+
 $man->dispatchEvent("onPreInit", array($type));
 
 // Include all plugins

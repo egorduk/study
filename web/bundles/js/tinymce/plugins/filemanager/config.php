@@ -18,16 +18,16 @@
         $mcFileManagerConfig['general.allow_override'] = "*";
         $mcFileManagerConfig['general.allow_export'] = "demo,tools,disabled_tools,debug";
 
-        // Preview options
-$host_name = $_SERVER['HTTP_HOST'];
-$mcFileManagerConfig['preview.wwwroot'] = $_SERVER['DOCUMENT_ROOT']."/files/"; // absolute or relative from this script path (c:/Inetpub/wwwroot).
-$mcFileManagerConfig['preview.urlprefix'] = "{proto}://".$host_name."/"; // domain name
-$mcFileManagerConfig['preview.urlsuffix'] = "http://".$host_name."/files/";
-$mcFileManagerConfig['preview.include_file_pattern'] = "http://".$host_name."/files/";
-$mcFileManagerConfig['preview.exclude_file_pattern'] = "http://".$host_name."/files/";
-$mcFileManagerConfig['preview.extensions'] = "*";
-$mcFileManagerConfig['preview.allow_export'] = "urlprefix,urlsuffix";
-$mcFileManagerConfig['preview.allow_override'] = "*";
+                // Preview options
+        $host_name = $_SERVER['HTTP_HOST'];
+        $mcFileManagerConfig['preview.wwwroot'] = $_SERVER['DOCUMENT_ROOT']."/files/"; // absolute or relative from this script path (c:/Inetpub/wwwroot).
+        $mcFileManagerConfig['preview.urlprefix'] = "{proto}://".$host_name."/"; // domain name
+        $mcFileManagerConfig['preview.urlsuffix'] = "http://".$host_name."/files/";
+        $mcFileManagerConfig['preview.include_file_pattern'] = "http://".$host_name."/files/";
+        $mcFileManagerConfig['preview.exclude_file_pattern'] = "http://".$host_name."/files/";
+        $mcFileManagerConfig['preview.extensions'] = "*";
+        $mcFileManagerConfig['preview.allow_export'] = "urlprefix,urlsuffix";
+        $mcFileManagerConfig['preview.allow_override'] = "*";
 
         // General file system options
         $mcFileManagerConfig['filesystem'] = "Moxiecode_LocalFileImpl";
@@ -40,7 +40,7 @@ $mcFileManagerConfig['preview.allow_override'] = "*";
         $mcFileManagerConfig['filesystem.include_file_pattern'] = '';
         $mcFileManagerConfig['filesystem.exclude_file_pattern'] = '/^\.|mcic_/i';
         $mcFileManagerConfig['filesystem.invalid_file_name_msg'] = "";
-        $mcFileManagerConfig['filesystem.extensions'] = "gif,jpg,htm,html,pdf,zip,txt,php,png,swf,dcr,mov,qt,ram,rm,avi,mp3,mpg,mpeg,asf,flv";
+        $mcFileManagerConfig['filesystem.extensions'] = "gif,jpg,pdf,zip,txt,png";
         $mcFileManagerConfig['filesystem.file_templates'] = '${rootpath}/templates/document.htm,${rootpath}/templates/another_document.htm';
         $mcFileManagerConfig['filesystem.directory_templates'] = '${rootpath}/templates/directory,${rootpath}/templates/another_directory';
         $mcFileManagerConfig['filesystem.readable'] = true;
