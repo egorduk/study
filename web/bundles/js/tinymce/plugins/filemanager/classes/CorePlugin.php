@@ -4,7 +4,7 @@
  *
  * @package MCManagerCore
  * @author Moxiecode
- * @copyright Copyright © 2007, Moxiecode Systems AB, All rights reserved.
+ * @copyright Copyright ï¿½ 2007, Moxiecode Systems AB, All rights reserved.
  */
 
 // Load local file system
@@ -640,6 +640,7 @@ class Moxiecode_CorePlugin extends Moxiecode_ManagerPlugin {
 	 */
 	function _listFiles(&$man, $input) {
 		$result = new Moxiecode_ResultSet("name,path,size,type,created,modified,attribs,custom");
+        //var_dump($result);die;
 		$config = $man->getConfig();
 		$files = array();
 		$rootNames = $man->_getRootNames();
@@ -649,6 +650,14 @@ class Moxiecode_CorePlugin extends Moxiecode_ManagerPlugin {
 			// URL specified
 			if (isset($input["url"]) && $input["path"] == '{default}')
 				$input["path"] = $man->convertURIToPath($input["url"]);
+            //var_dump($rootNames); die;
+            foreach($rootNames as $rt => $root)
+            {
+                //echo $rt; die;
+            }
+
+            //$input["path"] = "D:/OpenServer/domains/localhost/study/web/bundles/js/tinymce/plugins/filemanager/files";
+            $input["path"] = $rt . "/files";
 
 			if (isset($input['remember_last_path'])) {
 				if ($input['remember_last_path'] !== 'auto')
@@ -671,6 +680,7 @@ class Moxiecode_CorePlugin extends Moxiecode_ManagerPlugin {
 
 			$input["path"] = $man->toAbsPath($man->decryptPath($input["path"]));
 
+            //print_r($input);
 			$result->setHeader("path", $man->encryptPath($input["path"]));
 			$result->setHeader("visual_path", checkBool($config['general.user_friendly_paths']) ? $man->toVisualPath($input["path"]) : $man->encryptPath($input["path"]));
 
@@ -722,6 +732,9 @@ class Moxiecode_CorePlugin extends Moxiecode_ManagerPlugin {
 		}
 
 		// Add directories
+
+        //$input["path"] = $input["path"] . "/files/";
+        //print_r($input);
 		$listFS = $man->getFSFromPath($input["path"]);
 		foreach ($files as $file) {
 			// Remove files below root

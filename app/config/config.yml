@@ -115,4 +115,7 @@ swiftmailer:
 genemu_form:
     select2: ~
     tinymce:
+        enabled: true
         script_url: '/web/bundles/js/tinymce/tinymce.min.js'
+        configs:
+            entity_encoding: raw

@@ -26,7 +26,7 @@ ini_set("display_errors", 0);
 	if ($package) {
 		$compressor = new Moxiecode_JSCompressor(array(
 			'expires_offset' => 3600 * 24 * 10,
-			'disk_cache' => true,
+			'disk_cache' => false,
 			'cache_dir' => '_cache',
 			'gzip_compress' => true,
 			'remove_whitespace' => true,

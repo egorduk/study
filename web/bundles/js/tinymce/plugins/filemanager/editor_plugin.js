@@ -1,18 +1,11 @@
-/**
- * $Id: editor_plugin_src.js 42 2006-08-08 14:32:24Z spocke $
- *
- * @author Moxiecode
- * @copyright Copyright © 2004-2007, Moxiecode Systems AB, All rights reserved.
- */
-
 (function() {
 	window.mcFileManager = {
 		settings : {
 			document_base_url : '',
-			relative_urls : false,
+			relative_urls : true,
 			remove_script_host : false,
 			use_url_path : true,
-			remember_last_path : 'auto',
+			remember_last_path : 'false',
 			target_elements : '',
 			target_form : '',
 			handle : 'file'
@@ -321,11 +314,11 @@
 	var mcFileManagerPlugin = {
 		getInfo : function() {
 			return {
-				longname : 'MCFileManager PHP',
-				author : 'Moxiecode Systems AB',
-				authorurl : 'http://tinymce.moxiecode.com',
-				infourl : 'http://tinymce.moxiecode.com/plugins_filemanager.php',
-				version : "3.1.0.5"
+				longname : '',
+				author : '',
+				authorurl : '',
+				infourl : '',
+				version : ""
 			};
 		},
 

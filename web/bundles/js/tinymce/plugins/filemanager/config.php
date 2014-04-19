@@ -8,7 +8,7 @@
         $mcFileManagerConfig['general.user_friendly_paths'] = true;
         $mcFileManagerConfig['general.tools'] = "imagemanager,filemanager,createdir,createdoc,refresh,zip,upload,edit,rename,cut,copy,paste,delete,selectall,unselectall,view,download,insert,addfavorite,removefavorite";
         $mcFileManagerConfig['general.disabled_tools'] = "";
-        $mcFileManagerConfig['general.error_log'] = "log.txt";
+        $mcFileManagerConfig['general.error_log'] = "";
         $mcFileManagerConfig['general.language'] = "ru"; // en, sv
         $mcFileManagerConfig['general.plugins'] = "History,Favorites"; // comma seperated
         $mcFileManagerConfig['general.demo'] = false;
@@ -20,19 +20,22 @@
 
                 // Preview options
         $host_name = $_SERVER['HTTP_HOST'];
-        $mcFileManagerConfig['preview.wwwroot'] = $_SERVER['DOCUMENT_ROOT']."/files/"; // absolute or relative from this script path (c:/Inetpub/wwwroot).
-        $mcFileManagerConfig['preview.urlprefix'] = "{proto}://".$host_name."/"; // domain name
-        $mcFileManagerConfig['preview.urlsuffix'] = "http://".$host_name."/files/";
-        $mcFileManagerConfig['preview.include_file_pattern'] = "http://".$host_name."/files/";
-        $mcFileManagerConfig['preview.exclude_file_pattern'] = "http://".$host_name."/files/";
+$a = __DIR__;
+$a = str_replace('\\', '/', $a);
+//echo $a . "/files/";
+        $mcFileManagerConfig['preview.wwwroot'] = "/files"; // absolute or relative from this script path (c:/Inetpub/wwwroot).
+        $mcFileManagerConfig['preview.urlprefix'] = ""; // domain name
+        $mcFileManagerConfig['preview.urlsuffix'] = "";
+        $mcFileManagerConfig['preview.include_file_pattern'] = "";
+        $mcFileManagerConfig['preview.exclude_file_pattern'] = "";
         $mcFileManagerConfig['preview.extensions'] = "*";
-        $mcFileManagerConfig['preview.allow_export'] = "urlprefix,urlsuffix";
+        $mcFileManagerConfig['preview.allow_export'] = "";
         $mcFileManagerConfig['preview.allow_override'] = "*";
 
         // General file system options
         $mcFileManagerConfig['filesystem'] = "Moxiecode_LocalFileImpl";
-        $mcImageManagerConfig['filesystem.path'] = 'files';
-        $mcImageManagerConfig['filesystem.rootpath'] = '../../../../../../files';
+        $mcImageManagerConfig['filesystem.path'] = $a . "/files";
+        $mcImageManagerConfig['filesystem.rootpath'] = "/files";
         $mcFileManagerConfig['filesystem.datefmt'] = "Y-m-d H:i";
         $mcFileManagerConfig['filesystem.include_directory_pattern'] = '';
         $mcFileManagerConfig['filesystem.exclude_directory_pattern'] = '/^mcith$/i';
