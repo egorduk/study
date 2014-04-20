@@ -108,6 +108,11 @@ class User extends EntityRepository implements UserInterface, \Serializable
      */
     protected $account;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Acme\SecureBundle\Entity\UserOrder", mappedBy="user")
+     **/
+    protected $link_user;
+
 
     public function __construct()
     {
@@ -120,6 +125,7 @@ class User extends EntityRepository implements UserInterface, \Serializable
         $this->user_info_id = 0;
         $this->hash_code = '';
         $this->account = 0;
+        $this->link_user = new \Doctrine\Common\Collections\ArrayCollection();
         //$this->date_confirm_recovery = 'NULL';
         //$this->date_confirm_reg = 'NULL';
         //$this->fio = '';

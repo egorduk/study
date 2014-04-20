@@ -455,6 +455,9 @@ class Helper
         $typeOrder = $em->getRepository(self::$_tableTypeOrder)
             ->findOneById($typeTypeOrderId);
 
+        $user = $em->getRepository(self::$_tableUser)
+            ->findOneById($userId);
+
         $order = new UserOrder(self::getContainer());
         $order->setTheme($theme);
         $order->setTask($task);
@@ -463,6 +466,7 @@ class Helper
         $order->setCountSheet($countSheet);
         $order->setSubject($subject);
         $order->setTypeOrder($typeOrder);
+        $order->setUser($user);
 
         $em->persist($order);
         $em->flush();

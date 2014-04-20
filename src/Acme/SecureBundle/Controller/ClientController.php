@@ -153,13 +153,15 @@ class ClientController extends Controller
             {
                 if ($formOrder->get('create')->isClicked())
                 {
+                    print_r($formOrder->getErrorsAsString()); die;
+
                     if ($formOrder->isValid())
                     {
                         $postData = $request->request->get('formCreateOrder');
-
+                        $userId = 1;
                         Helper::createNewOrder($postData, $userId);
-
                         $showWindow = true;
+                       // $formOrder = $this->createForm(new CreateOrderForm());
                     }
                 }
             }

@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="User_order")
+ * @ORM\Table(name="User_Order")
  */
 class UserOrder extends EntityRepository
 {
@@ -56,7 +56,7 @@ class UserOrder extends EntityRepository
     private $count_sheet;
 
     /**
-     * @ORM\ManyToOne(targetEntity="subject", inversedBy="link_subject", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Subject", inversedBy="link_subject", cascade={"all"})
      * @ORM\JoinColumn(name="subject_id", referencedColumnName="id")
      **/
     private $subject;
@@ -66,6 +66,12 @@ class UserOrder extends EntityRepository
      * @ORM\JoinColumn(name="type_order_id", referencedColumnName="id")
      **/
     private $type_order;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Acme\AuthBundle\Entity\User", inversedBy="link_user", cascade={"all"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     **/
+    protected $user;
 
     /**
      * @ORM\Column(type="integer")
@@ -178,5 +184,15 @@ class UserOrder extends EntityRepository
     public function getIsShow()
     {
         return $this->is_show;
+    }
+
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    public function getUser()
+    {
+        return $this->user;
     }
 }

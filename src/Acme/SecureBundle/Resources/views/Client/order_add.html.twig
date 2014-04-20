@@ -31,34 +31,42 @@
             {% endif %}
             <div class="row" style="width: 500px">
                 {{ form_start(formOrder, {'attr': {'class': 'form'}}) }}
-                    {{ form_errors(formOrder) }}
                         <div class="form-group">
                             {{ form_label(formOrder.fieldTheme) }}
+                            {{ form_errors(formOrder.fieldTheme) }}
                             <div class="input-group">
                                 {{ form_widget(formOrder.fieldTheme) }}
                                 <span class="input-group-addon"><i class="icon-quill"></i></span>
                             </div>
-                            {{ form_row(formOrder.fieldTask) }}
+                            {{ form_label(formOrder.fieldTask) }}
+                            {{ form_errors(formOrder.fieldTask) }}
+                            <div class="input-group">
+                                {{ form_widget(formOrder.fieldTask) }}
+                            </div>
                             {{ form_label(formOrder.fieldDateExpire) }}
                             <div class="input-group">
                                 {{ form_widget(formOrder.fieldDateExpire) }}
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
                             {{ form_label(formOrder.fieldOriginality) }}
+                            {{ form_errors(formOrder.fieldOriginality) }}
                             <div class="input-group">
                                 {{ form_widget(formOrder.fieldOriginality) }}
                                 <span class="input-group-addon"><i class="icon-cc-pd"></i></span>
                             </div>
                             {{ form_label(formOrder.fieldCountSheet) }}
+                            {{ form_errors(formOrder.fieldCountSheet) }}
                             <div class="input-group">
                                 {{ form_widget(formOrder.fieldCountSheet) }}
                                 <span class="input-group-addon"><i class="icon-book"></i></span>
                             </div>
-                            <div style="height: 60px">
-                                {{ form_row(formOrder.selectorSubject) }}
+                            {{ form_label(formOrder.selectorSubject) }}
+                            <div class="input-group">
+                                {{ form_widget(formOrder.selectorSubject) }}
                             </div>
-                            <div style="height: 60px">
-                                {{ form_row(formOrder.selectorTypeOrder) }}
+                            {{ form_label(formOrder.selectorTypeOrder) }}
+                            <div class="input-group">
+                                {{ form_widget(formOrder.selectorTypeOrder) }}
                             </div>
                             <div style="height: 20px">
                             </div>
@@ -76,7 +84,7 @@
             <script>
                 $(document).ready(function() {
                     var placeholder = "Placeholder";
-                    var maxLength = 10;
+                    var maxLength = 255;
 
                     tinyMCE.init({
                         mode : 'textareas',
@@ -102,6 +110,7 @@
                                 $(".mceLayout").css("border", "1px solid #CCCCCC");
                                 $("#formCreateOrder_fieldTask").blur();
                                 //var doc = ed.getDoc();
+
                                 tinyMCE.dom.Event.add(ed.getDoc(), 'blur', function(e) {
                                     var tinyText = getTinyTrimText();
                                     if (tinyText == placeholder || tinyText == "") {
@@ -126,21 +135,7 @@
                                 }
                             });
 
-                            /*ed.onChange.add(function(ed, l) {
-                                var tm = tinyMCE.get(0);
-                                var tinyText = $(tm.getBody()).text();
-                                tinyText = tinyText.trim();
-
-                                console.log(tinyText.indexOf(placeholder));
-
-                                /*if (tinyText.indexOf(placeholder) == 0)
-                                {
-                                    ed.setContent("");
-                                }*/
-
-                                /*if (tinyText == placeholder) {
-                                    ed.setContent("");
-                                }
+                            /*ed.onChange.add(function(ed, e) {
                             });*/
 
                             ed.onClick.add(function(ed,e) {
@@ -149,6 +144,9 @@
                                     ed.setContent("");
                                 }
                                 setBootstrapStyle();
+                            });
+
+                            ed.onReset.add(function(ed, e) {
                             });
                         }
                     });
@@ -224,8 +222,7 @@
                         //tinyText = tinyText.trim();
                         //console.log($(ed.getBody()).text());
 
-                        if ($("#formCreateOrder_fieldTheme").val() != "" /*&& tinyText != "" */ && $("#formCreateOrder_fieldDateExpire").val() != "")
-                        {
+                        if ($("#formCreateOrder_fieldTheme").val() != "" /*&& tinyText != "" */ && $("#formCreateOrder_fieldDateExpire").val() != ""){
                             var selectorSubject = $("#formCreateOrder_selectorSubject");
                             var selectorTypeOrder = $("#formCreateOrder_selectorTypeOrder");
                             triggerPopover(selectorSubject);
@@ -238,6 +235,17 @@
                         $("#formCreateOrder_selectorSubject, #formCreateOrder_selectorTypeOrder ").select2("val", "");
                         $("#formCreateOrder_selectorSubject, #formCreateOrder_selectorTypeOrder ").popover('hide');
                         $("#formCreateOrder_selectorSubject, #formCreateOrder_selectorTypeOrder ").removeClass('invalid');
+                        //var tinyText = getTinyTrimText();
+
+                        //if (tinyText == ""){
+                            //var tm = tinyMCE.get(0);
+                           // console.log(tm);
+                                    //tm.editorId.setContent("sdfsdfsdf");
+                        //tm.setContent("dsf");
+                            //console.log(tm.setContent("SDFSDFSD"));
+                            //tm.setContent(placeholder);
+                            //$(tm.getBody()).setData("sdf");
+                        //}
                     });
 
                     function triggerPopover(a){
@@ -275,11 +283,6 @@
                     setTimeout(function() {
                         closeMessage($('#js-timer'));
                     }, 3000);
-
-
-                    //tinyMCE.get(0).setContent("yo");
-                    //tinyMCE.triggerSave();
-                    //console.log($("#formCreateOrder_fieldTask").attr("title"));
                 });
             </script>
             <script type="text/javascript" src="{{ asset('bundles/js/sorting_select2.js') }}"></script>
