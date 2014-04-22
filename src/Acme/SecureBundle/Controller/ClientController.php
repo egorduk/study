@@ -153,15 +153,16 @@ class ClientController extends Controller
             {
                 if ($formOrder->get('create')->isClicked())
                 {
-                    print_r($formOrder->getErrorsAsString()); die;
-
                     if ($formOrder->isValid())
                     {
+                        //print_r($request->request->get('formCreateOrder'));
                         $postData = $request->request->get('formCreateOrder');
                         $userId = 1;
                         Helper::createNewOrder($postData, $userId);
                         $showWindow = true;
-                       // $formOrder = $this->createForm(new CreateOrderForm());
+                        //$formOrder = $this->createForm(new CreateOrderForm());
+
+                        //return new RedirectResponse($this->generateUrl('', array()));
                     }
                 }
             }
@@ -169,6 +170,9 @@ class ClientController extends Controller
             return $this->render(
                 'AcmeSecureBundle:Client:order_add.html.twig', array('formOrder' => $formOrder->createView(), 'showWindow' => $showWindow)
             );
+        }
+        else{
+
         }
 
     }

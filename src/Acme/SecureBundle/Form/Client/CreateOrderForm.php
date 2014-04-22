@@ -15,9 +15,9 @@ class CreateOrderForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('fieldTheme', 'text', array('label'=>'Тема задания:', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Введите тему задания', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Введите название темы...')))
+        $builder->add('fieldTheme', 'text', array('label'=>'Тема задания:', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Введите тему задания', 'size' => 30, 'maxlength' => 25, 'placeholder' => 'Введите название темы...')))
                 ->add('fieldTask', 'genemu_tinymce', array('label'=>'Описание задания:', 'required' => false, 'attr' => array('class' => 'form-control')))
-                ->add('fieldDateExpire', 'text', array('label'=>'Выполнение до:', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Выберите дату выполнения задания', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Нажмите сюда...')))
+                ->add('fieldDateExpire', 'text', array('label'=>'Выполнение до:', 'required' => true, 'attr' => array('class' => 'form-control', 'readonly' => true, 'title' => 'Выберите дату выполнения задания', 'size' => 10, 'maxlength' => 20, 'placeholder' => 'Нажмите сюда...')))
                 ->add('fieldOriginality', 'text', array('label'=>'Процент оригинальности:', 'required' => false, 'attr' => array('class' => 'form-control', 'title' => 'Укажите процент оригинальности', 'size' => 3, 'maxlength' => 3, 'placeholder' => 'Введите процент оригинальности...')))
                 ->add('fieldCountSheet', 'text', array('label'=>'Количесто страниц:', 'required' => false, 'attr' => array('class' => 'form-control', 'title' => 'Укажите объем задания', 'size' => 3, 'maxlength' => 3, 'placeholder' => 'Введите число страниц...')))
                 ->add('selectorSubject', 'genemu_jqueryselect2_entity', array(
@@ -54,20 +54,17 @@ class CreateOrderForm extends AbstractType
 
         $builder->addEventListener(FormEvents::POST_BIND, function(FormEvent $event)
         {
-            /*$form = $event->getForm();
+            $form = $event->getForm();
+            $task = $form->get('fieldTask')->getData();
+            $task = strip_tags($task);
 
-            $selectedSubject = $form->get('selectorSubject')->getData();
-            $selectedTypeOrder = $form->get('selectorTypeOrder')->getData();
+            if ($task != null) {
+                $task = Helper::convertFromUtfToCp($task);
 
-            if (!$selectedSubject)
-            {
-                $form->get('selectorSubject')->addError(new FormError('Выберите предмет!'));
+                if (strlen($task) < 5) {
+                    $form->get('fieldTask')->addError(new FormError('Введите описание более конкретно!'));
+                }
             }
-
-            if (!$selectedTypeOrder)
-            {
-                $form->get('selectorTypeOrder')->addError(new FormError('Выберите тип заказа!'));
-            }*/
         });
     }
 

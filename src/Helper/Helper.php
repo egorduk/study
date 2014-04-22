@@ -447,6 +447,10 @@ class Helper
         $subjectId = $postData['selectorSubject'];
         $typeTypeOrderId = $postData['selectorTypeOrder'];
 
+        $theme = strip_tags($theme);
+        $theme = trim($theme);
+        $theme = preg_replace('|\s+|', ' ', $theme);
+
         $em = self::getContainer()->get('doctrine')->getManager();
 
         $subject = $em->getRepository(self::$_tableSubject)
@@ -470,6 +474,12 @@ class Helper
 
         $em->persist($order);
         $em->flush();
+    }
+
+
+    public static function convertFromUtfToCp($task)
+    {
+        return iconv("UTF-8", "CP1251", $task);
     }
 
 

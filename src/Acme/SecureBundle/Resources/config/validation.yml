@@ -23,13 +23,13 @@ Acme\SecureBundle\Entity\CreateOrderFormValidate:
     properties:
         fieldTheme:
           - Length: { min: 4, minMessage: "Слишком короткое название темы!" }
-          - Regex: { pattern: "/^[а-яА-Я]+$/u", message: "Только русские буквы!" }
+          - Regex: { pattern: "/^[а-яА-Я\s+]+$/u", message: "Только русские буквы!" }
         fieldOriginality:
           - Regex: { pattern: "/^[\d]+$/", message: "Только цифры!" }
         fieldCountSheet:
           - Regex: { pattern: "/^[\d]+$/", message: "Только цифры!" }
-        fieldTask:
-          - Length: { min: 6, minMessage: "Слишком короткое описание!" }
+        #fieldTask:
+        #  - Length: { min: 6, minMessage: "Слишком короткое описание!" }
           #- Regex: { pattern: "/^[\d]+$/", message: "Введите корректное описание!" }
         #fieldDescribe:
         #  - Length: { min: 3, minMessage: "Слишком короткое название темы!" }
