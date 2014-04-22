@@ -25,8 +25,6 @@ security:
             anonymous: ~
             form_login:
                 login_path: unauthorized
-                #login_path: client_login
-            #provider: user_db
             http_basic:
                 realm: "Secured Area"
                 #provider: user_db
@@ -52,6 +50,7 @@ security:
         - { path: ^/client/recovery, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/client/index, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/secure/client/index, roles: IS_AUTHENTICATED_ANONYMOUSLY } #ROLE_CLIENT
+        - { path: ^/secure/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
     encoders:
         Acme\AuthBundle\Entity\User:

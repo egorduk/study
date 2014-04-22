@@ -3,6 +3,10 @@
 {% block title "Create order" %}
 
     {% block content %}
+
+        {# Underscore templates for the uploader #}
+        {% include "PunkAveFileUploaderBundle:Default:templates.html.twig" %}
+
         <style>
             .invalid{
                 border-color: #E9322D!important;
@@ -30,7 +34,7 @@
             </div>
             {% endif %}
             <div class="row" style="width: 500px">
-                {{ form_start(formOrder, {'attr': {'class': 'form'}}) }}
+                {{ form_start(formOrder, {'attr': {'class' : 'form', 'data-spinner' : 1}}) }}
                         <div class="form-group">
                             {{ form_label(formOrder.fieldTheme) }}
                             {{ form_errors(formOrder.fieldTheme) }}
@@ -77,14 +81,41 @@
                                 {{ form_widget(formOrder.reset) }}
                             </div>
                             {{ form_row(formOrder.reset) }}
+                            <div class="input-group">
+
+                                <div class="file-uploader"></div>
+                                <a class="btn btn-danger" href="">Delete</a>
+                            </div>
                         </div>
                 {{ form_end(formOrder) }}
                 <a href="{{ path('secure_client_profile', {'type': 'view'}) }}">К профилю</a>
             </div>
+
             <script>
                 $(document).ready(function() {
                     var placeholder = "Placeholder";
                     var maxLength = 255;
+
+
+                    //$(function() {
+                        new PunkAveFileUploader({
+                            'uploadUrl': {{ path('upload', { editId: 1 }) | json_encode | raw }},
+                            'viewUrl': {{ ('/study/web/uploads/attachments/' ~ 1)| json_encode | raw }},
+                            'el': '.file-uploader',
+                            'existingFiles': {{ punkave_get_files('attachments/' ~ 1) | json_encode | raw }},
+                            'delaySubmitWhileUploading': '.edit-form',
+                            //'auto' : true,
+                            //'multi' : true,
+
+                            'errorCallback': function(errorObj) {
+                                if (errorObj.error == 'maxNumberOfFiles') {
+                                    alert("Maximum uploaded files exceeded!");
+                                }
+                            }
+
+                        });
+                    //});
+
 
                     tinyMCE.init({
                         mode : 'textareas',
@@ -270,5 +301,12 @@
                 });
             </script>
             <script type="text/javascript" src="{{ asset('bundles/js/sorting_select2.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/underscore.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/jquery.fileupload.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/jquery.iframe-transport.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/FileUploader.js') }}"></script>
+
+
+
         </div>
     {% endblock %}

@@ -178,6 +178,27 @@ class ClientController extends Controller
     }
 
 
+    /**
+     * @Route("/upload", name="upload")
+     */
+    public function uploadAction(Request $request)
+    {
+        $editId = $this->getRequest()->get('editId');
+        $fileName = $this->getRequest()->get('file');
+
+        if (!preg_match('/^\d+$/', $editId)){
+            die("Error");
+        }
+
+        if ($fileName){
+            $this->get('punk_ave.file_uploader')->removeFiles(array('folder' => 'attachments/' . $editId));
+            $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/' . $editId));
+        }
+        //elseif ($request->isMethod('POST')){
+        else{
+            $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/' . $editId));
+        }
+    }
 
 
     /**
