@@ -191,8 +191,9 @@ class ClientController extends Controller
         }
 
         if ($fileName){
-            $this->get('punk_ave.file_uploader')->removeFiles(array('folder' => 'attachments/' . $editId));
-            $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/' . $editId));
+            //$this->get('punk_ave.file_uploader')->removeFiles($this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/' . $editId)));
+            $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/' . $editId, 'action' => 'delete'));
+           //$this->get('punk_ave.file_uploader')->removeFiles(array('folder' => 'attachments/' . $editId));
         }
         //elseif ($request->isMethod('POST')){
         else{

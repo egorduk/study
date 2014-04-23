@@ -134,7 +134,8 @@ class FileUploader
                 $upload_handler->get();
                 break;
             case 'POST':
-                if (isset($_REQUEST['_method']) && $_REQUEST['_method'] === 'DELETE') {
+                //if (isset($_REQUEST['_method']) && $_REQUEST['_method'] === 'DELETE') {
+                if (isset($options['action']) && $options['action'] == 'delete'){
                     $upload_handler->delete();
                 } else {
                     $upload_handler->post();
