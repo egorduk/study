@@ -82,7 +82,6 @@
                             </div>
                             {{ form_row(formOrder.reset) }}
                             <div class="input-group">
-
                                 <div class="file-uploader"></div>
                                 <a class="btn btn-danger" href="">Delete</a>
                             </div>
@@ -96,26 +95,35 @@
                     var placeholder = "Placeholder";
                     var maxLength = 255;
 
-
-                    //$(function() {
+                   //$(function() {
                         new PunkAveFileUploader({
                             'uploadUrl': {{ path('upload', { editId: 1 }) | json_encode | raw }},
                             'viewUrl': {{ ('/study/web/uploads/attachments/' ~ 1)| json_encode | raw }},
                             'el': '.file-uploader',
                             'existingFiles': {{ punkave_get_files('attachments/' ~ 1) | json_encode | raw }},
                             'delaySubmitWhileUploading': '.edit-form',
-                            //'auto' : true,
-                            //'multi' : true,
+
+                            'onDoneCallback': function(e) {
+                                console.log('send');
+                            },
+
 
                             'errorCallback': function(errorObj) {
                                 if (errorObj.error == 'maxNumberOfFiles') {
                                     alert("Maximum uploaded files exceeded!");
                                 }
                             }
-
                         });
+                        /*.bind('add', function (e) {
+                            console.log("piy");
+                        });*/
                     //});
 
+                    //console.log(new PunkAveFileUploader());
+
+                    $('#fileupload').bind('add', function (e) {
+                        console.log("piy");
+                    });
 
                     tinyMCE.init({
                         mode : 'textareas',

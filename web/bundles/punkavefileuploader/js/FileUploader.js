@@ -98,22 +98,15 @@ function PunkAveFileUploader(options)
     }
     var li = $(fileTemplate(info));
     li.find('[data-action="delete"]').click(function(event) {
-      //console.log(uploadUrl);
       var file = $(this).closest('[data-name]');
       var name = file.attr('data-name');
       $.ajax({
         dataType: 'json',
         type: 'post',
-        url: uploadUrl + '&file=' + name,
-        //url: setQueryParameter(uploadUrl, 'file', name),
+        //url: uploadUrl + '&file=' + name,
+        url: setQueryParameter(uploadUrl, 'file', name),
         success: function() {
-            //file.remove();
-            //alert("good");
-            //self.uploading = false;
-            //editor.fileupload();
-            //self.addExistingFiles();
-            //$el.html(uploaderTemplate({}));
-            editor.fileupload();
+            file.remove();
         }
 
       });
