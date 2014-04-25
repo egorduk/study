@@ -13,10 +13,14 @@
                 box-shadow: 0 0 6px #E9322D!important;
             }
 
-            .popover {
+            .popover{
                 position: inherit;
                 top: -30px !important;
                 left: 310px !important;
+            }
+
+            .thumbnail-image{
+                padding-top: 20px;
             }
         </style>
         <div class="body">
@@ -83,7 +87,6 @@
                             {{ form_row(formOrder.reset) }}
                             <div class="input-group">
                                 <div class="file-uploader"></div>
-                                <a class="btn btn-danger" href="">Delete</a>
                             </div>
                         </div>
                 {{ form_end(formOrder) }}
@@ -102,11 +105,6 @@
                             'el': '.file-uploader',
                             'existingFiles': {{ punkave_get_files('attachments/' ~ 1) | json_encode | raw }},
                             'delaySubmitWhileUploading': '.edit-form',
-
-                            'onDoneCallback': function(e) {
-                                console.log('send');
-                            },
-
 
                             'errorCallback': function(errorObj) {
                                 if (errorObj.error == 'maxNumberOfFiles') {

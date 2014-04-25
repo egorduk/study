@@ -18,10 +18,12 @@ function PunkAveFileUploader(options)
   self.addExistingFiles = function(files)
   {
     _.each(files, function(file) {
+       // console.log(files);
       appendEditableImage({
         // cmsMediaUrl is a global variable set by the underscoreTemplates partial of MediaItems.html.twig
         'thumbnail_url': viewUrl + '/thumbnails/' + file,
         'url': viewUrl + '/originals/' + file,
+        'size': '123',
         'name': file
         });
     });
@@ -72,6 +74,7 @@ function PunkAveFileUploader(options)
       if (data)
       {
         _.each(data.result, function(item) {
+            console.log(item);
           appendEditableImage(item);
         });
       }
@@ -106,7 +109,9 @@ function PunkAveFileUploader(options)
         //url: uploadUrl + '&file=' + name,
         url: setQueryParameter(uploadUrl, 'file', name),
         success: function() {
-            file.remove();
+            li.hide("slow", function(){
+                file.remove();
+            })
         }
 
       });
