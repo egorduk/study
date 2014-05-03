@@ -100,10 +100,10 @@
 
                    //$(function() {
                         new PunkAveFileUploader({
-                            'uploadUrl': {{ path('upload', { editId: 1 }) | json_encode | raw }},
-                            'viewUrl': {{ ('/study/web/uploads/attachments/' ~ 1)| json_encode | raw }},
+                            'uploadUrl': {{ path('upload', { editId: folderFiles }) | json_encode | raw }},
+                            'viewUrl': {{ ('/study/web/uploads/attachments/' ~ folderFiles)| json_encode | raw }},
                             'el': '.file-uploader',
-                            'existingFiles': {{ punkave_get_files('attachments/' ~ 1) | json_encode | raw }},
+                            'existingFiles': {{ punkave_get_files('attachments/' ~ folderFiles) | json_encode | raw }},
                             'delaySubmitWhileUploading': '.edit-form',
 
                             'errorCallback': function(errorObj) {
@@ -119,9 +119,9 @@
 
                     //console.log(new PunkAveFileUploader());
 
-                    $('#fileupload').bind('add', function (e) {
+                    /*$('#fileupload').bind('add', function (e) {
                         console.log("piy");
-                    });
+                    });*/
 
                     tinyMCE.init({
                         mode : 'textareas',
@@ -210,21 +210,23 @@
                     }
 
                     $('#formCreateOrder_fieldDateExpire').datepicker({
-                        //autoclose: true,
-                        //todayHighlight: true,
-                        //todayBtn: true,
-                        format: "dd/mm/yyyy"
-                    })
-                    .on('changeDate', function(ev) {
+                       // daysOfWeekDisabled: "1",
+                       // calendarWeeks: true,
+                        todayHighlight: true,
+                        format: "dd/mm/yyyy",
+                        autoclose: true
+                        //todayBtn: true
+                    });
+                    /*.on('changeDate', function(ev) {
                         if (ev.viewMode == "days"){
                             $('.datepicker').hide();
                         }
-                    });
+                    });*/
 
-                    $(".datepicker").css("width","225px");
+                    //$(".datepicker").css("width","225px");
 
-                    $(".input-group-addon").click(function(e){
-                        //$(".datepicker").show();
+                    $(".input-group-addon:eq(1)").click(function(e){
+                        $("#formCreateOrder_fieldDateExpire").datepicker('show');
                     });
 
                     $("#formCreateOrder_selectorSubject").select2({

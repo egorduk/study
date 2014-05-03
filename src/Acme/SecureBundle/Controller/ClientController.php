@@ -149,6 +149,17 @@ class ClientController extends Controller
             $formOrder->handleRequest($request);
             $showWindow = false;
 
+            $session = $request->getSession();
+            $sessionFolderFiles = $session->get("folderFiles");
+            if (isset($sessionFolderFiles)){
+                $folderFiles = $sessionFolderFiles;
+            }
+            else{
+                $folderFiles = Helper::getRandomValue(10);
+                $session->set("folderFiles", $folderFiles);
+                $session->save();
+            }
+
             if ($request->isMethod('POST'))
             {
                 if ($formOrder->get('create')->isClicked())
@@ -168,7 +179,7 @@ class ClientController extends Controller
             }
 
             return $this->render(
-                'AcmeSecureBundle:Client:order_add.html.twig', array('formOrder' => $formOrder->createView(), 'showWindow' => $showWindow)
+                'AcmeSecureBundle:Client:order_add.html.twig', array('formOrder' => $formOrder->createView(), 'showWindow' => $showWindow, 'folderFiles' => $folderFiles)
             );
         }
         else{
@@ -186,18 +197,18 @@ class ClientController extends Controller
         $editId = $this->getRequest()->get('editId');
         $fileName = $this->getRequest()->get('file');
 
-        if (!preg_match('/^\d+$/', $editId)){
-            die("Error");
+        //if (preg_match('/^\d+$/', $editId))
+        {
+            if ($fileName){
+                $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/' . $editId, 'action' => 'delete'));
+            }
+            else{
+                $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/' . $editId));
+            }
         }
+        //else
+        {
 
-        if ($fileName){
-            //$this->get('punk_ave.file_uploader')->removeFiles($this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/' . $editId)));
-            $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/' . $editId, 'action' => 'delete'));
-           //$this->get('punk_ave.file_uploader')->removeFiles(array('folder' => 'attachments/' . $editId));
-        }
-        //elseif ($request->isMethod('POST')){
-        else{
-            $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/' . $editId));
         }
     }
 
