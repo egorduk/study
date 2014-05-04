@@ -15,6 +15,7 @@ parameters:
     - pdf #application/pdf
     - rar
     - zip
+    - bmp
     #- mp3 #audio/mpeg
     - xls #application/vnd.ms-excel
     - ppt #application/vnd.ms-powerpoint

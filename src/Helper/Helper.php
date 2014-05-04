@@ -437,7 +437,7 @@ class Helper
     }
 
 
-    public static function createNewOrder($postData, $userId)
+    public static function createNewOrder($postData, $userId, $folderFiles)
     {
         $theme = $postData['fieldTheme'];
         $task = $postData['fieldTask'];
@@ -471,6 +471,7 @@ class Helper
         $order->setSubject($subject);
         $order->setTypeOrder($typeOrder);
         $order->setUser($user);
+        $order->setFolderFiles($folderFiles);
 
         $em->persist($order);
         $em->flush();
@@ -480,6 +481,10 @@ class Helper
     public static function convertFromUtfToCp($task)
     {
         return iconv("UTF-8", "CP1251", $task);
+    }
+
+    public static function getFilesFromFolderToSave($folderFiles){
+        return ;
     }
 
 

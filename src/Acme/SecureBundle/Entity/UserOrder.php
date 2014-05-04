@@ -78,16 +78,21 @@ class UserOrder extends EntityRepository
      */
     private $is_show;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $folder_files;
+
 
     public function __construct($container){
         $this->date_create = new \DateTime();
         $this->is_show = 1;
-
+        $this->folder_files = "";
         $em = $container->get('doctrine')->getManager();
         $query = $em->getRepository('AcmeSecureBundle:UserOrder')->createQueryBuilder('s');
         $query->select('MAX(s.num) AS max_num');
-        $obj = $query->getQuery()->getResult();
-        $num = $obj[0]['max_num'];
+        $data = $query->getQuery()->getResult();
+        $num = $data[0]['max_num'];
         $num++;
         $this->num = $num;
     }
@@ -100,6 +105,16 @@ class UserOrder extends EntityRepository
     public function getTheme()
     {
         return $this->theme;
+    }
+
+    public function setFolderFiles($folder)
+    {
+        $this->folder_files = $folder;
+    }
+
+    public function getFolderFiles()
+    {
+        return $this->folder_files;
     }
 
     public function setDateExpire($date)

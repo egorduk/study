@@ -166,10 +166,13 @@ class ClientController extends Controller
                 {
                     if ($formOrder->isValid())
                     {
-                        //print_r($request->request->get('formCreateOrder'));
+                       // print_r($request->request->get('formCreateOrder')); die;
+
+                        $arrayFiles = Helper::getFilesFromFolderToSave($folderFiles);
+
                         $postData = $request->request->get('formCreateOrder');
                         $userId = 1;
-                        Helper::createNewOrder($postData, $userId);
+                        Helper::createNewOrder($postData, $userId, $folderFiles);
                         $showWindow = true;
                         //$formOrder = $this->createForm(new CreateOrderForm());
 
