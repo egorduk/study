@@ -478,13 +478,75 @@ class Helper
     }
 
 
-    public static function convertFromUtfToCp($task)
-    {
+    public static function convertFromUtfToCp($task){
         return iconv("UTF-8", "CP1251", $task);
     }
 
-    public static function getFilesFromFolderToSave($folderFiles){
-        return ;
+
+    public static function getFilesFromFolder($folderFiles){
+        $dh = opendir($folderFiles);
+        $arrayInfoFiles = [];
+        $i = 0;
+
+        while (false !== ($filename = readdir($dh))) {
+            if ($filename != "." && $filename != "..") {
+                $arrayInfoFiles[$i]['size'] = Helper::getSizeFile(filesize($folderFiles . "/" . $filename));
+                $arrayInfoFiles[$i]['extension'] = Helper::getExtensionFile($folderFiles . "/" . $filename);
+                $arrayInfoFiles[$i]['date'] = Helper::getDateCreateFile($folderFiles . "/" . $filename);
+                $i++;
+            }
+        }
+        closedir($dh);
+
+        return $arrayInfoFiles;
+    }
+
+
+    public static function getSizeFile($bytes){
+        $label = array('Б', 'КБ', 'МБ');
+        for($i = 0; $bytes >= 1024 && $i < (count($label) - 1); $bytes /= 1024, $i++);
+        return(round($bytes) . " " . $label[$i]);
+    }
+
+
+    /*public static function getTypeFile($filename){
+        $mime_types = array(
+            'txt' => 'text/plain',
+            'png' => 'image/png',
+            'jpeg' => 'image/jpeg',
+            'jpg' => 'image/jpeg',
+            'gif' => 'image/gif',
+            'bmp' => 'image/bmp',
+            '7z' => 'application/x-7z-compressed',
+            'zip' => 'application/zip',
+            'rar' => 'application/x-rar-compressed',
+            'pdf' => 'application/pdf',
+            'doc' => 'application/msword',
+            'rtf' => 'application/rtf',
+            'xls' => 'application/vnd.ms-excel',
+            'ppt' => 'application/vnd.ms-powerpoint',
+        );
+
+        $ext = strtolower(array_pop(explode('.', $filename)));
+        if (array_key_exists($ext, $mime_types)) {
+            return $mime_types[$ext];
+        }
+        else{
+
+        }
+    }*/
+
+
+    public static function getExtensionFile($filename) {
+        $pathInfo = pathinfo($filename);
+        return $pathInfo['extension'];
+    }
+
+
+    public static function getDateCreateFile($filename) {
+        if (file_exists($filename)) {
+            return date("Y-m-d H:i:s", filemtime($filename));
+        }
     }
 
 

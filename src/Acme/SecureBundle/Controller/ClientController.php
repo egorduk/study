@@ -168,12 +168,14 @@ class ClientController extends Controller
                     {
                        // print_r($request->request->get('formCreateOrder')); die;
 
-                        $arrayFiles = Helper::getFilesFromFolderToSave($folderFiles);
+                        $folderFiles = dirname($_SERVER['SCRIPT_FILENAME']) . "/uploads/attachments/" . $folderFiles . "/originals";
+                        $arrayFiles = Helper::getFilesFromFolder($folderFiles);
+                        var_dump($arrayFiles);
 
                         $postData = $request->request->get('formCreateOrder');
                         $userId = 1;
-                        Helper::createNewOrder($postData, $userId, $folderFiles);
-                        $showWindow = true;
+                        //Helper::createNewOrder($postData, $userId, $folderFiles);
+                        //$showWindow = true;
                         //$formOrder = $this->createForm(new CreateOrderForm());
 
                         //return new RedirectResponse($this->generateUrl('', array()));

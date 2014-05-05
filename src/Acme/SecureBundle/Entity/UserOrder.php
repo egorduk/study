@@ -121,9 +121,9 @@ class UserOrder extends EntityRepository
     {
         $format = 'd/m/Y';
         $date = \DateTime::createFromFormat($format, $date);
-        $dietStartDate = $date->format('Y-m-d H:i:s');
-        $dietStartDate = new \Datetime($dietStartDate);
-        $this->date_expire = $dietStartDate;
+        $dateStartDate = $date->format('Y-m-d H:i:s');
+        $dateStartDate = new \Datetime($dateStartDate);
+        $this->date_expire = $dateStartDate;
     }
 
     public function getDateExpire()
