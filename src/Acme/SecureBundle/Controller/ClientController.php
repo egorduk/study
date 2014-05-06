@@ -223,10 +223,10 @@ class ClientController extends Controller
                 $response->total = ceil($countOrders / $rowsPerPage);
                 $response->records = $countOrders;
                 $response->page = $curPage;
+                $i = 0;
 
                 foreach($orders as $order) {
                     $task = $order->getTask();
-
                     $response->rows[$i]['id'] = $order->getId();
                     $response->rows[$i]['cell'] = array(
                         $order->getId(),
@@ -238,6 +238,8 @@ class ClientController extends Controller
                         $order->getDateCreate()->format("d.m.Y H:s"),
                         $order->getDateExpire()->format("d.m.Y H:s"),
                     );
+
+                    $i++;
                 }
 
                 return new JsonResponse($response);
