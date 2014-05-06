@@ -224,4 +224,9 @@ class UserOrder extends EntityRepository
     {
         return $this->id;
     }
+
+    public function getDateCreate()
+    {
+        return $this->date_create;
+    }
 }

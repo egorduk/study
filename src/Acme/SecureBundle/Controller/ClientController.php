@@ -16,6 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 //use Symfony\Component\PropertyAccess\Exception\AccessException;
 //use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Util\StringUtils;
 //use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -183,14 +184,63 @@ class ClientController extends Controller
             );
         }
         elseif ($type == "view") {
-            if($request->isXmlHttpRequest())
-            {
+            if($request->isXmlHttpRequest()) {
 
                 //$response = new Response(json_encode(array('response' => 'hello')));
                 //$response->headers->set('Content-Type', 'application/json');
                 //return $response;
-                return new JsonResponse(array('name' => 'hello'));
                 //$response->setStatusCode(Response::HTTP_NOT_FOUND);
+
+                $userId = 1;
+                $user = Helper::getUserById($userId);
+                $postData = $request->request->all();
+                $curPage = $postData['page'];
+                $rowsPerPage = $postData['rows'];
+                $sortingField = $postData['sidx'];
+                $sortingOrder = $postData['sord'];
+                $search = $postData['_search'];
+                $sField = $sData = $sTable = $mode = null;
+                //var_dump($postData); die;
+
+                if (isset($search) && $search == "true")
+                {
+                    $mode = $postData['searchOper'];
+                    $sData = $postData['searchString'];
+                    $sField = $postData['searchField'];
+                }
+
+                $countOrders = Helper::getCountOrdersForGrid($mode, $sField, $sData, $user);
+
+                /*if ($totalRows < $rowsPerPage)
+                    $response->page = 1;
+                else
+                    $response->page = $curPage;*/
+
+                $firstRowIndex = $curPage * $rowsPerPage - $rowsPerPage;
+                //$limit = $firstRowIndex.','.$rowsPerPage;
+                $orders = Helper::getClientOrdersForGrid($mode, $sField, $sData, $firstRowIndex, $rowsPerPage, $user);
+                $response = new Response();
+                $response->total = ceil($countOrders / $rowsPerPage);
+                $response->records = $countOrders;
+                $response->page = $curPage;
+
+                foreach($orders as $order) {
+                    $task = $order->getTask();
+
+                    $response->rows[$i]['id'] = $order->getId();
+                    $response->rows[$i]['cell'] = array(
+                        $order->getId(),
+                        $order->getNum(),
+                        $order->getTypeOrder()->getName(),
+                        $order->getTheme(),
+                        $order->getSubject()->getChildName(),
+                        $task,
+                        $order->getDateCreate()->format("d.m.Y H:s"),
+                        $order->getDateExpire()->format("d.m.Y H:s"),
+                    );
+                }
+
+                return new JsonResponse($response);
             }
 
             $showWindow = false;

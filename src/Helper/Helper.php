@@ -25,6 +25,7 @@ class Helper
     private static $_tableUserInfo = 'AcmeAuthBundle:UserInfo';
     private static $_tableSubject = 'AcmeSecureBundle:Subject';
     private static $_tableTypeOrder = 'AcmeSecureBundle:TypeOrder';
+    private static $_tableUserOrder = 'AcmeSecureBundle:UserOrder';
     private static $kernel;
 
     public function __construct()
@@ -598,6 +599,184 @@ class Helper
         $date = \DateTime::createFromFormat($format, $sourceDate);
         $date = $date->format('Y-m-d H:i:s');
         return new \Datetime($date);
+    }
+
+
+    public static function getCountOrdersForGrid($mode = null, $sField = null, $sData = null, $user) {
+        //if ($mode != null)
+        {
+            $table = null;
+
+            /*if ($sField == 'price') {
+                $table = 'author_has_estimated_order';
+            }
+            else if ($sField == 'specialty_id') {
+                $table = 'specialty';
+            }
+            else if ($sField == 'type_id') {
+                $table = 'type';
+            }
+
+            if ($mode == 'eq') {
+                if ($sField == 'price' || $sField == 'specialty_id' || $sField == 'type_id') {
+                    $row = $this->_db->query("SELECT COUNT(id) AS count FROM $table WHERE '$sField' = '$sData'");
+                    $row = $row->fetch(PDO::FETCH_ASSOC);
+
+                    return $row['count'];
+                }
+                else {
+                    $qWhere = ' WHERE ' . $sField . '=' . $this->_db->quote($sData);
+                }
+            }
+            else if ($mode == 'ne') {
+                if ($sField == 'price' || $sField == 'specialty_id' || $sField == 'type_id') {
+                    $row = $this->_db->query("SELECT COUNT(id) AS count FROM $table WHERE '$sField' <> '$sData'");
+                    $row = $row->fetch(PDO::FETCH_ASSOC);
+
+                    return $row['count'];
+                }
+                else {
+                    $qWhere = ' WHERE ' . $sField . '<>' . $this->_db->quote($sData);
+                }
+            }
+            else if ($mode == 'cn') {
+                if ($sField == 'price' || $sField == 'specialty_id' || $sField == 'type_id') {
+                    $row = $this->_db->query("SELECT COUNT(id) AS count FROM $table WHERE '$sField' LIKE '%" . $sData . "%'");
+                    $row = $row->fetch(PDO::FETCH_ASSOC);
+
+                    return $row['count'];
+                }
+                else {
+                    $qWhere = ' WHERE ' . $sField . ' LIKE ' . $this->_db->quote('%' . $sData . '%');
+                }
+            }
+            else if ($mode == 'bw') {
+                if ($sField == 'price' || $sField == 'specialty_id' || $sField == 'type_id') {
+                    $row = $this->_db->query("SELECT COUNT(id) AS count FROM $table WHERE '$sField' LIKE '" . $sData . "%'");
+                    $row = $row->fetch(PDO::FETCH_ASSOC);
+
+                    return $row['count'];
+                }
+                else
+                {
+                    $qWhere = ' WHERE ' . $sField . ' LIKE ' . $this->_db->quote($sData . '%');
+                }
+            }
+        }
+        else {
+            $qWhere = '';
+        }*/
+
+        //$row = $this->_db->query('SELECT COUNT(id) AS count FROM `order`'.$qWhere);
+        //$row = $row->fetch(PDO::FETCH_ASSOC);
+
+            $em = self::getContainer()->get('doctrine')->getManager();
+
+            $order = $em->getRepository(self::$_tableUserOrder)
+                ->findByUser($user);
+
+            return count($order);
+        }
+    }
+
+
+    public static function getClientOrdersForGrid($mode = null, $sField = null, $sData = null, $firstRowIndex, $rowsPerPage, $user) {
+        //if ($sField != null && $mode != null)
+        {
+            /*if ($sField == 'date_create' || $sField == 'date_expire') {
+                $sTable = 'datetime';
+                $where = $sTable . '.' . $sField;
+            }
+            else if ($sField == 'specialty_id') {
+                $sTable = 'specialty';
+                $where = $sTable . '.name';
+            }
+            else if ($sField == 'num') {
+                $sTable = 'order';
+                $where = $sTable . '.' . $sField;
+            }
+            else if ($sField == 'name_theme') {
+                $sTable = 'order';
+                $where = $sTable . '.' . $sField;
+            }
+            else if ($sField == 'type_id') {
+                $sTable = 'type';
+                $where = $sTable . '.name';
+            }
+            else if ($sField == 'price') {
+                $sTable = 'author_has_estimated_order';
+                $where = $sTable . '.price';
+            }
+
+            if ($mode == 'cn') {
+                $row = $this->_db->query("SELECT order.id,order.name_theme,order.num,datetime.date_create,datetime.date_expire,type.name AS tname,specialty.name AS sname,author_has_estimated_order.price
+					FROM `order`
+					INNER JOIN `datetime` ON datetime.id = order.datetime_id
+					INNER JOIN `type` ON type.id = order.type_id
+					INNER JOIN specialty ON specialty.id = order.specialty_id
+					LEFT JOIN author_has_estimated_order ON author_has_estimated_order.order_id = order.id AND author_has_estimated_order.author_est_id = '$authorId'
+					WHERE $where LIKE '%" . $sData . "%'
+					LIMIT $limit");
+            }
+            else if ($mode == 'bw')
+            {
+                $row = $this->_db->query("SELECT order.id,order.name_theme,order.num,datetime.date_create,datetime.date_expire,type.name AS tname,specialty.name AS sname,author_has_estimated_order.price
+					FROM `order`
+					INNER JOIN `datetime` ON datetime.id = order.datetime_id
+					INNER JOIN `type` ON type.id = order.type_id
+					INNER JOIN specialty ON specialty.id = order.specialty_id
+					LEFT JOIN author_has_estimated_order ON author_has_estimated_order.order_id = order.id AND author_has_estimated_order.author_est_id = '$authorId'
+					WHERE $where LIKE '" . $sData . "%'
+					LIMIT $limit");
+            }
+            else if ($mode == 'eq')
+            {
+                $row = $this->_db->query("SELECT order.id,order.name_theme,order.num,datetime.date_create,datetime.date_expire,type.name AS tname,specialty.name AS sname,author_has_estimated_order.price
+					FROM `order`
+					INNER JOIN `datetime` ON datetime.id = order.datetime_id
+					INNER JOIN `type` ON type.id = order.type_id
+					INNER JOIN specialty ON specialty.id = order.specialty_id
+					LEFT JOIN author_has_estimated_order ON author_has_estimated_order.order_id = order.id AND author_has_estimated_order.author_est_id = '$authorId'
+					WHERE $where = '$sData'
+					LIMIT $limit");
+            }
+            else if ($mode == 'ne')
+            {
+                $row = $this->_db->query("SELECT order.id,order.name_theme,order.num,datetime.date_create,datetime.date_expire,type.name AS tname,specialty.name AS sname,author_has_estimated_order.price
+					FROM `order`
+					INNER JOIN `datetime` ON datetime.id = order.datetime_id
+					INNER JOIN `type` ON type.id = order.type_id
+					INNER JOIN specialty ON specialty.id = order.specialty_id
+					LEFT JOIN author_has_estimated_order ON author_has_estimated_order.order_id = order.id AND author_has_estimated_order.author_est_id = '$authorId'
+					WHERE $where <> '$sData'
+					LIMIT $limit");
+            }
+        }
+        else*/
+        {
+            /*$row = $this->_db->query("SELECT o.id,o.name_theme,o.num,d.date_create,d.date_expire,t.name AS tname,s.name AS sname,aheo.price
+				FROM `order` o
+				INNER JOIN `datetime` d ON d.id = o.datetime_id
+				INNER JOIN `type` t ON t.id = o.type_id
+				INNER JOIN specialty s ON s.id = o.specialty_id
+				LEFT JOIN author_has_estimated_order aheo ON aheo.order_id = o.id AND aheo.author_est_id = '$authorId'
+				ORDER BY '.$sortingField . ' ' . $sortingOrder.'
+				LIMIT $limit");*/
+
+            $em = self::getContainer()->get('doctrine')->getManager();
+            $orders = $em->getRepository(self::$_tableUserOrder)
+                ->findBy(
+                    array('user' => $user),
+                    array('num' => 'ASC'),
+                    10,
+                    $rowsPerPage
+                );
+
+            //var_dump($em); die;
+        }
+
+            return $orders;
+        }
     }
 
 }
