@@ -26,8 +26,12 @@ Acme\SecureBundle\Entity\CreateOrderFormValidate:
           - Regex: { pattern: "/^[а-яА-Я\s+]+$/u", message: "Только русские буквы!" }
         fieldOriginality:
           - Regex: { pattern: "/^[\d]+$/", message: "Только цифры!" }
+          - GreaterThan: { value: 0, message: "Процент не может быть меньше 0!" }
+          - LessThan: { value: 101, message: "Процент не может быть больше 100!" }
         fieldCountSheet:
           - Regex: { pattern: "/^[\d]+$/", message: "Только цифры!" }
+          - GreaterThan: { value: 0, message: "Количество страниц не может быть меньше 0!" }
+          - LessThan: { value: 501, message: "Количество страниц не может быть больше 500!" }
         #fieldTask:
         #  - Length: { min: 6, minMessage: "Слишком короткое описание!" }
           #- Regex: { pattern: "/^[\d]+$/", message: "Введите корректное описание!" }

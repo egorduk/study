@@ -25,6 +25,7 @@ use Acme\SecureBundle\Form\Client\ClientProfileForm;
 use Acme\SecureBundle\Entity\ClientProfileFormValidate;
 use Acme\SecureBundle\Form\Client\CreateOrderForm;
 use Acme\SecureBundle\Entity\CreateOrderFormValidate;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 class ClientController extends Controller
@@ -133,16 +134,14 @@ class ClientController extends Controller
      */
     public function orderAction(Request $request, $type)
     {
-        if ($type == "view" || $type == "create")
-        {
+        if ($type == "view" || $type == "create") {
             $userId = $this->get('security.context')->getToken()->getUser();
             $user = Helper::getUserById($userId);
             //$userInfoId = $user->getUserInfoId();
             //$userInfo = Helper::getUserInfoById($userInfoId);
         }
 
-        if ($type == "create")
-        {
+        if ($type == "create") {
             $createOrderValidate = new CreateOrderFormValidate();
 
             $formOrder = $this->createForm(new CreateOrderForm(), $createOrderValidate);
@@ -151,33 +150,29 @@ class ClientController extends Controller
 
             $session = $request->getSession();
             $sessionFolderFiles = $session->get("folderFiles");
-            if (isset($sessionFolderFiles)){
+            if (isset($sessionFolderFiles)) {
                 $folderFiles = $sessionFolderFiles;
             }
-            else{
-                $folderFiles = Helper::getRandomValue(10);
+            else {
+                $folderFiles = "non_" . Helper::getRandomValue(5);
                 $session->set("folderFiles", $folderFiles);
                 $session->save();
             }
 
-            if ($request->isMethod('POST'))
-            {
-                if ($formOrder->get('create')->isClicked())
-                {
-                    if ($formOrder->isValid())
-                    {
-                       // print_r($request->request->get('formCreateOrder')); die;
-
-                        $folderFiles = dirname($_SERVER['SCRIPT_FILENAME']) . "/uploads/attachments/" . $folderFiles . "/originals";
-                        $arrayFiles = Helper::getFilesFromFolder($folderFiles);
-                        var_dump($arrayFiles);
-
+            if ($request->isMethod('POST')) {
+                if ($formOrder->get('create')->isClicked()) {
+                    if ($formOrder->isValid()) {
+                        $filesFolder = Helper::getFullPathFolderFiles($folderFiles, "originals");
+                        $arrayFiles = Helper::getFilesFromFolder($filesFolder, "originals");
                         $postData = $request->request->get('formCreateOrder');
                         $userId = 1;
-                        //Helper::createNewOrder($postData, $userId, $folderFiles);
-                        //$showWindow = true;
-                        //$formOrder = $this->createForm(new CreateOrderForm());
+                        $flagSuccess = Helper::createNewOrder($postData, $userId, $folderFiles, $arrayFiles);
+                        if ($flagSuccess) {
+                            $session->remove("folderFiles");
+                            $showWindow = true;
+                        }
 
+                        //$formOrder = $this->createForm(new CreateOrderForm());
                         //return new RedirectResponse($this->generateUrl('', array()));
                     }
                 }
@@ -187,8 +182,22 @@ class ClientController extends Controller
                 'AcmeSecureBundle:Client:order_add.html.twig', array('formOrder' => $formOrder->createView(), 'showWindow' => $showWindow, 'folderFiles' => $folderFiles)
             );
         }
-        else{
+        elseif ($type == "view") {
+            if($request->isXmlHttpRequest())
+            {
 
+                //$response = new Response(json_encode(array('response' => 'hello')));
+                //$response->headers->set('Content-Type', 'application/json');
+                //return $response;
+                return new JsonResponse(array('name' => 'hello'));
+                //$response->setStatusCode(Response::HTTP_NOT_FOUND);
+            }
+
+            $showWindow = false;
+
+            return $this->render(
+                'AcmeSecureBundle:Client:order_view.html.twig', array('showWindow' => $showWindow)
+            );
         }
 
     }

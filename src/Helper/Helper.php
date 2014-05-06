@@ -2,6 +2,7 @@
 
 namespace Helper;
 
+use Acme\SecureBundle\Entity\OrderFile;
 use Acme\SecureBundle\Entity\UserOrder;
 use Symfony\Component\Yaml\Yaml;
 use Doctrine\ORM\EntityManager;
@@ -437,7 +438,7 @@ class Helper
     }
 
 
-    public static function createNewOrder($postData, $userId, $folderFiles)
+    public static function createNewOrder($postData, $userId, $folderFiles, $arrayFiles)
     {
         $theme = $postData['fieldTheme'];
         $task = $postData['fieldTask'];
@@ -446,6 +447,7 @@ class Helper
         $countSheet = $postData['fieldCountSheet'];
         $subjectId = $postData['selectorSubject'];
         $typeTypeOrderId = $postData['selectorTypeOrder'];
+        $flagSuccess = false;
 
         $theme = strip_tags($theme);
         $theme = trim($theme);
@@ -471,32 +473,63 @@ class Helper
         $order->setSubject($subject);
         $order->setTypeOrder($typeOrder);
         $order->setUser($user);
-        $order->setFolderFiles($folderFiles);
+        $filesFolderOld = Helper::getFullPathFolderFiles($folderFiles);
+        $filesFolder = str_replace("non", "act", $folderFiles);
+        $filesFolderNew = Helper::getFullPathFolderFiles($filesFolder);
+        rename($filesFolderOld, $filesFolderNew);
+        $order->setFilesFolder($filesFolder);
 
         $em->persist($order);
+        $em->flush();
+
+        foreach($arrayFiles as $file) {
+            $fileSize = $file['size'];
+            $fileName = $file['name'];
+            $fileDateUpload = $file['dateUpload'];
+            $format = 'Y-m-d H:i:s';
+            $fileDateUpload = self::getFormatDateForInsert($fileDateUpload, $format);
+
+            self::insertInfoAboutFileInDb($fileSize, $fileName, $fileDateUpload, $order, $em);
+        }
+
+        $flagSuccess = true;
+
+        return $flagSuccess;
+    }
+
+
+    public static function insertInfoAboutFileInDb($fileSize, $fileName, $fileDateUpload, $order, $em) {
+        $orderFile = new OrderFile();
+        $orderFile->setDateUpload($fileDateUpload);
+        $orderFile->setName($fileName);
+        $orderFile->setSize($fileSize);
+        $orderFile->setUserOrder($order);
+
+        $em->persist($orderFile);
         $em->flush();
     }
 
 
-    public static function convertFromUtfToCp($task){
+    public static function convertFromUtfToCp($task) {
         return iconv("UTF-8", "CP1251", $task);
     }
 
 
-    public static function getFilesFromFolder($folderFiles){
-        $dh = opendir($folderFiles);
+    public static function getFilesFromFolder($filesFolder) {
+        $fileHandler = opendir($filesFolder);
         $arrayInfoFiles = [];
         $i = 0;
 
-        while (false !== ($filename = readdir($dh))) {
+        while (false !== ($filename = readdir($fileHandler))) {
             if ($filename != "." && $filename != "..") {
-                $arrayInfoFiles[$i]['size'] = Helper::getSizeFile(filesize($folderFiles . "/" . $filename));
-                $arrayInfoFiles[$i]['extension'] = Helper::getExtensionFile($folderFiles . "/" . $filename);
-                $arrayInfoFiles[$i]['date'] = Helper::getDateCreateFile($folderFiles . "/" . $filename);
+                $arrayInfoFiles[$i]['size'] = Helper::getSizeFile(filesize($filesFolder . "/" . $filename));
+                //$arrayInfoFiles[$i]['extension'] = Helper::getExtensionFile($filesFolder . "/" . $filename);
+                $arrayInfoFiles[$i]['dateUpload'] = Helper::getDateUploadFile($filesFolder . "/" . $filename);
+                $arrayInfoFiles[$i]['name'] = $filename;
                 $i++;
             }
         }
-        closedir($dh);
+        closedir($fileHandler);
 
         return $arrayInfoFiles;
     }
@@ -505,7 +538,7 @@ class Helper
     public static function getSizeFile($bytes){
         $label = array('Б', 'КБ', 'МБ');
         for($i = 0; $bytes >= 1024 && $i < (count($label) - 1); $bytes /= 1024, $i++);
-        return(round($bytes) . " " . $label[$i]);
+        return(round($bytes, 1) . " " . $label[$i]);
     }
 
 
@@ -543,11 +576,28 @@ class Helper
     }
 
 
-    public static function getDateCreateFile($filename) {
+    public static function getDateUploadFile($filename) {
         if (file_exists($filename)) {
             return date("Y-m-d H:i:s", filemtime($filename));
         }
     }
 
+
+    public static function getFullPathFolderFiles($folderFiles, $type = null) {
+        if ($type == "originals") {
+            return dirname($_SERVER['SCRIPT_FILENAME']) . "/uploads/attachments/" . $folderFiles . "/originals";
+        }
+        elseif ($type == null) {
+            return dirname($_SERVER['SCRIPT_FILENAME']) . "/uploads/attachments/" . $folderFiles;
+        }
+
+    }
+
+
+    public static function getFormatDateForInsert($sourceDate, $format) {
+        $date = \DateTime::createFromFormat($format, $sourceDate);
+        $date = $date->format('Y-m-d H:i:s');
+        return new \Datetime($date);
+    }
 
 }

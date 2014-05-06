@@ -3,6 +3,7 @@
 namespace Acme\SecureBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Helper\Helper;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Doctrine\ORM\EntityRepository;
@@ -81,13 +82,18 @@ class UserOrder extends EntityRepository
     /**
      * @ORM\Column(type="string")
      */
-    private $folder_files;
+    private $files_folder;
+
+    /**
+     * @ORM\OneToMany(targetEntity="OrderFile", mappedBy="user_order")
+     **/
+    private $link_user_order;
 
 
     public function __construct($container){
         $this->date_create = new \DateTime();
         $this->is_show = 1;
-        $this->folder_files = "";
+        $this->files_dir = "";
         $em = $container->get('doctrine')->getManager();
         $query = $em->getRepository('AcmeSecureBundle:UserOrder')->createQueryBuilder('s');
         $query->select('MAX(s.num) AS max_num');
@@ -95,6 +101,7 @@ class UserOrder extends EntityRepository
         $num = $data[0]['max_num'];
         $num++;
         $this->num = $num;
+        $this->link_user_order = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function setTheme($theme)
@@ -107,23 +114,20 @@ class UserOrder extends EntityRepository
         return $this->theme;
     }
 
-    public function setFolderFiles($folder)
+    public function setFilesFolder($folder)
     {
-        $this->folder_files = $folder;
+        $this->files_folder = $folder;
     }
 
-    public function getFolderFiles()
+    public function getFilesFolder()
     {
-        return $this->folder_files;
+        return $this->files_folder;
     }
 
     public function setDateExpire($date)
     {
         $format = 'd/m/Y';
-        $date = \DateTime::createFromFormat($format, $date);
-        $dateStartDate = $date->format('Y-m-d H:i:s');
-        $dateStartDate = new \Datetime($dateStartDate);
-        $this->date_expire = $dateStartDate;
+        $this->date_expire = Helper::getFormatDateForInsert($date, $format);
     }
 
     public function getDateExpire()
@@ -209,5 +213,15 @@ class UserOrder extends EntityRepository
     public function getUser()
     {
         return $this->user;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 }

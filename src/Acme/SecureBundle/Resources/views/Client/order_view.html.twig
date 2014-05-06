@@ -1,0 +1,100 @@
+{% extends "AcmeSecureBundle::layout.html.twig" %}
+
+{% block title "View all order" %}
+
+    {% block content %}
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.fmatter.js') }}"></script>
+        <div class="body">
+            {% if (showWindow) %}
+            <div id="success-window">
+                <div class="Message Message--green" id="js-timer">
+                    <div class="Message-icon">
+                        <i class="fa fa-check"></i>
+                    </div>
+                    <div class="Message-body">
+                        <p align="center">Ваш заказ создан! Ожидайте ставок авторов!</p>
+                    </div>
+                    <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            {% endif %}
+
+            <table id="listOrders"></table>
+            <div id="pagerOrders"></div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#listOrders").jqGrid({
+                        url: {{ path('secure_client_order', { type: 'view' }) | json_encode | raw }},
+                        datatype: 'json',
+                        mtype: 'POST',
+                        autowidth: true,
+                        recordtext:"Просмотр заказов {0} - {1}",
+                        colNames:['','№ заказа','Дата создания','Специальность','Тема работы','Тип работы','Выполнение до','Моя цена'],
+                        colModel :[
+                            {name:'id',index:'id',search:false,hidden:true},
+                            {name:'num',index:'num',width:100,align:'center',resizable:false,editable:false,searchoptions:{sopt:['eq','ne','bw','cn']},/*,formatter:'showlink',formatoptions:{baseLinkUrl:'someurl.php', addParam: '&action=edit'}*/},
+                            {name:'date_create',index:'date_create',width:140,align:'center',resizable:false,editable:false,search:false},
+                            {name:'specialty_id',index:'specialty_id',width:170,align:'center',resizable:false, editable:false, searchoptions:{sopt:['eq','bw','cn']}},
+                            {name:'name_theme',index:'name_theme',width:600,align:'center',resizable:false,editable:false, searchoptions:{sopt:['eq','bw','cn']}},
+                            {name:'type_id',index:'type_id',width:150,align:'center',resizable:false,editable:false, searchoptions:{sopt:['eq','ne','bw','cn']}},
+                            {name:'date_expire',index:'date_expire',width:150,align:'center',resizable:false,editable:false,search:false},
+                            {name:'price',index:'price',width:130,align:'center',resizable:false,editable:false, searchoptions:{sopt:['eq','ne','bw','cn']}/*,formatter:showButton*/},
+                        ],
+                        pager: $('#pagerOrders'),
+                        toolbar: [true,'top'],
+                        rowNum:10,
+                        rowList:[5,10,20,30],
+                        sortname: 'date_create',
+                        sortorder: 'desc',
+                        viewrecords: true,
+                        hidegrid: false,
+                        caption: 'Таблица заказов',
+                        height: '450',
+                        /*loadComplete: function(data)
+                         {
+                         var NoOfCellAdd = Number($("#list").parent().parent().css('height').split('px')[0]) / 5;
+
+                         for (var i = data.records; i <= NoOfCellAdd; i++)
+                         {
+                         $("#list").addRowData(i + 1, {});
+                         }
+                         }, */
+                        onSelectRow: function(id)
+                        {
+                            //if ($('.buttonSetPrice').data('clicked'))
+                            //{
+                            //alert("id="+id);
+                            //$('.buttonSetPrice').data('clicked', false);
+                            //}
+                            //else
+                            location.href = 'order/' + id;
+                        }
+                    }).navGrid('#pagerOrders',{view:false,search:true,del:false,add:false,edit:false,refresh:true},
+                            {},{},{},{closeOnEscape:true, multipleSearch:false, closeAfterSearch:true},{}
+                    );
+
+                    $("#t_listOrders").height(55);
+                    $("#t_listOrders").append('<div id="">Для поиска нажмите на </div><div id="">Для сброса результата поиска нажмите на </div><div id="">Для обновления таблицы нажмите на </div>');
+
+
+
+                    function closeMessage(el) {
+                        el.addClass('is-hidden');
+                    }
+
+                    $('.js-messageClose').on('click', function(e) {
+                        closeMessage($(this).closest('.Message'));
+                    });
+
+                    setTimeout(function() {
+                        closeMessage($('#js-timer'));
+                    }, 3000);
+                });
+            </script>
+        </div>
+    {% endblock %}
