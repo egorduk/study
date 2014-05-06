@@ -602,7 +602,7 @@ class Helper
     }
 
 
-    public static function getCountOrdersForGrid($mode = null, $sField = null, $sData = null, $user) {
+    public static function getCountOrdersForGrid($sOper = null, $sField = null, $sData = null, $user) {
         //if ($mode != null)
         {
             $table = null;
@@ -680,103 +680,160 @@ class Helper
     }
 
 
-    public static function getClientOrdersForGrid($mode = null, $sField = null, $sData = null, $firstRowIndex, $rowsPerPage, $user) {
-        //if ($sField != null && $mode != null)
-        {
-            /*if ($sField == 'date_create' || $sField == 'date_expire') {
-                $sTable = 'datetime';
-                $where = $sTable . '.' . $sField;
+    public static function getClientOrdersForGrid($sOper = null, $sField = null, $sData = null, $firstRowIndex, $rowsPerPage, $user, $sortingField, $sortingOrder) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+
+        if ($sField != null && $sOper != null && $sData != null) {
+            if ($sField == "subject") {
+                $field = 'child_name';
             }
-            else if ($sField == 'specialty_id') {
-                $sTable = 'specialty';
-                $where = $sTable . '.name';
-            }
-            else if ($sField == 'num') {
-                $sTable = 'order';
-                $where = $sTable . '.' . $sField;
-            }
-            else if ($sField == 'name_theme') {
-                $sTable = 'order';
-                $where = $sTable . '.' . $sField;
-            }
-            else if ($sField == 'type_id') {
-                $sTable = 'type';
-                $where = $sTable . '.name';
-            }
-            else if ($sField == 'price') {
-                $sTable = 'author_has_estimated_order';
-                $where = $sTable . '.price';
+            elseif ($sField == "type_order") {
+                $field = 'name';
             }
 
-            if ($mode == 'cn') {
-                $row = $this->_db->query("SELECT order.id,order.name_theme,order.num,datetime.date_create,datetime.date_expire,type.name AS tname,specialty.name AS sname,author_has_estimated_order.price
-					FROM `order`
-					INNER JOIN `datetime` ON datetime.id = order.datetime_id
-					INNER JOIN `type` ON type.id = order.type_id
-					INNER JOIN specialty ON specialty.id = order.specialty_id
-					LEFT JOIN author_has_estimated_order ON author_has_estimated_order.order_id = order.id AND author_has_estimated_order.author_est_id = '$authorId'
-					WHERE $where LIKE '%" . $sData . "%'
-					LIMIT $limit");
+            if ($sOper == 'eq') {
+                if ($sField != "subject" && $sField != "type_order") {
+                    $orders = $em->getRepository(self::$_tableUserOrder)
+                        ->findBy(
+                            array('user' => $user, 'is_show' => 1, $sField => $sData),
+                            array($sField => $sortingOrder),
+                            $rowsPerPage, $firstRowIndex
+                        );
+                }
+                else {
+                    $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('o')
+                        ->andWhere('o.user = :user')
+                        ->andWhere('o.is_show = 1')
+                        ->innerJoin('o.' . $sField , 'a')
+                        ->andWhere('a.' . $field . ' = :data')
+                        ->setParameter('user', $user)
+                        ->setParameter('data', $sData)
+                        ->getQuery()
+                        ->getResult();
+                }
             }
-            else if ($mode == 'bw')
-            {
-                $row = $this->_db->query("SELECT order.id,order.name_theme,order.num,datetime.date_create,datetime.date_expire,type.name AS tname,specialty.name AS sname,author_has_estimated_order.price
-					FROM `order`
-					INNER JOIN `datetime` ON datetime.id = order.datetime_id
-					INNER JOIN `type` ON type.id = order.type_id
-					INNER JOIN specialty ON specialty.id = order.specialty_id
-					LEFT JOIN author_has_estimated_order ON author_has_estimated_order.order_id = order.id AND author_has_estimated_order.author_est_id = '$authorId'
-					WHERE $where LIKE '" . $sData . "%'
-					LIMIT $limit");
+            elseif ($sOper == 'ne') {
+                if ($sField != "subject" && $sField != "type_order") {
+                    $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('o')
+                        ->andWhere('o.user = :user')
+                        ->andWhere('o.is_show = 1')
+                        ->andWhere('o.' . $sField . ' != :data')
+                        ->setParameter('user', $user)
+                        ->setParameter('data', $sData)
+                        ->getQuery()
+                        ->getResult();
+                }
+                else {
+                    $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('o')
+                        ->andWhere('o.user = :user')
+                        ->andWhere('o.is_show = 1')
+                        ->innerJoin('o.' . $sField , 'a')
+                        ->andWhere('a.' . $field . ' != :data')
+                        ->setParameter('user', $user)
+                        ->setParameter('data', $sData)
+                        ->getQuery()
+                        ->getResult();
+                }
             }
-            else if ($mode == 'eq')
-            {
-                $row = $this->_db->query("SELECT order.id,order.name_theme,order.num,datetime.date_create,datetime.date_expire,type.name AS tname,specialty.name AS sname,author_has_estimated_order.price
-					FROM `order`
-					INNER JOIN `datetime` ON datetime.id = order.datetime_id
-					INNER JOIN `type` ON type.id = order.type_id
-					INNER JOIN specialty ON specialty.id = order.specialty_id
-					LEFT JOIN author_has_estimated_order ON author_has_estimated_order.order_id = order.id AND author_has_estimated_order.author_est_id = '$authorId'
-					WHERE $where = '$sData'
-					LIMIT $limit");
+            elseif ($sOper == 'bw') {
+                if ($sField != "subject" && $sField != "type_order") {
+                    $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('o')
+                        ->andWhere('o.user = :user')
+                        ->andWhere('o.is_show = 1')
+                        ->andWhere('o.' . $sField . ' LIKE :data')
+                        ->setParameter('user', $user)
+                        ->setParameter('data', $sData . '%')
+                        ->getQuery()
+                        ->getResult();
+                }
+                else {
+                    $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('o')
+                        ->andWhere('o.user = :user')
+                        ->andWhere('o.is_show = 1')
+                        ->innerJoin('o.' . $sField , 'a')
+                        ->andWhere('a.' . $field . ' LIKE :data')
+                        ->setParameter('user', $user)
+                        ->setParameter('data', '%' . $sData . '%')
+                        ->getQuery()
+                        ->getResult();
+                }
             }
-            else if ($mode == 'ne')
-            {
-                $row = $this->_db->query("SELECT order.id,order.name_theme,order.num,datetime.date_create,datetime.date_expire,type.name AS tname,specialty.name AS sname,author_has_estimated_order.price
-					FROM `order`
-					INNER JOIN `datetime` ON datetime.id = order.datetime_id
-					INNER JOIN `type` ON type.id = order.type_id
-					INNER JOIN specialty ON specialty.id = order.specialty_id
-					LEFT JOIN author_has_estimated_order ON author_has_estimated_order.order_id = order.id AND author_has_estimated_order.author_est_id = '$authorId'
-					WHERE $where <> '$sData'
-					LIMIT $limit");
+            elseif ($sOper == 'cn') {
+                if ($sField != "subject" && $sField != "type_order") {
+                    $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('o')
+                        ->andWhere('o.user = :user')
+                        ->andWhere('o.is_show = 1')
+                        ->andWhere('o.' . $sField . ' LIKE :data')
+                        ->setParameter('user', $user)
+                        ->setParameter('data', $sData . '%')
+                        ->getQuery()
+                        ->getResult();
+                }
+                else {
+                    $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('o')
+                        ->andWhere('o.user = :user')
+                        ->andWhere('o.is_show = 1')
+                        ->innerJoin('o.' . $sField , 'a')
+                        ->andWhere('a.' . $field . ' LIKE :data')
+                        ->setParameter('user', $user)
+                        ->setParameter('data', '%' . $sData . '%')
+                        ->getQuery()
+                        ->getResult();
+                }
             }
         }
-        else*/
-        {
-            /*$row = $this->_db->query("SELECT o.id,o.name_theme,o.num,d.date_create,d.date_expire,t.name AS tname,s.name AS sname,aheo.price
-				FROM `order` o
-				INNER JOIN `datetime` d ON d.id = o.datetime_id
-				INNER JOIN `type` t ON t.id = o.type_id
-				INNER JOIN specialty s ON s.id = o.specialty_id
-				LEFT JOIN author_has_estimated_order aheo ON aheo.order_id = o.id AND aheo.author_est_id = '$authorId'
-				ORDER BY '.$sortingField . ' ' . $sortingOrder.'
-				LIMIT $limit");*/
-
-            $em = self::getContainer()->get('doctrine')->getManager();
-            $orders = $em->getRepository(self::$_tableUserOrder)
-                ->findBy(
-                    array('user' => $user),
-                    array('num' => 'ASC'),
-                    10,
-                    $rowsPerPage
-                );
-
-            //var_dump($em); die;
+        else {
+            if (isset($sortingField) && $sortingField != "" && isset($sortingOrder) && $sortingOrder != "") {
+                $orders = $em->getRepository(self::$_tableUserOrder)
+                    ->findBy(
+                        array('user' => $user, 'is_show' => 1),
+                        array($sortingField => $sortingOrder),
+                        $rowsPerPage,
+                        $firstRowIndex
+                    );
+            }
+            else {
+                $orders = $em->getRepository(self::$_tableUserOrder)
+                    ->findBy(
+                        array('user' => $user, 'is_show' => 1),
+                        array('num' => 'ASC'),
+                        $rowsPerPage,
+                        $firstRowIndex
+                    );
+            }
         }
 
-            return $orders;
+        return $orders;
+    }
+
+
+    public static function getCutTask($task) {
+        $task = mb_substr($task, 0, 35, "UTF-8");
+        $task = substr($task, 0, strrpos($task, ' '));
+        $task = $task . '...';
+        return $task;
+    }
+
+
+    public static function getMonthNameFromDate($date) {
+        $dateArray = explode('.', $date);
+        if ($dateArray[0][0] == '0') {
+            $dateArray[0][0] = '';
         }
+        if($dateArray[1] == "1"){$month="января";}
+        elseif($dateArray[1] == "2"){$month="февраля";}
+        elseif($dateArray[1] == "3"){$month="марта";}
+        elseif($dateArray[1] == "4"){$month="апреля";}
+        elseif($dateArray[1] == "5"){$month="мая";}
+        elseif($dateArray[1] == "6"){$month="июня";}
+        elseif($dateArray[1] == "7"){$month="июля";}
+        elseif($dateArray[1] == "8"){$month="августа";}
+        elseif($dateArray[1] == "9"){$month="сентября";}
+        elseif($dateArray[1] == "10"){$month="октября";}
+        elseif($dateArray[1] == "11"){$month="ноября";}
+        elseif($dateArray[1] == "12"){$month="декабря";}
+        $fullDate = $dateArray[0] . ' ' . $month . ' ' . $dateArray[2];
+        return $fullDate;
     }
 
 }

@@ -199,17 +199,16 @@ class ClientController extends Controller
                 $sortingField = $postData['sidx'];
                 $sortingOrder = $postData['sord'];
                 $search = $postData['_search'];
-                $sField = $sData = $sTable = $mode = null;
-                //var_dump($postData); die;
+                $sField = $sData = $sTable = $sOper = null;
 
                 if (isset($search) && $search == "true")
                 {
-                    $mode = $postData['searchOper'];
+                    $sOper = $postData['searchOper'];
                     $sData = $postData['searchString'];
                     $sField = $postData['searchField'];
                 }
 
-                $countOrders = Helper::getCountOrdersForGrid($mode, $sField, $sData, $user);
+                $countOrders = Helper::getCountOrdersForGrid($sOper, $sField, $sData, $user);
 
                 /*if ($totalRows < $rowsPerPage)
                     $response->page = 1;
@@ -217,8 +216,7 @@ class ClientController extends Controller
                     $response->page = $curPage;*/
 
                 $firstRowIndex = $curPage * $rowsPerPage - $rowsPerPage;
-                //$limit = $firstRowIndex.','.$rowsPerPage;
-                $orders = Helper::getClientOrdersForGrid($mode, $sField, $sData, $firstRowIndex, $rowsPerPage, $user);
+                $orders = Helper::getClientOrdersForGrid($sOper, $sField, $sData, $firstRowIndex, $rowsPerPage, $user, $sortingField, $sortingOrder);
                 $response = new Response();
                 $response->total = ceil($countOrders / $rowsPerPage);
                 $response->records = $countOrders;
@@ -226,7 +224,10 @@ class ClientController extends Controller
                 $i = 0;
 
                 foreach($orders as $order) {
-                    $task = $order->getTask();
+                    $task = strip_tags($order->getTask());
+                    if (strlen($task) >= 15) {
+                        $task = Helper::getCutTask($task);
+                    }
                     $response->rows[$i]['id'] = $order->getId();
                     $response->rows[$i]['cell'] = array(
                         $order->getId(),
@@ -235,8 +236,8 @@ class ClientController extends Controller
                         $order->getTheme(),
                         $order->getSubject()->getChildName(),
                         $task,
-                        $order->getDateCreate()->format("d.m.Y H:s"),
-                        $order->getDateExpire()->format("d.m.Y H:s"),
+                        Helper::getMonthNameFromDate($order->getDateCreate()->format("d.m.Y H:s")),
+                        Helper::getMonthNameFromDate($order->getDateExpire()->format("d.m.Y H:s")),
                     );
 
                     $i++;
