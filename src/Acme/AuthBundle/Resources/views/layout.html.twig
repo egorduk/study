@@ -5,8 +5,9 @@
     {% block stylesheets %}
         <link href="{{ asset('bundles/css/bootstrap.css') }}" rel="stylesheet" />
         <link href="{{ asset('bundles/css/bootstrap-theme.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/css/window.css') }}" rel="stylesheet" />
         <link href="{{ asset('bundles/css/font-awesome-4.0.3/css/font-awesome.css') }}" rel="stylesheet" />
-        <link href="{{ asset('bundles/acmeindex/css/style.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/css/icon.css') }}" rel="stylesheet" charset="UTF-8"/>
     {% endblock %}
     {% block javascripts %}
         <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
@@ -17,9 +18,7 @@
 {% block title '' %}
 
 {% block body %}
-    <div class="container">
-        {% block content %}
+    {% block content %}
 
-        {% endblock %}
-    </div>
+    {% endblock %}
 {% endblock %}

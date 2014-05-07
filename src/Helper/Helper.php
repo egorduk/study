@@ -356,8 +356,9 @@ class Helper
         $message = \Swift_Message::newInstance()
             ->setSubject('Подтверждение регистрации в системе')
             ->setFrom($mailSender, $mailTitle)
-            ->setTo($userEmail)
+            //->setTo($userEmail)
             //->setTo("gzhelka777@mail.ru")
+            ->setTo("egordukk@tut.by")
             ->setBody(
                 '<html>' .
                 '<head></head>' .
@@ -737,11 +738,17 @@ class Helper
     }
 
 
-    public static function getCutTask($task) {
-        $task = mb_substr($task, 0, 35, "UTF-8");
-        $task = substr($task, 0, strrpos($task, ' '));
-        $task = $task . '...';
-        return $task;
+    public static function getCutSentence($sentence, $size) {
+        $sentence = mb_substr($sentence, 0, $size, "UTF-8");
+        $pos = strrpos($sentence, ' ');
+        if ($pos === false) {
+            $sentence . '...';
+        }
+        else {
+            $sentence = substr($sentence, 0, $pos) . '...';
+        }
+
+        return $sentence;
     }
 
 

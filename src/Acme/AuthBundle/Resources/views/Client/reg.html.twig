@@ -6,18 +6,44 @@
 
 {% block content %}
     <div class="container">
+        <style>
+            #modal-window{
+                /*display: block;
+                position: absolute;
+                width: 100px;*/
+            }
+        </style>
         <div class="row">
-            <div class="span2 centred">
+            <div>
                 {{ form_start(formReg) }}
                     {{ form_errors(formReg) }}
-                        {{ form_row(formReg.fieldLogin) }}
-                        {{ form_row(formReg.fieldPass) }}
-                        {% block errorPassApprove %}
+                        {{ form_label(formReg.fieldLogin) }}
+                        {{ form_errors(formReg.fieldLogin) }}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="icon-user4"></i></span>
+                            {{ form_widget(formReg.fieldLogin) }}
+                        </div>
+                        {{ form_label(formReg.fieldPass) }}
+                        {{ form_errors(formReg.fieldPass) }}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                            {{ form_widget(formReg.fieldPass) }}
+                        </div>
+                        {{ form_label(formReg.fieldPassApprove) }}
+                        {{ form_errors(formReg.fieldPassApprove) }}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                            {{ form_widget(formReg.fieldPassApprove) }}
+                        </div>
                             <div>
                                 {{ form_row(formReg.fieldPassApprove) }}
                             </div>
-                        {% endblock %}
-                        {{ form_row(formReg.fieldEmail) }}
+                        {{ form_label(formReg.fieldEmail) }}
+                        {{ form_errors(formReg.fieldEmail) }}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                            {{ form_widget(formReg.fieldEmail) }}
+                        </div>
                         {% block form_label %}
                             {{ parent() }}
                             {% if(formReg.checkAgreeRules) %}
@@ -25,14 +51,51 @@
                                {{ form_widget(formReg.checkAgreeRules) }}
                             {% endif %}
                         {% endblock %}
-                {% block captcha %}
-                    <div>
-                        {{ captchaError|raw }}
-                        {{ captcha|raw }}
-                    </div>
-                {% endblock %}
+                        {% block captcha %}
+                            <div>
+                                {{ captchaError|raw }}
+                                {{ captcha|raw }}
+                            </div>
+                        {% endblock %}
+                        <div class="input-group">
+                            <label for="formReg_reg" class="btn btn-success"><i class="icon-checkmark">&nbspРегистрация</i></label>
+                            {{ form_widget(formReg.reg) }}
+                            <label for="formReg_reset" class="btn btn-success"><i class="fa fa-trash-o">&nbspОчистить</i></label>
+                            {{ form_widget(formReg.reset) }}
+                        </div>
                 {{ form_end(formReg) }}
             </div>
+            <div id="modal-window">
+                {% if (showWindow) %}
+                    <div id="success-window">
+                        <div class="Message Message--green" id="js-timer">
+                            <div class="Message-icon">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="Message-body">
+                                <p align="center">Ваш аккаунт создан! Проверьте вашу почту для активации!</p>
+                            </div>
+                            <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
         </div>
+        <script>
+            $(document).ready(function() {
+                {% if (showWindow) %}
+                    function closeMessage(el) {
+                        el.addClass('is-hidden');
+                    }
+                    $('.js-messageClose').on('click', function(e) {
+                        closeMessage($(this).closest('.Message'));
+                    });
+                    setTimeout(function() {
+                        closeMessage($('#js-timer'));
+                        document.location.href = "{{ path("login") }}";
+                    }, 2000);
+                {% endif %}
+            })
+        </script>
     </div>
 {% endblock %}

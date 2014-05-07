@@ -60,7 +60,7 @@ img {
 }
 #content {
     width: 970px;
-    margin: 0 auto;
+    margin-left: 200px;
 }
 pre {
     white-space: normal;

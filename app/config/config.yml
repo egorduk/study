@@ -22,7 +22,7 @@ framework:
     csrf_protection:  true
     templating:
         engines: ['twig']
-        cache: true
+        cache: false
     default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~
@@ -50,7 +50,7 @@ services:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    cache: true
+    cache: false
 
 # Assetic Configuration
 assetic:
@@ -60,6 +60,7 @@ assetic:
        -  AcmeIndexBundle
        -  AcmeAuthBundle
        -  AcmeSecureBundle
+
     #java: /usr/bin/java
     filters:
         cssrewrite: ~

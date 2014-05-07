@@ -205,8 +205,10 @@ class AuthController extends Controller
      */
     public function regAction(Request $request, $type)
     {
-        if ($type == "client")
-        {
+        $showWindow = false;
+        $captchaError = "";
+
+        if ($type == "client") {
             $clientValidate = new ClientRegFormValidate();
             $formReg = $this->createForm(new ClientRegForm(), $clientValidate);
             $formReg->handleRequest($request);
@@ -214,36 +216,28 @@ class AuthController extends Controller
             $publicKeyRecaptcha = $this->container->getParameter('publicKeyRecaptcha');
             $captcha = recaptcha_get_html($publicKeyRecaptcha);
 
-            if ($request->isMethod('POST'))
-            {
-                if ($formReg->get('reg')->isClicked())
-                {
-                    if ($formReg->isValid())
-                    {
+            if ($request->isMethod('POST')) {
+                if ($formReg->get('reg')->isClicked()) {
+                    if ($formReg->isValid()) {
                         $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
                         $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
 
-                        if (!$resp->is_valid)
-                        {
+                        if (!$resp->is_valid) {
                             $postData = $request->request->get('formReg');
                             $userLogin = $postData['fieldLogin'];
                             $userPassword = $postData['fieldPass'];
                             $userEmail = $postData['fieldEmail'];
-
                             $em = $this->getDoctrine()->getManager();
 
                             $userInfo = new UserInfo();
-
                             $em->persist($userInfo);
                             $em->flush();
-
                             $userInfoId = $userInfo->getId();
 
                             $user = new User();
                             $user->setLogin($userLogin);
                             $user->setEmail($userEmail);
                             $user->setRole(2);
-
                             $salt = Helper::getSalt();
                             $password = Helper::getRegPassword($userPassword, $salt);
                             $user->setPassword($password);
@@ -254,27 +248,19 @@ class AuthController extends Controller
 
                             $em->persist($user);
                             $em->flush();
-
                             $userId = $user->getId();
 
                             Helper::sendConfirmationReg($this->container, $userEmail, $userId, $hashCode);
-
-                            //return $this->redirect($this->generateUrl('client_success_reg'));
+                            $showWindow = true;
                         }
-                        else
-                        {
-                            //return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $resp->error);
-                            return $this->render(
-                                'AcmeAuthBundle:Client:reg.html.twig', array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $resp->error)
-                            );
+                        else {
+                            $captchaError = $resp->error;
                         }
                     }
                 }
             }
-
-            //return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => '');
             return $this->render(
-                'AcmeAuthBundle:Client:reg.html.twig', array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => '')
+                'AcmeAuthBundle:Client:reg.html.twig', array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $captchaError, 'showWindow' => $showWindow)
             );
         }
         elseif ($type == "author")

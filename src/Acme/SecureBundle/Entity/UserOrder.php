@@ -69,6 +69,12 @@ class UserOrder extends EntityRepository
     private $type_order;
 
     /**
+     * @ORM\ManyToOne(targetEntity="StatusOrder", inversedBy="link_status_order", cascade={"all"})
+     * @ORM\JoinColumn(name="status_order_id", referencedColumnName="id")
+     **/
+    private $status_order;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Acme\AuthBundle\Entity\User", inversedBy="link_user", cascade={"all"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      **/
@@ -165,12 +171,12 @@ class UserOrder extends EntityRepository
         return $this->count_sheet;
     }
 
-    public function getSubject()
+    public function getSubjectOrder()
     {
         return $this->subject;
     }
 
-    public function setSubject($subject)
+    public function setSubjectOrder($subject)
     {
         $this->subject = $subject;
     }
@@ -183,6 +189,16 @@ class UserOrder extends EntityRepository
     public function setTypeOrder($type)
     {
         $this->type_order = $type;
+    }
+
+    public function getStatusOrder()
+    {
+        return $this->status_order;
+    }
+
+    public function setStatusOrder($status)
+    {
+        $this->status_order = $status;
     }
 
     public function setNum($num)

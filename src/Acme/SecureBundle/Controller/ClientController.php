@@ -222,22 +222,32 @@ class ClientController extends Controller
                 $response->records = $countOrders;
                 $response->page = $curPage;
                 $i = 0;
+                $responseAuthor = 0;
 
                 foreach($orders as $order) {
                     $task = strip_tags($order->getTask());
+                    $task = stripcslashes($task);
+                    $task = preg_replace("/&nbsp;/", "", $task);
+                    //$task = strlen($task);
                     if (strlen($task) >= 15) {
-                        $task = Helper::getCutTask($task);
+                        $task = Helper::getCutSentence($task, 35);
                     }
+                    $dateCreate = Helper::getMonthNameFromDate($order->getDateCreate()->format("d.m.Y"));
+                    $dateCreate = $dateCreate . "<br><span class='gridCellTime'>" . $order->getDateCreate()->format("H:s") . "</span>";
+                    $dateExpire = Helper::getMonthNameFromDate($order->getDateExpire()->format("d.m.Y"));
+                    $dateExpire = $dateExpire . "<br><span class='gridCellTime'>" . $order->getDateExpire()->format("H:s") . "</span>";
                     $response->rows[$i]['id'] = $order->getId();
                     $response->rows[$i]['cell'] = array(
                         $order->getId(),
                         $order->getNum(),
                         $order->getTypeOrder()->getName(),
                         $order->getTheme(),
-                        $order->getSubject()->getChildName(),
+                        $order->getSubjectOrder()->getChildName(),
                         $task,
-                        Helper::getMonthNameFromDate($order->getDateCreate()->format("d.m.Y H:s")),
-                        Helper::getMonthNameFromDate($order->getDateExpire()->format("d.m.Y H:s")),
+                        $order->getStatusOrder()->getName(),
+                        $dateCreate,
+                        $dateExpire,
+                        $responseAuthor
                     );
 
                     $i++;

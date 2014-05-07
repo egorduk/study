@@ -10,8 +10,13 @@ parameters:
     mailer_host: smtp.gmail.com
     mailer_user: egorduk91@gmail.com
     mailer_password: rezistor
+    mailSender: egorduk91@gmail.com
+    mailTitle: Study
     locale: ru_RU
     secret: 6LcYmecSAAAAAJlYNqogbOXJVMvGgim5JoegorLcYmecSAAAAANaq8JFPxT3xEA_urO6st1gfVOXL
+    publicKeyRecaptcha: 6LcYmecSAAAAAJlYNqogbOXJVMvGgim5JoM0hcAi
+    privateKeyRecaptcha: 6LcYmecSAAAAANaq8JFPxT3xEA_urO6st1gfVOXL
+    confirmPath: http://localhost/study/web/app_dev.php/auth/confirm
 doctrine:
     dbal:
         driver: '%database_driver%'

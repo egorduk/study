@@ -35,9 +35,9 @@
                         url: {{ path('secure_client_order', { type: 'view' }) | json_encode | raw }},
                         datatype: 'json',
                         mtype: 'POST',
-                      //  autowidth: true,
+                        //  autowidth: true,
                         recordtext: "Просмотр заказов {0} - {1}",
-                        colNames:['','№ заказа','Тип работы', 'Тема работы', 'Предмет', 'Задание', 'Дата создания', 'Выполнение до'],
+                        colNames:['','№ заказа','Тип работы', 'Тема работы', 'Предмет', 'Задание', 'Статус', 'Дата создания', 'Выполнение до', 'Отклики'],
                         colModel :[
                             {name:'id',index:'id',search:false,hidden:true},
                             {name:'num',index:'num',width:100,align:'center',resizable:false,editable:false,searchrules:{"required":true, "number":true, "maxValue":13},searchoptions:{sopt:['eq','ne','bw','cn']},/*,formatter:'showlink',formatoptions:{baseLinkUrl:'someurl.php', addParam: '&action=edit'}*/},
@@ -45,8 +45,10 @@
                             {name:'theme',index:'theme',width:350,align:'center',resizable:false,editable:false, searchoptions:{sopt:['eq','bw','cn']}},
                             {name:'subject',index:'subject',width:170,align:'center',resizable:false, editable:false, searchoptions:{sopt:['eq','ne','bw','cn']}},
                             {name:'task',index:'task',width:250,align:'center',resizable:false, editable:false, searchoptions:{sopt:['eq','bw','cn']}},
+                            {name:'status_order',index:'status_order',width:160,align:'center',resizable:false,editable:false,search:false},
                             {name:'date_create',index:'date_create',width:160,align:'center',resizable:false,editable:false,search:false},
-                            {name:'date_expire',index:'date_expire',width:160,align:'center',resizable:false,editable:false,search:false}
+                            {name:'date_expire',index:'date_expire',width:160,align:'center',resizable:false,editable:false,search:false},
+                            {name:'response_author',index:'response_author',width:70,align:'center',resizable:false,editable:false,search:false,sortable:false}
                         ],
                         pager: $('#pagerOrders'),
                         toolbar: [true,'top'],
@@ -58,12 +60,13 @@
                         hidegrid: false,
                         caption: 'Таблица c вашими заказами',
                         height: '450',
+                        //width: '1300'
                         //emptyrecords: "Пока тут нету ваших созданных заказов",
                         //width: null,
                         //shrinkToFit: false,
                         altRows: true,
                         altclass:'myAltRowClass',
-                       // scroll: true,
+                        // scroll: true,
 
                         loadComplete : function () {
                         },
