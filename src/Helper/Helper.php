@@ -602,81 +602,11 @@ class Helper
     }
 
 
-    public static function getCountOrdersForGrid($sOper = null, $sField = null, $sData = null, $user) {
-        //if ($mode != null)
-        {
-            $table = null;
-
-            /*if ($sField == 'price') {
-                $table = 'author_has_estimated_order';
-            }
-            else if ($sField == 'specialty_id') {
-                $table = 'specialty';
-            }
-            else if ($sField == 'type_id') {
-                $table = 'type';
-            }
-
-            if ($mode == 'eq') {
-                if ($sField == 'price' || $sField == 'specialty_id' || $sField == 'type_id') {
-                    $row = $this->_db->query("SELECT COUNT(id) AS count FROM $table WHERE '$sField' = '$sData'");
-                    $row = $row->fetch(PDO::FETCH_ASSOC);
-
-                    return $row['count'];
-                }
-                else {
-                    $qWhere = ' WHERE ' . $sField . '=' . $this->_db->quote($sData);
-                }
-            }
-            else if ($mode == 'ne') {
-                if ($sField == 'price' || $sField == 'specialty_id' || $sField == 'type_id') {
-                    $row = $this->_db->query("SELECT COUNT(id) AS count FROM $table WHERE '$sField' <> '$sData'");
-                    $row = $row->fetch(PDO::FETCH_ASSOC);
-
-                    return $row['count'];
-                }
-                else {
-                    $qWhere = ' WHERE ' . $sField . '<>' . $this->_db->quote($sData);
-                }
-            }
-            else if ($mode == 'cn') {
-                if ($sField == 'price' || $sField == 'specialty_id' || $sField == 'type_id') {
-                    $row = $this->_db->query("SELECT COUNT(id) AS count FROM $table WHERE '$sField' LIKE '%" . $sData . "%'");
-                    $row = $row->fetch(PDO::FETCH_ASSOC);
-
-                    return $row['count'];
-                }
-                else {
-                    $qWhere = ' WHERE ' . $sField . ' LIKE ' . $this->_db->quote('%' . $sData . '%');
-                }
-            }
-            else if ($mode == 'bw') {
-                if ($sField == 'price' || $sField == 'specialty_id' || $sField == 'type_id') {
-                    $row = $this->_db->query("SELECT COUNT(id) AS count FROM $table WHERE '$sField' LIKE '" . $sData . "%'");
-                    $row = $row->fetch(PDO::FETCH_ASSOC);
-
-                    return $row['count'];
-                }
-                else
-                {
-                    $qWhere = ' WHERE ' . $sField . ' LIKE ' . $this->_db->quote($sData . '%');
-                }
-            }
-        }
-        else {
-            $qWhere = '';
-        }*/
-
-        //$row = $this->_db->query('SELECT COUNT(id) AS count FROM `order`'.$qWhere);
-        //$row = $row->fetch(PDO::FETCH_ASSOC);
-
-            $em = self::getContainer()->get('doctrine')->getManager();
-
-            $order = $em->getRepository(self::$_tableUserOrder)
-                ->findByUser($user);
-
-            return count($order);
-        }
+    public static function getCountOrdersForGrid($user) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $order = $em->getRepository(self::$_tableUserOrder)
+            ->findByUser(array('user' => $user, 'is_show' > 1));
+        return count($order);
     }
 
 

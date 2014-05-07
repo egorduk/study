@@ -208,7 +208,7 @@ class ClientController extends Controller
                     $sField = $postData['searchField'];
                 }
 
-                $countOrders = Helper::getCountOrdersForGrid($sOper, $sField, $sData, $user);
+                $countOrders = Helper::getCountOrdersForGrid($user);
 
                 /*if ($totalRows < $rowsPerPage)
                     $response->page = 1;
