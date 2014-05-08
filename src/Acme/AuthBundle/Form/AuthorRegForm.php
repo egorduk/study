@@ -20,19 +20,19 @@ class AuthorRegForm extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('fieldLogin', 'text', array('label'=>'Логин:', 'required' => true, 'attr' => array('title' => 'Ваш логин должен состоять только из латинских букв', 'size' => 20, 'maxlength' => 12, 'placeholder' => 'Введите логин...')))
-                ->add('fieldPass', 'password', array('label'=>'Пароль:', 'required' => true, 'attr' => array('title' => 'Ваш пароль должен состоять только из латинских букв и цифр', 'size' => 20, 'maxlength' => 12, 'placeholder' => 'Введите пароль...')))
-                ->add('fieldPassApprove', 'password', array('label'=>'Подтвердите пароль:', 'required' => true, 'attr' => array('title' => 'Введите Ваш пароль еще раз', 'size' => 20, 'maxlength' => 12, 'placeholder' => 'Введите пароль...')))
-                ->add('fieldEmail', 'text', array('label'=>'Email:', 'required' => true, 'attr' => array('title' => 'Введите Ваш email', 'size' => 20, 'maxlength' => 25, 'placeholder' => 'Введите Email...')))
-                ->add('fieldMobilePhone', 'text', array('label'=>'Мобильный телефон:', 'required' => true, 'attr' => array('title' => 'Введите номер Вашего мобильного телефона', 'size' => 22, 'maxlength' => 14, 'placeholder' => 'Введите номер...')))
-                ->add('fieldSkype', 'text', array('label'=>'Skype:', 'required' => false, 'attr' => array('title' => 'Введите Ваш Skype', 'size' => 22, 'maxlength' => 20, 'placeholder' => 'Введите Skype...')))
-                ->add('fieldIcq', 'text', array('label'=>'Icq:', 'required' => false, 'attr' => array('title' => 'Введите Ваш Icq', 'size' => 20, 'maxlength' => 10, 'placeholder' => 'Введите Icq...')))
-                ->add('checkAgreeRules', 'checkbox', array('label'=>' ', 'required' => true, 'attr' => array('title' => 'Если Вы согласны с правилами, то установите тут флажок', 'class' => '')))
+        $builder->add('fieldLogin', 'text', array('label'=>'Логин:', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Ваш логин должен состоять только из латинских букв', 'size' => 20, 'maxlength' => 12, 'placeholder' => 'Введите логин...')))
+                ->add('fieldPass', 'password', array('label'=>'Пароль:', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Ваш пароль должен состоять только из латинских букв и цифр', 'size' => 20, 'maxlength' => 12, 'placeholder' => 'Введите пароль...')))
+                ->add('fieldPassApprove', 'password', array('label'=>'Подтвердите пароль:', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Введите Ваш пароль еще раз', 'size' => 20, 'maxlength' => 12, 'placeholder' => 'Введите повторно пароль...')))
+                ->add('fieldEmail', 'text', array('label'=>'Email:', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Введите Ваш email', 'size' => 20, 'maxlength' => 25, 'placeholder' => 'Введите Email...')))
+                ->add('fieldMobilePhone', 'text', array('label'=>'Мобильный телефон:', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Введите номер Вашего мобильного телефона', 'size' => 22, 'maxlength' => 14, 'placeholder' => 'Введите номер...')))
+                ->add('fieldSkype', 'text', array('label'=>'Skype:', 'required' => false, 'attr' => array('class' => 'form-control', 'title' => 'Введите Ваш Skype', 'size' => 22, 'maxlength' => 20, 'placeholder' => 'Введите Skype...')))
+                ->add('fieldIcq', 'text', array('label'=>'Icq:', 'required' => false, 'attr' => array('class' => 'form-control', 'title' => 'Введите Ваш Icq', 'size' => 20, 'maxlength' => 10, 'placeholder' => 'Введите Icq...')))
+                ->add('checkAgreeRules', 'checkbox', array('label'=>' ', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Если Вы согласны с правилами, то установите тут флажок', 'class' => '')))
                 ->add('reg', 'submit', array('label'=>'Регистрация', 'attr' => array('class' => 'btn btn-success')))
                 ->add('reset', 'reset', array('label'=>'Очистить', 'attr' => array('class' => 'btn btn-success')))
-                ->add('fieldUsername', 'text', array('label'=>'Имя:', 'required' => false, 'attr' => array('title' => 'Ваше имя должно состоять только из русских букв', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Введите имя...')))
-                ->add('fieldSurname', 'text', array('label'=>'Фамилия:', 'required' => false, 'attr' => array('title' => 'Ваша фамилия должна состоять только из русских букв', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Введите фамилию...')))
-                ->add('fieldLastname', 'text', array('label'=>'Отчество:', 'required' => false, 'attr' => array('title' => 'Ваше отчество должно состоять только из русских букв', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Введите отчество...')))
+                ->add('fieldUsername', 'text', array('label'=>'Имя:', 'required' => false, 'attr' => array('class' => 'form-control', 'title' => 'Ваше имя должно состоять только из русских букв', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Введите имя...')))
+                ->add('fieldSurname', 'text', array('label'=>'Фамилия:', 'required' => false, 'attr' => array('class' => 'form-control', 'title' => 'Ваша фамилия должна состоять только из русских букв', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Введите фамилию...')))
+                ->add('fieldLastname', 'text', array('label'=>'Отчество:', 'required' => false, 'attr' => array('class' => 'form-control', 'title' => 'Ваше отчество должно состоять только из русских букв', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Введите отчество...')))
                /* ->add('selectorCountry', 'genemu_jqueryselect2_entity', array(
                 'mapped'   => false,
                 'class' => 'Acme\AuthBundle\Entity\Country',
@@ -40,14 +40,8 @@ class AuthorRegForm extends AbstractType
             ))*/
             ->add('selectorCountry', 'choice', array(
                 'mapped'   => false,
-                'choices' => $this->buildChoices()
-            ))
-                /*->add('selectorCountry', 'choice', array('label'=>' ', 'choices' => array(
-                    'ru'   => 'Россия',
-                    'by' => 'Беларусь',
-                    'uk'   => 'Украина',
-                    'kz'   => 'Казахстан'), 'attr' => array()))*/
-                ;
+                'choices' => $this->buildChoices(),
+            ));
 
         $builder->addEventListener(FormEvents::POST_BIND, function(FormEvent $event)
         {
@@ -87,25 +81,6 @@ class AuthorRegForm extends AbstractType
             }
         });
     }
-
-    /*public static function getContainer()
-    {
-        if (self::$kernel instanceof \AppKernel)
-        {
-            if (!self::$kernel->getContainer() instanceof Container)
-            {
-                self::$kernel->boot();
-            }
-
-            return self::$kernel->getContainer();
-        }
-
-        $environment = 'dev';
-        self::$kernel = new \AppKernel($environment, false);
-        self::$kernel->boot();
-
-        return self::$kernel->getContainer();
-    }*/
 
     protected function buildChoices()
     {

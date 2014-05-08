@@ -35,9 +35,9 @@
                             <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
                             {{ form_widget(formReg.fieldPassApprove) }}
                         </div>
-                            <div>
-                                {{ form_row(formReg.fieldPassApprove) }}
-                            </div>
+                        <div>
+                            {{ form_row(formReg.fieldPassApprove) }}
+                        </div>
                         {{ form_label(formReg.fieldEmail) }}
                         {{ form_errors(formReg.fieldEmail) }}
                         <div class="input-group">
@@ -83,18 +83,24 @@
         </div>
         <script>
             $(document).ready(function() {
-                {% if (showWindow) %}
-                    function closeMessage(el) {
-                        el.addClass('is-hidden');
-                    }
-                    $('.js-messageClose').on('click', function(e) {
-                        closeMessage($(this).closest('.Message'));
-                    });
-                    setTimeout(function() {
-                        closeMessage($('#js-timer'));
-                        document.location.href = "{{ path("login") }}";
-                    }, 2000);
-                {% endif %}
+                if (!sessionStorage.getItem("Page2Visited")) {
+                    {% if (showWindow) %}
+                        function closeMessage(el) {
+                            el.addClass('is-hidden');
+                        }
+                        $('.js-messageClose').on('click', function(e) {
+                            closeMessage($(this).closest('.Message'));
+                        });
+                        setTimeout(function() {
+                            closeMessage($('#js-timer'));
+                            document.location.href = "{{ path("login") }}";
+                        }, 3000);
+                    {% endif %}
+                }
+                else {
+                    sessionStorage.removeItem("Page2Visited");
+                    $("#modal-window").hide();
+                }
             })
         </script>
     </div>
