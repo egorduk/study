@@ -96,6 +96,11 @@ class User extends EntityRepository implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="integer")
      */
+    protected $is_ban;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
     protected $is_confirm;
 
     /**
@@ -126,6 +131,7 @@ class User extends EntityRepository implements UserInterface, \Serializable
         $this->hash_code = '';
         $this->account = 0;
         $this->link_user = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->is_ban = 0;
         //$this->date_confirm_recovery = 'NULL';
         //$this->date_confirm_reg = 'NULL';
         //$this->fio = '';
@@ -158,6 +164,16 @@ class User extends EntityRepository implements UserInterface, \Serializable
     public function setHash($hash)
     {
         $this->hash_code = $hash;
+    }
+
+    public function getIsBan()
+    {
+        return $this->is_ban;
+    }
+
+    public function setIsBan($ban)
+    {
+        $this->is_ban = $ban;
     }
 
     public function getSalt()

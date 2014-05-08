@@ -16,12 +16,13 @@
                             {{ form_widget(formLogin.fieldPass) }}
                         </div>
                         <div class="input-group">
-                            <label for="formLogin_enter" class="btn btn-success"><i class="fa fa-sign-in fa-2x">&nbspВойти</i></label>
+                            <label for="formLogin_enter" class="btn btn-success"><i class="fa fa-sign-in fa-1x">&nbspВойти</i></label>
                             {{ form_widget(formLogin.enter) }}
                         </div>
                     {{ form_end(formLogin) }}
                 </div>
-                <a class="btn btn-success" href="{{ path('login') }}"><i class="fa fa-pencil fa-2x">&nbspРегистрация</i></a>
+                <a class="btn btn-success" href="{{ path('login') }}"><i class="fa fa-pencil fa-1x">&nbspРегистрация</i></a>
+
                 <div id="openID">
                     <p>Войти с помощью:</p>
                     <div id="uLogin" data-ulogin="display=panel;fields=first_name,nickname,email,photo,photo_big;
