@@ -7,9 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="Country")
+ * @ORM\Table(name="user_role")
  */
-class Country extends EntityRepository
+class UserRole extends EntityRepository
 {
     /**
      * @ORM\Id
@@ -24,34 +24,19 @@ class Country extends EntityRepository
     protected $name;
 
     /**
-     * @ORM\Column(type="string")
-     */
-    protected $code;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Openid", mappedBy="country")
+     * @ORM\OneToMany(targetEntity="User", mappedBy="role")
      **/
-    protected $link_country;
+    protected $link_role;
 
-    /**
-     * @ORM\OneToMany(targetEntity="UserInfo", mappedBy="country")
-     **/
-    protected $link_user_info;
 
     public function __construct()
     {
-        $this->link_country = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->link_user_info = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->link_role = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function setName($name)
     {
         $this->name = $name;
-    }
-
-    public function setCode($code)
-    {
-        $this->code = $code;
     }
 
     public function setId($id)
@@ -68,10 +53,4 @@ class Country extends EntityRepository
     {
         return $this->name;
     }
-
-    public function getCode()
-    {
-        return $this->code;
-    }
-
 }

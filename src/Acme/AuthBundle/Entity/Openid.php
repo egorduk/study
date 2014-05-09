@@ -65,10 +65,16 @@ class Openid extends EntityRepository
     protected $provider;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Country", inversedBy="link_openid", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Country", inversedBy="link_country", cascade={"all"})
      * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
      **/
     protected $country;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="link_openid", cascade={"all"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     **/
+    protected $user;
 
 
     public function __construct()
@@ -135,5 +141,19 @@ class Openid extends EntityRepository
         $this->id = $id;
     }
 
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    public function getCountry()
+    {
+        return $this->country;
+    }
 
 }

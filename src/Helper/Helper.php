@@ -373,16 +373,13 @@ class Helper
     }
 
 
-    public static function addNewOpenIdData($socialData, $providerName, $countryCode)
+    public static function addNewOpenIdData($socialData, $country, $user)
     {
-        $provider = self::getContainer()->get('doctrine')->getRepository(self::$_tableProvider)
-            ->findOneByName($providerName);
-
-        $country = self::getContainer()->get('doctrine')->getRepository(self::$_tableCountry)
-            ->findOneByCode($countryCode);
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $provider = $em->getRepository(self::$_tableProvider)
+            ->findOneByName($socialData['network']);
 
         $openId = new Openid();
-
         $openId->setUid($socialData['uid']);
         $openId->setProfileUrl($socialData['profile']);
         $openId->setEmail($socialData['email']);
@@ -393,12 +390,10 @@ class Helper
         $openId->setPhoto($socialData['photo']);
         $openId->setProvider($provider);
         $openId->setCountry($country);
-
-        $em = self::getContainer()->get('doctrine')->getManager();
+        $openId->setUser($user);
         $em->persist($openId);
         $em->flush();
-
-        return $openId->getId();
+        return $user->getId();
     }
 
 

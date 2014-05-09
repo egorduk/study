@@ -5,6 +5,7 @@ namespace Acme\AuthBundle\Controller;
 use Acme\AuthBundle\Entity\Country;
 use Acme\AuthBundle\Entity\Openid;
 use Acme\AuthBundle\Entity\User;
+use Acme\AuthBundle\Entity\UserRole;
 use Acme\AuthBundle\Entity\Provider;
 use Acme\AuthBundle\Entity\ClientRegFormValidate;
 use Acme\AuthBundle\Entity\AuthorRegFormValidate;
@@ -28,6 +29,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Util\StringUtils;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -43,7 +45,7 @@ class AuthController extends Controller
 {
     //private $tableUser = 'AcmeAuthBundle:User';
     private $tableCountry = 'AcmeAuthBundle:Country';
-    //private $tableProvider = 'AcmeAuthBundle:Provider';
+    private $tableUserRole = 'AcmeAuthBundle:UserRole';
 
 
 
@@ -227,25 +229,30 @@ class AuthController extends Controller
                             $userLogin = $postData['fieldLogin'];
                             $userPassword = $postData['fieldPass'];
                             $userEmail = $postData['fieldEmail'];
-                            $em = $this->getDoctrine()->getManager();
 
                             $userInfo = new UserInfo();
+                            //$countryCode = geoip_country_code_by_name($_SERVER["REMOTE_ADDR"]);
+                            $countryCode = 'by';
+                            $country = $this->getDoctrine()->getRepository($this->tableCountry)
+                                ->findOneByCode($countryCode);
+                            $userInfo->setCountry($country);
+                            $em = $this->getDoctrine()->getManager();
                             $em->persist($userInfo);
                             $em->flush();
-                            $userInfoId = $userInfo->getId();
 
                             $user = new User();
                             $user->setLogin($userLogin);
                             $user->setEmail($userEmail);
-                            $user->setRole(2);
+                            $role = $this->getDoctrine()->getRepository($this->tableUserRole)
+                                ->findOneById(2);
+                            $user->setRole($role);
                             $salt = Helper::getSalt();
                             $password = Helper::getRegPassword($userPassword, $salt);
                             $user->setPassword($password);
                             $user->setSalt($salt);
                             $hashCode = Helper::getRandomValue(15);
                             $user->setHash($hashCode);
-                            $user->setUserInfoId($userInfoId);
-
+                            $user->setUserInfo($userInfo);
                             $em->persist($user);
                             $em->flush();
                             $userId = $user->getId();
@@ -263,8 +270,7 @@ class AuthController extends Controller
                 'AcmeAuthBundle:Client:reg.html.twig', array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $captchaError, 'showWindow' => $showWindow)
             );
         }
-        elseif ($type == "author")
-        {
+        elseif ($type == "author") {
             $authorValidate = new AuthorRegFormValidate();
             $formReg = $this->createForm(new AuthorRegForm(), $authorValidate);
             $formReg->handleRequest($request);
@@ -272,77 +278,62 @@ class AuthController extends Controller
             $publicKeyRecaptcha = $this->container->getParameter('publicKeyRecaptcha');
             $captcha = recaptcha_get_html($publicKeyRecaptcha);
 
-            if ($request->isMethod('POST'))
-            {
-                if ($formReg->get('reg')->isClicked())
-                {
+            if ($request->isMethod('POST')) {
+                if ($formReg->get('reg')->isClicked()) {
                     $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
                     $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
 
-                    if ($formReg->isValid())
-                    {
-                        if (!$resp->is_valid)
-                        {
+                    if ($formReg->isValid()) {
+                        if (!$resp->is_valid) {
                             $postData = $request->request->get('formReg');
                             $userLogin = $postData['fieldLogin'];
                             $userPassword = $postData['fieldPass'];
                             $userEmail = $postData['fieldEmail'];
-                            $userMobileTel = $postData['fieldMobilePhone'];
+                            $userMobilePhone = $postData['fieldMobilePhone'];
                             $userSkype = $postData['fieldSkype'];
                             $userIcq = $postData['fieldIcq'];
                             $userCountryCode = $postData['selectorCountry'];
 
-                            $em = $this->getDoctrine()->getManager();
-
                             $userInfo = new UserInfo();
                             $userInfo->setSkype($userSkype);
                             $userInfo->setIcq($userIcq);
-                            $userInfo->setMobileTel($userMobileTel);
-
+                            $userInfo->setMobilePhone($userMobilePhone);
+                            //$countryCode = geoip_country_code_by_name($_SERVER["REMOTE_ADDR"]);
                             $country = $this->getDoctrine()->getRepository($this->tableCountry)
                                 ->findOneByCode($userCountryCode);
-
                             $userInfo->setCountry($country);
-
+                            $em = $this->getDoctrine()->getManager();
                             $em->persist($userInfo);
                             $em->flush();
-
-                            $userInfoId = $userInfo->getId();
 
                             $user = new User();
                             $user->setLogin($userLogin);
                             $user->setEmail($userEmail);
-                            $user->setRole(1);
-
+                            $role = $this->getDoctrine()->getRepository($this->tableUserRole)
+                                ->findOneById(1);
+                            $user->setRole($role);
                             $salt = Helper::getSalt();
                             $password = Helper::getRegPassword($userPassword, $salt);
                             $user->setPassword($password);
                             $user->setSalt($salt);
                             $hashCode = Helper::getRandomValue(15);
                             $user->setHash($hashCode);
-                            $user->setUserInfoId($userInfoId);
-
+                            $user->setUserInfo($userInfo);
                             $em->persist($user);
                             $em->flush();
-
                             $userId = $user->getId();
 
-                            //Helper::sendConfirmationReg($this->container, $userEmail, $userId, $hashCode);
-
-                            //return $this->redirect($this->generateUrl('client_success_reg'));
+                            Helper::sendConfirmationReg($this->container, $userEmail, $userId, $hashCode);
+                            $showWindow = true;
                         }
-                        else
-                        {
-                            return $this->render(
-                                'AcmeAuthBundle:Author:reg.html.twig', array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $resp->error)
-                            );
+                        else {
+                            $captchaError = $resp->error;
                         }
                     }
                 }
             }
-
             return $this->render(
-                'AcmeAuthBundle:Author:reg.html.twig', array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => '')
+                'AcmeAuthBundle:Author:reg.html.twig', array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $captchaError, 'showWindow' => $showWindow)
             );
         }
         else
@@ -380,7 +371,8 @@ class AuthController extends Controller
             $socialToken = $session->get('socialToken');
             $socialResponse = file_get_contents('http://ulogin.ru/token.php?token=' . $socialToken . '&host=' . $_SERVER['HTTP_HOST']);
             $socialData = json_decode($socialResponse, true);
-            //print_r($socialData); die;
+            $showWindow = false;
+            $captchaError = "";
 
             if (!isset($socialData['error']))
             {
@@ -431,7 +423,6 @@ class AuthController extends Controller
                                 if (!$resp->is_valid)
                                 {
                                     $session->remove('socialToken');
-                                    $em = $this->getDoctrine()->getManager();
 
                                     $postData = $request->request->get('formReg');
                                     $userLogin = $postData['fieldLogin'];
@@ -439,55 +430,49 @@ class AuthController extends Controller
                                     $userEmail = $postData['fieldEmail'];
 
                                     $userInfo = new UserInfo();
+                                    //$countryCode = geoip_country_code_by_name($_SERVER["REMOTE_ADDR"]);
+                                    $countryCode = 'by';
+                                    $country = $this->getDoctrine()->getRepository($this->tableCountry)
+                                        ->findOneByCode($countryCode);
+                                    $userInfo->setCountry($country);
+                                    $em = $this->getDoctrine()->getManager();
                                     $em->persist($userInfo);
                                     $em->flush();
-                                    $userInfoId = $userInfo->getId();
 
                                     $user = new User();
                                     $user->setLogin($userLogin);
                                     $user->setEmail($userEmail);
-                                    $user->setRole(2);
-
+                                    $role = $this->getDoctrine()->getRepository($this->tableUserRole)
+                                        ->findOneById(2);
+                                    $user->setRole($role);
                                     $salt = Helper::getSalt();
                                     $password = Helper::getRegPassword($userPassword, $salt);
                                     $user->setPassword($password);
                                     $user->setSalt($salt);
                                     $hashCode = Helper::getRandomValue(15);
                                     $user->setHash($hashCode);
-                                    $user->setUserInfoId($userInfoId);
+                                    $user->setUserInfo($userInfo);
 
-                                    $providerName = $socialData['network'];
-                                    //$countryCode = geoip_country_code_by_name($_SERVER["REMOTE_ADDR"]);
-                                    $countryCode = 'by';
-
-                                    $openId = Helper::addNewOpenIdData($socialData, $providerName, $countryCode);
-
-                                    $user->setOpenId($openId);
-
-                                    $em->persist($user);
-                                    $em->flush();
-                                    $userId = $user->getId();
-
+                                    $userId = Helper::addNewOpenIdData($socialData, $country, $user);
                                     Helper::sendConfirmationReg($this->container, $userEmail, $userId, $hashCode);
-
-                                    return $this->render(
-                                        'AcmeAuthBundle:Auth:successReg.html.twig', array('userLogin' => $userLogin)
-                                    );
+                                    $showWindow = true;
                                 }
                                 else
                                 {
-                                    return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $resp->error);
+                                    $captchaError = $resp->error;
                                 }
                             }
                         }
                     }
                 }
-
-                return array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => '');
+                return $this->render(
+                    'AcmeAuthBundle:Client:reg.html.twig', array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $captchaError, 'showWindow' => $showWindow)
+                );
             }
         }
-
-        return $this->redirect($this->generateUrl('login'));
+        else {
+            return $this->redirect($this->generateUrl('login'));
+        }
     }
 
 

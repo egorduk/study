@@ -75,7 +75,7 @@ class UserOrder extends EntityRepository
     private $status_order;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Acme\AuthBundle\Entity\User", inversedBy="link_user", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Acme\AuthBundle\Entity\User", inversedBy="link_user_order", cascade={"all"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      **/
     protected $user;

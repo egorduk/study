@@ -59,6 +59,11 @@ class UserInfo extends EntityRepository
      **/
     protected $country;
 
+    /**
+     * @ORM\OneToMany(targetEntity="User", mappedBy="userInfo")
+     **/
+    protected $link_user_info;
+
 
     public function __construct()
     {
@@ -69,7 +74,7 @@ class UserInfo extends EntityRepository
         $this->username = "";
         $this->surname = "";
         $this->lastname = "";
-        //$this->country = "";
+        $this->link_user_info = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function getSkype()

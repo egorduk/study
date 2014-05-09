@@ -20,7 +20,7 @@
                         {{ form_label(formReg.fieldLogin) }}
                         {{ form_errors(formReg.fieldLogin) }}
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="icon-user4"></i></span>
+                            <span class="input-group-addon"><i class="icon-user"></i></span>
                             {{ form_widget(formReg.fieldLogin) }}
                         </div>
                         {{ form_label(formReg.fieldPass) }}
@@ -58,9 +58,9 @@
                             </div>
                         {% endblock %}
                         <div class="input-group">
-                            <label for="formReg_reg" class="btn btn-success"><i class="icon-checkmark">&nbspРегистрация</i></label>
+                            <label for="formReg_reg" class="btn btn-success"><span class="icon-ok">&nbspРегистрация</span></label>
                             {{ form_widget(formReg.reg) }}
-                            <label for="formReg_reset" class="btn btn-success"><i class="fa fa-trash-o">&nbspОчистить</i></label>
+                            <label for="formReg_reset" class="btn btn-success"><span class="icon-trash-1">&nbspОчистить</span></label>
                             {{ form_widget(formReg.reset) }}
                         </div>
                 {{ form_end(formReg) }}

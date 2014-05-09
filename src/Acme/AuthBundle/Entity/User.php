@@ -3,6 +3,7 @@
 namespace Acme\AuthBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Helper\Helper;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,7 +17,7 @@ use Symfony\Component\Serializer;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="User")
+ * @ORM\Table(name="user")
  */
 //class User extends EntityRepository implements AdvancedUserInterface
 class User extends EntityRepository implements UserInterface, \Serializable
@@ -59,11 +60,6 @@ class User extends EntityRepository implements UserInterface, \Serializable
     protected $date_confirm_recovery;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    protected $user_role_id;
-
-    /**
      * @ORM\Column(type="string")
      */
     protected $salt;
@@ -91,11 +87,6 @@ class User extends EntityRepository implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="integer")
      */
-    protected $openid_id;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
     protected $is_ban;
 
     /**
@@ -106,17 +97,29 @@ class User extends EntityRepository implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="integer")
      */
-    protected $user_info_id;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
     protected $account;
 
     /**
      * @ORM\OneToMany(targetEntity="Acme\SecureBundle\Entity\UserOrder", mappedBy="user")
      **/
-    protected $link_user;
+    protected $link_user_order;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Openid", mappedBy="user")
+     **/
+    protected $link_openid;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserRole", inversedBy="link_role", cascade={"all"})
+     * @ORM\JoinColumn(name="user_role_id", referencedColumnName="id")
+     **/
+    protected $role;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserInfo", inversedBy="link_user_info", cascade={"all"})
+     * @ORM\JoinColumn(name="user_info_id", referencedColumnName="id")
+     **/
+    protected $userInfo;
 
 
     public function __construct()
@@ -124,17 +127,15 @@ class User extends EntityRepository implements UserInterface, \Serializable
         $this->date_reg = new \DateTime();
         $this->is_active = 0;
         $this->ip_reg = ip2long($_SERVER['REMOTE_ADDR']);
-        $this->openid_id = 0;
         $this->is_confirm = 0;
         $this->recovery_password = '';
-        $this->user_info_id = 0;
         $this->hash_code = '';
         $this->account = 0;
-        $this->link_user = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->link_user_order = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->link_openid = new \Doctrine\Common\Collections\ArrayCollection();
         $this->is_ban = 0;
-        //$this->date_confirm_recovery = 'NULL';
-        //$this->date_confirm_reg = 'NULL';
-        //$this->fio = '';
+        $this->date_confirm_recovery = Helper::getFormatDateForInsert("0000-00-00 00:00:00", "Y-m-d H:i:s");
+        $this->date_confirm_reg = Helper::getFormatDateForInsert("0000-00-00 00:00:00", "Y-m-d H:i:s");
     }
 
     public function getId()
@@ -218,12 +219,12 @@ class User extends EntityRepository implements UserInterface, \Serializable
 
     public function getRole()
     {
-        return $this->user_role_id;
+        return $this->role;
     }
 
     public function setRole($role)
     {
-        $this->user_role_id = $role;
+        $this->role = $role;
     }
 
     public function getPassword()
@@ -321,14 +322,14 @@ class User extends EntityRepository implements UserInterface, \Serializable
         $this->date_confirm_recovery = $date;
     }
 
-    public function setUserInfoId($id)
+    public function setUserInfo($userInfo)
     {
-        $this->user_info_id = $id;
+        $this->userInfo = $userInfo;
     }
 
-    public function getUserInfoId()
+    public function getUserInfo()
     {
-        return $this->user_info_id;
+        return $this->userInfo;
     }
 
     public function setAccount($account)
@@ -340,9 +341,6 @@ class User extends EntityRepository implements UserInterface, \Serializable
     {
         return $this->account;
     }
-
-
-
 
     /**
      * @see \Serializable::serialize()
