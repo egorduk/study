@@ -26,6 +26,11 @@ class StatusOrder extends EntityRepository
     private $name;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $code;
+
+    /**
      * @ORM\OneToMany(targetEntity="UserOrder", mappedBy="status_order")
      **/
     private $link_status_order;
@@ -53,6 +58,16 @@ class StatusOrder extends EntityRepository
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 
 }

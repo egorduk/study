@@ -7,9 +7,9 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="order_file")
+ * @ORM\Table(name="author_file")
  */
-class OrderFile extends EntityRepository
+class AuthorFile extends EntityRepository
 {
     /**
      * @ORM\Id
@@ -34,10 +34,10 @@ class OrderFile extends EntityRepository
     private $size;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserOrder", inversedBy="link_user_order", cascade={"all"})
-     * @ORM\JoinColumn(name="user_order_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="AuthorStudy", inversedBy="link_author_file", cascade={"all"})
+     * @ORM\JoinColumn(name="author_study_id", referencedColumnName="id")
      **/
-    private $user_order;
+    private $author_study;
 
 
     public function __construct(){
@@ -84,14 +84,14 @@ class OrderFile extends EntityRepository
         $this->size = $size;
     }
 
-    public function getUserOrder()
+    public function getAuthorStudy()
     {
-        return $this->user_order;
+        return $this->author_study;
     }
 
-    public function setUserOrder($userOrder)
+    public function setAuthorStudy($study)
     {
-        $this->user_order = $userOrder;
+        $this->author_study = $study;
     }
 
 }

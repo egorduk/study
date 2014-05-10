@@ -9,9 +9,9 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="subject")
+ * @ORM\Table(name="subject_order")
  */
-class Subject extends EntityRepository
+class SubjectOrder extends EntityRepository
 {
     /**
      * @ORM\Id
@@ -31,7 +31,7 @@ class Subject extends EntityRepository
     private $child_name;
 
     /**
-     * @ORM\OneToMany(targetEntity="UserOrder", mappedBy="subject")
+     * @ORM\OneToMany(targetEntity="UserOrder", mappedBy="subject_order")
      **/
     private $link_subject;
 

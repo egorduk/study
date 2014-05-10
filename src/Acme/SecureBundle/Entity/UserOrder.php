@@ -57,10 +57,10 @@ class UserOrder extends EntityRepository
     private $count_sheet;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Subject", inversedBy="link_subject", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="SubjectOrder", inversedBy="link_subject", cascade={"all"})
      * @ORM\JoinColumn(name="subject_id", referencedColumnName="id")
      **/
-    private $subject;
+    private $subject_order;
 
     /**
      * @ORM\ManyToOne(targetEntity="TypeOrder", inversedBy="link_type_order", cascade={"all"})
@@ -83,7 +83,12 @@ class UserOrder extends EntityRepository
     /**
      * @ORM\Column(type="integer")
      */
-    private $is_show;
+    private $is_show_author;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $is_show_client;
 
     /**
      * @ORM\Column(type="string")
@@ -98,7 +103,8 @@ class UserOrder extends EntityRepository
 
     public function __construct($container){
         $this->date_create = new \DateTime();
-        $this->is_show = 1;
+        $this->is_show_author = 0;
+        $this->is_show_client = 1;
         $this->files_dir = "";
         $em = $container->get('doctrine')->getManager();
         $query = $em->getRepository('AcmeSecureBundle:UserOrder')->createQueryBuilder('s');
@@ -173,12 +179,12 @@ class UserOrder extends EntityRepository
 
     public function getSubjectOrder()
     {
-        return $this->subject;
+        return $this->subject_order;
     }
 
     public function setSubjectOrder($subject)
     {
-        $this->subject = $subject;
+        $this->subject_order = $subject;
     }
 
     public function getTypeOrder()
@@ -211,14 +217,24 @@ class UserOrder extends EntityRepository
         return $this->num;
     }
 
-    public function setIsShow($val)
+    public function setIsShowAuthor($val)
     {
-        $this->is_show = $val;
+        $this->is_show_author = $val;
     }
 
-    public function getIsShow()
+    public function getIsShowAuthor()
     {
-        return $this->is_show;
+        return $this->is_show_author;
+    }
+
+    public function setIsShowClient($val)
+    {
+        $this->is_show_client = $val;
+    }
+
+    public function getIsShowClient()
+    {
+        return $this->is_show_client;
     }
 
     public function setUser($user)

@@ -1,6 +1,9 @@
 {% extends "AcmeSecureBundle::layout.html.twig" %}
     {% block content %}
         <div class="container">
+            <script>
+                sessionStorage.setItem("Page2Visited", "True");
+            </script>
             <div class="row">
                 <p>Ваш ID - {{ userId }}</p>
                 <p>Ваш ник - {{ userLogin }}</p>
@@ -10,6 +13,7 @@
                 <p><a href="{{ path('secure_client_profile', {'type': 'view'}) }}">Мой профиль</a></p>
                 <p><a href="{{ path('secure_client_settings', {'type': 'view'}) }}">Мои настройки</a></p>
                 <p><a href="{{ path('secure_client_order', {'type': 'create'}) }}">Создать заказ</a></p>
+                <p><a href="{{ path('secure_client_order', {'type': 'view'}) }}">Просмотр моих заказов</a></p>
                 <p><a href="{{ path('logout') }}">Выход</a></p>
             </div>
         </div>

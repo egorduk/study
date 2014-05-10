@@ -26,6 +26,7 @@ class Helper
     private static $_tableSubject = 'AcmeSecureBundle:Subject';
     private static $_tableTypeOrder = 'AcmeSecureBundle:TypeOrder';
     private static $_tableUserOrder = 'AcmeSecureBundle:UserOrder';
+    private static $_tableStatusOrder = 'AcmeSecureBundle:StatusOrder';
     private static $kernel;
 
     public function __construct()
@@ -258,16 +259,12 @@ class Helper
     }
 
 
-    public static function getUserById($userId)
-    {
+    public static function getUserById($userId) {
         $user = self::getContainer()->get('doctrine')->getRepository(self::$_tableUser)
             ->findOneById($userId);
-
-        if (!$user)
-        {
+        if (!$user) {
             return false;
         }
-
         return $user;
     }
 
@@ -429,13 +426,12 @@ class Helper
         $userInfo->setMobilePhone($userMobilePhone);
         $userInfo->setStaticPhone($userStaticPhone);
         $userInfo->setCountry($country);
-
         $em->merge($userInfo);
         $em->flush();
     }
 
 
-    public static function createNewOrder($postData, $userId, $folderFiles, $arrayFiles)
+    public static function createNewOrder($postData, $user, $folderFiles, $arrayFiles)
     {
         $theme = $postData['fieldTheme'];
         $task = $postData['fieldTask'];
@@ -444,22 +440,23 @@ class Helper
         $countSheet = $postData['fieldCountSheet'];
         $subjectId = $postData['selectorSubject'];
         $typeTypeOrderId = $postData['selectorTypeOrder'];
-        $flagSuccess = false;
-
         $theme = strip_tags($theme);
         $theme = trim($theme);
         $theme = preg_replace('|\s+|', ' ', $theme);
+        $taskWithoutTags = strip_tags($task);
+        if ($taskWithoutTags == "Placeholder") {
+            $task = "Не указана";
+        }
 
         $em = self::getContainer()->get('doctrine')->getManager();
-
         $subject = $em->getRepository(self::$_tableSubject)
             ->findOneById($subjectId);
-
         $typeOrder = $em->getRepository(self::$_tableTypeOrder)
             ->findOneById($typeTypeOrderId);
-
-        $user = $em->getRepository(self::$_tableUser)
-            ->findOneById($userId);
+        /*$user = $em->getRepository(self::$_tableUser)
+            ->findOneById($userId);*/
+        $statusOrder = $em->getRepository(self::$_tableStatusOrder)
+            ->findOneById(1);
 
         $order = new UserOrder(self::getContainer());
         $order->setTheme($theme);
@@ -467,33 +464,42 @@ class Helper
         $order->setDateExpire($dateExpire);
         $order->setOriginality($originality);
         $order->setCountSheet($countSheet);
-        $order->setSubject($subject);
+        $order->setSubjectOrder($subject);
         $order->setTypeOrder($typeOrder);
+        $order->setStatusOrder($statusOrder);
         $order->setUser($user);
         $filesFolderOld = Helper::getFullPathFolderFiles($folderFiles);
+        $isExistFilesFolder = self::isExistFilesFolder($filesFolderOld);
         $filesFolder = str_replace("non", "act", $folderFiles);
-        $filesFolderNew = Helper::getFullPathFolderFiles($filesFolder);
-        rename($filesFolderOld, $filesFolderNew);
-        $order->setFilesFolder($filesFolder);
-
-        $em->persist($order);
-        $em->flush();
-
-        foreach($arrayFiles as $file) {
-            $fileSize = $file['size'];
-            $fileName = $file['name'];
-            $fileDateUpload = $file['dateUpload'];
-            $format = 'Y-m-d H:i:s';
-            $fileDateUpload = self::getFormatDateForInsert($fileDateUpload, $format);
-
-            self::insertInfoAboutFileInDb($fileSize, $fileName, $fileDateUpload, $order, $em);
+        if ($isExistFilesFolder) {
+            $filesFolderNew = Helper::getFullPathFolderFiles($filesFolder);
+            rename($filesFolderOld, $filesFolderNew);
         }
-
-        $flagSuccess = true;
-
-        return $flagSuccess;
+        $order->setFilesFolder($filesFolder);
+        $em->persist($order);
+        //$em->flush();
+        if ($isExistFilesFolder) {
+            foreach($arrayFiles as $file) {
+                $fileSize = $file['size'];
+                $fileName = $file['name'];
+                $fileDateUpload = $file['dateUpload'];
+                $format = 'Y-m-d H:i:s';
+                $fileDateUpload = self::getFormatDateForInsert($fileDateUpload, $format);
+                self::insertInfoAboutFileInDb($fileSize, $fileName, $fileDateUpload, $order, $em);
+            }
+        }
+        $em->flush();
     }
 
+
+    public static function isExistFilesFolder($filesFolder) {
+        if (is_dir($filesFolder)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
     public static function insertInfoAboutFileInDb($fileSize, $fileName, $fileDateUpload, $order, $em) {
         $orderFile = new OrderFile();
@@ -501,9 +507,7 @@ class Helper
         $orderFile->setName($fileName);
         $orderFile->setSize($fileSize);
         $orderFile->setUserOrder($order);
-
         $em->persist($orderFile);
-        $em->flush();
     }
 
 
@@ -512,23 +516,28 @@ class Helper
     }
 
 
-    public static function getFilesFromFolder($filesFolder) {
-        $fileHandler = opendir($filesFolder);
-        $arrayInfoFiles = [];
-        $i = 0;
-
-        while (false !== ($filename = readdir($fileHandler))) {
-            if ($filename != "." && $filename != "..") {
-                $arrayInfoFiles[$i]['size'] = Helper::getSizeFile(filesize($filesFolder . "/" . $filename));
-                //$arrayInfoFiles[$i]['extension'] = Helper::getExtensionFile($filesFolder . "/" . $filename);
-                $arrayInfoFiles[$i]['dateUpload'] = Helper::getDateUploadFile($filesFolder . "/" . $filename);
-                $arrayInfoFiles[$i]['name'] = $filename;
-                $i++;
+    public static function getFilesFromFolder($filesFolder, $folderFiles) {
+        if (self::isExistFilesFolder($filesFolder)) {
+            $fileHandler = opendir($filesFolder);
+            $arrayInfoFiles = [];
+            $i = 0;
+            while (false !== ($filename = readdir($fileHandler))) {
+                if ($filename != "." && $filename != "..") {
+                    $arrayInfoFiles[$i]['size'] = Helper::getSizeFile(filesize($filesFolder . "/" . $filename));
+                    //$arrayInfoFiles[$i]['extension'] = Helper::getExtensionFile($filesFolder . "/" . $filename);
+                    $arrayInfoFiles[$i]['dateUpload'] = Helper::getDateUploadFile($filesFolder . "/" . $filename);
+                    $arrayInfoFiles[$i]['name'] = $filename;
+                    $i++;
+                }
             }
+            closedir($fileHandler);
+            return $arrayInfoFiles;
         }
-        closedir($fileHandler);
-
-        return $arrayInfoFiles;
+        else {
+            //die($folderFiles);
+            //$f = self::getFullPathFolderFiles($folderFiles);
+           // mkdir($f, 0777);
+        }
     }
 
 
@@ -601,14 +610,13 @@ class Helper
     public static function getCountOrdersForGrid($user) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $order = $em->getRepository(self::$_tableUserOrder)
-            ->findByUser(array('user' => $user, 'is_show' > 1));
+            ->findBy(array('user' => $user, 'is_show_author' => 1));
         return count($order);
     }
 
 
     public static function getClientOrdersForGrid($sOper = null, $sField = null, $sData = null, $firstRowIndex, $rowsPerPage, $user, $sortingField, $sortingOrder) {
         $em = self::getContainer()->get('doctrine')->getManager();
-
         if ($sField != null && $sOper != null && $sData != null) {
             if ($sField == "subject") {
                 $field = 'child_name';
@@ -621,7 +629,7 @@ class Helper
                 if ($sField != "subject" && $sField != "type_order") {
                     $orders = $em->getRepository(self::$_tableUserOrder)
                         ->findBy(
-                            array('user' => $user, 'is_show' => 1, $sField => $sData),
+                            array('user' => $user, 'is_show_client' => 1, $sField => $sData),
                             array($sField => $sortingOrder),
                             $rowsPerPage, $firstRowIndex
                         );
@@ -629,7 +637,7 @@ class Helper
                 else {
                     $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('o')
                         ->andWhere('o.user = :user')
-                        ->andWhere('o.is_show = 1')
+                        ->andWhere('o.is_show_client = 1')
                         ->innerJoin('o.' . $sField , 'a')
                         ->andWhere('a.' . $field . ' = :data')
                         ->setParameter('user', $user)
@@ -642,7 +650,7 @@ class Helper
                 if ($sField != "subject" && $sField != "type_order") {
                     $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('o')
                         ->andWhere('o.user = :user')
-                        ->andWhere('o.is_show = 1')
+                        ->andWhere('o.is_show_client = 1')
                         ->andWhere('o.' . $sField . ' != :data')
                         ->setParameter('user', $user)
                         ->setParameter('data', $sData)
@@ -652,7 +660,7 @@ class Helper
                 else {
                     $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('o')
                         ->andWhere('o.user = :user')
-                        ->andWhere('o.is_show = 1')
+                        ->andWhere('o.is_show_client = 1')
                         ->innerJoin('o.' . $sField , 'a')
                         ->andWhere('a.' . $field . ' != :data')
                         ->setParameter('user', $user)
@@ -665,7 +673,7 @@ class Helper
                 if ($sField != "subject" && $sField != "type_order") {
                     $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('o')
                         ->andWhere('o.user = :user')
-                        ->andWhere('o.is_show = 1')
+                        ->andWhere('o.is_show_client = 1')
                         ->andWhere('o.' . $sField . ' LIKE :data')
                         ->setParameter('user', $user)
                         ->setParameter('data', $sData . '%')
@@ -675,7 +683,7 @@ class Helper
                 else {
                     $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('o')
                         ->andWhere('o.user = :user')
-                        ->andWhere('o.is_show = 1')
+                        ->andWhere('o.is_show_client = 1')
                         ->innerJoin('o.' . $sField , 'a')
                         ->andWhere('a.' . $field . ' LIKE :data')
                         ->setParameter('user', $user)
@@ -688,7 +696,7 @@ class Helper
                 if ($sField != "subject" && $sField != "type_order") {
                     $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('o')
                         ->andWhere('o.user = :user')
-                        ->andWhere('o.is_show = 1')
+                        ->andWhere('o.is_show_client = 1')
                         ->andWhere('o.' . $sField . ' LIKE :data')
                         ->setParameter('user', $user)
                         ->setParameter('data', $sData . '%')
@@ -698,7 +706,7 @@ class Helper
                 else {
                     $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('o')
                         ->andWhere('o.user = :user')
-                        ->andWhere('o.is_show = 1')
+                        ->andWhere('o.is_show_client = 1')
                         ->innerJoin('o.' . $sField , 'a')
                         ->andWhere('a.' . $field . ' LIKE :data')
                         ->setParameter('user', $user)
@@ -712,7 +720,7 @@ class Helper
             if (isset($sortingField) && $sortingField != "" && isset($sortingOrder) && $sortingOrder != "") {
                 $orders = $em->getRepository(self::$_tableUserOrder)
                     ->findBy(
-                        array('user' => $user, 'is_show' => 1),
+                        array('user' => $user, 'is_show_client' => 1),
                         array($sortingField => $sortingOrder),
                         $rowsPerPage,
                         $firstRowIndex
@@ -721,7 +729,7 @@ class Helper
             else {
                 $orders = $em->getRepository(self::$_tableUserOrder)
                     ->findBy(
-                        array('user' => $user, 'is_show' => 1),
+                        array('user' => $user, 'is_show_client' => 1),
                         array('num' => 'ASC'),
                         $rowsPerPage,
                         $firstRowIndex
@@ -768,4 +776,68 @@ class Helper
         return $fullDate;
     }
 
+
+    public static function deleteOrderByClient($orderId, $user) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $order = $em->getRepository(self::$_tableUserOrder)
+            ->findOneBy(array('user' => $user, 'is_show_client' => 1, 'id' => $orderId));
+        if ($order) {
+            $order->setIsShowClient(0);
+            $order->setIsShowAuthor(0);
+            $em->flush();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    public static function hideOrderFromAuthor($orderId, $user) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $order = $em->getRepository(self::$_tableUserOrder)
+            ->findOneBy(array('user' => $user, 'is_show_client' => 1, 'is_show_author' => 1, 'id' => $orderId));
+        if ($order) {
+            $status = $em->getRepository(self::$_tableStatusOrder)
+                ->findOneByCode('h');
+            $order->setIsShowAuthor(0);
+            $order->setStatusOrder($status);
+            $em->flush();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    public static function showOrderForAuthor($orderId, $user) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $order = $em->getRepository(self::$_tableUserOrder)
+            ->findOneBy(array('user' => $user, 'is_show_client' => 1, 'is_show_author' => 0, 'id' => $orderId));
+        if ($order) {
+            $status = $em->getRepository(self::$_tableStatusOrder)
+                ->findOneByCode('s');
+            $order->setIsShowAuthor(1);
+            $order->setStatusOrder($status);
+            $em->flush();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    public static function getOrderByNum($num, $user) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $order = $em->getRepository(self::$_tableUserOrder)
+            ->findOneBy(array('user' => $user, 'is_show_client' => 1, 'num' => $num));
+        if ($order) {
+            return $order;
+        }
+        else {
+            return false;
+        }
+    }
 }

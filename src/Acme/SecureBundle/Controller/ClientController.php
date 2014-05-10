@@ -41,23 +41,23 @@ class ClientController extends Controller
     {
         //throw new NotFoundHttpException('Sorry not existing!');
         $userId = $this->get('security.context')->getToken()->getUser();
+        $userId = 1;
         //$userRole = $this->get('security.context')->getToken()->getRoles();
         $session = $request->getSession();
         $sessionCreated = $session->getMetadataBag()->getCreated();
         $sessionLifeTime = $session->getMetadataBag()->getLifetime();
         //$sessionUpdated = $session->getMetadataBag()->getLastUsed();
         //$whenUpdated = Helper::getDateFromTimestamp($sessionUpdated, "d/m/Y H:i:s");
-        $whenLogin = Helper::getDateFromTimestamp($sessionCreated, "d/m/Y H:i:s");
+        $whenLogin = Helper::getDateFromTimestamp($sessionCreated, "d/m/Y H:i");
         $sessionRemaining = $sessionCreated + $sessionLifeTime;
         $nowTimestamp = strtotime("now");
         $sessionRemaining = $sessionRemaining - $nowTimestamp;
         $sessionRemaining = Helper::getDateFromTimestamp($sessionRemaining, "i:s");
-
         $user = Helper::getUserById($userId);
+        $userLogin = $user->getLogin();
+        $userRole = $user->getRole()->getName();
 
-        //print_r($this->get('security.context')->getToken()); //die;
-
-        return array('userId' => $userId, 'userLogin' => $user->getLogin(), 'userRole' => 'Заказчик', 'whenLogin' => $whenLogin, 'remainingTime' => $sessionRemaining);
+        return array('userId' => $userId, 'userLogin' => $userLogin, 'userRole' => $userRole, 'whenLogin' => $whenLogin, 'remainingTime' => $sessionRemaining);
     }
 
 
@@ -67,22 +67,18 @@ class ClientController extends Controller
      */
     public function profileAction(Request $request, $type)
     {
-        if ($type == "view" || $type == "edit")
-        {
+        if ($type == "view" || $type == "edit") {
             $userId = $this->get('security.context')->getToken()->getUser();
+            $userId = 1;
             $user = Helper::getUserById($userId);
-            $userInfoId = $user->getUserInfoId();
-            $userInfo = Helper::getUserInfoById($userInfoId);
+            $userInfo = $user->getUserInfo();
+            $showWindow = false;
         }
 
-        if ($type == "view")
-        {
-            return array('formProfile' =>'', 'user' => $user, 'userInfo' => $userInfo, 'showWindow' => false);
+        if ($type == "view") {
+            return array('formProfile' =>'', 'user' => $user, 'userInfo' => $userInfo, 'showWindow' => $showWindow);
         }
-        elseif ($type == "edit")
-        {
-            $userInfo = Helper::getUserInfoById($userInfoId);
-
+        elseif ($type == "edit") {
             $profileValidate = new ClientProfileFormValidate();
             $profileValidate->setIcq($userInfo->getIcq());
             $profileValidate->setSkype($userInfo->getSkype());
@@ -96,25 +92,21 @@ class ClientController extends Controller
             $formProfile = $this->createForm(new ClientProfileForm(), $profileValidate);
             $formProfile->handleRequest($request);
 
-            if ($request->isMethod('POST'))
-            {
-                if ($formProfile->get('save')->isClicked())
-                {
-                    if ($formProfile->isValid())
-                    {
+            if ($request->isMethod('POST')) {
+                if ($formProfile->get('save')->isClicked()) {
+                    if ($formProfile->isValid()) {
                         $postData = $request->request->get('formProfile');
-
                         Helper::updateUserInfo($postData, $userInfo);
-                        return array('formProfile' => $formProfile->createView(), 'user' => '', 'userInfo' => $userInfo, 'showWindow' => true);
+                        $showWindow = true;
                     }
                 }
             }
 
-            return array('formProfile' => $formProfile->createView(), 'user' => '', 'userInfo' => $userInfo, 'showWindow' => false);
+            return array('formProfile' => $formProfile->createView(), 'user' => '', 'userInfo' => $userInfo, 'showWindow' => $showWindow);
         }
         else
         {
-
+            return new RedirectResponse($this->generateUrl('secure_client_index'));
         }
     }
 
@@ -125,7 +117,6 @@ class ClientController extends Controller
      */
     public function settingsAction(Request $request, $type)
     {
-
     }
 
 
@@ -135,16 +126,14 @@ class ClientController extends Controller
      */
     public function orderAction(Request $request, $type)
     {
-        if ($type == "view" || $type == "create") {
+        if ($type == "view" || $type == "create" || $type == "delete" || $type == "hide" || $type == "configure" || $type == "show") {
             $userId = $this->get('security.context')->getToken()->getUser();
+            $userId = 1;
             $user = Helper::getUserById($userId);
-            //$userInfoId = $user->getUserInfoId();
-            //$userInfo = Helper::getUserInfoById($userInfoId);
         }
 
         if ($type == "create") {
             $createOrderValidate = new CreateOrderFormValidate();
-
             $formOrder = $this->createForm(new CreateOrderForm(), $createOrderValidate);
             $formOrder->handleRequest($request);
             $showWindow = false;
@@ -164,17 +153,11 @@ class ClientController extends Controller
                 if ($formOrder->get('create')->isClicked()) {
                     if ($formOrder->isValid()) {
                         $filesFolder = Helper::getFullPathFolderFiles($folderFiles, "originals");
-                        $arrayFiles = Helper::getFilesFromFolder($filesFolder, "originals");
+                        $arrayFiles = Helper::getFilesFromFolder($filesFolder, $folderFiles);
                         $postData = $request->request->get('formCreateOrder');
-                        $userId = 1;
-                        $flagSuccess = Helper::createNewOrder($postData, $userId, $folderFiles, $arrayFiles);
-                        if ($flagSuccess) {
-                            $session->remove("folderFiles");
-                            $showWindow = true;
-                        }
-
-                        //$formOrder = $this->createForm(new CreateOrderForm());
-                        //return new RedirectResponse($this->generateUrl('', array()));
+                        Helper::createNewOrder($postData, $user, $folderFiles, $arrayFiles);
+                        $session->remove("folderFiles");
+                        $showWindow = true;
                     }
                 }
             }
@@ -185,14 +168,11 @@ class ClientController extends Controller
         }
         elseif ($type == "view") {
             if($request->isXmlHttpRequest()) {
-
                 //$response = new Response(json_encode(array('response' => 'hello')));
                 //$response->headers->set('Content-Type', 'application/json');
                 //return $response;
                 //$response->setStatusCode(Response::HTTP_NOT_FOUND);
-
-                $userId = 1;
-                $user = Helper::getUserById($userId);
+                //$user = Helper::getUserById($userId);
                 $postData = $request->request->all();
                 $curPage = $postData['page'];
                 $rowsPerPage = $postData['rows'];
@@ -201,8 +181,7 @@ class ClientController extends Controller
                 $search = $postData['_search'];
                 $sField = $sData = $sTable = $sOper = null;
 
-                if (isset($search) && $search == "true")
-                {
+                if (isset($search) && $search == "true") {
                     $sOper = $postData['searchOper'];
                     $sData = $postData['searchString'];
                     $sField = $postData['searchField'];
@@ -228,8 +207,7 @@ class ClientController extends Controller
                     $task = strip_tags($order->getTask());
                     $task = stripcslashes($task);
                     $task = preg_replace("/&nbsp;/", "", $task);
-                    //$task = strlen($task);
-                    if (strlen($task) >= 15) {
+                    if (strlen($task) >= 20) {
                         $task = Helper::getCutSentence($task, 35);
                     }
                     $dateCreate = Helper::getMonthNameFromDate($order->getDateCreate()->format("d.m.Y"));
@@ -247,7 +225,8 @@ class ClientController extends Controller
                         $order->getStatusOrder()->getName(),
                         $dateCreate,
                         $dateExpire,
-                        $responseAuthor
+                        $responseAuthor,
+                        ""
                     );
 
                     $i++;
@@ -255,14 +234,76 @@ class ClientController extends Controller
 
                 return new JsonResponse($response);
             }
-
             $showWindow = false;
-
             return $this->render(
                 'AcmeSecureBundle:Client:order_view.html.twig', array('showWindow' => $showWindow)
             );
         }
+        elseif ($type == "delete") {
+            if($request->isXmlHttpRequest()) {
+                $orderId = $request->request->get('orderId');
+                $isDelete = Helper::deleteOrderByClient($orderId, $user);
+                if ($isDelete) {
+                    return new Response(json_encode(array('action' => 'true')));
+                }
+                else {
+                    return  new Response(json_encode(array('action' => 'false')));
+                }
+            }
+        }
+        elseif ($type == "hide") {
+            if($request->isXmlHttpRequest()) {
+                $orderId = $request->request->get('orderId');
+                $isHide = Helper::hideOrderFromAuthor($orderId, $user);
+                if ($isHide) {
+                    return new Response(json_encode(array('action' => 'true')));
+                }
+                else {
+                    return  new Response(json_encode(array('action' => 'false')));
+                }
+            }
+        }
+        elseif ($type == "show") {
+            if($request->isXmlHttpRequest()) {
+                $orderId = $request->request->get('orderId');
+                $isShow = Helper::showOrderForAuthor($orderId, $user);
+                if ($isShow) {
+                    return new Response(json_encode(array('action' => 'true')));
+                }
+                else {
+                    return  new Response(json_encode(array('action' => 'false')));
+                }
+            }
+        }
+    }
 
+
+    /**
+     * @Template()
+     * @return array|RedirectResponse
+     */
+    public function ordernumAction(Request $request, $num)
+    {
+        if (is_numeric($num)) {
+            $userId = $this->get('security.context')->getToken()->getUser();
+            $userId = 1;
+            $user = Helper::getUserById($userId);
+            $order = Helper::getOrderByNum($num, $user);
+
+            if ($order) {
+
+            }
+            else{
+
+            }
+
+            return $this->render(
+                'AcmeSecureBundle:Client:order_select.html.twig', array('order' => $order, 'showWindow' => false)
+            );
+        }
+        else {
+
+        }
     }
 
 

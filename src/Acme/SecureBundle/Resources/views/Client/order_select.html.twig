@@ -1,0 +1,76 @@
+{% extends "AcmeSecureBundle::layout.html.twig" %}
+
+{% block title "Order" %}
+
+    {% block content %}
+        <style>
+            .invalid{
+                border-color: #E9322D!important;
+                box-shadow: 0 0 6px #E9322D!important;
+            }
+            .popover{
+                position: absolute;
+                top: -20px !important;
+                left: 310px !important;
+                width: 300px;
+                height: 90px;
+            }
+            .thumbnail-image{
+                padding-top: 20px;
+            }
+        </style>
+        <div class="container">
+            <div id="modal-window">
+                {% if (showWindow) %}
+                    <div id="success-window">
+                        <div class="Message Message--green" id="js-timer">
+                            <div class="Message-icon">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="Message-body">
+                                <p align="center">Ваш заказ создан! Ожидайте ставок авторов!</p>
+                            </div>
+                            <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="row">
+                <div id="blockAboutOrder">
+                    <p>Номер заказа: {{ order.num }}</p>
+                    <p>Тема работы: {{ order.theme }}</p>
+                    <p>Задание: {{ order.task | raw }}</p>
+                    <p>Объем работы: {{ order.countsheet }} стр.</p>
+                    <p>Оригинальность работы: {{ order.originality }}%</p>
+                    <p>Предмет: {{ order.subjectorder.childname }}</p>
+                    <p>Тип работы: {{ order.typeorder.name }}</p>
+                    <p>Статус заказа: {{ order.statusorder.name }}</p>
+                    <p>Дата создания заказа: {{ order.datecreate.format("d.m.Y H:i") }}</p>
+                    <p>Выполнение заказа до: {{ order.dateexpire.format("d.m.Y H:i") }}</p>
+                </div>
+                <a href="{{ path('secure_client_index') }}">Главная</a>
+            </div>
+            <script>
+                $(document).ready(function() {
+                    if (!sessionStorage.getItem("Page2Visited")) {
+                        {% if (showWindow) %}
+                            function closeMessage(el) {
+                                el.addClass('is-hidden');
+                            }
+                            $('.js-messageClose').on('click', function(e) {
+                                closeMessage($(this).closest('.Message'));
+                            });
+                            setTimeout(function() {
+                                closeMessage($('#js-timer'));
+                                document.location.href = "{{ path('secure_client_order', {'type': 'view'}) }}";
+                            }, 3000);
+                        {% endif %}
+                    }
+                    else {
+                        sessionStorage.removeItem("Page2Visited");
+                        $("#modal-window").hide();
+                    }
+                });
+            </script>
+        </div>
+    {% endblock %}

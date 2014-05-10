@@ -2,11 +2,14 @@
     {% block content %}
         <div class="container">
             <div class="row">
+                <p>Ваш ID - {{ userId }}</p>
                 <p>Ваш ник - {{ userLogin }}</p>
                 <p>Ваш статус - {{ userRole }}</p>
                 <p>Вход в систему - {{ whenLogin }}</p>
                 <p>Осталось в системе - {{ remainingTime }}</p>
-
+                <p><a href="{{ path('secure_author_profile', {'type': 'view'}) }}">Мой профиль</a></p>
+                <p><a href="{{ path('secure_author_settings', {'type': 'view'}) }}">Мои настройки</a></p>
+                <p><a href="{{ path('secure_author_order', {'type': 'view'}) }}">Просмотр заказов</a></p>
                 <p><a href="{{ path('logout') }}">Выход</a></p>
             </div>
         </div>

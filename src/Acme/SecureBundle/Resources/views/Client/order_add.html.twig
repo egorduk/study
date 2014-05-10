@@ -12,39 +12,41 @@
                 border-color: #E9322D!important;
                 box-shadow: 0 0 6px #E9322D!important;
             }
-
             .popover{
-                position: inherit;
-                top: -30px !important;
+                position: absolute;
+                top: -20px !important;
                 left: 310px !important;
+                width: 300px;
+                height: 90px;
             }
-
             .thumbnail-image{
                 padding-top: 20px;
             }
         </style>
-        <div class="body">
-            {% if (showWindow) %}
-            <div id="success-window">
-                <div class="Message Message--green" id="js-timer">
-                    <div class="Message-icon">
-                        <i class="fa fa-check"></i>
+        <div class="container">
+            <div id="modal-window">
+                {% if (showWindow) %}
+                    <div id="success-window">
+                        <div class="Message Message--green" id="js-timer">
+                            <div class="Message-icon">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="Message-body">
+                                <p align="center">Ваш заказ создан! Ожидайте ставок авторов!</p>
+                            </div>
+                            <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
+                        </div>
                     </div>
-                    <div class="Message-body">
-                        <p align="center">Ваш заказ создан! Ожидайте ставок авторов!</p>
-                    </div>
-                    <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
-                </div>
+                {% endif %}
             </div>
-            {% endif %}
             <div class="row" style="width: 500px">
                 {{ form_start(formOrder, {'attr': {'class' : 'form', 'data-spinner' : 1}}) }}
                         <div class="form-group">
                             {{ form_label(formOrder.fieldTheme) }}
                             {{ form_errors(formOrder.fieldTheme) }}
                             <div class="input-group">
+                                <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
                                 {{ form_widget(formOrder.fieldTheme) }}
-                                <span class="input-group-addon"><i class="icon-quill"></i></span>
                             </div>
                             {{ form_label(formOrder.fieldTask) }}
                             {{ form_errors(formOrder.fieldTask) }}
@@ -52,21 +54,22 @@
                                 {{ form_widget(formOrder.fieldTask) }}
                             </div>
                             {{ form_label(formOrder.fieldDateExpire) }}
+                            {{ form_errors(formOrder.fieldDateExpire) }}
                             <div class="input-group">
+                                <span class="input-group-addon"><i class="icon-calendar"></i></span>
                                 {{ form_widget(formOrder.fieldDateExpire) }}
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
                             {{ form_label(formOrder.fieldOriginality) }}
                             {{ form_errors(formOrder.fieldOriginality) }}
                             <div class="input-group">
-                                {{ form_widget(formOrder.fieldOriginality) }}
                                 <span class="input-group-addon"><i class="icon-cc-pd"></i></span>
+                                {{ form_widget(formOrder.fieldOriginality) }}
                             </div>
                             {{ form_label(formOrder.fieldCountSheet) }}
                             {{ form_errors(formOrder.fieldCountSheet) }}
                             <div class="input-group">
-                                {{ form_widget(formOrder.fieldCountSheet) }}
                                 <span class="input-group-addon"><i class="icon-book"></i></span>
+                                {{ form_widget(formOrder.fieldCountSheet) }}
                             </div>
                             {{ form_label(formOrder.selectorSubject) }}
                             <div class="input-group">
@@ -79,9 +82,9 @@
                             <div style="height: 20px">
                             </div>
                             <div class="input-group">
-                                <label for="formCreateOrder_create" class="btn btn-success"><i class="fa fa-pencil-square-o fa-2x">&nbspСоздать</i></label>
+                                <label for="formCreateOrder_create" class="btn btn-success"><span class="icon-edit-3">&nbspСоздать</span></label>
                                 {{ form_widget(formOrder.create) }}
-                                <label for="formCreateOrder_reset" class="btn btn-success"><i class="fa fa-trash-o fa-2x">&nbspОчистить</i></label>
+                                <label for="formCreateOrder_reset" class="btn btn-success"><span class="icon-trash-1">&nbspОчистить</span></label>
                                 {{ form_widget(formOrder.reset) }}
                             </div>
                             {{ form_row(formOrder.reset) }}
@@ -92,7 +95,6 @@
                 {{ form_end(formOrder) }}
                 <a href="{{ path('secure_client_profile', {'type': 'view'}) }}">К профилю</a>
             </div>
-
             <script>
                 $(document).ready(function() {
                     var placeholder = "Placeholder";
@@ -125,7 +127,7 @@
 
                     tinyMCE.init({
                         mode : 'textareas',
-                        document_base_url: "http://localhost/study/web/app_dev.php/",   //url
+                        //document_base_url: "http://localhost/study/web/app_dev.php/",   //url
                         width : 500,
                         height : 300,
                         language : 'ru',
@@ -256,12 +258,23 @@
                     });
 
                     $('#formCreateOrder_create').click(function(e) {
-                        if ($("#formCreateOrder_fieldTheme").val() != "" && $("#formCreateOrder_fieldDateExpire").val() != ""){
-                            var selectorSubject = $("#formCreateOrder_selectorSubject");
-                            var selectorTypeOrder = $("#formCreateOrder_selectorTypeOrder");
-                            triggerPopover(selectorSubject);
-                            triggerPopover(selectorTypeOrder);
+                        var selectorSubject = $("#formCreateOrder_selectorSubject");
+                        var selectorTypeOrder = $("#formCreateOrder_selectorTypeOrder");
+                        var fieldTheme = $("#formCreateOrder_fieldTheme");
+                        var fieldDateExpire = $("#formCreateOrder_fieldDateExpire");
+                        if (fieldTheme.val() != "" && fieldDateExpire.val() != "" && selectorSubject.val() != "" && selectorTypeOrder.val() != "") {
                             return true;
+                        }
+                        else if (fieldTheme.val() != "" && fieldDateExpire.val() != "") {
+                            if (selectorSubject.val() == "") {
+                                triggerPopover(selectorSubject);
+                                hidePopover(selectorTypeOrder);
+                                return false;
+                            }
+                            else if (selectorTypeOrder.val() == "") {
+                                triggerPopover(selectorTypeOrder);
+                                return false;
+                            }
                         }
                     });
 
@@ -272,17 +285,14 @@
                     });
 
                     function triggerPopover(a){
-                        if (!a.val())
-                        {
+                        if (!a.val()) {
                             a.popover('show');
                             a.addClass('invalid');
                             $(".popover-title").css("color", "red" );
                             $(".popover").css("text-align", "center");
                         }
-                        else
-                        {
-                            a.removeClass('invalid');
-                            a.popover('hide');
+                        else {
+                            hidePopover(a);
                         }
                     }
 
@@ -295,17 +305,24 @@
                         a.popover('hide');
                     }
 
-                    function closeMessage(el) {
-                        el.addClass('is-hidden');
+                    if (!sessionStorage.getItem("Page2Visited")) {
+                        {% if (showWindow) %}
+                            function closeMessage(el) {
+                                el.addClass('is-hidden');
+                            }
+                            $('.js-messageClose').on('click', function(e) {
+                                closeMessage($(this).closest('.Message'));
+                            });
+                            setTimeout(function() {
+                                closeMessage($('#js-timer'));
+                                document.location.href = "{{ path('secure_client_order', {'type': 'view'}) }}";
+                            }, 3000);
+                        {% endif %}
                     }
-
-                    $('.js-messageClose').on('click', function(e) {
-                        closeMessage($(this).closest('.Message'));
-                    });
-
-                    setTimeout(function() {
-                        closeMessage($('#js-timer'));
-                    }, 3000);
+                    else {
+                        sessionStorage.removeItem("Page2Visited");
+                        $("#modal-window").hide();
+                    }
                 });
             </script>
             <script type="text/javascript" src="{{ asset('bundles/js/sorting_select2.js') }}"></script>

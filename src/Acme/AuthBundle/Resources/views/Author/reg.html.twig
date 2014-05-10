@@ -129,16 +129,16 @@
             $(document).ready(function() {
                 if (!sessionStorage.getItem("Page2Visited")) {
                     {% if (showWindow) %}
-                    function closeMessage(el) {
-                        el.addClass('is-hidden');
-                    }
-                    $('.js-messageClose').on('click', function(e) {
-                        closeMessage($(this).closest('.Message'));
-                    });
-                    setTimeout(function() {
-                        closeMessage($('#js-timer'));
-                        document.location.href = "{{ path("login") }}";
-                    }, 3000);
+                        function closeMessage(el) {
+                            el.addClass('is-hidden');
+                        }
+                        $('.js-messageClose').on('click', function(e) {
+                            closeMessage($(this).closest('.Message'));
+                        });
+                        setTimeout(function() {
+                            closeMessage($('#js-timer'));
+                            document.location.href = "{{ path("login") }}";
+                        }, 3000);
                     {% endif %}
                 }
                 else {
