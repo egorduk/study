@@ -6,7 +6,6 @@
 
         {# Underscore templates for the uploader #}
         {% include "PunkAveFileUploaderBundle:Default:templates.html.twig" %}
-
         <style>
             .invalid{
                 border-color: #E9322D!important;
@@ -79,8 +78,7 @@
                             <div class="input-group">
                                 {{ form_widget(formOrder.selectorTypeOrder) }}
                             </div>
-                            <div style="height: 20px">
-                            </div>
+                            <br>
                             <div class="input-group">
                                 <label for="formCreateOrder_create" class="btn btn-success"><span class="icon-edit-3">&nbspСоздать</span></label>
                                 {{ form_widget(formOrder.create) }}
@@ -102,12 +100,11 @@
 
                    //$(function() {
                         new PunkAveFileUploader({
-                            'uploadUrl': {{ path('upload', { editId: folderFiles }) | json_encode | raw }},
+                            'uploadUrl': {{ path('secure_client_upload', { editId: folderFiles }) | json_encode | raw }},
                             'viewUrl': {{ ('/study/web/uploads/attachments/' ~ folderFiles)| json_encode | raw }},
                             'el': '.file-uploader',
                             'existingFiles': {{ punkave_get_files('attachments/' ~ folderFiles) | json_encode | raw }},
                             'delaySubmitWhileUploading': '.edit-form',
-
                             'errorCallback': function(errorObj) {
                                 if (errorObj.error == 'maxNumberOfFiles') {
                                     alert("Maximum uploaded files exceeded!");
@@ -118,8 +115,6 @@
                             console.log("piy");
                         });*/
                     //});
-
-                    //console.log(new PunkAveFileUploader());
 
                     /*$('#fileupload').bind('add', function (e) {
                         console.log("piy");

@@ -55,7 +55,7 @@ secure_client_order_num:
   pattern:   /secure/client/order/view/{num}
   defaults:  { _controller: AcmeSecureBundle:Client:ordernum }
 
-upload:
+secure_client_upload:
   pattern:   /secure/client/upload
   defaults:  { _controller: AcmeSecureBundle:Client:upload }
 
@@ -78,6 +78,9 @@ secure_author_order:
   pattern:   /secure/author/order/{type}
   defaults:  { _controller: AcmeSecureBundle:Author:order }
 
+secure_author_upload:
+  pattern:   /secure/author/upload
+  defaults:  { _controller: AcmeSecureBundle:Author:upload }
 
 #---------------AuthBundle----------------------------#
 

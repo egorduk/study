@@ -30,9 +30,9 @@ class AuthorRegForm extends AbstractType
                 ->add('checkAgreeRules', 'checkbox', array('label'=>' ', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Если Вы согласны с правилами, то установите тут флажок', 'class' => '')))
                 ->add('reg', 'submit', array('label'=>'Регистрация', 'attr' => array('class' => 'hidden')))
                 ->add('reset', 'reset', array('label'=>'Очистить', 'attr' => array('class' => 'hidden')))
-                ->add('fieldUsername', 'text', array('label'=>'Имя:', 'required' => false, 'attr' => array('class' => 'form-control', 'title' => 'Ваше имя должно состоять только из русских букв', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Введите имя...')))
-                ->add('fieldSurname', 'text', array('label'=>'Фамилия:', 'required' => false, 'attr' => array('class' => 'form-control', 'title' => 'Ваша фамилия должна состоять только из русских букв', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Введите фамилию...')))
-                ->add('fieldLastname', 'text', array('label'=>'Отчество:', 'required' => false, 'attr' => array('class' => 'form-control', 'title' => 'Ваше отчество должно состоять только из русских букв', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Введите отчество...')))
+                ->add('fieldUsername', 'text', array('label'=>'Имя:', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Ваше имя должно состоять только из русских букв', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Введите имя...')))
+                ->add('fieldSurname', 'text', array('label'=>'Фамилия:', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Ваша фамилия должна состоять только из русских букв', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Введите фамилию...')))
+                ->add('fieldLastname', 'text', array('label'=>'Отчество:', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Ваше отчество должно состоять только из русских букв', 'size' => 30, 'maxlength' => 20, 'placeholder' => 'Введите отчество...')))
                /* ->add('selectorCountry', 'genemu_jqueryselect2_entity', array(
                 'mapped'   => false,
                 'class' => 'Acme\AuthBundle\Entity\Country',

@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\SecureBundle\Entity;
+namespace Acme\SecureBundle\Entity\Client;
 
 
 class ClientProfileFormValidate

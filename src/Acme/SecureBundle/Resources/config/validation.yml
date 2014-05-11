@@ -1,4 +1,4 @@
-Acme\SecureBundle\Entity\ClientProfileFormValidate:
+Acme\SecureBundle\Entity\Client\ClientProfileFormValidate:
     properties:
         fieldMobilePhone:
           - Length: { min: 7, minMessage: "Слишком короткий номер!" }

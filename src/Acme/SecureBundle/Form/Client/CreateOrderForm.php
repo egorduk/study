@@ -30,7 +30,7 @@ class CreateOrderForm extends AbstractType
                     'mapped' => true,
                     'required' => true,
                     'label'=>'Предмет:',
-                    'class' => 'Acme\SecureBundle\Entity\Subject',
+                    'class' => 'Acme\SecureBundle\Entity\SubjectOrder',
                     'property' => 'child_name',
                     'empty_value' => '',
                     'group_by' => 'parent_name'

@@ -29,55 +29,48 @@ class Helper
     private static $_tableStatusOrder = 'AcmeSecureBundle:StatusOrder';
     private static $kernel;
 
-    public function __construct()
-    {
+    public function __construct() {
     }
 
-    public static function readYamlFile()
-    {
+    public static function readYamlFile() {
         $rootDir = self::$_container->get('kernel')->getRootDir();
         $yml = sprintf("%s/config/" . self::$_ymFile . ".yml", $rootDir);
         $parsed = Yaml::parse(file_get_contents($yml));
-
         return $parsed;
     }
 
-    public static function getEncodersParam()
-    {
+    public static function getEncodersParam() {
         self::$_container = self::getContainer();
         self::$_ymFile = 'security';
-
         $parsedYml = self::readYamlFile();
         $algorithm = $parsedYml['security']['encoders']['Acme\AuthBundle\Entity\User']['algorithm'];
         $baseAs64 = $parsedYml['security']['encoders']['Acme\AuthBundle\Entity\User']['encode-as-base64'];
         $iterations = $parsedYml['security']['encoders']['Acme\AuthBundle\Entity\User']['iterations'];
-
         return array('algorithm' => $algorithm, 'baseAs64' => $baseAs64, 'iterations' => $iterations);
     }
 
-    public static function getDateFromTimestamp($timestamp, $format)
-    {
+    public static function getUploadMaxFile() {
+        self::$_container = self::getContainer();
+        self::$_ymFile = 'services';
+        //$rootDir = self::$_container->get('kernel')->getRootDir();
+        //$yml = sprintf("%s/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/config/" . self::$_ymFile . ".yml", $rootDir);
+        $yml = "D:/OpenServer/domains/localhost/study/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/config/" . self::$_ymFile . ".yml";
+        $parsed = Yaml::parse(file_get_contents($yml));
+        return $parsed;
+    }
+
+    public static function getDateFromTimestamp($timestamp, $format) {
         return date($format, $timestamp);
     }
 
-    public static function getUserByEmailAndIsConfirm($userEmail)
-    {
+    public static function getUserByEmailAndIsConfirm($userEmail) {
         $user = self::getContainer()->get('doctrine')->getRepository(self::$_tableUser)
             ->findOneByEmail($userEmail);
-
-       /*$em = self::getContainer()->get('doctrine')->getManager();
-        $query = $em->createQuery('SELECT u.id, u.role_id, u.login, u.salt, u.password
-            FROM AcmeAuthBundle:User u
-            WHERE u.email = :email AND u.is_confirm = 1')
-            ->setParameter('email', $userEmail);
-            //->setParameter('is_confirm', 1);
-        $user = $query->getResult();*/
 
         if(!$user)
         {
             return false;
         }
-
         return $user;
     }
 
@@ -93,7 +86,6 @@ class Helper
         {
             return false;
         }
-
         return true;
     }
 

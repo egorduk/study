@@ -20,12 +20,12 @@ use Symfony\Component\Security\Core\Util\StringUtils;
 //use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Helper\Helper;
 //use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Acme\SecureBundle\Entity\Author\AuthorProfileFormValidate;
+use Acme\SecureBundle\Form\Author\AuthorProfileForm;
 
 
 class AuthorController extends Controller
 {
-    //private $tableUser = 'AcmeSecureBundle:User';
-
     /**
      * @Template()
      * @return array
@@ -68,7 +68,17 @@ class AuthorController extends Controller
             return array('formProfile' =>'', 'user' => $user, 'userInfo' => $userInfo, 'showWindow' => $showWindow);
         }
         elseif ($type == "edit") {
-            $profileValidate = new ClientProfileFormValidate();
+            $session = $request->getSession();
+            $sessionFolderFiles = $session->get("folderFiles");
+            if (isset($sessionFolderFiles)) {
+                $folderFiles = $sessionFolderFiles;
+            }
+            else {
+                $folderFiles = $userId;
+                $session->set("folderFiles", $folderFiles);
+                $session->save();
+            }
+            $profileValidate = new AuthorProfileFormValidate();
             $profileValidate->setIcq($userInfo->getIcq());
             $profileValidate->setSkype($userInfo->getSkype());
             $profileValidate->setMobilePhone($userInfo->getMobilePhone());
@@ -78,7 +88,7 @@ class AuthorController extends Controller
             $profileValidate->setLastname($userInfo->getLastname());
             $profileValidate->setCountry($userInfo->getCountry()->getCode());
 
-            $formProfile = $this->createForm(new ClientProfileForm(), $profileValidate);
+            $formProfile = $this->createForm(new AuthorProfileForm(), $profileValidate);
             $formProfile->handleRequest($request);
 
             if ($request->isMethod('POST')) {
@@ -91,12 +101,33 @@ class AuthorController extends Controller
                 }
             }
 
-            return array('formProfile' => $formProfile->createView(), 'user' => '', 'userInfo' => $userInfo, 'showWindow' => $showWindow);
+            return array('formProfile' => $formProfile->createView(), 'user' => '', 'userInfo' => $userInfo, 'showWindow' => $showWindow, 'folderFiles' => $folderFiles);
         }
         else
         {
             return new RedirectResponse($this->generateUrl('secure_author_index'));
         }
+    }
+
+
+    public function uploadAction()
+    {
+        $editId = $this->getRequest()->get('editId');
+        $fileName = $this->getRequest()->get('file');
+
+        //var_dump(Helper::getUploadMaxFile());
+
+        if (preg_match('/^\d+$/', $editId))
+        {
+            if ($fileName){
+                $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'author/' . $editId, 'action' => 'delete'));
+            }
+            else{
+                $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'author/' . $editId));
+            }
+        }
+
+        return new Response(json_encode(array('action' => 'false')));
     }
 
 }

@@ -310,7 +310,7 @@ class ClientController extends Controller
     /**
      * @Route("/upload", name="upload")
      */
-    public function uploadAction(Request $request)
+    public function uploadAction()
     {
         $editId = $this->getRequest()->get('editId');
         $fileName = $this->getRequest()->get('file');
