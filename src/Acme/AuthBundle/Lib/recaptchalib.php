@@ -1,5 +1,7 @@
 <?php
 
+namespace Acme\AuthBundle\Lib;
+
 /**
  * The reCAPTCHA server URL's
  */

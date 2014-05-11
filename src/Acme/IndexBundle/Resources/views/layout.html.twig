@@ -2,26 +2,17 @@
 
 {% block head %}
     <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
-    {% stylesheets '@AcmeAuthBundle/Resources/public/css/*'  %}
-        <link type="text/css" rel="stylesheet" media="all" href="{{ asset_url }}" />
-    {% endstylesheets %}
+    {% block stylesheets %}
+        <link href="{{ asset('bundles/css/bootstrap.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/css/bootstrap-theme.css') }}" rel="stylesheet" />
+    {% endblock %}
     {% block javascripts %}
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-        {% javascripts '@AcmeAuthBundle/Resources/public/js/*'  %}
-            <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}
     {% endblock %}
 {% endblock %}
 
 {% block title '' %}
 
 {% block body %}
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="flash-message">
-            <em>Notice</em>: {{ flashMessage }}
-        </div>
-    {% endfor %}
-
     <div class="container">
         {% block content %}
 

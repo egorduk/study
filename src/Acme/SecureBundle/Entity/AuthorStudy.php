@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\AuthBundle\Entity;
+namespace Acme\SecureBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -45,7 +45,7 @@ class AuthorStudy extends EntityRepository
     protected $edu;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="link_author_study", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Acme\AuthBundle\Entity\User", inversedBy="link_author_study", cascade={"all"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      **/
     protected $user;

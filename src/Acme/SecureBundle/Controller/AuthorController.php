@@ -2,11 +2,6 @@
 
 namespace Acme\SecureBundle\Controller;
 
-/*use Acme\AuthBundle\Entity\Client;
-use Acme\AuthBundle\Entity\User;
-use Acme\AuthBundle\Entity\ClientFormValidate;
-use Acme\AuthBundle\Form\Client\LoginForm;
-use Acme\AuthBundle\Form\Client\RegForm;*/
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\ExpressionLanguage\Parser;
 use Symfony\Component\HttpFoundation\Response;

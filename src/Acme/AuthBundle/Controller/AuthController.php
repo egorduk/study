@@ -37,8 +37,9 @@ use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Helper\Helper;
 //use Symfony\Component\Security\Core\Util\SecureRandom;
+use Acme\AuthBundle\Lib;
 
-require_once '..\src\Acme\AuthBundle\Lib\recaptchalib.php';
+//require_once '..\src\Acme\AuthBundle\Lib\recaptchalib.php';
 
 
 class AuthController extends Controller
