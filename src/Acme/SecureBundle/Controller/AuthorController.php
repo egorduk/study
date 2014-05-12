@@ -3,25 +3,20 @@
 namespace Acme\SecureBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\ExpressionLanguage\Parser;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Finder\Iterator\SortableIterator;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\Query;
-use Doctrine\ORM\QueryBuilder;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-//use Symfony\Component\PropertyAccess\Exception\AccessException;
-//use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\SecurityContext;
-use Symfony\Component\Security\Core\Util\StringUtils;
-//use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Helper\Helper;
-//use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Acme\SecureBundle\Entity\Author\AuthorProfileFormValidate;
 use Acme\SecureBundle\Form\Author\AuthorProfileForm;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Acme\SecureBundle\Entity\Author\BidFormValidate;
+use Acme\SecureBundle\Form\Author\BidForm;
 
 
 class AuthorController extends Controller
@@ -43,10 +38,8 @@ class AuthorController extends Controller
         $sessionRemaining = $sessionRemaining - $nowTimestamp;
         $sessionRemaining = Helper::getDateFromTimestamp($sessionRemaining, "i:s");
         $user = Helper::getUserById($userId);
-        $userLogin = $user->getLogin();
-        $userRole = $user->getRole()->getName();
 
-        return array('userId' => $userId, 'userLogin' => $userLogin, 'userRole' => $userRole, 'whenLogin' => $whenLogin, 'remainingTime' => $sessionRemaining);
+        return array('user' => $user, 'whenLogin' => $whenLogin, 'remainingTime' => $sessionRemaining);
     }
 
 
@@ -63,21 +56,12 @@ class AuthorController extends Controller
             $userInfo = $user->getUserInfo();
             $showWindow = false;
         }
-
-        if ($type == "view") {
-            return array('formProfile' =>'', 'user' => $user, 'userInfo' => $userInfo, 'showWindow' => $showWindow);
+        else {
+            return new RedirectResponse($this->generateUrl('secure_author_index'));
         }
-        elseif ($type == "edit") {
-            $session = $request->getSession();
-            $sessionFolderFiles = $session->get("folderFiles");
-            if (isset($sessionFolderFiles)) {
-                $folderFiles = $sessionFolderFiles;
-            }
-            else {
-                $folderFiles = $userId;
-                $session->set("folderFiles", $folderFiles);
-                $session->save();
-            }
+
+        if ($type == "edit") {
+            $isAuthorFile = $user->getIsAuthorFile();
             $profileValidate = new AuthorProfileFormValidate();
             $profileValidate->setIcq($userInfo->getIcq());
             $profileValidate->setSkype($userInfo->getSkype());
@@ -96,17 +80,15 @@ class AuthorController extends Controller
                     if ($formProfile->isValid()) {
                         $postData = $request->request->get('formProfile');
                         Helper::updateUserInfo($postData, $userInfo);
+                        if (!$isAuthorFile) {
+                            Helper::uploadAuthorFileInfo($user);
+                        }
                         $showWindow = true;
                     }
                 }
             }
-
-            return array('formProfile' => $formProfile->createView(), 'user' => '', 'userInfo' => $userInfo, 'showWindow' => $showWindow, 'folderFiles' => $folderFiles);
         }
-        else
-        {
-            return new RedirectResponse($this->generateUrl('secure_author_index'));
-        }
+        return array('formProfile' => (isset($formProfile)?$formProfile->createView():null), 'user' => $user, 'userInfo' => $userInfo, 'showWindow' => $showWindow);
     }
 
 
@@ -114,20 +96,133 @@ class AuthorController extends Controller
     {
         $editId = $this->getRequest()->get('editId');
         $fileName = $this->getRequest()->get('file');
-
-        //var_dump(Helper::getUploadMaxFile());
+        $action = $this->getRequest()->get('action');
 
         if (preg_match('/^\d+$/', $editId))
         {
-            if ($fileName){
-                $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'author/' . $editId, 'action' => 'delete'));
+            if ($action == "profile") {
+                if ($fileName){
+                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'author/' . $editId, 'action' => 'delete'));
+                }
+                else{
+                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'author/' . $editId));
+                }
             }
-            else{
-                $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'author/' . $editId));
+            elseif ($action == "order") {
+
             }
         }
-
         return new Response(json_encode(array('action' => 'false')));
+    }
+
+
+    /**
+     * @Template()
+     * @return array|RedirectResponse
+     */
+    public function ordersAction(Request $request, $type)
+    {
+        if ($type == "new") {
+            $userId = $this->get('security.context')->getToken()->getUser();
+            $userId = 2;
+            $user = Helper::getUserById($userId);
+        }
+        if ($type == "new") {
+            if($request->isXmlHttpRequest()) {
+                $postData = $request->request->all();
+                $curPage = $postData['page'];
+                $rowsPerPage = $postData['rows'];
+                $sortingField = $postData['sidx'];
+                $sortingOrder = $postData['sord'];
+                $search = $postData['_search'];
+                $sField = $sData = $sTable = $sOper = null;
+                if (isset($search) && $search == "true") {
+                    $sOper = $postData['searchOper'];
+                    $sData = $postData['searchString'];
+                    $sField = $postData['searchField'];
+                }
+                $countOrders = Helper::getCountOrdersForAuthorGrid();
+                $firstRowIndex = $curPage * $rowsPerPage - $rowsPerPage;
+                $orders = Helper::getAuthorOrdersForGrid($sOper, $sField, $sData, $firstRowIndex, $rowsPerPage, $sortingField, $sortingOrder);
+                $response = new Response();
+                $response->total = ceil($countOrders / $rowsPerPage);
+                $response->records = $countOrders;
+                $response->page = $curPage;
+                $i = 0;
+                $responseAuthor = 0;
+                foreach($orders as $order) {
+                    $task = strip_tags($order->getTask());
+                    $task = stripcslashes($task);
+                    $task = preg_replace("/&nbsp;/", "", $task);
+                    if (strlen($task) >= 20) {
+                        $task = Helper::getCutSentence($task, 35);
+                    }
+                    $maxBid = 0;
+                    $minBid = 0;
+                    $myBid = 0;
+                    $dateCreate = Helper::getMonthNameFromDate($order->getDateCreate()->format("d.m.Y"));
+                    $dateCreate = $dateCreate . "<br><span class='gridCellTime'>" . $order->getDateCreate()->format("H:s") . "</span>";
+                    $dateExpire = Helper::getMonthNameFromDate($order->getDateExpire()->format("d.m.Y"));
+                    $dateExpire = $dateExpire . "<br><span class='gridCellTime'>" . $order->getDateExpire()->format("H:s") . "</span>";
+                    $response->rows[$i]['id'] = $order->getId();
+                    $response->rows[$i]['cell'] = array(
+                        $order->getId(),
+                        $order->getNum(),
+                        $order->getSubjectOrder()->getChildName(),
+                        $order->getTypeOrder()->getName(),
+                        $order->getTheme(),
+                        $task,
+                        $dateExpire,
+                        $maxBid,
+                        $minBid,
+                        $myBid,
+                        $dateCreate,
+                        ""
+                    );
+                    $i++;
+                }
+                return new JsonResponse($response);
+            }
+            $showWindow = false;
+            return $this->render(
+                'AcmeSecureBundle:Author:orders_new.html.twig', array('showWindow' => $showWindow)
+            );
+        }
+    }
+
+
+    /**
+     * @Template()
+     * @return array|RedirectResponse
+     */
+    public function orderAction(Request $request, $num)
+    {
+        if (is_numeric($num)) {
+            $userId = $this->get('security.context')->getToken()->getUser();
+            $userId = 2;
+            $user = Helper::getUserById($userId);
+            $order = Helper::getOrderByNumForAuthor($num);
+            //$orderId = $order->getId();
+            $filesOrder = Helper::getFilesForOrder($order);
+
+            $bidValidate = new BidFormValidate();
+            $formBid = $this->createForm(new BidForm(), $bidValidate);
+            $formBid->handleRequest($request);
+
+            if ($request->isMethod('POST')) {
+                if ($formBid->get('create')->isClicked()) {
+                    if ($formBid->isValid()) {
+                    }
+                }
+            }
+
+            return $this->render(
+                'AcmeSecureBundle:Author:order_select.html.twig', array('formBid' => $formBid->createView(), 'files' => $filesOrder, 'order' => $order, 'showWindow' => false)
+            );
+        }
+        else {
+
+        }
     }
 
 }

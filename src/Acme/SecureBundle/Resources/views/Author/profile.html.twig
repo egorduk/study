@@ -20,7 +20,7 @@
                     <p>Ваше имя: {{ userInfo.username }}</p>
                     <p>Ваша фамилия: {{ userInfo.surname }}</p>
                     <p>Ваше отчество: {{ userInfo.lastname }}</p>
-                    <p>Доступ к заказам: </p>
+                    <p>Доступ к заказам: {{ user.isauthorfile }}</p>
                 </div>
                 <div class="row">
                     <a href="{{ path('secure_author_profile', {'type': 'edit'}) }}">Изменить данные</a>
@@ -103,7 +103,6 @@
                     {{ form_widget(formProfile.reset) }}
                 </div>
                 {{ form_end(formProfile) }}
-                <a href="{{ path('secure_client_profile', {'type': 'view'}) }}">К профилю</a>
             </div>
                 <div id="modal-window">
                     {% if (showWindow) %}
@@ -122,6 +121,7 @@
                 </div>
             {% endif %}
             <a href="{{ path('secure_author_index') }}">Главная</a>
+            <a href="{{ path('secure_author_profile', {'type': 'view'}) }}">К профилю</a>
             <script>
                 $(document).ready(function() {
                     function format(state) {
@@ -134,12 +134,12 @@
                         formatSelection: format,
                         escapeMarkup: function(m) { return m; }
                     });
-
+                    {% if (user.isauthorfile == 0) %}
                     new PunkAveFileUploader({
-                        'uploadUrl': {{ path('secure_author_upload', { editId: folderFiles }) | json_encode | raw }},
-                        'viewUrl': {{ ('/study/web/uploads/author/' ~ folderFiles)| json_encode | raw }},
+                        'uploadUrl': {{ path('secure_author_upload', { editId: user.id, action: 'profile' }) | json_encode | raw }},
+                        'viewUrl': {{ ('/study/web/uploads/author/' ~ user.id)| json_encode | raw }},
                         'el': '.file-uploader',
-                        'existingFiles': {{ punkave_get_files('author/' ~ folderFiles) | json_encode | raw }},
+                        'existingFiles': {{ punkave_get_files('author/' ~ user.id) | json_encode | raw }},
                         'delaySubmitWhileUploading': '.edit-form',
                         'errorCallback': function(errorObj) {
                             if (errorObj.error == 'maxNumberOfFiles') {
@@ -147,6 +147,7 @@
                             }
                         }
                     });
+                    {% endif %}
 
                     if (!sessionStorage.getItem("Page2Visited")) {
                         {% if (showWindow) %}
@@ -168,9 +169,11 @@
                     }
                 });
             </script>
+            {% if (user.isauthorfile == 0) %}
             <script type="text/javascript" src="{{ asset('bundles/js/underscore.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/jquery.fileupload.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/jquery.iframe-transport.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/FileUploader.js') }}"></script>
+            {% endif %}
         </div>
     {% endblock %}

@@ -4,6 +4,7 @@ namespace Helper;
 
 use Acme\SecureBundle\Entity\OrderFile;
 use Acme\SecureBundle\Entity\UserOrder;
+use Proxies\__CG__\Acme\SecureBundle\Entity\Author\AuthorFile;
 use Symfony\Component\Yaml\Yaml;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\Container;
@@ -27,6 +28,7 @@ class Helper
     private static $_tableTypeOrder = 'AcmeSecureBundle:TypeOrder';
     private static $_tableUserOrder = 'AcmeSecureBundle:UserOrder';
     private static $_tableStatusOrder = 'AcmeSecureBundle:StatusOrder';
+    private static $_tableOrderFile = 'AcmeSecureBundle:OrderFile';
     private static $kernel;
 
     public function __construct() {
@@ -96,12 +98,10 @@ class Helper
         $query = $em->createQuery('SELECT u.id FROM AcmeAuthBundle:User u WHERE u.id = :id')
             ->setParameter('id', $userId);
         $user = $query->getResult();
-
         if(!$user)
         {
             return false;
         }
-
         return true;
     }
 
@@ -113,12 +113,10 @@ class Helper
         $query = $em->createQuery('SELECT u.id FROM AcmeAuthBundle:User u WHERE u.login = :login')
             ->setParameter('login', $userLogin);
         $user = $query->getResult();
-
         if(!$user)
         {
             return false;
         }
-
         return true;
     }
 
@@ -134,11 +132,9 @@ class Helper
 
             return self::$kernel->getContainer();
         }
-
         $environment = 'dev';
         self::$kernel = new \AppKernel($environment, false);
         self::$kernel->boot();
-
         return self::$kernel->getContainer();
     }
 
@@ -147,7 +143,6 @@ class Helper
     {
         $generator = new SecureRandom();
         $salt = bin2hex($generator->nextBytes(32));
-
         return $salt;
     }
 
@@ -156,7 +151,6 @@ class Helper
     {
         $generator = new SecureRandom();
         $genValue = bin2hex($generator->nextBytes($size));
-
         return $genValue;
     }
 
@@ -166,7 +160,6 @@ class Helper
         $parsedYml = Helper::getEncodersParam();
         $encoder = new MessageDigestPasswordEncoder($parsedYml['algorithm'], $parsedYml['baseAs64'], $parsedYml['iterations']);
         $regPassword = $encoder->encodePassword($userPassword, $salt);
-
         return $regPassword;
     }
 
@@ -213,13 +206,11 @@ class Helper
     {
         $user = self::getContainer()->get('doctrine')->getRepository(self::$_tableUser)
             ->findOneByEmail($userEmail);
-
         if (!$user)
         {
             //throw new NotFoundHttpException('Error!');
             return false;
         }
-
         return $user;
     }
 
@@ -230,7 +221,6 @@ class Helper
         {
             return true;
         }
-
         return false;
     }
 
@@ -241,12 +231,10 @@ class Helper
         $query = $em->createQuery('SELECT u.user_role_id FROM AcmeAuthBundle:User u WHERE u.email = :email')
             ->setParameter('email', $userEmail);
         $user = $query->getResult();
-
         if(!$user)
         {
             return false;
         }
-
         return true;
     }
 
@@ -405,11 +393,10 @@ class Helper
         $userMobilePhone = $postData['fieldMobilePhone'];
         $userStaticPhone = $postData['fieldStaticPhone'];
         $userSelectedCountryCode = $postData['selectorCountry'];
-
         $em = self::getContainer()->get('doctrine')->getManager();
         $country = $em->getRepository(self::$_tableCountry)
             ->findOneByCode($userSelectedCountryCode);
-
+        $userInfo->setCountry($country);
         $userInfo->setSkype($userSkype);
         $userInfo->setIcq($userIcq);
         $userInfo->setUsername($userName);
@@ -417,7 +404,6 @@ class Helper
         $userInfo->setSurname($userSurname);
         $userInfo->setMobilePhone($userMobilePhone);
         $userInfo->setStaticPhone($userStaticPhone);
-        $userInfo->setCountry($country);
         $em->merge($userInfo);
         $em->flush();
     }
@@ -493,7 +479,7 @@ class Helper
         }
     }
 
-    public static function insertInfoAboutFileInDb($fileSize, $fileName, $fileDateUpload, $order, $em) {
+    public static function insertInfoAboutOrderFileInDb($fileSize, $fileName, $fileDateUpload, $order, $em) {
         $orderFile = new OrderFile();
         $orderFile->setDateUpload($fileDateUpload);
         $orderFile->setName($fileName);
@@ -508,7 +494,7 @@ class Helper
     }
 
 
-    public static function getFilesFromFolder($filesFolder, $folderFiles) {
+    public static function getFilesFromFolder($filesFolder) {
         if (self::isExistFilesFolder($filesFolder)) {
             $fileHandler = opendir($filesFolder);
             $arrayInfoFiles = [];
@@ -534,7 +520,7 @@ class Helper
 
 
     public static function getSizeFile($bytes){
-        $label = array('Б', 'КБ', 'МБ');
+        $label = array('B', 'KB', 'MB');
         for($i = 0; $bytes >= 1024 && $i < (count($label) - 1); $bytes /= 1024, $i++);
         return(round($bytes, 1) . " " . $label[$i]);
     }
@@ -585,6 +571,9 @@ class Helper
         if ($type == "originals") {
             return dirname($_SERVER['SCRIPT_FILENAME']) . "/uploads/attachments/" . $folderFiles . "/originals";
         }
+        elseif ($type == "author") {
+            return dirname($_SERVER['SCRIPT_FILENAME']) . "/uploads/author/" . $folderFiles . "/originals";
+        }
         elseif ($type == null) {
             return dirname($_SERVER['SCRIPT_FILENAME']) . "/uploads/attachments/" . $folderFiles;
         }
@@ -599,11 +588,18 @@ class Helper
     }
 
 
-    public static function getCountOrdersForGrid($user) {
+    public static function getCountOrdersForClientGrid($user) {
         $em = self::getContainer()->get('doctrine')->getManager();
-        $order = $em->getRepository(self::$_tableUserOrder)
-            ->findBy(array('user' => $user, 'is_show_author' => 1));
-        return count($order);
+        $orders = $em->getRepository(self::$_tableUserOrder)
+            ->findBy(array('user' => $user, 'is_show_client' => 1));
+        return count($orders);
+    }
+
+    public static function getCountOrdersForAuthorGrid() {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $orders = $em->getRepository(self::$_tableUserOrder)
+            ->findBy(array('is_show_author' => 1));
+        return count($orders);
     }
 
 
@@ -728,7 +724,6 @@ class Helper
                     );
             }
         }
-
         return $orders;
     }
 
@@ -821,7 +816,7 @@ class Helper
     }
 
 
-    public static function getOrderByNum($num, $user) {
+    public static function getOrderByNumForClient($num, $user) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $order = $em->getRepository(self::$_tableUserOrder)
             ->findOneBy(array('user' => $user, 'is_show_client' => 1, 'num' => $num));
@@ -831,5 +826,162 @@ class Helper
         else {
             return false;
         }
+    }
+
+
+    public static function getOrderByNumForAuthor($num) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $order = $em->getRepository(self::$_tableUserOrder)
+            ->findOneBy(array('is_show_author' => 1, 'num' => $num));
+        if ($order) {
+            return $order;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    public static function uploadAuthorFileInfo($user) {
+        $folderFiles = Helper::getFullPathFolderFiles($user->getId(), "author");
+        $isExistFilesFolder = self::isExistFilesFolder($folderFiles);
+        if ($isExistFilesFolder) {
+            $em = self::getContainer()->get('doctrine')->getManager();
+            $arrayFiles = Helper::getFilesFromFolder($folderFiles);
+            foreach($arrayFiles as $file) {
+                $authorFile = new AuthorFile();
+                $authorFile->setSize($file['size']);
+                $authorFile->setName($file['name']);
+                $fileDateUpload = self::getFormatDateForInsert($file['dateUpload'], 'Y-m-d H:i:s');
+                $authorFile->setDateUpload($fileDateUpload);
+                $authorFile->setUser($user);
+                $em->persist($authorFile);
+            }
+            $user->setIsAuthorfile(1);
+            $em->flush();
+            return true;
+        }
+        return false;
+    }
+
+
+    public static function getAuthorOrdersForGrid($sOper = null, $sField = null, $sData = null, $firstRowIndex, $rowsPerPage, $sortingField, $sortingOrder) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        if ($sField != null && $sOper != null && $sData != null) {
+            if ($sField == "subject_order") {
+                $field = 'child_name';
+            }
+            elseif ($sField == "type_order") {
+                $field = 'name';
+            }
+
+            if ($sOper == 'eq') {
+                if ($sField != "subject_order" && $sField != "type_order") {
+                    $orders = $em->getRepository(self::$_tableUserOrder)
+                        ->findBy(
+                            array('is_show_author' => 1, $sField => $sData),
+                            array($sField => $sortingOrder),
+                            $rowsPerPage, $firstRowIndex
+                        );
+                }
+                else {
+                    $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('o')
+                        ->andWhere('o.is_show_author = 1')
+                        ->innerJoin('o.' . $sField , 'a')
+                        ->andWhere('a.' . $field . ' = :data')
+                        ->setParameter('data', $sData)
+                        ->getQuery()
+                        ->getResult();
+                }
+            }
+            elseif ($sOper == 'ne') {
+                if ($sField != "subject_order" && $sField != "type_order") {
+                    $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('o')
+                        ->andWhere('o.is_show_author = 1')
+                        ->andWhere('o.' . $sField . ' != :data')
+                        ->setParameter('data', $sData)
+                        ->getQuery()
+                        ->getResult();
+                }
+                else {
+                    $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('o')
+                        ->andWhere('o.is_show_author = 1')
+                        ->innerJoin('o.' . $sField , 'a')
+                        ->andWhere('a.' . $field . ' != :data')
+                        ->setParameter('data', $sData)
+                        ->getQuery()
+                        ->getResult();
+                }
+            }
+            elseif ($sOper == 'bw') {
+                if ($sField != "subject_order" && $sField != "type_order") {
+                    $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('o')
+                        ->andWhere('o.is_show_author = 1')
+                        ->andWhere('o.' . $sField . ' LIKE :data')
+                        ->setParameter('data', $sData . '%')
+                        ->getQuery()
+                        ->getResult();
+                }
+                else {
+                    $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('o')
+                        ->andWhere('o.is_show_author = 1')
+                        ->innerJoin('o.' . $sField , 'a')
+                        ->andWhere('a.' . $field . ' LIKE :data')
+                        ->setParameter('data', '%' . $sData . '%')
+                        ->getQuery()
+                        ->getResult();
+                }
+            }
+            elseif ($sOper == 'cn') {
+                if ($sField != "subject_order" && $sField != "type_order") {
+                    $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('o')
+                        ->andWhere('o.user = :user')
+                        ->andWhere('o.is_show_client = 1')
+                        ->andWhere('o.' . $sField . ' LIKE :data')
+                        ->setParameter('user', $user)
+                        ->setParameter('data', $sData . '%')
+                        ->getQuery()
+                        ->getResult();
+                }
+                else {
+                    $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('o')
+                        ->andWhere('o.is_show_author = 1')
+                        ->innerJoin('o.' . $sField , 'a')
+                        ->andWhere('a.' . $field . ' LIKE :data')
+                        ->setParameter('data', '%' . $sData . '%')
+                        ->getQuery()
+                        ->getResult();
+                }
+            }
+        }
+        else {
+            if (isset($sortingField) && $sortingField != "" && isset($sortingOrder) && $sortingOrder != "") {
+                $orders = $em->getRepository(self::$_tableUserOrder)
+                    ->findBy(
+                        array('is_show_author' => 1),
+                        array($sortingField => $sortingOrder),
+                        $rowsPerPage,
+                        $firstRowIndex
+                    );
+            }
+            else {
+                $orders = $em->getRepository(self::$_tableUserOrder)
+                    ->findBy(
+                        array('is_show_author' => 1),
+                        array('num' => 'ASC'),
+                        $rowsPerPage,
+                        $firstRowIndex
+                    );
+            }
+        }
+        return $orders;
+    }
+
+
+    public static function getFilesForOrder($order) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $orders = $em->getRepository(self::$_tableOrderFile)
+            ->findByOrder($order);
+        return $orders;
     }
 }

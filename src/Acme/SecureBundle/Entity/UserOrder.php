@@ -58,7 +58,7 @@ class UserOrder extends EntityRepository
 
     /**
      * @ORM\ManyToOne(targetEntity="SubjectOrder", inversedBy="link_subject", cascade={"all"})
-     * @ORM\JoinColumn(name="subject_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="subject_order_id", referencedColumnName="id")
      **/
     private $subject_order;
 
@@ -96,7 +96,7 @@ class UserOrder extends EntityRepository
     private $files_folder;
 
     /**
-     * @ORM\OneToMany(targetEntity="OrderFile", mappedBy="user_order")
+     * @ORM\OneToMany(targetEntity="OrderFile", mappedBy="order")
      **/
     private $link_user_order;
 

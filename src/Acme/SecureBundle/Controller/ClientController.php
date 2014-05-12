@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\Util\StringUtils;
 use Helper\Helper;
 //use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Acme\SecureBundle\Form\Client\ClientProfileForm;
-use Acme\SecureBundle\Entity\ClientProfileFormValidate;
+use Acme\SecureBundle\Entity\Client\ClientProfileFormValidate;
 use Acme\SecureBundle\Form\Client\CreateOrderForm;
 use Acme\SecureBundle\Entity\CreateOrderFormValidate;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -104,8 +104,7 @@ class ClientController extends Controller
 
             return array('formProfile' => $formProfile->createView(), 'user' => '', 'userInfo' => $userInfo, 'showWindow' => $showWindow);
         }
-        else
-        {
+        else {
             return new RedirectResponse($this->generateUrl('secure_client_index'));
         }
     }

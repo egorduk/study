@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\SecureBundle\Entity;
+namespace Acme\SecureBundle\Entity\Author;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\EntityRepository;
@@ -34,10 +34,10 @@ class AuthorFile extends EntityRepository
     private $size;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AuthorStudy", inversedBy="link_author_file", cascade={"all"})
-     * @ORM\JoinColumn(name="author_study_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Acme\AuthBundle\Entity\User", inversedBy="link_author_file", cascade={"all"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      **/
-    private $author_study;
+    protected $user;
 
 
     public function __construct(){
@@ -84,14 +84,14 @@ class AuthorFile extends EntityRepository
         $this->size = $size;
     }
 
-    public function getAuthorStudy()
+    public function getUser()
     {
-        return $this->author_study;
+        return $this->user;
     }
 
-    public function setAuthorStudy($study)
+    public function setUser($user)
     {
-        $this->author_study = $study;
+        $this->user = $user;
     }
 
 }

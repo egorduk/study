@@ -97,6 +97,11 @@ class User extends EntityRepository implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="integer")
      */
+    protected $is_author_file;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
     protected $account;
 
     /**
@@ -108,6 +113,16 @@ class User extends EntityRepository implements UserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="Openid", mappedBy="user")
      **/
     protected $link_openid;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Acme\SecureBundle\Entity\Author\AuthorFile", mappedBy="user")
+     **/
+    protected $link_author_file;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Acme\SecureBundle\Entity\UserBid", mappedBy="user")
+     **/
+    protected $link_user_bid;
 
     /**
      * @ORM\ManyToOne(targetEntity="UserRole", inversedBy="link_role", cascade={"all"})
@@ -133,6 +148,8 @@ class User extends EntityRepository implements UserInterface, \Serializable
         $this->account = 0;
         $this->link_user_order = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_openid = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->link_author_file = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->link_user_bid = new \Doctrine\Common\Collections\ArrayCollection();
         $this->is_ban = 0;
         $this->date_confirm_recovery = Helper::getFormatDateForInsert("0000-00-00 00:00:00", "Y-m-d H:i:s");
         $this->date_confirm_reg = Helper::getFormatDateForInsert("0000-00-00 00:00:00", "Y-m-d H:i:s");
@@ -272,81 +289,72 @@ class User extends EntityRepository implements UserInterface, \Serializable
         $this->date_confirm_reg = $dateReg;
     }
 
-    public function getDateConfirmReg()
-    {
+    public function getDateConfirmReg() {
         return $this->date_confirm_reg;
     }
 
-    public function getRoles()
-    {
-        //return $this->getUserRoles()->toArray();
-        //return array('ROLE_CLIENT');
+    public function getRoles() {
     }
 
-    public function eraseCredentials()
-    {
+    public function eraseCredentials() {
     }
 
-    public function isAccountNonExpired()
-    {
+    public function isAccountNonExpired() {
         return true;
     }
 
-    public function isAccountNonLocked()
-    {
+    public function isAccountNonLocked() {
         return true;
     }
 
-    public function isCredentialsNonExpired()
-    {
+    public function isCredentialsNonExpired() {
         return true;
     }
 
-    public function isEnabled()
-    {
+    public function isEnabled() {
         return $this->is_active;
     }
 
-    public function setIsEnabled($active)
-    {
+    public function setIsEnabled($active) {
         $this->is_active = $active;
     }
 
-    public function getDateConfirmRecovery()
-    {
+    public function getDateConfirmRecovery() {
         return $this->date_confirm_recovery;
     }
 
-    public function setDateConfirmRecovery($date)
-    {
+    public function setDateConfirmRecovery($date) {
         $this->date_confirm_recovery = $date;
     }
 
-    public function setUserInfo($userInfo)
-    {
+    public function setUserInfo($userInfo) {
         $this->userInfo = $userInfo;
     }
 
-    public function getUserInfo()
-    {
+    public function getUserInfo() {
         return $this->userInfo;
     }
 
-    public function setAccount($account)
-    {
+    public function setAccount($account) {
         $this->account = $account;
     }
 
-    public function getAccount()
-    {
+    public function getAccount() {
         return $this->account;
+    }
+
+    public function setIsAuthorFile($val) {
+        $this->is_author_file = $val;
+    }
+
+    public function getIsAuthorFile() {
+        return $this->is_author_file;
     }
 
     /**
      * @see \Serializable::serialize()
      */
-    public function serialize()
-    {
+    public function serialize() {
         return serialize(array(
             $this->id,
             $this->password,
@@ -357,8 +365,7 @@ class User extends EntityRepository implements UserInterface, \Serializable
     /**
      * @see \Serializable::unserialize()
      */
-    public function unserialize($serialized)
-    {
+    public function unserialize($serialized) {
         list (
             $this->id,
             $this->password,

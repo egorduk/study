@@ -1,0 +1,135 @@
+{% extends "AcmeSecureBundle::layout.html.twig" %}
+
+{% block title "Order" %}
+
+    {% block content %}
+        <style>
+            .invalid{
+                border-color: #E9322D!important;
+                box-shadow: 0 0 6px #E9322D!important;
+            }
+            .popover{
+                position: absolute;
+                top: -20px !important;
+                left: 310px !important;
+                width: 300px;
+                height: 90px;
+            }
+            .thumbnail-image{
+                padding-top: 20px;
+            }
+            .block-file{
+                border: 1px solid #000000;
+                width: 300px;
+            }
+            .reset-margin-bottom{
+                margin-bottom: 0px;
+            }
+            .reset-margin-left{
+                padding-left: 0px;
+            }
+        </style>
+        <div class="container">
+            <div id="modal-window">
+                {% if (showWindow) %}
+                    <div id="success-window">
+                        <div class="Message Message--green" id="js-timer">
+                            <div class="Message-icon">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="Message-body">
+                                <p align="center">Ваш заказ создан! Ожидайте ставок авторов!</p>
+                            </div>
+                            <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="row">
+                <div id="blockAboutOrder">
+                    <p>Номер заказа: {{ order.num }}</p>
+                    <p>Тема работы: {{ order.theme }}</p>
+                    <p>Задание: {{ order.task | raw }}</p>
+                    <p>Объем работы: {{ order.countsheet }} стр.</p>
+                    <p>Оригинальность работы: {{ order.originality }}%</p>
+                    <p>Предмет: {{ order.subjectorder.childname }}</p>
+                    <p>Тип работы: {{ order.typeorder.name }}</p>
+                    <p>Статус заказа: {{ order.statusorder.name }}</p>
+                    <p>Дата создания заказа: {{ order.datecreate.format("d.m.Y H:i") }}</p>
+                    <p>Выполнение заказа до: {{ order.dateexpire.format("d.m.Y H:i") }}</p>
+                    <p>Заказчик: {{ order.user.login }}</p>
+                    <div>
+                        {% for file in files %}
+                            <div class="block-file">
+                                <p>Файл: {{ file.name }} </p>
+                                <p>Размер: {{ file.size }} </p>
+                                <p>Загружен: {{ file.dateupload.format("d.m.Y H:i") }} </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <a href="{{ path('secure_author_index') }}">Главная</a>
+                <a href="{{ path('secure_author_orders', { type: 'new'}) }}">К новым заказам</a>
+            </div>
+            <div class="row">
+                <div blockAuthorBid>
+                    {{ form_start(formBid) }}
+                    <div class="form-group">
+                        {{ form_label(formBid.fieldSum) }}
+                        {{ form_errors(formBid.fieldSum) }}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class=" icon-rouble"></i></span>
+                            {{ form_widget(formBid.fieldSum) }}
+                        </div>
+                        {{ form_label(formBid.fieldDay) }}
+                        {{ form_errors(formBid.fieldDay) }}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="icon-clock-5"></i></span>
+                            {{ form_widget(formBid.fieldDay) }}
+                        </div>
+                        {{ form_label(formBid.isClientDate) }}
+                        {{ form_errors(formBid.isClientDate) }}
+                        <div class="input-group">
+                            {{ form_widget(formBid.isClientDate) }}
+                        </div>
+                        {{ form_label(formBid.fieldComment) }}
+                        {{ form_errors(formBid.fieldComment) }}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
+                            {{ form_widget(formBid.fieldComment) }}
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <label for="formBid_bid" class="btn btn-success"><span class="icon-hammer">&nbspПоставить</span></label>
+                            {{ form_widget(formBid.bid) }}
+                            <label for="formBid_reset" class="btn btn-success"><span class="icon-trash-1">&nbspСбросить</span></label>
+                            {{ form_widget(formBid.reset) }}
+                        </div>
+                    </div>
+                    {{ form_end(formBid) }}
+                </div>
+            </div>
+            <script>
+                $(document).ready(function() {
+                    if (!sessionStorage.getItem("Page2Visited")) {
+                        {% if (showWindow) %}
+                            function closeMessage(el) {
+                                el.addClass('is-hidden');
+                            }
+                            $('.js-messageClose').on('click', function(e) {
+                                closeMessage($(this).closest('.Message'));
+                            });
+                            setTimeout(function() {
+                                closeMessage($('#js-timer'));
+                                document.location.href = "{{ path('secure_author_order', {'type': 'view'}) }}";
+                            }, 3000);
+                        {% endif %}
+                    }
+                    else {
+                        sessionStorage.removeItem("Page2Visited");
+                        $("#modal-window").hide();
+                    }
+                });
+            </script>
+        </div>
+    {% endblock %}

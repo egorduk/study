@@ -74,13 +74,17 @@ secure_author_settings:
   pattern:   /secure/author/settings/{type}
   defaults:  { _controller: AcmeSecureBundle:Author:settings }
 
-secure_author_order:
-  pattern:   /secure/author/order/{type}
-  defaults:  { _controller: AcmeSecureBundle:Author:order }
+secure_author_orders:
+  pattern:   /secure/author/orders/{type}
+  defaults:  { _controller: AcmeSecureBundle:Author:orders }
 
 secure_author_upload:
   pattern:   /secure/author/upload
   defaults:  { _controller: AcmeSecureBundle:Author:upload }
+
+secure_author_order:
+  pattern:   /secure/author/order/{num}
+  defaults:  { _controller: AcmeSecureBundle:Author:order }
 
 #---------------AuthBundle----------------------------#
 
