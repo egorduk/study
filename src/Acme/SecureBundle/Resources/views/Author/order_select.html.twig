@@ -102,8 +102,6 @@
                         <div class="input-group">
                             <label for="formBid_bid" class="btn btn-success"><span class="icon-hammer">&nbspПоставить</span></label>
                             {{ form_widget(formBid.bid) }}
-                            <label for="formBid_reset" class="btn btn-success"><span class="icon-trash-1">&nbspСбросить</span></label>
-                            {{ form_widget(formBid.reset) }}
                         </div>
                     </div>
                     {{ form_end(formBid) }}
@@ -111,6 +109,27 @@
             </div>
             <script>
                 $(document).ready(function() {
+
+                    $("#formBid_bid").click(function(e) {
+                        //if (rowId)
+                        var sum = $("#formBid_fieldSum").val();
+                        var day = $("#formBid_fieldDay").val();
+                        var comment = $("#formBid_fieldComment").val();
+                        var isClientDate = $("#formBid_isClientDate").val();
+                        {
+                            $.ajax({
+                                type: 'POST',
+                                data: 'sum='+sum+'&day='+day+'&comment='+comment+'&clientDate='+isClientDate,
+                                success: function(response) {
+                                    /*var resposeObject = window.JSON.parse(response);
+                                    if (resposeObject.action == "true") {
+                                        $("#listOrders").trigger('reloadGrid');
+                                    }*/
+                                }
+                            });
+                        }
+                    });
+
                     if (!sessionStorage.getItem("Page2Visited")) {
                         {% if (showWindow) %}
                             function closeMessage(el) {

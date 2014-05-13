@@ -29,6 +29,7 @@ class Helper
     private static $_tableUserOrder = 'AcmeSecureBundle:UserOrder';
     private static $_tableStatusOrder = 'AcmeSecureBundle:StatusOrder';
     private static $_tableOrderFile = 'AcmeSecureBundle:OrderFile';
+    private static $_tableUserBid = 'AcmeSecureBundle:UserBid';
     private static $kernel;
 
     public function __construct() {
@@ -983,5 +984,18 @@ class Helper
         $orders = $em->getRepository(self::$_tableOrderFile)
             ->findByOrder($order);
         return $orders;
+    }
+
+
+    public static function  getAuthorBid($user, $order) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $bid = $em->getRepository(self::$_tableUserBid)
+            ->findOneBy(array('user' => $user, 'order' => $order));
+        return $bid;
+    }
+
+
+    public static function updateAuthorBid($postData, $user, $order) {
+
     }
 }

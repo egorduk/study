@@ -19,7 +19,7 @@ Acme\SecureBundle\Entity\Client\ClientProfileFormValidate:
           - Length: { min: 1, minMessage: "Слишком короткое отчество!" }
           - Regex: { pattern: "/^[а-яА-Я]+$/u", message: "Только русские буквы!" }
 
-Acme\SecureBundle\Entity\CreateOrderFormValidate:
+Acme\SecureBundle\Entity\Client\CreateOrderFormValidate:
     properties:
         fieldTheme:
           - Length: { min: 4, minMessage: "Слишком короткое название темы!" }
@@ -38,3 +38,13 @@ Acme\SecureBundle\Entity\CreateOrderFormValidate:
         #fieldDescribe:
         #  - Length: { min: 3, minMessage: "Слишком короткое название темы!" }
         #  - Regex: { pattern: "/^[а-яА-Я]+$/u", message: "Только русские буквы!" }
+
+Acme\SecureBundle\Entity\Author\BidFormValidate:
+    properties:
+        fieldSum:
+          - Length: { min: 1, minMessage: "Слишком маленькая сумма!" }
+          - Regex: { pattern: "/^[\d]+$/u", message: "Только цифры!" }
+        fieldDay:
+          - Regex: { pattern: "/^[\d]+$/", message: "Только цифры!" }
+        #fieldComment:
+        #  - Regex: { pattern: "/^[A-Za-zА-Яа-я\d]+$/", message: "Только цифрыи буквы!" }

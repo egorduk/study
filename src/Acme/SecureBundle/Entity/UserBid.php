@@ -119,4 +119,14 @@ class UserBid extends EntityRepository
         $this->order = $userOrder;
     }
 
+    public function getIsClientDate()
+    {
+        return $this->is_client_date;
+    }
+
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
 }

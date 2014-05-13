@@ -202,22 +202,36 @@ class AuthorController extends Controller
             $userId = 2;
             $user = Helper::getUserById($userId);
             $order = Helper::getOrderByNumForAuthor($num);
-            //$orderId = $order->getId();
+            $bid = Helper::getAuthorBid($user, $order);
             $filesOrder = Helper::getFilesForOrder($order);
-
             $bidValidate = new BidFormValidate();
+            if ($bid) {
+                $bidValidate->setDay($bid->getDay());
+                $bidValidate->setSum($bid->getSum());
+                $bidValidate->setIsClientDate($bid->getIsClientDate());
+                $bidValidate->setComment($bid->getComment());
+            }
+            $showWindow = false;
             $formBid = $this->createForm(new BidForm(), $bidValidate);
             $formBid->handleRequest($request);
 
-            if ($request->isMethod('POST')) {
-                if ($formBid->get('create')->isClicked()) {
+            if($request->isXmlHttpRequest()) {
+                $postData = $request->request->all();
+                var_dump($postData); die;
+            //if ($request->isMethod('POST')) {
+                //if ($formBid->get('bid')->isClicked()) {
                     if ($formBid->isValid()) {
+                        $postData = $request->request->get('formBid');
+
+                        //Helper::updateAuthorBid($postData, $user, $order);
+                        //$showWindow = true;
                     }
-                }
+                //}
+            //}
             }
 
             return $this->render(
-                'AcmeSecureBundle:Author:order_select.html.twig', array('formBid' => $formBid->createView(), 'files' => $filesOrder, 'order' => $order, 'showWindow' => false)
+                'AcmeSecureBundle:Author:order_select.html.twig', array('formBid' => $formBid->createView(), 'files' => $filesOrder, 'order' => $order, 'showWindow' => $showWindow)
             );
         }
         else {

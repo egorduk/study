@@ -33,5 +33,23 @@ class BidFormValidate
         return $this->is_client_date;
     }
 
+    public function setSum($val)
+    {
+        return $this->fieldSum = $val;
+    }
 
+    public function setDay($val)
+    {
+        return $this->fieldDay = $val;
+    }
+
+    public function setComment($val)
+    {
+        return $this->fieldComment = $val;
+    }
+
+    public function setIsClientDate($val)
+    {
+        return $this->is_client_date = $val;
+    }
 }
