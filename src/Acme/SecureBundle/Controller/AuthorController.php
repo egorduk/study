@@ -213,18 +213,49 @@ class AuthorController extends Controller
             }
             $showWindow = false;
             $formBid = $this->createForm(new BidForm(), $bidValidate);
-            $formBid->handleRequest($request);
 
             if($request->isXmlHttpRequest()) {
-                $postData = $request->request->all();
-                var_dump($postData); die;
-            //if ($request->isMethod('POST')) {
-                //if ($formBid->get('bid')->isClicked()) {
+                $formBid->handleRequest($request);
                     if ($formBid->isValid()) {
-                        $postData = $request->request->get('formBid');
-
+                        //$postData = $request->request->get('formBid');
+                        return  new Response(json_encode(array('action' => 'valid')));
                         //Helper::updateAuthorBid($postData, $user, $order);
                         //$showWindow = true;
+                    }
+                    else {
+                        //$errors = $formBid->getErrorsAsString();
+                        //var_dump($formBid['fieldDay']->getErrors()); die;
+                        $errors = [];
+                        foreach ($formBid as $fieldName => $formField) {
+                            $errors[$fieldName] = $formField->getErrors();
+                        }
+
+                        //var_dump($errors);die;
+
+                        /*foreach ($formBid as $child) {
+                            if ($child->hasErrors()) {
+                                $vars = $child->createView()->getVars();
+                                $errors = $child->getErrors();
+                                foreach ($errors as $error) {
+                                    $this->allErrors[$vars["name"]][] = $this->convertFormErrorObjToString($error);
+                                }
+                            }
+                        }*/
+
+                        $arr = [];
+                        $i=0;
+                        foreach ($errors as $index=>$error) {
+                            //var_dump(Helper::convertFormErrorObjToString($error[0]));
+                            if (isset($error[0]))
+                            {
+                                $arr[$index] = $error[0]->getMessage();
+                                $i++;
+                            }
+                        }
+
+                        //var_dump($arr); die;
+
+                        return  new Response(json_encode(array('action' => $arr)));
                     }
                 //}
             //}

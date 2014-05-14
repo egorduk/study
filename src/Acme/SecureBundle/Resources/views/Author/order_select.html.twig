@@ -73,7 +73,7 @@
             </div>
             <div class="row">
                 <div blockAuthorBid>
-                    {{ form_start(formBid) }}
+                    {{ form_start(formBid, {'attr': {'id' : 'formBid'}}) }}
                     <div class="form-group">
                         {{ form_label(formBid.fieldSum) }}
                         {{ form_errors(formBid.fieldSum) }}
@@ -111,20 +111,13 @@
                 $(document).ready(function() {
 
                     $("#formBid_bid").click(function(e) {
-                        //if (rowId)
-                        var sum = $("#formBid_fieldSum").val();
-                        var day = $("#formBid_fieldDay").val();
-                        var comment = $("#formBid_fieldComment").val();
-                        var isClientDate = $("#formBid_isClientDate").val();
                         {
                             $.ajax({
                                 type: 'POST',
-                                data: 'sum='+sum+'&day='+day+'&comment='+comment+'&clientDate='+isClientDate,
+                                data: $("#formBid").serialize(),
                                 success: function(response) {
-                                    /*var resposeObject = window.JSON.parse(response);
-                                    if (resposeObject.action == "true") {
-                                        $("#listOrders").trigger('reloadGrid');
-                                    }*/
+                                    var responseObject = window.JSON.parse(response);
+                                    console.log(responseObject);
                                 }
                             });
                         }

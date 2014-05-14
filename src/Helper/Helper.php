@@ -998,4 +998,13 @@ class Helper
     public static function updateAuthorBid($postData, $user, $order) {
 
     }
+
+
+    public static function convertFormErrorObjToString($error) {
+        $errorMessageTemplate = $error->getMessageTemplate();
+        foreach ($error->getMessageParameters() as $key => $value) {
+            $errorMessageTemplate = str_replace($key, $value, $errorMessageTemplate);
+        }
+        return $errorMessageTemplate;
+    }
 }
