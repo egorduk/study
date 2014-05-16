@@ -28,6 +28,12 @@
             .reset-margin-left{
                 padding-left: 0px;
             }
+            .error{
+                color: red;
+            }
+            .success{
+                color: green;
+            }
         </style>
         <div class="container">
             <div id="modal-window">
@@ -110,18 +116,87 @@
             <script>
                 $(document).ready(function() {
 
-                    $("#formBid_bid").click(function(e) {
-                        {
-                            $.ajax({
-                                type: 'POST',
-                                data: $("#formBid").serialize(),
-                                success: function(response) {
-                                    var responseObject = window.JSON.parse(response);
-                                    console.log(responseObject);
+                    var buttonBid = $("#formBid_bid");
+                    var isClientDate = $("#formBid_isClientDate");
+                    var fieldDay = $("#formBid_fieldDay");
+                    var fieldSum = $("#formBid_fieldSum");
+
+                    buttonBid.click(function(e) {
+                        $.ajax({
+                            type: 'POST',
+                            data: $("#formBid").serialize(),
+                            success: function(response) {
+                                var responseObject = window.JSON.parse(response);
+                                if (responseObject.response == "valid") {
+                                    $("#formBid").parent().before("<span class='success'>Ставка поставлена!</span>");
+                                    setTimeout(function() {
+                                        $("#formBid").parent().prev().hide();
+                                    }, 3000);
                                 }
-                            });
+                                else {
+                                    $(".error").remove();
+                                    $.each(responseObject.response, function(index, value) {
+                                        var selector  = "#formBid_" + index;
+                                        $(selector).parent().after("<p class='error'>" + value + "</p>");
+                                    });
+                                }
+                            }
+                        });
+                    });
+
+                    if (isClientDate.prop("checked")) {
+                        fieldDay.prop('disabled', true);
+                    }
+                    else {
+                        fieldDay.prop('disabled', false);
+                    }
+
+                    isClientDate.change(function() {
+                        if($(this).prop("checked")) {
+                            fieldDay.prop('disabled', true);
+                            if (buttonBid.prop('disabled') && fieldSum.val() != "") {
+                                disabledButtonBid(false);
+                            }
+                        }
+                        else {
+                            fieldDay.prop('disabled', false);
                         }
                     });
+
+                    if (fieldSum.val() == "" || (fieldDay.val() == "" && !isClientDate.prop("checked"))) {
+                        disabledButtonBid(true);
+                    }
+                    else {
+                        disabledButtonBid(false);
+                    }
+
+                    fieldSum.on('input', function() {
+                        if ($(this).val() == "" || (fieldDay.val() == "" && !isClientDate.prop("checked"))) {
+                            disabledButtonBid(true);
+                        }
+                        else {
+                            disabledButtonBid(false);
+                        }
+                    });
+
+                    fieldDay.on('input', function() {
+                        if ($(this).val() == ""|| fieldSum.val() == "") {
+                            disabledButtonBid(true);
+                        }
+                        else {
+                            disabledButtonBid(false);
+                        }
+                    });
+
+                    function disabledButtonBid(a) {
+                        if (a) {
+                            $(".btn-success").addClass('disabled');
+                        }
+                        else {
+                            $(".btn-success").removeClass('disabled');
+                        }
+                        buttonBid.prop('disabled', a);
+                    }
 
                     if (!sessionStorage.getItem("Page2Visited")) {
                         {% if (showWindow) %}

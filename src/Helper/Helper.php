@@ -3,6 +3,7 @@
 namespace Helper;
 
 use Acme\SecureBundle\Entity\OrderFile;
+use Acme\SecureBundle\Entity\UserBid;
 use Acme\SecureBundle\Entity\UserOrder;
 use Proxies\__CG__\Acme\SecureBundle\Entity\Author\AuthorFile;
 use Symfony\Component\Yaml\Yaml;
@@ -996,7 +997,26 @@ class Helper
 
 
     public static function updateAuthorBid($postData, $user, $order) {
+        $sum = $postData['fieldSum'];
+        $comment = $postData['fieldComment'];
+        if (isset($postData['fieldDay'])) {
+            $day = $postData['fieldDay'];
+        }
 
+        $userBid = new UserBid();
+        $userBid->setUser($user);
+        $userBid->setUserOrder($order);
+        $userBid->setSum($sum);
+        $userBid->setComment($comment);
+        if (isset($day)) {
+            $userBid->setDay($day);
+        }
+        else {
+            $userBid->setIsClientDate(1);
+        }
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $em->persist($userBid);
+        $em->flush();
     }
 
 

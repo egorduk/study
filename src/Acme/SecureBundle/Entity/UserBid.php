@@ -62,6 +62,10 @@ class UserBid extends EntityRepository
 
 
     public function __construct(){
+        $this->is_show = 1;
+        $this->date_bid = new \DateTime();
+        $this->is_client_date = 0;
+        $this->day = 0;
     }
 
     public function setSum($sum)
@@ -127,6 +131,16 @@ class UserBid extends EntityRepository
     public function getComment()
     {
         return $this->comment;
+    }
+
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+    }
+
+    public function setIsClientDate($val)
+    {
+        $this->is_client_date = $val;
     }
 
 }

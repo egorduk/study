@@ -216,49 +216,26 @@ class AuthorController extends Controller
 
             if($request->isXmlHttpRequest()) {
                 $formBid->handleRequest($request);
-                    if ($formBid->isValid()) {
-                        //$postData = $request->request->get('formBid');
-                        return  new Response(json_encode(array('action' => 'valid')));
-                        //Helper::updateAuthorBid($postData, $user, $order);
-                        //$showWindow = true;
+                if ($formBid->isValid()) {
+                    $postData = $request->request->get('formBid');
+                    Helper::updateAuthorBid($postData, $user, $order);
+                    return new Response(json_encode(array('response' => 'valid')));
+                    //$showWindow = true;
+                }
+                else {
+                    $errors = [];
+                    $arrayResponse = [];
+                    foreach ($formBid as $fieldName => $formField) {
+                        $errors[$fieldName] = $formField->getErrors();
                     }
-                    else {
-                        //$errors = $formBid->getErrorsAsString();
-                        //var_dump($formBid['fieldDay']->getErrors()); die;
-                        $errors = [];
-                        foreach ($formBid as $fieldName => $formField) {
-                            $errors[$fieldName] = $formField->getErrors();
+                    foreach ($errors as $index=>$error) {
+                        if (isset($error[0])) {
+                            $arrayResponse[$index] = $error[0]->getMessage();
                         }
-
-                        //var_dump($errors);die;
-
-                        /*foreach ($formBid as $child) {
-                            if ($child->hasErrors()) {
-                                $vars = $child->createView()->getVars();
-                                $errors = $child->getErrors();
-                                foreach ($errors as $error) {
-                                    $this->allErrors[$vars["name"]][] = $this->convertFormErrorObjToString($error);
-                                }
-                            }
-                        }*/
-
-                        $arr = [];
-                        $i=0;
-                        foreach ($errors as $index=>$error) {
-                            //var_dump(Helper::convertFormErrorObjToString($error[0]));
-                            if (isset($error[0]))
-                            {
-                                $arr[$index] = $error[0]->getMessage();
-                                $i++;
-                            }
-                        }
-
-                        //var_dump($arr); die;
-
-                        return  new Response(json_encode(array('action' => $arr)));
                     }
-                //}
-            //}
+
+                    return  new Response(json_encode(array('response' => $arrayResponse)));
+                }
             }
 
             return $this->render(
