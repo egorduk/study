@@ -202,10 +202,11 @@ class AuthorController extends Controller
             $userId = 2;
             $user = Helper::getUserById($userId);
             $order = Helper::getOrderByNumForAuthor($num);
-            $bid = Helper::getAuthorBid($user, $order);
+            $bids = Helper::getAllAuthorBid($user, $order);
             $filesOrder = Helper::getFilesForOrder($order);
             $bidValidate = new BidFormValidate();
-            if ($bid) {
+            if ($bids) {
+                $bid = end($bids);
                 $bidValidate->setDay($bid->getDay());
                 $bidValidate->setSum($bid->getSum());
                 $bidValidate->setIsClientDate($bid->getIsClientDate());
@@ -220,7 +221,6 @@ class AuthorController extends Controller
                     $postData = $request->request->get('formBid');
                     Helper::updateAuthorBid($postData, $user, $order);
                     return new Response(json_encode(array('response' => 'valid')));
-                    //$showWindow = true;
                 }
                 else {
                     $errors = [];
@@ -233,13 +233,11 @@ class AuthorController extends Controller
                             $arrayResponse[$index] = $error[0]->getMessage();
                         }
                     }
-
                     return  new Response(json_encode(array('response' => $arrayResponse)));
                 }
             }
-
             return $this->render(
-                'AcmeSecureBundle:Author:order_select.html.twig', array('formBid' => $formBid->createView(), 'files' => $filesOrder, 'order' => $order, 'showWindow' => $showWindow)
+                'AcmeSecureBundle:Author:order_select.html.twig', array('formBid' => $formBid->createView(), 'files' => $filesOrder, 'order' => $order, 'bids' => $bids, 'showWindow' => $showWindow)
             );
         }
         else {

@@ -78,7 +78,7 @@
                 <a href="{{ path('secure_author_orders', { type: 'new'}) }}">К новым заказам</a>
             </div>
             <div class="row">
-                <div blockAuthorBid>
+                <div blockAuthorFormBid>
                     {{ form_start(formBid, {'attr': {'id' : 'formBid'}}) }}
                     <div class="form-group">
                         {{ form_label(formBid.fieldSum) }}
@@ -111,6 +111,18 @@
                         </div>
                     </div>
                     {{ form_end(formBid) }}
+                </div>
+                <div class="row">
+                    <div blockAuthorBids>
+                        {% for bid in bids %}
+                        <div class="block-bid">
+                            <p>Сумма: {{ bid.sum }} </p>
+                            <p>Дней: {{ bid.day }} </p>
+                            <p>Комментарий: {{ bid.comment }} </p>
+                            <p>Поставлен: {{ bid.datebid.format("d.m.Y H:i") }} </p>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
             <script>

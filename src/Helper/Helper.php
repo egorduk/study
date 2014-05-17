@@ -988,11 +988,11 @@ class Helper
     }
 
 
-    public static function  getAuthorBid($user, $order) {
+    public static function getAllAuthorBid($user, $order) {
         $em = self::getContainer()->get('doctrine')->getManager();
-        $bid = $em->getRepository(self::$_tableUserBid)
-            ->findOneBy(array('user' => $user, 'order' => $order));
-        return $bid;
+        $bids = $em->getRepository(self::$_tableUserBid)
+            ->findBy(array('user' => $user, 'order' => $order), array('id' => 'DESC'));
+        return $bids;
     }
 
 
