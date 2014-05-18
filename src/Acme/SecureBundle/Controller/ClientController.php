@@ -123,7 +123,7 @@ class ClientController extends Controller
      * @Template()
      * @return array|RedirectResponse
      */
-    public function orderAction(Request $request, $type)
+    public function ordersAction(Request $request, $type)
     {
         if ($type == "view" || $type == "create" || $type == "delete" || $type == "hide" || $type == "configure" || $type == "show") {
             $userId = $this->get('security.context')->getToken()->getUser();
@@ -281,13 +281,13 @@ class ClientController extends Controller
      * @Template()
      * @return array|RedirectResponse
      */
-    public function ordernumAction(Request $request, $num)
+    public function orderAction(Request $request, $num)
     {
         if (is_numeric($num)) {
             $userId = $this->get('security.context')->getToken()->getUser();
             $userId = 1;
             $user = Helper::getUserById($userId);
-            $order = Helper::getOrderByNum($num, $user);
+            $order = Helper::getOrderByNumForClient($num, $user);
 
             if ($order) {
 

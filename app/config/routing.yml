@@ -48,12 +48,12 @@ secure_client_settings:
   defaults:  { _controller: AcmeSecureBundle:Client:settings }
 
 secure_client_order:
-  pattern:   /secure/client/order/{type}
+  pattern:   /secure/client/order/{num}
   defaults:  { _controller: AcmeSecureBundle:Client:order }
 
-secure_client_order_num:
-  pattern:   /secure/client/order/view/{num}
-  defaults:  { _controller: AcmeSecureBundle:Client:ordernum }
+secure_client_orders:
+  pattern:   /secure/author/orders/{type}
+  defaults:  { _controller: AcmeSecureBundle:Client:orders }
 
 secure_client_upload:
   pattern:   /secure/client/upload

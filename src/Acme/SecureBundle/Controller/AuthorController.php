@@ -225,18 +225,18 @@ class AuthorController extends Controller
                         $dateCreate = $dateCreate . "<br><span class='gridCellTime'>" . $order->getDateCreate()->format("H:s") . "</span>";
                         $dateExpire = Helper::getMonthNameFromDate($order->getDateExpire()->format("d.m.Y"));
                         $dateExpire = $dateExpire . "<br><span class='gridCellTime'>" . $order->getDateExpire()->format("H:s") . "</span>";*/
-                        if ($bid->getIsClientDate()) {
+                        /*if ($bid->getIsClientDate()) {
                             $isClientDate = "+";
                         }
                         else {
                             $isClientDate = "-";
-                        }
+                        }*/
                         $response->rows[$i]['id'] = $bid->getId();
                         $response->rows[$i]['cell'] = array(
                             $bid->getId(),
                             $bid->getSum(),
                             $bid->getDay(),
-                            $isClientDate,
+                            $bid->getIsClientDate(),
                             $bid->getDateBid()->format("d.m.Y H:i"),
                             $bid->getComment(),
                             ""
