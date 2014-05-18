@@ -3,6 +3,11 @@
 {% block title "Order" %}
 
     {% block content %}
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.fmatter.js') }}"></script>
         <style>
             .invalid{
                 border-color: #E9322D!important;
@@ -33,6 +38,20 @@
             }
             .success{
                 color: green;
+            }
+            .altRow {
+                background-color: #f3f3f3;
+                background-image: none;
+            }
+            .offset-margin-right {
+                float: right;
+                margin-right: -200px;
+            }
+            .ui-jqgrid .ui-jqgrid-htable th div {
+                height: 21px;
+            }
+            .gridCellTime {
+                color: blue;
             }
         </style>
         <div class="container">
@@ -114,14 +133,7 @@
                 </div>
                 <div class="row">
                     <div blockAuthorBids>
-                        {% for bid in bids %}
-                        <div class="block-bid">
-                            <p>Сумма: {{ bid.sum }} </p>
-                            <p>Дней: {{ bid.day }} </p>
-                            <p>Комментарий: {{ bid.comment }} </p>
-                            <p>Поставлен: {{ bid.datebid.format("d.m.Y H:i") }} </p>
-                        </div>
-                        {% endfor %}
+                        <table id="listBids"></table>
                     </div>
                 </div>
             </div>
@@ -140,6 +152,7 @@
                             success: function(response) {
                                 var responseObject = window.JSON.parse(response);
                                 if (responseObject.response == "valid") {
+                                    $("#listBids").trigger('reloadGrid');
                                     $("#formBid").parent().before("<span class='success'>Ставка поставлена!</span>");
                                     setTimeout(function() {
                                         $("#formBid").parent().prev().hide();
@@ -210,24 +223,56 @@
                         buttonBid.prop('disabled', a);
                     }
 
-                    if (!sessionStorage.getItem("Page2Visited")) {
-                        {% if (showWindow) %}
-                            function closeMessage(el) {
-                                el.addClass('is-hidden');
+                    $("#listBids").jqGrid({
+                        url: {{ path('secure_author_order', { num: order.num }) | json_encode | raw }},
+                        datatype: 'json',
+                        mtype: 'POST',
+                        recordtext: "Просмотр ставок {0} - {1}",
+                        colNames:['','Сумма','Дней на выполнение','В срок клиента','Дата ставки','Комментарий','Действия'],
+                        colModel :[
+                            {name:'id',index:'id',search:false,hidden:true},
+                            {name:'sum',index:'sum',width:130,align:'center',resizable:false,editable:false,sortable:false},
+                            {name:'day',index:'day',width:180,align:'center',resizable:false,editable:false,sortable:false},
+                            {name:'is_client_date',index:'is_client_date',width:150,align:'center',resizable:false,editable:false,sortable:false},
+                            {name:'date_bid',index:'date_bid',width:150,align:'center',resizable:false,editable:false,sortable:false},
+                            {name:'comment',index:'comment',width:200,align:'center',resizable:false,editable:false,sortable:false},
+                            {name:'action',width:100,align:'center',sortable:false,resize:false,formatter:function() {
+                                return "<div id='refresh-bid' style='margin-left:8px;'>" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Поставить заново' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<span class='icon-ok'></span></div></div>";
+                            }}
+
+                        ],
+                        rowNum: 100,
+                        viewrecords: true,
+                        hidegrid: false,
+                        caption: 'Таблица ставок',
+                        height: '250',
+                        altRows: true,
+                        altclass:'altRow',
+                        loadComplete : function() {
+                            function getOrderId(e) {
+                                var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'), rowId = $tr.attr('id');
+                                return rowId;
                             }
-                            $('.js-messageClose').on('click', function(e) {
-                                closeMessage($(this).closest('.Message'));
+                            $("#refresh-bid").click(function(e) {
+                                /*var rowId = getOrderId(e);
+                                if (rowId) {
+                                    $.ajax({
+                                        url: 'delete',
+                                        type: 'POST',
+                                        data: 'orderId=' + rowId,
+                                        success: function(response) {
+                                            var resposeObject = window.JSON.parse(response);
+                                            if (resposeObject.action == "true") {
+                                                $("#listOrders").trigger('reloadGrid');
+                                            }
+                                        }
+                                    });
+                                }*/
                             });
-                            setTimeout(function() {
-                                closeMessage($('#js-timer'));
-                                document.location.href = "{{ path('secure_author_order', {'type': 'view'}) }}";
-                            }, 3000);
-                        {% endif %}
-                    }
-                    else {
-                        sessionStorage.removeItem("Page2Visited");
-                        $("#modal-window").hide();
-                    }
+                        }
+                    });
                 });
             </script>
         </div>

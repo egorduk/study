@@ -199,7 +199,7 @@ class AuthorController extends Controller
     {
         if (is_numeric($num)) {
             $userId = $this->get('security.context')->getToken()->getUser();
-            $userId = 2;
+            $userId = 1;
             $user = Helper::getUserById($userId);
             $order = Helper::getOrderByNumForAuthor($num);
             $bids = Helper::getAllAuthorBid($user, $order);
@@ -216,24 +216,55 @@ class AuthorController extends Controller
             $formBid = $this->createForm(new BidForm(), $bidValidate);
 
             if($request->isXmlHttpRequest()) {
-                $formBid->handleRequest($request);
-                if ($formBid->isValid()) {
-                    $postData = $request->request->get('formBid');
-                    Helper::updateAuthorBid($postData, $user, $order);
-                    return new Response(json_encode(array('response' => 'valid')));
+                $nd = $request->request->get('nd');
+                if (isset($nd)) {
+                    $response = new Response();
+                    $i = 0;
+                    foreach($bids as $bid) {
+                        /*$dateCreate = Helper::getMonthNameFromDate($order->getDateCreate()->format("d.m.Y"));
+                        $dateCreate = $dateCreate . "<br><span class='gridCellTime'>" . $order->getDateCreate()->format("H:s") . "</span>";
+                        $dateExpire = Helper::getMonthNameFromDate($order->getDateExpire()->format("d.m.Y"));
+                        $dateExpire = $dateExpire . "<br><span class='gridCellTime'>" . $order->getDateExpire()->format("H:s") . "</span>";*/
+                        if ($bid->getIsClientDate()) {
+                            $isClientDate = "+";
+                        }
+                        else {
+                            $isClientDate = "-";
+                        }
+                        $response->rows[$i]['id'] = $bid->getId();
+                        $response->rows[$i]['cell'] = array(
+                            $bid->getId(),
+                            $bid->getSum(),
+                            $bid->getDay(),
+                            $isClientDate,
+                            $bid->getDateBid()->format("d.m.Y H:i"),
+                            $bid->getComment(),
+                            ""
+                        );
+                        $i++;
+                    }
+                    return new JsonResponse($response);
                 }
                 else {
-                    $errors = [];
-                    $arrayResponse = [];
-                    foreach ($formBid as $fieldName => $formField) {
-                        $errors[$fieldName] = $formField->getErrors();
+                    $formBid->handleRequest($request);
+                    if ($formBid->isValid()) {
+                        $postData = $request->request->get('formBid');
+                        Helper::updateAuthorBid($postData, $user, $order);
+                        return new Response(json_encode(array('response' => 'valid')));
                     }
-                    foreach ($errors as $index=>$error) {
-                        if (isset($error[0])) {
-                            $arrayResponse[$index] = $error[0]->getMessage();
+                    else {
+                        $errors = [];
+                        $arrayResponse = [];
+                        foreach ($formBid as $fieldName => $formField) {
+                            $errors[$fieldName] = $formField->getErrors();
                         }
+                        foreach ($errors as $index=>$error) {
+                            if (isset($error[0])) {
+                                $arrayResponse[$index] = $error[0]->getMessage();
+                            }
+                        }
+                        return  new Response(json_encode(array('response' => $arrayResponse)));
                     }
-                    return  new Response(json_encode(array('response' => $arrayResponse)));
                 }
             }
             return $this->render(
