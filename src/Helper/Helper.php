@@ -996,13 +996,20 @@ class Helper
     }
 
 
-    public static function updateAuthorBid($postData, $user, $order) {
+    public static function setAuthorBid($postData, $user, $order) {
         $sum = $postData['fieldSum'];
         $comment = $postData['fieldComment'];
         if (isset($postData['fieldDay'])) {
             $day = $postData['fieldDay'];
         }
-
+        else {
+            $dateOrderExpire = $order->getDateExpire();
+            $dateNow = new \DateTime();
+            $interval = date_diff($dateNow, $dateOrderExpire);
+            echo $interval->format('%d:%h:%i');
+            //var_dump($date);
+            //$day =
+        }
         $userBid = new UserBid();
         $userBid->setUser($user);
         $userBid->setUserOrder($order);

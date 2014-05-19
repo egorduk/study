@@ -219,20 +219,9 @@ class AuthorController extends Controller
                 $nd = $request->request->get('nd');
                 if (isset($nd)) {
                     $response = new Response();
-                    $i = 0;
-                    foreach($bids as $bid) {
-                        /*$dateCreate = Helper::getMonthNameFromDate($order->getDateCreate()->format("d.m.Y"));
-                        $dateCreate = $dateCreate . "<br><span class='gridCellTime'>" . $order->getDateCreate()->format("H:s") . "</span>";
-                        $dateExpire = Helper::getMonthNameFromDate($order->getDateExpire()->format("d.m.Y"));
-                        $dateExpire = $dateExpire . "<br><span class='gridCellTime'>" . $order->getDateExpire()->format("H:s") . "</span>";*/
-                        /*if ($bid->getIsClientDate()) {
-                            $isClientDate = "+";
-                        }
-                        else {
-                            $isClientDate = "-";
-                        }*/
-                        $response->rows[$i]['id'] = $bid->getId();
-                        $response->rows[$i]['cell'] = array(
+                    foreach($bids as $index => $bid) {
+                        $response->rows[$index]['id'] = $bid->getId();
+                        $response->rows[$index]['cell'] = array(
                             $bid->getId(),
                             $bid->getSum(),
                             $bid->getDay(),
@@ -241,7 +230,6 @@ class AuthorController extends Controller
                             $bid->getComment(),
                             ""
                         );
-                        $i++;
                     }
                     return new JsonResponse($response);
                 }
@@ -249,7 +237,7 @@ class AuthorController extends Controller
                     $formBid->handleRequest($request);
                     if ($formBid->isValid()) {
                         $postData = $request->request->get('formBid');
-                        Helper::updateAuthorBid($postData, $user, $order);
+                        Helper::setAuthorBid($postData, $user, $order);
                         return new Response(json_encode(array('response' => 'valid')));
                     }
                     else {
@@ -258,7 +246,7 @@ class AuthorController extends Controller
                         foreach ($formBid as $fieldName => $formField) {
                             $errors[$fieldName] = $formField->getErrors();
                         }
-                        foreach ($errors as $index=>$error) {
+                        foreach ($errors as $index => $error) {
                             if (isset($error[0])) {
                                 $arrayResponse[$index] = $error[0]->getMessage();
                             }

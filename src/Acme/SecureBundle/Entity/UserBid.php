@@ -66,6 +66,7 @@ class UserBid extends EntityRepository
         $this->date_bid = new \DateTime();
         $this->is_client_date = 0;
         $this->day = 0;
+        $timesp = 0;
     }
 
     public function setSum($sum)
