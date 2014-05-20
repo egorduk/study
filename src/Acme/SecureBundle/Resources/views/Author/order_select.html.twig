@@ -233,8 +233,7 @@
                         url: {{ path('secure_author_order', { num: order.num }) | json_encode | raw }},
                         datatype: 'json',
                         mtype: 'POST',
-                        recordtext: "Просмотр ставок {0} - {1}",
-                        colNames:['','Сумма','Времени на выполнение','В срок клиента','Дата ставки','Комментарий','Действия'],
+                        colNames:['','Сумма','На выполнение','В срок клиента','Дата ставки','Комментарий','Действия'],
                         colModel :[
                             {name:'id',index:'id',search:false,hidden:true},
                             {name:'sum',index:'sum',width:130,align:'center',resizable:false,editable:false,sortable:false,formatter:'currency',formatoptions:{thousandsSeparator: " ",decimalPlaces:0}},
@@ -252,30 +251,16 @@
                         rowNum: 100,
                         viewrecords: true,
                         hidegrid: false,
-                        caption: 'Таблица ставок',
-                        height: '250',
+                        caption: 'Таблица истории ставок',
+                        height: '100',
                         altRows: true,
                         altclass:'altRow',
                         loadComplete : function() {
-                            function getOrderId(e) {
+                            function getBidId(e) {
                                 var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'), rowId = $tr.attr('id');
                                 return rowId;
                             }
                             $("#refresh-bid").click(function(e) {
-                                /*var rowId = getOrderId(e);
-                                if (rowId) {
-                                    $.ajax({
-                                        url: 'delete',
-                                        type: 'POST',
-                                        data: 'orderId=' + rowId,
-                                        success: function(response) {
-                                            var resposeObject = window.JSON.parse(response);
-                                            if (resposeObject.action == "true") {
-                                                $("#listOrders").trigger('reloadGrid');
-                                            }
-                                        }
-                                    });
-                                }*/
                             });
                         }
                     });

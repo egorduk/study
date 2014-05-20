@@ -211,8 +211,10 @@
                        // calendarWeeks: true,
                         todayHighlight: true,
                         format: "dd/mm/yyyy",
-                        autoclose: true
-                        //todayBtn: true
+                        autoclose: true,
+                        startDate: '0d',
+                        language: 'ru',
+                        todayBtn: true
                     });
                     /*.on('changeDate', function(ev) {
                         if (ev.viewMode == "days"){
@@ -320,6 +322,9 @@
                     }
                 });
             </script>
+            <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-datepicker.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/locales/bootstrap-datepicker.ru.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/select2.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/js/sorting_select2.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/js/underscore.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/jquery.fileupload.js') }}"></script>

@@ -215,7 +215,7 @@ class AuthorController extends Controller
             $showWindow = false;
             $formBid = $this->createForm(new BidForm(), $bidValidate);
 
-            if($request->isXmlHttpRequest()) {
+            if ($request->isXmlHttpRequest()) {
                 $nd = $request->request->get('nd');
                 if (isset($nd)) {
                     $response = new Response();

@@ -52,7 +52,7 @@ secure_client_order:
   defaults:  { _controller: AcmeSecureBundle:Client:order }
 
 secure_client_orders:
-  pattern:   /secure/author/orders/{type}
+  pattern:   /secure/client/orders/{type}
   defaults:  { _controller: AcmeSecureBundle:Client:orders }
 
 secure_client_upload:

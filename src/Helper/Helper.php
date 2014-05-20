@@ -996,20 +996,26 @@ class Helper
     }
 
 
+    public static function getAllAuthorsBid($order) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $bids = $em->getRepository(self::$_tableUserBid)
+            ->findBy(array('order' => $order, 'is_show' => 1), array('id' => 'DESC'));
+        return $bids;
+    }
+
+
     public static function setAuthorBid($postData, $user, $order) {
         $sum = $postData['fieldSum'];
         $comment = $postData['fieldComment'];
         if (isset($postData['fieldDay'])) {
             $day = $postData['fieldDay'];
         }
-        else {
+        /*else {
             $dateOrderExpire = $order->getDateExpire();
             $dateNow = new \DateTime();
             $interval = date_diff($dateNow, $dateOrderExpire);
             echo $interval->format('%d:%h:%i');
-            //var_dump($date);
-            //$day =
-        }
+        }*/
         $userBid = new UserBid();
         $userBid->setUser($user);
         $userBid->setUserOrder($order);

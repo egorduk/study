@@ -25,7 +25,7 @@ use Helper\Helper;
 use Acme\SecureBundle\Form\Client\ClientProfileForm;
 use Acme\SecureBundle\Entity\Client\ClientProfileFormValidate;
 use Acme\SecureBundle\Form\Client\CreateOrderForm;
-use Acme\SecureBundle\Entity\CreateOrderFormValidate;
+use Acme\SecureBundle\Entity\Client\CreateOrderFormValidate;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 
@@ -239,7 +239,7 @@ class ClientController extends Controller
             );
         }
         elseif ($type == "delete") {
-            if($request->isXmlHttpRequest()) {
+            if ($request->isXmlHttpRequest()) {
                 $orderId = $request->request->get('orderId');
                 $isDelete = Helper::deleteOrderByClient($orderId, $user);
                 if ($isDelete) {
@@ -263,7 +263,7 @@ class ClientController extends Controller
             }
         }
         elseif ($type == "show") {
-            if($request->isXmlHttpRequest()) {
+            if ($request->isXmlHttpRequest()) {
                 $orderId = $request->request->get('orderId');
                 $isShow = Helper::showOrderForAuthor($orderId, $user);
                 if ($isShow) {
@@ -288,6 +288,28 @@ class ClientController extends Controller
             $userId = 1;
             $user = Helper::getUserById($userId);
             $order = Helper::getOrderByNumForClient($num, $user);
+
+            if ($request->isXmlHttpRequest()) {
+                $nd = $request->request->get('nd');
+                if (isset($nd)) {
+                    $response = new Response();
+                    $bids = Helper::getAllAuthorsBid($order);
+                    foreach($bids as $index => $bid) {
+                        $response->rows[$index]['id'] = $bid->getId();
+                        $response->rows[$index]['cell'] = array(
+                            $bid->getId(),
+                            $bid->getUser()->getLogin(),
+                            $bid->getSum(),
+                            $bid->getDay(),
+                            $bid->getIsClientDate(),
+                            //$bid->getDateBid()->format("d.m.Y H:i"),
+                            $bid->getComment(),
+                            ""
+                        );
+                    }
+                    return new JsonResponse($response);
+                }
+            }
 
             if ($order) {
 
@@ -329,119 +351,5 @@ class ClientController extends Controller
         }
     }
 
-
-    /**
-     * @Template()
-     * A function for viewing all sources and controlled them
-     * @param Request $request the data of client's request
-     * @return array|RedirectResponse
-     */
-    public function viewAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        if($request->isXmlHttpRequest())
-        {
-            $arrDeleteInd = (array)json_decode($request->request->get('arrDeleteInd'));
-
-            if (count($arrDeleteInd))
-            {
-                foreach($arrDeleteInd as $deleteId)
-                {
-                    $source = $em->getRepository($this->tableSource)
-                        ->find($deleteId);
-
-                    $em->remove($source);
-                }
-
-                $em->flush();
-
-                $response = new Response();
-                $response->headers->set('Content-Type', 'application/json');
-                return $response;
-            }
-
-            $arrSaveInd = (array)json_decode($request->request->get('arrSaveInd'));
-
-            if (count($arrSaveInd) && ($arrSaveInd[0] != -1))
-            {
-                $sources = $em->getRepository($this->tableSource)
-                    ->findAll();
-
-                foreach($sources as $source)
-                {
-                    $source->setActive(0);
-                    $em->persist($source);
-                }
-
-                $em->flush();
-
-                foreach($arrSaveInd as $saveId)
-                {
-                    foreach($sources as $source)
-                    {
-                        if ($source->getId() == $saveId)
-                        {
-                            $source->setActive(1);
-                            $em->persist($source);
-
-                            break;
-                        }
-                    }
-                }
-
-                $em->flush();
-
-                $response = new Response();
-                $response->headers->set('Content-Type', 'application/json');
-                return $response;
-            }
-            else if (count($arrSaveInd) && ($arrSaveInd[0] == -1))
-            {
-                $sources = $em->getRepository($this->tableSource)
-                    ->findAll();
-
-                foreach($sources as $source)
-                {
-                    $source->setActive(0);
-                    $em->persist($source);
-                }
-
-                $em->flush();
-
-                $response = new Response();
-                $response->headers->set('Content-Type', 'application/json');
-                return $response;
-            }
-
-            $loadActive = $request->request->get('loadActive');
-
-            if (isset($loadActive))
-            {
-                $sources = $em->getRepository($this->tableSource)
-                    ->findByActive(1);
-
-                $arrLoadActive = array();
-
-                foreach($sources as $source)
-                {
-                    $arrLoadActive[] = $source->getId();
-                }
-
-                $response = new Response(json_encode(array('arrLoadActive' => $arrLoadActive)));
-                $response->headers->set('Content-Type', 'application/json');
-                return $response;
-            }
-
-        }
-
-        $formView = $this->createForm(new ViewForm());
-        $formView->handleRequest($request);
-
-        $sources = $em->getRepository($this->tableSource)
-            ->findAll();
-
-        return array('count' => count($sources), 'sources' => $sources, 'formView' => $formView->createView());
-    }
 
 }
