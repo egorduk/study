@@ -1016,7 +1016,7 @@ class Helper
             ->getResult();*/
         //var_dump($bids); die;
         $id = $order->getId();
-        $query = $em->createQuery("SELECT DISTINCT(u.user),u,a FROM AcmeSecureBundle:UserBid u JOIN u.order a WITH a.id = '$id' GROUP BY u.user");
+        $query = $em->createQuery("SELECT * FROM (SELECT b.user_id AS uid,b.date_bid FROM user_bid AS b JOIN user AS u ON b.user_id = u.id ORDER BY b.date_bid DESC) AS t GROUP BY uid");
         $bids = $query->getResult();
         var_dump($bids); die;
         return $bids;
