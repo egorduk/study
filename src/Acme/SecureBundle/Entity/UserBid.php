@@ -52,7 +52,7 @@ class UserBid extends EntityRepository
      * @ORM\ManyToOne(targetEntity="Acme\AuthBundle\Entity\User", inversedBy="link_user_bid", cascade={"all"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      **/
-    protected $user;
+    private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="UserOrder", inversedBy="link_user_order", cascade={"all"})
@@ -66,7 +66,6 @@ class UserBid extends EntityRepository
         $this->date_bid = new \DateTime();
         $this->is_client_date = 0;
         $this->day = 0;
-        $timesp = 0;
     }
 
     public function setSum($sum)

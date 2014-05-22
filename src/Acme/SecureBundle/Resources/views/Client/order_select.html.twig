@@ -50,7 +50,7 @@
                         gridview: true,
                         viewsortcols: true,
                         recordtext: "Просмотр ставок {0} - {1}",
-                        colNames:['','Автор','Стоимость', 'Дней', 'В указанный срок', 'Комментарий', 'Действия'],
+                        colNames:['','Автор','Стоимость','Дней','В указанный срок','Комментарий','Дата ставки','Действия'],
                         colModel :[
                             {name:'id',index:'id',hidden:true},
                             {name:'author',index:'author',width:100,align:'center',resizable:false,editable:false},
@@ -58,6 +58,7 @@
                             {name:'day',index:'day',width:150,align:'center',resizable:false,editable:false},
                             {name:'is_client_date',index:'is_client_date',width:150,align:'center',resizable:false,editable:false},
                             {name:'comment',index:'comment',width:250,align:'center',resizable:false, editable:false},
+                            {name:'date_bid',index:'date_bid',width:250,align:'center',resizable:false, editable:false},
                             {name:'action',width:120,align:'center',sortable:false,resize:false,formatter:function() {
                                 return "<div class='delete-order' style='margin-left:8px;'>" +
                                         "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Удалить заказ' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +

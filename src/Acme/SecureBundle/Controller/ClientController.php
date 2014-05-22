@@ -293,18 +293,27 @@ class ClientController extends Controller
                 $nd = $request->request->get('nd');
                 if (isset($nd)) {
                     $response = new Response();
-                    $bids = Helper::getAllAuthorsBid($order);
+                    $bids = Helper::getAllAuthorsBids($order);
                     foreach($bids as $index => $bid) {
-                        $response->rows[$index]['id'] = $bid->getId();
+                        $response->rows[$index]['id'] = $bid[0]->getId();
+                        $response->rows[$index]['cell'] = array(
+                            $bid[0]->getId(),
+                            $bid[0]->getUser()->getLogin(),
+                            $bid[0]->getSum(),
+                            $bid[0]->getDay(),
+                            $bid[0]->getIsClientDate(),
+                            $bid[0]->getComment(),
+                            $bid[0]->getDateBid()->format("d.m.Y H:i"),
+                            ""
+                        /*$response->rows[$index]['id'] = $bid->getId();
                         $response->rows[$index]['cell'] = array(
                             $bid->getId(),
                             $bid->getUser()->getLogin(),
                             $bid->getSum(),
                             $bid->getDay(),
                             $bid->getIsClientDate(),
-                            //$bid->getDateBid()->format("d.m.Y H:i"),
                             $bid->getComment(),
-                            ""
+                            ""*/
                         );
                     }
                     return new JsonResponse($response);

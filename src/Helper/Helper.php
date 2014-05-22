@@ -996,10 +996,29 @@ class Helper
     }
 
 
-    public static function getAllAuthorsBid($order) {
+    public static function getAllAuthorsBids($order) {
         $em = self::getContainer()->get('doctrine')->getManager();
-        $bids = $em->getRepository(self::$_tableUserBid)
-            ->findBy(array('order' => $order, 'is_show' => 1), array('id' => 'DESC'));
+        /*$category = $em->getRepository(self::$_tableUserBid)->createQueryBuilder('b')
+            ->select('DISTINCT(b.user),b')
+            ->where('b.order = :order')
+            ->setParameter('order', $order)
+            ->groupBy('b.user')
+            ->addOrderBy('b.id', 'DESC')
+            ->getQuery();
+        $bids = $category->getResult();*/
+        /*$bids = $em->getRepository(self::$_tableUserBid)->createQueryBuilder('o')
+            ->andWhere('o.order = :order')
+            ->select('DISTINCT(o.user),o')
+            ->setParameter('order', $order)
+            //->addOrderBy('o.id', 'DESC')
+            ->groupBy('o.user')
+            ->getQuery()
+            ->getResult();*/
+        //var_dump($bids); die;
+        $id = $order->getId();
+        $query = $em->createQuery("SELECT DISTINCT(u.user),u,a FROM AcmeSecureBundle:UserBid u JOIN u.order a WITH a.id = '$id' GROUP BY u.user");
+        $bids = $query->getResult();
+        var_dump($bids); die;
         return $bids;
     }
 
