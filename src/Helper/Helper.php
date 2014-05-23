@@ -1015,10 +1015,12 @@ class Helper
             ->getQuery()
             ->getResult();*/
         //var_dump($bids); die;
-        $id = $order->getId();
-        $query = $em->createQuery("SELECT * FROM (SELECT b.user_id AS uid,b.date_bid FROM user_bid AS b JOIN user AS u ON b.user_id = u.id ORDER BY b.date_bid DESC) AS t GROUP BY uid");
+        //$id = $order->getId();
+        $query = $em->createQuery("SELECT a FROM (SELECT b.user_id AS uid,b.date_bid FROM user_bid AS b JOIN user AS u ON b.user_id = u.id ORDER BY b.date_bid DESC) AS t GROUP BY uid");
         $bids = $query->getResult();
-        var_dump($bids); die;
+        //$query = $em->createQuery('SELECT u FROM AcmeSecureBundle:OrderFile u WHERE u.id > 0');
+        //$bids = $query->getResult();
+        //var_dump($bids); die;
         return $bids;
     }
 
