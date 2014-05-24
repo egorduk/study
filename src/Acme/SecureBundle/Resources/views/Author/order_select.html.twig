@@ -236,7 +236,7 @@
                         colNames:['','Сумма','На выполнение','В срок клиента','Дата ставки','Комментарий','Действия'],
                         colModel :[
                             {name:'id',index:'id',search:false,hidden:true},
-                            {name:'sum',index:'sum',width:130,align:'center',resizable:false,editable:false,sortable:false,formatter:'currency',formatoptions:{thousandsSeparator: " ",decimalPlaces:0}},
+                            {name:'sum',index:'sum',width:130,align:'center',resizable:false,editable:false,sortable:false,formatter:'currency',formatoptions:{thousandsSeparator: " ",decimalPlaces:0,suffix:" руб."}},
                             {name:'day',index:'day',width:180,align:'center',resizable:false,editable:false,sortable:false},
                             {name:'is_client_date',index:'is_client_date',width:150,align:'center',resizable:false,editable:false,sortable:false,formatter:statusDate},
                             {name:'date_bid',index:'date_bid',width:150,align:'center',resizable:false,editable:false,sortable:false},

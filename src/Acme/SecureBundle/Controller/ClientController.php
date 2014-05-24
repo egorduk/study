@@ -295,7 +295,7 @@ class ClientController extends Controller
                     $response = new Response();
                     $bids = Helper::getAllAuthorsBids($order);
                     foreach($bids as $index => $bid) {
-                        $response->rows[$index]['id'] = $bid[0]->getId();
+                        /*$response->rows[$index]['id'] = $bid[0]->getId();
                         $response->rows[$index]['cell'] = array(
                             $bid[0]->getId(),
                             $bid[0]->getUser()->getLogin(),
@@ -314,6 +314,26 @@ class ClientController extends Controller
                             $bid->getIsClientDate(),
                             $bid->getComment(),
                             ""*/
+
+                        $fileName = $bid['avatar'];
+                        $userLogin = $bid['login'];
+                        $userId = $bid['uid'];
+                        $pathAvatar = Helper::getFullPathToAvatar($fileName);
+                        $urlClient = $this->generateUrl('secure_client_action', array('type' => 'view_client_profile', 'id' => $userId));
+                        $author = "<img src='$pathAvatar' align='middle' alt='$fileName' width='110px' class='thumbnail'><a href='$urlClient' class='label label-primary'>$userLogin</a>";
+
+                        $dateBid =  new \DateTime($bid['date_bid']);
+                        $response->rows[$index]['id'] = $bid['id'];
+                        $response->rows[$index]['cell'] = array(
+                            $bid['id'],
+                            $author,
+                            $bid['sum'],
+                            $bid['day'],
+                            $bid['is_client_date'],
+                            $bid['comment'],
+                            $dateBid->format("d.m.Y H:i"),
+                            ""
+
                         );
                     }
                     return new JsonResponse($response);

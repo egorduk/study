@@ -998,29 +998,13 @@ class Helper
 
     public static function getAllAuthorsBids($order) {
         $em = self::getContainer()->get('doctrine')->getManager();
-        /*$category = $em->getRepository(self::$_tableUserBid)->createQueryBuilder('b')
-            ->select('DISTINCT(b.user),b')
-            ->where('b.order = :order')
-            ->setParameter('order', $order)
-            ->groupBy('b.user')
-            ->addOrderBy('b.id', 'DESC')
-            ->getQuery();
-        $bids = $category->getResult();*/
-        /*$bids = $em->getRepository(self::$_tableUserBid)->createQueryBuilder('o')
-            ->andWhere('o.order = :order')
-            ->select('DISTINCT(o.user),o')
-            ->setParameter('order', $order)
-            //->addOrderBy('o.id', 'DESC')
-            ->groupBy('o.user')
-            ->getQuery()
-            ->getResult();*/
+        $id = $order->getId();
+        $stmt = $em->getConnection()
+            ->prepare("SELECT * FROM (SELECT b.user_id AS uid,b.*,u.avatar,u.login FROM user_bid AS b JOIN user_order AS uo ON b.user_order_id = uo.id JOIN `user` AS u ON b.user_id = u.id WHERE b.user_order_id = '$id' AND b.is_show = '1' ORDER BY b.date_bid DESC) AS t GROUP BY uid");
+        $stmt->execute();
+        $bids = $stmt->fetchAll();
         //var_dump($bids); die;
-        //$id = $order->getId();
-        $query = $em->createQuery("SELECT a FROM (SELECT b.user_id AS uid,b.date_bid FROM user_bid AS b JOIN user AS u ON b.user_id = u.id ORDER BY b.date_bid DESC) AS t GROUP BY uid");
-        $bids = $query->getResult();
-        //$query = $em->createQuery('SELECT u FROM AcmeSecureBundle:OrderFile u WHERE u.id > 0');
-        //$bids = $query->getResult();
-        //var_dump($bids); die;
+
         return $bids;
     }
 
@@ -1060,5 +1044,10 @@ class Helper
             $errorMessageTemplate = str_replace($key, $value, $errorMessageTemplate);
         }
         return $errorMessageTemplate;
+    }
+
+
+    public static function getFullPathToAvatar($fileName) {
+        return '/study/web/uploads/avatars/' . $fileName;
     }
 }

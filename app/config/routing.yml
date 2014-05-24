@@ -59,6 +59,9 @@ secure_client_upload:
   pattern:   /secure/client/upload
   defaults:  { _controller: AcmeSecureBundle:Client:upload }
 
+secure_client_action:
+  pattern:   /secure/client/action/{type}/{id}
+  defaults:  { _controller: AcmeSecureBundle:Client:action }
 
 #--------------------------------------------------Author---------------------------------------------------#
 

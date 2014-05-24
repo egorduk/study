@@ -20,6 +20,15 @@
             .gridCellTime {
                 color: blue;
             }
+            .thumbnail {
+                margin-bottom: 7px;
+            }
+            .label-primary {
+                background-color: #0088cc;
+            }
+            .ui-widget-content a, .ui-widget-content .ui-state-highlight a, .ui-widget-content .ui-state-hover a {
+                color: white;
+            }
         </style>
         <div class="container">
             <div class="row">
@@ -53,8 +62,8 @@
                         colNames:['','Автор','Стоимость','Дней','В указанный срок','Комментарий','Дата ставки','Действия'],
                         colModel :[
                             {name:'id',index:'id',hidden:true},
-                            {name:'author',index:'author',width:100,align:'center',resizable:false,editable:false},
-                            {name:'sum',index:'sum',width:150,align:'center',resizable:false,editable:false},
+                            {name:'author',index:'author',width:120,align:'center',resizable:false,editable:false},
+                            {name:'sum',index:'sum',width:150,align:'center',resizable:false,editable:false,formatter:'currency',formatoptions:{thousandsSeparator: " ",decimalPlaces:0,suffix:" руб."}},
                             {name:'day',index:'day',width:150,align:'center',resizable:false,editable:false},
                             {name:'is_client_date',index:'is_client_date',width:150,align:'center',resizable:false,editable:false},
                             {name:'comment',index:'comment',width:250,align:'center',resizable:false, editable:false},
