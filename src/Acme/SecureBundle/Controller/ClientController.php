@@ -321,7 +321,6 @@ class ClientController extends Controller
                         $pathAvatar = Helper::getFullPathToAvatar($fileName);
                         $urlClient = $this->generateUrl('secure_client_action', array('type' => 'view_client_profile', 'id' => $userId));
                         $author = "<img src='$pathAvatar' align='middle' alt='$fileName' width='110px' class='thumbnail'><a href='$urlClient' class='label label-primary'>$userLogin</a>";
-
                         $dateBid =  new \DateTime($bid['date_bid']);
                         $response->rows[$index]['id'] = $bid['id'];
                         $response->rows[$index]['cell'] = array(

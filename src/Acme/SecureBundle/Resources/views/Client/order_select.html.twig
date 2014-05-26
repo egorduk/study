@@ -8,7 +8,6 @@
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.fmatter.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.tablednd.js') }}"></script>
         <style>
             .altRow {
                 background-color: #f3f3f3;
@@ -50,7 +49,6 @@
             <div id="pagerBids"></div>
             <script>
                 $(document).ready(function() {
-                    $("#listBids").tableDnD({scrollAmount:0});
                     $("#listBids").jqGrid({
                         url: {{ path('secure_client_order', { num: order.num }) | json_encode | raw }},
                         datatype: 'json',
@@ -65,37 +63,35 @@
                             {name:'author',index:'author',width:120,align:'center',resizable:false,editable:false},
                             {name:'sum',index:'sum',width:150,align:'center',resizable:false,editable:false,formatter:'currency',formatoptions:{thousandsSeparator: " ",decimalPlaces:0,suffix:" руб."}},
                             {name:'day',index:'day',width:150,align:'center',resizable:false,editable:false},
-                            {name:'is_client_date',index:'is_client_date',width:150,align:'center',resizable:false,editable:false},
+                            {name:'is_client_date',index:'is_client_date',width:150,align:'center',resizable:false,editable:false,formatter:statusDate},
                             {name:'comment',index:'comment',width:250,align:'center',resizable:false, editable:false},
                             {name:'date_bid',index:'date_bid',width:250,align:'center',resizable:false, editable:false},
-                            {name:'action',width:120,align:'center',sortable:false,resize:false,formatter:function() {
-                                return "<div class='delete-order' style='margin-left:8px;'>" +
-                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Удалить заказ' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
-                                        "<span class='icon-trash'></span></div></div>";
+                            {name:'action',width:105,align:'center',sortable:false,resize:false,formatter:function() {
+                                return "<div class='delete-bid' style='margin-left:8px;'>" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Удалить ставку автора' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<span class='icon-trash'></span></div></div>" +
+                                        "<div class='confirm-bid' style='margin-left:8px;'>" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Принять ставку автора' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<span class='icon-ok-5'></span></div></div>" +
+                                        "<div class='auction-bid' style='margin-left:8px;'>" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Предложить торг автору' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<span class='icon-hammer'></span></div></div>";
                             }}
 
                         ],
                         pager: $('#pagerBids'),
-                        //toolbar: [true,'top'],
                         rowNum: 10,
                         rowList: [5,10,20,30],
-                        //sortname: 'num',
-                        //sortorder: 'desc',
                         viewrecords: true,
                         hidegrid: false,
                         caption: 'Таблица ставок',
                         height: '350',
-                        //width: '1300'
                         emptyrecords: "Нету ставок авторов",
-                        //width: 600,
-                        //width: null,
-                        //shrinkToFit: false,
                         altRows: true,
                         altclass:'altRow',
 
                         gridComplete: function() {
                             $("#_empty","#listBids").addClass("nodrag nodrop");
-                            $("#listBids").tableDnDUpdate();
                         },
 
                         loadComplete : function() {
@@ -121,33 +117,19 @@
                                 }
                             });
                         }
-                        /*gridComplete: function() {
-                         },*/
-                        /*onCellSelect: function(rowid, iCol) {
-                            if (iCol != 10) {
-                                var rowData = $("#listBids").getRowData(rowid);
-                                var num = rowData['num'];
-                                location.href = 'view/' + num;
-                            }
-                        }*/
-                        /*getCellIndex: function(rowid, iCol, cellcontent, e) {
-                         return rowid;
-                         },*/
-                        /*loadComplete: function(data)
-                         {
-                         var NoOfCellAdd = Number($("#list").parent().parent().css('height').split('px')[0]) / 5;
-
-                         for (var i = data.records; i <= NoOfCellAdd; i++)
-                         {
-                         $("#list").addRowData(i + 1, {});
-                         }
-                         }, */
-                        /*onSelectRow: function(id) {
-                         //location.href = 'order/' + id;
-                         }*/
                     }).navGrid('#pagerBids',{view:false, search:false, del:false, add:false, edit:false, refresh:true},
                             {},{},{},{closeOnEscape:true, multipleSearch:false, closeAfterSearch:false},{}
                     );
+
+                    function statusDate(cellvalue, options, rowObject)
+                    {
+                        if (cellvalue == "1") {
+                            return ("<span class='icon-plus-6'></span>");
+                        }
+                        else {
+                            return ("<span class='icon-minus-4'></span>");
+                        }
+                    }
 
                     if (!sessionStorage.getItem("Page2Visited")) {
                         {% if (showWindow) %}
