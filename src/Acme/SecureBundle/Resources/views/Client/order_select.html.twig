@@ -3,7 +3,7 @@
 {% block title "Order" %}
 
     {% block content %}
-        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
@@ -28,6 +28,16 @@
             .ui-widget-content a, .ui-widget-content .ui-state-highlight a, .ui-widget-content .ui-state-hover a {
                 color: white;
             }
+            #dialog-message p .icon-hammer {
+                font-size: 45px;
+                color: green;
+            }
+            .ui-dialog-title {
+                color: green;
+            }
+            #dialog-message {
+                display: none;
+            }
         </style>
         <div class="container">
             <div class="row">
@@ -45,10 +55,17 @@
                 </div>
                 <a href="{{ path('secure_client_index') }}">Главная</a>
             </div>
+            <div id="dialog-message" title="Подтверждение ставки">
+                <p>
+                    <span class="icon-hammer" style="float:left; margin:0 7px 50px 0;"></span>
+                    Вы уверены, что согласны с выбранной ставкой?
+                </p>
+            </div>
             <table id="listBids"></table>
             <div id="pagerBids"></div>
             <script>
                 $(document).ready(function() {
+                    var btn = $.fn.button.noConflict();
                     $("#listBids").jqGrid({
                         url: {{ path('secure_client_order', { num: order.num }) | json_encode | raw }},
                         datatype: 'json',
@@ -67,12 +84,12 @@
                             {name:'comment',index:'comment',width:250,align:'center',resizable:false, editable:false},
                             {name:'date_bid',index:'date_bid',width:250,align:'center',resizable:false, editable:false},
                             {name:'action',width:105,align:'center',sortable:false,resize:false,formatter:function() {
-                                return "<div class='delete-bid' style='margin-left:8px;'>" +
-                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Удалить ставку автора' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
-                                        "<span class='icon-trash'></span></div></div>" +
-                                        "<div class='confirm-bid' style='margin-left:8px;'>" +
+                                return "<div class='confirm-bid' style='margin-left:8px;'>" +
                                         "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Принять ставку автора' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
                                         "<span class='icon-ok-5'></span></div></div>" +
+                                        "<div class='delete-bid' style='margin-left:8px;'>" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Удалить ставку автора' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<span class='icon-trash'></span></div></div>" +
                                         "<div class='auction-bid' style='margin-left:8px;'>" +
                                         "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Предложить торг автору' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
                                         "<span class='icon-hammer'></span></div></div>";
@@ -81,7 +98,7 @@
                         ],
                         pager: $('#pagerBids'),
                         rowNum: 10,
-                        rowList: [5,10,20,30],
+                        rowList: [10,20,30],
                         viewrecords: true,
                         hidegrid: false,
                         caption: 'Таблица ставок',
@@ -89,28 +106,38 @@
                         emptyrecords: "Нету ставок авторов",
                         altRows: true,
                         altclass:'altRow',
-
-                        gridComplete: function() {
-                            $("#_empty","#listBids").addClass("nodrag nodrop");
-                        },
-
                         loadComplete : function() {
-                            //var cm = $("#listOrders").jqGrid('getGridParam', 'colModel');
                             function getOrderId(e) {
                                 var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'), rowId = $tr.attr('id');
                                 return rowId;
                             }
-                            $(".delete-order").click(function(e) {
+                            $(".confirm-bid").click(function(e) {
                                 var rowId = getOrderId(e);
+                               // alert(rowId);
                                 if (rowId) {
-                                    $.ajax({
-                                        url: 'delete',
-                                        type: 'POST',
-                                        data: 'orderId=' + rowId,
-                                        success: function(response) {
-                                            var resposeObject = window.JSON.parse(response);
-                                            if (resposeObject.action == "true") {
-                                                $("#listOrders").trigger('reloadGrid');
+                                    $("#dialog-message").dialog({
+                                        modal: true,
+                                        resizable: true,
+                                        height: 260,
+                                        width: 300,
+                                        buttons: {
+                                            Ok: function() {
+                                                $.ajax({
+                                                    url: 'confirm_bid',
+                                                    type: 'POST',
+                                                    data: 'orderId=' + rowId,
+                                                    success: function(response) {
+                                                        /*var resposeObject = window.JSON.parse(response);
+                                                        if (resposeObject.action == "true") {
+                                                            $("#listOrders").trigger('reloadGrid');
+                                                        }*/
+                                                    }
+                                                });
+                                                $(this).dialog("close");
+
+                                            },
+                                            Cancel: function() {
+                                                $(this).dialog("close");
                                             }
                                         }
                                     });
@@ -131,7 +158,7 @@
                         }
                     }
 
-                    if (!sessionStorage.getItem("Page2Visited")) {
+                    /*if (!sessionStorage.getItem("Page2Visited")) {
                         {% if (showWindow) %}
                             function closeMessage(el) {
                                 el.addClass('is-hidden');
@@ -148,7 +175,7 @@
                     else {
                         sessionStorage.removeItem("Page2Visited");
                         $("#modal-window").hide();
-                    }
+                    }*/
                 });
             </script>
         </div>
