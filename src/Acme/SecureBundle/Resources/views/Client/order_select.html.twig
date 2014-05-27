@@ -38,6 +38,10 @@
             #dialog-message {
                 display: none;
             }
+            .state-selected {
+                background-color: green;
+                color: white;
+            }
         </style>
         <div class="container">
             <div class="row">
@@ -83,7 +87,7 @@
                             {name:'is_client_date',index:'is_client_date',width:150,align:'center',resizable:false,editable:false,formatter:statusDate},
                             {name:'comment',index:'comment',width:250,align:'center',resizable:false, editable:false},
                             {name:'date_bid',index:'date_bid',width:250,align:'center',resizable:false, editable:false},
-                            {name:'action',width:105,align:'center',sortable:false,resize:false,formatter:function() {
+                            {name:'action',width:135,align:'center',sortable:false,resize:false,formatter:function() {
                                 return "<div class='confirm-bid' style='margin-left:8px;'>" +
                                         "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Принять ставку автора' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
                                         "<span class='icon-ok-5'></span></div></div>" +
@@ -92,9 +96,11 @@
                                         "<span class='icon-trash'></span></div></div>" +
                                         "<div class='auction-bid' style='margin-left:8px;'>" +
                                         "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Предложить торг автору' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
-                                        "<span class='icon-hammer'></span></div></div>";
+                                        "<span class='icon-hammer'></span></div></div>" +
+                                        "<div class='open-chat' style='margin-left:8px;'>" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Открыть чат с автором' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<span class='icon-chat-5'></span></div></div>";
                             }}
-
                         ],
                         pager: $('#pagerBids'),
                         rowNum: 10,
@@ -123,18 +129,19 @@
                                         buttons: {
                                             Ok: function() {
                                                 $.ajax({
-                                                    url: 'confirm_bid',
+                                                    //url: 'confirm_bid',
                                                     type: 'POST',
-                                                    data: 'orderId=' + rowId,
+                                                    data: 'bidId=' + rowId + '&action=confirmBid',
                                                     success: function(response) {
                                                         /*var resposeObject = window.JSON.parse(response);
                                                         if (resposeObject.action == "true") {
                                                             $("#listOrders").trigger('reloadGrid');
                                                         }*/
+                                                        $("tr.jqgrow#" + rowId).addClass("state-selected");
+                                                        
                                                     }
                                                 });
                                                 $(this).dialog("close");
-
                                             },
                                             Cancel: function() {
                                                 $(this).dialog("close");

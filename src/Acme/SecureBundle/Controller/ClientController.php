@@ -291,30 +291,11 @@ class ClientController extends Controller
 
             if ($request->isXmlHttpRequest()) {
                 $nd = $request->request->get('nd');
+                $action = $request->request->get('action');
                 if (isset($nd)) {
                     $response = new Response();
-                    $bids = Helper::getAllAuthorsBids($order);
+                    $bids = Helper::getAllAuthorsBidsForOrder($order);
                     foreach($bids as $index => $bid) {
-                        /*$response->rows[$index]['id'] = $bid[0]->getId();
-                        $response->rows[$index]['cell'] = array(
-                            $bid[0]->getId(),
-                            $bid[0]->getUser()->getLogin(),
-                            $bid[0]->getSum(),
-                            $bid[0]->getDay(),
-                            $bid[0]->getIsClientDate(),
-                            $bid[0]->getComment(),
-                            $bid[0]->getDateBid()->format("d.m.Y H:i"),
-                            ""
-                        /*$response->rows[$index]['id'] = $bid->getId();
-                        $response->rows[$index]['cell'] = array(
-                            $bid->getId(),
-                            $bid->getUser()->getLogin(),
-                            $bid->getSum(),
-                            $bid->getDay(),
-                            $bid->getIsClientDate(),
-                            $bid->getComment(),
-                            ""*/
-
                         $fileName = $bid['avatar'];
                         $userLogin = $bid['login'];
                         $userId = $bid['uid'];
@@ -332,10 +313,20 @@ class ClientController extends Controller
                             $bid['comment'],
                             $dateBid->format("d.m.Y H:i"),
                             ""
-
                         );
                     }
                     return new JsonResponse($response);
+                }
+                elseif (isset($action)) {
+                    if ($action == 'confirmBid') {
+                        $bidId = $request->request->get('bidId');
+                        $actionResponse = Helper::confirmSelectedClientBid($bidId, $order);
+                        $response = new Response();
+                        $response->action = $actionResponse;
+                        //$response->orderId = $order->getId();
+                        return new JsonResponse($response);
+                    }
+
                 }
             }
 

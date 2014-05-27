@@ -46,6 +46,11 @@ class UserBid extends EntityRepository
     /**
      * @ORM\Column(type="integer")
      */
+    private $is_author_select;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
     private $is_show;
 
     /**
@@ -66,6 +71,7 @@ class UserBid extends EntityRepository
         $this->date_bid = new \DateTime();
         $this->is_client_date = 0;
         $this->day = 0;
+        $this->is_select = 0;
     }
 
     public function setSum($sum)
@@ -141,6 +147,16 @@ class UserBid extends EntityRepository
     public function setIsClientDate($val)
     {
         $this->is_client_date = $val;
+    }
+
+    public function setIsAuthorSelect($val)
+    {
+        $this->is_author_select = $val;
+    }
+
+    public function getIsAuthorSelect()
+    {
+        return $this->is_author_select;
     }
 
 }

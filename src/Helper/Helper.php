@@ -996,7 +996,7 @@ class Helper
     }
 
 
-    public static function getAllAuthorsBids($order) {
+    public static function getAllAuthorsBidsForOrder($order) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $id = $order->getId();
         $stmt = $em->getConnection()
@@ -1049,5 +1049,20 @@ class Helper
 
     public static function getFullPathToAvatar($fileName) {
         return '/study/web/uploads/avatars/' . $fileName;
+    }
+
+    public static function confirmSelectedClientBid($bidId, $order) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $bid = $em->getRepository(self::$_tableUserBid)
+            ->findOneById($bidId);
+        if ($bid)
+        {
+            $bid->setIsAuthorSelect(1);
+            $em->flush();
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
