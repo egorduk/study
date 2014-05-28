@@ -39,8 +39,9 @@
                 display: none;
             }
             .state-selected {
-                background-color: green;
                 color: white;
+                border: 1px solid green;
+                background: green;
             }
         </style>
         <div class="container">
@@ -76,7 +77,7 @@
                         mtype: 'POST',
                         rownumbers: true,
                         gridview: true,
-                        viewsortcols: true,
+                        //viewsortcols: true,
                         recordtext: "Просмотр ставок {0} - {1}",
                         colNames:['','Автор','Стоимость','Дней','В указанный срок','Комментарий','Дата ставки','Действия'],
                         colModel :[
@@ -87,7 +88,7 @@
                             {name:'is_client_date',index:'is_client_date',width:150,align:'center',resizable:false,editable:false,formatter:statusDate},
                             {name:'comment',index:'comment',width:250,align:'center',resizable:false, editable:false},
                             {name:'date_bid',index:'date_bid',width:250,align:'center',resizable:false, editable:false},
-                            {name:'action',width:135,align:'center',sortable:false,resize:false,formatter:function() {
+                            {name:'action',index:'action',width:135,align:'center',sortable:false,resize:false,unformat:unform ,formatter:function() {
                                 return "<div class='confirm-bid' style='margin-left:8px;'>" +
                                         "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Принять ставку автора' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
                                         "<span class='icon-ok-5'></span></div></div>" +
@@ -108,19 +109,22 @@
                         viewrecords: true,
                         hidegrid: false,
                         caption: 'Таблица ставок',
-                        height: '350',
+                        height: '400',
                         emptyrecords: "Нету ставок авторов",
-                        altRows: true,
-                        altclass:'altRow',
+                        //altRows: true,
+                        //altclass:'altRow',
                         loadComplete : function() {
-                            function getOrderId(e) {
+                            function getRowId(e) {
                                 var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'), rowId = $tr.attr('id');
                                 return rowId;
                             }
                             $(".confirm-bid").click(function(e) {
-                                var rowId = getOrderId(e);
-                               // alert(rowId);
-                                if (rowId) {
+                                var rowId = getRowId(e);
+                                newData = {sum : "999", day: "777", action: "123"};
+                                oldData = $("#listBids").getRowData(rowId);
+                                //console.log(oldData);
+                                $("#listBids").setRowData(rowId, newData);
+                                /*if (rowId) {
                                     $("#dialog-message").dialog({
                                         modal: true,
                                         resizable: true,
@@ -133,10 +137,10 @@
                                                     type: 'POST',
                                                     data: 'bidId=' + rowId + '&action=confirmBid',
                                                     success: function(response) {
-                                                        /*var resposeObject = window.JSON.parse(response);
+                                                        var resposeObject = window.JSON.parse(response);
                                                         if (resposeObject.action == "true") {
                                                             $("#listOrders").trigger('reloadGrid');
-                                                        }*/
+                                                        }
                                                         $("tr.jqgrow#" + rowId).addClass("state-selected");
 
                                                     }
@@ -148,21 +152,27 @@
                                             }
                                         }
                                     });
-                                }
+                                }*/
                             });
+                        },
+                        onCellSelect: function(rowid, iCol) {
+                            return unform();
                         }
                     }).navGrid('#pagerBids',{view:false, search:false, del:false, add:false, edit:false, refresh:true},
                             {},{},{},{closeOnEscape:true, multipleSearch:false, closeAfterSearch:false},{}
                     );
 
-                    function statusDate(cellvalue, options, rowObject)
-                    {
+                    function statusDate(cellvalue, options, rowObject) {
                         if (cellvalue == "1") {
                             return ("<span class='icon-plus-6'></span>");
                         }
                         else {
                             return ("<span class='icon-minus-4'></span>");
                         }
+                    }
+
+                    function unform() {
+                        return "<span class='icon-cancel-5'></span>";
                     }
 
                     /*if (!sessionStorage.getItem("Page2Visited")) {
