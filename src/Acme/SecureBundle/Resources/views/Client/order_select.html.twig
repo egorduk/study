@@ -16,12 +16,6 @@
             .ui-jqgrid .ui-jqgrid-htable th div {
                 height: 21px;
             }
-            .gridCellTime {
-                color: blue;
-            }
-            .thumbnail {
-                margin-bottom: 7px;
-            }
             .label-primary {
                 background-color: #0088cc;
             }
@@ -83,7 +77,7 @@
             <div id="pagerBids"></div>
             <script>
                 $(document).ready(function() {
-                    var btn = $.fn.button.noConflict();
+                    $.fn.button.noConflict();
                     $("#listBids").jqGrid({
                         url: {{ path('secure_client_order', { num: order.num }) | json_encode | raw }},
                         datatype: 'json',

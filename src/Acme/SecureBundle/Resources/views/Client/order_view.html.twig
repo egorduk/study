@@ -3,15 +3,14 @@
 {% block title "View order" %}
 
     {% block content %}
-        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.fmatter.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-datepicker.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/locales/bootstrap-datepicker.ru.js') }}"></script>
         <div class="container">
-            <script>
-                sessionStorage.setItem("Page2Visited", "True");
-            </script>
             <style type="text/css">
                 .altRow {
                     background-color: #f3f3f3;
@@ -27,28 +26,46 @@
                 .gridCellTime {
                     color: blue;
                 }
-                .show-order {
+                .show-order, #dialog-configure-order {
                     display: none;
                 }
+                .label-primary {
+                    background-color: #0088cc;
+                }
+                #ui-id-1 {
+                    color: blue;
+                }
+                /*body { font-size: 62.5%; }*/
+                /*label, input { display:block; }*/
+                input.text { margin-bottom:12px; width:100%; padding: .4em; }
+                fieldset { padding:0; border:0; margin-top:25px; }
+                h1 { font-size: 1.2em; margin: .6em 0; }
+                div#users-contain { width: 350px; margin: 20px 0; }
+                div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+                div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+                .ui-dialog .ui-state-error { padding: .3em; }
+                .validateTips { border: 1px solid transparent; padding: 0.3em; }
             </style>
             <div class="row offset-margin-right">
-                {% if (showWindow) %}
-                <div id="success-window">
-                    <div class="Message Message--green" id="js-timer">
-                        <div class="Message-icon">
-                            <i class="fa fa-check"></i>
-                        </div>
-                        <div class="Message-body">
-                            <p align="center">Ваш заказ создан! Ожидайте ставок авторов!</p>
-                        </div>
-                        <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
-                    </div>
-                </div>
-                {% endif %}
                 <table id="listOrders"></table>
                 <div id="pagerOrders"></div>
+                <div id="dialog-configure-order" title="Управление заказом">
+                    <p class="validateTips">All form fields are required.</p>
+                    <form>
+                        <fieldset>
+                            <label for="task">Задание</label>
+                            <textarea name="task" style="overflow:auto;resize:none" required id="task" placeholder="Введите задание..." class="text ui-widget-content ui-corner-all form-control" cols="5" rows="5"></textarea>
+                            <label for="new_date_expire">Выполнение до</label>
+                            <div class="input-group">
+                                <input type="text" name="new_date_expire" id="new_date_expire" required placeholder="Нажмите сюда..." value="" class="text ui-widget-content ui-corner-all form-control">
+                                <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
                 <script>
                     $(document).ready(function() {
+                        $.fn.button.noConflict();
                         $("#listOrders").jqGrid({
                             url: {{ path('secure_client_orders', { type: 'view' }) | json_encode | raw }},
                             datatype: 'json',
@@ -80,7 +97,7 @@
                                             "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Управление заказом' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
                                             "<span class='icon-cogs'></span></div></div>";
                                 }},
-                                {name:'is_show_author',index:'is_show_author',key:true,search:false,hidden:true},
+                                {name:'is_show_author',index:'is_show_author',key:true,search:false,hidden:true}
                             ],
                             pager: $('#pagerOrders'),
                             toolbar: [true,'top'],
@@ -139,8 +156,8 @@
                                             success: function(response) {
                                                 var resposeObject = window.JSON.parse(response);
                                                 if (resposeObject.action == "true") {
-                                                    grid.trigger('reloadGrid');
-                                                    //grid.setCell(rowId,'status_order',"Скрытый");
+                                                    //grid.trigger('reloadGrid');
+                                                    grid.setCell(rowId,'status_order',"Скрытый");
                                                     actionHideOrder(row, "hide");
                                                 }
                                             }
@@ -149,7 +166,7 @@
                                 });
                                 $(".show-order").click(function(e) {
                                     var rowId = getRowId(e);
-                                    var row = getRow($(this));;
+                                    var row = getRow($(this));
                                     if (rowId) {
                                         $.ajax({
                                             url: 'show',
@@ -165,14 +182,82 @@
                                         });
                                     }
                                 });
+                                $(".configure-order").click(function(e) {
+                                    var rowId = getRowId(e);
+                                    var row = getRow($(this));
+                                    var taskContent = grid.getCell(rowId, "task");
+                                    $("#task").val(taskContent);
+                                    $("#dialog-configure-order").dialog({
+                                        resizable: false,
+                                        height: 500,
+                                        width: 500,
+                                        modal: true,
+                                        buttons: {
+                                            "Сохранить": function() {
+                                                /*var bValid = true;
+                                                allFields.removeClass( "ui-state-error" );
+                                                bValid = bValid && checkLength( name, "username", 3, 16 );
+                                                bValid = bValid && checkLength( email, "email", 6, 80 );
+                                                bValid = bValid && checkLength( password, "password", 5, 16 );
+                                                bValid = bValid && checkRegexp( name, /^[a-z]([0-9a-z_])+$/i, "Username may consist of a-z, 0-9, underscores, begin with a letter." );
+                                                bValid = bValid && checkRegexp( email, /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i, "eg. ui@jquery.com" );
+                                                bValid = bValid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
+                                                if ( bValid ) {
+                                                    $( "#users tbody" ).append( "<tr>" +
+                                                            "<td>" + name.val() + "</td>" +
+                                                            "<td>" + email.val() + "</td>" +
+                                                            "<td>" + password.val() + "</td>" +
+                                                            "</tr>" );
+                                                    $( this ).dialog( "close" );
+                                                }*/
+                                            },
+                                            "Отмена": function() {
+                                                $(this).dialog("close");
+                                            }
+                                        },
+                                        close: function() {
+                                            allFields.val("").removeClass("ui-state-error");
+                                        }
+                                    });
+
+                                    $('#new_date_expire').datepicker({
+                                        todayHighlight: true,
+                                        format: "dd/mm/yyyy",
+                                        autoclose: true,
+                                        startDate: '1d',
+                                        language: 'ru',
+                                        todayBtn: true
+                                    });
+
+                                    if (rowId) {
+
+                                        /*$.ajax({
+                                            url: 'hide',
+                                            type: 'POST',
+                                            data: 'orderId=' + rowId,
+                                            success: function(response) {
+                                                var resposeObject = window.JSON.parse(response);
+                                                if (resposeObject.action == "true") {
+                                                    grid.trigger('reloadGrid');
+                                                    //grid.setCell(rowId,'status_order',"Скрытый");
+                                                    actionHideOrder(row, "hide");
+                                                }
+                                            }
+                                        });*/
+                                    }
+                                });
                                 var grids = grid.getDataIDs();
                                 var gridsLength = grids.length;
                                 for (var i = 0; i < gridsLength; i++) {
-                                    if (grid.getCell(grids[i], "is_show_author") == 1) {
-                                        var selectedRowBid = $("tr.jqgrow#" + grids[i]);
-                                        var blockShowOrder = selectedRowBid.find(".show-order"), blockHideOrder = selectedRowBid.find(".hide-order");
+                                    var selectedRowOrder = $("tr.jqgrow#" + grids[i]);
+                                    var blockShowOrder = selectedRowOrder.find(".show-order"), blockHideOrder = selectedRowOrder.find(".hide-order");
+                                    if (Number(grid.getCell(grids[i], "is_show_author"))) {
                                         blockShowOrder.hide();
                                         blockHideOrder.show();
+                                    }
+                                    else {
+                                        blockHideOrder.hide();
+                                        blockShowOrder.show();
                                     }
                                 }
                             },
@@ -186,12 +271,37 @@
                         }).navGrid('#pagerOrders',{view:false, search:true, del:false, add:false, edit:false, refresh:true},
                                 {},{},{},{closeOnEscape:true, multipleSearch:false, closeAfterSearch:true},{}
                         );
+                        var task = $("#task"), allFields = $([]).add(task), tips = $(".validateTips");
+                        function updateTips(t) {
+                            tips.text(t).addClass( "ui-state-highlight");
+                            setTimeout(function() {
+                                tips.removeClass("ui-state-highlight", 1500);
+                            }, 500);
+                        }
+                        function checkLength(o, n, min, max) {
+                            if (o.val().length > max || o.val().length < min) {
+                                o.addClass("ui-state-error");
+                                updateTips("Length of " + n + " must be between " + min + " and " + max + ".");
+                                return false;
+                            } else {
+                                return true;
+                            }
+                        }
+                        function checkRegexp(o, regexp, n) {
+                            if (!( regexp.test( o.val()))) {
+                                o.addClass("ui-state-error");
+                                updateTips(n);
+                                return false;
+                            } else {
+                                return true;
+                            }
+                        }
 
                         $("#t_listOrders").height(60);
                         $("#t_listOrders").append('<div id="">Для поиска нажмите на </div><div id="">Для сброса результата поиска нажмите на </div><div id="">Для обновления таблицы нажмите на </div>');
                         $(".default").addClass('form-control');
 
-                        function closeMessage(el) {
+                        /*function closeMessage(el) {
                             el.addClass('is-hidden');
                         }
                         $('.js-messageClose').on('click', function(e) {
@@ -199,7 +309,7 @@
                         });
                         setTimeout(function() {
                             closeMessage($('#js-timer'));
-                        }, 3000);
+                        }, 3000);*/
                     });
                 </script>
             </div>
