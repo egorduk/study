@@ -605,7 +605,7 @@ class Helper
     }
 
 
-    public static function getClientOrdersForGrid($sOper = null, $sField = null, $sData = null, $firstRowIndex, $rowsPerPage, $user, $sortingField, $sortingOrder) {
+    public static function getCreatedClientsOrdersForGrid($sOper = null, $sField = null, $sData = null, $firstRowIndex, $rowsPerPage, $user, $sortingField, $sortingOrder) {
         $em = self::getContainer()->get('doctrine')->getManager();
         if ($sField != null && $sOper != null && $sData != null) {
             if ($sField == "subject") {
@@ -614,7 +614,6 @@ class Helper
             elseif ($sField == "type_order") {
                 $field = 'name';
             }
-
             if ($sOper == 'eq') {
                 if ($sField != "subject" && $sField != "type_order") {
                     $orders = $em->getRepository(self::$_tableUserOrder)
@@ -724,6 +723,7 @@ class Helper
                         $rowsPerPage,
                         $firstRowIndex
                     );
+                //var_dump($orders); die;
             }
         }
         return $orders;
@@ -1004,7 +1004,6 @@ class Helper
         $stmt->execute();
         $bids = $stmt->fetchAll();
         //var_dump($bids); die;
-
         return $bids;
     }
 
@@ -1051,7 +1050,8 @@ class Helper
         return '/study/web/uploads/avatars/' . $fileName;
     }
 
-    public static function confirmSelectedClientBid($bidId, $order) {
+
+    public static function confirmSelectedClientBid($bidId) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $bid = $em->getRepository(self::$_tableUserBid)
             ->findOneById($bidId);
@@ -1064,5 +1064,41 @@ class Helper
         else {
             return false;
         }
+    }
+
+
+    public static function cancelSelectedClientBid($bidId) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $bid = $em->getRepository(self::$_tableUserBid)
+            ->findOneById($bidId);
+        if ($bid)
+        {
+            $bid->setIsAuthorSelect(0);
+            $em->flush();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    public static function getCountBidsForEveryOrder($user) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $bids = $em->getRepository(self::$_tableUserBid)->createQueryBuilder('ub')
+        ->select('COUNT(ub.id) AS count_bids,uo.id AS user_order_id')
+      //->innerJoin('AcmeSecureBundle:UserBid' , 'ub')
+            //IDENTITY(ub.user_order),
+        ->innerJoin('ub.user_order', 'uo')
+        ->andWhere('uo.user = :user')
+        ->andWhere('uo.is_show_client = 1')
+        ->andWhere('uo.is_show_author = 1')
+        ->groupBy('uo.num')
+        ->setParameter('user', $user)
+        //->orderBy('uo.num', 'ASC')
+        ->getQuery()
+        ->getResult();
+        return $bids;
+      //var_dump($bids);
     }
 }

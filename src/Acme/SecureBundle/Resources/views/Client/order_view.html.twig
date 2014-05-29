@@ -47,11 +47,9 @@
                 <script>
                     $(document).ready(function() {
                         $("#listOrders").jqGrid({
-                            url: {{ path('secure_client_order', { type: 'view' }) | json_encode | raw }},
+                            url: {{ path('secure_client_orders', { type: 'view' }) | json_encode | raw }},
                             datatype: 'json',
                             mtype: 'POST',
-                           // ExpandColClick: true,
-                            //autowidth: true,
                             recordtext: "Просмотр заказов {0} - {1}",
                             colNames:['','№ заказа','Тип работы', 'Тема работы', 'Предмет', 'Задание', 'Статус', 'Дата создания', 'Выполнение до', 'Отклики', 'Действия'],
                             colModel :[

@@ -186,7 +186,7 @@ class ClientController extends Controller
                     $sField = $postData['searchField'];
                 }
 
-                $countOrders = Helper::getCountOrdersForGrid($user);
+                $countOrders = Helper::getCountOrdersForClientGrid($user);
 
                 /*if ($totalRows < $rowsPerPage)
                     $response->page = 1;
@@ -194,13 +194,22 @@ class ClientController extends Controller
                     $response->page = $curPage;*/
 
                 $firstRowIndex = $curPage * $rowsPerPage - $rowsPerPage;
-                $orders = Helper::getClientOrdersForGrid($sOper, $sField, $sData, $firstRowIndex, $rowsPerPage, $user, $sortingField, $sortingOrder);
+                $orders = Helper::getCreatedClientsOrdersForGrid($sOper, $sField, $sData, $firstRowIndex, $rowsPerPage, $user, $sortingField, $sortingOrder);
                 $response = new Response();
                 $response->total = ceil($countOrders / $rowsPerPage);
                 $response->records = $countOrders;
                 $response->page = $curPage;
                 $i = 0;
-                $responseAuthor = 0;
+                $countBidsForEveryOrder = Helper::getCountBidsForEveryOrder($user);
+                //$responseAuthor = $countBidsForEveryOrder[0];
+
+                //$arrayCountBidsForEveryOrder = [];
+                //var_dump(array($countBidsForEveryOrder));
+                /*foreach($countBidsForEveryOrder as $elem) {
+                    $arrayCountBidsForEveryOrder[] = $elem;
+                }
+                var_dump($arrayCountBidsForEveryOrder);*/
+                //var_dump($countBidsForEveryOrder);
 
                 foreach($orders as $order) {
                     $task = strip_tags($order->getTask());
@@ -209,13 +218,22 @@ class ClientController extends Controller
                     if (strlen($task) >= 20) {
                         $task = Helper::getCutSentence($task, 35);
                     }
+                    $countBids = 0;
+                    $orderId = $order->getId();
+                    foreach($countBidsForEveryOrder as $elem) {
+                        if ($elem['user_order_id'] == $orderId) {
+                            $countBids = $elem['count_bids'];
+                            break;
+                        }
+                    }
+
                     $dateCreate = Helper::getMonthNameFromDate($order->getDateCreate()->format("d.m.Y"));
                     $dateCreate = $dateCreate . "<br><span class='gridCellTime'>" . $order->getDateCreate()->format("H:s") . "</span>";
                     $dateExpire = Helper::getMonthNameFromDate($order->getDateExpire()->format("d.m.Y"));
                     $dateExpire = $dateExpire . "<br><span class='gridCellTime'>" . $order->getDateExpire()->format("H:s") . "</span>";
-                    $response->rows[$i]['id'] = $order->getId();
+                    $response->rows[$i]['id'] = $orderId;
                     $response->rows[$i]['cell'] = array(
-                        $order->getId(),
+                        $orderId,
                         $order->getNum(),
                         $order->getTypeOrder()->getName(),
                         $order->getTheme(),
@@ -224,7 +242,7 @@ class ClientController extends Controller
                         $order->getStatusOrder()->getName(),
                         $dateCreate,
                         $dateExpire,
-                        $responseAuthor,
+                        $countBids,
                         ""
                     );
 
@@ -270,7 +288,7 @@ class ClientController extends Controller
                     return new Response(json_encode(array('action' => 'true')));
                 }
                 else {
-                    return  new Response(json_encode(array('action' => 'false')));
+                    return new Response(json_encode(array('action' => 'false')));
                 }
             }
         }
@@ -301,7 +319,7 @@ class ClientController extends Controller
                         $userId = $bid['uid'];
                         $pathAvatar = Helper::getFullPathToAvatar($fileName);
                         $urlClient = $this->generateUrl('secure_client_action', array('type' => 'view_client_profile', 'id' => $userId));
-                        $author = "<img src='$pathAvatar' align='middle' alt='$fileName' width='110px' class='thumbnail'><a href='$urlClient' class='label label-primary'>$userLogin</a>";
+                        $author = "<img src='$pathAvatar' align='middle' alt='$fileName' width='110px' height='auto' class='thumbnail'><a href='$urlClient' class='label label-primary'>$userLogin</a>";
                         $dateBid =  new \DateTime($bid['date_bid']);
                         $response->rows[$index]['id'] = $bid['id'];
                         $response->rows[$index]['cell'] = array(
@@ -312,21 +330,24 @@ class ClientController extends Controller
                             $bid['is_client_date'],
                             $bid['comment'],
                             $dateBid->format("d.m.Y H:i"),
-                            ""
+                            "",
+                            $bid['is_author_select'],
                         );
                     }
+                    $response->selected_bid = 1;
                     return new JsonResponse($response);
                 }
                 elseif (isset($action)) {
                     if ($action == 'confirmBid') {
                         $bidId = $request->request->get('bidId');
-                        $actionResponse = Helper::confirmSelectedClientBid($bidId, $order);
-                        $response = new Response();
-                        $response->action = $actionResponse;
-                        //$response->orderId = $order->getId();
-                        return new JsonResponse($response);
+                        $actionResponse = Helper::confirmSelectedClientBid($bidId);
+                        return new Response(json_encode(array('action' => $actionResponse)));
                     }
-
+                    elseif ($action == 'cancelBid') {
+                        $bidId = $request->request->get('bidId');
+                        $actionResponse = Helper::cancelSelectedClientBid($bidId);
+                        return new Response(json_encode(array('action' => $actionResponse)));
+                    }
                 }
             }
 

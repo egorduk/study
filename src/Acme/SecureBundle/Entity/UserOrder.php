@@ -96,7 +96,7 @@ class UserOrder extends EntityRepository
     private $files_folder;
 
     /**
-     * @ORM\OneToMany(targetEntity="OrderFile", mappedBy="order")
+     * @ORM\OneToMany(targetEntity="UserBid", mappedBy="user_order")
      **/
     private $link_user_order;
 

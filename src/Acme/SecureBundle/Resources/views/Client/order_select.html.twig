@@ -28,20 +28,27 @@
             .ui-widget-content a, .ui-widget-content .ui-state-highlight a, .ui-widget-content .ui-state-hover a {
                 color: white;
             }
-            #dialog-message p .icon-hammer {
+            #dialog-message-confirm-bid p .icon-hammer {
                 font-size: 45px;
                 color: green;
             }
-            .ui-dialog-title {
-                color: green;
-            }
-            #dialog-message {
+            #dialog-message-confirm-bid, #dialog-message-error, .cancel-bid {
                 display: none;
             }
-            .state-selected {
+            .state-selected:hover, .state-selected {
                 color: white;
                 border: 1px solid green;
                 background: green;
+            }
+            #dialog-message-error p .icon-warning {
+                font-size: 45px;
+                color: orange;
+            }
+            #ui-id-2 {
+                color: orange;
+            }
+            #ui-id-1 {
+                color: green;
             }
         </style>
         <div class="container">
@@ -60,10 +67,16 @@
                 </div>
                 <a href="{{ path('secure_client_index') }}">Главная</a>
             </div>
-            <div id="dialog-message" title="Подтверждение ставки">
+            <div id="dialog-message-confirm-bid" title="Подтверждение ставки">
                 <p>
                     <span class="icon-hammer" style="float:left; margin:0 7px 50px 0;"></span>
                     Вы уверены, что согласны с выбранной ставкой?
+                </p>
+            </div>
+            <div id="dialog-message-error" title="Уведомление">
+                <p>
+                    <span class="icon-warning" style="float:left; margin:0 7px 50px 0;"></span>
+                    Заказ удален, обновите таблицу со ставками либо страницу!
                 </p>
             </div>
             <table id="listBids"></table>
@@ -77,31 +90,34 @@
                         mtype: 'POST',
                         rownumbers: true,
                         gridview: true,
-                        //viewsortcols: true,
                         recordtext: "Просмотр ставок {0} - {1}",
-                        colNames:['','Автор','Стоимость','Дней','В указанный срок','Комментарий','Дата ставки','Действия'],
+                        colNames:['','Автор','Стоимость','Дней','В указанный срок','Комментарий','Дата ставки','Действия', ''],
                         colModel :[
                             {name:'id',index:'id',hidden:true},
-                            {name:'author',index:'author',width:120,align:'center',resizable:false,editable:false},
+                            {name:'author',index:'author',width:120,align:'center',resizable:false,editable:false,sortable:false},
                             {name:'sum',index:'sum',width:150,align:'center',resizable:false,editable:false,formatter:'currency',formatoptions:{thousandsSeparator: " ",decimalPlaces:0,suffix:" руб."}},
                             {name:'day',index:'day',width:150,align:'center',resizable:false,editable:false},
-                            {name:'is_client_date',index:'is_client_date',width:150,align:'center',resizable:false,editable:false,formatter:statusDate},
-                            {name:'comment',index:'comment',width:250,align:'center',resizable:false, editable:false},
-                            {name:'date_bid',index:'date_bid',width:250,align:'center',resizable:false, editable:false},
-                            {name:'action',index:'action',width:135,align:'center',sortable:false,resize:false,unformat:unform ,formatter:function() {
-                                return "<div class='confirm-bid' style='margin-left:8px;'>" +
+                            {name:'is_client_date',index:'is_client_date',width:150,align:'center',resizable:false,editable:false,formatter:statusDate,sortable:false},
+                            {name:'comment',index:'comment',width:250,align:'center',resizable:false,editable:false,sortable:false},
+                            {name:'date_bid',index:'date_bid',width:250,align:'center',resizable:false,editable:false,sortable:false},
+                            {name:'action',index:'action',width:135,align:'center',sortable:false,resize:false,formatter:function() {
+                                return "<div class='cancel-bid' style='margin-left:8px;'>" +
+                                        "<div style='float:left;margin-left:8px;' class='ui-pg-div ui-inline-del' title='Отменить' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<span class='icon-cancel-6'></span></div></div>" +
+                                        "<div class='confirm-bid' style='margin-left:8px;'>" +
                                         "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Принять ставку автора' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
                                         "<span class='icon-ok-5'></span></div></div>" +
                                         "<div class='delete-bid' style='margin-left:8px;'>" +
                                         "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Удалить ставку автора' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
-                                        "<span class='icon-trash'></span></div></div>" +
+                                        "<span class='icon-trash-1'></span></div></div>" +
                                         "<div class='auction-bid' style='margin-left:8px;'>" +
                                         "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Предложить торг автору' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
                                         "<span class='icon-hammer'></span></div></div>" +
                                         "<div class='open-chat' style='margin-left:8px;'>" +
                                         "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Открыть чат с автором' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
                                         "<span class='icon-chat-5'></span></div></div>";
-                            }}
+                            }},
+                            {name:'is_author_select',index:'is_author_select',hidden:true}
                         ],
                         pager: $('#pagerBids'),
                         rowNum: 10,
@@ -111,21 +127,70 @@
                         caption: 'Таблица ставок',
                         height: '400',
                         emptyrecords: "Нету ставок авторов",
-                        //altRows: true,
-                        //altclass:'altRow',
-                        loadComplete : function() {
+                        altRows: true,
+                        altclass:'altRow',
+                        loadComplete : function(data) {
+                            var grid  = $("#listBids");
                             function getRowId(e) {
                                 var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'), rowId = $tr.attr('id');
                                 return rowId;
                             }
-                            $(".confirm-bid").click(function(e) {
+                            function getRow(a) {
+                                return a.parent().parent();
+                            }
+                            function hideCancelBid(a) {
+                                var blockAuctionBid = a.find(".auction-bid"),
+                                        blockCancelBid = a.find(".cancel-bid"),
+                                        blockConfirmBid = a.find(".confirm-bid");
+                                blockConfirmBid.show();
+                                blockAuctionBid.show();
+                                blockCancelBid.hide();
+                            }
+                            function showCancelBid(a) {
+                                var blockAuctionBid = a.find(".auction-bid"),
+                                        blockCancelBid = a.find(".cancel-bid"),
+                                        blockConfirmBid = a.find(".confirm-bid");
+                                blockConfirmBid.hide();
+                                blockAuctionBid.hide();
+                                blockCancelBid.show();
+                            }
+                            function actionCancelBid(a, type) {
+                                var blockAuctionBid = a.find(".auction-bid"),
+                                        blockCancelBid = a.find(".cancel-bid"),
+                                        blockConfirmBid = a.find(".confirm-bid");
+                                if (type == "show") {
+                                    blockConfirmBid.hide();
+                                    blockAuctionBid.hide();
+                                    blockCancelBid.show();
+                                }
+                                else {
+                                    blockConfirmBid.show();
+                                    blockAuctionBid.show();
+                                    blockCancelBid.hide();
+                                }
+                            }
+                            $(".cancel-bid").click(function(e) {
                                 var rowId = getRowId(e);
-                                newData = {sum : "999", day: "777", action: "123"};
-                                oldData = $("#listBids").getRowData(rowId);
-                                //console.log(oldData);
-                                $("#listBids").setRowData(rowId, newData);
-                                /*if (rowId) {
-                                    $("#dialog-message").dialog({
+                                var row = getRow($(this));
+                                $.ajax({
+                                    type: 'POST',
+                                    data: 'bidId=' + rowId + '&action=cancelBid',
+                                    success: function(response) {
+                                        actionCancelBid(row, "hide");
+                                        $("tr.jqgrow#" + rowId).removeClass("state-selected");
+                                    }
+                                });
+                            });
+                            $(".confirm-bid").click(function(e) {
+                                //rowId = row.attr("id");
+                                //title = grid.getCell(rowId,'action');
+                                //grid.setCell(rowId,'action',"123");
+                                //oldData = $("#listBids").getRowData(rowId);
+                                //$("#listBids").setRowData(rowId, newData);
+                                var rowId = getRowId(e);
+                                var row = getRow($(this));
+                                if (rowId) {
+                                    $("#dialog-message-confirm-bid").dialog({
                                         modal: true,
                                         resizable: true,
                                         height: 260,
@@ -133,16 +198,27 @@
                                         buttons: {
                                             Ok: function() {
                                                 $.ajax({
-                                                    //url: 'confirm_bid',
                                                     type: 'POST',
                                                     data: 'bidId=' + rowId + '&action=confirmBid',
                                                     success: function(response) {
-                                                        var resposeObject = window.JSON.parse(response);
-                                                        if (resposeObject.action == "true") {
-                                                            $("#listOrders").trigger('reloadGrid');
+                                                        var responseObject = window.JSON.parse(response);
+                                                        if (responseObject.action) {
+                                                            actionCancelBid(row, "show");
+                                                            $("tr.jqgrow#" + rowId).addClass("state-selected");
                                                         }
-                                                        $("tr.jqgrow#" + rowId).addClass("state-selected");
-
+                                                        else {
+                                                            $("#dialog-message-error").dialog({
+                                                                modal: true,
+                                                                resizable: true,
+                                                                height: 260,
+                                                                width: 300,
+                                                                buttons: {
+                                                                    Ok: function() {
+                                                                        $(this).dialog("close");
+                                                                    }
+                                                                }
+                                                            });
+                                                        }
                                                     }
                                                 });
                                                 $(this).dialog("close");
@@ -152,16 +228,27 @@
                                             }
                                         }
                                     });
-                                }*/
+                                }
                             });
-                        },
-                        onCellSelect: function(rowid, iCol) {
-                            return unform();
+                            var grids = grid.getDataIDs();
+                            var gridsLength = grids.length;
+                            for (var i = 0; i < gridsLength; i++) {
+                                //console.log(grid.getCell(grids[i], "is_author_select"));
+                                if (grid.getCell(grids[i], "is_author_select") == 1) {
+                                    var selectedRowBid = $("tr.jqgrow#" + grids[i]);
+                                    selectedRowBid.addClass("state-selected");
+                                    var blockAuctionBid = selectedRowBid.find(".auction-bid"),
+                                            blockCancelBid = selectedRowBid.find(".cancel-bid"),
+                                            blockConfirmBid = selectedRowBid.find(".confirm-bid");
+                                    blockConfirmBid.hide();
+                                    blockAuctionBid.hide();
+                                    blockCancelBid.show();
+                                }
+                            }
                         }
                     }).navGrid('#pagerBids',{view:false, search:false, del:false, add:false, edit:false, refresh:true},
                             {},{},{},{closeOnEscape:true, multipleSearch:false, closeAfterSearch:false},{}
                     );
-
                     function statusDate(cellvalue, options, rowObject) {
                         if (cellvalue == "1") {
                             return ("<span class='icon-plus-6'></span>");
@@ -169,10 +256,6 @@
                         else {
                             return ("<span class='icon-minus-4'></span>");
                         }
-                    }
-
-                    function unform() {
-                        return "<span class='icon-cancel-5'></span>";
                     }
 
                     /*if (!sessionStorage.getItem("Page2Visited")) {

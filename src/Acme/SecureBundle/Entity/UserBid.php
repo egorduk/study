@@ -63,7 +63,12 @@ class UserBid extends EntityRepository
      * @ORM\ManyToOne(targetEntity="UserOrder", inversedBy="link_user_order", cascade={"all"})
      * @ORM\JoinColumn(name="user_order_id", referencedColumnName="id")
      **/
-    private $order;
+    private $user_order;
+
+    /**
+     * @ORM\OneToMany(targetEntity="UserChoice", mappedBy="user_bid")
+     **/
+    protected $link_user_bid;
 
 
     public function __construct(){
@@ -72,6 +77,7 @@ class UserBid extends EntityRepository
         $this->is_client_date = 0;
         $this->day = 0;
         $this->is_select = 0;
+        $this->link_user_bid = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function setSum($sum)
@@ -126,7 +132,7 @@ class UserBid extends EntityRepository
 
     public function setUserOrder($userOrder)
     {
-        $this->order = $userOrder;
+        $this->user_order = $userOrder;
     }
 
     public function getIsClientDate()
@@ -159,4 +165,8 @@ class UserBid extends EntityRepository
         return $this->is_author_select;
     }
 
+    public function getUserOrder()
+    {
+        return $this->user_order;
+    }
 }
