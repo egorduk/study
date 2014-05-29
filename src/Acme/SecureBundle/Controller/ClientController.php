@@ -179,20 +179,12 @@ class ClientController extends Controller
                 $sortingOrder = $postData['sord'];
                 $search = $postData['_search'];
                 $sField = $sData = $sTable = $sOper = null;
-
                 if (isset($search) && $search == "true") {
                     $sOper = $postData['searchOper'];
                     $sData = $postData['searchString'];
                     $sField = $postData['searchField'];
                 }
-
                 $countOrders = Helper::getCountOrdersForClientGrid($user);
-
-                /*if ($totalRows < $rowsPerPage)
-                    $response->page = 1;
-                else
-                    $response->page = $curPage;*/
-
                 $firstRowIndex = $curPage * $rowsPerPage - $rowsPerPage;
                 $orders = Helper::getCreatedClientsOrdersForGrid($sOper, $sField, $sData, $firstRowIndex, $rowsPerPage, $user, $sortingField, $sortingOrder);
                 $response = new Response();
@@ -201,16 +193,6 @@ class ClientController extends Controller
                 $response->page = $curPage;
                 $i = 0;
                 $countBidsForEveryOrder = Helper::getCountBidsForEveryOrder($user);
-                //$responseAuthor = $countBidsForEveryOrder[0];
-
-                //$arrayCountBidsForEveryOrder = [];
-                //var_dump(array($countBidsForEveryOrder));
-                /*foreach($countBidsForEveryOrder as $elem) {
-                    $arrayCountBidsForEveryOrder[] = $elem;
-                }
-                var_dump($arrayCountBidsForEveryOrder);*/
-                //var_dump($countBidsForEveryOrder);
-
                 foreach($orders as $order) {
                     $task = strip_tags($order->getTask());
                     $task = stripcslashes($task);
@@ -219,14 +201,15 @@ class ClientController extends Controller
                         $task = Helper::getCutSentence($task, 35);
                     }
                     $countBids = 0;
+                    //$isShowAuthor = 0;
                     $orderId = $order->getId();
                     foreach($countBidsForEveryOrder as $elem) {
                         if ($elem['user_order_id'] == $orderId) {
                             $countBids = $elem['count_bids'];
+                            //$isShowAuthor = $elem['is_show_author'];
                             break;
                         }
                     }
-
                     $dateCreate = Helper::getMonthNameFromDate($order->getDateCreate()->format("d.m.Y"));
                     $dateCreate = $dateCreate . "<br><span class='gridCellTime'>" . $order->getDateCreate()->format("H:s") . "</span>";
                     $dateExpire = Helper::getMonthNameFromDate($order->getDateExpire()->format("d.m.Y"));
@@ -243,7 +226,8 @@ class ClientController extends Controller
                         $dateCreate,
                         $dateExpire,
                         $countBids,
-                        ""
+                        "",
+                        $order->getIsShowAuthor()
                     );
 
                     $i++;

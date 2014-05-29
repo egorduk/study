@@ -27,6 +27,9 @@
                 .gridCellTime {
                     color: blue;
                 }
+                .show-order {
+                    display: none;
+                }
             </style>
             <div class="row offset-margin-right">
                 {% if (showWindow) %}
@@ -51,7 +54,7 @@
                             datatype: 'json',
                             mtype: 'POST',
                             recordtext: "Просмотр заказов {0} - {1}",
-                            colNames:['','№ заказа','Тип работы', 'Тема работы', 'Предмет', 'Задание', 'Статус', 'Дата создания', 'Выполнение до', 'Отклики', 'Действия'],
+                            colNames:['','№ заказа','Тип работы', 'Тема работы', 'Предмет', 'Задание', 'Статус', 'Дата создания', 'Выполнение до', 'Ставки', 'Действия',''],
                             colModel :[
                                 {name:'id',index:'id',key:true,search:false,hidden:true},
                                 {name:'num',index:'num',width:100,align:'center',resizable:false,editable:false,searchrules:{"required":true, "number":true, "maxValue":13},searchoptions:{sopt:['eq','ne','bw','cn']},/*,formatter:'showlink',formatoptions:{baseLinkUrl:'someurl.php', addParam: '&action=edit'}*/},
@@ -76,34 +79,41 @@
                                             "<div class='configure-order' style='margin-left:8px;'>" +
                                             "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Управление заказом' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
                                             "<span class='icon-cogs'></span></div></div>";
-                                }}
-
+                                }},
+                                {name:'is_show_author',index:'is_show_author',key:true,search:false,hidden:true},
                             ],
                             pager: $('#pagerOrders'),
                             toolbar: [true,'top'],
                             rowNum: 10,
-                            rowList: [5,10,20,30],
-                            //sortname: 'num',
-                            //sortorder: 'desc',
+                            rowList: [10,20,30],
                             viewrecords: true,
                             hidegrid: false,
                             caption: 'Таблица заказов',
                             height: '450',
-                            //width: '1300'
-                            //emptyrecords: "Пока тут нету ваших созданных заказов",
-                            //width: null,
-                            //shrinkToFit: false,
                             altRows: true,
                             altclass:'altRow',
-
                             loadComplete : function() {
-                                //var cm = $("#listOrders").jqGrid('getGridParam', 'colModel');
-                                function getOrderId(e) {
+                                var grid  = $("#listOrders");
+                                function getRowId(e) {
                                     var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'), rowId = $tr.attr('id');
                                     return rowId;
                                 }
+                                function getRow(a) {
+                                    return a.parent().parent();
+                                }
+                                function actionHideOrder(a, type) {
+                                    var blockShowOrder = a.find(".show-order"), blockHideOrder = a.find(".hide-order");
+                                    if (type == "show") {
+                                        blockShowOrder.hide();
+                                        blockHideOrder.show();
+                                    }
+                                    else {
+                                        blockShowOrder.show();
+                                        blockHideOrder.hide();
+                                    }
+                                }
                                 $(".delete-order").click(function(e) {
-                                    var rowId = getOrderId(e);
+                                    var rowId = getRowId(e);
                                     if (rowId) {
                                         $.ajax({
                                             url: 'delete',
@@ -112,14 +122,15 @@
                                             success: function(response) {
                                                 var resposeObject = window.JSON.parse(response);
                                                 if (resposeObject.action == "true") {
-                                                    $("#listOrders").trigger('reloadGrid');
+                                                    grid.trigger('reloadGrid');
                                                 }
                                             }
                                         });
                                     }
                                 });
                                 $(".hide-order").click(function(e) {
-                                    var rowId = getOrderId(e);
+                                    var rowId = getRowId(e);
+                                    var row = getRow($(this));
                                     if (rowId) {
                                         $.ajax({
                                             url: 'hide',
@@ -128,14 +139,17 @@
                                             success: function(response) {
                                                 var resposeObject = window.JSON.parse(response);
                                                 if (resposeObject.action == "true") {
-                                                    $("#listOrders").trigger('reloadGrid');
+                                                    grid.trigger('reloadGrid');
+                                                    //grid.setCell(rowId,'status_order',"Скрытый");
+                                                    actionHideOrder(row, "hide");
                                                 }
                                             }
                                         });
                                     }
                                 });
                                 $(".show-order").click(function(e) {
-                                    var rowId = getOrderId(e);
+                                    var rowId = getRowId(e);
+                                    var row = getRow($(this));;
                                     if (rowId) {
                                         $.ajax({
                                             url: 'show',
@@ -144,41 +158,31 @@
                                             success: function(response) {
                                                 var resposeObject = window.JSON.parse(response);
                                                 if (resposeObject.action == "true") {
-                                                    $("#listOrders").trigger('reloadGrid');
+                                                    grid.trigger('reloadGrid');
+                                                    actionHideOrder(row, "show");
                                                 }
                                             }
                                         });
                                     }
                                 });
+                                var grids = grid.getDataIDs();
+                                var gridsLength = grids.length;
+                                for (var i = 0; i < gridsLength; i++) {
+                                    if (grid.getCell(grids[i], "is_show_author") == 1) {
+                                        var selectedRowBid = $("tr.jqgrow#" + grids[i]);
+                                        var blockShowOrder = selectedRowBid.find(".show-order"), blockHideOrder = selectedRowBid.find(".hide-order");
+                                        blockShowOrder.hide();
+                                        blockHideOrder.show();
+                                    }
+                                }
                             },
-
-                            /*gridComplete: function() {
-                            },*/
-
                             onCellSelect: function(rowid, iCol) {
                                 if (iCol != 10) {
-                                    var rowData = $("#listOrders").getRowData(rowid);
+                                    var rowData = grid.getRowData(rowid);
                                     var num = rowData['num'];
                                     location.href = 'view/' + num;
                                 }
                             }
-
-                            /*getCellIndex: function(rowid, iCol, cellcontent, e) {
-                                return rowid;
-                            },*/
-
-                            /*loadComplete: function(data)
-                             {
-                             var NoOfCellAdd = Number($("#list").parent().parent().css('height').split('px')[0]) / 5;
-
-                             for (var i = data.records; i <= NoOfCellAdd; i++)
-                             {
-                             $("#list").addRowData(i + 1, {});
-                             }
-                             }, */
-                            /*onSelectRow: function(id) {
-                                //location.href = 'order/' + id;
-                            }*/
                         }).navGrid('#pagerOrders',{view:false, search:true, del:false, add:false, edit:false, refresh:true},
                                 {},{},{},{closeOnEscape:true, multipleSearch:false, closeAfterSearch:true},{}
                         );
