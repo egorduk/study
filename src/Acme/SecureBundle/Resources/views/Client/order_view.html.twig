@@ -5,11 +5,11 @@
     {% block content %}
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/datepicker.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/datepicker3.css') }}" />
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.fmatter.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-datepicker.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/js/locales/bootstrap-datepicker.ru.js') }}"></script>
         <div class="container">
             <style type="text/css">
                 .altRow {
@@ -313,6 +313,8 @@
                     });
                 </script>
             </div>
+            <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-datepicker.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/locales/bootstrap-datepicker.ru.js') }}"></script>
             <a href="{{ path('secure_client_index') }}">Главная</a>
         </div>
     {% endblock %}
