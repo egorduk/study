@@ -1101,4 +1101,12 @@ class Helper
         return $bids;
       //var_dump($bids);
     }
+
+
+    public static function getOrderById($orderId) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $order = $em->getRepository(self::$_tableUserOrder)
+            ->findOneById($orderId);
+        return $order;
+    }
 }

@@ -276,6 +276,20 @@ class ClientController extends Controller
                 }
             }
         }
+        elseif ($type == "load_config") {
+            if($request->isXmlHttpRequest()) {
+                $orderId = $request->request->get('orderId');
+                $order = Helper::getOrderById($orderId);
+                if ($order) {
+                    $task = $order->getTask();
+                    $dateExpire = $order->getDateExpire()->format("d/m/Y");
+                    return  new Response(json_encode(array('action' => 'true', 'task' => $task, 'dateExpire' => $dateExpire)));
+                }
+                else {
+                    return new Response(json_encode(array('action' => 'false')));
+                }
+            }
+        }
     }
 
 
