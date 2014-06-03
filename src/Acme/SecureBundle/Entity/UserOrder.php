@@ -105,6 +105,8 @@ class UserOrder extends EntityRepository
      **/
     private $link_user_order;
 
+    private $count_bids;
+
 
     public function __construct($container){
         $this->date_create = new \DateTime();
@@ -120,6 +122,7 @@ class UserOrder extends EntityRepository
         $num++;
         $this->num = $num;
         $this->link_user_order = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->count_bids = 0;
     }
 
     public function setTheme($theme)
@@ -151,6 +154,12 @@ class UserOrder extends EntityRepository
     public function getDateExpire()
     {
         return $this->date_expire;
+    }
+
+    public function setDateCreate($date)
+    {
+        $format = 'd/m/Y';
+        $this->date_create = Helper::getFormatDateForInsert($date, $format);
     }
 
     public function setTask($task)
@@ -271,5 +280,14 @@ class UserOrder extends EntityRepository
     public function setDateEdit($date)
     {
         $this->date_edit = $date;
+    }
+
+    public function getCountAuthorBids() {
+        return $this->count_bids;
+    }
+
+    public function setCountAuthorBids($val)
+    {
+        $this->count_bids = $val;
     }
 }

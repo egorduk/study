@@ -707,23 +707,85 @@ class Helper
         }
         else {
             if (isset($sortingField) && $sortingField != "" && isset($sortingOrder) && $sortingOrder != "") {
-                $orders = $em->getRepository(self::$_tableUserOrder)
-                    ->findBy(
-                        array('user' => $user, 'is_show_client' => 1),
-                        array($sortingField => $sortingOrder),
-                        $rowsPerPage,
-                        $firstRowIndex
+                if ($sortingField == 'response_author') {
+                    $bids = $em->getRepository(self::$_tableUserBid)->createQueryBuilder('ub')
+                        ->select('COUNT(ub.id) AS count_bids,ub,uo,uo.id AS user_order_id')
+                        ->innerJoin('ub.user_order', 'uo')
+                        ->andWhere('uo.user = :user')
+                        ->andWhere('uo.is_show_client = 1')
+                        ->andWhere('uo.is_show_author = 1')
+                        ->groupBy('uo.num')
+                        ->setParameter('user', $user)
+                        ->orderBy('count_bids', $sortingOrder)
+                        ->getQuery()
+                        ->getResult();
+                    $arrayUserOrders = [];
+                    foreach($bids as $bid) {
+                        $userOrder = new UserOrder(self::getContainer());
+                        $userOrder->setDateExpire($bid[0]->getUserOrder()->getDateExpire()->format('d/m/Y'));
+                        $userOrder->setTask($bid[0]->getUserOrder()->getTask());
+                        $userOrder->setDateCreate($bid[0]->getUserOrder()->getDateCreate()->format('d/m/Y'));
+                        $userOrder->setNum($bid[0]->getUserOrder()->getNum());
+                        $userOrder->setTypeOrder($bid[0]->getUserOrder()->getTypeOrder());
+                        $userOrder->setSubjectOrder($bid[0]->getUserOrder()->getSubjectOrder());
+                        $userOrder->setStatusOrder($bid[0]->getUserOrder()->getStatusOrder());
+                        $userOrder->setTheme($bid[0]->getUserOrder()->getTheme());
+                        $userOrder->setIsShowAuthor($bid[0]->getUserOrder()->getIsShowAuthor());
+                        $userOrder->setCountAuthorBids($bid['count_bids']);
+                        $arrayUserOrders[] = $userOrder;
+                    }
+                    return $arrayUserOrders;
+                }
+                else {
+                    $orders = $em->getRepository(self::$_tableUserOrder)
+                        ->findBy(
+                            array('user' => $user, 'is_show_client' => 1),
+                            array($sortingField => $sortingOrder),
+                            $rowsPerPage,
+                            $firstRowIndex
                     );
+                }
             }
             else {
-                $orders = $em->getRepository(self::$_tableUserOrder)
+                /*$orders = $em->getRepository(self::$_tableUserOrder)
                     ->findBy(
                         array('user' => $user, 'is_show_client' => 1),
                         array('num' => 'ASC'),
                         $rowsPerPage,
                         $firstRowIndex
-                    );
-                //var_dump($orders); die;
+                );*/
+
+                $bids = $em->getRepository(self::$_tableUserBid)->createQueryBuilder('ub')
+                    ->select('COUNT(ub.id) AS count_bids,uo.id AS user_order_id')
+                    //->innerJoin('AcmeSecureBundle:UserBid' , 'ub')
+                    //IDENTITY(ub.user_order),
+                    ->innerJoin('ub.user_order', 'uo')
+                    ->where('uo.user = :user')
+                    //->andWhere('uo.is_show_client = 1')
+                    //->andWhere('uo.is_show_author = 1')
+                    ->groupBy('uo.id')
+                    ->setParameter('user', $user)
+                    //->orderBy('uo.num', 'ASC')
+                    ->getQuery()
+                    ->getResult();
+                var_dump($bids); die;
+                /*$arrayUserOrders = [];
+                foreach($bids as $bid) {
+                    $userOrder = new UserOrder(self::getContainer());
+                    $userOrder->setDateExpire($bid[0]->getUserOrder()->getDateExpire()->format('d/m/Y'));
+                    $userOrder->setTask($bid[0]->getUserOrder()->getTask());
+                    $userOrder->setDateCreate($bid[0]->getUserOrder()->getDateCreate()->format('d/m/Y'));
+                    $userOrder->setNum($bid[0]->getUserOrder()->getNum());
+                    $userOrder->setTypeOrder($bid[0]->getUserOrder()->getTypeOrder());
+                    $userOrder->setSubjectOrder($bid[0]->getUserOrder()->getSubjectOrder());
+                    $userOrder->setStatusOrder($bid[0]->getUserOrder()->getStatusOrder());
+                    $userOrder->setTheme($bid[0]->getUserOrder()->getTheme());
+                    $userOrder->setIsShowAuthor($bid[0]->getUserOrder()->getIsShowAuthor());
+                    $userOrder->setCountAuthorBids($bid['count_bids']);
+                    $arrayUserOrders[] = $userOrder;
+                }
+
+                return $arrayUserOrders;*/
             }
         }
         return $orders;

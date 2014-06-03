@@ -191,31 +191,32 @@ class ClientController extends Controller
                 $response->total = ceil($countOrders / $rowsPerPage);
                 $response->records = $countOrders;
                 $response->page = $curPage;
-                $i = 0;
                 $countBidsForEveryOrder = Helper::getCountBidsForEveryOrder($user);
-                foreach($orders as $order) {
+                foreach($orders as $index => $order) {
+                    //var_dump($order); die;
                     $task = strip_tags($order->getTask());
                     $task = stripcslashes($task);
                     $task = preg_replace("/&nbsp;/", "", $task);
                     if (strlen($task) >= 20) {
                         $task = Helper::getCutSentence($task, 35);
                     }
-                    $countBids = 0;
-                    //$isShowAuthor = 0;
                     $orderId = $order->getId();
-                    foreach($countBidsForEveryOrder as $elem) {
+                    /*foreach($countBidsForEveryOrder as $elem) {
                         if ($elem['user_order_id'] == $orderId) {
                             $countBids = $elem['count_bids'];
                             //$isShowAuthor = $elem['is_show_author'];
                             break;
                         }
-                    }
+                    }*/
+                    //$countBids = 0;
+                    //var_dump($order);
+                    $order->getCountAuthorBids() == null ? $countBids = $order->getCountAuthorBids() : $countBids = 0;
                     $dateCreate = Helper::getMonthNameFromDate($order->getDateCreate()->format("d.m.Y"));
                     $dateCreate = $dateCreate . "<br><span class='gridCellTime'>" . $order->getDateCreate()->format("H:s") . "</span>";
                     $dateExpire = Helper::getMonthNameFromDate($order->getDateExpire()->format("d.m.Y"));
                     $dateExpire = $dateExpire . "<br><span class='gridCellTime'>" . $order->getDateExpire()->format("H:s") . "</span>";
-                    $response->rows[$i]['id'] = $orderId;
-                    $response->rows[$i]['cell'] = array(
+                    $response->rows[$index]['id'] = $orderId;
+                    $response->rows[$index]['cell'] = array(
                         $orderId,
                         $order->getNum(),
                         $order->getTypeOrder()->getName(),
@@ -224,15 +225,13 @@ class ClientController extends Controller
                         $task,
                         $order->getStatusOrder()->getName(),
                         $dateExpire,
-                        $countBids,
+                        //$countBids,
+                        $order->getCountAuthorBids(),
                         $dateCreate,
                         "",
                         $order->getIsShowAuthor()
                     );
-
-                    $i++;
                 }
-
                 return new JsonResponse($response);
             }
             $showWindow = false;
