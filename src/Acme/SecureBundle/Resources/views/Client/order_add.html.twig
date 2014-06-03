@@ -137,14 +137,12 @@
                         relative_urls : false,
 
                         setup : function(ed) {
-
                             ed.onInit.add(function(ed) {
                                 ed.setContent(placeholder);
                                 $(".mceLayout").css("border-radius", "2px");
                                 $(".mceLayout").css("border", "1px solid #CCCCCC");
                                 $("#formCreateOrder_fieldTask").blur();
                                 //var doc = ed.getDoc();
-
                                 tinyMCE.dom.Event.add(ed.getDoc(), 'blur', function(e) {
                                     var tinyText = getTinyTrimText();
                                     if (tinyText == placeholder || tinyText == "") {

@@ -42,6 +42,11 @@ class UserOrder extends EntityRepository
     private $date_create;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date_edit;
+
+    /**
      * @ORM\Column(type="string")
      */
     private $task;
@@ -103,6 +108,7 @@ class UserOrder extends EntityRepository
 
     public function __construct($container){
         $this->date_create = new \DateTime();
+        $this->date_edit = new \DateTime();
         $this->is_show_author = 0;
         $this->is_show_client = 1;
         $this->files_dir = "";
@@ -260,5 +266,10 @@ class UserOrder extends EntityRepository
     public function getDateCreate()
     {
         return $this->date_create;
+    }
+
+    public function setDateEdit($date)
+    {
+        $this->date_edit = $date;
     }
 }

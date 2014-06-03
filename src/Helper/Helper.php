@@ -1109,4 +1109,14 @@ class Helper
             ->findOneById($orderId);
         return $order;
     }
+
+
+    public static function saveEditedTaskAndDateExpireForOrder($order, $newTask, $newDateExpire) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $order->setTask($newTask);
+        $order->setDateExpire($newDateExpire);
+        $order->setDateEdit(new \DateTime());
+        $em->merge($order);
+        $em->flush();
+    }
 }

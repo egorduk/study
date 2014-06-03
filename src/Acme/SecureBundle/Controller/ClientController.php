@@ -223,9 +223,9 @@ class ClientController extends Controller
                         $order->getSubjectOrder()->getChildName(),
                         $task,
                         $order->getStatusOrder()->getName(),
-                        $dateCreate,
                         $dateExpire,
                         $countBids,
+                        $dateCreate,
                         "",
                         $order->getIsShowAuthor()
                     );
@@ -284,6 +284,21 @@ class ClientController extends Controller
                     $task = $order->getTask();
                     $dateExpire = $order->getDateExpire()->format("d/m/Y");
                     return  new Response(json_encode(array('action' => 'true', 'task' => $task, 'dateExpire' => $dateExpire)));
+                }
+                else {
+                    return new Response(json_encode(array('action' => 'false')));
+                }
+            }
+        }
+        elseif ($type == "save_config") {
+            if($request->isXmlHttpRequest()) {
+                $orderId = $request->request->get('orderId');
+                $newTask = $request->request->get('newTask');
+                $newDateExpire = $request->request->get('newDateExpire');
+                $order = Helper::getOrderById($orderId);
+                if ($order) {
+                    Helper::saveEditedTaskAndDateExpireForOrder($order, $newTask, $newDateExpire);
+                    return new Response(json_encode(array('action' => 'true')));
                 }
                 else {
                     return new Response(json_encode(array('action' => 'false')));
