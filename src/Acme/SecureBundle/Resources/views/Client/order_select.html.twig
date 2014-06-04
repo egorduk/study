@@ -29,7 +29,7 @@
                 font-size: 45px;
                 color: green;
             }
-            #dialog-message-confirm-bid, #dialog-message-error, .cancel-bid {
+            #dialog-message-confirm-bid, #dialog-message-error, .cancel-bid, #dialog-message-auction-bid  {
                 display: none;
             }
             .state-selected:hover, .state-selected {
@@ -50,6 +50,19 @@
             .grid-cell-day {
                 color: green;
                 font-size: 20px;
+            }
+            .grid-cell-comment {
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                font-style: italic;
+            }
+            input.text {
+                margin-bottom:15px;
+                width:100%;
+                padding: .4em;
+            }
+            .bootstrap-error {
+                border-color: #E9322D!important;
+                box-shadow: 0 0 6px #E9322D!important;
             }
         </style>
         <div class="container">
@@ -79,6 +92,18 @@
                     <span class="icon-warning" style="float:left; margin:0 7px 50px 0;"></span>
                     Заказ удален, обновите таблицу со ставками либо страницу!
                 </p>
+            </div>
+            <div id="dialog-message-auction-bid" title="Предложить торг">
+                <label for="auction-price">Моя цена</label>
+                <div class="input-group">
+                    <input type="text" name="auction-price" id="auction-price" required placeholder="Введите цену..." value="" class="form-control">
+                    <span class="input-group-addon"><i class="icon-rouble"></i></span>
+                </div>
+                <label for="auction-day">Дней на выполнение</label>
+                <div class="input-group">
+                    <input type="text" name="auction-day" id="auction-day" required placeholder="Введите количество дней..." value="" class="form-control">
+                    <span class="input-group-addon"><i class="icon-clock-5"></i></span>
+                </div>
             </div>
             <table id="listBids"></table>
             <div id="pagerBids"></div>
@@ -127,7 +152,7 @@
                         viewrecords: true,
                         hidegrid: false,
                         caption: 'Таблица ставок авторов',
-                        height: '400',
+                        height: '500',
                         emptyrecords: "Нету ставок авторов",
                         altRows: true,
                         altclass:'alt-row',
@@ -181,6 +206,55 @@
                                         $("tr.jqgrow#" + rowId).removeClass("state-selected");
                                     }
                                 });
+                            });
+                            $(".auction-bid").click(function(e) {
+                                var rowId = getRowId(e);
+                                if (rowId) {
+                                    var auctionPrice = $("#auction-price");
+                                    var auctionDay = $("#auction-day");
+                                    $("#dialog-message-auction-bid").dialog({
+                                        modal: true,
+                                        resizable: false,
+                                        height: 280,
+                                        width: 350,
+                                        buttons: {
+                                            "Предложить": function() {
+                                                var error = false;
+                                                auctionDay.removeClass('bootstrap-error');
+                                                auctionPrice.removeClass('bootstrap-error');
+                                                if (auctionDay.val() == "") {
+                                                    error = true;
+                                                    auctionDay.addClass('bootstrap-error');
+                                                }
+                                                if (auctionPrice.val() == "") {
+                                                    error = true;
+                                                    auctionPrice.addClass('bootstrap-error');
+                                                }
+                                                if (!error) {
+                                                    $.ajax({
+                                                        type: 'POST',
+                                                        data: 'bidId=' + rowId + '&auctionPrice=' + auctionPrice.val() + '&auctionDay=' + auctionDay.val() + '&action=auctionBid',
+                                                        success: function(response) {
+                                                            //actionCancelBid(row, "hide");
+                                                            //$("tr.jqgrow#" + rowId).removeClass("state-selected");
+                                                        }
+                                                    });
+                                                }
+                                                /**/
+                                                //$(this).dialog("close");
+                                            },
+                                            "Отмена": function() {
+                                                $(this).dialog("close");
+                                            }
+                                        },
+                                        close: function() {
+                                            auctionDay.val("");
+                                            auctionPrice.val("");
+                                            auctionDay.removeClass('bootstrap-error');
+                                            auctionPrice.removeClass('bootstrap-error');
+                                        }
+                                    });
+                                }
                             });
                             $(".confirm-bid").click(function(e) {
                                 //rowId = row.attr("id");

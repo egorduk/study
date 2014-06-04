@@ -63,11 +63,19 @@
                 }
                 /*body { font-size: 62.5%; }*/
                 /*label, input { display:block; }*/
-                input.text { margin-bottom:15px; width:100%; padding: .4em; }
-                fieldset { padding:0; border:0; margin-top:15px; }
-                h1 { font-size: 1.2em; margin: .6em 0; }
+                input.text {
+                    margin-bottom:15px;
+                    width:100%;
+                    padding: .4em;
+                }
+                fieldset {
+                    padding:0;
+                    border:0;
+                    margin-top:15px;
+                }
+                /*h1 { font-size: 1.2em; margin: .6em 0; }
                 .ui-dialog .ui-state-error { padding: .3em; }
-                .validateTips { border: 1px solid transparent; padding: 0.3em; }
+                .validateTips { border: 1px solid transparent; padding: 0.3em; }*/
                 textarea {
                     display: none;
                 }
@@ -113,7 +121,7 @@
                                 {name:'action',width:110,align:'center',sortable:false,search:false,resize:false,formatter:function() {
                                     return "<div class='delete-order' style='margin-left:8px;'>" +
                                             "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Удалить заказ' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
-                                            "<span class='icon-trash'></span></div></div>" +
+                                            "<span class='icon-trash-1'></span></div></div>" +
                                             "<div class='hide-order' style='margin-left:8px;'>" +
                                             "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Скрыть заказ от авторов' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
                                             "<span class='icon-eye-off'></span></div></div>" +

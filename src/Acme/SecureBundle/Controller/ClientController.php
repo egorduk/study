@@ -332,6 +332,7 @@ class ClientController extends Controller
                         $author = "<img src='$pathAvatar' align='middle' alt='$fileName' width='110px' height='auto' class='thumbnail'><a href='$urlClient' class='label label-primary'>$userLogin</a>";
                         $dateBid =  new \DateTime($bid['date_bid']);
                         $dateBid = $dateBid->format("d.m.Y") . "<br><span class='grid-cell-time'>" . $dateBid->format("H:i") . "</span>";
+                        $comment = "<span class='grid-cell-comment'>" . $bid['comment'] . "</span>";
                         $response->rows[$index]['id'] = $bid['id'];
                         $day = $bid['day'];
                         $day != 0 ? $day = "<span class='grid-cell-day'>" . $bid['day'] . "</span>" : $day = "";
@@ -341,7 +342,7 @@ class ClientController extends Controller
                             $bid['sum'],
                             $day,
                             $bid['is_client_date'],
-                            $bid['comment'],
+                            $comment,
                             $dateBid,
                             "",
                             $bid['is_author_select'],
