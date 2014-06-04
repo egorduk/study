@@ -105,6 +105,11 @@ class UserOrder extends EntityRepository
      **/
     private $link_user_order;
 
+    /**
+     * @ORM\OneToMany(targetEntity="OrderFile", mappedBy="user_order")
+     **/
+    private $link_order_file;
+
     private $count_bids;
 
 
@@ -122,6 +127,7 @@ class UserOrder extends EntityRepository
         $num++;
         $this->num = $num;
         $this->link_user_order = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->link_order_file = new \Doctrine\Common\Collections\ArrayCollection();
         $this->count_bids = 0;
     }
 

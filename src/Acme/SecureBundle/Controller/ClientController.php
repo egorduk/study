@@ -193,7 +193,7 @@ class ClientController extends Controller
                 $response->page = $curPage;
                 $countBidsForEveryOrder = Helper::getCountBidsForEveryOrder($user);
                 foreach($orders as $index => $order) {
-                    //var_dump($order); die;
+                    $countBids = 0;
                     $task = strip_tags($order->getTask());
                     $task = stripcslashes($task);
                     $task = preg_replace("/&nbsp;/", "", $task);
@@ -201,20 +201,17 @@ class ClientController extends Controller
                         $task = Helper::getCutSentence($task, 35);
                     }
                     $orderId = $order->getId();
-                    /*foreach($countBidsForEveryOrder as $elem) {
+                    foreach($countBidsForEveryOrder as $elem) {
                         if ($elem['user_order_id'] == $orderId) {
                             $countBids = $elem['count_bids'];
-                            //$isShowAuthor = $elem['is_show_author'];
                             break;
                         }
-                    }*/
-                    //$countBids = 0;
-                    //var_dump($order);
-                    $order->getCountAuthorBids() == null ? $countBids = $order->getCountAuthorBids() : $countBids = 0;
+                    }
                     $dateCreate = Helper::getMonthNameFromDate($order->getDateCreate()->format("d.m.Y"));
-                    $dateCreate = $dateCreate . "<br><span class='gridCellTime'>" . $order->getDateCreate()->format("H:s") . "</span>";
+                    $dateCreate = $dateCreate . "<br><span class='grid-cell-time'>" . $order->getDateCreate()->format("H:s") . "</span>";
                     $dateExpire = Helper::getMonthNameFromDate($order->getDateExpire()->format("d.m.Y"));
-                    $dateExpire = $dateExpire . "<br><span class='gridCellTime'>" . $order->getDateExpire()->format("H:s") . "</span>";
+                    $dateExpire = $dateExpire . "<br><span class='grid-cell-time'>" . $order->getDateExpire()->format("H:s") . "</span>";
+                    $countBids = "<span class='grid-cell-author-response'>" . $countBids . "</span>";
                     $response->rows[$index]['id'] = $orderId;
                     $response->rows[$index]['cell'] = array(
                         $orderId,
@@ -225,8 +222,7 @@ class ClientController extends Controller
                         $task,
                         $order->getStatusOrder()->getName(),
                         $dateExpire,
-                        //$countBids,
-                        $order->getCountAuthorBids(),
+                        $countBids,
                         $dateCreate,
                         "",
                         $order->getIsShowAuthor()
@@ -318,7 +314,9 @@ class ClientController extends Controller
             $userId = 1;
             $user = Helper::getUserById($userId);
             $order = Helper::getOrderByNumForClient($num, $user);
-
+            if (!$order) {
+                return new RedirectResponse($this->generateUrl('secure_client_orders',array('type' => 'view')));
+            }
             if ($request->isXmlHttpRequest()) {
                 $nd = $request->request->get('nd');
                 $action = $request->request->get('action');
@@ -333,15 +331,18 @@ class ClientController extends Controller
                         $urlClient = $this->generateUrl('secure_client_action', array('type' => 'view_client_profile', 'id' => $userId));
                         $author = "<img src='$pathAvatar' align='middle' alt='$fileName' width='110px' height='auto' class='thumbnail'><a href='$urlClient' class='label label-primary'>$userLogin</a>";
                         $dateBid =  new \DateTime($bid['date_bid']);
+                        $dateBid = $dateBid->format("d.m.Y") . "<br><span class='grid-cell-time'>" . $dateBid->format("H:i") . "</span>";
                         $response->rows[$index]['id'] = $bid['id'];
+                        $day = $bid['day'];
+                        $day != 0 ? $day = "<span class='grid-cell-day'>" . $bid['day'] . "</span>" : $day = "";
                         $response->rows[$index]['cell'] = array(
                             $bid['id'],
                             $author,
                             $bid['sum'],
-                            $bid['day'],
+                            $day,
                             $bid['is_client_date'],
                             $bid['comment'],
-                            $dateBid->format("d.m.Y H:i"),
+                            $dateBid,
                             "",
                             $bid['is_author_select'],
                         );
@@ -362,20 +363,12 @@ class ClientController extends Controller
                     }
                 }
             }
-
-            if ($order) {
-
-            }
-            else{
-
-            }
-
             return $this->render(
                 'AcmeSecureBundle:Client:order_select.html.twig', array('order' => $order, 'showWindow' => false)
             );
         }
         else {
-
+            return new RedirectResponse($this->generateUrl('secure_client_orders',array('type' => 'view')));
         }
     }
 

@@ -34,10 +34,10 @@ class OrderFile extends EntityRepository
     private $size;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserOrder", inversedBy="link_user_order", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="UserOrder", inversedBy="link_order_file", cascade={"all"})
      * @ORM\JoinColumn(name="user_order_id", referencedColumnName="id")
      **/
-    private $order;
+    private $user_order;
 
 
     public function __construct(){
@@ -86,12 +86,12 @@ class OrderFile extends EntityRepository
 
     public function getUserOrder()
     {
-        return $this->order;
+        return $this->user_order;
     }
 
-    public function setUserOrder($userOrder)
+    public function setUserOrder($order)
     {
-        $this->order = $userOrder;
+        $this->user_order = $order;
     }
 
 }

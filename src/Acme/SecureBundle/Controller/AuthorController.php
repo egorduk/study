@@ -202,7 +202,10 @@ class AuthorController extends Controller
             $userId = 1;
             $user = Helper::getUserById($userId);
             $order = Helper::getOrderByNumForAuthor($num);
-            $bids = Helper::getAllAuthorBid($user, $order);
+            if (!$order) {
+
+            }
+            $bids = Helper::getAllAuthorBids($user, $order);
             $filesOrder = Helper::getFilesForOrder($order);
             $bidValidate = new BidFormValidate();
             if ($bids) {
@@ -214,24 +217,42 @@ class AuthorController extends Controller
             }
             $showWindow = false;
             $formBid = $this->createForm(new BidForm(), $bidValidate);
-
             if ($request->isXmlHttpRequest()) {
                 $nd = $request->request->get('nd');
+                $action = $request->request->get('action');
                 if (isset($nd)) {
                     $response = new Response();
                     foreach($bids as $index => $bid) {
+                        $day = $bid->getDay();
+                        $dateBid =  $bid->getDateBid();
+                        $dateBid = $dateBid->format("d.m.Y") . "<br><span class='grid-cell-time'>" . $dateBid->format("H:i") . "</span>";
+                        $day != 0 ? $day = "<span class='grid-cell-day'>" . $day . "</span>" : $day = "";
                         $response->rows[$index]['id'] = $bid->getId();
                         $response->rows[$index]['cell'] = array(
                             $bid->getId(),
                             $bid->getSum(),
-                            $bid->getDay(),
+                            $day,
                             $bid->getIsClientDate(),
-                            $bid->getDateBid()->format("d.m.Y H:i"),
+                            $dateBid,
                             $bid->getComment(),
                             ""
                         );
                     }
                     return new JsonResponse($response);
+                }
+                elseif (isset($action)) {
+                    if ($action == 'deleteBid') {
+                        $bidId = $request->request->get('bidId');
+                        //$actionResponse = Helper::confirmSelectedClientBid($bidId);
+                        var_dump($bidId);die;
+                        return new Response(json_encode(array('action' => true)));
+
+                    }
+                    /*elseif ($action == 'cancelBid') {
+                        $bidId = $request->request->get('bidId');
+                        $actionResponse = Helper::cancelSelectedClientBid($bidId);
+                        return new Response(json_encode(array('action' => $actionResponse)));
+                    }*/
                 }
                 else {
                     $formBid->handleRequest($request);

@@ -39,7 +39,7 @@
             .success{
                 color: green;
             }
-            .altRow {
+            .alt-row {
                 background-color: #f3f3f3;
                 background-image: none;
             }
@@ -50,26 +50,18 @@
             .ui-jqgrid .ui-jqgrid-htable th div {
                 height: 21px;
             }
-            .gridCellTime {
+            .grid-cell-time {
                 color: blue;
+            }
+            .grid-cell-day {
+                color: green;
+                font-size: 22px;
+            }
+            .ui-jqgrid tr.jqgrow td {
+                font-size: 18px !important;
             }
         </style>
         <div class="container">
-            <div id="modal-window">
-                {% if (showWindow) %}
-                    <div id="success-window">
-                        <div class="Message Message--green" id="js-timer">
-                            <div class="Message-icon">
-                                <i class="fa fa-check"></i>
-                            </div>
-                            <div class="Message-body">
-                                <p align="center">Ваш заказ создан! Ожидайте ставок авторов!</p>
-                            </div>
-                            <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
-                        </div>
-                    </div>
-                {% endif %}
-            </div>
             <div class="row">
                 <div id="blockAboutOrder">
                     <p>Номер заказа: {{ order.num }}</p>
@@ -181,7 +173,6 @@
                     else {
                         fieldDay.prop('disabled', false);
                     }
-
                     isClientDate.change(function() {
                         if($(this).prop("checked")) {
                             fieldDay.prop('disabled', true);
@@ -229,22 +220,26 @@
                         buttonBid.prop('disabled', a);
                     }
 
-                    $("#listBids").jqGrid({
+                    var grid = $("#listBids");
+                    grid.jqGrid({
                         url: {{ path('secure_author_order', { num: order.num }) | json_encode | raw }},
                         datatype: 'json',
                         mtype: 'POST',
-                        colNames:['','Сумма','На выполнение','В срок клиента','Дата ставки','Комментарий','Действия'],
+                        colNames:['','Сумма','Дней на выполнение','В срок клиента','Дата ставки','Комментарий','Действия'],
                         colModel :[
                             {name:'id',index:'id',search:false,hidden:true},
                             {name:'sum',index:'sum',width:130,align:'center',resizable:false,editable:false,sortable:false,formatter:'currency',formatoptions:{thousandsSeparator: " ",decimalPlaces:0,suffix:" руб."}},
-                            {name:'day',index:'day',width:180,align:'center',resizable:false,editable:false,sortable:false},
+                            {name:'day',index:'day',width:200,align:'center',resizable:false,editable:false,sortable:false},
                             {name:'is_client_date',index:'is_client_date',width:150,align:'center',resizable:false,editable:false,sortable:false,formatter:statusDate},
                             {name:'date_bid',index:'date_bid',width:150,align:'center',resizable:false,editable:false,sortable:false},
                             {name:'comment',index:'comment',width:200,align:'center',resizable:false,editable:false,sortable:false},
                             {name:'action',width:100,align:'center',sortable:false,resize:false,formatter:function() {
-                                return "<div id='refresh-bid' style='margin-left:8px;'>" +
+                                return "<div class='refresh-bid' style='margin-left:8px;'>" +
                                         "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Поставить заново' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
-                                        "<span class='icon-ok'></span></div></div>";
+                                        "<span class='icon-ok'></span></div></div>" +
+                                        "<div class='delete-bid' style='margin-left:8px;'>" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Удалить ставку' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<span class='icon-trash'></span></div></div>";
                             }}
 
                         ],
@@ -252,22 +247,42 @@
                         viewrecords: true,
                         hidegrid: false,
                         caption: 'Таблица истории ставок',
-                        height: '100',
+                        height: '200',
                         altRows: true,
-                        altclass:'altRow',
+                        altclass:'alt-row',
                         loadComplete : function() {
-                            function getBidId(e) {
+                            function getRowId(e) {
                                 var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'), rowId = $tr.attr('id');
                                 return rowId;
                             }
-                            $("#refresh-bid").click(function(e) {
+                            var firstRowId = grid.getDataIDs()[0];
+                            var firstRow = $("tr.jqgrow#" + firstRowId);
+                            firstRow.addClass('ui-state-active');
+                            var activeElem = firstRow.find('.grid-cell-day');
+                            activeElem.removeClass('grid-cell-day');
+                            $(".refresh-bid").click(function(e) {
+                            });
+                            $(".delete-bid").click(function(e) {
+                                var rowId = getRowId(e);
+                                if (rowId) {
+                                    $.ajax({
+                                        //url: 'deleteBid',
+                                        type: 'POST',
+                                        data: 'bidId=' + rowId + '&action=deleteBid',
+                                        success: function(response) {
+                                            /*var resposeObject = window.JSON.parse(response);
+                                            if (resposeObject.action == "true") {
+                                                grid.trigger('reloadGrid');
+                                            }*/
+                                        }
+                                    });
+                                }
                             });
                         }
                     });
 
-                    function statusDate(cellvalue, options, rowObject)
+                    function statusDate(cellvalue)
                     {
-                        //alert(cellvalue);
                         if (cellvalue) {
                             return ("<span class='icon-plus-6'></span>");
                         }

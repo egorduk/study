@@ -76,7 +76,7 @@ class UserBid extends EntityRepository
         $this->date_bid = new \DateTime();
         $this->is_client_date = 0;
         $this->day = 0;
-        $this->is_select = 0;
+        $this->is_author_select = 0;
         $this->link_user_bid = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -130,9 +130,9 @@ class UserBid extends EntityRepository
         return $this->user;
     }
 
-    public function setUserOrder($userOrder)
+    public function setUserOrder($order)
     {
-        $this->user_order = $userOrder;
+        $this->user_order = $order;
     }
 
     public function getIsClientDate()

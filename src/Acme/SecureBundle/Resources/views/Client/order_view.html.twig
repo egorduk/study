@@ -12,7 +12,7 @@
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.fmatter.js') }}"></script>
         <div class="container">
             <style type="text/css">
-                .altRow {
+                .alt-row {
                     background-color: #f3f3f3;
                     background-image: none;
                 }
@@ -23,7 +23,7 @@
                 .ui-jqgrid .ui-jqgrid-htable th div {
                     height: 21px;
                 }
-                .gridCellTime {
+                .grid-cell-time {
                     color: blue;
                 }
                 .show-order, #dialog-configure-order {
@@ -57,6 +57,10 @@
                     border-color: #E9322D!important;
                     box-shadow: 0 0 6px #E9322D!important;
                 }
+                .grid-cell-author-response {
+                    color: green;
+                    font-size: 20px;
+                }
                 /*body { font-size: 62.5%; }*/
                 /*label, input { display:block; }*/
                 input.text { margin-bottom:15px; width:100%; padding: .4em; }
@@ -88,7 +92,8 @@
                 <script>
                     $(document).ready(function() {
                         $.fn.button.noConflict();
-                        $("#listOrders").jqGrid({
+                        var grid = $("#listOrders");
+                        grid.jqGrid({
                             url: {{ path('secure_client_orders', { type: 'view' }) | json_encode | raw }},
                             datatype: 'json',
                             mtype: 'POST',
@@ -103,9 +108,9 @@
                                 {name:'task',index:'task',width:250,align:'center',resizable:false, editable:false, searchoptions:{sopt:['eq','bw','cn']}},
                                 {name:'status_order',index:'status_order',width:160,align:'center',resizable:false,editable:false,search:false},
                                 {name:'date_expire',index:'date_expire',width:160,align:'center',resizable:false,editable:false,search:false},
-                                {name:'response_author',index:'response_author',width:90,align:'center',resizable:false,editable:false,search:false,sortable:true},
+                                {name:'response_author',index:'response_author',width:90,align:'center',resizable:false,editable:false,search:false,sortable:false},
                                 {name:'date_create',index:'date_create',width:160,align:'center',resizable:false,editable:false,search:false},
-                                {name:'action',width:120,align:'center',sortable:false,resize:false,formatter:function() {
+                                {name:'action',width:110,align:'center',sortable:false,search:false,resize:false,formatter:function() {
                                     return "<div class='delete-order' style='margin-left:8px;'>" +
                                             "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Удалить заказ' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
                                             "<span class='icon-trash'></span></div></div>" +
@@ -123,16 +128,15 @@
                             ],
                             pager: $('#pagerOrders'),
                             toolbar: [true,'top'],
-                            rowNum: 10,
-                            rowList: [10,20,30],
+                            rowNum: 20,
+                            rowList: [20,50],
                             viewrecords: true,
                             hidegrid: false,
                             caption: 'Таблица заказов',
                             height: '450',
                             altRows: true,
-                            altclass:'altRow',
+                            altclass:'alt-row',
                             loadComplete : function() {
-                                var grid  = $("#listOrders");
                                 function getRowId(e) {
                                     var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'), rowId = $tr.attr('id');
                                     return rowId;
@@ -206,7 +210,6 @@
                                 });
                                 $(".configure-order").click(function(e) {
                                     var rowId = getRowId(e);
-                                    //var row = getRow($(this));
                                     var newDateExpire = $("#new_date_expire");
                                     if (rowId) {
                                         tinyMCE.init({
@@ -228,16 +231,12 @@
                                                     mceLayout.css("border", "1px solid #CCCCCC");
                                                     ed.getDoc().addEventListener("click", function(){
                                                         setBootstrapStyle();
-                                                        //ed.getBody().focus();
                                                         tinyMCE.activeEditor.focus();
                                                         newDateExpire.removeClass('bootstrap-focus')
                                                     });
                                                     ed.getDoc().addEventListener("blur", function(){
                                                         setDefaultStyleMce();
-                                                        //ed.getBody().blur();
-                                                        //newDateExpire.focus();
                                                     }, false);
-                                                    //ed.getBody().focus();
                                                     tinyMCE.activeEditor.focus();
                                                     setBootstrapStyle();
                                                 });
@@ -255,7 +254,6 @@
                                             buttons: {
                                                 "Сохранить": function() {
                                                     var mceLayout = $(".mceLayout");
-                                                    //mceLayout.removeClass('bootstrap-focus');
                                                     var tinyText = getTinyTrimText();
                                                     if (tinyText.length <= 0) {
                                                         mceLayout.addClass('bootstrap-error');
@@ -350,7 +348,8 @@
                                 if (iCol != 10) {
                                     var rowData = grid.getRowData(rowid);
                                     var num = rowData['num'];
-                                    location.href = 'view/' + num;
+                                    var url = "{{ path("secure_client_order", {'num': 'num'}) }}";
+                                    location.href = url.replace("num", num);
                                 }
                             }
                         }).navGrid('#pagerOrders',{view:false, search:true, del:false, add:false, edit:false, refresh:true},
@@ -363,8 +362,6 @@
                             tinyText = tinyText.trim();
                             return tinyText;
                         }
-                        /*$("#dialog-configure-order").on("dialogopen", function(event, ui) {
-                        });*/
                         function getTinyTextContent() {
                             var tm = tinyMCE.get(0);
                             var tinyTextContent = tm.getContent();
@@ -372,12 +369,9 @@
                         }
                         function setBootstrapStyle() {
                             $(".mceLayout").addClass('bootstrap-focus');
-
                         }
                         function setDefaultStyleMce() {
-                            var mceLayout = $(".mceLayout");
-                            mceLayout.removeClass('bootstrap-focus');
-                            //mceLayout.addClass('bootstrap-blur');
+                            $(".mceLayout").removeClass('bootstrap-focus');
                         }
                         newDateExpire.on("click", function() {
                             $(this).addClass('bootstrap-focus');
@@ -386,8 +380,8 @@
 
                         $(".input-group-addon").click(function(e){
                             newDateExpire.datepicker('show');
-                            $(".mceLayout").removeClass('bootstrap-focus');
                             newDateExpire.addClass('bootstrap-focus');
+                            $(".mceLayout").removeClass('bootstrap-focus');
                             /*var tm = tinyMCE.get(0);
                             var controlManager = tm.controlManager;
                             var elements = controlManager.controls;
