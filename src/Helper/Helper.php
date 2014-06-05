@@ -1125,10 +1125,9 @@ class Helper
             ->andWhere('ub.is_show_client = 1')
             ->groupBy('uo.num')
             ->setParameter('user', $user)
-            ->setFirstResult(1)
             ->getQuery()
             ->getResult();
-        var_dump($bids); die;
+        //var_dump($bids); die;
         return $bids;
     }
 
