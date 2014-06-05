@@ -126,6 +126,7 @@
                 <div class="row">
                     <div blockAuthorBids>
                         <table id="listBids"></table>
+                        <div id="pagerBids"></div>
                     </div>
                 </div>
             </div>
@@ -249,6 +250,8 @@
                         caption: 'Таблица истории ставок',
                         height: '200',
                         altRows: true,
+                        recordtext: "Просмотр ставок {0} - {1}",
+                        pager: $('#pagerBids'),
                         altclass:'alt-row',
                         loadComplete : function() {
                             function getRowId(e) {
@@ -279,8 +282,9 @@
                                 }
                             });
                         }
-                    });
-
+                    }).navGrid('#pagerOrders',{view:false, search:false, del:false, add:false, edit:false, refresh:true},
+                            {},{},{},{},{}
+                    );
                     function statusDate(cellvalue)
                     {
                         if (cellvalue) {

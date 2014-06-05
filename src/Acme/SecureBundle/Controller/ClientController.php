@@ -362,6 +362,13 @@ class ClientController extends Controller
                         $actionResponse = Helper::cancelSelectedClientBid($bidId);
                         return new Response(json_encode(array('action' => $actionResponse)));
                     }
+                    elseif ($action == 'auctionBid') {
+                        $bidId = $request->request->get('bidId');
+                        $auctionPrice = $request->request->get('auctionPrice');;
+                        $auctionDay = $request->request->get('auctionDay');;
+                        $actionResponse = Helper::createAuctionSelectedClientBid($bidId, $order, $auctionPrice, $auctionDay);
+                        return new Response(json_encode(array('action' => $actionResponse)));
+                    }
                 }
             }
             return $this->render(

@@ -106,6 +106,16 @@ class UserOrder extends EntityRepository
     private $link_user_order;
 
     /**
+     * @ORM\OneToMany(targetEntity="AuctionBid", mappedBy="user_order")
+     **/
+    private $link_auction_user_order;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AuctionBid", mappedBy="user")
+     **/
+    private $link_auction_user;
+
+    /**
      * @ORM\OneToMany(targetEntity="OrderFile", mappedBy="user_order")
      **/
     private $link_order_file;
@@ -128,6 +138,8 @@ class UserOrder extends EntityRepository
         $this->num = $num;
         $this->link_user_order = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_order_file = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->link_auction_user_order = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->link_auction_user = new \Doctrine\Common\Collections\ArrayCollection();
         $this->count_bids = 0;
     }
 

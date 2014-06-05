@@ -2,6 +2,7 @@
 
 namespace Helper;
 
+use Acme\SecureBundle\Entity\AuctionBid;
 use Acme\SecureBundle\Entity\OrderFile;
 use Acme\SecureBundle\Entity\UserBid;
 use Acme\SecureBundle\Entity\UserOrder;
@@ -1113,5 +1114,26 @@ class Helper
         $order->setDateEdit(new \DateTime());
         $em->merge($order);
         $em->flush();
+    }
+
+
+    public static function createAuctionSelectedClientBid($bidId, $order, $auctionPrice, $auctionDay) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $bid = $em->getRepository(self::$_tableUserBid)
+            ->findOneById($bidId);
+        if ($bid) {
+            $user = $bid->getUser();
+            $auctionBid = new AuctionBid();
+            $auctionBid->setDay($auctionDay);
+            $auctionBid->setPrice($auctionPrice);
+            $auctionBid->setUserOrder($order);
+            $auctionBid->setUser($user);
+            $em->persist($auctionBid);
+            $em->flush();
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

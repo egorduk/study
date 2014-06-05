@@ -25,7 +25,7 @@
             .ui-widget-content a, .ui-widget-content .ui-state-highlight a, .ui-widget-content .ui-state-hover a {
                 color: white;
             }
-            #dialog-message-confirm-bid p .icon-hammer {
+            #dialog-message-confirm-bid p .icon-hammer, #dialog-message-success-auction p .icon-hammer {
                 font-size: 45px;
                 color: green;
             }
@@ -44,7 +44,7 @@
             #ui-id-2 {
                 color: orange;
             }
-            #ui-id-1 {
+            #ui-id-1, .class-dialog-success-auction #ui-id-2 {
                 color: green;
             }
             .grid-cell-day {
@@ -91,6 +91,12 @@
                 <p>
                     <span class="icon-warning" style="float:left; margin:0 7px 50px 0;"></span>
                     Заказ удален, обновите таблицу со ставками либо страницу!
+                </p>
+            </div>
+            <div id="dialog-message-success-auction" title="Успешно">
+                <p>
+                    <span class="icon-hammer" style="float:left; margin:0 7px 20px 0;"></span>
+                    Торг предложен!
                 </p>
             </div>
             <div id="dialog-message-auction-bid" title="Предложить торг">
@@ -235,13 +241,27 @@
                                                         type: 'POST',
                                                         data: 'bidId=' + rowId + '&auctionPrice=' + auctionPrice.val() + '&auctionDay=' + auctionDay.val() + '&action=auctionBid',
                                                         success: function(response) {
-                                                            //actionCancelBid(row, "hide");
-                                                            //$("tr.jqgrow#" + rowId).removeClass("state-selected");
+                                                            var responseObject = window.JSON.parse(response);
+                                                            if (responseObject.action) {
+                                                                $("#dialog-message-success-auction").dialog({
+                                                                    modal: true,
+                                                                    height: 230,
+                                                                    dialogClass: 'class-dialog-success-auction',
+                                                                    buttons: {
+                                                                        Ok: function() {
+                                                                            $(this).dialog("close");
+                                                                            $("#dialog-message-auction-bid").dialog('close');
+                                                                        }
+                                                                    }
+                                                                });
+                                                                setTimeout(function() {
+                                                                    $("#dialog-message-success-auction").dialog('close');
+                                                                    $("#dialog-message-auction-bid").dialog('close');
+                                                                }, 1500);
+                                                            }
                                                         }
                                                     });
                                                 }
-                                                /**/
-                                                //$(this).dialog("close");
                                             },
                                             "Отмена": function() {
                                                 $(this).dialog("close");
