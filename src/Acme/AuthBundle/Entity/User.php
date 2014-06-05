@@ -72,6 +72,11 @@ class User extends EntityRepository implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string")
      */
+    protected $avatar;
+
+    /**
+     * @ORM\Column(type="string")
+     */
     protected $recovery_password;
 
     /**
@@ -355,6 +360,10 @@ class User extends EntityRepository implements UserInterface, \Serializable
 
     public function getIsAuthorFile() {
         return $this->is_author_file;
+    }
+
+    public function getAvatar() {
+        return $this->avatar;
     }
 
     /**

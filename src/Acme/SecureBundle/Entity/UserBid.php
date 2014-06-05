@@ -46,12 +46,17 @@ class UserBid extends EntityRepository
     /**
      * @ORM\Column(type="integer")
      */
-    private $is_author_select;
+    private $is_select_author;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $is_show;
+    private $is_show_client;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $is_show_author;
 
     /**
      * @ORM\ManyToOne(targetEntity="Acme\AuthBundle\Entity\User", inversedBy="link_user_bid", cascade={"all"})
@@ -72,11 +77,12 @@ class UserBid extends EntityRepository
 
 
     public function __construct(){
-        $this->is_show = 1;
         $this->date_bid = new \DateTime();
         $this->is_client_date = 0;
+        $this->is_show_author = 1;
+        $this->is_show_client = 1;
         $this->day = 0;
-        $this->is_author_select = 0;
+        $this->is_select_author = 0;
         $this->link_user_bid = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -155,18 +161,38 @@ class UserBid extends EntityRepository
         $this->is_client_date = $val;
     }
 
-    public function setIsAuthorSelect($val)
+    public function setIsSelectAuthor($val)
     {
-        $this->is_author_select = $val;
+        $this->is_select_author = $val;
     }
 
-    public function getIsAuthorSelect()
+    public function getIsSelectAuthor()
     {
-        return $this->is_author_select;
+        return $this->is_select_author;
     }
 
     public function getUserOrder()
     {
         return $this->user_order;
+    }
+
+    public function setIsShowAuthor($val)
+    {
+        $this->is_show_author = $val;
+    }
+
+    public function getIsShowAuthor()
+    {
+        return $this->is_show_author;
+    }
+
+    public function setIsShowClient($val)
+    {
+        $this->is_show_client = $val;
+    }
+
+    public function getIsShowClient()
+    {
+        return $this->is_show_client;
     }
 }

@@ -782,6 +782,21 @@ class Helper
     }
 
 
+    public static function deleteSelectedAuthorBid($bidId, $user) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $bid = $em->getRepository(self::$_tableUserBid)
+            ->findOneBy(array('user' => $user, 'is_show_client' => 1, 'id' => $bidId));
+        if ($bid) {
+            $bid->setIsShowAuthor(0);
+            $em->flush();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
     public static function hideOrderFromAuthor($orderId, $user) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $order = $em->getRepository(self::$_tableUserOrder)
@@ -791,6 +806,21 @@ class Helper
                 ->findOneByCode('h');
             $order->setIsShowAuthor(0);
             $order->setStatusOrder($status);
+            $em->flush();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    public static function hideBidForClient($bidId) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $bid = $em->getRepository(self::$_tableUserBid)
+            ->findOneBy(array('is_show_author' => 1, 'id' => $bidId));
+        if ($bid) {
+            $bid->setIsShowAuthor(0);
             $em->flush();
             return true;
         }
@@ -988,10 +1018,10 @@ class Helper
     }
 
 
-    public static function getAllAuthorBids($user, $order) {
+    public static function getAllAuthorsBidsForSelectedOrder($user, $order) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $bids = $em->getRepository(self::$_tableUserBid)
-            ->findBy(array('user' => $user, 'user_order' => $order), array('id' => 'DESC'));
+            ->findBy(array('user' => $user, 'user_order' => $order, 'is_show_author' => 1), array('id' => 'DESC'));
         return $bids;
     }
 
@@ -1000,7 +1030,7 @@ class Helper
         $em = self::getContainer()->get('doctrine')->getManager();
         $id = $order->getId();
         $stmt = $em->getConnection()
-            ->prepare("SELECT * FROM (SELECT b.user_id AS uid,b.*,u.avatar,u.login FROM user_bid AS b JOIN user_order AS uo ON b.user_order_id = uo.id JOIN `user` AS u ON b.user_id = u.id WHERE b.user_order_id = '$id' AND b.is_show = '1' ORDER BY b.date_bid DESC) AS t GROUP BY uid");
+            ->prepare("SELECT * FROM (SELECT b.user_id AS uid,b.*,u.avatar,u.login FROM user_bid AS b JOIN user_order AS uo ON b.user_order_id = uo.id JOIN `user` AS u ON b.user_id = u.id WHERE b.user_order_id = '$id' AND b.is_show_author = '1' ORDER BY b.date_bid DESC) AS t GROUP BY uid");
         $stmt->execute();
         $bids = $stmt->fetchAll();
         //var_dump($bids); die;
@@ -1057,7 +1087,7 @@ class Helper
             ->findOneById($bidId);
         if ($bid)
         {
-            $bid->setIsAuthorSelect(1);
+            $bid->setIsSelectAuthor(1);
             $em->flush();
             return true;
         }
@@ -1073,7 +1103,7 @@ class Helper
             ->findOneById($bidId);
         if ($bid)
         {
-            $bid->setIsAuthorSelect(0);
+            $bid->setIsSelectAuthor(0);
             $em->flush();
             return true;
         }
@@ -1090,11 +1120,15 @@ class Helper
             ->innerJoin('ub.user_order', 'uo')
             ->andWhere('uo.user = :user')
             ->andWhere('uo.is_show_client = 1')
-            ->andWhere('ub.is_show = 1')
+            ->andWhere('uo.is_show_author = 1')
+            ->andWhere('ub.is_show_author = 1')
+            ->andWhere('ub.is_show_client = 1')
             ->groupBy('uo.num')
             ->setParameter('user', $user)
+            ->setFirstResult(1)
             ->getQuery()
             ->getResult();
+        var_dump($bids); die;
         return $bids;
     }
 

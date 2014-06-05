@@ -327,9 +327,11 @@ class ClientController extends Controller
                         $fileName = $bid['avatar'];
                         $userLogin = $bid['login'];
                         $userId = $bid['uid'];
+
                         $pathAvatar = Helper::getFullPathToAvatar($fileName);
                         $urlClient = $this->generateUrl('secure_client_action', array('type' => 'view_client_profile', 'id' => $userId));
                         $author = "<img src='$pathAvatar' align='middle' alt='$fileName' width='110px' height='auto' class='thumbnail'><a href='$urlClient' class='label label-primary'>$userLogin</a>";
+
                         $dateBid =  new \DateTime($bid['date_bid']);
                         $dateBid = $dateBid->format("d.m.Y") . "<br><span class='grid-cell-time'>" . $dateBid->format("H:i") . "</span>";
                         $comment = "<span class='grid-cell-comment'>" . $bid['comment'] . "</span>";
@@ -345,7 +347,7 @@ class ClientController extends Controller
                             $comment,
                             $dateBid,
                             "",
-                            $bid['is_author_select'],
+                            $bid['is_select_author'],
                         );
                     }
                     $response->selected_bid = 1;
@@ -364,15 +366,25 @@ class ClientController extends Controller
                     }
                     elseif ($action == 'auctionBid') {
                         $bidId = $request->request->get('bidId');
-                        $auctionPrice = $request->request->get('auctionPrice');;
-                        $auctionDay = $request->request->get('auctionDay');;
+                        $auctionPrice = $request->request->get('auctionPrice');
+                        $auctionDay = $request->request->get('auctionDay');
                         $actionResponse = Helper::createAuctionSelectedClientBid($bidId, $order, $auctionPrice, $auctionDay);
                         return new Response(json_encode(array('action' => $actionResponse)));
+                    }
+                    elseif ($action == 'hideBid') {
+                        $bidId = $request->request->get('bidId');
+                        $isHide = Helper::hideBidForClient($bidId);
+                        if ($isHide) {
+                            return new Response(json_encode(array('action' => true)));
+                        }
+                        else {
+                            return  new Response(json_encode(array('action' => false)));
+                        }
                     }
                 }
             }
             return $this->render(
-                'AcmeSecureBundle:Client:order_select.html.twig', array('order' => $order, 'showWindow' => false)
+                'AcmeSecureBundle:Client:order_select.html.twig', array('order' => $order)
             );
         }
         else {

@@ -23,6 +23,13 @@
             .thumbnail-image{
                 padding-top: 20px;
             }
+            .thumbnail {
+                margin-bottom: 7px;
+                margin-left: 45px;
+            }
+            .label-primary {
+                background-color: #0088cc;
+            }
             .block-file{
                 border: 1px solid #000000;
                 width: 300px;
@@ -60,6 +67,17 @@
             .ui-jqgrid tr.jqgrow td {
                 font-size: 18px !important;
             }
+            #pagerBids_center {
+                display: none;
+            }
+            .grid-cell-comment {
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                font-style: italic;
+            }
+            #blockAuthor {
+                width: 200px;
+                text-align: center;
+            }
         </style>
         <div class="container">
             <div class="row">
@@ -74,7 +92,7 @@
                     <p>Статус заказа: {{ order.statusorder.name }}</p>
                     <p>Дата создания заказа: {{ order.datecreate.format("d.m.Y H:i") }}</p>
                     <p>Выполнение заказа до: {{ order.dateexpire.format("d.m.Y H:i") }}</p>
-                    <p>Заказчик: {{ order.user.login }}</p>
+                    <p>Заказчик: <div id="blockAuthor">{{ client | raw }}</div></p>
                     <div>
                         {% for file in files %}
                             <div class="block-file">
@@ -132,12 +150,10 @@
             </div>
             <script>
                 $(document).ready(function() {
-
                     var buttonBid = $("#formBid_bid");
                     var isClientDate = $("#formBid_isClientDate");
                     var fieldDay = $("#formBid_fieldDay");
                     var fieldSum = $("#formBid_fieldSum");
-
                     buttonBid.click(function(e) {
                         $.ajax({
                             type: 'POST',
@@ -167,7 +183,6 @@
                             }
                         });
                     });
-
                     if (isClientDate.prop("checked")) {
                         fieldDay.prop('disabled', true);
                     }
@@ -185,14 +200,12 @@
                             fieldDay.prop('disabled', false);
                         }
                     });
-
                     if (fieldSum.val() == "" || (fieldDay.val() == "" && !isClientDate.prop("checked"))) {
                         disabledButtonBid(true);
                     }
                     else {
                         disabledButtonBid(false);
                     }
-
                     fieldSum.on('input', function() {
                         if ($(this).val() == "" || (fieldDay.val() == "" && !isClientDate.prop("checked"))) {
                             disabledButtonBid(true);
@@ -201,7 +214,6 @@
                             disabledButtonBid(false);
                         }
                     });
-
                     fieldDay.on('input', function() {
                         if ($(this).val() == ""|| fieldSum.val() == "") {
                             disabledButtonBid(true);
@@ -210,7 +222,6 @@
                             disabledButtonBid(false);
                         }
                     });
-
                     function disabledButtonBid(a) {
                         if (a) {
                             $(".btn-success").addClass('disabled');
@@ -220,7 +231,6 @@
                         }
                         buttonBid.prop('disabled', a);
                     }
-
                     var grid = $("#listBids");
                     grid.jqGrid({
                         url: {{ path('secure_author_order', { num: order.num }) | json_encode | raw }},
@@ -237,15 +247,15 @@
                             {name:'action',width:100,align:'center',sortable:false,resize:false,formatter:function() {
                                 return "<div class='refresh-bid' style='margin-left:8px;'>" +
                                         "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Поставить заново' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
-                                        "<span class='icon-ok'></span></div></div>" +
+                                        "<span class='icon-arrows-cw'></span></div></div>" +
                                         "<div class='delete-bid' style='margin-left:8px;'>" +
                                         "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Удалить ставку' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
-                                        "<span class='icon-trash'></span></div></div>";
+                                        "<span class='icon-trash-1'></span></div></div>";
                             }}
-
                         ],
                         rowNum: 100,
                         viewrecords: true,
+                        rownumbers: true,
                         hidegrid: false,
                         caption: 'Таблица истории ставок',
                         height: '200',
@@ -269,14 +279,13 @@
                                 var rowId = getRowId(e);
                                 if (rowId) {
                                     $.ajax({
-                                        //url: 'deleteBid',
                                         type: 'POST',
                                         data: 'bidId=' + rowId + '&action=deleteBid',
                                         success: function(response) {
-                                            /*var resposeObject = window.JSON.parse(response);
-                                            if (resposeObject.action == "true") {
+                                            var resposeObject = window.JSON.parse(response);
+                                            if (resposeObject.action) {
                                                 grid.trigger('reloadGrid');
-                                            }*/
+                                            }
                                         }
                                     });
                                 }

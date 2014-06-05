@@ -22,6 +22,9 @@
             .label-primary {
                 background-color: #0088cc;
             }
+            .thumbnail {
+                margin-bottom: 7px;
+            }
             .ui-widget-content a, .ui-widget-content .ui-state-highlight a, .ui-widget-content .ui-state-hover a {
                 color: white;
             }
@@ -29,7 +32,7 @@
                 font-size: 45px;
                 color: green;
             }
-            #dialog-message-confirm-bid, #dialog-message-error, .cancel-bid, #dialog-message-auction-bid  {
+            #dialog-message-confirm-bid, #dialog-message-error, .cancel-bid, #dialog-message-auction-bid, #dialog-message-success-auction  {
                 display: none;
             }
             .state-selected:hover, .state-selected {
@@ -140,9 +143,9 @@
                                         "<div class='confirm-bid' style='margin-left:8px;'>" +
                                         "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Принять ставку автора' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
                                         "<span class='icon-ok-5'></span></div></div>" +
-                                        "<div class='delete-bid' style='margin-left:8px;'>" +
-                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Удалить ставку автора' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
-                                        "<span class='icon-trash-1'></span></div></div>" +
+                                        "<div class='hide-bid' style='margin-left:8px;'>" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Скрыть ставку автора' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<span class='icon-eye'></span></div></div>" +
                                         "<div class='auction-bid' style='margin-left:8px;'>" +
                                         "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Предложить торг автору' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
                                         "<span class='icon-hammer'></span></div></div>" +
@@ -210,6 +213,19 @@
                                     success: function(response) {
                                         actionCancelBid(row, "hide");
                                         $("tr.jqgrow#" + rowId).removeClass("state-selected");
+                                    }
+                                });
+                            });
+                            $(".hide-bid").click(function(e) {
+                                var rowId = getRowId(e);
+                                $.ajax({
+                                    type: 'POST',
+                                    data: 'bidId=' + rowId + '&action=hideBid',
+                                    success: function(response) {
+                                        var resposeObject = window.JSON.parse(response);
+                                        if (resposeObject.action) {
+                                            grid.delRowData(rowId);
+                                        }
                                     }
                                 });
                             });

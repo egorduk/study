@@ -202,10 +202,16 @@ class AuthorController extends Controller
             $userId = 1;
             $user = Helper::getUserById($userId);
             $order = Helper::getOrderByNumForAuthor($num);
+            $clientLogin = $order->getUser()->getLogin();
+            $clientId = $order->getUser()->getId();
+            $clientAvatar = $order->getUser()->getAvatar();
+            $pathAvatar = Helper::getFullPathToAvatar($clientAvatar);
+            $urlClient = $this->generateUrl('secure_client_action', array('type' => 'view_client_profile', 'id' => $userId));
+            $client = "<img src='$pathAvatar' align='middle' alt='$pathAvatar' width='110px' height='auto' class='thumbnail'><a href='$urlClient' class='label label-primary'>$clientLogin</a>";
             if (!$order) {
 
             }
-            $bids = Helper::getAllAuthorBids($user, $order);
+            $bids = Helper::getAllAuthorsBidsForSelectedOrder($user, $order);
             $filesOrder = Helper::getFilesForOrder($order);
             $bidValidate = new BidFormValidate();
             if ($bids) {
@@ -227,6 +233,7 @@ class AuthorController extends Controller
                         $dateBid =  $bid->getDateBid();
                         $dateBid = $dateBid->format("d.m.Y") . "<br><span class='grid-cell-time'>" . $dateBid->format("H:i") . "</span>";
                         $day != 0 ? $day = "<span class='grid-cell-day'>" . $day . "</span>" : $day = "";
+                        $comment = "<span class='grid-cell-comment'>" . $bid->getComment() . "</span>";
                         $response->rows[$index]['id'] = $bid->getId();
                         $response->rows[$index]['cell'] = array(
                             $bid->getId(),
@@ -234,7 +241,7 @@ class AuthorController extends Controller
                             $day,
                             $bid->getIsClientDate(),
                             $dateBid,
-                            $bid->getComment(),
+                            $comment,
                             ""
                         );
                     }
@@ -243,10 +250,8 @@ class AuthorController extends Controller
                 elseif (isset($action)) {
                     if ($action == 'deleteBid') {
                         $bidId = $request->request->get('bidId');
-                        //$actionResponse = Helper::confirmSelectedClientBid($bidId);
-                        var_dump($bidId);die;
-                        return new Response(json_encode(array('action' => true)));
-
+                        $actionResponse = Helper::deleteSelectedAuthorBid($bidId, $user);
+                        return new Response(json_encode(array('action' => $actionResponse)));
                     }
                     /*elseif ($action == 'cancelBid') {
                         $bidId = $request->request->get('bidId');
@@ -277,7 +282,7 @@ class AuthorController extends Controller
                 }
             }
             return $this->render(
-                'AcmeSecureBundle:Author:order_select.html.twig', array('formBid' => $formBid->createView(), 'files' => $filesOrder, 'order' => $order, 'bids' => $bids, 'showWindow' => $showWindow)
+                'AcmeSecureBundle:Author:order_select.html.twig', array('formBid' => $formBid->createView(), 'files' => $filesOrder, 'order' => $order, 'client' => $client, 'bids' => $bids, 'showWindow' => $showWindow)
             );
         }
         else {
