@@ -78,6 +78,13 @@
                 width: 200px;
                 text-align: center;
             }
+            #dialog-message-confirm-selection p .icon-help-3 {
+                font-size: 45px;
+                color: blue;
+            }
+            .class-dialog-confirm-selection #ui-id-1 {
+                color: blue;
+            }
         </style>
         <div class="container">
             <div class="row">
@@ -141,6 +148,12 @@
                     </div>
                     {{ form_end(formBid) }}
                 </div>
+                <div id="dialog-message-confirm-selection" title="Подтверждение выполнения заказа">
+                    <p>
+                        <span class="icon-help-3" style="float:left;"></span>
+                        Вы согласны успешно и в срок выполнить данный заказ?
+                    </p>
+                </div>
                 <div class="row">
                     <div blockAuthorBids>
                         <table id="listBids"></table>
@@ -150,27 +163,69 @@
             </div>
             <script>
                 $(document).ready(function() {
+                    $.fn.button.noConflict();
+                    $("#dialog-message-confirm-selection").dialog({
+                        modal: true,
+                        resizable: false,
+                        height: 230,
+                        width: 410,
+                        dialogClass: 'class-dialog-confirm-selection',
+                        buttons: {
+                            "Согласие": function() {
+                                $.ajax({
+                                    type: 'POST',
+                                    data: 'bidId=' + rowId + '&auctionPrice=' + auctionPrice.val() + '&auctionDay=' + auctionDay.val() + '&action=auctionBid',
+                                    success: function(response) {
+                                        var responseObject = window.JSON.parse(response);
+                                        if (responseObject.action) {
+                                            /*setTimeout(function() {
+                                                $("#dialog-message-success-auction").dialog('close');
+                                                $("#dialog-message-auction-bid").dialog('close');
+                                            }, 1500);*/
+                                        }
+                                    }
+                                });
+                            },
+                            "Отказ": function() {
+                                $(this).dialog("close");
+                            }
+                        },
+                        close: function() {
+                        }
+                    });
                     var buttonBid = $("#formBid_bid");
                     var isClientDate = $("#formBid_isClientDate");
                     var fieldDay = $("#formBid_fieldDay");
                     var fieldSum = $("#formBid_fieldSum");
+                    var fieldComment = $("#formBid_fieldComment");
                     buttonBid.click(function(e) {
+                        var formBid = $("#formBid");
+                        /*if (fieldDay.val() == '') {
+                            fieldDay.addClass('has-error');
+                            return false;
+                        }
+                        /*if (fieldSum.val() == '') {
+                            fieldSum.addClass('has-error');
+                            return false;
+                        }*/
                         $.ajax({
                             type: 'POST',
-                            data: $("#formBid").serialize(),
+                            data: formBid.serialize(),
                             success: function(response) {
                                 var responseObject = window.JSON.parse(response);
                                 if (responseObject.response == "valid") {
                                     $(".error").remove();
-                                    var placeError = $("#formBid").parent().prev();
+                                    var placeError = formBid.parent().prev();
                                     if (placeError.hasClass("success")) {
                                         placeError.removeClass("success");
                                         placeError.hide();
                                     }
-                                    $("#listBids").trigger('reloadGrid');
-                                    $("#formBid").parent().before("<span class='success'>Ставка поставлена!</span>");
+                                    disabledButtonBid(true);
+                                    clearFields();
+                                    grid.trigger('reloadGrid');
+                                    formBid.parent().before("<span class='success'>Ставка поставлена!</span>");
                                     setTimeout(function() {
-                                        $("#formBid").parent().prev().hide();
+                                        formBid.parent().prev().hide();
                                     }, 3000);
                                 }
                                 else {
@@ -185,8 +240,7 @@
                     });
                     if (isClientDate.prop("checked")) {
                         fieldDay.prop('disabled', true);
-                    }
-                    else {
+                    } else {
                         fieldDay.prop('disabled', false);
                     }
                     isClientDate.change(function() {
@@ -195,38 +249,34 @@
                             if (buttonBid.prop('disabled') && fieldSum.val() != "") {
                                 disabledButtonBid(false);
                             }
-                        }
-                        else {
+                        } else {
                             fieldDay.prop('disabled', false);
+                            fieldDay.val("");
                         }
                     });
                     if (fieldSum.val() == "" || (fieldDay.val() == "" && !isClientDate.prop("checked"))) {
                         disabledButtonBid(true);
-                    }
-                    else {
+                    } else {
                         disabledButtonBid(false);
                     }
                     fieldSum.on('input', function() {
                         if ($(this).val() == "" || (fieldDay.val() == "" && !isClientDate.prop("checked"))) {
                             disabledButtonBid(true);
-                        }
-                        else {
+                        } else {
                             disabledButtonBid(false);
                         }
                     });
                     fieldDay.on('input', function() {
                         if ($(this).val() == ""|| fieldSum.val() == "") {
                             disabledButtonBid(true);
-                        }
-                        else {
+                        } else {
                             disabledButtonBid(false);
                         }
                     });
                     function disabledButtonBid(a) {
                         if (a) {
                             $(".btn-success").addClass('disabled');
-                        }
-                        else {
+                        } else {
                             $(".btn-success").removeClass('disabled');
                         }
                         buttonBid.prop('disabled', a);
@@ -240,10 +290,10 @@
                         colModel :[
                             {name:'id',index:'id',search:false,hidden:true},
                             {name:'sum',index:'sum',width:130,align:'center',resizable:false,editable:false,sortable:false,formatter:'currency',formatoptions:{thousandsSeparator: " ",decimalPlaces:0,suffix:" руб."}},
-                            {name:'day',index:'day',width:200,align:'center',resizable:false,editable:false,sortable:false},
+                            {name:'day',index:'day',width:200,align:'center',resizable:false,editable:false,sortable:false,formatter:statusDay},
                             {name:'is_client_date',index:'is_client_date',width:150,align:'center',resizable:false,editable:false,sortable:false,formatter:statusDate},
                             {name:'date_bid',index:'date_bid',width:150,align:'center',resizable:false,editable:false,sortable:false},
-                            {name:'comment',index:'comment',width:200,align:'center',resizable:false,editable:false,sortable:false},
+                            {name:'comment',index:'comment',width:200,align:'center',resizable:false,editable:false,sortable:false,formatter:statusComment},
                             {name:'action',width:100,align:'center',sortable:false,resize:false,formatter:function() {
                                 return "<div class='refresh-bid' style='margin-left:8px;'>" +
                                         "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Поставить заново' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
@@ -285,6 +335,7 @@
                                             var resposeObject = window.JSON.parse(response);
                                             if (resposeObject.action) {
                                                 grid.trigger('reloadGrid');
+                                                clearFields();
                                             }
                                         }
                                     });
@@ -294,14 +345,30 @@
                     }).navGrid('#pagerOrders',{view:false, search:false, del:false, add:false, edit:false, refresh:true},
                             {},{},{},{},{}
                     );
-                    function statusDate(cellvalue)
-                    {
+                    function statusDate(cellvalue) {
                         if (cellvalue) {
                             return ("<span class='icon-plus-6'></span>");
-                        }
-                        else {
+                        } else {
                             return ("<span class='icon-minus-4'></span>");
                         }
+                    }
+                    function statusDay(cellvalue) {
+                        if (cellvalue != 0) {
+                            return ("<span class='grid-cell-day'>" + cellvalue + "</span>");
+                        } else {
+                            return ("");
+                        }
+                    }
+                    function statusComment(cellvalue) {
+                        return ("<span class='grid-cell-comment'>" + cellvalue + "</span>");
+                    }
+                    function clearFields() {
+                        fieldDay.val("");
+                        fieldSum.val("");
+                        fieldComment.val("");
+                        isClientDate.prop('checked', false);
+                        fieldDay.prop('disabled', false);
+                        buttonBid.prop('disabled', false);
                     }
                 });
             </script>

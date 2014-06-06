@@ -356,7 +356,7 @@ class ClientController extends Controller
                 elseif (isset($action)) {
                     if ($action == 'confirmBid') {
                         $bidId = $request->request->get('bidId');
-                        $actionResponse = Helper::confirmSelectedClientBid($bidId);
+                        $actionResponse = Helper::confirmSelectedClientBid($user, $bidId, $order, $this->container);
                         return new Response(json_encode(array('action' => $actionResponse)));
                     }
                     elseif ($action == 'cancelBid') {

@@ -782,12 +782,24 @@ class Helper
     }
 
 
-    public static function deleteSelectedAuthorBid($bidId, $user) {
+    public static function deleteSelectedAuthorBid($bidId, $user, $order) {
         $em = self::getContainer()->get('doctrine')->getManager();
-        $bid = $em->getRepository(self::$_tableUserBid)
-            ->findOneBy(array('user' => $user, 'is_show_client' => 1, 'id' => $bidId));
-        if ($bid) {
-            $bid->setIsShowAuthor(0);
+        $userBid = $em->getRepository(self::$_tableUserBid)
+            ->findOneBy(array('user' => $user, 'is_show_author' => 1, 'id' => $bidId));
+        if ($userBid) {
+            $userBid->setIsShowAuthor(0);
+            $userBid->setIsShowClient(0);
+            $bids = $em->getRepository(self::$_tableUserBid)->createQueryBuilder('ub')
+                ->innerJoin('ub.user_order', 'uo')
+                ->andWhere('uo.user = :user')
+                ->andWhere('ub.user_order = :order')
+                ->andWhere('ub.is_show_client = 0')
+                ->setParameter('user', $user)
+                ->setParameter('order', $order)
+                ->getQuery()
+                ->getResult();
+            $bid = reset($bids);
+            $bid->setIsShowClient(1);
             $em->flush();
             return true;
         }
@@ -1063,6 +1075,17 @@ class Helper
         }
         $em = self::getContainer()->get('doctrine')->getManager();
         $em->persist($userBid);
+        $bids = $em->getRepository(self::$_tableUserBid)->createQueryBuilder('ub')
+            ->innerJoin('ub.user_order', 'uo')
+            ->andWhere('uo.user = :user')
+            ->andWhere('ub.user_order = :order')
+            ->setParameter('user', $user)
+            ->setParameter('order', $order)
+            ->getQuery()
+            ->getResult();
+        foreach($bids as $bid) {
+            $bid->setIsShowClient(0);
+        }
         $em->flush();
     }
 
@@ -1081,7 +1104,7 @@ class Helper
     }
 
 
-    public static function confirmSelectedClientBid($bidId) {
+    public static function confirmSelectedClientBid($user, $bidId, $order, $container) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $bid = $em->getRepository(self::$_tableUserBid)
             ->findOneById($bidId);
@@ -1089,11 +1112,37 @@ class Helper
         {
             $bid->setIsSelectAuthor(1);
             $em->flush();
+            $email = $bid->getUser()->getEmail();
+            $subject = "Вас выбрали, подтвердите, что согласны!";
+            $body = "Вы выбраны для выполнения заказа номер " . $order->getNum() . ". Тема - " . $order->getTheme() . ". Заказчик - " . $user->getLogin();
+            self::sendMailToAuthor($email, $subject, $body, $container);
             return true;
         }
         else {
             return false;
         }
+    }
+
+
+    public static function sendMailToAuthor($email, $subject, $body, $container) {
+        $mailSender = $container->getParameter('mailSender');
+        $mailTitle = $container->getParameter('mailTitle');
+        $mailer = $container->get('mailer');
+        $message = \Swift_Message::newInstance()
+            ->setSubject($subject)
+            ->setFrom($mailSender, $mailTitle)
+            ->setTo($email)
+            //->setTo("gzhelka777@mail.ru")
+            ->setBody(
+                '<html>' .
+                '<head></head>' .
+                '<body>' .
+                $body .
+                '</body>' .
+                '</html>',
+                'text/html'
+            );
+        $mailer->send($message);
     }
 
 

@@ -209,18 +209,17 @@ class AuthorController extends Controller
             $urlClient = $this->generateUrl('secure_client_action', array('type' => 'view_client_profile', 'id' => $userId));
             $client = "<img src='$pathAvatar' align='middle' alt='$pathAvatar' width='110px' height='auto' class='thumbnail'><a href='$urlClient' class='label label-primary'>$clientLogin</a>";
             if (!$order) {
-
             }
-            $bids = Helper::getAllAuthorsBidsForSelectedOrder($user, $order);
             $filesOrder = Helper::getFilesForOrder($order);
             $bidValidate = new BidFormValidate();
-            if ($bids) {
-                $bid = end($bids);
+            $bids = Helper::getAllAuthorsBidsForSelectedOrder($user, $order);
+            /*if ($bids) {
+                $bid = reset($bids);
                 $bidValidate->setDay($bid->getDay());
                 $bidValidate->setSum($bid->getSum());
                 $bidValidate->setIsClientDate($bid->getIsClientDate());
                 $bidValidate->setComment($bid->getComment());
-            }
+            }*/
             $showWindow = false;
             $formBid = $this->createForm(new BidForm(), $bidValidate);
             if ($request->isXmlHttpRequest()) {
@@ -229,19 +228,16 @@ class AuthorController extends Controller
                 if (isset($nd)) {
                     $response = new Response();
                     foreach($bids as $index => $bid) {
-                        $day = $bid->getDay();
                         $dateBid =  $bid->getDateBid();
                         $dateBid = $dateBid->format("d.m.Y") . "<br><span class='grid-cell-time'>" . $dateBid->format("H:i") . "</span>";
-                        $day != 0 ? $day = "<span class='grid-cell-day'>" . $day . "</span>" : $day = "";
-                        $comment = "<span class='grid-cell-comment'>" . $bid->getComment() . "</span>";
                         $response->rows[$index]['id'] = $bid->getId();
                         $response->rows[$index]['cell'] = array(
                             $bid->getId(),
                             $bid->getSum(),
-                            $day,
+                            $bid->getDay(),
                             $bid->getIsClientDate(),
                             $dateBid,
-                            $comment,
+                            $bid->getComment(),
                             ""
                         );
                     }
@@ -250,7 +246,7 @@ class AuthorController extends Controller
                 elseif (isset($action)) {
                     if ($action == 'deleteBid') {
                         $bidId = $request->request->get('bidId');
-                        $actionResponse = Helper::deleteSelectedAuthorBid($bidId, $user);
+                        $actionResponse = Helper::deleteSelectedAuthorBid($bidId, $user, $order);
                         return new Response(json_encode(array('action' => $actionResponse)));
                     }
                     /*elseif ($action == 'cancelBid') {

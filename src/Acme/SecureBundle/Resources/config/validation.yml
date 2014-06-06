@@ -44,7 +44,9 @@ Acme\SecureBundle\Entity\Author\BidFormValidate:
         fieldSum:
           - Length: { min: 1, minMessage: "Слишком маленькая сумма!" }
           - Regex: { pattern: "/^[\d]+$/u", message: "Только цифры!" }
+          - NotBlank: { message: "Введите сумму!" }
         fieldDay:
           - Regex: { pattern: "/^[\d]+$/", message: "Только цифры!" }
+          #- NotBlank: { message: "Введите количество дней!" }
         #fieldComment:
         #  - Regex: { pattern: "/^[A-Za-zА-Яа-я\d]+$/", message: "Только цифрыи буквы!" }
