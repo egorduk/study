@@ -146,6 +146,11 @@ class User extends EntityRepository implements UserInterface, \Serializable
      **/
     protected $link_select_user;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Acme\SecureBundle\Entity\FavoriteOrder", mappedBy="user")
+     **/
+    protected $link_favorite_user;
+
 
     public function __construct()
     {
@@ -161,6 +166,7 @@ class User extends EntityRepository implements UserInterface, \Serializable
         $this->link_author_file = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_user_bid = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_select_user = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->link_favorite_user = new \Doctrine\Common\Collections\ArrayCollection();
         $this->is_ban = 0;
         $this->date_confirm_recovery = Helper::getFormatDateForInsert("0000-00-00 00:00:00", "Y-m-d H:i:s");
         $this->date_confirm_reg = Helper::getFormatDateForInsert("0000-00-00 00:00:00", "Y-m-d H:i:s");

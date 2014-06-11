@@ -3,6 +3,7 @@
 namespace Helper;
 
 use Acme\SecureBundle\Entity\AuctionBid;
+use Acme\SecureBundle\Entity\FavoriteOrder;
 use Acme\SecureBundle\Entity\OrderFile;
 use Acme\SecureBundle\Entity\SelectBid;
 use Acme\SecureBundle\Entity\UserBid;
@@ -33,6 +34,7 @@ class Helper
     private static $_tableStatusOrder = 'AcmeSecureBundle:StatusOrder';
     private static $_tableOrderFile = 'AcmeSecureBundle:OrderFile';
     private static $_tableUserBid = 'AcmeSecureBundle:UserBid';
+    private static $_tableFavoriteOrder = 'AcmeSecureBundle:FavoriteOrder';
     private static $kernel;
 
     public function __construct() {
@@ -919,7 +921,6 @@ class Helper
             elseif ($sField == "type_order") {
                 $field = 'name';
             }
-
             if ($sOper == 'eq') {
                 if ($sField != "subject_order" && $sField != "type_order") {
                     $orders = $em->getRepository(self::$_tableUserOrder)
@@ -1254,6 +1255,35 @@ class Helper
         $bid = $em->getRepository(self::$_tableUserBid)
             ->findOneBy(array('user' => $user, 'user_order' => $order, 'is_select_client' => 1, 'is_show_author' => 1, 'is_show_client' => 1, 'is_confirm_author' => 0, 'is_confirm_fail' => 0));
         if ($bid) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    public static function favoriteOrder($orderId, $user, $type) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $order = $em->getRepository(self::$_tableUserOrder)
+            ->findOneById($orderId);
+        if ($order) {
+            if ($type == "favorite") {
+                $favoriteOrder = new FavoriteOrder();
+                $favoriteOrder->setUserOrder($order);
+                $favoriteOrder->setUser($user);
+                $order->setIsFavorite(1);
+                $em->persist($favoriteOrder);
+                $em->flush();
+            }
+            else {
+                $order->setIsFavorite(0);
+                $favoriteOrder = $em->getRepository(self::$_tableFavoriteOrder)
+                    ->findOneBy(array('user_order' => $order, 'user' => $user));
+               // var_dump($favoriteOrder); die;
+                $em->remove($favoriteOrder);
+                $em->flush();
+            }
             return true;
         }
         else {

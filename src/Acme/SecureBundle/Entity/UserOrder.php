@@ -93,6 +93,11 @@ class UserOrder extends EntityRepository
     /**
      * @ORM\Column(type="integer")
      */
+    private $is_favorite;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
     private $is_show_client;
 
     /**
@@ -120,6 +125,11 @@ class UserOrder extends EntityRepository
      **/
     private $link_order_file;
 
+    /**
+     * @ORM\OneToMany(targetEntity="FavoriteOrder", mappedBy="user")
+     **/
+    private $link_favorite_user_order;
+
     private $count_bids;
 
 
@@ -128,6 +138,7 @@ class UserOrder extends EntityRepository
         $this->date_edit = new \DateTime();
         $this->is_show_author = 0;
         $this->is_show_client = 1;
+        $this->is_favorite = 0;
         $this->files_dir = "";
         $em = $container->get('doctrine')->getManager();
         $query = $em->getRepository('AcmeSecureBundle:UserOrder')->createQueryBuilder('s');
@@ -140,6 +151,7 @@ class UserOrder extends EntityRepository
         $this->link_order_file = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_auction_user_order = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_auction_user = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->link_favorite_user_order = new \Doctrine\Common\Collections\ArrayCollection();
         $this->count_bids = 0;
     }
 
@@ -308,4 +320,15 @@ class UserOrder extends EntityRepository
     {
         $this->count_bids = $val;
     }
+
+    public function setIsFavorite($val)
+    {
+        $this->is_favorite = $val;
+    }
+
+    public function getIsFavorite()
+    {
+        return $this->is_favorite;
+    }
+
 }

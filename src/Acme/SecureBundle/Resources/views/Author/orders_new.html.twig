@@ -28,6 +28,9 @@
                 #help-popover {
                     cursor: pointer;
                 }
+                .unfavorite-order {
+                    display: none;
+                }
             </style>
             <div class="row offset-margin-right">
                 {% if (showWindow) %}
@@ -53,7 +56,7 @@
                             datatype: 'json',
                             mtype: 'POST',
                             recordtext: "Просмотр заказов {0} - {1}",
-                            colNames:['','№ заказа', 'Предмет', 'Тип работы', 'Тема работы', 'Задание', 'Выполнение до', 'Min ставка', 'Max ставка', 'Моя ставка', 'Создан', 'Действия'],
+                            colNames:['','№ заказа', 'Предмет', 'Тип работы', 'Тема работы', 'Задание', 'Выполнение до', 'Min ставка', 'Max ставка', 'Моя ставка', 'Создан', 'Действия', ''],
                             colModel :[
                                 {name:'id',index:'id',key:true,search:false,resize:false,hidden:true},
                                 {name:'num',index:'num',width:100,align:'center',resizable:false,editable:false,searchrules:{"required":true, "number":true, "maxValue":13},searchoptions:{sopt:['eq','ne','bw','cn']},/*,formatter:'showlink',formatoptions:{baseLinkUrl:'someurl.php', addParam: '&action=edit'}*/},
@@ -67,19 +70,22 @@
                                 {name:'my_bid',index:'my_bid',width:100,align:'center',resizable:false,editable:false,search:false,sortable:true},
                                 {name:'date_create',index:'date_create',width:160,align:'center',resizable:false,editable:false,search:false},
                                 {name:'action',width:80,align:'center',sortable:false,resize:false,search:false,formatter:function() {
-                                    return "<div class='favorite-order' style='margin-left:8px;'>" +
-                                            "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='В избранные заказы' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
-                                            "<span class='icon-star'></span></div></div>" +
-                                            "<div class='bid-order' style='margin-left:8px;'>" +
+                                    return "<div class='bid-order' style='margin-left:8px;'>" +
                                             "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Поставить ставку' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
-                                            "<span class='icon-hammer'></span></div></div>";
-                                }}
-
+                                            "<span class='icon-hammer'></span></div></div>" +
+                                            "<div class='favorite-order' style='margin-left:8px;'>" +
+                                            "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='В избранные заказы' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                            "<span class='icon-star-empty-2'></span></div></div>" +
+                                            "<div class='unfavorite-order' style='margin-left:8px;'>" +
+                                            "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Из избранных заказов' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                            "<span class='icon-star'></span></div></div>";
+                                }},
+                                {name:'is_favorite_order',index:'is_favorite_order',key:false,search:false,hidden:true}
                             ],
                             pager: $('#pagerOrders'),
-                            toolbar: [true,'top'],
-                            rowNum: 10,
-                            rowList: [10,20,30],
+                            //toolbar: [true,'top'],
+                            rowNum: 15,
+                            rowList: [15,25,35],
                             sortname: 'date_create',
                             sortorder: 'desc',
                             viewrecords: true,
@@ -94,7 +100,7 @@
                                     return rowId;
                                 }
                                 $(".favorite-order").click(function(e) {
-                                    var rowId = getOrderId(e);
+                                    var rowId = getOrderId(e), row = getRow($(this));
                                     if (rowId) {
                                         $.ajax({
                                             type: 'POST',
@@ -102,13 +108,44 @@
                                             success: function(response) {
                                                 var resposeObject = window.JSON.parse(response);
                                                 if (resposeObject.action) {
-                                                    grid.trigger('reloadGrid');
+                                                    //grid.trigger('reloadGrid');
+                                                    actionFavoriteOrder(row, "favorite");
+                                                }
+                                            }
+                                        });
+                                    }
+                                });
+                                $(".unfavorite-order").click(function(e) {
+                                    var rowId = getOrderId(e), row = getRow($(this));
+                                    if (rowId) {
+                                        $.ajax({
+                                            type: 'POST',
+                                            data: 'orderId=' + rowId + '&action=unfavoriteOrder',
+                                            success: function(response) {
+                                                var resposeObject = window.JSON.parse(response);
+                                                if (resposeObject.action) {
+                                                    //grid.trigger('reloadGrid');
+                                                    actionFavoriteOrder(row, "unfavorite");
                                                 }
                                             }
                                         });
                                     }
                                 });
                                 $(".ui-widget-content td").removeAttr('title');
+                                var grids = grid.getDataIDs();
+                                var gridsLength = grids.length;
+                                for (var i = 0; i < gridsLength; i++) {
+                                    var selectedRowOrder = $("tr.jqgrow#" + grids[i]);
+                                    var blockFavoriteOrder = selectedRowOrder.find(".favorite-order"), blockUnfavoriteOrder = selectedRowOrder.find(".unfavorite-order");
+                                    if (Number(grid.getCell(grids[i], "is_favorite_order"))) {
+                                        blockFavoriteOrder.hide();
+                                        blockUnfavoriteOrder.show();
+                                    }
+                                    else {
+                                        blockFavoriteOrder.show();
+                                        blockUnfavoriteOrder.hide();
+                                    }
+                                }
                             },
                             onCellSelect: function(rowid, iCol) {
                                 if (iCol != 11) {
@@ -121,8 +158,9 @@
                         }).navGrid('#pagerOrders',{view:false, search:true, del:false, add:false, edit:false, refresh:true},
                                 {},{},{},{closeOnEscape:true, multipleSearch:false, closeAfterSearch:true},{}
                         );
-                        $("#t_listOrders").height(22);
-                        $("#t_listOrders").append('<span id="help-popover" class="icon-help-circled" data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"></span>');
+                        grid.setCaption('Таблица заказов ' + '<span id="help-popover" class="icon-help-circled" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="bottom"></span>');
+                        //$("#t_listOrders").height(22);
+                        //$("#t_listOrders").append('<span id="help-popover" class="icon-help-circled" data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover"></span>');
                        // $(".default").addClass('form-control');
                         /*function closeMessage(el) {
                             el.addClass('is-hidden');
@@ -134,13 +172,29 @@
                             closeMessage($('#js-timer'));
                         }, 3000);*/
                     });
-                    $("#help-popover").live('mouseenter', function() {
-                        $(this).popover({
+                    function getRow(a) {
+                        return a.parent().parent();
+                    }
+                    function actionFavoriteOrder(a, type) {
+                        var blockFavoriteOrder = a.find(".favorite-order"), blockUnfavoriteOrder = a.find(".unfavorite-order");
+                        if (type == "favorite") {
+                            blockFavoriteOrder.hide();
+                            blockUnfavoriteOrder.show();
+                        }
+                        else {
+                            blockFavoriteOrder.show();
+                            blockUnfavoriteOrder.hide();
+                        }
+                    }
+                    $(".ui-jqgrid-titlebar").live('mouseenter', function() {
+                        $("#help-popover").popover({
                             html : true,
                             content : function() {
                                 return "Для поиска нажмите на <div style=\"display: inline-block\"><span class=\"ui-icon ui-icon-search\"></span></div></br>" +
                                         "Для сброса результата поиска нажмите на <div style=\"display: inline-block\"><span class=\"ui-icon ui-icon-arrowreturnthick-1-w\"></span></div></br>" +
-                                        "Для обновления таблицы нажмите на <div style=\"display: inline-block\"><span class=\"ui-icon ui-icon-refresh\"></span></div>";
+                                        "Для обновления таблицы нажмите на <div style=\"display: inline-block\"><span class=\"ui-icon ui-icon-refresh\"></span></div></br>" +
+                                        "Для добавления заказа в избранное нажмите на <div style=\"display: inline-block\"><span class=\"icon-star\"></span></div></br>" +
+                                        "Для того,чтобы поставить ставку на заказ,нажмите на <div style=\"display: inline-block\"><span class=\"icon-hammer\"></span></div>";
                             }
                         });
                     });

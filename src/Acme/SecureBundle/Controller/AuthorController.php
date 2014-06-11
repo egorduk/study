@@ -126,68 +126,82 @@ class AuthorController extends Controller
             $userId = $this->get('security.context')->getToken()->getUser();
             $userId = 2;
             $user = Helper::getUserById($userId);
-        }
-        if ($type == "new") {
             if($request->isXmlHttpRequest()) {
-                $postData = $request->request->all();
-                $curPage = $postData['page'];
-                $rowsPerPage = $postData['rows'];
-                $sortingField = $postData['sidx'];
-                $sortingOrder = $postData['sord'];
-                $search = $postData['_search'];
-                $sField = $sData = $sTable = $sOper = null;
-                if (isset($search) && $search == "true") {
-                    $sOper = $postData['searchOper'];
-                    $sData = $postData['searchString'];
-                    $sField = $postData['searchField'];
+                $action = $request->request->get('action');
+                if ($action == 'favoriteOrder') {
+                    $orderId = $request->request->get('orderId');
+                    $type = "favorite";
+                    $actionResponse = Helper::favoriteOrder($orderId, $user, $type);
+                    return new Response(json_encode(array('action' => $actionResponse)));
                 }
-                $countOrders = Helper::getCountOrdersForAuthorGrid();
-                $firstRowIndex = $curPage * $rowsPerPage - $rowsPerPage;
-                $orders = Helper::getAuthorOrdersForGrid($sOper, $sField, $sData, $firstRowIndex, $rowsPerPage, $sortingField, $sortingOrder);
-                $response = new Response();
-                $response->total = ceil($countOrders / $rowsPerPage);
-                $response->records = $countOrders;
-                $response->page = $curPage;
-                $i = 0;
-                $responseAuthor = 0;
-                foreach($orders as $order) {
-                    $task = strip_tags($order->getTask());
-                    $task = stripcslashes($task);
-                    $task = preg_replace("/&nbsp;/", "", $task);
-                    if (strlen($task) >= 20) {
-                        $task = Helper::getCutSentence($task, 35);
+                elseif ($action == 'unfavoriteOrder') {
+                    $orderId = $request->request->get('orderId');
+                    $type = "unfavorite";
+                    $actionResponse = Helper::favoriteOrder($orderId, $user, $type);
+                    return new Response(json_encode(array('action' => $actionResponse)));
+                }
+                else {
+                    $postData = $request->request->all();
+                    $curPage = $postData['page'];
+                    $rowsPerPage = $postData['rows'];
+                    $sortingField = $postData['sidx'];
+                    $sortingOrder = $postData['sord'];
+                    $search = $postData['_search'];
+                    $sField = $sData = $sTable = $sOper = null;
+                    if (isset($search) && $search == "true") {
+                        $sOper = $postData['searchOper'];
+                        $sData = $postData['searchString'];
+                        $sField = $postData['searchField'];
                     }
-                    $maxBid = 0;
-                    $minBid = 0;
-                    $myBid = 0;
-                    $dateCreate = Helper::getMonthNameFromDate($order->getDateCreate()->format("d.m.Y"));
-                    $dateCreate = $dateCreate . "<br><span class='gridCellTime'>" . $order->getDateCreate()->format("H:s") . "</span>";
-                    $dateExpire = Helper::getMonthNameFromDate($order->getDateExpire()->format("d.m.Y"));
-                    $dateExpire = $dateExpire . "<br><span class='gridCellTime'>" . $order->getDateExpire()->format("H:s") . "</span>";
-                    $response->rows[$i]['id'] = $order->getId();
-                    $response->rows[$i]['cell'] = array(
-                        $order->getId(),
-                        $order->getNum(),
-                        $order->getSubjectOrder()->getChildName(),
-                        $order->getTypeOrder()->getName(),
-                        $order->getTheme(),
-                        $task,
-                        $dateExpire,
-                        $maxBid,
-                        $minBid,
-                        $myBid,
-                        $dateCreate,
-                        ""
-                    );
-                    $i++;
+                    $countOrders = Helper::getCountOrdersForAuthorGrid();
+                    $firstRowIndex = $curPage * $rowsPerPage - $rowsPerPage;
+                    $orders = Helper::getAuthorOrdersForGrid($sOper, $sField, $sData, $firstRowIndex, $rowsPerPage, $sortingField, $sortingOrder);
+                    $response = new Response();
+                    $response->total = ceil($countOrders / $rowsPerPage);
+                    $response->records = $countOrders;
+                    $response->page = $curPage;
+                    $i = 0;
+                    $responseAuthor = 0;
+                    foreach($orders as $index => $order) {
+                        $task = strip_tags($order->getTask());
+                        $task = stripcslashes($task);
+                        $task = preg_replace("/&nbsp;/", "", $task);
+                        if (strlen($task) >= 20) {
+                            $task = Helper::getCutSentence($task, 35);
+                        }
+                        $maxBid = 0;
+                        $minBid = 0;
+                        $myBid = 0;
+                        $dateCreate = Helper::getMonthNameFromDate($order->getDateCreate()->format("d.m.Y"));
+                        $dateCreate = $dateCreate . "<br><span class='gridCellTime'>" . $order->getDateCreate()->format("H:s") . "</span>";
+                        $dateExpire = Helper::getMonthNameFromDate($order->getDateExpire()->format("d.m.Y"));
+                        $dateExpire = $dateExpire . "<br><span class='gridCellTime'>" . $order->getDateExpire()->format("H:s") . "</span>";
+                        $response->rows[$index]['id'] = $order->getId();
+                        $response->rows[$index]['cell'] = array(
+                            $order->getId(),
+                            $order->getNum(),
+                            $order->getSubjectOrder()->getChildName(),
+                            $order->getTypeOrder()->getName(),
+                            $order->getTheme(),
+                            $task,
+                            $dateExpire,
+                            $maxBid,
+                            $minBid,
+                            $myBid,
+                            $dateCreate,
+                            "",
+                            $order->getIsFavorite()
+                        );
+                        $i++;
+                    }
+                    return new JsonResponse($response);
                 }
-                return new JsonResponse($response);
             }
-            $showWindow = false;
-            return $this->render(
-                'AcmeSecureBundle:Author:orders_new.html.twig', array('showWindow' => $showWindow)
-            );
         }
+        $showWindow = false;
+        return $this->render(
+            'AcmeSecureBundle:Author:orders_new.html.twig', array('showWindow' => $showWindow)
+        );
     }
 
 

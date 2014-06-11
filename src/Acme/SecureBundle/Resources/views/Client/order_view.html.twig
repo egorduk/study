@@ -189,7 +189,7 @@
                                             data: 'orderId=' + rowId,
                                             success: function(response) {
                                                 var resposeObject = window.JSON.parse(response);
-                                                if (resposeObject.action == "true") {
+                                                if (resposeObject.action) {
                                                     //grid.trigger('reloadGrid');
                                                     grid.setCell(rowId,'status_order',"Скрытый");
                                                     actionHideOrder(row, "hide");
@@ -208,7 +208,7 @@
                                             data: 'orderId=' + rowId,
                                             success: function(response) {
                                                 var resposeObject = window.JSON.parse(response);
-                                                if (resposeObject.action == "true") {
+                                                if (resposeObject.action) {
                                                     grid.trigger('reloadGrid');
                                                     actionHideOrder(row, "show");
                                                 }
