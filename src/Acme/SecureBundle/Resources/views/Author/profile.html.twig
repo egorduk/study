@@ -1,7 +1,5 @@
-{% extends "AcmeSecureBundle::layout.html.twig" %}
-
-{% block title "Author profile" %}
-
+{% extends "AcmeSecureBundle::layout_author.html.twig" %}
+{% block title "Профиль" %}
     {% block content %}
         {% include "PunkAveFileUploaderBundle:Default:templates.html.twig" %}
         <div class="container">
@@ -21,9 +19,6 @@
                     <p>Ваша фамилия: {{ userInfo.surname }}</p>
                     <p>Ваше отчество: {{ userInfo.lastname }}</p>
                     <p>Доступ к заказам: {{ user.isauthorfile }}</p>
-                </div>
-                <div class="row">
-                    <a href="{{ path('secure_author_profile', {'type': 'edit'}) }}">Изменить данные</a>
                 </div>
             {% else %}
             <div class="row">
@@ -104,30 +99,12 @@
                 </div>
                 {{ form_end(formProfile) }}
             </div>
-                <div id="modal-window">
-                    {% if (showWindow) %}
-                        <div id="success-window">
-                            <div class="Message Message--green" id="js-timer">
-                                <div class="Message-icon">
-                                    <i class="fa fa-check"></i>
-                                </div>
-                                <div class="Message-body">
-                                    <p align="center">Ваши данные сохранены!</p>
-                                </div>
-                                <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
-                    {% endif %}
-                </div>
             {% endif %}
-            <a href="{{ path('secure_author_index') }}">Главная</a>
-            <a href="{{ path('secure_author_profile', {'type': 'view'}) }}">К профилю</a>
             <script>
                 $(document).ready(function() {
                     function format(state) {
                         return "<img title='" + state.text + "' class='flag' src='{{ asset('bundles/images/flags/') }}" + state.id.toLowerCase() + ".png'/>";
                     }
-
                     $("#formProfile_selectorCountry").select2({
                         minimumResultsForSearch: -1,
                         formatResult: format,
@@ -148,25 +125,6 @@
                         }
                     });
                     {% endif %}
-
-                    if (!sessionStorage.getItem("Page2Visited")) {
-                        {% if (showWindow) %}
-                            function closeMessage(el) {
-                                el.addClass('is-hidden');
-                            }
-                            $('.js-messageClose').on('click', function(e) {
-                                closeMessage($(this).closest('.Message'));
-                            });
-                            setTimeout(function() {
-                                closeMessage($('#js-timer'));
-                                document.location.href = "{{ path("secure_author_index") }}";
-                            }, 2000);
-                        {% endif %}
-                    }
-                    else {
-                        sessionStorage.removeItem("Page2Visited");
-                        $("#modal-window").hide();
-                    }
                 });
             </script>
             {% if (user.isauthorfile == 0) %}

@@ -65,6 +65,10 @@ secure_client_action:
 
 #--------------------------------------------------Author---------------------------------------------------#
 
+secure_author_index:
+  pattern:   /secure/author/index
+  defaults:  { _controller: AcmeSecureBundle:Author:index }
+
 author_reg:
   pattern:   /{type}/reg
   defaults:  { _controller: AcmeAuthBundle:Author:reg }

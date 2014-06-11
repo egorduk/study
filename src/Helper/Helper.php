@@ -4,6 +4,7 @@ namespace Helper;
 
 use Acme\SecureBundle\Entity\AuctionBid;
 use Acme\SecureBundle\Entity\OrderFile;
+use Acme\SecureBundle\Entity\SelectBid;
 use Acme\SecureBundle\Entity\UserBid;
 use Acme\SecureBundle\Entity\UserOrder;
 use Proxies\__CG__\Acme\SecureBundle\Entity\Author\AuthorFile;
@@ -1212,6 +1213,47 @@ class Helper
             $auctionBid->setUser($user);
             $em->persist($auctionBid);
             $em->flush();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public static function authorConfirmSelection($user, $bidId, $mode) {
+        if ($mode == null) {
+            return false;
+        }
+        elseif ($mode == 'confirm' || $mode == 'fail') {
+            $em = self::getContainer()->get('doctrine')->getManager();
+            $bid = $em->getRepository(self::$_tableUserBid)
+                ->findOneById($bidId);
+            if ($bid) {
+                if ($mode == 'confirm') {
+                    $bid->setIsConfirmAuthor(1);
+                }
+                else {
+                    $bid->setIsConfirmFail(1);
+                }
+                $selectBid = new SelectBid();
+                $selectBid->setUser($user);
+                $selectBid->setUserBid($bid);
+                $em->persist($selectBid);
+                $em->flush();
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+
+
+    public static function getClientSelectedBid($user, $order) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $bid = $em->getRepository(self::$_tableUserBid)
+            ->findOneBy(array('user' => $user, 'user_order' => $order, 'is_select_client' => 1, 'is_show_author' => 1, 'is_show_client' => 1, 'is_confirm_author' => 0, 'is_confirm_fail' => 0));
+        if ($bid) {
             return true;
         }
         else {

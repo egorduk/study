@@ -7,7 +7,6 @@
         <link href="{{ asset('bundles/css/bootstrap-theme.css') }}" rel="stylesheet" />
         <link href="{{ asset('bundles/css/window.css') }}" rel="stylesheet" />
         <link href="{{ asset('bundles/css/select2.css') }}" rel="stylesheet" />
-
         <link href="{{ asset('bundles/css/fontello.css') }}" rel="stylesheet" charset="UTF-8"/>
     {% endblock %}
     {% block javascripts %}
@@ -22,6 +21,24 @@
 {% block title '' %}
 
 {% block body %}
+        {% block menu %}
+            <div class="row">
+                <div class="col-md-10">
+                    <ul class="nav nav-pills">
+                        <li class="active">
+                            <a href="#">Home</a>
+                        </li>
+                        <li>
+                            <a href="#">...</a>
+                        </li>
+                        <li>
+                            <a href="#">...</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        {% endblock %}
+
         {% block content %}
 
         {% endblock %}

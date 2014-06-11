@@ -220,7 +220,7 @@ class AuthorController extends Controller
                 $bidValidate->setIsClientDate($bid->getIsClientDate());
                 $bidValidate->setComment($bid->getComment());
             }*/
-            $showWindow = false;
+            $showDialogConfirmSelection = Helper::getClientSelectedBid($user, $order);
             $formBid = $this->createForm(new BidForm(), $bidValidate);
             if ($request->isXmlHttpRequest()) {
                 $nd = $request->request->get('nd');
@@ -247,6 +247,20 @@ class AuthorController extends Controller
                     if ($action == 'deleteBid') {
                         $bidId = $request->request->get('bidId');
                         $actionResponse = Helper::deleteSelectedAuthorBid($bidId, $user, $order);
+                        return new Response(json_encode(array('action' => $actionResponse)));
+                    }
+                    elseif ($action == 'confirmSelection' || $action == 'failSelection') {
+                        $bidId = $request->request->get('bidId');
+                        if ($action == 'confirmSelection') {
+                            $mode = 'confirm';
+                        }
+                        elseif ($action == 'failSelection') {
+                            $mode = 'fail';
+                        }
+                        else {
+                            $mode = null;
+                        }
+                        $actionResponse = Helper::authorConfirmSelection($user, $bidId, $mode);
                         return new Response(json_encode(array('action' => $actionResponse)));
                     }
                     /*elseif ($action == 'cancelBid') {
@@ -278,7 +292,7 @@ class AuthorController extends Controller
                 }
             }
             return $this->render(
-                'AcmeSecureBundle:Author:order_select.html.twig', array('formBid' => $formBid->createView(), 'files' => $filesOrder, 'order' => $order, 'client' => $client, 'bids' => $bids, 'showWindow' => $showWindow)
+                'AcmeSecureBundle:Author:order_select.html.twig', array('formBid' => $formBid->createView(), 'files' => $filesOrder, 'order' => $order, 'client' => $client, 'bids' => $bids, 'showDialogConfirmSelection' => $showDialogConfirmSelection)
             );
         }
         else {

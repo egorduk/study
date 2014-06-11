@@ -1,4 +1,4 @@
-{% extends "AcmeSecureBundle::layout.html.twig" %}
+{% extends "AcmeSecureBundle::layout_author.html.twig" %}
 
 {% block title "Order" %}
 
@@ -67,7 +67,7 @@
             .ui-jqgrid tr.jqgrow td {
                 font-size: 18px !important;
             }
-            #pagerBids_center {
+            #pagerBids_center, #dialog-message-confirm-selection {
                 display: none;
             }
             .grid-cell-comment {
@@ -164,35 +164,6 @@
             <script>
                 $(document).ready(function() {
                     $.fn.button.noConflict();
-                    $("#dialog-message-confirm-selection").dialog({
-                        modal: true,
-                        resizable: false,
-                        height: 230,
-                        width: 410,
-                        dialogClass: 'class-dialog-confirm-selection',
-                        buttons: {
-                            "Согласие": function() {
-                                $.ajax({
-                                    type: 'POST',
-                                    data: 'bidId=' + rowId + '&auctionPrice=' + auctionPrice.val() + '&auctionDay=' + auctionDay.val() + '&action=auctionBid',
-                                    success: function(response) {
-                                        var responseObject = window.JSON.parse(response);
-                                        if (responseObject.action) {
-                                            /*setTimeout(function() {
-                                                $("#dialog-message-success-auction").dialog('close');
-                                                $("#dialog-message-auction-bid").dialog('close');
-                                            }, 1500);*/
-                                        }
-                                    }
-                                });
-                            },
-                            "Отказ": function() {
-                                $(this).dialog("close");
-                            }
-                        },
-                        close: function() {
-                        }
-                    });
                     var buttonBid = $("#formBid_bid");
                     var isClientDate = $("#formBid_isClientDate");
                     var fieldDay = $("#formBid_fieldDay");
@@ -345,6 +316,46 @@
                     }).navGrid('#pagerOrders',{view:false, search:false, del:false, add:false, edit:false, refresh:true},
                             {},{},{},{},{}
                     );
+                    {% if (showDialogConfirmSelection) %}
+                    $("#dialog-message-confirm-selection").dialog({
+                        modal: true,
+                        resizable: false,
+                        height: 230,
+                        width: 410,
+                        dialogClass: 'class-dialog-confirm-selection',
+                        buttons: {
+                            "Согласен": function() {
+                                $.ajax({
+                                    type: 'POST',
+                                    data: 'bidId=' + rowId + '&action=confirmSelection',
+                                    success: function(response) {
+                                        var responseObject = window.JSON.parse(response);
+                                        if (responseObject.action) {
+                                            $("#dialog-message-confirm-selection").dialog("close");
+                                        }
+                                    }
+                                });
+                            },
+                            "Отказ": function() {
+                                var firstRowId = grid.getDataIDs()[0];
+                                var firstRow = $("tr.jqgrow#" + firstRowId);
+                                var rowId = firstRow.attr('id');
+                                $.ajax({
+                                    type: 'POST',
+                                    data: 'bidId=' + rowId + '&action=failSelection',
+                                    success: function(response) {
+                                        var responseObject = window.JSON.parse(response);
+                                        if (responseObject.action) {
+                                            $("#dialog-message-confirm-selection").dialog("close");
+                                        }
+                                    }
+                                });
+                            }
+                        },
+                        close: function() {
+                        }
+                    });
+                    {% endif %}
                     function statusDate(cellvalue) {
                         if (cellvalue) {
                             return ("<span class='icon-plus-6'></span>");

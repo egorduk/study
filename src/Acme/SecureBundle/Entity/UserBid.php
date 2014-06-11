@@ -46,7 +46,7 @@ class UserBid extends EntityRepository
     /**
      * @ORM\Column(type="integer")
      */
-    private $is_select_author;
+    private $is_select_client;
 
     /**
      * @ORM\Column(type="integer")
@@ -56,7 +56,17 @@ class UserBid extends EntityRepository
     /**
      * @ORM\Column(type="integer")
      */
+    private $is_confirm_fail;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
     private $is_show_author;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $is_confirm_author;
 
     /**
      * @ORM\ManyToOne(targetEntity="Acme\AuthBundle\Entity\User", inversedBy="link_user_bid", cascade={"all"})
@@ -71,9 +81,9 @@ class UserBid extends EntityRepository
     private $user_order;
 
     /**
-     * @ORM\OneToMany(targetEntity="UserChoice", mappedBy="user_bid")
+     * @ORM\OneToMany(targetEntity="SelectBid", mappedBy="user_bid")
      **/
-    protected $link_user_bid;
+    protected $link_select_user_bid;
 
 
     public function __construct(){
@@ -81,9 +91,10 @@ class UserBid extends EntityRepository
         $this->is_client_date = 0;
         $this->is_show_author = 1;
         $this->is_show_client = 1;
+        $this->is_confirm_author = 0;
+        $this->is_select_client = 0;
         $this->day = 0;
-        $this->is_select_author = 0;
-        $this->link_user_bid = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->link_select_user_bid = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function setSum($sum)
@@ -194,5 +205,25 @@ class UserBid extends EntityRepository
     public function getIsShowClient()
     {
         return $this->is_show_client;
+    }
+
+    public function setIsConfirmAuthor($val)
+    {
+        $this->is_confirm_author = $val;
+    }
+
+    public function getIsConfirmAuthor()
+    {
+        return $this->is_confirm_author;
+    }
+
+    public function setIsConfirmFail($val)
+    {
+        $this->is_confirm_fail = $val;
+    }
+
+    public function getIsConfirmFail()
+    {
+        return $this->is_confirm_fail;
     }
 }

@@ -1,9 +1,6 @@
-{% extends "AcmeSecureBundle::layout.html.twig" %}
+{% extends "AcmeSecureBundle::layout_author.html.twig" %}
+    {% block title "Домашняя страница" %}
     {% block content %}
-        <div class="container">
-            <script>
-                sessionStorage.setItem("Page2Visited", "True");
-            </script>
             <div class="row">
                 <p>Ваш ID - {{ user.id }}</p>
                 <p>Ваш ник - {{ user.login }}</p>
@@ -11,10 +8,5 @@
                 <p>Ваш статус - {{ user.role.name }}</p>
                 <p>Вход в систему - {{ whenLogin }}</p>
                 <p>Осталось в системе - {{ remainingTime }}</p>
-                <p><a href="{{ path('secure_author_profile', {'type': 'view'}) }}">Мой профиль</a></p>
-                <p><a href="{{ path('secure_author_settings', {'type': 'view'}) }}">Мои настройки</a></p>
-                <p><a href="{{ path('secure_author_orders', {'type': 'new'}) }}">Просмотр заказов</a></p>
-                <p><a href="{{ path('logout') }}">Выход</a></p>
             </div>
-        </div>
     {% endblock %}
