@@ -31,6 +31,9 @@
                 .unfavorite-order {
                     display: none;
                 }
+                .ui-jqgrid-titlebar {
+                    line-height: 2;
+                }
             </style>
             <div class="row offset-margin-right">
                 {% if (showWindow) %}
@@ -84,7 +87,7 @@
                             ],
                             pager: $('#pagerOrders'),
                             //toolbar: [true,'top'],
-                            rowNum: 15,
+                            rowNum: 10,
                             rowList: [15,25,35],
                             sortname: 'date_create',
                             sortorder: 'desc',
@@ -186,7 +189,7 @@
                             blockUnfavoriteOrder.hide();
                         }
                     }
-                    $(".ui-jqgrid-titlebar").live('mouseenter', function() {
+                    $(".ui-jqgrid-titlebar").live('hover', function() {
                         $("#help-popover").popover({
                             html : true,
                             content : function() {

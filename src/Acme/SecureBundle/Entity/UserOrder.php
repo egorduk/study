@@ -93,11 +93,6 @@ class UserOrder extends EntityRepository
     /**
      * @ORM\Column(type="integer")
      */
-    //private $is_favorite;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
     private $is_show_client;
 
     /**
@@ -131,22 +126,26 @@ class UserOrder extends EntityRepository
     private $link_favorite_user_order;
 
     private $count_bids;
+    private $is_favorite = 0;
 
 
-    public function __construct($container){
+    public function __construct($container, $action = null){
         $this->date_create = new \DateTime();
         $this->date_edit = new \DateTime();
         $this->is_show_author = 0;
         $this->is_show_client = 1;
-        //$this->is_favorite = 0;
+        $this->is_favorite = 0;
         $this->files_dir = "";
-        $em = $container->get('doctrine')->getManager();
-        $query = $em->getRepository('AcmeSecureBundle:UserOrder')->createQueryBuilder('s');
-        $query->select('MAX(s.num) AS max_num');
-        $data = $query->getQuery()->getResult();
-        $num = $data[0]['max_num'];
-        $num++;
-        $this->num = $num;
+        if ($action == "new") {
+            $em = $container->get('doctrine')->getManager();
+            $orders = $em->getRepository('AcmeSecureBundle:UserOrder')->createQueryBuilder('uo')
+                ->select('MAX(uo.num) AS max_num')
+                ->getQuery()
+                ->getResult();
+            $num = $orders[0]['max_num'];
+            $num++;
+            $this->num = $num;
+        }
         $this->link_user_order = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_order_file = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_auction_user_order = new \Doctrine\Common\Collections\ArrayCollection();
@@ -321,7 +320,7 @@ class UserOrder extends EntityRepository
         $this->count_bids = $val;
     }
 
-    /*public function setIsFavorite($val)
+    public function setIsFavorite($val)
     {
         $this->is_favorite = $val;
     }
@@ -329,6 +328,6 @@ class UserOrder extends EntityRepository
     public function getIsFavorite()
     {
         return $this->is_favorite;
-    }*/
+    }
 
 }

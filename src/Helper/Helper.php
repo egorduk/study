@@ -912,7 +912,7 @@ class Helper
     }
 
 
-    public static function getAuthorOrdersForGrid($sOper = null, $sField = null, $sData = null, $firstRowIndex, $rowsPerPage, $sortingField, $sortingOrder) {
+    public static function getAuthorOrdersForGrid($sOper = null, $sField = null, $sData = null, $firstRowIndex, $rowsPerPage, $sortingField, $sortingOrder, $user) {
         $em = self::getContainer()->get('doctrine')->getManager();
         if ($sField != null && $sOper != null && $sData != null) {
             if ($sField == "subject_order") {
@@ -1004,20 +1004,41 @@ class Helper
             if (isset($sortingField) && $sortingField != "" && isset($sortingOrder) && $sortingOrder != "") {
                 $orders = $em->getRepository(self::$_tableUserOrder)
                     ->findBy(
-                        array('is_show_author' => 1),
+                        array('is_show_author' => 1, 'is_show_client' => 1),
                         array($sortingField => $sortingOrder),
                         $rowsPerPage,
                         $firstRowIndex
                     );
+                $favoriteOrders = $em->getRepository(self::$_tableFavoriteOrder)
+                    ->findByUser($user);
+                foreach($orders as $order) {
+                    foreach($favoriteOrders as $favoriteOrder) {
+                        if ($order->getId() == $favoriteOrder->getUserOrder()->getId()) {
+                            $order->setIsFavorite(1);
+                        }
+                    }
+                }
+                //var_dump($favoriteOrders);die;
+                /*$orders = $em->getRepository(self::$_tableFavoriteOrder)->createQueryBuilder('fo')
+                    //->leftJoin('fo.user_order', 'uo')
+                    //->select(array('uo'))
+                    //->from(self::$_tableUserOrder, 'uo')
+                    //->andWhere('uo.user = :user')
+                    //->andWhere('ub.user_order = :order')
+                    //->setParameter('user', $user)
+                    //->setParameter('order', $order)
+                    ->getQuery()
+                    ->getResult();
+                var_dump($orders);die;*/
             }
             else {
                 $orders = $em->getRepository(self::$_tableUserOrder)
                     ->findBy(
-                        array('is_show_author' => 1),
-                        array('num' => 'ASC'),
+                        array('is_show_author' => 1, 'is_show_client' => 1),
+                        //array('num' => 'ASC'),
                         $rowsPerPage,
                         $firstRowIndex
-                    );
+                    );;
             }
         }
         return $orders;
@@ -1272,15 +1293,12 @@ class Helper
                 $favoriteOrder = new FavoriteOrder();
                 $favoriteOrder->setUserOrder($order);
                 $favoriteOrder->setUser($user);
-                //$order->setIsFavorite(1);
                 $em->persist($favoriteOrder);
                 $em->flush();
             }
             else {
-                //$order->setIsFavorite(0);
                 $favoriteOrder = $em->getRepository(self::$_tableFavoriteOrder)
                     ->findOneBy(array('user_order' => $order, 'user' => $user));
-               // var_dump($favoriteOrder); die;
                 $em->remove($favoriteOrder);
                 $em->flush();
             }

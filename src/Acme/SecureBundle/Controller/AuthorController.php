@@ -155,19 +155,19 @@ class AuthorController extends Controller
                     }
                     $countOrders = Helper::getCountOrdersForAuthorGrid();
                     $firstRowIndex = $curPage * $rowsPerPage - $rowsPerPage;
-                    $orders = Helper::getAuthorOrdersForGrid($sOper, $sField, $sData, $firstRowIndex, $rowsPerPage, $sortingField, $sortingOrder);
+                    $orders = Helper::getAuthorOrdersForGrid($sOper, $sField, $sData, $firstRowIndex, $rowsPerPage, $sortingField, $sortingOrder, $user);
                     $response = new Response();
                     $response->total = ceil($countOrders / $rowsPerPage);
                     $response->records = $countOrders;
                     $response->page = $curPage;
-                    $i = 0;
-                    $responseAuthor = 0;
+                    //$i = 0;
+                    //$responseAuthor = 0;
                     foreach($orders as $index => $order) {
                         $task = strip_tags($order->getTask());
                         $task = stripcslashes($task);
                         $task = preg_replace("/&nbsp;/", "", $task);
                         if (strlen($task) >= 20) {
-                            $task = Helper::getCutSentence($task, 35);
+                            $task = Helper::getCutSentence($task, 45);
                         }
                         $maxBid = 0;
                         $minBid = 0;
@@ -190,9 +190,9 @@ class AuthorController extends Controller
                             $myBid,
                             $dateCreate,
                             "",
-                            ""
+                            $order->getIsFavorite()
                         );
-                        $i++;
+                        //$i++;
                     }
                     return new JsonResponse($response);
                 }
