@@ -350,7 +350,7 @@ class ClientController extends Controller
                             $bid['is_select_author'],
                         );
                     }
-                    $response->selected_bid = 1;
+                    //$response->selected_bid = 1;
                     return new JsonResponse($response);
                 }
                 elseif (isset($action)) {

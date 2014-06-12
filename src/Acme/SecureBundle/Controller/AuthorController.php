@@ -190,7 +190,7 @@ class AuthorController extends Controller
                             $myBid,
                             $dateCreate,
                             "",
-                            $order->getIsFavorite()
+                            ""
                         );
                         $i++;
                     }

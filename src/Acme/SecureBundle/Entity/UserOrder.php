@@ -93,7 +93,7 @@ class UserOrder extends EntityRepository
     /**
      * @ORM\Column(type="integer")
      */
-    private $is_favorite;
+    //private $is_favorite;
 
     /**
      * @ORM\Column(type="integer")
@@ -138,7 +138,7 @@ class UserOrder extends EntityRepository
         $this->date_edit = new \DateTime();
         $this->is_show_author = 0;
         $this->is_show_client = 1;
-        $this->is_favorite = 0;
+        //$this->is_favorite = 0;
         $this->files_dir = "";
         $em = $container->get('doctrine')->getManager();
         $query = $em->getRepository('AcmeSecureBundle:UserOrder')->createQueryBuilder('s');
@@ -321,7 +321,7 @@ class UserOrder extends EntityRepository
         $this->count_bids = $val;
     }
 
-    public function setIsFavorite($val)
+    /*public function setIsFavorite($val)
     {
         $this->is_favorite = $val;
     }
@@ -329,6 +329,6 @@ class UserOrder extends EntityRepository
     public function getIsFavorite()
     {
         return $this->is_favorite;
-    }
+    }*/
 
 }

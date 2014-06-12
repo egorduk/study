@@ -1272,12 +1272,12 @@ class Helper
                 $favoriteOrder = new FavoriteOrder();
                 $favoriteOrder->setUserOrder($order);
                 $favoriteOrder->setUser($user);
-                $order->setIsFavorite(1);
+                //$order->setIsFavorite(1);
                 $em->persist($favoriteOrder);
                 $em->flush();
             }
             else {
-                $order->setIsFavorite(0);
+                //$order->setIsFavorite(0);
                 $favoriteOrder = $em->getRepository(self::$_tableFavoriteOrder)
                     ->findOneBy(array('user_order' => $order, 'user' => $user));
                // var_dump($favoriteOrder); die;
