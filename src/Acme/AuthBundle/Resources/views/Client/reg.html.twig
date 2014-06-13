@@ -1,11 +1,8 @@
 {% extends "AcmeAuthBundle::layout.html.twig" %}
-
-{% block title "Client registration" %}
-
+{% block title "Регистрация заказчика" %}
 {% block content_header '' %}
-
 {% block content %}
-    <div class="container">
+    <div class="">
         <style>
             #modal-window{
                 /*display: block;
@@ -13,7 +10,7 @@
                 width: 100px;*/
             }
         </style>
-        <div class="row">
+        <div class="">
             <div>
                 {{ form_start(formReg) }}
                     {{ form_errors(formReg) }}
@@ -26,13 +23,13 @@
                         {{ form_label(formReg.fieldPass) }}
                         {{ form_errors(formReg.fieldPass) }}
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                            <span class="input-group-addon"><i class="icon-key-5"></i></span>
                             {{ form_widget(formReg.fieldPass) }}
                         </div>
                         {{ form_label(formReg.fieldPassApprove) }}
                         {{ form_errors(formReg.fieldPassApprove) }}
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                            <span class="input-group-addon"><i class="icon-key-5"></i></span>
                             {{ form_widget(formReg.fieldPassApprove) }}
                         </div>
                         <div>
@@ -41,7 +38,7 @@
                         {{ form_label(formReg.fieldEmail) }}
                         {{ form_errors(formReg.fieldEmail) }}
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                            <span class="input-group-addon"><i class="icon-mail-8"></i></span>
                             {{ form_widget(formReg.fieldEmail) }}
                         </div>
                         {% block form_label %}

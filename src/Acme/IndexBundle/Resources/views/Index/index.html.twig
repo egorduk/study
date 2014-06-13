@@ -1,16 +1,13 @@
 {% extends "AcmeIndexBundle::layout.html.twig" %}
 
-{% block title "Index page" %}
+{% block title "Начальная страница" %}
 
 {% block content_header '' %}
 
 {% block content %}
-    <div id="main">
-        <div id="content-index">
-            <p><a href="{{ path('login') }}">Клиент вход</a></p>
-            <p><a href="{{ path('client_reg', {'type': 'client'}) }}">Клиент регистрация</a></p>
-            <p><a href="{{ path('login') }}">Автор вход</a></p>
-            <p><a href="{{ path('author_reg', {'type': 'author'}) }}">Автор регистрация</a></p>
+        <div id="content">
+            <p><a href="{{ path('login') }}">Вход в систему</a></p>
+            <p><a href="{{ path('client_reg', {'type': 'client'}) }}">Регистрация как заказчик</a></p>
+            <p><a href="{{ path('author_reg', {'type': 'author'}) }}">Регистрация как исполнитель</a></p>
         </div>
-    </div>
 {% endblock %}

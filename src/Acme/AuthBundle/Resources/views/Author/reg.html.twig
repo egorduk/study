@@ -1,11 +1,10 @@
 {% extends "AcmeAuthBundle::layout.html.twig" %}
-
-{% block title "Author registration" %}
-
+{% block title "Регистрация исполнителя" %}
 {% block content_header '' %}
-
 {% block content %}
-    <div class="container">
+    <link href="{{ asset('bundles/css/select2.css') }}" rel="stylesheet" />
+    <script src="{{ asset('bundles/js/select2.min.js') }}"></script>
+    <div class="">
         <style>
             .reset-margin-bottom{
                 margin-bottom: 0px;
@@ -14,7 +13,7 @@
                 padding-left: 0px;
             }
         </style>
-        <div class="row">
+        <div class="">
             <div>
                 {{ form_start(formReg) }}
                 {{ form_errors(formReg) }}
@@ -27,31 +26,31 @@
                 {{ form_label(formReg.fieldPass) }}
                 {{ form_errors(formReg.fieldPass) }}
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                    <span class="input-group-addon"><i class="icon-key-5"></i></span>
                     {{ form_widget(formReg.fieldPass) }}
                 </div>
                 {{ form_label(formReg.fieldPassApprove) }}
                 {{ form_errors(formReg.fieldPassApprove) }}
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                    <span class="input-group-addon"><i class="icon-key-5"></i></span>
                     {{ form_widget(formReg.fieldPassApprove) }}
                 </div>
                 {{ form_label(formReg.fieldEmail) }}
                 {{ form_errors(formReg.fieldEmail) }}
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                    <span class="input-group-addon"><i class="icon-mail-8"></i></span>
                     {{ form_widget(formReg.fieldEmail) }}
                 </div>
                 {% block form_mobile_tel %}
                     {{ form_label(formReg.fieldMobilePhone) }}
                     {{ form_errors(formReg.fieldMobilePhone) }}
                     <div class="row">
-                        <div class="form-group col-md-1 reset-margin-bottom">
+                        <div class="form-group col-md-2">
                             <div class="input-group">
                                 {{ form_widget(formReg.selectorCountry) }}
                             </div>
                         </div>
-                        <div class="form-group col-md-11 reset-margin-bottom reset-margin-left">
+                        <div class="form-group col-md-10 reset-margin-left">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="icon-mobile-alt"></i></span>
                                 {{ form_widget(formReg.fieldMobilePhone) }}
@@ -149,7 +148,6 @@
                 /*if (!state.id){
                     return state.text;
                 }*/
-;
                 return "<img title='" + state.text + "' class='flag' src='{{ asset('bundles/images/flags/') }}" + state.id.toLowerCase() + ".png'/>";
             }
             $("#formReg_selectorCountry").select2({

@@ -43,11 +43,8 @@ require_once '..\src\Acme\AuthBundle\Lib\recaptchalib.php';
 
 class AuthController extends Controller
 {
-    //private $tableUser = 'AcmeAuthBundle:User';
     private $tableCountry = 'AcmeAuthBundle:Country';
     private $tableUserRole = 'AcmeAuthBundle:UserRole';
-
-
 
     /**
      * @Template()
@@ -58,65 +55,46 @@ class AuthController extends Controller
         $loginValidate = new LoginFormValidate();
         $formLogin = $this->createForm(new LoginForm(), $loginValidate);
         $formLogin->handleRequest($request);
-
         $socialToken = $request->request->get('token');
-
-        if (isset($socialToken) && $socialToken != null)
-        {
+        $errorData = "";
+        if (isset($socialToken) && $socialToken != null) {
             $session = $request->getSession();
             $session->set('socialToken', $socialToken);
             $session->save();
-
             return new RedirectResponse($this->generateUrl('openid_auth'));
         }
-
-        if ($request->isMethod('POST'))
-        {
-            if ($formLogin->get('enter')->isClicked())
-            {
-                if ($formLogin->isValid())
-                {
+        if ($request->isMethod('POST')) {
+            if ($formLogin->get('enter')->isClicked()) {
+                if ($formLogin->isValid()) {
                     $postData = $request->request->get('formLogin');
                     $userEmail = $postData['fieldEmail'];
                     $userPassword = $postData['fieldPass'];
-
                     $user = Helper::getUserByEmailAndIsConfirm($userEmail);
-
-                    if (!$user)
-                    {
-                        return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный Email или пароль!');
+                    if (!$user) {
+                        //return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный Email или пароль!');
+                        $errorData = "Введен неправильный Email или пароль!";
                     }
                     else
                     {
                         $encodedPassword = Helper::getRegPassword($userPassword, $user->getSalt());
-
-                        if (!StringUtils::equals($encodedPassword, $user->getPassword()))
-                        {
-                            return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный Email или пароль!');
+                        if (!StringUtils::equals($encodedPassword, $user->getPassword())) {
+                            //return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный Email или пароль!');
+                            $errorData = "Введен неправильный Email или пароль!";
                         }
-                        else
-                        {
-                            $firewall = 'secured_area';
-                            $role = $user->getRole();
-
-                            if ($role == 1)
-                            {
+                        else {
+                            $roleId = $user->getRole()->getId();
+                            if ($roleId == 1) {
                                 $role = 'ROLE_AUTHOR';
                             }
-                            else
-                            {
+                            else {
                                 $role = 'ROLE_CLIENT';
                             }
-
-                            $token = new UsernamePasswordToken((string)$user->getId(), null, $firewall, array($role));
+                            $token = new UsernamePasswordToken((string)$user->getId(), null, 'secured_area', array($role));
                             $this->get('security.context')->setToken($token);
-
-                            if ($role == 'ROLE_AUTHOR')
-                            {
+                            if ($role == 'ROLE_AUTHOR') {
                                 return new RedirectResponse($this->generateUrl('secure_author_index'));
                             }
-                            else
-                            {
+                            else {
                                 return new RedirectResponse($this->generateUrl('secure_client_index'));
                             }
                         }
@@ -128,8 +106,7 @@ class AuthController extends Controller
                 }*/
             }
         }
-
-        return array('formLogin' => $formLogin->createView(), 'errorData' => '');
+        return array('formLogin' => $formLogin->createView(), 'errorData' => $errorData);
     }
 
 

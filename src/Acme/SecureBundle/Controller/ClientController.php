@@ -347,7 +347,7 @@ class ClientController extends Controller
                             $comment,
                             $dateBid,
                             "",
-                            $bid['is_select_author'],
+                            $bid['is_select_client'],
                         );
                     }
                     //$response->selected_bid = 1;

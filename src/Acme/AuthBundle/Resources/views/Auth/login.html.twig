@@ -1,41 +1,100 @@
 {% extends "AcmeAuthBundle::layout.html.twig" %}
+{% block title "Вход в систему" %}
     {% block content %}
-        <script>
-            sessionStorage.setItem("Page2Visited", "True");
-        </script>
-        <div class="container">
-            <div class="row">
-                <div id="form-login">
-                    {{ form_start(formLogin) }}
-                        {{ errorData }}
-                        {{ form_errors(formLogin.fieldEmail) }}
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-                            {{ form_widget(formLogin.fieldEmail) }}
-                        </div>
-                        {{ form_errors(formLogin.fieldPass) }}
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                            {{ form_widget(formLogin.fieldPass) }}
-                        </div>
-                        <div class="form-group">
-                        <div class="input-group">
-                            <label for="formLogin_enter" class="btn btn-success"><span class="icon-login-1">&nbspВойти</span></label>
-                            {{ form_widget(formLogin.enter) }}
-                        </div>
-                        <div class="input-group">
-                            <a class="btn btn-success" href="{{ path('login') }}"><span class="icon-user-add">&nbspРегистрация</span></a>
-                        </div>
-                        </div>
-                    {{ form_end(formLogin) }}
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
+        <style>
+            .block-button, #block-openid {
+                margin-top: 10px;
+            }
+            #dialog-reg-select-role {
+                display: none;
+            }
+            /*label.required:before {
+                content: "* ";
+            }*/
+            ul li, #block-error {
+                color : red;
+            }
+        </style>
+        <div id="block-form-login">
+            <span id="block-error">{{ errorData }}</span>
+            {{ form_start(formLogin) }}
+            {{ form_label(formLogin.fieldEmail) }}
+            {{ form_errors(formLogin.fieldEmail) }}
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon-mail-8"></i></span>
+                {{ form_widget(formLogin.fieldEmail) }}
+            </div>
+            {{ form_label(formLogin.fieldPass) }}
+            {{ form_errors(formLogin.fieldPass) }}
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon-key-5"></i></span>
+                {{ form_widget(formLogin.fieldPass) }}
+            </div>
+            <div class="row block-button">
+                <div class="col-xs-2">
+                    <label for="formLogin_enter" class="btn btn-success"><span class="icon-login-1">&nbspВойти</span></label>
+                    {{ form_widget(formLogin.enter) }}
                 </div>
-                <div id="openID">
-                    <p>Войти с помощью:</p>
-                    <div id="uLogin" data-ulogin="display=panel;fields=first_name,nickname,email,photo,photo_big;
+                <div class="col-xs-3">
+                    <a class="btn btn-success" id="btn-reg" href="{{ path('login') }}"><span class="icon-user-add">&nbspРегистрация</span></a>
+                </div>
+            </div>
+            {{ form_end(formLogin) }}
+        </div>
+        <div id="block-openid">
+            <p>Войти с помощью:</p>
+            <div id="uLogin" data-ulogin="display=panel;fields=first_name,nickname,email,photo,photo_big;
 				        providers=vkontakte,odnoklassniki,twitter,facebook,google;hidden=mailru,yandex;
 				        redirect_uri=http%3A%2F%2Flocalhost%2Fstudy%2Fweb%2Fapp_dev.php%2Flogin">
+            </div>
+        </div>
+        <div id="dialog-reg-select-role" title="Выбор роли">
+            <div class="row">
+                <div class="col-xs-6">
+                    <label for="role-author">Автор</label>
+                    <div class="input-group">
+                        <input type="checkbox" name="role-author" id="role-author" class="form-control">
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <label for="role-client">Заказчик</label>
+                    <div class="input-group">
+                        <input type="checkbox" name="role-client" id="role-client" class="form-control">
                     </div>
                 </div>
             </div>
         </div>
+    <script>
+        $(document).ready(function() {
+            $.fn.button.noConflict();
+            $("#btn-reg").click(function(e) {
+                $("#dialog-reg-select-role").dialog({
+                    modal: true,
+                    resizable: false,
+                    height: 160,
+                    width: 260,
+                    close: function() {
+                        $('input:checkbox').attr('checked', false);
+                    }
+                });
+                return false;
+            });
+            $("input:checkbox").click(function() {
+                var typeRole = $(this).attr('name');
+                $("#dialog-reg-select-role").dialog('close');
+                if (typeRole == "role-client") {
+                    var type = "client";
+                    var url = "{{ path('client_reg', {'type': 'client'}) }}";
+                    location.href = url.replace('type', type);
+                }
+                else {
+                    var type = "author";
+                    var url = "{{ path('author_reg', {'type': 'author'}) }}";
+                    location.href = url.replace('type', type);
+                }
+            });
+        });
+    </script>
     {% endblock %}

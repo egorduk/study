@@ -1,25 +1,41 @@
 {% extends "TwigBundle::layout.html.twig" %}
-
 {% block head %}
-    <link rel="icon" sizes="16x16" href="{{ asset('bundles/images/favicon.gif') }}" />
     {% block stylesheets %}
         <link href="{{ asset('bundles/css/bootstrap.css') }}" rel="stylesheet" />
         <link href="{{ asset('bundles/css/bootstrap-theme.css') }}" rel="stylesheet" />
-        <link href="{{ asset('bundles/css/window.css') }}" rel="stylesheet" />
-        <link href="{{ asset('bundles/css/select2.css') }}" rel="stylesheet" />
         <link href="{{ asset('bundles/css/fontello.css') }}" rel="stylesheet" charset="UTF-8"/>
     {% endblock %}
     {% block javascripts %}
-        <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/bootstrap.js') }}"></script>
         <script type="text/javascript" src="//ulogin.ru/js/ulogin.js"></script>
-        <script type="text/javascript" src="{{ asset('bundles/js/select2.min.js') }}"></script>
     {% endblock %}
 {% endblock %}
-
 {% block title '' %}
-
+{% block header %}
+    <div class="row">
+        <div class="col-md-12">
+            <p align="center">HEADER</p>
+        </div>
+    </div>
+{% endblock %}
 {% block body %}
-    {% block content %}
-
-    {% endblock %}
+    <div class="row">
+        <div class="container">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-7">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}
+    <div class="row">
+        <div class="col-md-12">
+            <p align="center">FOOTER</p>
+        </div>
+    </div>
 {% endblock %}

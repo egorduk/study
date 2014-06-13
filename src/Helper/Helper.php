@@ -334,7 +334,6 @@ class Helper
         $mailSender = $container->getParameter('mailSender');
         $mailTitle = $container->getParameter('mailTitle');
         $confirmPath = $container->getParameter('confirmPath');
-
         $mailer = $container->get('mailer');
         $message = \Swift_Message::newInstance()
             ->setSubject('Подтверждение регистрации в системе')
@@ -351,7 +350,6 @@ class Helper
                 '</html>',
                 'text/html'
             );
-
         $mailer->send($message);
     }
 
@@ -1131,9 +1129,8 @@ class Helper
         $em = self::getContainer()->get('doctrine')->getManager();
         $bid = $em->getRepository(self::$_tableUserBid)
             ->findOneById($bidId);
-        if ($bid)
-        {
-            $bid->setIsSelectAuthor(1);
+        if ($bid) {
+            $bid->setIsSelectClient(1);
             $em->flush();
             $email = $bid->getUser()->getEmail();
             $subject = "Вас выбрали, подтвердите, что согласны!";
