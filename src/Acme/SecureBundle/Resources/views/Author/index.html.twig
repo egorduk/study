@@ -1,12 +1,21 @@
 {% extends "AcmeSecureBundle::layout_author.html.twig" %}
-    {% block title "Домашняя страница" %}
+    {% block title "Домашняя страница автора" %}
     {% block content %}
             <div class="row">
-                <p>Ваш ID - {{ user.id }}</p>
-                <p>Ваш ник - {{ user.login }}</p>
-                <p>Ваш баланс: {{ user.account }} руб.</p>
-                <p>Ваш статус - {{ user.role.name }}</p>
-                <p>Вход в систему - {{ whenLogin }}</p>
-                <p>Осталось в системе - {{ remainingTime }}</p>
+                <div  class="col-xs-3">
+                </div>
+                <div  class="col-xs-2">
+                    <p>Ваш ID - {{ user.id }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Ваш ник - {{ user.login }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Ваш баланс: {{ user.account }} руб.</p>
+                    <hr style="border:solid 1px black">
+                    <p>Ваш статус - {{ user.role.name }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Вход в систему - {{ whenLogin }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Осталось в системе - {{ remainingTime }}</p>
+                </div>
             </div>
     {% endblock %}

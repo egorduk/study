@@ -59,9 +59,8 @@ class AuthorController extends Controller
         else {
             return new RedirectResponse($this->generateUrl('secure_author_index'));
         }
-
         if ($type == "edit") {
-            $isAuthorFile = $user->getIsAuthorFile();
+            $isAccessOrder = $user->getIsAccessOrder();
             $profileValidate = new AuthorProfileFormValidate();
             $profileValidate->setIcq($userInfo->getIcq());
             $profileValidate->setSkype($userInfo->getSkype());
@@ -71,16 +70,14 @@ class AuthorController extends Controller
             $profileValidate->setSurname($userInfo->getSurname());
             $profileValidate->setLastname($userInfo->getLastname());
             $profileValidate->setCountry($userInfo->getCountry()->getCode());
-
             $formProfile = $this->createForm(new AuthorProfileForm(), $profileValidate);
             $formProfile->handleRequest($request);
-
             if ($request->isMethod('POST')) {
                 if ($formProfile->get('save')->isClicked()) {
                     if ($formProfile->isValid()) {
                         $postData = $request->request->get('formProfile');
                         Helper::updateUserInfo($postData, $userInfo);
-                        if (!$isAuthorFile) {
+                        if (!$isAccessOrder) {
                             Helper::uploadAuthorFileInfo($user);
                         }
                         $showWindow = true;

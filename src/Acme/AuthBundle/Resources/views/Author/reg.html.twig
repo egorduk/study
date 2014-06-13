@@ -3,130 +3,136 @@
 {% block content_header '' %}
 {% block content %}
     <link href="{{ asset('bundles/css/select2.css') }}" rel="stylesheet" />
+    <link href="{{ asset('bundles/css/window.css') }}" rel="stylesheet" />
     <script src="{{ asset('bundles/js/select2.min.js') }}"></script>
-    <div class="">
         <style>
-            .reset-margin-bottom{
-                margin-bottom: 0px;
+            ul li{
+                color: red;
             }
             .reset-margin-left{
                 padding-left: 0px;
             }
+            .Message {
+                position: relative;
+            }
+            .Message-body {
+                font-size: 18px;
+            }
         </style>
-        <div class="">
-            <div>
-                {{ form_start(formReg) }}
-                {{ form_errors(formReg) }}
-                {{ form_label(formReg.fieldLogin) }}
-                {{ form_errors(formReg.fieldLogin) }}
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-user"></i></span>
-                    {{ form_widget(formReg.fieldLogin) }}
-                </div>
-                {{ form_label(formReg.fieldPass) }}
-                {{ form_errors(formReg.fieldPass) }}
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-key-5"></i></span>
-                    {{ form_widget(formReg.fieldPass) }}
-                </div>
-                {{ form_label(formReg.fieldPassApprove) }}
-                {{ form_errors(formReg.fieldPassApprove) }}
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-key-5"></i></span>
-                    {{ form_widget(formReg.fieldPassApprove) }}
-                </div>
-                {{ form_label(formReg.fieldEmail) }}
-                {{ form_errors(formReg.fieldEmail) }}
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-mail-8"></i></span>
-                    {{ form_widget(formReg.fieldEmail) }}
-                </div>
-                {% block form_mobile_tel %}
-                    {{ form_label(formReg.fieldMobilePhone) }}
-                    {{ form_errors(formReg.fieldMobilePhone) }}
-                    <div class="row">
-                        <div class="form-group col-md-2">
-                            <div class="input-group">
-                                {{ form_widget(formReg.selectorCountry) }}
+        {% if (showWindow) %}
+            <div class="row">
+                <div id="modal-window">
+                    <div id="success-window">
+                        <div class="Message Message--green" id="js-timer">
+                            <div class="Message-icon">
+                                <i class="fa fa-check"></i>
                             </div>
-                        </div>
-                        <div class="form-group col-md-10 reset-margin-left">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="icon-mobile-alt"></i></span>
-                                {{ form_widget(formReg.fieldMobilePhone) }}
+                            <div class="Message-body">
+                                <p align="center">Ваш аккаунт создан! Проверьте ваш Email для активации аккаунта!</p>
                             </div>
+                            <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
                         </div>
                     </div>
-                {% endblock %}
-                {{ form_label(formReg.fieldUsername) }}
-                {{ form_errors(formReg.fieldUsername) }}
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-fontsize"></i></span>
-                    {{ form_widget(formReg.fieldUsername) }}
                 </div>
-                {{ form_label(formReg.fieldSurname) }}
-                {{ form_errors(formReg.fieldSurname) }}
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-fontsize"></i></span>
-                    {{ form_widget(formReg.fieldSurname) }}
-                </div>
-                {{ form_label(formReg.fieldLastname) }}
-                {{ form_errors(formReg.fieldLastname) }}
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-fontsize"></i></span>
-                    {{ form_widget(formReg.fieldLastname) }}
-                </div>
-                {{ form_label(formReg.fieldSkype) }}
-                {{ form_errors(formReg.fieldSkype) }}
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-skype"></i></span>
-                    {{ form_widget(formReg.fieldSkype) }}
-                </div>
-                {{ form_label(formReg.fieldIcq) }}
-                {{ form_errors(formReg.fieldIcq) }}
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-icq"></i></span>
-                    {{ form_widget(formReg.fieldIcq) }}
-                </div>
-                {% block form_label %}
-                    {% if(formReg.checkAgreeRules) %}
-                        <span class="required" title="Нажмите для прочтения правил"><a href="{{ path('rules', {'type': 'author'}) }}" target="_blank">Правила системы</a>&nbsp;прочитаны</span>
-                        {{ form_widget(formReg.checkAgreeRules) }}
-                    {% endif %}
-                {% endblock %}
-                {% block captcha %}
-                    <div>
-                        {{ captchaError|raw }}
-                        {{ captcha|raw }}
-                    </div>
-                {% endblock %}
-                <div class="input-group">
-                    <label for="formReg_reg" class="btn btn-success"><span class="icon-ok">&nbspРегистрация</span></label>
-                    {{ form_widget(formReg.reg) }}
-                    <label for="formReg_reset" class="btn btn-success"><span class="icon-trash-1">&nbspОчистить</span></label>
-                    {{ form_widget(formReg.reset) }}
-                </div>
-                {{ form_end(formReg) }}
             </div>
-        </div>
-        <div id="modal-window">
-            {% if (showWindow) %}
-                <div id="success-window">
-                    <div class="Message Message--green" id="js-timer">
-                        <div class="Message-icon">
-                            <i class="fa fa-check"></i>
+        {% endif %}
+        <div class="row">
+            {{ form_start(formReg) }}
+            {{ form_errors(formReg) }}
+            {{ form_label(formReg.fieldLogin) }}
+            {{ form_errors(formReg.fieldLogin) }}
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon-user"></i></span>
+                {{ form_widget(formReg.fieldLogin) }}
+            </div>
+            {{ form_label(formReg.fieldPass) }}
+            {{ form_errors(formReg.fieldPass) }}
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon-key-5"></i></span>
+                {{ form_widget(formReg.fieldPass) }}
+            </div>
+            {{ form_label(formReg.fieldPassApprove) }}
+            {{ form_errors(formReg.fieldPassApprove) }}
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon-key-5"></i></span>
+                {{ form_widget(formReg.fieldPassApprove) }}
+            </div>
+            {{ form_label(formReg.fieldEmail) }}
+            {{ form_errors(formReg.fieldEmail) }}
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon-mail-8"></i></span>
+                {{ form_widget(formReg.fieldEmail) }}
+            </div>
+            {% block form_mobile_tel %}
+                {{ form_label(formReg.fieldMobilePhone) }}
+                {{ form_errors(formReg.fieldMobilePhone) }}
+                <div class="row">
+                    <div class="form-group col-md-2">
+                        <div class="input-group">
+                            {{ form_widget(formReg.selectorCountry) }}
                         </div>
-                        <div class="Message-body">
-                            <p align="center">Ваш аккаунт создан! Проверьте вашу почту для активации!</p>
+                    </div>
+                    <div class="form-group col-md-10 reset-margin-left">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="icon-mobile-alt"></i></span>
+                            {{ form_widget(formReg.fieldMobilePhone) }}
                         </div>
-                        <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
                     </div>
                 </div>
-            {% endif %}
+            {% endblock %}
+            {{ form_label(formReg.fieldUsername) }}
+            {{ form_errors(formReg.fieldUsername) }}
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon-fontsize"></i></span>
+                {{ form_widget(formReg.fieldUsername) }}
+            </div>
+            {{ form_label(formReg.fieldSurname) }}
+            {{ form_errors(formReg.fieldSurname) }}
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon-fontsize"></i></span>
+                {{ form_widget(formReg.fieldSurname) }}
+            </div>
+            {{ form_label(formReg.fieldLastname) }}
+            {{ form_errors(formReg.fieldLastname) }}
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon-fontsize"></i></span>
+                {{ form_widget(formReg.fieldLastname) }}
+            </div>
+            {{ form_label(formReg.fieldSkype) }}
+            {{ form_errors(formReg.fieldSkype) }}
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon-skype"></i></span>
+                {{ form_widget(formReg.fieldSkype) }}
+            </div>
+            {{ form_label(formReg.fieldIcq) }}
+            {{ form_errors(formReg.fieldIcq) }}
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon-icq"></i></span>
+                {{ form_widget(formReg.fieldIcq) }}
+            </div>
+            {% block form_label %}
+                {% if(formReg.checkAgreeRules) %}
+                    <span class="required" title="Нажмите для прочтения правил"><a href="{{ path('rules', {'type': 'author'}) }}" target="_blank">Правила системы</a>&nbsp;прочитаны</span>
+                    {{ form_widget(formReg.checkAgreeRules) }}
+                {% endif %}
+            {% endblock %}
+            {% block captcha %}
+                <div>
+                    {{ captchaError|raw }}
+                    {{ captcha|raw }}
+                </div>
+            {% endblock %}
+            <div class="input-group">
+                <label for="formReg_reg" class="btn btn-success"><span class="icon-ok">&nbspРегистрация</span></label>
+                {{ form_widget(formReg.reg) }}
+                <label for="formReg_reset" class="btn btn-success"><span class="icon-trash-1">&nbspОчистить</span></label>
+                {{ form_widget(formReg.reset) }}
+            </div>
+            {{ form_end(formReg) }}
         </div>
         <script>
             $(document).ready(function() {
-                if (!sessionStorage.getItem("Page2Visited")) {
+                //if (!sessionStorage.getItem("Page2Visited")) {
                     {% if (showWindow) %}
                         function closeMessage(el) {
                             el.addClass('is-hidden');
@@ -139,11 +145,11 @@
                             document.location.href = "{{ path("login") }}";
                         }, 3000);
                     {% endif %}
-                }
+               /* }
                 else {
                     sessionStorage.removeItem("Page2Visited");
                     $("#modal-window").hide();
-                }
+                }*/
                 function format(state) {
                 /*if (!state.id){
                     return state.text;

@@ -886,7 +886,11 @@ class Helper
         }
     }
 
-
+    /**
+     * Upload author file to folder and set flag access to order
+     * @param $user
+     * @return bool
+     */
     public static function uploadAuthorFileInfo($user) {
         $folderFiles = Helper::getFullPathFolderFiles($user->getId(), "author");
         $isExistFilesFolder = self::isExistFilesFolder($folderFiles);
@@ -902,7 +906,7 @@ class Helper
                 $authorFile->setUser($user);
                 $em->persist($authorFile);
             }
-            $user->setIsAuthorfile(1);
+            $user->setIsAccessOrder(1);
             $em->flush();
             return true;
         }

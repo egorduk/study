@@ -1,107 +1,149 @@
 {% extends "AcmeSecureBundle::layout_author.html.twig" %}
-{% block title "Профиль" %}
+{% block title "Профиль исполнителя" %}
     {% block content %}
         {% include "PunkAveFileUploaderBundle:Default:templates.html.twig" %}
         <div class="container">
+            <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.css') }}" />
+            <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
+            <style>
+                ul li{
+                    color: red;
+                }
+                .reset-margin-left{
+                    padding-left: 0px;
+                }
+                .thumbnail-image{
+                    padding-top: 20px;
+                }
+                #dialog-message-success-save {
+                    display: none;
+                }
+                #dialog-message-success-save p .icon-ok-6 {
+                    font-size: 45px;
+                    color: green;
+                }
+                .dialog-text-message {
+                    float: left;
+                    margin-top: 15px;
+                    margin-left: 25px;
+                }
+            </style>
             {% if (formProfile == null) %}
                 <div class="row">
-                    <p>Ваш ID: {{ user.id }}</p>
-                    <p>Ваш ник: {{ user.login }}</p>
-                    <p>Ваш Email: {{ user.email }}</p>
-                    <p>Ваш статус: {{ user.role.name }}</p>
-                    <p>Дата регистрации в системе: {{ user.datereg.format("d.m.Y H:i") }}</p>
-                    <p>Ваш Skype: {{ userInfo.skype }}</p>
-                    <p>Ваш Icq: {{ userInfo.icq }}</p>
-                    <p>Ваш номер мобильного телефона: {{ userInfo.mobilephone }}</p>
-                    <p>Ваш номер стационарного телефона: {{ userInfo.staticphone }}</p>
-                    <p>Ваша страна: <img src='{{ asset('bundles/images/flags/') }}{{ userInfo.country.code }}.png' alt={{ userInfo.country.name }} title={{ userInfo.country.name }}></p>
-                    <p>Ваше имя: {{ userInfo.username }}</p>
-                    <p>Ваша фамилия: {{ userInfo.surname }}</p>
-                    <p>Ваше отчество: {{ userInfo.lastname }}</p>
-                    <p>Доступ к заказам: {{ user.isauthorfile }}</p>
+                    <div  class="col-xs-3">
+                    </div>
+                    <div  class="col-xs-5">
+                        <p>Ваш ID: {{ user.id }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Ваш ник: {{ user.login }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Ваш Email: {{ user.email }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Ваш статус: {{ user.role.name }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Дата регистрации в системе: {{ user.datereg.format("d.m.Y H:i") }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Ваш Skype: {{ userInfo.skype }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Ваш Icq: {{ userInfo.icq }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Ваш номер мобильного телефона: {{ userInfo.mobilephone }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Ваш номер стационарного телефона: {{ userInfo.staticphone }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Ваша страна: <img src='{{ asset('bundles/images/flags/') }}{{ userInfo.country.code }}.png' alt={{ userInfo.country.name }} title={{ userInfo.country.name }}></p>
+                        <hr style="border:solid 1px black">
+                        <p>Ваше имя: {{ userInfo.username }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Ваша фамилия: {{ userInfo.surname }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Ваше отчество: {{ userInfo.lastname }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Доступ к заказам: {{ user.isaccessorder }}</p>
+                    </div>
                 </div>
             {% else %}
-            <div class="row">
-                <style>
-                    .reset-margin-bottom{
-                        margin-bottom: 0px;
-                    }
-                    .reset-margin-left{
-                        padding-left: 0px;
-                    }
-                    .thumbnail-image{
-                        padding-top: 20px;
-                    }
-                </style>
-                {{ form_start(formProfile) }}
-                {{ form_label(formProfile.fieldUsername) }}
-                {{ form_errors(formProfile.fieldUsername) }}
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
-                    {{ form_widget(formProfile.fieldUsername) }}
-                </div>
-                {{ form_label(formProfile.fieldSurname) }}
-                {{ form_errors(formProfile.fieldSurname) }}
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
-                    {{ form_widget(formProfile.fieldSurname) }}
-                </div>
-                {{ form_label(formProfile.fieldLastname) }}
-                {{ form_errors(formProfile.fieldLastname) }}
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
-                    {{ form_widget(formProfile.fieldLastname) }}
-                </div>
-                {{ form_label(formProfile.fieldSkype) }}
-                {{ form_errors(formProfile.fieldSkype) }}
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-skype-1"></i></span>
-                    {{ form_widget(formProfile.fieldSkype) }}
-                </div>
-                {{ form_label(formProfile.fieldIcq) }}
-                {{ form_errors(formProfile.fieldIcq) }}
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-icq"></i></span>
-                    {{ form_widget(formProfile.fieldIcq) }}
-                </div>
-                {% block form_mobile_tel %}
-                    {{ form_label(formProfile.fieldMobilePhone) }}
-                    {{ form_errors(formProfile.fieldMobilePhone) }}
-                    <div class="row">
-                        <div class="form-group col-md-1 reset-margin-bottom">
-                            <div class="input-group">
-                                {{ form_widget(formProfile.selectorCountry) }}
-                            </div>
-                        </div>
-                        <div class="form-group col-md-11 reset-margin-bottom reset-margin-left">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="icon-mobile-alt"></i></span>
-                                {{ form_widget(formProfile.fieldMobilePhone) }}
-                            </div>
-                        </div>
+                <div class="row">
+                    <div class="col-xs-2">
                     </div>
-                {% endblock %}
-                {{ form_label(formProfile.fieldStaticPhone) }}
-                {{ form_errors(formProfile.fieldStaticPhone) }}
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-phone-3"></i></span>
-                    {{ form_widget(formProfile.fieldStaticPhone) }}
+                    <div class="col-xs-7">
+                    {{ form_start(formProfile) }}
+                    {{ form_label(formProfile.fieldUsername) }}
+                    {{ form_errors(formProfile.fieldUsername) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
+                        {{ form_widget(formProfile.fieldUsername) }}
+                    </div>
+                    {{ form_label(formProfile.fieldSurname) }}
+                    {{ form_errors(formProfile.fieldSurname) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
+                        {{ form_widget(formProfile.fieldSurname) }}
+                    </div>
+                    {{ form_label(formProfile.fieldLastname) }}
+                    {{ form_errors(formProfile.fieldLastname) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
+                        {{ form_widget(formProfile.fieldLastname) }}
+                    </div>
+                    {{ form_label(formProfile.fieldSkype) }}
+                    {{ form_errors(formProfile.fieldSkype) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-skype-1"></i></span>
+                        {{ form_widget(formProfile.fieldSkype) }}
+                    </div>
+                    {{ form_label(formProfile.fieldIcq) }}
+                    {{ form_errors(formProfile.fieldIcq) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-icq"></i></span>
+                        {{ form_widget(formProfile.fieldIcq) }}
+                    </div>
+                    {% block form_mobile_tel %}
+                        {{ form_label(formProfile.fieldMobilePhone) }}
+                        {{ form_errors(formProfile.fieldMobilePhone) }}
+                        <div class="row">
+                            <div class="form-group col-xs-2">
+                                <div class="input-group">
+                                    {{ form_widget(formProfile.selectorCountry) }}
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-10 reset-margin-left">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="icon-mobile-alt"></i></span>
+                                    {{ form_widget(formProfile.fieldMobilePhone) }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endblock %}
+                    {{ form_label(formProfile.fieldStaticPhone) }}
+                    {{ form_errors(formProfile.fieldStaticPhone) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-phone-3"></i></span>
+                        {{ form_widget(formProfile.fieldStaticPhone) }}
+                    </div>
+                    </br>
+                    <div class="input-group">
+                        <div class="file-uploader"></div>
+                    </div>
+                    <div class="input-group">
+                        <label for="formProfile_save" class="btn btn-success"><span class="icon-floppy">&nbspСохранить</span></label>
+                        {{ form_widget(formProfile.save) }}
+                        <label for="formProfile_reset" class="btn btn-success"><span class="icon-trash-1">&nbspОчистить</span></label>
+                        {{ form_widget(formProfile.reset) }}
+                    </div>
+                    {{ form_end(formProfile) }}
+                    </div>
                 </div>
-                </br>
-                <div class="input-group">
-                    <div class="file-uploader"></div>
-                </div>
-                <div class="input-group">
-                    <label for="formProfile_save" class="btn btn-success"><span class="icon-floppy">&nbspСохранить</span></label>
-                    {{ form_widget(formProfile.save) }}
-                    <label for="formProfile_reset" class="btn btn-success"><span class="icon-trash-1">&nbspОчистить</span></label>
-                    {{ form_widget(formProfile.reset) }}
-                </div>
-                {{ form_end(formProfile) }}
-            </div>
             {% endif %}
+            <div id="dialog-message-success-save" title="Уведомление">
+                <p>
+                    <span class="icon-ok-6" style="float:left;"></span>
+                    <span class="dialog-text-message">Данные успешно сохранены!</span>
+                </p>
+            </div>
             <script>
                 $(document).ready(function() {
+                    $.fn.button.noConflict();
                     function format(state) {
                         return "<img title='" + state.text + "' class='flag' src='{{ asset('bundles/images/flags/') }}" + state.id.toLowerCase() + ".png'/>";
                     }
@@ -111,27 +153,39 @@
                         formatSelection: format,
                         escapeMarkup: function(m) { return m; }
                     });
-                    {% if (user.isauthorfile == 0) %}
-                    new PunkAveFileUploader({
-                        'uploadUrl': {{ path('secure_author_upload', { editId: user.id, action: 'profile' }) | json_encode | raw }},
-                        'viewUrl': {{ ('/study/web/uploads/author/' ~ user.id)| json_encode | raw }},
-                        'el': '.file-uploader',
-                        'existingFiles': {{ punkave_get_files('author/' ~ user.id) | json_encode | raw }},
-                        'delaySubmitWhileUploading': '.edit-form',
-                        'errorCallback': function(errorObj) {
-                            if (errorObj.error == 'maxNumberOfFiles') {
-                                alert("Maximum uploaded files exceeded!");
+                    {% if (user.isaccessorder == 0) %}
+                        new PunkAveFileUploader({
+                            'uploadUrl': {{ path('secure_author_upload', { editId: user.id, action: 'profile' }) | json_encode | raw }},
+                            'viewUrl': {{ ('/study/web/uploads/author/' ~ user.id)| json_encode | raw }},
+                            'el': '.file-uploader',
+                            'existingFiles': {{ punkave_get_files('author/' ~ user.id) | json_encode | raw }},
+                            'delaySubmitWhileUploading': '.edit-form',
+                            'errorCallback': function(errorObj) {
+                                if (errorObj.error == 'maxNumberOfFiles') {
+                                    alert("Maximum uploaded files exceeded!");
+                                }
                             }
-                        }
-                    });
+                        });
+                    {% endif %}
+                    {% if (showWindow == 1) %}
+                        $("#dialog-message-success-save").dialog({
+                            modal: true,
+                            resizable: false,
+                            height: 150,
+                            width: 400,
+                            dialogClass: 'class-dialog-confirm-selection'
+                        });
+                        setTimeout(function() {
+                            $("#dialog-message-success-save").dialog('close');
+                        }, 1500);
                     {% endif %}
                 });
             </script>
-            {% if (user.isauthorfile == 0) %}
-            <script type="text/javascript" src="{{ asset('bundles/js/underscore.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/jquery.fileupload.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/jquery.iframe-transport.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/FileUploader.js') }}"></script>
+            {% if (user.isaccessorder == 0) %}
+                <script type="text/javascript" src="{{ asset('bundles/js/underscore.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/jquery.fileupload.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/jquery.iframe-transport.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/FileUploader.js') }}"></script>
             {% endif %}
         </div>
     {% endblock %}

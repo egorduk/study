@@ -102,7 +102,7 @@ class User extends EntityRepository implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="integer")
      */
-    protected $is_author_file;
+    protected $is_access_order;
 
     /**
      * @ORM\Column(type="integer")
@@ -161,7 +161,8 @@ class User extends EntityRepository implements UserInterface, \Serializable
         $this->recovery_password = '';
         $this->hash_code = '';
         $this->account = 0;
-        $this->is_author_file = 0;
+        $this->avatar = "default.jpg";
+        $this->is_access_order = 0;
         $this->link_user_order = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_openid = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_author_file = new \Doctrine\Common\Collections\ArrayCollection();
@@ -361,12 +362,12 @@ class User extends EntityRepository implements UserInterface, \Serializable
         return $this->account;
     }
 
-    public function setIsAuthorFile($val) {
-        $this->is_author_file = $val;
+    public function setIsAccessOrder($val) {
+        $this->is_access_order = $val;
     }
 
-    public function getIsAuthorFile() {
-        return $this->is_author_file;
+    public function getIsAccessOrder() {
+        return $this->is_access_order;
     }
 
     public function getAvatar() {
