@@ -71,14 +71,11 @@ class AuthController extends Controller
                     $userPassword = $postData['fieldPass'];
                     $user = Helper::getUserByEmailAndIsConfirm($userEmail);
                     if (!$user) {
-                        //return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный Email или пароль!');
                         $errorData = "Введен неправильный Email или пароль!";
                     }
-                    else
-                    {
+                    else {
                         $encodedPassword = Helper::getRegPassword($userPassword, $user->getSalt());
                         if (!StringUtils::equals($encodedPassword, $user->getPassword())) {
-                            //return array('formLogin' => $formLogin->createView(), 'errorData' => 'Введен неправильный Email или пароль!');
                             $errorData = "Введен неправильный Email или пароль!";
                         }
                         else {
@@ -100,10 +97,6 @@ class AuthController extends Controller
                         }
                     }
                 }
-                /*else
-                {
-                    return array('formLogin' => $formLogin->createView(), 'errorData' => '');
-                }*/
             }
         }
         return array('formLogin' => $formLogin->createView(), 'errorData' => $errorData);
@@ -165,6 +158,7 @@ class AuthController extends Controller
         return $user;*/
     }
 
+
     /**
      * @Template()
      * @return Response
@@ -173,7 +167,6 @@ class AuthController extends Controller
     {
         $session = $request->getSession();
         $session->clear();
-
         return array();
     }
 
@@ -186,42 +179,38 @@ class AuthController extends Controller
     {
         $showWindow = false;
         $captchaError = "";
-
         if ($type == "client") {
             $clientValidate = new ClientRegFormValidate();
             $formReg = $this->createForm(new ClientRegForm(), $clientValidate);
             $formReg->handleRequest($request);
-
             $publicKeyRecaptcha = $this->container->getParameter('publicKeyRecaptcha');
             $captcha = recaptcha_get_html($publicKeyRecaptcha);
-
             if ($request->isMethod('POST')) {
                 if ($formReg->get('reg')->isClicked()) {
                     if ($formReg->isValid()) {
                         $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
                         $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
-
                         if (!$resp->is_valid) {
                             $postData = $request->request->get('formReg');
                             $userLogin = $postData['fieldLogin'];
                             $userPassword = $postData['fieldPass'];
                             $userEmail = $postData['fieldEmail'];
-
                             $userInfo = new UserInfo();
                             //$countryCode = geoip_country_code_by_name($_SERVER["REMOTE_ADDR"]);
                             $countryCode = 'by';
-                            $country = $this->getDoctrine()->getRepository($this->tableCountry)
-                                ->findOneByCode($countryCode);
+                            $country = Helper::getCountryByCode($countryCode);
                             $userInfo->setCountry($country);
-                            $em = $this->getDoctrine()->getManager();
+                            Helper::addNewUserInfo($userInfo);
+                            /*$em = $this->getDoctrine()->getManager();
                             $em->persist($userInfo);
-                            $em->flush();
-
+                            $em->flush();*/
                             $user = new User();
                             $user->setLogin($userLogin);
                             $user->setEmail($userEmail);
-                            $role = $this->getDoctrine()->getRepository($this->tableUserRole)
-                                ->findOneById(2);
+                            $userId = $user->getId();
+                            /*$role = $this->getDoctrine()->getRepository($this->tableUserRole)
+                                ->findOneById(2);*/
+                            $role = Helper::getUserRoleByUserId($userId);
                             $user->setRole($role);
                             $salt = Helper::getSalt();
                             $password = Helper::getRegPassword($userPassword, $salt);
@@ -251,15 +240,12 @@ class AuthController extends Controller
             $authorValidate = new AuthorRegFormValidate();
             $formReg = $this->createForm(new AuthorRegForm(), $authorValidate);
             $formReg->handleRequest($request);
-
             $publicKeyRecaptcha = $this->container->getParameter('publicKeyRecaptcha');
             $captcha = recaptcha_get_html($publicKeyRecaptcha);
-
             if ($request->isMethod('POST')) {
                 if ($formReg->get('reg')->isClicked()) {
                     $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
                     $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
-
                     if ($formReg->isValid()) {
                         if (!$resp->is_valid) {
                             $postData = $request->request->get('formReg');
@@ -270,7 +256,6 @@ class AuthController extends Controller
                             $userSkype = $postData['fieldSkype'];
                             $userIcq = $postData['fieldIcq'];
                             $userCountryCode = $postData['selectorCountry'];
-
                             $userInfo = new UserInfo();
                             $userInfo->setSkype($userSkype);
                             $userInfo->setIcq($userIcq);
@@ -282,7 +267,6 @@ class AuthController extends Controller
                             $em = $this->getDoctrine()->getManager();
                             $em->persist($userInfo);
                             $em->flush();
-
                             $user = new User();
                             $user->setLogin($userLogin);
                             $user->setEmail($userEmail);
@@ -299,7 +283,6 @@ class AuthController extends Controller
                             $em->persist($user);
                             $em->flush();
                             $userId = $user->getId();
-
                             Helper::sendConfirmationReg($this->container, $userEmail, $userId, $hashCode);
                             $showWindow = true;
                         }
@@ -313,8 +296,7 @@ class AuthController extends Controller
                 'AcmeAuthBundle:Author:reg.html.twig', array('formReg' => $formReg->createView(), 'captcha' => $captcha, 'captchaError' => $captchaError, 'showWindow' => $showWindow)
             );
         }
-        else
-        {
+        else {
             throw new AccessException();
         }
 
@@ -327,8 +309,7 @@ class AuthController extends Controller
      * @Template()
      * @return array
      */
-    public function unauthorizedAction(Request $request)
-    {
+    public function unauthorizedAction(Request $request) {
         return array();
     }
 
@@ -342,70 +323,48 @@ class AuthController extends Controller
     public function openidAction(Request $request)
     {
         $session = $request->getSession();
-
-        if ($session->has('socialToken'))
-        {
+        if ($session->has('socialToken')) {
             $socialToken = $session->get('socialToken');
             $socialResponse = file_get_contents('http://ulogin.ru/token.php?token=' . $socialToken . '&host=' . $_SERVER['HTTP_HOST']);
             $socialData = json_decode($socialResponse, true);
             $showWindow = false;
             $captchaError = "";
-
-            if (!isset($socialData['error']))
-            {
+            if (!isset($socialData['error'])) {
                 $userEmail = $socialData['email'];
                 $isExistsUser = Helper::isExistsUserByEmailAndIsConfirm($userEmail);
-
-                if ($isExistsUser)
-                {
+                if ($isExistsUser) {
                     $role = Helper::getUserRoleByEmail($userEmail);
-
-                    if ($role == 1)
-                    {
+                    if ($role == 1) {
                         $role = 'ROLE_AUTHOR';
                         $pathRedirect = 'secure_author_index';
                     }
-                    else
-                    {
+                    else {
                         $role = 'ROLE_CLIENT';
                         $pathRedirect = 'secure_client_index';
                     }
-
                     $token = new UsernamePasswordToken($userEmail, null, 'secured_area', array($role));
                     $this->get('security.context')->setToken($token);
-
                     return new RedirectResponse($this->generateUrl($pathRedirect));
                 }
-                else
-                {
+                else {
                     $clientValidate = new ClientRegFormValidate();
                     $clientValidate->setLogin($socialData['nickname']);
                     $clientValidate->setEmail($socialData['email']);
-
                     $formReg = $this->createForm(new ClientRegForm(), $clientValidate);
                     $formReg->handleRequest($request);
-
                     $publicKeyRecaptcha = $this->container->getParameter('publicKeyRecaptcha');
                     $captcha = recaptcha_get_html($publicKeyRecaptcha);
-
-                    if ($request->isMethod('POST'))
-                    {
-                        if ($formReg->get('reg')->isClicked())
-                        {
-                            if ($formReg->isValid())
-                            {
+                    if ($request->isMethod('POST')) {
+                        if ($formReg->get('reg')->isClicked()) {
+                            if ($formReg->isValid()) {
                                 $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
                                 $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
-
-                                if (!$resp->is_valid)
-                                {
+                                if (!$resp->is_valid) {
                                     $session->remove('socialToken');
-
                                     $postData = $request->request->get('formReg');
                                     $userLogin = $postData['fieldLogin'];
                                     $userPassword = $postData['fieldPass'];
                                     $userEmail = $postData['fieldEmail'];
-
                                     $userInfo = new UserInfo();
                                     //$countryCode = geoip_country_code_by_name($_SERVER["REMOTE_ADDR"]);
                                     $countryCode = 'by';
@@ -415,7 +374,6 @@ class AuthController extends Controller
                                     $em = $this->getDoctrine()->getManager();
                                     $em->persist($userInfo);
                                     $em->flush();
-
                                     $user = new User();
                                     $user->setLogin($userLogin);
                                     $user->setEmail($userEmail);
@@ -429,13 +387,11 @@ class AuthController extends Controller
                                     $hashCode = Helper::getRandomValue(15);
                                     $user->setHash($hashCode);
                                     $user->setUserInfo($userInfo);
-
                                     $userId = Helper::addNewOpenIdData($socialData, $country, $user);
                                     Helper::sendConfirmationReg($this->container, $userEmail, $userId, $hashCode);
                                     $showWindow = true;
                                 }
-                                else
-                                {
+                                else {
                                     $captchaError = $resp->error;
                                 }
                             }

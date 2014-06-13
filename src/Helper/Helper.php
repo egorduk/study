@@ -71,12 +71,15 @@ class Helper
         return date($format, $timestamp);
     }
 
+    /**
+     * Get user by email and if he confirmed activation
+     * @param $userEmail
+     * @return bool
+     */
     public static function getUserByEmailAndIsConfirm($userEmail) {
         $user = self::getContainer()->get('doctrine')->getRepository(self::$_tableUser)
-            ->findOneByEmail($userEmail);
-
-        if(!$user)
-        {
+            ->findOneBy(array('email' => $userEmail, 'is_confirm' => 1, 'is_ban' => 0));
+        if (!$user) {
             return false;
         }
         return $user;
@@ -1279,9 +1282,7 @@ class Helper
         if ($bid) {
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
 
@@ -1305,8 +1306,24 @@ class Helper
             }
             return true;
         }
-        else {
-            return false;
+        return false;
+    }
+
+
+    public static function getCountryByCode($countryCode) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $country = $em->getRepository(self::$_tableCountry)
+            ->findOneByCode($countryCode);
+        if ($country) {
+            return true;
         }
+        return false;
+    }
+
+
+    public static function addNewUserInfo($userInfo) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $em->persist($userInfo);
+        $em->flush();
     }
 }
