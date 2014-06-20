@@ -18,10 +18,10 @@ class ClientRegForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('fieldLogin', 'text', array('label'=>'Логин:', 'required' => true, 'data' => $options['data']->fieldLogin, 'attr' => array('class' => 'form-control', 'title' => 'Ваш логин должен состоять только из латинских букв', 'size' => 20, 'maxlength' => 12, 'placeholder' => 'Введите логин...')))
-                ->add('fieldPass', 'password', array('label'=>'Пароль:', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Ваш пароль должен состоять только из латинских букв и цифр', 'size' => 20, 'maxlength' => 12, 'placeholder' => 'Введите пароль...')))
-                ->add('fieldPassApprove', 'password', array('label'=>'Подтвердите пароль:', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Введите Ваш пароль еще раз', 'size' => 20, 'maxlength' => 12, 'placeholder' => 'Введите повторно пароль...')))
-                ->add('fieldEmail', 'text', array('label'=>'Email:', 'required' => true, 'data' => $options['data']->fieldEmail, 'attr' => array('class' => 'form-control', 'title' => 'Введите Ваш email', 'size' => 20, 'maxlength' => 25, 'placeholder' => 'Введите Email...')))
+        $builder->add('fieldLogin', 'text', array('label'=>'Логин', 'required' => true, 'data' => $options['data']->fieldLogin, 'attr' => array('class' => 'form-control', 'title' => 'Ваш логин должен состоять только из латинских букв', 'size' => 20, 'maxlength' => 12, 'placeholder' => 'Введите логин...')))
+                ->add('fieldPass', 'password', array('label'=>'Пароль', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Ваш пароль должен состоять только из латинских букв и цифр', 'size' => 20, 'maxlength' => 12, 'placeholder' => 'Введите пароль...')))
+                ->add('fieldPassApprove', 'password', array('label'=>'Подтвердите пароль', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Введите Ваш пароль еще раз', 'size' => 20, 'maxlength' => 12, 'placeholder' => 'Введите повторно пароль...')))
+                ->add('fieldEmail', 'text', array('label'=>'Email', 'required' => true, 'data' => $options['data']->fieldEmail, 'attr' => array('class' => 'form-control', 'title' => 'Введите Ваш email', 'size' => 20, 'maxlength' => 25, 'placeholder' => 'Введите Email...')))
                 ->add('checkAgreeRules', 'checkbox', array('label'=>' ', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Если Вы согласны с правилами, то установите тут флажок', 'class' => '')))
                 ->add('reg', 'submit', array('attr' => array('class' => 'hidden')))
                 ->add('reset', 'reset', array('attr' => array('class' => 'hidden')));

@@ -1,10 +1,8 @@
-{% extends "AcmeSecureBundle::layout.html.twig" %}
-
-{% block title "Create order" %}
-
+{% extends "AcmeSecureBundle::layout_client.html.twig" %}
+{% block title "Создать новый заказ" %}
     {% block content %}
-
-        {# Underscore templates for the uploader #}
+        <link rel="stylesheet" href="{{ asset('bundles/css/datepicker.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/datepicker3.css') }}" />
         {% include "PunkAveFileUploaderBundle:Default:templates.html.twig" %}
         <style>
             .invalid{
@@ -21,11 +19,22 @@
             .thumbnail-image{
                 padding-top: 20px;
             }
+            label.required:after {
+                content: "* ";
+            }
+            .Message {
+                position: relative;
+            }*
+             .Message-body {
+                 font-size: 18px;
+             }
         </style>
+        {% form_theme formOrder "TwigBundle::layout.html.twig" %}
         <div class="container">
-            <div id="modal-window">
-                {% if (showWindow) %}
-                    <div id="success-window">
+        {% if (showWindow) %}
+            <div class="row">
+                <div id="modal-window">
+                    <div id="success-window-create-order">
                         <div class="Message Message--green" id="js-timer">
                             <div class="Message-icon">
                                 <i class="fa fa-check"></i>
@@ -36,9 +45,11 @@
                             <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
                         </div>
                     </div>
-                {% endif %}
+                </div>
             </div>
-            <div class="row" style="width: 500px">
+        {% endif %}
+            <div class="row">
+                <div class="col-md-5 col-md-offset-3">
                 {{ form_start(formOrder, {'attr': {'class' : 'form', 'data-spinner' : 1}}) }}
                         <div class="form-group">
                             {{ form_label(formOrder.fieldTheme) }}
@@ -91,7 +102,7 @@
                             </div>
                         </div>
                 {{ form_end(formOrder) }}
-                <a href="{{ path('secure_client_profile', {'type': 'view'}) }}">К профилю</a>
+                </div>
             </div>
             <script>
                 $(document).ready(function() {
@@ -210,10 +221,22 @@
                         todayHighlight: true,
                         format: "dd/mm/yyyy",
                         autoclose: true,
-                        startDate: '0d',
+                        startDate: '1d',
                         language: 'ru',
                         todayBtn: true
                     });
+                    var today = new Date();
+                    var dd = today.getDate() + 1;
+                    var mm = today.getMonth() + 1;
+                    var yyyy = today.getFullYear();
+                    if(dd < 10) {
+                        dd = '0' + dd
+                    }
+                    if(mm < 10) {
+                        mm = '0' + mm
+                    }
+                    var currentDate = dd + '/' + mm + '/' + yyyy;
+                    $('#formCreateOrder_fieldDateExpire').datepicker('setStartDate', currentDate);
                     /*.on('changeDate', function(ev) {
                         if (ev.viewMode == "days"){
                             $('.datepicker').hide();
@@ -310,7 +333,7 @@
                             });
                             setTimeout(function() {
                                 closeMessage($('#js-timer'));
-                                document.location.href = "{{ path('secure_client_order', {'type': 'view'}) }}";
+                                document.location.href = "{{ path('secure_client_index') }}";
                             }, 3000);
                         {% endif %}
                     }
@@ -328,8 +351,5 @@
             <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/jquery.fileupload.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/jquery.iframe-transport.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/FileUploader.js') }}"></script>
-
-
-
         </div>
     {% endblock %}

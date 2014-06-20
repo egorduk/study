@@ -6,8 +6,10 @@ use Acme\SecureBundle\Entity\AuctionBid;
 use Acme\SecureBundle\Entity\FavoriteOrder;
 use Acme\SecureBundle\Entity\OrderFile;
 use Acme\SecureBundle\Entity\SelectBid;
+use Acme\SecureBundle\Entity\StatusOrder;
 use Acme\SecureBundle\Entity\UserBid;
 use Acme\SecureBundle\Entity\UserOrder;
+use Acme\SecureBundle\Entity\WebchatMessage;
 use Proxies\__CG__\Acme\SecureBundle\Entity\Author\AuthorFile;
 use Symfony\Component\Yaml\Yaml;
 use Doctrine\ORM\EntityManager;
@@ -19,6 +21,7 @@ use Symfony\Component\Security\Core\Util\StringUtils;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Acme\AuthBundle\Entity\Openid;
+use Symfony\Component\HttpFoundation\Response;
 
 class Helper
 {
@@ -26,15 +29,17 @@ class Helper
     private static $_ymFile;
     private static $_tableUser = 'AcmeAuthBundle:User';
     private static $_tableProvider = 'AcmeAuthBundle:Provider';
+    private static $_tableUserRole = 'AcmeAuthBundle:UserRole';
     private static $_tableCountry = 'AcmeAuthBundle:Country';
     private static $_tableUserInfo = 'AcmeAuthBundle:UserInfo';
-    private static $_tableSubject = 'AcmeSecureBundle:Subject';
+    private static $_tableSubject = 'AcmeSecureBundle:SubjectOrder';
     private static $_tableTypeOrder = 'AcmeSecureBundle:TypeOrder';
     private static $_tableUserOrder = 'AcmeSecureBundle:UserOrder';
     private static $_tableStatusOrder = 'AcmeSecureBundle:StatusOrder';
     private static $_tableOrderFile = 'AcmeSecureBundle:OrderFile';
     private static $_tableUserBid = 'AcmeSecureBundle:UserBid';
     private static $_tableFavoriteOrder = 'AcmeSecureBundle:FavoriteOrder';
+    private static $_tableWebchatMessage = 'AcmeSecureBundle:WebchatMessage';
     private static $kernel;
 
     public function __construct() {
@@ -92,9 +97,7 @@ class Helper
         $query = $em->createQuery('SELECT u.id FROM AcmeAuthBundle:User u WHERE u.email = :email')
             ->setParameter('email', $userEmail);
         $user = $query->getResult();
-
-        if(!$user)
-        {
+        if (!$user) {
             return false;
         }
         return true;
@@ -107,8 +110,7 @@ class Helper
         $query = $em->createQuery('SELECT u.id FROM AcmeAuthBundle:User u WHERE u.id = :id')
             ->setParameter('id', $userId);
         $user = $query->getResult();
-        if(!$user)
-        {
+        if (!$user) {
             return false;
         }
         return true;
@@ -122,8 +124,7 @@ class Helper
         $query = $em->createQuery('SELECT u.id FROM AcmeAuthBundle:User u WHERE u.login = :login')
             ->setParameter('login', $userLogin);
         $user = $query->getResult();
-        if(!$user)
-        {
+        if (!$user) {
             return false;
         }
         return true;
@@ -132,13 +133,10 @@ class Helper
 
     public static function getContainer()
     {
-        if(self::$kernel instanceof \AppKernel)
-        {
-            if(!self::$kernel->getContainer() instanceof Container)
-            {
+        if(self::$kernel instanceof \AppKernel) {
+            if(!self::$kernel->getContainer() instanceof Container) {
                 self::$kernel->boot();
             }
-
             return self::$kernel->getContainer();
         }
         $environment = 'dev';
@@ -182,23 +180,26 @@ class Helper
         return $recoveryPassword;
     }*/
 
-    public static function sendRecoveryPasswordMail($container, $userEmail, $userId, $unencodePassword, $hashCode)
+    public static function sendRecoveryPasswordMail($container, $user)
     {
         $mailSender = $container->getParameter('mailSender');
         $mailTitle = $container->getParameter('mailTitle');
         $confirmPath = $container->getParameter('confirmPath');
+        $unEncodePassword = $user->getUnEncodePass();
+        $hashCode = $user->getHash();
+        $userId = $user->getId();
         //$encodePassword = htmlspecialchars(rawurlencode($encodePassword));
-
         $mailer = $container->get('mailer');
         $message = \Swift_Message::newInstance()
             ->setSubject('Восстановление пароля в системе')
             ->setFrom($mailSender, $mailTitle)
-            ->setTo($userEmail)
+            //->setTo($userEmail)
+            ->setTo('a_1300@mail.ru')
             ->setBody(
                 '<html>' .
                     '<head></head>' .
                     '<body>' .
-                        '<p>Ваш новый пароль для входа ' . $unencodePassword . '</p>' .
+                        '<p>Ваш новый пароль для входа ' . $unEncodePassword . '</p>' .
                         '<p>Для подтверждения смены пароля нажмите <a href="' . $confirmPath . '?type=rec&hash_code=' . $hashCode . '&id=' .$userId. '">сюда</a></p>' .
                     '</body>' .
                 '</html>',
@@ -215,19 +216,16 @@ class Helper
     {
         $user = self::getContainer()->get('doctrine')->getRepository(self::$_tableUser)
             ->findOneByEmail($userEmail);
-        if (!$user)
-        {
-            //throw new NotFoundHttpException('Error!');
-            return false;
+        if ($user) {
+            return $user;
         }
-        return $user;
+        return false;
     }
 
 
     public static function isCorrectConfirmUrl($hashCode, $userId, $type)
     {
-        if (isset($hashCode) && isset($userId) && ($type == "reg" || $type == "rec") && (iconv_strlen($hashCode) == 30) && !empty($hashCode) && !empty($userId) && is_numeric($userId) && ($userId > 0))
-        {
+        if (isset($hashCode) && isset($userId) && ($type == "reg" || $type == "rec") && (iconv_strlen($hashCode) == 30) && !empty($hashCode) && !empty($userId) && is_numeric($userId) && ($userId > 0)) {
             return true;
         }
         return false;
@@ -237,14 +235,12 @@ class Helper
     public static function getUserRoleByEmail($userEmail)
     {
         $em = self::getContainer()->get('doctrine')->getManager();
-        $query = $em->createQuery('SELECT u.user_role_id FROM AcmeAuthBundle:User u WHERE u.email = :email')
-            ->setParameter('email', $userEmail);
-        $user = $query->getResult();
-        if(!$user)
-        {
-            return false;
+        $user = $em->getRepository(self::$_tableUser)
+            ->findOneByEmail($userEmail);
+        if ($user) {
+            return $user->getRole();
         }
-        return true;
+        return false;
     }
 
 
@@ -260,95 +256,80 @@ class Helper
 
     public static function updateUserAfterConfirmByMail($userId, $hashCode, $type)
     {
-        $container = self::getContainer();
-
-        $em = $container->get('doctrine')->getManager();
+        $em =  self::getContainer()->get('doctrine')->getManager();
         $user = $em->getRepository(self::$_tableUser)
             ->findOneBy(array('id' => $userId, 'hash_code' => $hashCode));
-
-        if (!$user)
-        {
+        if (!$user) {
             return false;
         }
-        else
-        {
-            $user->setHash('');
-
-            if ($type == "reg")
-            {
+        else {
+            $user->setHash("");
+            if ($type == "reg") {
                 //$user->setPassword($hashCode);
                 $user->setIsConfirm(1);
                 $user->setDateConfirmReg(new \DateTime());
             }
-            elseif ($type == "rec")
-            {
+            elseif ($type == "rec") {
                 $encodePassword = $user->getRecoveryPassword();
                 $user->setPassword($encodePassword);
                 $user->setDateConfirmRecovery(new \DateTime());
                 $user->setRecoveryPassword('');
             }
-
             $em->flush();
-
             return true;
         }
     }
 
 
-    public static function isExistsUserByEmailAndIsConfirm($userEmail)
+    public static function isExistsUserByEmailAndIsConfirmAndIsUnban($userEmail)
     {
-        $container = self::getContainer();
-        $em = $container->get('doctrine')->getManager();
-        $query = $em->createQuery('SELECT u.id FROM AcmeAuthBundle:User u WHERE u.email = :email AND u.is_confirm = :is_confirm')
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $query = $em->createQuery('SELECT u.id FROM AcmeAuthBundle:User u WHERE u.email = :email AND u.is_confirm = :is_confirm AND u.is_ban = :is_ban')
             ->setParameter('email', $userEmail)
-            ->setParameter('is_confirm', 1);
+            ->setParameter('is_confirm', 1)
+            ->setParameter('is_ban', 0);
         $user = $query->getResult();
-
-        if(!$user)
-        {
-            return false;
+        if ($user) {
+            return true;
         }
-
-        return true;
+        return false;
     }
 
 
     public static function isExistsUserByHashAndByIdAndIsConfirm($userId, $hashCode, $isConfirm)
     {
-        $container = self::getContainer();
-        $em = $container->get('doctrine')->getManager();
-        $query = $em->createQuery('SELECT u.id FROM AcmeAuthBundle:User u WHERE u.id = :id AND u.is_confirm = :is_confirm AND u.hash_code = :hash_code')
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $query = $em->createQuery('SELECT u.id FROM AcmeAuthBundle:User u WHERE u.id = :id AND u.is_confirm = :is_confirm AND u.hash_code = :hash_code AND u.is_ban = :is_ban')
             ->setParameter('id', $userId)
             ->setParameter('is_confirm', $isConfirm)
-            ->setParameter('hash_code', $hashCode);
+            ->setParameter('hash_code', $hashCode)
+            ->setParameter('is_ban', 0);
         $user = $query->getResult();
-
-        if(!$user)
-        {
-            return false;
+        if ($user) {
+            return true;
         }
-
         return true;
     }
 
 
-    public static function sendConfirmationReg($container, $userEmail, $userId, $hash)
+    public static function sendConfirmationReg($container, $user)
     {
         $mailSender = $container->getParameter('mailSender');
         $mailTitle = $container->getParameter('mailTitle');
         $confirmPath = $container->getParameter('confirmPath');
         $mailer = $container->get('mailer');
+        $hash = $user->getHash();
+        $userId = $user->getId();
         $message = \Swift_Message::newInstance()
             ->setSubject('Подтверждение регистрации в системе')
             ->setFrom($mailSender, $mailTitle)
-            //->setTo($userEmail)
-            //->setTo("gzhelka777@mail.ru")
-            ->setTo("egordukk@tut.by")
+            //->setTo($userEmail)->
+            ->setTo("a_1300@mail.ru")
             ->setBody(
                 '<html>' .
                 '<head></head>' .
                 '<body>' .
-                '<p>Для подтверждения регистрации на сайте нажмите <a href="' . $confirmPath . '?hash_code=' . $hash . '&type=reg&id=' .$userId. '">сюда</a></p>' .
+                '<p>Для подтверждения регистрации на сайте нажмите <a href="' . $confirmPath . '?hash_code=' . $hash . '&type=reg&id=' . $userId . '">сюда</a></p>' .
                 '</body>' .
                 '</html>',
                 'text/html'
@@ -356,13 +337,17 @@ class Helper
         $mailer->send($message);
     }
 
-
+    /**Add new record with openid information about user
+     * @param $socialData
+     * @param $country
+     * @param $user
+     * @return mixed
+     */
     public static function addNewOpenIdData($socialData, $country, $user)
     {
         $em = self::getContainer()->get('doctrine')->getManager();
         $provider = $em->getRepository(self::$_tableProvider)
             ->findOneByName($socialData['network']);
-
         $openId = new Openid();
         $openId->setUid($socialData['uid']);
         $openId->setProfileUrl($socialData['profile']);
@@ -385,7 +370,6 @@ class Helper
     {
         $userInfo = self::getContainer()->get('doctrine')->getRepository(self::$_tableUserInfo)
             ->findOneById($userId);
-
         return $userInfo;
     }
 
@@ -432,18 +416,14 @@ class Helper
         if ($taskWithoutTags == "Placeholder") {
             $task = "Не указана";
         }
-
         $em = self::getContainer()->get('doctrine')->getManager();
         $subject = $em->getRepository(self::$_tableSubject)
             ->findOneById($subjectId);
         $typeOrder = $em->getRepository(self::$_tableTypeOrder)
             ->findOneById($typeTypeOrderId);
-        /*$user = $em->getRepository(self::$_tableUser)
-            ->findOneById($userId);*/
         $statusOrder = $em->getRepository(self::$_tableStatusOrder)
             ->findOneById(1);
-
-        $order = new UserOrder(self::getContainer());
+        $order = new UserOrder(self::getContainer(), "new");
         $order->setTheme($theme);
         $order->setTask($task);
         $order->setDateExpire($dateExpire);
@@ -470,7 +450,7 @@ class Helper
                 $fileDateUpload = $file['dateUpload'];
                 $format = 'Y-m-d H:i:s';
                 $fileDateUpload = self::getFormatDateForInsert($fileDateUpload, $format);
-                self::insertInfoAboutFileInDb($fileSize, $fileName, $fileDateUpload, $order, $em);
+                self::insertInfoAboutOrderFileInDb($fileSize, $fileName, $fileDateUpload, $order, $em);
             }
         }
         $em->flush();
@@ -481,9 +461,7 @@ class Helper
         if (is_dir($filesFolder)) {
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
     public static function insertInfoAboutOrderFileInDb($fileSize, $fileName, $fileDateUpload, $order, $em) {
@@ -610,7 +588,7 @@ class Helper
     }
 
 
-    public static function getCreatedClientsOrdersForGrid($sOper = null, $sField = null, $sData = null, $firstRowIndex, $rowsPerPage, $user, $sortingField, $sortingOrder) {
+    public static function getClientOrdersForGrid($sOper = null, $sField = null, $sData = null, $firstRowIndex, $rowsPerPage, $user, $sortingField, $sortingOrder) {
         $em = self::getContainer()->get('doctrine')->getManager();
         if ($sField != null && $sOper != null && $sData != null) {
             if ($sField == "subject") {
@@ -780,36 +758,38 @@ class Helper
             $em->flush();
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
 
     public static function deleteSelectedAuthorBid($bidId, $user, $order) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $userBid = $em->getRepository(self::$_tableUserBid)
-            ->findOneBy(array('user' => $user, 'is_show_author' => 1, 'id' => $bidId));
+            ->findOneById($bidId);
         if ($userBid) {
             $userBid->setIsShowAuthor(0);
             $userBid->setIsShowClient(0);
-            $bids = $em->getRepository(self::$_tableUserBid)->createQueryBuilder('ub')
+            $nearBid = $em->getRepository(self::$_tableUserBid)->createQueryBuilder('ub')
                 ->innerJoin('ub.user_order', 'uo')
-                ->andWhere('uo.user = :user')
+                ->andWhere('ub.user = :user')
                 ->andWhere('ub.user_order = :order')
                 ->andWhere('ub.is_show_client = 0')
+                ->andWhere('ub.id < :id')
                 ->setParameter('user', $user)
                 ->setParameter('order', $order)
+                ->setParameter('id', $bidId)
+                ->setMaxResults('1')
+                ->orderBy('ub.id', 'DESC')
                 ->getQuery()
                 ->getResult();
-            $bid = reset($bids);
-            $bid->setIsShowClient(1);
+            if ($nearBid) {
+                $bid = $nearBid[0];
+                $bid->setIsShowClient(1);
+            }
             $em->flush();
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
 
@@ -825,9 +805,7 @@ class Helper
             $em->flush();
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
 
@@ -840,9 +818,7 @@ class Helper
             $em->flush();
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
 
@@ -852,15 +828,13 @@ class Helper
             ->findOneBy(array('user' => $user, 'is_show_client' => 1, 'is_show_author' => 0, 'id' => $orderId));
         if ($order) {
             $status = $em->getRepository(self::$_tableStatusOrder)
-                ->findOneByCode('s');
+                ->findOneByCode('sa');
             $order->setIsShowAuthor(1);
             $order->setStatusOrder($status);
             $em->flush();
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
 
@@ -871,9 +845,7 @@ class Helper
         if ($order) {
             return $order;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
 
@@ -884,9 +856,7 @@ class Helper
         if ($order) {
             return $order;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
     /**
@@ -917,7 +887,7 @@ class Helper
     }
 
 
-    public static function getAuthorOrdersForGrid($sOper = null, $sField = null, $sData = null, $firstRowIndex, $rowsPerPage, $sortingField, $sortingOrder, $user) {
+    public static function getClientOrdersForAuthorGrid($sOper = null, $sField = null, $sData = null, $firstRowIndex, $rowsPerPage, $sortingField, $sortingOrder, $user) {
         $em = self::getContainer()->get('doctrine')->getManager();
         if ($sField != null && $sOper != null && $sData != null) {
             if ($sField == "subject_order") {
@@ -1007,34 +977,48 @@ class Helper
         }
         else {
             if (isset($sortingField) && $sortingField != "" && isset($sortingOrder) && $sortingOrder != "") {
-                $orders = $em->getRepository(self::$_tableUserOrder)
+                /*$orders = $em->getRepository(self::$_tableUserOrder)
                     ->findBy(
                         array('is_show_author' => 1, 'is_show_client' => 1),
                         array($sortingField => $sortingOrder),
                         $rowsPerPage,
                         $firstRowIndex
-                    );
+                    );*/
+                $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
+                    ->andWhere('uo.is_show_author = 1')
+                    ->andWhere('uo.is_show_client = 1')
+                    ->andWhere('uo.date_expire > :now')
+                    ->setParameter('now', new \DateTime('now'))
+                    ->setFirstResult($firstRowIndex)
+                    ->setMaxResults($rowsPerPage)
+                    ->getQuery()
+                    ->getResult();
+                //var_dump(count($orders));die;
                 $favoriteOrders = $em->getRepository(self::$_tableFavoriteOrder)
                     ->findByUser($user);
                 foreach($orders as $order) {
                     foreach($favoriteOrders as $favoriteOrder) {
                         if ($order->getId() == $favoriteOrder->getUserOrder()->getId()) {
                             $order->setIsFavorite(1);
+                            break;
                         }
                     }
                 }
-                //var_dump($favoriteOrders);die;
-                /*$orders = $em->getRepository(self::$_tableFavoriteOrder)->createQueryBuilder('fo')
-                    //->leftJoin('fo.user_order', 'uo')
-                    //->select(array('uo'))
-                    //->from(self::$_tableUserOrder, 'uo')
-                    //->andWhere('uo.user = :user')
-                    //->andWhere('ub.user_order = :order')
-                    //->setParameter('user', $user)
-                    //->setParameter('order', $order)
-                    ->getQuery()
-                    ->getResult();
-                var_dump($orders);die;*/
+                //var_dump($user);die;
+                $userId = $user->getId();
+                $query = $em->getConnection()
+                    ->prepare("SELECT * FROM (SELECT ub.user_id AS uid,ub.sum,uo.id AS order_id FROM user_bid AS ub JOIN user_order AS uo ON ub.user_order_id = uo.id JOIN `user` AS u ON ub.user_id = u.id WHERE ub.is_show_author = '1' AND u.id = '$userId' ORDER BY ub.date_bid DESC) AS t GROUP BY order_id");
+                $query->execute();
+                $bids = $query->fetchAll();
+                $countBids = count($bids);
+                foreach($orders as $order) {
+                    for ($i = 0; $i < $countBids; $i++) {
+                        if ($order->getId() == $bids[$i]['order_id']) {
+                            $order->setAuthorLastSumBid($bids[$i]['sum']);
+                            break;
+                        }
+                    }
+                }
             }
             else {
                 $orders = $em->getRepository(self::$_tableUserOrder)
@@ -1046,6 +1030,20 @@ class Helper
                     );;
             }
         }
+        return $orders;
+    }
+
+
+    public static function getClientFavoriteOrdersForAuthorGrid($firstRowIndex, $rowsPerPage, $user) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $orders = $em->getRepository(self::$_tableFavoriteOrder)->createQueryBuilder('fo')
+            ->innerJoin('fo.user_order', 'uo')
+            //->andWhere('uo.user = :user')
+            ->andWhere('uo.is_show_client = 1')
+            ->andWhere('uo.is_show_author = 1')
+            //->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
         return $orders;
     }
 
@@ -1078,12 +1076,14 @@ class Helper
     }
 
 
+    /** Sets new author's bid from page selected order or page all new orders
+     * @param $postData
+     * @param $user
+     * @param $order
+     */
     public static function setAuthorBid($postData, $user, $order) {
         $sum = $postData['fieldSum'];
         $comment = $postData['fieldComment'];
-        if (isset($postData['fieldDay'])) {
-            $day = $postData['fieldDay'];
-        }
         /*else {
             $dateOrderExpire = $order->getDateExpire();
             $dateNow = new \DateTime();
@@ -1095,18 +1095,19 @@ class Helper
         $userBid->setUserOrder($order);
         $userBid->setSum($sum);
         $userBid->setComment($comment);
-        if (isset($day)) {
+        if (isset($postData['fieldDay']) && !empty($postData['fieldDay'])) {
+            $day = $postData['fieldDay'];
             $userBid->setDay($day);
-        }
-        else {
+        } else {
             $userBid->setIsClientDate(1);
         }
         $em = self::getContainer()->get('doctrine')->getManager();
         $em->persist($userBid);
         $bids = $em->getRepository(self::$_tableUserBid)->createQueryBuilder('ub')
             ->innerJoin('ub.user_order', 'uo')
-            ->andWhere('uo.user = :user')
+            ->andWhere('ub.user = :user')
             ->andWhere('ub.user_order = :order')
+            ->andWhere('ub.is_show_client = 1')
             ->setParameter('user', $user)
             ->setParameter('order', $order)
             ->getQuery()
@@ -1115,6 +1116,7 @@ class Helper
             $bid->setIsShowClient(0);
         }
         $em->flush();
+        return true;
     }
 
 
@@ -1131,35 +1133,45 @@ class Helper
         return '/study/web/uploads/avatars/' . $fileName;
     }
 
-
-    public static function confirmSelectedClientBid($user, $bidId, $order, $container) {
+    /** Select author bid and send notice mail to author
+     * @param $user
+     * @param $bidId
+     * @param $order
+     * @param $container
+     * @return bool
+     */
+    public static function selectAuthorBid($user, $bidId, $order, $container) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $bid = $em->getRepository(self::$_tableUserBid)
             ->findOneById($bidId);
         if ($bid) {
             $bid->setIsSelectClient(1);
+            $statusOrder = $em->getRepository(self::$_tableStatusOrder)
+                ->findOneByCode('ca');
+            $order->setStatusOrder($statusOrder);
             $em->flush();
+            $orderNum = $order->getNum();
             $email = $bid->getUser()->getEmail();
+            $path = $container->get('router');
+            $path = 'http://localhost' . $path->generate('secure_author_order', array('num' => $orderNum));
             $subject = "Вас выбрали, подтвердите, что согласны!";
-            $body = "Вы выбраны для выполнения заказа номер " . $order->getNum() . ". Тема - " . $order->getTheme() . ". Заказчик - " . $user->getLogin();
-            self::sendMailToAuthor($email, $subject, $body, $container);
+            $body = "Вы выбраны для выполнения заказа № " . $orderNum . ". Тема - " . $order->getTheme() . ". Заказчик - " . $user->getLogin() . ". <a href='" . $path . "'>Переход на заказ</a>";
+            self::sendMail($email, $subject, $body, $container);
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
 
-    public static function sendMailToAuthor($email, $subject, $body, $container) {
+    public static function sendMail($email, $subject, $body, $container) {
         $mailSender = $container->getParameter('mailSender');
         $mailTitle = $container->getParameter('mailTitle');
         $mailer = $container->get('mailer');
         $message = \Swift_Message::newInstance()
             ->setSubject($subject)
             ->setFrom($mailSender, $mailTitle)
-            ->setTo($email)
-            //->setTo("gzhelka777@mail.ru")
+            //->setTo($email)
+            ->setTo("gzhelka777@mail.ru")
             ->setBody(
                 '<html>' .
                 '<head></head>' .
@@ -1172,20 +1184,23 @@ class Helper
         $mailer->send($message);
     }
 
-
-    public static function cancelSelectedClientBid($bidId) {
+    /** Cancel selected author's bid
+     * @param $bidId
+     * @return bool
+     */
+    public static function cancelSelectedAuthorBid($bidId, $order) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $bid = $em->getRepository(self::$_tableUserBid)
-            ->findOneById($bidId);
-        if ($bid)
-        {
-            $bid->setIsSelectAuthor(0);
+            ->findOneBy(array('id' => $bidId, 'is_show_client' => 1, 'is_confirm_author' => 0, 'is_select_client' => 1));
+        if ($bid) {
+            $bid->setIsSelectClient(0);
+            $statusOrder = $em->getRepository(self::$_tableStatusOrder)
+                ->findOneByCode('sa');
+            $order->setStatusOrder($statusOrder);
             $em->flush();
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
 
@@ -1199,7 +1214,8 @@ class Helper
             ->andWhere('uo.is_show_author = 1')
             ->andWhere('ub.is_show_author = 1')
             ->andWhere('ub.is_show_client = 1')
-            ->groupBy('uo.num')
+            //->groupBy('uo.num')
+            ->groupBy('user_order_id')
             ->setParameter('user', $user)
             ->getQuery()
             ->getResult();
@@ -1225,8 +1241,14 @@ class Helper
         $em->flush();
     }
 
-
-    public static function createAuctionSelectedClientBid($bidId, $order, $auctionPrice, $auctionDay) {
+    /** Create auction bid with client's price and day for author by his made bid
+     * @param $bidId
+     * @param $order
+     * @param $auctionPrice
+     * @param $auctionDay
+     * @return bool
+     */
+    public static function createAuctionByAuthorBid($bidId, $order, $auctionPrice, $auctionDay, $container) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $bid = $em->getRepository(self::$_tableUserBid)
             ->findOneById($bidId);
@@ -1239,14 +1261,19 @@ class Helper
             $auctionBid->setUser($user);
             $em->persist($auctionBid);
             $em->flush();
+            $orderNum = $order->getNum();
+            $email = $user->getEmail();
+            $path = $container->get('router');
+            $path = 'http://localhost' . $path->generate('secure_author_order', array('num' => $orderNum));
+            $subject = "Заказчик предложил вам торг!";
+            $body = "Заказчик предложил вам торг в заказе № " . $orderNum . ". Тема - " . $order->getTheme() . ". Заказчик - " . $user->getLogin() . ". <a href='" . $path . "'>Переход на заказ</a>";
+            self::sendMail($email, $subject, $body, $container);
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
-    public static function authorConfirmSelection($user, $bidId, $mode) {
+    public static function authorConfirmSelection($order, $user, $bidId, $mode, $container) {
         if ($mode == null) {
             return false;
         }
@@ -1257,24 +1284,37 @@ class Helper
             if ($bid) {
                 if ($mode == 'confirm') {
                     $bid->setIsConfirmAuthor(1);
+                    $subject = "Автор согласился выполнять заказ!";
+                    $statusOrder = $em->getRepository(self::$_tableStatusOrder)
+                        ->findOneByCode('w');
+                    $order->setStatusOrder($statusOrder);
                 }
                 else {
                     $bid->setIsConfirmFail(1);
+                    $subject = "Автор отказался выполнять заказ!";
                 }
                 $selectBid = new SelectBid();
                 $selectBid->setUser($user);
                 $selectBid->setUserBid($bid);
                 $em->persist($selectBid);
                 $em->flush();
+                $orderNum = $order->getNum();
+                $email = $bid->getUser()->getEmail();
+                $path = $container->get('router');
+                $path = 'http://localhost' . $path->generate('secure_author_order', array('num' => $orderNum));
+                $body = "<a href='" . $path . "'>Переход на заказ</a>";
+                self::sendMail($email, $subject, $body, $container);
                 return true;
             }
-            else {
-                return false;
-            }
+            return false;
         }
     }
 
-
+    /** Gets the author's bid which client selected
+     * @param $user
+     * @param $order
+     * @return bool
+     */
     public static function getClientSelectedBid($user, $order) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $bid = $em->getRepository(self::$_tableUserBid)
@@ -1315,7 +1355,7 @@ class Helper
         $country = $em->getRepository(self::$_tableCountry)
             ->findOneByCode($countryCode);
         if ($country) {
-            return true;
+            return $country;
         }
         return false;
     }
@@ -1325,5 +1365,121 @@ class Helper
         $em = self::getContainer()->get('doctrine')->getManager();
         $em->persist($userInfo);
         $em->flush();
+    }
+
+    /**
+     * Get user's role by user id
+     * @param $userId
+     */
+    public static function getUserRoleByRoleId($roleId) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $role = $em->getRepository(self::$_tableUserRole)
+            ->findOneById($roleId);
+        if ($role) {
+            return $role;
+        }
+        return false;
+    }
+
+
+    public static function addNewUser($user) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $em->persist($user);
+        $em->flush();
+        return $user;
+    }
+
+
+    public static function getChatMessages($user, $order, $lastId) {
+       $em = self::getContainer()->get('doctrine')->getManager();
+       $messages = $em->getRepository(self::$_tableWebchatMessage)->createQueryBuilder('wm')
+            ->andWhere('wm.id > :lastId')
+            //->andWhere('wm.user = :user')
+            ->andWhere('wm.user_order = :order')
+            //->setParameter('user', $user)
+            ->setParameter('order', $order)
+            ->setParameter('lastId', $lastId)
+            ->getQuery()
+            ->getResult();
+        return $messages;
+    }
+
+
+    public static function addNewWebchatMessage($user, $order, $message) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $webchatMessage = new WebchatMessage();
+        $webchatMessage->setUserOrder($order);
+        $webchatMessage->setUser($user);
+        $webchatMessage->setMessage($message);
+        $em->persist($webchatMessage);
+        $em->flush();
+        return $webchatMessage->getId();
+    }
+
+
+    public static function checkUserAccessForOrder($user, $order) {
+        $statusOrder = $order->getStatusOrder()->getCode();
+        if ($statusOrder == 'w') {
+            $em = self::getContainer()->get('doctrine')->getManager();
+            $bid = $em->getRepository(self::$_tableUserBid)
+                ->findOneBy(array('user' => $user, 'user_order' => $order, 'is_show_client' => 1, 'is_select_client' => 1, 'is_confirm_author' => 1));
+            if ($bid) {
+                return true;
+            }
+        } elseif ($statusOrder == 'sa') {
+            return true;
+        }   elseif ($statusOrder == 'ca') {
+            return true;
+        }
+        return false;
+    }
+
+
+    public static function getUserLinkProfile($order, $role, $container) {
+        if ($role == "author") {
+            $em = self::getContainer()->get('doctrine')->getManager();
+            $bid = $em->getRepository(self::$_tableUserBid)
+                ->findOneBy(array('user_order' => $order, 'is_show_client' => 1, 'is_select_client' => 1, 'is_confirm_author' => 1));
+            if ($bid) {
+                $user = $bid->getUser();
+                $login = $user->getLogin();
+                $authorAvatar = $user->getAvatar();
+                $authorId = $user->getId();
+                $pathAvatar = Helper::getFullPathToAvatar($authorAvatar);
+                $url = $container->get('router')->generate('secure_author_action', array('type' => 'view_author_profile', 'id' => $authorId));
+            }
+            else {
+                return null;
+            }
+        }
+        else {
+            $login = $order->getUser()->getLogin();
+            $clientAvatar = $order->getUser()->getAvatar();
+            $pathAvatar = Helper::getFullPathToAvatar($clientAvatar);
+            $clientId = $order->getUser()->getId();
+            $url = $container->get('router')->generate('secure_client_action', array('type' => 'view_client_profile', 'id' => $clientId));
+        }
+        $link = "<img src='$pathAvatar' align='middle' alt='Аватар' width='110px' height='auto' class='thumbnail'><a href='$url' class='label label-primary'>$login</a>";
+        return $link;
+    }
+
+
+    public static function generateNewPassForRecovery($userEmail) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $user = $em->getRepository(self::$_tableUser)
+            ->findOneByEmail($userEmail);
+        if ($user) {
+            $userSalt = $user->getSalt();
+            $unEncodePassword = self::getRandomValue(3);
+            $encodePassword = self::getRegPassword($unEncodePassword, $userSalt);
+            $hashCode = self::getRandomValue(15);
+            $user->setHash($hashCode);
+            $user->setRecoveryPassword($encodePassword);
+            $em->flush();
+            $user->setHash($hashCode);
+            $user->setUnEncodePass($unEncodePassword);
+            return $user;
+        }
+        return false;
     }
 }

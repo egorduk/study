@@ -17,6 +17,7 @@
                 color : red;
             }
         </style>
+        {% form_theme formLogin "TwigBundle::layout.html.twig" %}
         <div id="block-form-login">
             <span id="block-error">{{ errorData }}</span>
             {{ form_start(formLogin) }}
@@ -42,6 +43,9 @@
                 </div>
             </div>
             {{ form_end(formLogin) }}
+        </div>
+        <div>
+            <p><a href="{{ path('recovery_password') }}">Забыли пароль?</a></p>
         </div>
         <div id="block-openid">
             <p>Войти с помощью:</p>

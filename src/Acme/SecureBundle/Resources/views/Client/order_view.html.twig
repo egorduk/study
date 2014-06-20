@@ -1,7 +1,5 @@
 {% extends "AcmeSecureBundle::layout_client.html.twig" %}
-
-{% block title "View order" %}
-
+{% block title "Просмотр созданных заказов" %}
     {% block content %}
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
@@ -10,15 +8,17 @@
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.fmatter.js') }}"></script>
-        <div class="container">
+        <div class="">
             <style type="text/css">
                 .alt-row {
                     background-color: #f3f3f3;
                     background-image: none;
                 }
-                .offset-margin-right {
-                    float: right;
-                    margin-right: -200px;
+                #help-popover {
+                    cursor: pointer;
+                }
+                .popover {
+                    max-width: none;
                 }
                 .ui-jqgrid .ui-jqgrid-htable th div {
                     height: 21px;
@@ -80,7 +80,7 @@
                     display: none;
                 }
             </style>
-            <div class="row offset-margin-right">
+            <div class="">
                 <table id="listOrders"></table>
                 <div id="pagerOrders"></div>
                 <div id="dialog-configure-order" title="Управление заказом">
@@ -135,13 +135,12 @@
                                 {name:'is_show_author',index:'is_show_author',key:true,search:false,hidden:true}
                             ],
                             pager: $('#pagerOrders'),
-                            toolbar: [true,'top'],
                             rowNum: 20,
                             rowList: [20,50],
                             viewrecords: true,
                             hidegrid: false,
-                            caption: 'Таблица заказов',
-                            height: '450',
+                            caption: 'Таблица созданных заказов',
+                            height: '650',
                             altRows: true,
                             altclass:'alt-row',
                             loadComplete : function() {
@@ -337,6 +336,7 @@
                                         });
                                     }
                                 });
+                                //$(".ui-widget-content td").removeAttr('title');
                                 var grids = grid.getDataIDs();
                                 var gridsLength = grids.length;
                                 for (var i = 0; i < gridsLength; i++) {
@@ -358,12 +358,13 @@
                                     //var num = rowData['num'];
                                     num = $("tr.jqgrow#" + rowid).find('td').eq(1).attr('title');
                                     var url = "{{ path("secure_client_order", {'num': 'num'}) }}";
-                                    //location.href = url.replace("num", num);
+                                    location.href = url.replace("num", num);
                                 }
                             }
-                        }).navGrid('#pagerOrders',{view:false, search:true, del:false, add:false, edit:false, refresh:true},
+                        }).navGrid('#pagerOrders',{view:false,search:true,del:false,add:false,edit:false,refresh:true,searchtext:'Поиск',refreshtext:'Обновить'},
                                 {},{},{},{closeOnEscape:true, multipleSearch:false, closeAfterSearch:true},{}
                         );
+                        grid.setCaption('Таблица новых заказов ' + '<span id="help-popover" class="icon-help-circled" data-container="body" data-trigger="click" data-placement="bottom"></span>');
                         var task = $("#task"), newDateExpire = $("#new_date_expire");
                         function getTinyTrimText() {
                             var tm = tinyMCE.get(0);
@@ -402,14 +403,23 @@
                                 controlManager.setActive(element, false);
                             });*/
                         });
-                        $("#t_listOrders").height(60);
-                        $("#t_listOrders").append('<div id="">Для поиска нажмите на </div><div id="">Для сброса результата поиска нажмите на </div><div id="">Для обновления таблицы нажмите на </div>');
-                        $(".default").addClass('form-control');
+                        $(".ui-jqgrid-titlebar").live('mouseenter', function() {
+                            $("#help-popover").popover({
+                                html : true,
+                                content : function() {
+                                    return "Для поиска нажмите на <div style=\"display: inline-block\"><span class=\"ui-icon ui-icon-search\"></span></div></br>" +
+                                            "Для сброса результата поиска нажмите на <div style=\"display: inline-block\"><span class=\"ui-icon ui-icon-arrowreturnthick-1-w\"></span></div></br>" +
+                                            "Для обновления таблицы нажмите на <div style=\"display: inline-block\"><span class=\"ui-icon ui-icon-refresh\"></span></div></br>" +
+                                            "Для удаления заказа нажмите на <div style=\"display: inline-block\"><span class=\"icon-trash-1\"></span></div></br>" +
+                                            "Для скрытия заказа от исполнителей нажмите на <div style=\"display: inline-block\"><span class=\"icon-eye-off\"></span></div></br>" +
+                                            "Для изменения задания/срока нажмите на <div style=\"display: inline-block\"><span class=\"icon-cogs\"></span></div>";
+                                }
+                            });
+                        });
                     });
                 </script>
             </div>
             <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-datepicker.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/js/locales/bootstrap-datepicker.ru.js') }}"></script>
-            <a href="{{ path('secure_client_index') }}">Главная</a>
         </div>
     {% endblock %}

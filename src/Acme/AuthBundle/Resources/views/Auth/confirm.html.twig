@@ -1,18 +1,56 @@
 {% extends "AcmeAuthBundle::layout.html.twig" %}
-
-{% block title "Confirm Password" %}
-
-{% block content_header '' %}
-
+{% block title "Подтверждение с помощью Email" %}
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="span2 centred">
-                {{ msgError }}
-                {% if viewLink %}
-                    <p>Теперь вы можете <a href="{{ path('login') }}">зайти</a> в систему</p>
-                {% endif %}
-            </div>
+    <link href="{{ asset('bundles/css/window.css') }}" rel="stylesheet" />
+    <style>
+        .Message {
+            position: relative;
+        }
+        .Message-body {
+            font-size: 18px;
+        }
+        a {
+            color: blue;
+        }
+    </style>
+    <div class="row">
+        <div class="col-xs-1">
+        </div>
+        <div class="col-xs-8">
+            {% if (showSuccessWindow) %}
+                <div class="row">
+                    <div id="modal-window">
+                        <div id="success-window">
+                            <div class="Message Message--green" id="js-timer">
+                                <div class="Message-icon">
+                                    <i class="fa fa-check"></i>
+                                </div>
+                                <div class="Message-body">
+                                    <p align="center">Успешно!</p>
+                                    <p align="center">Теперь вы можете <a href="{{ path('login') }}">зайти</a> в систему</p>
+                                </div>
+                                <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="row">
+                    <div id="modal-window">
+                        <div id="error-window">
+                            <div class="Message Message--red" id="js-timer">
+                                <div class="Message-icon">
+                                    <i class="icon-cancel-6"></i>
+                                </div>
+                                <div class="Message-body">
+                                    <p align="center">Ошибка!</p>
+                                </div>
+                                <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

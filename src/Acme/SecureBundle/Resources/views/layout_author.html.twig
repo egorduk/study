@@ -1,26 +1,27 @@
 {% extends "TwigBundle::layout.html.twig" %}
-
 {% block head %}
     {% block stylesheets %}
-        <link href="{{ asset('bundles/css/bootstrap.css') }}" rel="stylesheet" />
-        <link href="{{ asset('bundles/css/bootstrap-theme.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/css/window.css') }}" rel="stylesheet" />
         <link href="{{ asset('bundles/css/select2.css') }}" rel="stylesheet" />
         <link href="{{ asset('bundles/css/fontello.css') }}" rel="stylesheet" charset="UTF-8"/>
     {% endblock %}
     {% block javascripts %}
-        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <!--<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>-->
+        <script type="text/javascript" src="{{ asset('bundles/js/jquery-2.1.0.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jquery-ui-1.10.4.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jquery-migrate-1.0.0.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/bootstrap.js') }}"></script>
-        <script src="{{ asset('bundles/js/tinymce/tiny_mce.js') }}"></script>
-        <script src="{{ asset('bundles/js/select2.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/tinymce/tiny_mce.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/select2.min.js') }}"></script>
     {% endblock %}
 {% endblock %}
 {% block title '' %}
 {% block header %}
     <div class="row">
-        <div class="col-md-12">
-            <p align="center">HEADER</p>
+        <div class="col-md-12" style="height:50px">
+            <p align="center"></p>
         </div>
     </div>
 {% endblock %}
@@ -107,17 +108,17 @@
                                 <li>
                                     <a class="accordion-toggle" href="{{ path('secure_author_orders', {'type': 'new'}) }}">Новые</a>
                                 </li>
-                                <li>
-                                    <a class="accordion-toggle" href="">С моими ставками</a>
+                                <!--<li>
+                                    <a class="accordion-toggle" href="{{ path('secure_author_orders', {'type': 'bid'}) }}">Оцененные</a>
                                 </li>
                                 <li>
                                     <a class="accordion-toggle" href="">Завершенные</a>
                                 </li>
                                 <li>
                                     <a class="accordion-toggle" href="">На выполнении</a>
-                                </li>
+                                </li>-->
                                 <li>
-                                    <a class="accordion-toggle" href="">Избранные</a>
+                                    <a class="accordion-toggle" href="{{ path('secure_author_orders', {'type': 'favorite'}) }}">Избранные</a>
                                 </li>
                             </ul>
                         </div>
@@ -153,8 +154,8 @@
 {% endblock %}
 {% block footer %}
     <div class="row">
-        <div class="col-md-12">
-            <p align="center">FOOTER</p>
+        <div class="col-md-12" style="height:100px">
+            <p align="center"></p>
         </div>
     </div>
 {% endblock %}

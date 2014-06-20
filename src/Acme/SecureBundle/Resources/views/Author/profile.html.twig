@@ -1,21 +1,15 @@
 {% extends "AcmeSecureBundle::layout_author.html.twig" %}
 {% block title "Профиль исполнителя" %}
     {% block content %}
-        {% include "PunkAveFileUploaderBundle:Default:templates.html.twig" %}
         <div class="container">
-            <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.css') }}" />
-            <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
             <style>
-                ul li{
-                    color: red;
-                }
                 .reset-margin-left{
                     padding-left: 0px;
                 }
                 .thumbnail-image{
                     padding-top: 20px;
                 }
-                #dialog-message-success-save {
+                /*#dialog-message-success-save {
                     display: none;
                 }
                 #dialog-message-success-save p .icon-ok-6 {
@@ -26,13 +20,20 @@
                     float: left;
                     margin-top: 15px;
                     margin-left: 25px;
+                }*/
+                .row label.required:after {
+                    content: "*";
+                }
+                .Message {
+                    position: relative;
+                }
+                .Message-body {
+                    font-size: 18px;
                 }
             </style>
             {% if (formProfile == null) %}
                 <div class="row">
-                    <div  class="col-xs-3">
-                    </div>
-                    <div  class="col-xs-5">
+                    <div  class="col-xs-5 col-xs-offset-4">
                         <p>Ваш ID: {{ user.id }}</p>
                         <hr style="border:solid 1px black">
                         <p>Ваш ник: {{ user.login }}</p>
@@ -64,9 +65,28 @@
                 </div>
             {% else %}
                 <div class="row">
-                    <div class="col-xs-2">
-                    </div>
-                    <div class="col-xs-7">
+                    {% if (showWindow) %}
+                        <div class="row">
+                            <div id="modal-window">
+                                <div id="success-window">
+                                    <div class="Message Message--green" id="js-timer">
+                                        <div class="Message-icon">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                        <div class="Message-body">
+                                            <p align="center">Данные сохранены!</p>
+                                        </div>
+                                        <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="row">
+                    {% form_theme formProfile "TwigBundle::layout.html.twig" %}
+                    {% include "PunkAveFileUploaderBundle:Default:templates.html.twig" %}
+                    <div class="col-xs-6 col-xs-offset-3">
                     {{ form_start(formProfile) }}
                     {{ form_label(formProfile.fieldUsername) }}
                     {{ form_errors(formProfile.fieldUsername) }}
@@ -135,15 +155,9 @@
                     </div>
                 </div>
             {% endif %}
-            <div id="dialog-message-success-save" title="Уведомление">
-                <p>
-                    <span class="icon-ok-6" style="float:left;"></span>
-                    <span class="dialog-text-message">Данные успешно сохранены!</span>
-                </p>
-            </div>
             <script>
                 $(document).ready(function() {
-                    $.fn.button.noConflict();
+                    //$.fn.button.noConflict();
                     function format(state) {
                         return "<img title='" + state.text + "' class='flag' src='{{ asset('bundles/images/flags/') }}" + state.id.toLowerCase() + ".png'/>";
                     }
@@ -167,17 +181,16 @@
                             }
                         });
                     {% endif %}
-                    {% if (showWindow == 1) %}
-                        $("#dialog-message-success-save").dialog({
-                            modal: true,
-                            resizable: false,
-                            height: 150,
-                            width: 400,
-                            dialogClass: 'class-dialog-confirm-selection'
+                    {% if (showWindow) %}
+                        function closeMessage(el) {
+                            el.addClass('is-hidden');
+                        }
+                        $('.js-messageClose').on('click', function(e) {
+                            closeMessage($(this).closest('.Message'));
                         });
                         setTimeout(function() {
-                            $("#dialog-message-success-save").dialog('close');
-                        }, 1500);
+                            closeMessage($('#js-timer'));
+                        }, 3000);
                     {% endif %}
                 });
             </script>

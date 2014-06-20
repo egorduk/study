@@ -1,19 +1,65 @@
 {% extends "AcmeAuthBundle::layout.html.twig" %}
-
-{% block title "Recovery Password" %}
-
-{% block content_header '' %}
-
+{% block title "Восстановление пароля" %}
 {% block content %}
+    <link href="{{ asset('bundles/css/window.css') }}" rel="stylesheet" />
+    <style>
+        .Message {
+            position: relative;
+        }
+        .Message-body {
+            font-size: 18px;
+        }
+    </style>
     <div class="container">
+            <div class="row">
+                {% if (showWindow) %}
+                <div id="modal-window" style="margin-right:650px">
+                    <div id="success-window">
+                        <div class="Message Message--green" id="js-timer">
+                            <div class="Message-icon">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="Message-body">
+                                <p align="center">Новый пароль выслан! Проверьте ваш Email!</p>
+                            </div>
+                            <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
         <div class="row">
-            <div class="span2 centred">
+            {% form_theme formRecovery "TwigBundle::layout.html.twig" %}
+            <div class="col-md-3 col-md-offset-1">
                 {{ form_start(formRecovery) }}
-                    {{ form_errors(formRecovery) }}
-                        {{ form_row(formRecovery.fieldEmail) }}
+                {{ form_label(formRecovery.fieldEmail) }}
+                {{ form_errors(formRecovery.fieldEmail) }}
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-mail-8"></i></span>
+                    {{ form_widget(formRecovery.fieldEmail) }}
+                </div>
+                <div class="input-group">
+                    <label for="formRecovery_recovery" class="btn btn-success"><span class="icon-ok">&nbspВосстановить пароль</span></label>
+                    {{ form_widget(formRecovery.recovery) }}
+                </div>
                 {{ form_end(formRecovery) }}
-                {{ msgSuccess }}
             </div>
         </div>
+        <script>
+            $(document).ready(function() {
+                {% if (showWindow) %}
+                    function closeMessage(el) {
+                        el.addClass('is-hidden');
+                    }
+                    $('.js-messageClose').on('click', function(e) {
+                        closeMessage($(this).closest('.Message'));
+                    });
+                    setTimeout(function() {
+                        closeMessage($('#js-timer'));
+                        //document.location.href = "{{ path("login") }}";
+                    }, 3000);
+                {% endif %}
+            });
+        </script>
     </div>
 {% endblock %}

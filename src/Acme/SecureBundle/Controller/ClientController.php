@@ -41,7 +41,7 @@ class ClientController extends Controller
     {
         //throw new NotFoundHttpException('Sorry not existing!');
         $userId = $this->get('security.context')->getToken()->getUser();
-        $userId = 1;
+        //$userId = 1;
         //$userRole = $this->get('security.context')->getToken()->getRoles();
         $session = $request->getSession();
         $sessionCreated = $session->getMetadataBag()->getCreated();
@@ -69,7 +69,7 @@ class ClientController extends Controller
     {
         if ($type == "view" || $type == "edit") {
             $userId = $this->get('security.context')->getToken()->getUser();
-            $userId = 1;
+            //$userId = 1;
             $user = Helper::getUserById($userId);
             $userInfo = $user->getUserInfo();
             $showWindow = false;
@@ -127,7 +127,7 @@ class ClientController extends Controller
     {
         if ($type == "view" || $type == "create" || $type == "delete" || $type == "hide" || $type == "configure" || $type == "show") {
             $userId = $this->get('security.context')->getToken()->getUser();
-            $userId = 1;
+           // $userId = 1;
             $user = Helper::getUserById($userId);
         }
 
@@ -136,18 +136,15 @@ class ClientController extends Controller
             $formOrder = $this->createForm(new CreateOrderForm(), $createOrderValidate);
             $formOrder->handleRequest($request);
             $showWindow = false;
-
             $session = $request->getSession();
             $sessionFolderFiles = $session->get("folderFiles");
             if (isset($sessionFolderFiles)) {
                 $folderFiles = $sessionFolderFiles;
-            }
-            else {
+            } else {
                 $folderFiles = "non_" . Helper::getRandomValue(5);
                 $session->set("folderFiles", $folderFiles);
                 $session->save();
             }
-
             if ($request->isMethod('POST')) {
                 if ($formOrder->get('create')->isClicked()) {
                     if ($formOrder->isValid()) {
@@ -160,7 +157,6 @@ class ClientController extends Controller
                     }
                 }
             }
-
             return $this->render(
                 'AcmeSecureBundle:Client:order_add.html.twig', array('formOrder' => $formOrder->createView(), 'showWindow' => $showWindow, 'folderFiles' => $folderFiles)
             );
@@ -171,7 +167,6 @@ class ClientController extends Controller
                 //$response->headers->set('Content-Type', 'application/json');
                 //return $response;
                 //$response->setStatusCode(Response::HTTP_NOT_FOUND);
-                //$user = Helper::getUserById($userId);
                 $postData = $request->request->all();
                 $curPage = $postData['page'];
                 $rowsPerPage = $postData['rows'];
@@ -186,7 +181,7 @@ class ClientController extends Controller
                 }
                 $countOrders = Helper::getCountOrdersForClientGrid($user);
                 $firstRowIndex = $curPage * $rowsPerPage - $rowsPerPage;
-                $orders = Helper::getCreatedClientsOrdersForGrid($sOper, $sField, $sData, $firstRowIndex, $rowsPerPage, $user, $sortingField, $sortingOrder);
+                $orders = Helper::getClientOrdersForGrid($sOper, $sField, $sData, $firstRowIndex, $rowsPerPage, $user, $sortingField, $sortingOrder);
                 $response = new Response();
                 $response->total = ceil($countOrders / $rowsPerPage);
                 $response->records = $countOrders;
@@ -252,11 +247,9 @@ class ClientController extends Controller
                 $orderId = $request->request->get('orderId');
                 $isHide = Helper::hideOrderFromAuthor($orderId, $user);
                 if ($isHide) {
-                    return new Response(json_encode(array('action' => 'true')));
+                    return new Response(json_encode(array('action' => true)));
                 }
-                else {
-                    return  new Response(json_encode(array('action' => 'false')));
-                }
+                return  new Response(json_encode(array('action' => false)));
             }
         }
         elseif ($type == "show") {
@@ -264,11 +257,9 @@ class ClientController extends Controller
                 $orderId = $request->request->get('orderId');
                 $isShow = Helper::showOrderForAuthor($orderId, $user);
                 if ($isShow) {
-                    return new Response(json_encode(array('action' => 'true')));
+                    return new Response(json_encode(array('action' => true)));
                 }
-                else {
-                    return new Response(json_encode(array('action' => 'false')));
-                }
+                return new Response(json_encode(array('action' => false)));
             }
         }
         elseif ($type == "load_config") {
@@ -280,9 +271,7 @@ class ClientController extends Controller
                     $dateExpire = $order->getDateExpire()->format("d/m/Y");
                     return  new Response(json_encode(array('action' => 'true', 'task' => $task, 'dateExpire' => $dateExpire)));
                 }
-                else {
-                    return new Response(json_encode(array('action' => 'false')));
-                }
+                return new Response(json_encode(array('action' => 'false')));
             }
         }
         elseif ($type == "save_config") {
@@ -295,9 +284,7 @@ class ClientController extends Controller
                     Helper::saveEditedTaskAndDateExpireForOrder($order, $newTask, $newDateExpire);
                     return new Response(json_encode(array('action' => 'true')));
                 }
-                else {
-                    return new Response(json_encode(array('action' => 'false')));
-                }
+                return new Response(json_encode(array('action' => 'false')));
             }
         }
     }
@@ -311,11 +298,42 @@ class ClientController extends Controller
     {
         if (is_numeric($num)) {
             $userId = $this->get('security.context')->getToken()->getUser();
-            $userId = 1;
+            //$userId = 1;
             $user = Helper::getUserById($userId);
             $order = Helper::getOrderByNumForClient($num, $user);
+            $filesOrder = Helper::getFilesForOrder($order);
+            $folder = 'http://localhost/study/web/uploads/attachments/' . $order->getFilesFolder() . '/originals/';
+            $authorLink = Helper::getUserLinkProfile($order, "author", $this->container);
             if (!$order) {
                 return new RedirectResponse($this->generateUrl('secure_client_orders',array('type' => 'view')));
+            }
+            $statusOrder = $order->getStatusOrder()->getCode();
+            if ($statusOrder == 'w') {
+                if ($request->isXmlHttpRequest()) {
+                    $action = $request->request->get('action');
+                    $lastId = $request->request->get('lastId');
+                    if ($action == 'getChats') {
+                        $messages = Helper::getChatMessages($user, $order, $lastId);
+                        $arr = [];
+                        foreach($messages as $index => $msg) {
+                            $arr[$index]['id'] = $msg->getId();
+                            $arr[$index]['msg'] = $msg->getMessage();
+                            $arr[$index]['login'] = $msg->getUser()->getLogin();
+                            $arr[$index]['date'] = $msg->getDateWrite()->format("d.m.Y");
+                            $arr[$index]['time'] = $msg->getDateWrite()->format("H:i:s");
+                            $arr[$index]['role'] = $user->getRole()->getId();
+                        }
+                        return new Response(json_encode(array('messages' => $arr)));
+                    }
+                    elseif ($action == 'sendMessage') {
+                        $message = $request->request->get('text');
+                        $insertId = Helper::addNewWebchatMessage($user, $order, $message);
+                        return new Response(json_encode(array('insertID' => $insertId)));
+                    }
+                }
+                return $this->render(
+                    'AcmeSecureBundle:Client:order_work.html.twig', array('files' => $filesOrder, 'order' => $order, 'author' => $authorLink)
+                );
             }
             if ($request->isXmlHttpRequest()) {
                 $nd = $request->request->get('nd');
@@ -327,22 +345,18 @@ class ClientController extends Controller
                         $fileName = $bid['avatar'];
                         $userLogin = $bid['login'];
                         $userId = $bid['uid'];
-
                         $pathAvatar = Helper::getFullPathToAvatar($fileName);
                         $urlClient = $this->generateUrl('secure_client_action', array('type' => 'view_client_profile', 'id' => $userId));
                         $author = "<img src='$pathAvatar' align='middle' alt='$fileName' width='110px' height='auto' class='thumbnail'><a href='$urlClient' class='label label-primary'>$userLogin</a>";
-
                         $dateBid =  new \DateTime($bid['date_bid']);
                         $dateBid = $dateBid->format("d.m.Y") . "<br><span class='grid-cell-time'>" . $dateBid->format("H:i") . "</span>";
                         $comment = "<span class='grid-cell-comment'>" . $bid['comment'] . "</span>";
                         $response->rows[$index]['id'] = $bid['id'];
-                        $day = $bid['day'];
-                        $day != 0 ? $day = "<span class='grid-cell-day'>" . $bid['day'] . "</span>" : $day = "";
                         $response->rows[$index]['cell'] = array(
                             $bid['id'],
                             $author,
                             $bid['sum'],
-                            $day,
+                            $bid['day'],
                             $bid['is_client_date'],
                             $comment,
                             $dateBid,
@@ -350,25 +364,24 @@ class ClientController extends Controller
                             $bid['is_select_client'],
                         );
                     }
-                    //$response->selected_bid = 1;
                     return new JsonResponse($response);
                 }
                 elseif (isset($action)) {
-                    if ($action == 'confirmBid') {
+                    if ($action == 'selectBid') {
                         $bidId = $request->request->get('bidId');
-                        $actionResponse = Helper::confirmSelectedClientBid($user, $bidId, $order, $this->container);
+                        $actionResponse = Helper::selectAuthorBid($user, $bidId, $order, $this->container);
                         return new Response(json_encode(array('action' => $actionResponse)));
                     }
                     elseif ($action == 'cancelBid') {
                         $bidId = $request->request->get('bidId');
-                        $actionResponse = Helper::cancelSelectedClientBid($bidId);
+                        $actionResponse = Helper::cancelSelectedAuthorBid($bidId, $order);
                         return new Response(json_encode(array('action' => $actionResponse)));
                     }
                     elseif ($action == 'auctionBid') {
                         $bidId = $request->request->get('bidId');
                         $auctionPrice = $request->request->get('auctionPrice');
                         $auctionDay = $request->request->get('auctionDay');
-                        $actionResponse = Helper::createAuctionSelectedClientBid($bidId, $order, $auctionPrice, $auctionDay);
+                        $actionResponse = Helper::createAuctionByAuthorBid($bidId, $order, $auctionPrice, $auctionDay, $this->container);
                         return new Response(json_encode(array('action' => $actionResponse)));
                     }
                     elseif ($action == 'hideBid') {
@@ -377,14 +390,12 @@ class ClientController extends Controller
                         if ($isHide) {
                             return new Response(json_encode(array('action' => true)));
                         }
-                        else {
-                            return  new Response(json_encode(array('action' => false)));
-                        }
+                        return  new Response(json_encode(array('action' => false)));
                     }
                 }
             }
             return $this->render(
-                'AcmeSecureBundle:Client:order_select.html.twig', array('order' => $order)
+                'AcmeSecureBundle:Client:order_select.html.twig', array('order' => $order, 'files' => $filesOrder, 'folder' => $folder)
             );
         }
         else {

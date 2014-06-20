@@ -152,6 +152,14 @@ class User extends EntityRepository implements UserInterface, \Serializable
     protected $link_favorite_user;
 
 
+    /**
+     * @ORM\OneToMany(targetEntity="Acme\SecureBundle\Entity\WebchatMessage", mappedBy="user")
+     **/
+    protected $link_webchat_user;
+
+    private $unEncodePass = "";
+
+
     public function __construct()
     {
         $this->date_reg = new \DateTime();
@@ -168,6 +176,7 @@ class User extends EntityRepository implements UserInterface, \Serializable
         $this->link_author_file = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_user_bid = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_select_user = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->link_webchat_user = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_favorite_user = new \Doctrine\Common\Collections\ArrayCollection();
         $this->is_ban = 0;
         $this->date_confirm_recovery = Helper::getFormatDateForInsert("0000-00-00 00:00:00", "Y-m-d H:i:s");
@@ -394,5 +403,13 @@ class User extends EntityRepository implements UserInterface, \Serializable
             $this->password,
             $this->email
             ) = unserialize($serialized);
+    }
+
+    public function setUnEncodePass($pass) {
+        $this->unEncodePass = $pass;
+    }
+
+    public function getUnEncodePass() {
+        return $this->unEncodePass;
     }
 }

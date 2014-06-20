@@ -93,6 +93,10 @@ secure_author_order:
   pattern:   /secure/author/order/{num}
   defaults:  { _controller: AcmeSecureBundle:Author:order }
 
+secure_author_action:
+  pattern:   /secure/author/action/{type}/{id}
+  defaults:  { _controller: AcmeSecureBundle:Author:action }
+
 #---------------AuthBundle----------------------------#
 
 unauthorized:

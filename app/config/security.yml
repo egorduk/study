@@ -47,10 +47,15 @@ security:
     access_control:
        # - { path: ^/client/reg, roles: IS_AUTHENTICATED_ANONYMOUSLY }
        # - { path: ^/client/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/client/recovery, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/client/index, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/secure/client/index, roles: IS_AUTHENTICATED_ANONYMOUSLY } #ROLE_CLIENT
-        - { path: ^/secure/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/index, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/recovery, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/auth/*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/client/*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/author/*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/secure/client/*, roles: ROLE_CLIENT }
+        - { path: ^/secure/author/*, roles: ROLE_AUTHOR } #ROLE_CLIENT
+        #- { path: ^/secure/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
     encoders:
         Acme\AuthBundle\Entity\User:

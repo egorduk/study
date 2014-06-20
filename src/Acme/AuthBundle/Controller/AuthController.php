@@ -201,16 +201,10 @@ class AuthController extends Controller
                             $country = Helper::getCountryByCode($countryCode);
                             $userInfo->setCountry($country);
                             Helper::addNewUserInfo($userInfo);
-                            /*$em = $this->getDoctrine()->getManager();
-                            $em->persist($userInfo);
-                            $em->flush();*/
                             $user = new User();
                             $user->setLogin($userLogin);
                             $user->setEmail($userEmail);
-                            $userId = $user->getId();
-                            /*$role = $this->getDoctrine()->getRepository($this->tableUserRole)
-                                ->findOneById(2);*/
-                            $role = Helper::getUserRoleByUserId($userId);
+                            $role = Helper::getUserRoleByRoleId(2);
                             $user->setRole($role);
                             $salt = Helper::getSalt();
                             $password = Helper::getRegPassword($userPassword, $salt);
@@ -219,11 +213,8 @@ class AuthController extends Controller
                             $hashCode = Helper::getRandomValue(15);
                             $user->setHash($hashCode);
                             $user->setUserInfo($userInfo);
-                            $em->persist($user);
-                            $em->flush();
-                            $userId = $user->getId();
-
-                            Helper::sendConfirmationReg($this->container, $userEmail, $userId, $hashCode);
+                            $user = Helper::addNewUser($user);
+                            //Helper::sendConfirmationReg($this->container, $user);
                             $showWindow = true;
                         }
                         else {
@@ -261,17 +252,13 @@ class AuthController extends Controller
                             $userInfo->setIcq($userIcq);
                             $userInfo->setMobilePhone($userMobilePhone);
                             //$countryCode = geoip_country_code_by_name($_SERVER["REMOTE_ADDR"]);
-                            $country = $this->getDoctrine()->getRepository($this->tableCountry)
-                                ->findOneByCode($userCountryCode);
+                            $country = Helper::getCountryByCode($userCountryCode);
                             $userInfo->setCountry($country);
-                            $em = $this->getDoctrine()->getManager();
-                            $em->persist($userInfo);
-                            $em->flush();
+                            Helper::addNewUserInfo($userInfo);
                             $user = new User();
                             $user->setLogin($userLogin);
                             $user->setEmail($userEmail);
-                            $role = $this->getDoctrine()->getRepository($this->tableUserRole)
-                                ->findOneById(1);
+                            $role = Helper::getUserRoleByRoleId(1);
                             $user->setRole($role);
                             $salt = Helper::getSalt();
                             $password = Helper::getRegPassword($userPassword, $salt);
@@ -280,10 +267,8 @@ class AuthController extends Controller
                             $hashCode = Helper::getRandomValue(15);
                             $user->setHash($hashCode);
                             $user->setUserInfo($userInfo);
-                            $em->persist($user);
-                            $em->flush();
-                            $userId = $user->getId();
-                            Helper::sendConfirmationReg($this->container, $userEmail, $userId, $hashCode);
+                            $user = Helper::addNewUser($user);
+                            Helper::sendConfirmationReg($this->container, $user);
                             $showWindow = true;
                         }
                         else {
@@ -315,8 +300,7 @@ class AuthController extends Controller
 
 
     /**
-     * Auth by openID
-     *
+     * Auth by openID provider
      * @Template()
      * @return array
      */
@@ -331,10 +315,12 @@ class AuthController extends Controller
             $captchaError = "";
             if (!isset($socialData['error'])) {
                 $userEmail = $socialData['email'];
-                $isExistsUser = Helper::isExistsUserByEmailAndIsConfirm($userEmail);
+                $session->remove('socialToken');
+                $isExistsUser = Helper::isExistsUserByEmailAndIsConfirmAndIsUnban($userEmail);
                 if ($isExistsUser) {
                     $role = Helper::getUserRoleByEmail($userEmail);
-                    if ($role == 1) {
+                    $roleId = $role->getId();
+                    if ($roleId == 1) {
                         $role = 'ROLE_AUTHOR';
                         $pathRedirect = 'secure_author_index';
                     }
@@ -368,17 +354,13 @@ class AuthController extends Controller
                                     $userInfo = new UserInfo();
                                     //$countryCode = geoip_country_code_by_name($_SERVER["REMOTE_ADDR"]);
                                     $countryCode = 'by';
-                                    $country = $this->getDoctrine()->getRepository($this->tableCountry)
-                                        ->findOneByCode($countryCode);
+                                    $country = Helper::getCountryByCode($countryCode);
                                     $userInfo->setCountry($country);
-                                    $em = $this->getDoctrine()->getManager();
-                                    $em->persist($userInfo);
-                                    $em->flush();
+                                    Helper::addNewUserInfo($userInfo);
                                     $user = new User();
                                     $user->setLogin($userLogin);
                                     $user->setEmail($userEmail);
-                                    $role = $this->getDoctrine()->getRepository($this->tableUserRole)
-                                        ->findOneById(2);
+                                    $role = Helper::getUserRoleByRoleId(2);
                                     $user->setRole($role);
                                     $salt = Helper::getSalt();
                                     $password = Helper::getRegPassword($userPassword, $salt);
@@ -418,49 +400,21 @@ class AuthController extends Controller
         $formRecovery = $this->createForm(new RecoveryForm());
         $clonedFormRecovery = clone $formRecovery;
         $formRecovery->handleRequest($request);
-
-        if ($request->isMethod('POST'))
-        {
-            if ($formRecovery->get('recovery')->isClicked())
-            {
-                if ($formRecovery->isValid())
-                {
+        $showWindow = false;
+        if ($request->isMethod('POST')) {
+            if ($formRecovery->get('recovery')->isClicked()) {
+                if ($formRecovery->isValid()) {
                     $postData = $request->request->get('formRecovery');
                     $userEmail = $postData['fieldEmail'];
-                    $user = Helper::getUserByEmail($userEmail);
-
-                    if ($user)
-                    {
-                        $userId = $user->getId();
-                        $userSalt = $user->getSalt();
-                        $unencodePassword = Helper::getRandomValue(3);
-                        $encodePassword = Helper::getRegPassword($unencodePassword, $userSalt);
-                        $hashCode = Helper::getRandomValue(15);
-
-                        $user->setHash($hashCode);
-                        $user->setRecoveryPassword($encodePassword);
-
-                        $em = $this->getDoctrine()->getManager();
-                        $em->merge($user);
-                        $em->flush();
-
-                        Helper::sendRecoveryPasswordMail($this->container, $userEmail, $userId, $unencodePassword, $hashCode);
-
-                        return array('formRecovery' => $clonedFormRecovery->createView(), 'msgSuccess' => 'Проверьте почту!');
+                    $user = Helper::generateNewPassForRecovery($userEmail);
+                    if ($user) {
+                        $showWindow = true;
+                        Helper::sendRecoveryPasswordMail($this->container, $user);
                     }
-                    else
-                    {
-                        return array('formRecovery' => $clonedFormRecovery->createView(), 'msgSuccess' => 'Проверьте почту!');
-                    }
-                }
-                else
-                {
-                    return array('formRecovery' => $formRecovery->createView(), 'msgSuccess' => '');
                 }
             }
         }
-
-        return array('formRecovery' => $formRecovery->createView(), 'msgSuccess' => '');
+        return array('formRecovery' => $formRecovery->createView(), 'showWindow' => $showWindow);
     }
 
 
@@ -475,52 +429,29 @@ class AuthController extends Controller
         $hashCode = $request->get('hash_code');
         $userId = $request->get('id');
         $type = $request->get('type');
-
         $isCorrectUrl = Helper::isCorrectConfirmUrl($hashCode, $userId, $type);
-
-        if ($isCorrectUrl)
-        {
-                if ($type == "reg")
-                {
+        $showSuccessWindow = false;
+        if ($isCorrectUrl) {
+                if ($type == "reg") {
                     $isExistsUser = Helper::isExistsUserByHashAndByIdAndIsConfirm($userId, $hashCode, 0);
-
-                    if ($isExistsUser)
-                    {
+                    if ($isExistsUser) {
                         $isSuccess = Helper::updateUserAfterConfirmByMail($userId, $hashCode, $type);
-
-                        if ($isSuccess)
-                        {
-                            return array('msgError' => 'Аккаунт активирован!', 'viewLink' => true);
+                        if ($isSuccess) {
+                            $showSuccessWindow = true;
                         }
                     }
-
-                    return array('msgError' => 'Ошибка подтверждения регистрации!', 'viewLink' => false);
                 }
-                elseif ($type == "rec")
-                {
+                elseif ($type == "rec") {
                     $isExistsUser = Helper::isExistsUserByHashAndByIdAndIsConfirm($userId, $hashCode, 1);
-
-                    if ($isExistsUser)
-                    {
+                    if ($isExistsUser) {
                         $isSuccess = Helper::updateUserAfterConfirmByMail($userId, $hashCode, $type);
-
-                        if ($isSuccess)
-                        {
-                            return array('msgError' => 'Новый пароль активирован!', 'viewLink' => true);
+                        if ($isSuccess) {
+                            $showSuccessWindow = true;
                         }
                     }
-
-                    return array('msgError' => 'Ошибка смены пароля!', 'viewLink' => false);
-                }
-                else
-                {
-                    return array('msgError' => 'Ошибка!', 'viewLink' => false);
                 }
         }
-        else
-        {
-            return array('msgError' => 'Ошибка!', 'viewLink' => false);
-        }
+        return array('showSuccessWindow' => $showSuccessWindow);
     }
 
 

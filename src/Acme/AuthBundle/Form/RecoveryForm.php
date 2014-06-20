@@ -16,29 +16,17 @@ class RecoveryForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('fieldEmail', 'text', array('label'=>'Email:', 'required' => true, 'attr' => array('title' => 'Введите Ваш email', 'size' => 20, 'maxlength' => 25, 'placeholder' => 'Введите Email...')))
-                ->add('recovery', 'submit', array('label'=>'Восстановить пароль', 'attr' => array('class' => 'btn btn-success')));
+        $builder->add('fieldEmail', 'text', array('label'=>'Email', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Введите Ваш email', 'size' => 20, 'maxlength' => 25, 'placeholder' => 'Введите Email...')))
+                ->add('recovery', 'submit', array('label'=>'Восстановить пароль', 'attr' => array('class' => 'hidden')));
 
-        $builder->addEventListener(FormEvents::POST_BIND, function(FormEvent $event)
-        {
+        $builder->addEventListener(FormEvents::POST_BIND, function(FormEvent $event) {
             $form = $event->getForm();
-            //$data = $event->getData();
             $email = $form->get('fieldEmail')->getData();
-
-            if ($email != null)
-            {
-                /*if(Helper::isExistsUserLogin($email))
-                {
-                    $form->get('fieldLogin')->addError(new FormError('Такой логин уже используется!'));
-                }*/
-
+            if ($email != null) {
                 $emailConstraint = new EmailConstraint();
                 $container = Helper::getContainer();
-
                 $errors = $container->get('validator')->validateValue($email, $emailConstraint);
-
-                if (count($errors))
-                {
+                if (count($errors)) {
                     $form->get('fieldEmail')->addError(new FormError('Email введен неправильно!'));
                 }
             }

@@ -121,20 +121,26 @@ class UserOrder extends EntityRepository
     private $link_order_file;
 
     /**
-     * @ORM\OneToMany(targetEntity="FavoriteOrder", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="FavoriteOrder", mappedBy="user_order")
      **/
     private $link_favorite_user_order;
 
+    /**
+     * @ORM\OneToMany(targetEntity="WebchatMessage", mappedBy="user_order")
+     **/
+    private $link_webchat_user_order;
+
     private $count_bids;
     private $is_favorite = 0;
+    private $author_last_sum_bid = null;
 
 
     public function __construct($container, $action = null){
         $this->date_create = new \DateTime();
         $this->date_edit = new \DateTime();
-        $this->is_show_author = 0;
+        $this->is_show_author = 1;
         $this->is_show_client = 1;
-        $this->is_favorite = 0;
+        //$this->is_favorite = 0;
         $this->files_dir = "";
         if ($action == "new") {
             $em = $container->get('doctrine')->getManager();
@@ -151,6 +157,7 @@ class UserOrder extends EntityRepository
         $this->link_auction_user_order = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_auction_user = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_favorite_user_order = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->link_webchat_user_order = new \Doctrine\Common\Collections\ArrayCollection();
         $this->count_bids = 0;
     }
 
@@ -328,6 +335,16 @@ class UserOrder extends EntityRepository
     public function getIsFavorite()
     {
         return $this->is_favorite;
+    }
+
+    public function setAuthorLastSumBid($val)
+    {
+        $this->author_last_sum_bid = $val;
+    }
+
+    public function getAuthorLastSumBid()
+    {
+        return $this->author_last_sum_bid;
     }
 
 }

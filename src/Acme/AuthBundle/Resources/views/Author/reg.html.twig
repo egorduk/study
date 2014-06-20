@@ -6,17 +6,17 @@
     <link href="{{ asset('bundles/css/window.css') }}" rel="stylesheet" />
     <script src="{{ asset('bundles/js/select2.min.js') }}"></script>
         <style>
-            ul li{
-                color: red;
-            }
-            .reset-margin-left{
+            /*.reset-margin-left{
                 padding-left: 0px;
-            }
+            }*/
             .Message {
                 position: relative;
             }
             .Message-body {
                 font-size: 18px;
+            }
+            .row label.required:after {
+                content: "*";
             }
         </style>
         {% if (showWindow) %}
@@ -36,6 +36,7 @@
                 </div>
             </div>
         {% endif %}
+    {% form_theme formReg "TwigBundle::layout.html.twig" %}
         <div class="row">
             {{ form_start(formReg) }}
             {{ form_errors(formReg) }}

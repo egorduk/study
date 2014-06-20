@@ -1,0 +1,102 @@
+{% extends "AcmeSecureBundle::layout_client.html.twig" %}
+{% block title "Просмотр заказа" %}
+    {% block content %}
+        <link rel="stylesheet" href="{{ asset('bundles/css/chat/jScrollPane.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/chat/page.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/chat/chat.css') }}" />
+        <script type="text/javascript" src="{{ asset('bundles/js/chat/jquery.mousewheel.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/chat/jScrollPane.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/chat/chat.js') }}"></script>
+        <style>
+            /*.bootstrap-error{
+                border-color: #E9322D!important;
+                box-shadow: 0 0 6px #E9322D!important;
+            }*/
+            .thumbnail {
+                margin-bottom: 7px;
+                margin-left: 45px;
+            }
+            .block-file{
+                border: 1px solid #000000;
+                width: 300px;
+            }
+            .alt-row {
+                background-color: #f3f3f3;
+                background-image: none;
+            }
+            #block-author {
+                width: 200px;
+                text-align: center;
+            }
+            hr {
+                margin: 3px;
+            }
+            .block-theme {
+                font-size: 18px;
+            }
+            .block-num {
+                font-size: 20px;
+                color: green;
+            }
+        </style>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <p class="block-num">Номер заказа: {{ order.num }}</p>
+                    <hr style="border:solid 1px black">
+                    <p class="block-theme">Тема работы: {{ order.theme }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Задание: {{ order.task | raw }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Объем заказа: {{ order.countsheet }} стр.</p>
+                    <hr style="border:solid 1px black">
+                    <p>Оригинальность заказа: {{ order.originality }}%</p>
+                    <hr style="border:solid 1px black">
+                    <p>Предмет: {{ order.subjectorder.childname }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Тип заказа: {{ order.typeorder.name }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Статус заказа: {{ order.statusorder.name }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Дата создания: {{ order.datecreate.format("d.m.Y H:i") }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Выполнение до: {{ order.dateexpire.format("d.m.Y H:i") }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Исполнитель: <div id="block-author">{{ author | raw }}</div></p>
+                    <div>
+                        {% for file in files %}
+                            <div class="block-file">
+                                <p>Файл: {{ file.name }} </p>
+                                <p>Размер: {{ file.size }} </p>
+                                <p>Загружен: {{ file.dateupload.format("d.m.Y H:i") }} </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div id="chatContainer">
+                        <div id="chatTopBar" class="rounded"></div>
+                        <div id="chatLineHolder"></div>
+                        <div id="chatUsers" class="rounded"></div>
+                        <div id="chatBottomBar" class="rounded">
+                            <div class="tip"></div>
+                            <form id="submitForm" method="post" action="">
+                                <input id="chatText" name="chatText" class="rounded form-control" maxlength="255" />
+                                <input type="submit" class="blueButton btn btn-primary" value="Отправить" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function() {
+                document.title = "Просмотр заказа № " + {{ order.num }};
+                //$.fn.button.noConflict();
+            });
+        </script>
+    {% endblock %}

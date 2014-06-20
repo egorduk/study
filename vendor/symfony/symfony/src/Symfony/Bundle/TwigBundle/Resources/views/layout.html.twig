@@ -5,12 +5,27 @@
         <meta http-equiv="Content-Type" content="text/html; charset={{ _charset }}"/>
         <meta name="robots" content="noindex,nofollow" />
         <title>{% block title %}{% endblock %}</title>
-        {% block head %}{% endblock %}
+        <link href="{{ asset('bundles/css/bootstrap.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/css/bootstrap-theme.css') }}" rel="stylesheet" />
+        {% block stylesheets %}{% endblock %}
+        {% block javascripts %}{% endblock %}
     </head>
     <body>
         <div class="container-fluid">
             {% block header %}{% endblock %}
-            {% block body %}{% endblock %}
+            {% block body %}
+                {% block form_errors %}
+                    {% spaceless %}
+                        {% if errors|length > 0 %}
+                            <p class="error-message">
+                                {% for error in errors %}
+                                    <span class="icon-warning" style="color:red">{{ error.message }}</span>
+                                {% endfor %}
+                            </p>
+                        {% endif %}
+                    {% endspaceless %}
+                {% endblock form_errors %}
+            {% endblock %}
             {% block footer %}{% endblock %}
         </div>
     </body>

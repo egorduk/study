@@ -92,8 +92,10 @@ class UserBid extends EntityRepository
         $this->is_show_author = 1;
         $this->is_show_client = 1;
         $this->is_confirm_author = 0;
+        $this->is_confirm_fail = 0;
         $this->is_select_client = 0;
         $this->day = 0;
+        $this->comment = "";
         $this->link_select_user_bid = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -172,14 +174,14 @@ class UserBid extends EntityRepository
         $this->is_client_date = $val;
     }
 
-    public function setIsSelectAuthor($val)
+    public function setIsSelectClient($val)
     {
-        $this->is_select_author = $val;
+        $this->is_select_client = $val;
     }
 
-    public function getIsSelectAuthor()
+    public function getIsSelectClient()
     {
-        return $this->is_select_author;
+        return $this->is_select_client;
     }
 
     public function getUserOrder()

@@ -1,17 +1,20 @@
 {% extends "AcmeSecureBundle::layout_client.html.twig" %}
+    {% block title "Домашняя страница заказчика" %}
     {% block content %}
-        <div class="container">
-            <div class="row">
+        <div class="row">
+            <div class="col-xs-3">
+            </div>
+            <div class="col-xs-2">
                 <p>Ваш ID - {{ userId }}</p>
-                <p>Ваш ник - {{ userLogin }}</p>
-                <p>Ваш статус - {{ userRole }}</p>
+                <hr style="border:solid 1px black">
+                <p>Ник - {{ userLogin }}</p>
+                <hr style="border:solid 1px black">
+                <p>Роль - {{ userRole }}</p>
+                <hr style="border:solid 1px black">
                 <p>Вход в систему - {{ whenLogin }}</p>
+                <hr style="border:solid 1px black">
                 <p>Осталось в системе - {{ remainingTime }}</p>
-                <p><a href="{{ path('secure_client_profile', {'type': 'view'}) }}">Мой профиль</a></p>
-                <p><a href="{{ path('secure_client_settings', {'type': 'view'}) }}">Мои настройки</a></p>
-                <p><a href="{{ path('secure_client_order', {'type': 'create'}) }}">Создать заказ</a></p>
-                <p><a href="{{ path('secure_client_order', {'type': 'view'}) }}">Просмотр моих заказов</a></p>
-                <p><a href="{{ path('logout') }}">Выход</a></p>
+                <hr style="border:solid 1px black">
             </div>
         </div>
     {% endblock %}

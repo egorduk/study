@@ -13,6 +13,9 @@
         .Message-body {
             font-size: 18px;
         }
+        .row label.required:after {
+            content: "*";
+        }
     </style>
     {% if (showWindow) %}
         <div class="row">
@@ -32,6 +35,7 @@
         </div>
     {% endif %}
     <div class="row">
+    {% form_theme formReg "TwigBundle::layout.html.twig" %}
         {{ form_start(formReg) }}
         {{ form_errors(formReg) }}
         {{ form_label(formReg.fieldLogin) }}
@@ -70,7 +74,9 @@
         {% endblock %}
         {% block captcha %}
             <div>
-                {{ captchaError|raw }}
+                {% if (captchaError) %}
+                    <span class="icon-warning" style="color:red">{{ captchaError|raw }}</span>
+                {% endif %}
                 {{ captcha|raw }}
             </div>
         {% endblock %}
@@ -94,7 +100,7 @@
                         });
                         setTimeout(function() {
                             closeMessage($('#js-timer'));
-                            document.location.href = "{{ path("login") }}";
+                            //document.location.href = "{{ path("login") }}";
                         }, 3000);
                     {% endif %}
                 /*}

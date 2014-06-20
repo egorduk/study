@@ -1,7 +1,5 @@
 {% extends "AcmeSecureBundle::layout_author.html.twig" %}
-
-{% block title "Order" %}
-
+{% block title "Просмотр заказа" %}
     {% block content %}
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
@@ -9,17 +7,17 @@
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.fmatter.js') }}"></script>
         <style>
-            .invalid{
+            .bootstrap-error{
                 border-color: #E9322D!important;
                 box-shadow: 0 0 6px #E9322D!important;
             }
-            .popover{
+            /*.popover{
                 position: absolute;
                 top: -20px !important;
                 left: 310px !important;
                 width: 300px;
                 height: 90px;
-            }
+            }*/
             .thumbnail-image{
                 padding-top: 20px;
             }
@@ -45,6 +43,7 @@
             }
             .success{
                 color: green;
+                margin-left: -270px;
             }
             .alt-row {
                 background-color: #f3f3f3;
@@ -74,7 +73,7 @@
                 font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
                 font-style: italic;
             }
-            #blockAuthor {
+            #block-author {
                 width: 200px;
                 text-align: center;
             }
@@ -85,49 +84,75 @@
             .class-dialog-confirm-selection #ui-id-1 {
                 color: blue;
             }
+            #pagerBids {
+                height: 30px;
+            }
+            hr {
+                margin: 3px;
+            }
+            /*.jqgrid-rownum,.ui-th-column {
+                width: 35px;
+            }*/
+            .block-theme {
+                font-size: 18px;
+            }
+            .block-num {
+                font-size: 20px;
+                color: green;
+            }
         </style>
         <div class="container">
             <div class="row">
-                <div id="blockAboutOrder">
-                    <p>Номер заказа: {{ order.num }}</p>
-                    <p>Тема работы: {{ order.theme }}</p>
-                    <p>Задание: {{ order.task | raw }}</p>
-                    <p>Объем работы: {{ order.countsheet }} стр.</p>
-                    <p>Оригинальность работы: {{ order.originality }}%</p>
-                    <p>Предмет: {{ order.subjectorder.childname }}</p>
-                    <p>Тип работы: {{ order.typeorder.name }}</p>
-                    <p>Статус заказа: {{ order.statusorder.name }}</p>
-                    <p>Дата создания заказа: {{ order.datecreate.format("d.m.Y H:i") }}</p>
-                    <p>Выполнение заказа до: {{ order.dateexpire.format("d.m.Y H:i") }}</p>
-                    <p>Заказчик: <div id="blockAuthor">{{ client | raw }}</div></p>
-                    <div>
-                        {% for file in files %}
-                            <div class="block-file">
-                                <p>Файл: {{ file.name }} </p>
-                                <p>Размер: {{ file.size }} </p>
-                                <p>Загружен: {{ file.dateupload.format("d.m.Y H:i") }} </p>
-                            </div>
-                        {% endfor %}
+                <div class="col-md-7">
+                    <div id="blockAboutOrder">
+                        <p class="block-num">Номер заказа: {{ order.num }}</p>
+                        <hr style="border:solid 1px black">
+                        <p class="block-theme">Тема работы: {{ order.theme }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Задание: {{ order.task | raw }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Объем заказа: {{ order.countsheet }} стр.</p>
+                        <hr style="border:solid 1px black">
+                        <p>Оригинальность заказа: {{ order.originality }}%</p>
+                        <hr style="border:solid 1px black">
+                        <p>Предмет: {{ order.subjectorder.childname }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Тип заказа: {{ order.typeorder.name }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Статус заказа: {{ order.statusorder.name }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Дата создания: {{ order.datecreate.format("d.m.Y H:i") }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Выполнение до: {{ order.dateexpire.format("d.m.Y H:i") }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Заказчик: <div id="block-author">{{ client | raw }}</div></p>
+                        <div>
+                            {% for file in files %}
+                                <div class="block-file">
+                                    <p>Файл: {{ file.name }} </p>
+                                    <p>Размер: {{ file.size }} </p>
+                                    <p>Загружен: {{ file.dateupload.format("d.m.Y H:i") }} </p>
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
-                <a href="{{ path('secure_author_index') }}">Главная</a>
-                <a href="{{ path('secure_author_orders', { type: 'new'}) }}">К новым заказам</a>
             </div>
             <div class="row">
-                <div blockAuthorFormBid>
+                <div class="col-md-4 col-md-offset-4">
                     {{ form_start(formBid, {'attr': {'id' : 'formBid'}}) }}
                     <div class="form-group">
                         {{ form_label(formBid.fieldSum) }}
                         {{ form_errors(formBid.fieldSum) }}
                         <div class="input-group">
-                            <span class="input-group-addon"><i class=" icon-rouble"></i></span>
                             {{ form_widget(formBid.fieldSum) }}
+                            <span class="input-group-addon"><i class=" icon-rouble"></i></span>
                         </div>
                         {{ form_label(formBid.fieldDay) }}
                         {{ form_errors(formBid.fieldDay) }}
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="icon-clock-5"></i></span>
                             {{ form_widget(formBid.fieldDay) }}
+                            <span class="input-group-addon"><i class="icon-clock-5"></i></span>
                         </div>
                         {{ form_label(formBid.isClientDate) }}
                         {{ form_errors(formBid.isClientDate) }}
@@ -137,8 +162,8 @@
                         {{ form_label(formBid.fieldComment) }}
                         {{ form_errors(formBid.fieldComment) }}
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
                             {{ form_widget(formBid.fieldComment) }}
+                            <span class="input-group-addon"><i class="icon-pencil-6"></i></span>
                         </div>
                         <br>
                         <div class="input-group">
@@ -147,67 +172,67 @@
                         </div>
                     </div>
                     {{ form_end(formBid) }}
-                </div>
-                <div id="dialog-message-confirm-selection" title="Подтверждение выполнения заказа">
-                    <p>
-                        <span class="icon-help-3" style="float:left;"></span>
-                        Вы согласны успешно и в срок выполнить данный заказ?
-                    </p>
-                </div>
-                <div class="row">
-                    <div blockAuthorBids>
-                        <table id="listBids"></table>
-                        <div id="pagerBids"></div>
+                    <div id="dialog-message-confirm-selection" title="Подтверждение выполнения заказа">
+                        <p>
+                            <span class="icon-help-3" style="float:left;"></span>
+                            Вы согласны успешно и в срок выполнить данный заказ?
+                        </p>
                     </div>
+                </div>
+            </div>
+            <div class="col-md-offset-1">
+                <div blockAuthorBids>
+                    <table id="listBids"></table>
+                    <div id="pagerBids"></div>
                 </div>
             </div>
             <script>
                 $(document).ready(function() {
+                    document.title = "Просмотр заказа №" + {{ order.num }};
                     $.fn.button.noConflict();
-                    var buttonBid = $("#formBid_bid");
-                    var isClientDate = $("#formBid_isClientDate");
-                    var fieldDay = $("#formBid_fieldDay");
-                    var fieldSum = $("#formBid_fieldSum");
-                    var fieldComment = $("#formBid_fieldComment");
+                    var buttonBid = $("#formBid_bid"), isClientDate = $("#formBid_isClientDate"), fieldDay = $("#formBid_fieldDay"), fieldSum = $("#formBid_fieldSum"), fieldComment = $("#formBid_fieldComment");
                     buttonBid.click(function(e) {
                         var formBid = $("#formBid");
-                        /*if (fieldDay.val() == '') {
-                            fieldDay.addClass('has-error');
-                            return false;
+                        var error = false;
+                        if (!isNormalInteger(fieldSum.val())) {
+                            error = true;
+                            fieldSum.addClass('bootstrap-error').tooltip('show');
+                        } else {
+                            fieldSum.removeClass('bootstrap-error').tooltip('hide');
                         }
-                        /*if (fieldSum.val() == '') {
-                            fieldSum.addClass('has-error');
-                            return false;
-                        }*/
-                        $.ajax({
-                            type: 'POST',
-                            data: formBid.serialize(),
-                            success: function(response) {
-                                var responseObject = window.JSON.parse(response);
-                                if (responseObject.response == "valid") {
-                                    $(".error").remove();
-                                    var placeError = formBid.parent().prev();
-                                    if (placeError.hasClass("success")) {
-                                        placeError.removeClass("success");
-                                        placeError.hide();
+                        if (!isNormalInteger(fieldDay.val()) && !isClientDate.prop('checked')) {
+                            error = true;
+                            fieldDay.addClass('bootstrap-error').tooltip('show');
+                        } else {
+                            fieldDay.removeClass('bootstrap-error').tooltip('hide');
+                        }
+                        if (!error) {
+                            $.ajax({
+                                type: 'POST',
+                                data: formBid.serialize(),
+                                success: function(response) {
+                                    var responseObject = window.JSON.parse(response);
+                                    if (responseObject.response == "valid") {
+                                        $(".error").remove();
+                                        formBid.parent().prev().removeClass("success").hide();
+                                        disabledButtonBid(true);
+                                        clearFields();
+                                        grid.trigger('reloadGrid');
+                                        formBid.parent().before("<span class='success icon-ok-6'>&nbspСтавка поставлена!</span>");
+                                        setTimeout(function() {
+                                            formBid.parent().prev().hide();
+                                        }, 3000);
                                     }
-                                    disabledButtonBid(true);
-                                    clearFields();
-                                    grid.trigger('reloadGrid');
-                                    formBid.parent().before("<span class='success'>Ставка поставлена!</span>");
-                                    setTimeout(function() {
-                                        formBid.parent().prev().hide();
-                                    }, 3000);
+                                    else {
+                                        $(".error").remove();
+                                        $.each(responseObject.response, function(index, value) {
+                                            var selector  = "#formBid_" + index;
+                                            $(selector).parent().after("<p class='error'>" + value + "</p>");
+                                        });
+                                    }
                                 }
-                                else {
-                                    $(".error").remove();
-                                    $.each(responseObject.response, function(index, value) {
-                                        var selector  = "#formBid_" + index;
-                                        $(selector).parent().after("<p class='error'>" + value + "</p>");
-                                    });
-                                }
-                            }
-                        });
+                            });
+                        }
                     });
                     if (isClientDate.prop("checked")) {
                         fieldDay.prop('disabled', true);
@@ -216,13 +241,13 @@
                     }
                     isClientDate.change(function() {
                         if($(this).prop("checked")) {
-                            fieldDay.prop('disabled', true);
+                            fieldDay.removeClass('bootstrap-error').prop('disabled', true).tooltip('hide');
                             if (buttonBid.prop('disabled') && fieldSum.val() != "") {
                                 disabledButtonBid(false);
                             }
                         } else {
-                            fieldDay.prop('disabled', false);
-                            fieldDay.val("");
+                            fieldDay.prop('disabled', false).val("");
+                            disabledButtonBid(true);
                         }
                     });
                     if (fieldSum.val() == "" || (fieldDay.val() == "" && !isClientDate.prop("checked"))) {
@@ -255,16 +280,17 @@
                     var grid = $("#listBids");
                     grid.jqGrid({
                         url: {{ path('secure_author_order', { num: order.num }) | json_encode | raw }},
-                        datatype: 'json',
+                        datatype: 'json', cache: true,
                         mtype: 'POST',
-                        colNames:['','Сумма','Дней на выполнение','В срок клиента','Дата ставки','Комментарий','Действия'],
+                        emptyrecords: 'Нет поставленных ставок',
+                        colNames:['','Сумма','Дней на выполнение','В срок заказчика','Дата ставки','Комментарий','Действия'],
                         colModel :[
                             {name:'id',index:'id',search:false,hidden:true},
-                            {name:'sum',index:'sum',width:130,align:'center',resizable:false,editable:false,sortable:false,formatter:'currency',formatoptions:{thousandsSeparator: " ",decimalPlaces:0,suffix:" руб."}},
-                            {name:'day',index:'day',width:200,align:'center',resizable:false,editable:false,sortable:false,formatter:statusDay},
+                            {name:'sum',index:'sum',width:140,align:'center',resizable:false,editable:false,sortable:false,formatter:'currency',formatoptions:{thousandsSeparator: " ",decimalPlaces:0,suffix:" руб."}},
+                            {name:'day',index:'day',width:170,align:'center',resizable:false,editable:false,sortable:false,formatter:statusDay},
                             {name:'is_client_date',index:'is_client_date',width:150,align:'center',resizable:false,editable:false,sortable:false,formatter:statusDate},
                             {name:'date_bid',index:'date_bid',width:150,align:'center',resizable:false,editable:false,sortable:false},
-                            {name:'comment',index:'comment',width:200,align:'center',resizable:false,editable:false,sortable:false,formatter:statusComment},
+                            {name:'comment',index:'comment',width:220,align:'center',resizable:false,editable:false,sortable:false,formatter:statusComment},
                             {name:'action',width:100,align:'center',sortable:false,resize:false,formatter:function() {
                                 return "<div class='refresh-bid' style='margin-left:8px;'>" +
                                         "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Поставить заново' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
@@ -277,8 +303,9 @@
                         rowNum: 100,
                         viewrecords: true,
                         rownumbers: true,
+                        rownumWidth: 40,
                         hidegrid: false,
-                        caption: 'Таблица истории ставок',
+                        caption: 'Таблица поставленных ставок',
                         height: '200',
                         altRows: true,
                         recordtext: "Просмотр ставок {0} - {1}",
@@ -313,55 +340,60 @@
                                 }
                             });
                         }
-                    }).navGrid('#pagerOrders',{view:false, search:false, del:false, add:false, edit:false, refresh:true},
+                    }).navGrid('#pagerBids',{view:false,search:false,del:false,add:false,edit:false,refresh:true,refreshtext:'Обновить'},
                             {},{},{},{},{}
                     );
                     {% if (showDialogConfirmSelection) %}
-                    $("#dialog-message-confirm-selection").dialog({
-                        modal: true,
-                        resizable: false,
-                        height: 230,
-                        width: 410,
-                        dialogClass: 'class-dialog-confirm-selection',
-                        buttons: {
-                            "Согласен": function() {
-                                $.ajax({
-                                    type: 'POST',
-                                    data: 'bidId=' + rowId + '&action=confirmSelection',
-                                    success: function(response) {
-                                        var responseObject = window.JSON.parse(response);
-                                        if (responseObject.action) {
-                                            $("#dialog-message-confirm-selection").dialog("close");
+                        $("#dialog-message-confirm-selection").dialog({
+                            modal: true,
+                            resizable: false,
+                            height: 230,
+                            width: 410,
+                            dialogClass: 'class-dialog-confirm-selection',
+                            buttons: {
+                                "Согласен": function() {
+                                    var rowId = getFirstRowId();
+                                    $.ajax({
+                                        type: 'POST',
+                                        data: 'bidId=' + rowId + '&action=confirmSelection',
+                                        success: function(response) {
+                                            var responseObject = window.JSON.parse(response);
+                                            if (responseObject.action) {
+                                                $("#dialog-message-confirm-selection").dialog("close");
+                                                window.location.reload();
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                                },
+                                "Отказ": function() {
+                                    var rowId = getFirstRowId();
+                                    $.ajax({
+                                        type: 'POST',
+                                        data: 'bidId=' + rowId + '&action=failSelection',
+                                        success: function(response) {
+                                            var responseObject = window.JSON.parse(response);
+                                            if (responseObject.action) {
+                                                $("#dialog-message-confirm-selection").dialog("close");
+                                            }
+                                        }
+                                    });
+                                }
                             },
-                            "Отказ": function() {
-                                var firstRowId = grid.getDataIDs()[0];
-                                var firstRow = $("tr.jqgrow#" + firstRowId);
-                                var rowId = firstRow.attr('id');
-                                $.ajax({
-                                    type: 'POST',
-                                    data: 'bidId=' + rowId + '&action=failSelection',
-                                    success: function(response) {
-                                        var responseObject = window.JSON.parse(response);
-                                        if (responseObject.action) {
-                                            $("#dialog-message-confirm-selection").dialog("close");
-                                        }
-                                    }
-                                });
+                            close: function() {
                             }
-                        },
-                        close: function() {
-                        }
-                    });
+                        });
                     {% endif %}
+                    function getFirstRowId() {
+                        var firstRowId = grid.getDataIDs()[0];
+                        var firstRow = $("tr.jqgrow#" + firstRowId);
+                        var rowId = firstRow.attr('id');
+                        return rowId;
+                    }
                     function statusDate(cellvalue) {
-                        if (cellvalue) {
-                            return ("<span class='icon-plus-6'></span>");
-                        } else {
-                            return ("<span class='icon-minus-4'></span>");
+                        if (cellvalue == "1") {
+                            return ("<span class='icon-check-1'></span>");
                         }
+                        return ("<span class='icon-minus-1'></span>");
                     }
                     function statusDay(cellvalue) {
                         if (cellvalue != 0) {
@@ -374,12 +406,18 @@
                         return ("<span class='grid-cell-comment'>" + cellvalue + "</span>");
                     }
                     function clearFields() {
-                        fieldDay.val("");
+                        fieldDay.val("").prop('disabled', false);
                         fieldSum.val("");
                         fieldComment.val("");
                         isClientDate.prop('checked', false);
-                        fieldDay.prop('disabled', false);
                         buttonBid.prop('disabled', false);
+                    }
+                    function isNormalInteger(str) {
+                        return /^\+?([1-9]\d*)$/.test(str);
+                    }
+                    function getRowId(e) {
+                        var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'), rowId = $tr.attr('id');
+                        return rowId;
                     }
                 });
             </script>
