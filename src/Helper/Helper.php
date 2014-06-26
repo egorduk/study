@@ -596,6 +596,19 @@ class Helper
     }
 
 
+    /*public static function getCountBidOrdersForAuthorGrid() {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
+            ->andWhere('uo.is_show_author = 1')
+            ->andWhere('uo.is_show_client = 1')
+            ->andWhere('uo.date_expire > :now')
+            ->setParameter('now', new \DateTime('now'))
+            ->getQuery()
+            ->getResult();
+        return count($orders);
+    }*/
+
+
     public static function getClientOrdersForGrid($sOper = null, $sField = null, $sData = null, $firstRowIndex, $rowsPerPage, $user, $sortingField, $sortingOrder) {
         $em = self::getContainer()->get('doctrine')->getManager();
         if ($sField != null && $sOper != null && $sData != null) {
@@ -1099,6 +1112,45 @@ class Helper
                 }
             }
         }
+        return $orders;
+    }
+
+
+    public static function getBidOrdersForAuthorGrid($firstRowIndex, $rowsPerPage, $user) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
+            ->select('ub.sum AS curr_sum, uo, ub.date_bid AS date_bid')
+            ->innerJoin('AcmeSecureBundle:UserBid', 'ub')
+            ->andWhere('ub.user = :user')
+            ->andWhere('ub.user_order = uo')
+            ->andWhere('uo.is_show_client = 1')
+            ->andWhere('uo.is_show_author = 1')
+            ->andWhere('ub.is_show_client = 1')
+            ->andWhere('ub.is_show_author = 1')
+            ->andWhere('uo.date_expire > :now')
+            ->groupBy('ub.user_order')
+            ->orderBy('ub.date_bid', 'desc')
+            ->setFirstResult($firstRowIndex)
+            ->setMaxResults($rowsPerPage)
+            ->setParameter('user', $user)
+            ->setParameter('now', new \DateTime('now'))
+            ->getQuery()
+            ->getResult();
+        //var_dump($orders);die;
+        /*$userId = $user->getId();
+        $query = $em->getConnection()
+            ->prepare("SELECT * FROM (SELECT ub.user_id AS uid,ub.sum,uo.id AS order_id FROM user_bid AS ub JOIN user_order AS uo ON ub.user_order_id = uo.id JOIN `user` AS u ON ub.user_id = u.id WHERE ub.is_show_author = '1' AND u.id = '$userId' ORDER BY ub.date_bid DESC) AS t GROUP BY order_id");
+        $query->execute();
+        $bids = $query->fetchAll();
+        foreach($orders as $order) {
+            $userOrder = $order->getUserOrder();
+            foreach($bids as $bid) {
+                if ($userOrder->getId() == $bid['order_id']) {
+                    $userOrder->setAuthorLastSumBid($bid['sum']);
+                    break;
+                }
+            }
+        }*/
         return $orders;
     }
 

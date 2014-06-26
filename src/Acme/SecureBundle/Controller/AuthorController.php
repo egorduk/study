@@ -95,19 +95,14 @@ class AuthorController extends Controller
         $editId = $this->getRequest()->get('editId');
         $fileName = $this->getRequest()->get('file');
         $action = $this->getRequest()->get('action');
-
-        if (preg_match('/^\d+$/', $editId))
-        {
+        if (preg_match('/^\d+$/', $editId)) {
             if ($action == "profile") {
                 if ($fileName){
                     $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'author/' . $editId, 'action' => 'delete'));
-                }
-                else{
+                } else{
                     $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'author/' . $editId));
                 }
-            }
-            elseif ($action == "order") {
-
+            } elseif ($action == "order") {
             }
         }
         return new Response(json_encode(array('action' => 'false')));
@@ -255,6 +250,52 @@ class AuthorController extends Controller
             }
             return $this->render(
                 'AcmeSecureBundle:Author:order_favorite.html.twig', array('showWindow' => $showWindow)
+            );
+        }
+        elseif ($type == "bid") {
+            if ($request->isXmlHttpRequest()) {
+                $postData = $request->request->all();
+                $curPage = $postData['page'];
+                $rowsPerPage = $postData['rows'];
+                $firstRowIndex = $curPage * $rowsPerPage - $rowsPerPage;
+                $orders = Helper::getBidOrdersForAuthorGrid($firstRowIndex, $rowsPerPage, $user);
+                $countOrders = count($orders);
+                //var_dump($countOrders);die;
+                $response = new Response();
+                $response->total = ceil($countOrders / $rowsPerPage);
+                //var_dump($countOrders); die;
+                $response->records = $countOrders;
+                $response->page = $curPage;
+                foreach($orders as $index => $order) {
+                    $task = strip_tags($order[0]->getTask());
+                    $task = stripcslashes($task);
+                    $task = preg_replace("/&nbsp;/", "", $task);
+                    if (strlen($task) >= 20) {
+                        $task = Helper::getCutSentence($task, 45);
+                    }
+                    $dateBid = Helper::getMonthNameFromDate($orders[$index]['date_bid']->format("d.m.Y"));
+                    $dateBid = $dateBid . "<br><span class='gridCellTime'>" . $orders[$index]['date_bid']->format("H:i") . "</span>";
+                    $dateExpire = Helper::getMonthNameFromDate($order[0]->getDateExpire()->format("d.m.Y"));
+                    $dateExpire = $dateExpire . "<br><span class='gridCellTime'>" . $order[0]->getDateExpire()->format("H:i") . "</span>";
+                    $response->rows[$index]['id'] = $order[0]->getId();
+                    $response->rows[$index]['cell'] = array(
+                        $order[0]->getId(),
+                        $order[0]->getNum(),
+                        $order[0]->getSubjectOrder()->getChildName(),
+                        $order[0]->getTypeOrder()->getName(),
+                        $order[0]->getTheme(),
+                        $task,
+                        $dateExpire,
+                        $orders[$index]['curr_sum'],
+                        $dateBid,
+                        "",
+                    );
+                }
+                return new JsonResponse($response);
+
+            }
+            return $this->render(
+                'AcmeSecureBundle:Author:order_bid.html.twig', array('showWindow' => $showWindow)
             );
         }
     }
