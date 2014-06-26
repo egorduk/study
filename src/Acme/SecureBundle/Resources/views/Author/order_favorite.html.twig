@@ -1,0 +1,119 @@
+{% extends "AcmeSecureBundle::layout_author.html.twig" %}
+{% block title "Избранные заказы" %}
+    {% block content %}
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.fmatter.js') }}"></script>
+            <style type="text/css">
+                .alt-row {
+                    background-color: #f3f3f3;
+                    background-image: none;
+                }
+                .ui-jqgrid .ui-jqgrid-htable th div {
+                    height: 21px;
+                }
+                .gridCellTime {
+                    color: blue;
+                }
+                .grid-cell-author-last-bid {
+                    color: #398439;
+                    font-size: 17px;
+                    font-weight: bold;
+                }
+                #pagerOrders {
+                    height: 30px;
+                }
+                .grid-cell-num {
+                    color: black;
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+            </style>
+            <div class="row">
+                <div class="">
+                    <table id="listOrders"></table>
+                    <div id="pagerOrders"></div>
+                </div>
+                <script>
+                $(document).ready(function() {
+                    $.fn.button.noConflict();
+                    var grid = $("#listOrders");
+                    grid.jqGrid({
+                        url: {{ path('secure_author_orders', { type: 'favorite' }) | json_encode | raw }},
+                        datatype: 'json',
+                        mtype: 'POST',
+                        caption: 'Таблица избранных заказов',
+                        recordtext: "Просмотр заказов {0} - {1}",
+                        colNames:['','№ заказа', 'Предмет', 'Тип работы', 'Тема работы', 'Задание', 'Выполнение до', 'Mоя ставка', 'В избранном', 'Действия'],
+                        colModel :[
+                            {name:'id',index:'id',key:true,search:false,resize:false,hidden:true},
+                            {name:'num',index:'num',width:120,align:'center',resizable:false,editable:false,searchrules:{"required":true, "number":true, "maxValue":13},searchoptions:{sopt:['eq','ne','bw','cn']},formatter:customNum},
+                            {name:'subject_order',index:'subject_order',width:170,align:'center',resizable:false, editable:false, searchoptions:{sopt:['eq','ne','bw','cn']}},
+                            {name:'type_order',index:'type_order',width:150,align:'center',resizable:false,editable:false,sortable:false,searchoptions:{sopt:['eq','ne','bw','cn']}},
+                            {name:'theme',index:'theme',width:350,align:'center',resizable:false,editable:false,sortable:false,searchoptions:{sopt:['eq','bw','cn']}},
+                            {name:'task',index:'task',width:350,align:'center',resizable:false, editable:false,sortable:false,searchoptions:{sopt:['eq','bw','cn']}},
+                            {name:'date_expire',index:'date_expire',width:150,align:'center',resizable:false,editable:false,sortable:false,search:false},
+                            {name:'author_last_bid',index:'author_last_bid',width:160,align:'center',resizable:false,editable:false,search:false,sortable:false,formatter:'currency',formatoptions:{defaultValue:'',thousandsSeparator: " ",decimalPlaces:0,suffix:" руб."}},
+                            {name:'date_bid',index:'date_bid',width:150,align:'center',resizable:false,editable:false,search:false,sortable:false},
+                            {name:'action',width:80,align:'center',sortable:false,resize:false,search:false,formatter:function() {
+                                return "<div class='unfavorite-order' style='margin-left:19px;'>" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Из избранных заказов' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<span class='icon-star'></span></div></div>";
+                            }}
+                        ],
+                        pager: $('#pagerOrders'),
+                        rowNum: 15,
+                        rowList: [15,25,35],
+                        sortname: 'date_create',
+                        sortorder: 'desc',
+                        viewrecords: true,
+                        hidegrid: false,
+                        height: 'auto',
+                        altRows: true,
+                        altclass:'alt-row',
+                        loadComplete : function() {
+                            function getRowId(e) {
+                                var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'), rowId = $tr.attr('id');
+                                return rowId;
+                            }
+                            function getRow(a) {
+                                return a.parent().parent();
+                            }
+                            $(".unfavorite-order").click(function(e) {
+                                var rowId = getRowId(e), row = getRow($(this));
+                                if (rowId) {
+                                    $.ajax({
+                                        type: 'POST',
+                                        data: 'orderId=' + rowId + '&action=unfavoriteOrder',
+                                        success: function(response) {
+                                            var resposeObject = window.JSON.parse(response);
+                                            if (resposeObject.action) {
+                                                grid.trigger('reloadGrid');
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        },
+                        onCellSelect: function(rowid, iCol) {
+                            if (iCol != 9) {
+                                num = $("tr.jqgrow#" + rowid).find('td').eq(1).attr('title');
+                                var url = "{{ path("secure_author_order", {'num': 'num'}) }}";
+                                location.href = url.replace("num", num);
+                            }
+                        }
+                    }).navGrid('#pagerOrders',{view:false,search:false,del:false,add:false,edit:false,refresh:true,refreshtext: 'Обновить'},
+                            {},{},{},{},{}
+                    );
+                    function getRow(a) {
+                        return a.parent().parent();
+                    }
+                    function customNum(cellvalue) {
+                        return ("<span class='grid-cell-num'>" + cellvalue + "</span>");
+                    }
+                });
+                </script>
+            </div>
+    {% endblock %}

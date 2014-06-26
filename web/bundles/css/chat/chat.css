@@ -1,0 +1,255 @@
+/* Main chat container */
+
+#chatContainer{
+	width : 600px;
+	position : relative;
+}
+
+
+/* Верхняя панель */
+
+#chatTopBar{
+	height:40px;
+	background:url('../../images/chat/solid_gray.jpg') repeat-x #d0d0d0;
+	border:1px solid #fff;
+	margin-bottom:15px;
+	position:relative;
+	color:#777;
+	text-shadow:1px 1px 0 #FFFFFF;
+}
+
+/*#chatTopBar .name{
+	position:absolute;
+	top:10px;
+	left:40px;
+}
+
+#chatTopBar img{
+	left:9px;
+	position:absolute;
+	top:8px;
+}*/
+
+
+/* Чат */
+
+#chatLineHolder{
+	height : 400px;
+	width : 530px;
+	margin-bottom : 20px;
+}
+
+/*Color of msg*/
+.chat{
+	/*background:url('../img/chat_line_bg.jpg') repeat-x #d5d5d5;*/
+	background : #fbf7a8;
+	min-height : 34px;
+	border : 1px solid #FFFFFF;
+	padding : 8px 6px 4px 10px;
+	position : relative;
+	margin : 0 4px 4px 0;
+}
+
+#chat-client{
+	background : #d993f7;
+}
+
+.chat:last-child,.chattest:last-child{
+	margin-bottom:0;
+}
+
+.chat .text,.chattest .text{
+	color : #000000;
+	display : inline-block;
+	font-size : 17px;
+	font-weight : normal;
+	overflow : hidden;
+    margin-left: 5px;
+	/*vertical-align : baseline;*/
+	width : 430px;
+}
+
+.chat .login,.chattest .login{
+    /*margin-left : -30px;*/
+	font-size:14px;
+	font-weight: bold;
+}
+
+.chat .datetime {
+    font-size : 11px;
+    /*vertical-align:baseline;*/
+}
+
+/* Область пользователя */
+
+
+#chatUsers{
+	background-color:#d0d0d0;
+	height:400px;
+	position:absolute;
+	right:0;
+	top:56px;
+	width:73px;
+	color: black;
+	font-weight: bold;
+}
+
+#chatUsers .user{
+	background:url('../../images/chat/icon-user-50.png') no-repeat 1px 1px #444444;
+	float:left;
+	height:50px;
+	margin:10px 0 0 10px;
+	width:50px;
+}
+
+#chatUsers .user img{
+	display:block;
+	visibility:hidden;
+}
+
+
+/* Нижняя панель */
+
+
+#chatBottomBar{
+	background : url('../../images/chat/solid_gray.jpg') repeat-x #81c8fc;
+	position : relative;
+	padding : 6px;
+}
+
+#chatBottomBar .tip{
+	position:absolute;
+	width:0;
+	height:0;
+	border:10px solid transparent;
+	border-bottom-color:#eeeeee;
+	top:-20px;
+	left:20px;
+}
+
+#chatContainer input{
+	/*background:url('../img/input_bg.jpg') repeat-x #81c8fc;*/
+	height:36px;
+	font:16px Calibri,Arial,sans-serif;
+	color:black;
+	/*text-shadow:1px 1px 0 #E4E4E4;*/
+	padding:0 5px;
+	margin-right:5px;
+	width:235px;
+	outline:none;
+}
+
+
+#submitForm{
+	/*display:none;*/
+}
+
+/* Текстовое поле чата */
+input#chatText{
+	width : 590px;
+}
+
+
+.jspVerticalBar{
+	background:none;
+	width:20px;
+
+}
+
+.jspTrack{
+	background-color:#202020;
+	border:1px solid #111111;
+	width:3px;
+	right:-10px;
+}
+
+.jspDrag {
+	background:url('../../images/chat/slider.png') no-repeat;
+	width:20px;
+	left:-9px;
+	height:20px !important;
+	margin-top:-5px;
+	
+}
+
+.jspDrag:hover{
+	background-position:left bottom;
+}
+
+
+/* Дополнительные стили */
+
+/*a.logoutButton{
+	background-color:#81c8fc;
+	border:1px solid #0c28f3 !important;
+	color:#FFFFFF !important;
+	font-size:12px;
+	padding:5px 9px;
+	position:absolute;
+	right:10px;
+	text-shadow:1px 1px 0 #888;
+	top:7px;
+	-moz-box-shadow:0 0 7px #888 inset;
+	-webkit-box-shadow:0 0 7px #888 inset;
+	box-shadow:0 0 7px #888 inset;
+}
+
+a.logoutButton:hover{
+	text-shadow:1px 1px 0 #888;
+	-moz-box-shadow:0 0 7px #666 inset;
+	-webkit-box-shadow:0 0 7px #666 inset;
+	box-shadow:0 0 7px #666 inset;
+}*/
+
+#chatContainer .blueButton{
+	/*background:url('../../images/chat/button_blue.png') #81c8fc;
+	color:black;
+	display:inline-block;
+	font-size:13px;
+	height:29px;
+	text-align:center;
+	text-shadow:1px 1px 0 rgba(255, 255, 255, 0.4);
+	width:75px;
+	margin:0;
+	cursor:pointer;
+	text-shadow:1px 1px 0 #888;
+	-moz-box-shadow:0 0 7px #888 inset;
+	-webkit-box-shadow:0 0 7px #888 inset;
+	box-shadow:0 0 7px #888 inset;*/
+}
+
+#chatContainer .blueButton:hover{
+	background-position:left bottom;
+}
+
+p.noChats,#chatUsers .count{
+	clear:both;
+	font-size:13px;
+	padding:10px;
+	text-align:center;
+	/*text-shadow:1px 1px 0 #111111;*/
+}
+
+#chatUsers .count{
+	font-size:13px;
+}
+
+.rounded{
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+}
+
+/*#chatErrorMessage{
+	width:100%;
+	top:0;
+	left:0;
+	position:fixed;
+	background-color:#ab0909;
+	border-bottom:1px solid #d32a2a;
+	font-size:23px;
+	padding:16px;
+	text-align:center;
+	color:#fff;
+	text-shadow:1px 1px 0 #940f0f;
+}*/
