@@ -45,6 +45,7 @@ framework:
 services:
     cache:
         class: Doctrine\Common\Cache\ApcCache
+        #save_path: "%kernel.cache_dir%/apc"
 
 # Twig Configuration
 twig:

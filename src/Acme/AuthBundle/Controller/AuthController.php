@@ -190,7 +190,7 @@ class AuthController extends Controller
                     if ($formReg->isValid()) {
                         $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
                         $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
-                        if (!$resp->is_valid) {
+                        if ($resp->is_valid) {
                             $postData = $request->request->get('formReg');
                             $userLogin = $postData['fieldLogin'];
                             $userPassword = $postData['fieldPass'];
@@ -214,7 +214,7 @@ class AuthController extends Controller
                             $user->setHash($hashCode);
                             $user->setUserInfo($userInfo);
                             $user = Helper::addNewUser($user);
-                            //Helper::sendConfirmationReg($this->container, $user);
+                            Helper::sendConfirmationReg($this->container, $user);
                             $showWindow = true;
                         }
                         else {
@@ -238,7 +238,7 @@ class AuthController extends Controller
                     $privateKeyRecaptcha = $this->container->getParameter('privateKeyRecaptcha');
                     $resp = recaptcha_check_answer($privateKeyRecaptcha, $_SERVER["REMOTE_ADDR"], $request->request->get('recaptcha_challenge_field'), $request->request->get('recaptcha_response_field'));
                     if ($formReg->isValid()) {
-                        if (!$resp->is_valid) {
+                        if ($resp->is_valid) {
                             $postData = $request->request->get('formReg');
                             $userLogin = $postData['fieldLogin'];
                             $userPassword = $postData['fieldPass'];

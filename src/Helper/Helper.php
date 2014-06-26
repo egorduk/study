@@ -188,13 +188,14 @@ class Helper
         $unEncodePassword = $user->getUnEncodePass();
         $hashCode = $user->getHash();
         $userId = $user->getId();
+        $userEmail = $user->getEmail();
         //$encodePassword = htmlspecialchars(rawurlencode($encodePassword));
         $mailer = $container->get('mailer');
         $message = \Swift_Message::newInstance()
             ->setSubject('Восстановление пароля в системе')
             ->setFrom($mailSender, $mailTitle)
-            //->setTo($userEmail)
-            ->setTo('a_1300@mail.ru')
+            ->setTo($userEmail)
+            //->setTo('a_1300@mail.ru')
             ->setBody(
                 '<html>' .
                     '<head></head>' .
@@ -320,11 +321,12 @@ class Helper
         $mailer = $container->get('mailer');
         $hash = $user->getHash();
         $userId = $user->getId();
+        $userEmail = $user->getEmail();
         $message = \Swift_Message::newInstance()
             ->setSubject('Подтверждение регистрации в системе')
             ->setFrom($mailSender, $mailTitle)
-            //->setTo($userEmail)->
-            ->setTo("a_1300@mail.ru")
+            ->setTo($userEmail)
+            //->setTo("a_1300@mail.ru")
             ->setBody(
                 '<html>' .
                 '<head></head>' .
@@ -580,10 +582,16 @@ class Helper
         return count($orders);
     }
 
+
     public static function getCountOrdersForAuthorGrid() {
         $em = self::getContainer()->get('doctrine')->getManager();
-        $orders = $em->getRepository(self::$_tableUserOrder)
-            ->findBy(array('is_show_author' => 1));
+        $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
+            ->andWhere('uo.is_show_author = 1')
+            ->andWhere('uo.is_show_client = 1')
+            ->andWhere('uo.date_expire > :now')
+            ->setParameter('now', new \DateTime('now'))
+            ->getQuery()
+            ->getResult();
         return count($orders);
     }
 
@@ -984,16 +992,48 @@ class Helper
                         $rowsPerPage,
                         $firstRowIndex
                     );*/
+                $now = new \DateTime('now');
                 $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
+                    ->innerJoin('uo.status_order', 'so')
                     ->andWhere('uo.is_show_author = 1')
                     ->andWhere('uo.is_show_client = 1')
                     ->andWhere('uo.date_expire > :now')
-                    ->setParameter('now', new \DateTime('now'))
+                    ->andWhere("so.code = 'sa'")
+                    ->orWhere("so.code = 'ca'")
+                    ->orderBy('uo.' . $sortingField, $sortingOrder)
+                    ->setParameter('now', $now)
                     ->setFirstResult($firstRowIndex)
                     ->setMaxResults($rowsPerPage)
                     ->getQuery()
                     ->getResult();
-                //var_dump(count($orders));die;
+                $query = $em->createQuery("SELECT MAX(ub.sum) AS max_sum,uo.id AS order_id FROM AcmeSecureBundle:UserOrder AS uo
+                    JOIN AcmeSecureBundle:UserBid AS ub WITH ub.user_order = uo
+                    WHERE uo.is_show_author = 1 AND uo.is_show_client = 1 AND ub.is_show_author = 1 AND ub.is_show_client = 1 AND uo.date_expire > :now
+                    GROUP BY uo.id");
+                $query->setParameter('now', $now);
+                $maxBids = $query->getResult();
+                foreach($orders as $order) {
+                    foreach($maxBids as $bid) {
+                        if ($order->getId() == $bid['order_id']) {
+                            $order->setMaxSum($bid['max_sum']);
+                            break;
+                        }
+                    }
+                }
+                $query = $em->createQuery("SELECT MIN(ub.sum) AS min_sum,uo.id AS order_id FROM AcmeSecureBundle:UserOrder AS uo
+                    JOIN AcmeSecureBundle:UserBid AS ub WITH ub.user_order = uo
+                    WHERE uo.is_show_author = 1 AND uo.is_show_client = 1 AND ub.is_show_author = 1 AND ub.is_show_client = 1 AND uo.date_expire > :now
+                    GROUP BY uo.id");
+                $query->setParameter('now', $now);
+                $minBids = $query->getResult();
+                foreach($orders as $order) {
+                    foreach($minBids as $bid) {
+                        if ($order->getId() == $bid['order_id']) {
+                            $order->setMinSum($bid['min_sum']);
+                            break;
+                        }
+                    }
+                }
                 $favoriteOrders = $em->getRepository(self::$_tableFavoriteOrder)
                     ->findByUser($user);
                 foreach($orders as $order) {
@@ -1004,7 +1044,6 @@ class Helper
                         }
                     }
                 }
-                //var_dump($user);die;
                 $userId = $user->getId();
                 $query = $em->getConnection()
                     ->prepare("SELECT * FROM (SELECT ub.user_id AS uid,ub.sum,uo.id AS order_id FROM user_bid AS ub JOIN user_order AS uo ON ub.user_order_id = uo.id JOIN `user` AS u ON ub.user_id = u.id WHERE ub.is_show_author = '1' AND u.id = '$userId' ORDER BY ub.date_bid DESC) AS t GROUP BY order_id");
@@ -1027,23 +1066,39 @@ class Helper
                         //array('num' => 'ASC'),
                         $rowsPerPage,
                         $firstRowIndex
-                    );;
+                    );
             }
         }
         return $orders;
     }
 
 
-    public static function getClientFavoriteOrdersForAuthorGrid($firstRowIndex, $rowsPerPage, $user) {
+    public static function getFavoriteOrdersForAuthorGrid($firstRowIndex, $rowsPerPage, $user) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $orders = $em->getRepository(self::$_tableFavoriteOrder)->createQueryBuilder('fo')
             ->innerJoin('fo.user_order', 'uo')
-            //->andWhere('uo.user = :user')
+            ->andWhere('fo.user = :user')
             ->andWhere('uo.is_show_client = 1')
             ->andWhere('uo.is_show_author = 1')
-            //->setParameter('user', $user)
+            ->setParameter('user', $user)
+            ->setFirstResult($firstRowIndex)
+            ->setMaxResults($rowsPerPage)
             ->getQuery()
             ->getResult();
+        $userId = $user->getId();
+        $query = $em->getConnection()
+            ->prepare("SELECT * FROM (SELECT ub.user_id AS uid,ub.sum,uo.id AS order_id FROM user_bid AS ub JOIN user_order AS uo ON ub.user_order_id = uo.id JOIN `user` AS u ON ub.user_id = u.id WHERE ub.is_show_author = '1' AND u.id = '$userId' ORDER BY ub.date_bid DESC) AS t GROUP BY order_id");
+        $query->execute();
+        $bids = $query->fetchAll();
+        foreach($orders as $order) {
+            $userOrder = $order->getUserOrder();
+            foreach($bids as $bid) {
+                if ($userOrder->getId() == $bid['order_id']) {
+                    $userOrder->setAuthorLastSumBid($bid['sum']);
+                    break;
+                }
+            }
+        }
         return $orders;
     }
 
@@ -1170,8 +1225,8 @@ class Helper
         $message = \Swift_Message::newInstance()
             ->setSubject($subject)
             ->setFrom($mailSender, $mailTitle)
-            //->setTo($email)
-            ->setTo("gzhelka777@mail.ru")
+            ->setTo($email)
+            //->setTo("gzhelka777@mail.ru")
             ->setBody(
                 '<html>' .
                 '<head></head>' .
@@ -1391,16 +1446,22 @@ class Helper
 
 
     public static function getChatMessages($user, $order, $lastId) {
+        //$config = new \Doctrine\ORM\Configuration();
+        //$config->setQueryCacheImpl(new \Doctrine\Common\Cache\ApcCache());
+        //$config->setResultCacheImpl(new \Doctrine\Common\Cache\ApcCache());
        $em = self::getContainer()->get('doctrine')->getManager();
        $messages = $em->getRepository(self::$_tableWebchatMessage)->createQueryBuilder('wm')
             ->andWhere('wm.id > :lastId')
+            ->innerJoin('wm.user','u')
             //->andWhere('wm.user = :user')
             ->andWhere('wm.user_order = :order')
             //->setParameter('user', $user)
             ->setParameter('order', $order)
             ->setParameter('lastId', $lastId)
             ->getQuery()
+            //->useResultCache(true, 3600, 'test')
             ->getResult();
+        //var_dump($messages[0]->getUser()->getRole()->getName());die;
         return $messages;
     }
 
@@ -1432,6 +1493,14 @@ class Helper
             return true;
         }
         return false;
+    }
+
+
+    public static function getUserAvatar($user) {
+        $avatar = $user->getAvatar();
+        $pathAvatar = Helper::getFullPathToAvatar($avatar);
+        $userAvatar = "<img src='$pathAvatar' align='middle' alt='Аватар' width='110px' height='auto' class='thumbnail'>";
+        return $userAvatar;
     }
 
 

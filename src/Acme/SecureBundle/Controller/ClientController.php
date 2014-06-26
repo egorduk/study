@@ -56,8 +56,8 @@ class ClientController extends Controller
         $user = Helper::getUserById($userId);
         $userLogin = $user->getLogin();
         $userRole = $user->getRole()->getName();
-
-        return array('userId' => $userId, 'userLogin' => $userLogin, 'userRole' => $userRole, 'whenLogin' => $whenLogin, 'remainingTime' => $sessionRemaining);
+        $avatar = Helper::getUserAvatar($user);
+        return array('user' => $user, 'whenLogin' => $whenLogin, 'remainingTime' => $sessionRemaining, 'avatar' => $avatar);
     }
 
 
@@ -322,6 +322,7 @@ class ClientController extends Controller
                             $arr[$index]['date'] = $msg->getDateWrite()->format("d.m.Y");
                             $arr[$index]['time'] = $msg->getDateWrite()->format("H:i:s");
                             $arr[$index]['role'] = $user->getRole()->getId();
+                            $arr[$index]['role_sender'] = $msg->getUser()->getRole()->getId();
                         }
                         return new Response(json_encode(array('messages' => $arr)));
                     }

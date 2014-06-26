@@ -1,13 +1,18 @@
 {% extends "AcmeSecureBundle::layout_author.html.twig" %}
     {% block title "Домашняя страница исполнителя" %}
     {% block content %}
+        <style>
+            .thumbnail-image{
+                padding-top: 20px;
+            }
+        </style>
+        <div class="container">
             <div class="row">
-                <div  class="col-xs-3">
-                </div>
-                <div  class="col-xs-2">
-                    <p>Ваш ID - {{ user.id }}</p>
+                <div  class="col-xs-4">
+                    <div id="">{{ avatar | raw }}</div>
+                    <p>{{ user.login }}</p>
                     <hr style="border:solid 1px black">
-                    <p>Ваш ник - {{ user.login }}</p>
+                    <p>Ваш ID - {{ user.id }}</p>
                     <hr style="border:solid 1px black">
                     <p>Ваш баланс: {{ user.account }} руб.</p>
                     <hr style="border:solid 1px black">
@@ -18,4 +23,5 @@
                     <p>Осталось в системе - {{ remainingTime }}</p>
                 </div>
             </div>
+        </div>
     {% endblock %}

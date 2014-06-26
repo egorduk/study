@@ -133,7 +133,8 @@ class UserOrder extends EntityRepository
     private $count_bids;
     private $is_favorite = 0;
     private $author_last_sum_bid = null;
-
+    private $min_sum = null;
+    private $max_sum = null;
 
     public function __construct($container, $action = null){
         $this->date_create = new \DateTime();
@@ -345,6 +346,22 @@ class UserOrder extends EntityRepository
     public function getAuthorLastSumBid()
     {
         return $this->author_last_sum_bid;
+    }
+
+    public function setMaxSum($val) {
+        $this->max_sum = $val;
+    }
+
+    public function getMaxSum() {
+        return $this->max_sum;
+    }
+
+    public function setMinSum($val) {
+        $this->min_sum = $val;
+    }
+
+    public function getMinSum() {
+        return $this->min_sum;
     }
 
 }

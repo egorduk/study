@@ -190,6 +190,112 @@
                 $(document).ready(function() {
                     document.title = "Просмотр заказа №" + {{ order.num }};
                     $.fn.button.noConflict();
+                    var grid = $("#listBids");
+                    grid.jqGrid({
+                        url: {{ path('secure_author_order', { num: order.num }) | json_encode | raw }},
+                        datatype: 'json', cache: true,
+                        mtype: 'POST',
+                        emptyrecords: 'Нет поставленных ставок',
+                        colNames:['','Сумма','Дней на выполнение','В срок заказчика','Дата ставки','Комментарий','Действия'],
+                        colModel :[
+                            {name:'id',index:'id',search:false,hidden:true},
+                            {name:'sum',index:'sum',width:140,align:'center',resizable:false,editable:false,sortable:false,formatter:'currency',formatoptions:{thousandsSeparator: " ",decimalPlaces:0,suffix:" руб."}},
+                            {name:'day',index:'day',width:170,align:'center',resizable:false,editable:false,sortable:false,formatter:statusDay},
+                            {name:'is_client_date',index:'is_client_date',width:150,align:'center',resizable:false,editable:false,sortable:false,formatter:statusDate},
+                            {name:'date_bid',index:'date_bid',width:150,align:'center',resizable:false,editable:false,sortable:false},
+                            {name:'comment',index:'comment',width:220,align:'center',resizable:false,editable:false,sortable:false,formatter:statusComment},
+                            {name:'action',width:100,align:'center',sortable:false,resize:false,formatter:function() {
+                                return "<div class='refresh-bid' style='margin-left:8px;'>" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Поставить заново' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<span class='icon-arrows-cw'></span></div></div>" +
+                                        "<div class='delete-bid' style='margin-left:8px;'>" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Удалить ставку' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<span class='icon-trash-1'></span></div></div>";
+                            }}
+                        ],
+                        rowNum: 100,
+                        viewrecords: true,
+                        rownumbers: true,
+                        rownumWidth: 40,
+                        hidegrid: false,
+                        caption: 'Таблица поставленных ставок',
+                        height: '200',
+                        altRows: true,
+                        recordtext: "Просмотр ставок {0} - {1}",
+                        pager: $('#pagerBids'),
+                        altclass:'alt-row',
+                        loadComplete : function() {
+                            {% if (showDialogConfirmSelection) %}
+                            $("#dialog-message-confirm-selection").dialog({
+                                modal: true,
+                                resizable: false,
+                                height: 230,
+                                width: 410,
+                                dialogClass: 'class-dialog-confirm-selection',
+                                buttons: {
+                                    "Согласен": function() {
+                                        var rowId = getFirstRowId();
+                                        $.ajax({
+                                            type: 'POST',
+                                            data: 'bidId=' + rowId + '&action=confirmSelection',
+                                            success: function(response) {
+                                                var responseObject = window.JSON.parse(response);
+                                                if (responseObject.action) {
+                                                    $("#dialog-message-confirm-selection").dialog("close");
+                                                    window.location.reload();
+                                                }
+                                            }
+                                        });
+                                    },
+                                    "Отказ": function() {
+                                        var rowId = getFirstRowId();
+                                        $.ajax({
+                                            type: 'POST',
+                                            data: 'bidId=' + rowId + '&action=failSelection',
+                                            success: function(response) {
+                                                var responseObject = window.JSON.parse(response);
+                                                if (responseObject.action) {
+                                                    $("#dialog-message-confirm-selection").dialog("close");
+                                                }
+                                            }
+                                        });
+                                    }
+                                },
+                                close: function() {
+                                }
+                            });
+                            {% endif %}
+                            function getRowId(e) {
+                                var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'), rowId = $tr.attr('id');
+                                return rowId;
+                            }
+                            var firstRowId = grid.getDataIDs()[0];
+                            var firstRow = $("tr.jqgrow#" + firstRowId);
+                            firstRow.addClass('ui-state-active');
+                            var activeElem = firstRow.find('.grid-cell-day');
+                            activeElem.removeClass('grid-cell-day');
+                            $(".refresh-bid").click(function(e) {
+                            });
+                            $(".delete-bid").click(function(e) {
+                                var rowId = getRowId(e);
+                                if (rowId) {
+                                    $.ajax({
+                                        type: 'POST',
+                                        data: 'bidId=' + rowId + '&action=deleteBid',
+                                        success: function(response) {
+                                            var resposeObject = window.JSON.parse(response);
+                                            if (resposeObject.action) {
+                                                grid.trigger('reloadGrid');
+                                                clearFields();
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    }).navGrid('#pagerBids',{view:false,search:false,del:false,add:false,edit:false,refresh:true,refreshtext:'Обновить'},
+                            {},{},{},{},{}
+                    );
                     var buttonBid = $("#formBid_bid"), isClientDate = $("#formBid_isClientDate"), fieldDay = $("#formBid_fieldDay"), fieldSum = $("#formBid_fieldSum"), fieldComment = $("#formBid_fieldComment");
                     buttonBid.click(function(e) {
                         var formBid = $("#formBid");
@@ -277,112 +383,6 @@
                         }
                         buttonBid.prop('disabled', a);
                     }
-                    var grid = $("#listBids");
-                    grid.jqGrid({
-                        url: {{ path('secure_author_order', { num: order.num }) | json_encode | raw }},
-                        datatype: 'json', cache: true,
-                        mtype: 'POST',
-                        emptyrecords: 'Нет поставленных ставок',
-                        colNames:['','Сумма','Дней на выполнение','В срок заказчика','Дата ставки','Комментарий','Действия'],
-                        colModel :[
-                            {name:'id',index:'id',search:false,hidden:true},
-                            {name:'sum',index:'sum',width:140,align:'center',resizable:false,editable:false,sortable:false,formatter:'currency',formatoptions:{thousandsSeparator: " ",decimalPlaces:0,suffix:" руб."}},
-                            {name:'day',index:'day',width:170,align:'center',resizable:false,editable:false,sortable:false,formatter:statusDay},
-                            {name:'is_client_date',index:'is_client_date',width:150,align:'center',resizable:false,editable:false,sortable:false,formatter:statusDate},
-                            {name:'date_bid',index:'date_bid',width:150,align:'center',resizable:false,editable:false,sortable:false},
-                            {name:'comment',index:'comment',width:220,align:'center',resizable:false,editable:false,sortable:false,formatter:statusComment},
-                            {name:'action',width:100,align:'center',sortable:false,resize:false,formatter:function() {
-                                return "<div class='refresh-bid' style='margin-left:8px;'>" +
-                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Поставить заново' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
-                                        "<span class='icon-arrows-cw'></span></div></div>" +
-                                        "<div class='delete-bid' style='margin-left:8px;'>" +
-                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Удалить ставку' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
-                                        "<span class='icon-trash-1'></span></div></div>";
-                            }}
-                        ],
-                        rowNum: 100,
-                        viewrecords: true,
-                        rownumbers: true,
-                        rownumWidth: 40,
-                        hidegrid: false,
-                        caption: 'Таблица поставленных ставок',
-                        height: '200',
-                        altRows: true,
-                        recordtext: "Просмотр ставок {0} - {1}",
-                        pager: $('#pagerBids'),
-                        altclass:'alt-row',
-                        loadComplete : function() {
-                            function getRowId(e) {
-                                var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'), rowId = $tr.attr('id');
-                                return rowId;
-                            }
-                            var firstRowId = grid.getDataIDs()[0];
-                            var firstRow = $("tr.jqgrow#" + firstRowId);
-                            firstRow.addClass('ui-state-active');
-                            var activeElem = firstRow.find('.grid-cell-day');
-                            activeElem.removeClass('grid-cell-day');
-                            $(".refresh-bid").click(function(e) {
-                            });
-                            $(".delete-bid").click(function(e) {
-                                var rowId = getRowId(e);
-                                if (rowId) {
-                                    $.ajax({
-                                        type: 'POST',
-                                        data: 'bidId=' + rowId + '&action=deleteBid',
-                                        success: function(response) {
-                                            var resposeObject = window.JSON.parse(response);
-                                            if (resposeObject.action) {
-                                                grid.trigger('reloadGrid');
-                                                clearFields();
-                                            }
-                                        }
-                                    });
-                                }
-                            });
-                        }
-                    }).navGrid('#pagerBids',{view:false,search:false,del:false,add:false,edit:false,refresh:true,refreshtext:'Обновить'},
-                            {},{},{},{},{}
-                    );
-                    {% if (showDialogConfirmSelection) %}
-                        $("#dialog-message-confirm-selection").dialog({
-                            modal: true,
-                            resizable: false,
-                            height: 230,
-                            width: 410,
-                            dialogClass: 'class-dialog-confirm-selection',
-                            buttons: {
-                                "Согласен": function() {
-                                    var rowId = getFirstRowId();
-                                    $.ajax({
-                                        type: 'POST',
-                                        data: 'bidId=' + rowId + '&action=confirmSelection',
-                                        success: function(response) {
-                                            var responseObject = window.JSON.parse(response);
-                                            if (responseObject.action) {
-                                                $("#dialog-message-confirm-selection").dialog("close");
-                                                window.location.reload();
-                                            }
-                                        }
-                                    });
-                                },
-                                "Отказ": function() {
-                                    var rowId = getFirstRowId();
-                                    $.ajax({
-                                        type: 'POST',
-                                        data: 'bidId=' + rowId + '&action=failSelection',
-                                        success: function(response) {
-                                            var responseObject = window.JSON.parse(response);
-                                            if (responseObject.action) {
-                                                $("#dialog-message-confirm-selection").dialog("close");
-                                            }
-                                        }
-                                    });
-                                }
-                            },
-                            close: function() {
-                            }
-                        });
-                    {% endif %}
                     function getFirstRowId() {
                         var firstRowId = grid.getDataIDs()[0];
                         var firstRow = $("tr.jqgrow#" + firstRowId);

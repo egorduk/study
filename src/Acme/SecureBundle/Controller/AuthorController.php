@@ -17,6 +17,7 @@ use Acme\SecureBundle\Form\Author\AuthorProfileForm;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Acme\SecureBundle\Entity\Author\BidFormValidate;
 use Acme\SecureBundle\Form\Author\BidForm;
+use Doctrine\Common\Cache\ApcCache;
 
 
 class AuthorController extends Controller
@@ -28,7 +29,7 @@ class AuthorController extends Controller
     public function indexAction(Request $request)
     {
         $userId = $this->get('security.context')->getToken()->getUser();
-        $userId = 2;
+        //$userId = 2;
         $session = $request->getSession();
         $sessionCreated = $session->getMetadataBag()->getCreated();
         $sessionLifeTime = $session->getMetadataBag()->getLifetime();
@@ -38,8 +39,8 @@ class AuthorController extends Controller
         $sessionRemaining = $sessionRemaining - $nowTimestamp;
         $sessionRemaining = Helper::getDateFromTimestamp($sessionRemaining, "i:s");
         $user = Helper::getUserById($userId);
-
-        return array('user' => $user, 'whenLogin' => $whenLogin, 'remainingTime' => $sessionRemaining);
+        $avatar = Helper::getUserAvatar($user);
+        return array('user' => $user, 'whenLogin' => $whenLogin, 'remainingTime' => $sessionRemaining, 'avatar' => $avatar);
     }
 
 
@@ -119,8 +120,8 @@ class AuthorController extends Controller
      */
     public function ordersAction(Request $request, $type)
     {
-        //$userId = $this->get('security.context')->getToken()->getUser();
-        $userId = 1;
+        $userId = $this->get('security.context')->getToken()->getUser();
+        //$userId = 1;
         $user = Helper::getUserById($userId);
         $showWindow = false;
         if ($type == "new") {
@@ -175,9 +176,6 @@ class AuthorController extends Controller
                         if (strlen($task) >= 20) {
                             $task = Helper::getCutSentence($task, 45);
                         }
-                        $maxBid = 0;
-                        $minBid = 0;
-                        $myBid = 0;
                         $dateCreate = Helper::getMonthNameFromDate($order->getDateCreate()->format("d.m.Y"));
                         $dateCreate = $dateCreate . "<br><span class='gridCellTime'>" . $order->getDateCreate()->format("H:s") . "</span>";
                         $dateExpire = Helper::getMonthNameFromDate($order->getDateExpire()->format("d.m.Y"));
@@ -191,8 +189,8 @@ class AuthorController extends Controller
                             $order->getTheme(),
                             $task,
                             $dateExpire,
-                            $maxBid,
-                            $minBid,
+                            $order->getMaxSum(),
+                            $order->getMinSum(),
                             $order->getAuthorLastSumBid(),
                             $dateCreate,
                             "",
@@ -221,7 +219,7 @@ class AuthorController extends Controller
                     $rowsPerPage = $postData['rows'];
                     $countOrders = Helper::getCountOrdersForAuthorGrid();
                     $firstRowIndex = $curPage * $rowsPerPage - $rowsPerPage;
-                    $orders = Helper::getClientFavoriteOrdersForAuthorGrid($firstRowIndex, $rowsPerPage, $user);
+                    $orders = Helper::getFavoriteOrdersForAuthorGrid($firstRowIndex, $rowsPerPage, $user);
                     $response = new Response();
                     $response->total = ceil($countOrders / $rowsPerPage);
                     $response->records = $countOrders;
@@ -274,7 +272,7 @@ class AuthorController extends Controller
                 return new RedirectResponse($this->generateUrl('secure_author_index'));
             }
             $userId = $this->get('security.context')->getToken()->getUser();
-            $userId = 1;
+            //$userId = 1;
             $user = Helper::getUserById($userId);
             $access = Helper::checkUserAccessForOrder($user, $order);
             if (!$access) {
@@ -288,6 +286,41 @@ class AuthorController extends Controller
                     $action = $request->request->get('action');
                     $lastId = $request->request->get('lastId');
                     if ($action == 'getChats') {
+                        /*$cache = $this->get('cache');
+                        $cache->setNamespace('webchat_cache');
+                        $cached_data = $cache->fetch('test');
+                        if ($cached_data === false) {
+                            $messages = Helper::getChatMessages($user, $order, $lastId);
+                            //$cached_data = $SOMEAPI->getData($params);
+                            $cache->save('test', $messages, 3600);//TTL 1h
+                            $cached_data = $messages;
+                        } /*else {
+                        }*/
+                        //$a = $this->get('annotation_reader');
+                        //$b = $this->get('cache');
+                        //$b = new \Doctrine\Common\Cache\ApcCache();
+                        //$b->save('test','123',3600);
+
+
+                        /*$cached_data = $this->get('cache')->get('test');
+                        if ($cached_data) {
+                            //$foo = unserialize($fooString);
+                            $messages = $cached_data;
+                        } else {
+                            $messages = Helper::getChatMessages($user, $order, $lastId);
+                            //$this->get('cache')->save('test', serialize($foo));
+                            $this->get('cache')->save('test', $messages);
+                        }*/
+                        /*$cacheDriver = new ApcCache();
+                        if ($cacheDriver->contains('test2')) {
+                            $messages = $cacheDriver->fetch('test2');
+                            //$messages = unserialize($messages);
+                        } else {
+                            $messages = Helper::getChatMessages($user, $order, $lastId);
+                            //$messages = "123";
+                            $cacheDriver->save('test2', $messages, 60);
+                        }*/
+                        //var_dump($this->get('cache')->fetch('test'));die;
                         $messages = Helper::getChatMessages($user, $order, $lastId);
                         $arr = [];
                         foreach($messages as $index => $msg) {
@@ -297,6 +330,7 @@ class AuthorController extends Controller
                             $arr[$index]['date'] = $msg->getDateWrite()->format("d.m.Y");
                             $arr[$index]['time'] = $msg->getDateWrite()->format("H:i:s");
                             $arr[$index]['role'] = $user->getRole()->getId();
+                            $arr[$index]['role_sender'] = $msg->getUser()->getRole()->getId();
                         }
                         return new Response(json_encode(array('messages' => $arr)));
                     }
