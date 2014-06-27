@@ -1116,6 +1116,26 @@ class Helper
     }
 
 
+    public static function getCountBidOrdersForAuthorGrid($user) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
+            ->innerJoin('AcmeSecureBundle:UserBid', 'ub')
+            ->andWhere('ub.user = :user')
+            ->andWhere('ub.user_order = uo')
+            ->andWhere('uo.is_show_client = 1')
+            ->andWhere('uo.is_show_author = 1')
+            ->andWhere('ub.is_show_client = 1')
+            ->andWhere('ub.is_show_author = 1')
+            ->andWhere('uo.date_expire > :now')
+            ->groupBy('ub.user_order')
+            ->setParameter('user', $user)
+            ->setParameter('now', new \DateTime('now'))
+            ->getQuery()
+            ->getResult();
+        return count($orders);
+    }
+
+
     public static function getBidOrdersForAuthorGrid($firstRowIndex, $rowsPerPage, $user) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
@@ -1191,12 +1211,6 @@ class Helper
     public static function setAuthorBid($postData, $user, $order) {
         $sum = $postData['fieldSum'];
         $comment = $postData['fieldComment'];
-        /*else {
-            $dateOrderExpire = $order->getDateExpire();
-            $dateNow = new \DateTime();
-            $interval = date_diff($dateNow, $dateOrderExpire);
-            echo $interval->format('%d:%h:%i');
-        }*/
         $userBid = new UserBid();
         $userBid->setUser($user);
         $userBid->setUserOrder($order);
@@ -1602,5 +1616,70 @@ class Helper
             return $user;
         }
         return false;
+    }
+
+
+    public static function deleteAuthorBid($user, $numOrder) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $order = $em->getRepository(self::$_tableUserOrder)
+            ->findOneByNum($numOrder);
+        $bid = $em->getRepository(self::$_tableUserBid)
+            ->findOneBy(array('user_order' => $order, 'user' => $user));
+        if ($bid) {
+            $em->remove($bid);
+            $em->flush();
+            return true;
+        }
+        return false;
+    }
+
+
+    public static function getWorkOrdersForAuthorGrid($firstRowIndex, $rowsPerPage, $user) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
+            ->select('ub.sum AS curr_sum, uo, so')
+            ->innerJoin('AcmeSecureBundle:UserBid', 'ub', 'WITH', 'ub.user_order = uo')
+            ->andWhere('ub.user = :user')
+            ->andWhere('ub.user_order = uo')
+            ->innerJoin('uo.status_order', 'so', 'WITH', 'so = uo.status_order')
+            //->innerJoin('uo.status_order', 'so')
+            //->andWhere('so.name = sa')
+            ->andWhere('ub.is_select_client = 1')
+            ->andWhere('ub.is_confirm_author = 1')
+            ->andWhere('uo.is_show_client = 1')
+            ->andWhere('uo.is_show_author = 1')
+            ->andWhere('ub.is_show_client = 1')
+            ->andWhere('ub.is_show_author = 1')
+            //->andWhere('uo.date_expire > :now')
+            ->groupBy('ub.user_order')
+            ->orderBy('uo.date_expire', 'asc')
+            ->setFirstResult($firstRowIndex)
+            ->setMaxResults($rowsPerPage)
+            ->setParameter('user', $user)
+            //->setParameter('now', new \DateTime('now'))
+            ->getQuery()
+            ->getResult();
+        return $orders;
+    }
+
+
+    public static function getCountWorkOrdersForAuthorGrid($user) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
+            ->innerJoin('AcmeSecureBundle:UserBid', 'ub', 'WITH', 'ub.user_order = uo')
+            ->andWhere('ub.user = :user')
+            ->andWhere('ub.user_order = uo')
+            ->innerJoin('uo.status_order', 'so', 'WITH', 'so = uo.status_order')
+            ->andWhere('ub.is_select_client = 1')
+            ->andWhere('ub.is_confirm_author = 1')
+            ->andWhere('uo.is_show_client = 1')
+            ->andWhere('uo.is_show_author = 1')
+            ->andWhere('ub.is_show_client = 1')
+            ->andWhere('ub.is_show_author = 1')
+            ->groupBy('ub.user_order')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+        return count($orders);
     }
 }

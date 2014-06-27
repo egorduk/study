@@ -26,9 +26,6 @@
                     font-weight: bold;
                 }
             </style>
-            <script>
-               // localStorage.clear();
-            </script>
             <div class="row">
                 <div class="">
                     <table id="listOrders"></table>
@@ -36,16 +33,6 @@
                 </div>
                 <script>
                 $(document).ready(function() {
-                    a = 1;
-
-                    $(".ui-pg-div").click(function() {
-                        a++;
-                    });
-
-
-                   /* a = localStorage.getItem("attempt");
-                    a++;
-                    localStorage.setItem("attempt", a);*/
                     $.fn.button.noConflict();
                     var grid = $("#listOrders");
                     grid.jqGrid({
@@ -57,21 +44,21 @@
                         colNames:['','№ заказа', 'Предмет', 'Тип работы', 'Тема работы', 'Задание', 'Выполнение до', 'Mоя ставка', 'Оценен', 'Действия'],
                         colModel :[
                             {name:'id',index:'id',key:true,search:false,resize:false,hidden:true},
-                            {name:'num',index:'num',width:120,align:'center',resizable:false,editable:false,sortable:false,searchrules:{"required":true, "number":true, "maxValue":13},searchoptions:{sopt:['eq','ne','bw','cn']},formatter:customNum},
-                            {name:'subject_order',index:'subject_order',width:170,align:'center',resizable:false,sortable:false,editable:false,searchoptions:{sopt:['eq','ne','bw','cn']}},
-                            {name:'type_order',index:'type_order',width:150,align:'center',resizable:false,editable:false,sortable:false,searchoptions:{sopt:['eq','ne','bw','cn']}},
-                            {name:'theme',index:'theme',width:350,align:'center',resizable:false,editable:false,sortable:false,searchoptions:{sopt:['eq','bw','cn']}},
-                            {name:'task',index:'task',width:350,align:'center',resizable:false, editable:false,sortable:false,searchoptions:{sopt:['eq','bw','cn']}},
-                            {name:'date_expire',index:'date_expire',width:150,align:'center',resizable:false,editable:false,sortable:false,search:false},
-                            {name:'author_last_bid',index:'author_last_bid',width:160,align:'center',resizable:false,editable:false,search:false,sortable:false,formatter:'currency',formatoptions:{defaultValue:'',thousandsSeparator: " ",decimalPlaces:0,suffix:" руб."}},
-                            {name:'date_bid',index:'date_bid',width:150,align:'center',resizable:false,editable:false,search:false,sortable:false},
+                            {name:'num',index:'num',width:120,align:'center',resizable:false,editable:false,sortable:false,title:false,formatter:customNum},
+                            {name:'subject_order',index:'subject_order',width:170,align:'center',resizable:false,sortable:false,editable:false},
+                            {name:'type_order',index:'type_order',width:150,align:'center',resizable:false,editable:false,sortable:false},
+                            {name:'theme',index:'theme',width:350,align:'center',resizable:false,editable:false,sortable:false},
+                            {name:'task',index:'task',width:350,align:'center',resizable:false, editable:false,sortable:false},
+                            {name:'date_expire',index:'date_expire',width:150,align:'center',resizable:false,editable:false,sortable:false},
+                            {name:'author_last_bid',index:'author_last_bid',width:160,align:'center',resizable:false,editable:false,sortable:false,formatter:'currency',formatoptions:{defaultValue:'',thousandsSeparator: " ",decimalPlaces:0,suffix:" руб."}},
+                            {name:'date_bid',index:'date_bid',width:150,align:'center',resizable:false,editable:false,sortable:false},
                             {name:'action',width:80,align:'center',sortable:false,resize:false,search:false,formatter:function() {
                                 return "<div class='delete-bid' style='margin-left:19px;'>" +
                                         "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Удалить ставку на заказ' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
                                         "<span class='icon-trash-6'></span></div></div>";
                             }}
                         ],
-                        postData: {attempt:a},
+                        //postData: {attempt : new Date()},
                         pager: $('#pagerOrders'),
                         rowNum: 15,
                         rowList: [15,25,35],
@@ -88,16 +75,16 @@
                             function getRow(a) {
                                 return a.parent().parent();
                             }
-                            $(".unfavorite-order").click(function(e) {
+                            $(".delete-bid").click(function(e) {
                                 var rowId = getRowId(e), row = getRow($(this));
                                 if (rowId) {
                                     $.ajax({
                                         type: 'POST',
-                                        data: 'orderId=' + rowId + '&action=unfavoriteOrder',
+                                        data: 'numOrder=' + rowId + '&action=deleteBid',
                                         success: function(response) {
                                             var resposeObject = window.JSON.parse(response);
                                             if (resposeObject.action) {
-                                                grid.trigger('reloadGrid');
+                                                grid.delRowData(rowId);
                                             }
                                         }
                                     });
@@ -106,17 +93,14 @@
                         },
                         onCellSelect: function(rowid, iCol) {
                             if (iCol != 9) {
-                                num = $("tr.jqgrow#" + rowid).find('td').eq(1).attr('title');
+                                //num = $("tr.jqgrow#" + rowid).find('td').eq(1).attr('title');
                                 var url = "{{ path("secure_author_order", {'num': 'num'}) }}";
-                                location.href = url.replace("num", num);
+                                location.href = url.replace("num", rowid);
                             }
                         }
                     }).navGrid('#pagerOrders',{view:false,search:false,del:false,add:false,edit:false,refresh:true,refreshtext:'Обновить'},
                             {},{},{},{},{}
                     );
-                    function getRow(a) {
-                        return a.parent().parent();
-                    }
                     function customNum(cellvalue) {
                         return ("<span class='grid-cell-num'>" + cellvalue + "</span>");
                     }

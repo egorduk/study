@@ -156,8 +156,7 @@
                                     if (type == "show") {
                                         blockShowOrder.hide();
                                         blockHideOrder.show();
-                                    }
-                                    else {
+                                    } else {
                                         blockShowOrder.show();
                                         blockHideOrder.hide();
                                     }
@@ -171,8 +170,9 @@
                                             data: 'orderId=' + rowId,
                                             success: function(response) {
                                                 var resposeObject = window.JSON.parse(response);
-                                                if (resposeObject.action == "true") {
-                                                    grid.trigger('reloadGrid');
+                                                if (resposeObject.action) {
+                                                   //grid.trigger('reloadGrid');
+                                                    grid.delRowData(rowId);
                                                 }
                                             }
                                         });
@@ -265,8 +265,7 @@
                                                     if (tinyText.length <= 0) {
                                                         mceLayout.addClass('bootstrap-error');
                                                         return false;
-                                                    }
-                                                    else {
+                                                    } else {
                                                         var newTask = getTinyTextContent();
                                                         var newDateExpire = $("#new_date_expire").val();
                                                         $.ajax({
@@ -345,8 +344,7 @@
                                     if (Number(grid.getCell(grids[i], "is_show_author"))) {
                                         blockShowOrder.hide();
                                         blockHideOrder.show();
-                                    }
-                                    else {
+                                    } else {
                                         blockHideOrder.hide();
                                         blockShowOrder.show();
                                     }

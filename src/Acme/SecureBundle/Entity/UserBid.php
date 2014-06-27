@@ -69,13 +69,13 @@ class UserBid extends EntityRepository
     private $is_confirm_author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Acme\AuthBundle\Entity\User", inversedBy="link_user_bid", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Acme\AuthBundle\Entity\User", inversedBy="link_user_bid", cascade={"persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      **/
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserOrder", inversedBy="link_user_order", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="UserOrder", inversedBy="link_bid_user_order", cascade={"persist"})
      * @ORM\JoinColumn(name="user_order_id", referencedColumnName="id")
      **/
     private $user_order;
@@ -154,6 +154,11 @@ class UserBid extends EntityRepository
         $this->user_order = $order;
     }
 
+    public function getUserOrder()
+    {
+        return $this->user_order;
+    }
+
     public function getIsClientDate()
     {
         return $this->is_client_date;
@@ -182,11 +187,6 @@ class UserBid extends EntityRepository
     public function getIsSelectClient()
     {
         return $this->is_select_client;
-    }
-
-    public function getUserOrder()
-    {
-        return $this->user_order;
     }
 
     public function setIsShowAuthor($val)

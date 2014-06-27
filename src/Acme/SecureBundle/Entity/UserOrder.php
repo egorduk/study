@@ -103,7 +103,7 @@ class UserOrder extends EntityRepository
     /**
      * @ORM\OneToMany(targetEntity="UserBid", mappedBy="user_order")
      **/
-    private $link_user_order;
+    private $link_bid_user_order;
 
     /**
      * @ORM\OneToMany(targetEntity="AuctionBid", mappedBy="user_order")
@@ -130,6 +130,7 @@ class UserOrder extends EntityRepository
      **/
     private $link_webchat_user_order;
 
+
     private $count_bids;
     private $is_favorite = 0;
     private $author_last_sum_bid = null;
@@ -153,7 +154,7 @@ class UserOrder extends EntityRepository
             $num++;
             $this->num = $num;
         }
-        $this->link_user_order = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->link_bid_user_order = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_order_file = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_auction_user_order = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_auction_user = new \Doctrine\Common\Collections\ArrayCollection();

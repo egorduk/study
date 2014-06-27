@@ -254,16 +254,66 @@ class AuthorController extends Controller
         }
         elseif ($type == "bid") {
             if ($request->isXmlHttpRequest()) {
+                $action = $request->request->get('action');
+                if ($action == 'deleteBid') {
+                    $numOrder = $request->request->get('numOrder');
+                    $actionResponse = Helper::deleteAuthorBid($user, $numOrder);
+                    return new Response(json_encode(array('action' => $actionResponse)));
+                } else {
+                    $postData = $request->request->all();
+                    $curPage = $postData['page'];
+                    $rowsPerPage = $postData['rows'];
+                    $firstRowIndex = $curPage * $rowsPerPage - $rowsPerPage;
+                    $orders = Helper::getBidOrdersForAuthorGrid($firstRowIndex, $rowsPerPage, $user);
+                    $countOrders = Helper::getCountBidOrdersForAuthorGrid($user);
+                    //var_dump($countOrders);die;
+                    $response = new Response();
+                    $response->total = ceil($countOrders / $rowsPerPage);
+                    //var_dump($countOrders); die;
+                    $response->records = $countOrders;
+                    $response->page = $curPage;
+                    foreach($orders as $index => $order) {
+                        $task = strip_tags($order[0]->getTask());
+                        $task = stripcslashes($task);
+                        $task = preg_replace("/&nbsp;/", "", $task);
+                        if (strlen($task) >= 20) {
+                            $task = Helper::getCutSentence($task, 45);
+                        }
+                        $dateBid = Helper::getMonthNameFromDate($orders[$index]['date_bid']->format("d.m.Y"));
+                        $dateBid = $dateBid . "<br><span class='gridCellTime'>" . $orders[$index]['date_bid']->format("H:i") . "</span>";
+                        $dateExpire = Helper::getMonthNameFromDate($order[0]->getDateExpire()->format("d.m.Y"));
+                        $dateExpire = $dateExpire . "<br><span class='gridCellTime'>" . $order[0]->getDateExpire()->format("H:i") . "</span>";
+                        $response->rows[$index]['id'] = $order[0]->getNum();
+                        $response->rows[$index]['cell'] = array(
+                            $order[0]->getNum(),
+                            $order[0]->getNum(),
+                            $order[0]->getSubjectOrder()->getChildName(),
+                            $order[0]->getTypeOrder()->getName(),
+                            $order[0]->getTheme(),
+                            $task,
+                            $dateExpire,
+                            $orders[$index]['curr_sum'],
+                            $dateBid,
+                            "",
+                        );
+                    }
+                    return new JsonResponse($response);
+                }
+            }
+            return $this->render(
+                'AcmeSecureBundle:Author:order_bid.html.twig', array('showWindow' => $showWindow)
+            );
+        }
+        elseif ($type == "work") {
+            if ($request->isXmlHttpRequest()) {
                 $postData = $request->request->all();
                 $curPage = $postData['page'];
                 $rowsPerPage = $postData['rows'];
                 $firstRowIndex = $curPage * $rowsPerPage - $rowsPerPage;
-                $orders = Helper::getBidOrdersForAuthorGrid($firstRowIndex, $rowsPerPage, $user);
-                $countOrders = count($orders);
-                //var_dump($countOrders);die;
+                $orders = Helper::getWorkOrdersForAuthorGrid($firstRowIndex, $rowsPerPage, $user);
+                $countOrders = Helper::getCountWorkOrdersForAuthorGrid($user);
                 $response = new Response();
                 $response->total = ceil($countOrders / $rowsPerPage);
-                //var_dump($countOrders); die;
                 $response->records = $countOrders;
                 $response->page = $curPage;
                 foreach($orders as $index => $order) {
@@ -273,29 +323,29 @@ class AuthorController extends Controller
                     if (strlen($task) >= 20) {
                         $task = Helper::getCutSentence($task, 45);
                     }
-                    $dateBid = Helper::getMonthNameFromDate($orders[$index]['date_bid']->format("d.m.Y"));
-                    $dateBid = $dateBid . "<br><span class='gridCellTime'>" . $orders[$index]['date_bid']->format("H:i") . "</span>";
+                    $dateOrderExpire = $order[0]->getDateExpire();
+                    $dateNow = new \DateTime();
+                    $remaining = date_diff($dateNow, $dateOrderExpire);
                     $dateExpire = Helper::getMonthNameFromDate($order[0]->getDateExpire()->format("d.m.Y"));
                     $dateExpire = $dateExpire . "<br><span class='gridCellTime'>" . $order[0]->getDateExpire()->format("H:i") . "</span>";
-                    $response->rows[$index]['id'] = $order[0]->getId();
+                    $response->rows[$index]['id'] = $order[0]->getNum();
                     $response->rows[$index]['cell'] = array(
-                        $order[0]->getId(),
+                        $order[0]->getNum(),
                         $order[0]->getNum(),
                         $order[0]->getSubjectOrder()->getChildName(),
                         $order[0]->getTypeOrder()->getName(),
                         $order[0]->getTheme(),
                         $task,
                         $dateExpire,
-                        $orders[$index]['curr_sum'],
-                        $dateBid,
-                        "",
+                        $remaining->format('%d дн. %h ч. %i мин.'),
+                        $order[0]->getStatusOrder()->getName(),
+                        $orders[$index]['curr_sum']
                     );
                 }
                 return new JsonResponse($response);
-
             }
             return $this->render(
-                'AcmeSecureBundle:Author:order_bid.html.twig', array('showWindow' => $showWindow)
+                'AcmeSecureBundle:Author:order_work.html.twig', array('showWindow' => $showWindow)
             );
         }
     }
