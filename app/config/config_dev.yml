@@ -35,11 +35,11 @@ assetic:
 #swiftmailer:
 #    delivery_address: me@example.com
 
-#doctrine:
-#  orm:
-#        auto_mapping: true
-#        query_cache_driver: apc
-#        metadata_cache_driver: apc
-#        result_cache_driver: apc
+doctrine:
+  orm:
+        auto_mapping: true
+        query_cache_driver: apc
+        metadata_cache_driver: apc
+        result_cache_driver: apc
         #resolve_target_entities:
         #    Symfony\Component\Security\Core\User\UserInterface: Acme\Entity\User

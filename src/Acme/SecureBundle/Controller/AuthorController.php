@@ -2,6 +2,7 @@
 
 namespace Acme\SecureBundle\Controller;
 
+use Doctrine\Common\Cache\ApcCache;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\MemcachedCache;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -374,22 +375,28 @@ class AuthorController extends Controller
             $filesOrder = Helper::getFilesForOrder($order);
             $statusOrder = $order->getStatusOrder()->getCode();
             if ($statusOrder == 'w') {
-                $cache = $this->get('winzou_cache.apc');
+                //$cache = $this->get('winzou_cache.apc');
                 if ($request->isXmlHttpRequest()) {
                     $action = $request->request->get('action');
                     $lastId = $request->request->get('lastId');
                     if ($action == 'getChats') {
                         /*if ($cache->contains('bar')) {
                             $messages = $cache->fetch('bar');
-                            $q = "yes";
-                            //var_dump($messages);die;
+                            //var_dump($cache->getStats());die;
                         } else {
                             $messages = Helper::getChatMessages($user, $order, $lastId);
                             $cache->save('bar', $messages);
-                            $q = "no";
                         }*/
+                        $a = new ApcCache();
+                        if ($a->contains('bar')) {
+                            $messages = $a->fetch('bar');
+                            //var_dump($a->getStats());die;
+                        } else {
+                            $messages = Helper::getChatMessages($user, $order, $lastId);
+                            $a->save('bar', $messages);
+                        }
                         //$cache->delete('bar');
-                        $messages = Helper::getChatMessages($user, $order, $lastId);
+                        //$messages = Helper::getChatMessages($user, $order, $lastId);
                         $arr = [];
                         foreach($messages as $index => $msg) {
                         //for($i=0;$i<count($messages);$i++) {
