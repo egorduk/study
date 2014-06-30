@@ -2,6 +2,7 @@
 
 namespace Acme\AuthBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -31,7 +32,7 @@ class UserRole extends EntityRepository
 
     public function __construct()
     {
-        $this->link_role = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->link_role = new ArrayCollection();
     }
 
     public function setName($name)

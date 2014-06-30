@@ -43,8 +43,8 @@ require_once '..\src\Acme\AuthBundle\Lib\recaptchalib.php';
 
 class AuthController extends Controller
 {
-    private $tableCountry = 'AcmeAuthBundle:Country';
-    private $tableUserRole = 'AcmeAuthBundle:UserRole';
+    //private $tableCountry = 'AcmeAuthBundle:Country';
+   // private $tableUserRole = 'AcmeAuthBundle:UserRole';
 
     /**
      * @Template()
@@ -79,7 +79,7 @@ class AuthController extends Controller
                             $errorData = "Введен неправильный Email или пароль!";
                         }
                         else {
-                            $roleId = $user->getRole()->getId();
+                            $roleId = $user->getUserRole()->getId();
                             if ($roleId == 1) {
                                 $role = 'ROLE_AUTHOR';
                             }
@@ -90,8 +90,7 @@ class AuthController extends Controller
                             $this->get('security.context')->setToken($token);
                             if ($role == 'ROLE_AUTHOR') {
                                 return new RedirectResponse($this->generateUrl('secure_author_index'));
-                            }
-                            else {
+                            } else {
                                 return new RedirectResponse($this->generateUrl('secure_client_index'));
                             }
                         }
@@ -205,7 +204,7 @@ class AuthController extends Controller
                             $user->setLogin($userLogin);
                             $user->setEmail($userEmail);
                             $role = Helper::getUserRoleByRoleId(2);
-                            $user->setRole($role);
+                            $user->setUserRole($role);
                             $salt = Helper::getSalt();
                             $password = Helper::getRegPassword($userPassword, $salt);
                             $user->setPassword($password);
@@ -259,7 +258,7 @@ class AuthController extends Controller
                             $user->setLogin($userLogin);
                             $user->setEmail($userEmail);
                             $role = Helper::getUserRoleByRoleId(1);
-                            $user->setRole($role);
+                            $user->setUserRole($role);
                             $salt = Helper::getSalt();
                             $password = Helper::getRegPassword($userPassword, $salt);
                             $user->setPassword($password);
@@ -361,7 +360,7 @@ class AuthController extends Controller
                                     $user->setLogin($userLogin);
                                     $user->setEmail($userEmail);
                                     $role = Helper::getUserRoleByRoleId(2);
-                                    $user->setRole($role);
+                                    $user->setUserRole($role);
                                     $salt = Helper::getSalt();
                                     $password = Helper::getRegPassword($userPassword, $salt);
                                     $user->setPassword($password);

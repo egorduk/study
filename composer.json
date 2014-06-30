@@ -25,7 +25,9 @@
         "genemu/form-bundle": "2.2.*",
         "symfony/finder": "2.3.*",
         "geoip/geoip": "~1.14",
-		"punkave/symfony2-file-uploader-bundle": "1.0.*@dev"
+		"punkave/symfony2-file-uploader-bundle": "1.0.*@dev",
+		"Beryllium/CacheBundle": "dev-master",
+		"leaseweb/memcache-bundle": "*"
     },
     "config":{
         "bin-dir": "bin",

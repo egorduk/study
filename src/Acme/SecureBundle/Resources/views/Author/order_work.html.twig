@@ -1,79 +1,106 @@
 {% extends "AcmeSecureBundle::layout_author.html.twig" %}
-{% block title "Заказы на выполнении" %}
+{% block title "Просмотр заказа" %}
     {% block content %}
-        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.css') }}" />
-        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
-        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.fmatter.js') }}"></script>
-            <style type="text/css">
-                .alt-row {
-                    background-color: #f3f3f3;
-                    background-image: none;
-                }
-                .ui-jqgrid .ui-jqgrid-htable th div {
-                    height: 21px;
-                }
-                .gridCellTime {
-                    color: blue;
-                }
-                #pagerOrders {
-                    height: 30px;
-                }
-                .grid-cell-num {
-                    color: black;
-                    font-size: 20px;
-                    font-weight: bold;
-                }
-            </style>
+        <link rel="stylesheet" href="{{ asset('bundles/css/chat/jScrollPane.css') }}" />
+        <!--<link rel="stylesheet" href="{{ asset('bundles/css/chat/page.css') }}" />-->
+        <link rel="stylesheet" href="{{ asset('bundles/css/chat/chat.css') }}" />
+        <script type="text/javascript" src="{{ asset('bundles/js/chat/jquery.mousewheel.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/chat/jScrollPane.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/chat/chat.js') }}"></script>
+        <style>
+            /*.bootstrap-error{
+                border-color: #E9322D!important;
+                box-shadow: 0 0 6px #E9322D!important;
+            }*/
+            .thumbnail {
+                margin-bottom: 7px;
+                margin-left: 45px;
+            }
+            .block-file{
+                border: 1px solid #000000;
+                width: 300px;
+            }
+            .alt-row {
+                background-color: #f3f3f3;
+                background-image: none;
+            }
+            #block-client {
+                width: 200px;
+                text-align: center;
+            }
+            hr {
+                margin: 3px;
+            }
+            .block-theme {
+                font-size: 18px;
+            }
+            .block-num {
+                font-size: 20px;
+                color: green;
+            }
+            textarea {
+                resize: none;
+            }
+        </style>
+        <div class="container" data-role="{{ user.userrole.id }}" data-login="{{ user.login }}">
             <div class="row">
-                <div class="">
-                    <table id="listOrders"></table>
-                    <div id="pagerOrders"></div>
+                <div class="col-md-7">
+                    <p class="block-num">Номер заказа: {{ order.num }}</p>
+                    <hr style="border:solid 1px black">
+                    <p class="block-theme">Тема работы: {{ order.theme }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Задание: {{ order.task | raw }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Объем заказа: {{ order.countsheet }} стр.</p>
+                    <hr style="border:solid 1px black">
+                    <p>Оригинальность заказа: {{ order.originality }}%</p>
+                    <hr style="border:solid 1px black">
+                    <p>Предмет: {{ order.subjectorder.childname }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Тип заказа: {{ order.typeorder.name }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Статус заказа: {{ order.statusorder.name }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Дата создания: {{ order.datecreate.format("d.m.Y H:i") }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Выполнение до: {{ order.dateexpire.format("d.m.Y H:i") }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Заказчик: <div id="block-client">{{ client | raw }}</div></p>
+                    <div>
+                        {% for file in files %}
+                            <div class="block-file">
+                                <p>Файл: {{ file.name }} </p>
+                                <p>Размер: {{ file.size }} </p>
+                                <p>Загружен: {{ file.dateupload.format("d.m.Y H:i") }} </p>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
-                <script>
-                $(document).ready(function() {
-                    $.fn.button.noConflict();
-                    var grid = $("#listOrders");
-                    grid.jqGrid({
-                        url: {{ path('secure_author_orders', { type: 'work' }) | json_encode | raw }},
-                        datatype: 'json',
-                        mtype: 'POST',
-                        caption: 'Таблица заказов на выполнении',
-                        recordtext: "Просмотр заказов {0} - {1}",
-                        colNames:['','№ заказа', 'Предмет', 'Тип работы', 'Тема работы', 'Задание', 'Выполнение до', 'Осталось', 'Статус', 'Mоя ставка'],
-                        colModel :[
-                            {name:'id',index:'id',key:true,search:false,resize:false,hidden:true},
-                            {name:'num',index:'num',width:120,align:'center',resizable:false,editable:false,sortable:false,title:false,formatter:customNum},
-                            {name:'subject_order',index:'subject_order',width:160,align:'center',resizable:false,sortable:false,editable:false},
-                            {name:'type_order',index:'type_order',width:150,align:'center',resizable:false,editable:false,sortable:false},
-                            {name:'theme',index:'theme',width:350,align:'center',resizable:false,editable:false,sortable:false},
-                            {name:'task',index:'task',width:350,align:'center',resizable:false, editable:false,sortable:false},
-                            {name:'date_expire',index:'date_expire',width:150,align:'center',resizable:false,editable:false,sortable:false},
-                            {name:'remaining',index:'remaining',width:150,align:'center',resizable:false,editable:false,sortable:false},
-                            {name:'status_order',index:'status_order',width:130,align:'center',resizable:false,editable:false,sortable:false},
-                            {name:'author_last_bid',index:'author_last_bid',width:160,align:'center',resizable:false,editable:false,sortable:false,formatter:'currency',formatoptions:{defaultValue:'',thousandsSeparator: " ",decimalPlaces:0,suffix:" руб."}},
-                        ],
-                        //postData: {attempt : new Date()},
-                        pager: $('#pagerOrders'),
-                        rowNum: 15,
-                        rowList: [15,25,35],
-                        viewrecords: true,
-                        hidegrid: false,
-                        height: '600',
-                        altRows: true,
-                        altclass:'alt-row',
-                        onCellSelect: function(rowid, iCol) {
-                            var url = "{{ path("secure_author_order", {'num': 'num'}) }}";
-                            location.href = url.replace("num", rowid);
-                        }
-                    }).navGrid('#pagerOrders',{view:false,search:false,del:false,add:false,edit:false,refresh:true,refreshtext:'Обновить'},
-                            {},{},{},{},{}
-                    );
-                    function customNum(cellvalue) {
-                        return ("<span class='grid-cell-num'>" + cellvalue + "</span>");
-                    }
-                });
-                </script>
+                <div class="col-md-5">
+                    <div id="chatContainer">
+                        <div id="chatTopBar" class="rounded"></div>
+                        <div id="chatLineHolder"></div>
+                        <div id="chatUsers" class="rounded"></div>
+                        <div id="chatBottomBar" class="rounded">
+                            <div class="tip"></div>
+                            <form id="submitForm" method="post" action="">
+                                <!--<input id="chatText" name="chatText" class="rounded form-control" maxlength="255" />-->
+                                <textarea id="chatText" name="chatText" class="rounded form-control" ></textarea>
+                                <input type="button" id="btn-send-msg" class="blueButton btn btn-primary" value="Отправить" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function() {
+                document.title = "Просмотр заказа № " + {{ order.num }};
+                //$.fn.button.noConflict();
+            });
+        </script>
     {% endblock %}

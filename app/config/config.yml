@@ -92,9 +92,14 @@ doctrine:
         auto_mapping: true
         #mappings:
         #    AcmeAuthBundle: ~
-        #metadata_cache_driver: apc
-        #result_cache_driver: apc
-        #query_cache_driver: apc
+        metadata_cache_driver: apc
+        query_cache_driver: apc
+        result_cache_driver: apc
+        #  type: memcache
+        #  host: 127.0.0.1
+        #  port: 11211
+        #  class: Doctrine\Common\Cache\MemcacheCache
+        #  instance_class: Memcache
         #mappings:
         #            FOSUserBundle: ~
         #            AcmeAuthBundle:  ~
@@ -121,3 +126,8 @@ genemu_form:
         script_url: '/web/bundles/js/tinymce/tinymce.min.js'
         configs:
             entity_encoding: raw
+
+#winzou_cache:
+    #options:
+        #cache_dir: "%kernel.cache_dir%/winzou"
+        #default_driver: apc

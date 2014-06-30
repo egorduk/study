@@ -41,8 +41,8 @@
 
 /*Color of msg*/
 .chat{
-	/*background:url('../img/chat_line_bg.jpg') repeat-x #d5d5d5;*/
-	background : #fbf7a8;
+	/*background:url('../img/chat_line_bg.jpg') repeat-x #d5d5d5;
+	background : #fbf7a8;*/
 	min-height : 34px;
 	border : 1px solid #FFFFFF;
 	padding : 8px 6px 4px 10px;
@@ -50,8 +50,17 @@
 	margin : 0 4px 4px 0;
 }
 
+#chat-author{
+    background: #fbf7a8;
+}
+
 #chat-client{
-	background : #d993f7;
+	background: #d993f7;
+}
+
+#chat-system{
+    background: #FCF8E3;
+    border-color: red;
 }
 
 .chat:last-child,.chattest:last-child{
@@ -112,7 +121,9 @@
 
 
 #chatBottomBar{
-	background : url('../../images/chat/solid_gray.jpg') repeat-x #81c8fc;
+	/*background : url('../../images/chat/solid_gray.jpg') repeat-x #81c8fc;*/
+    background-color:#d0d0d0;
+    height: auto;
 	position : relative;
 	padding : 6px;
 }
@@ -122,7 +133,7 @@
 	width:0;
 	height:0;
 	border:10px solid transparent;
-	border-bottom-color:#eeeeee;
+	border-bottom-color:#d0d0d0;
 	top:-20px;
 	left:20px;
 }
@@ -131,11 +142,11 @@
 	/*background:url('../img/input_bg.jpg') repeat-x #81c8fc;*/
 	height:36px;
 	font:16px Calibri,Arial,sans-serif;
-	color:black;
+	color:white;
 	/*text-shadow:1px 1px 0 #E4E4E4;*/
 	padding:0 5px;
 	margin-right:5px;
-	width:235px;
+	width:587px;
 	outline:none;
 }
 
@@ -147,6 +158,7 @@
 /* Текстовое поле чата */
 input#chatText{
 	width : 590px;
+
 }
 
 

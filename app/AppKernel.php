@@ -18,6 +18,9 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new PunkAve\FileUploaderBundle\PunkAveFileUploaderBundle(),
+            //new Beryllium\CacheBundle\BerylliumCacheBundle(),
+            //new Aequasi\Bundle\MemcachedBundle\AequasiMemcachedBundle(),
+            new winzou\CacheBundle\winzouCacheBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

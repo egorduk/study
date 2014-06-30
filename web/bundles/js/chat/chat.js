@@ -5,8 +5,8 @@ $(document).ready(function(){
 var chat = {
 	data : {
 		lastID 		: 0,
-		noActivity	: 0,
-		role		: 0
+		noActivity	: 0
+        //role		: 0
 	},
 	init : function(){
 		chat.data.jspAPI = $('#chatLineHolder').jScrollPane({
@@ -14,7 +14,8 @@ var chat = {
 			verticalDragMaxHeight: 12
 		}).data('jsp');
 		var working = false;
-		$('#submitForm').submit(function() {
+		//$('#submitForm').submit(function() {
+        $("#btn-send-msg").click(function() {
 			chat.data.noActivity = 0;
 			var text = $('#chatText').val();
 		    if (text.length == 0 || working) {
@@ -22,25 +23,52 @@ var chat = {
 			}
 			working = true;
 			var tempID = 't' + Math.round(Math.random() * 1000000);
-			params = {
-					id			: tempID,
-					text		: text.replace(/</g,'&lt;').replace(/>/g,'&gt;')
-				};
+            var uid = chat.data.lastID;
+            var arr = [];
+			/*params = {
+                //id: tempID,
+                id: ++uid,
+                text: text.replace(/</g,'&lt;').replace(/>/g,'&gt;'),
+                msg: text
+            };*/
+            var nowDate = new Date();
+            var hours = nowDate.getHours() < 10 ? '0' + nowDate.getHours() : nowDate.getHours();
+            var minutes = nowDate.getMinutes() < 10 ? '0' + nowDate.getMinutes() : nowDate.getMinutes();
+            var seconds = nowDate.getSeconds() < 10 ? '0' + nowDate.getSeconds() : nowDate.getSeconds();
+            var time = hours + ':' + minutes + ':' + seconds;
+            var day = nowDate.getDate() < 10 ? '0' + nowDate.getDate() : nowDate.getDate();
+            var month = nowDate.getMonth();
+            month++;
+            month = month < 10 ? '0' + month : month;
+            var year = nowDate.getFullYear();
+            var date = day + '.' + month + '.' + year;
+            var container = $(".container");
+            var role_sender = container.data('role');
+            var login_sender = container.data('login');
+            var params = {msg: text, id: ++uid, date: date, time: time, role_sender: role_sender, login: login_sender};
+            //var uid = chat.data.lastID;
+            //params.id = ++uid;
+            //params.id = tempID;
+            arr.push(params);
+            chat.addChatLine(arr);
+            //chat.render('chatLine', params);
 			$.tzPOSTsubmitChat('sendMessage', text, function(response) {
 				working = false;
 				$('#chatText').val('').focus();
-				$('div.chat-' + tempID).remove();
+				//$('div.chat-' + tempID).remove();
 				params['id'] = response.insertID;
             });
+            //chat.addChatLine(arr);
+            //chat.getChats();
 			return false;
 		});
-		$.tzPOST('checkLogged', null, function(response) {
+		/*$.tzPOST('checkLogged', null, function(response) {
 			if (response.isLogged) {
                 //chat.login('Duk', 'avatar.jpg', 'admin');
 				//chat.login(r.loggedAs.name, r.loggedAs.avatar, r.loggedAs.role);
-                console.oog('logged');
+                //console.oog('logged');
 			}
-		});
+		});*/
 		(function getChatsTimeoutFunction(){
 			chat.getChats(getChatsTimeoutFunction);
 		})();
@@ -61,7 +89,7 @@ var chat = {
 			case 'chatLine':
 				if (params.role_sender == 1)
 					arr = [
-                        '<div class="chat chat-', params.id,' rounded">' +
+                        '<div id="chat-author" class="chat chat-', params.id,' rounded">' +
                             '<div class="row">' +
                                 '<div class="col-md-2">' +
                                     '<span class="login">', params.login,':</span></br>' +
@@ -75,14 +103,30 @@ var chat = {
                             '</div>' +
                         '</div>'
                     ];
-				else
+				else if (params.role_sender == 2)
 					arr = [
                         '<div id="chat-client" class="chat chat-', params.id,' rounded">' +
                             '<div class="row">' +
                                 '<div class="col-md-2">' +
                                     '<span class="login">', params.login,':</span></br>' +
                                     '<span class="datetime">' +
-                                        '<span class="date">', params.date + '</br>' +params.time,'</span>' +
+                                        '<span class="date">', params.date + '</br>' + params.time,'</span>' +
+                                    '</span>' +
+                                '</div>' +
+                                '<div class="col-md-10" style="margin-left:20px">' +
+                                    '<span class="text">', params.msg,'</span>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>'
+                    ];
+                else
+                    arr = [
+                        '<div id="chat-system" class="chat chat-', params.id,' rounded">' +
+                            '<div class="row">' +
+                                '<div class="col-md-2">' +
+                                    '<span class="login">Система:</span></br>' +
+                                    '<span class="datetime">' +
+                                        '<span class="date">', params.date + '</br>' + params.time,'</span>' +
                                     '</span>' +
                                 '</div>' +
                                 '<div class="col-md-10" style="margin-left:20px">' +
@@ -92,30 +136,19 @@ var chat = {
                         '</div>'
                     ];
 			break;
-			/*case 'user':
+			case 'user':
 				arr = [
-					'<div class="user" title="',params.name,'"><img src="',
-					params.avatar,'" width="50" height="50" onload="this.style.visibility=\'visible\'" /></div>'
+					'<div class="user" title="',params.login,'">' +
+                        '<img src="',params.avatar,'" width="50" height="50" onload="this.style.visibility=\'visible\'" />' +
+                    '</div>'
 				];
-			break;*/
+			break;
 		}
 		return arr.join('');
 	},
 	addChatLine : function(params) {
-		var d = new Date();
-		for(var i = 0; i < params.length; i++) {
-			/*if (params[i].time)  {
-				d.setUTCHours(params[i].time.hours, params[i].time.minutes, params[i].time.seconds);
-			}
-			params[i].time = (d.getHours() < 10 ? '0' : '' ) + d.getHours() + ':' + (d.getMinutes() < 10 ? '0':'') + d.getMinutes() + ':' + d.getSeconds();
-			if (params[i].date) {
-				d.setUTCMonth(params[i].date.month);
-				d.setUTCDate(params[i].date.day);
-				d.setUTCFullYear(params[i].date.year);
-				params[i].date = (d.getDate() < 10 ? '0' : '' ) + d.getDate() + '.' + (d.getMonth() < 10 ? '0' : '' ) + d.getMonth() + '.' + d.getUTCFullYear();
-			} else {
-				params[i].date = (d.getDate() < 10 ? '0' : '' ) + d.getDate() + '.' + ((d.getUTCMonth()+1) < 10 ? '0' : '' ) + (d.getUTCMonth()+1) + '.' + d.getUTCFullYear();
-            }*/
+		var paramsLength = params.length;
+		for(var i = 0; i < paramsLength; i++) {
 			var markup = chat.render('chatLine', params[i]), exists = $('#chatLineHolder .chat-' + params[i].id);
 			if (exists.length) {
 				exists.remove();
@@ -130,20 +163,19 @@ var chat = {
 				} else chat.data.jspAPI.getContentPane().append(markup);
 			} else chat.data.jspAPI.getContentPane().append(markup);
 		}
-		if (params.length != 0) {
+		if (paramsLength != 0) {
 			chat.data.jspAPI.reinitialise();
 			chat.data.jspAPI.scrollToBottom(true);
 		}
 	},
 	getChats : function(callback) {
 		$.tzGETgetChats('getChats', chat.data.lastID, function(response) {
-			var arr = [];
-			for(var i = 0; i < response.messages.length; i++) {
-				//chat.addChatLine(r.chats[i]);
+			var arr = [], responseLength = response.messages.length;
+			for(var i = 0; i < responseLength; i++) {
 				arr.push(response.messages[i]);
 			}
 			chat.addChatLine(arr);
-			if (response.messages.length) {
+			if (responseLength) {
 				chat.data.noActivity = 0;
 				chat.data.lastID = response.messages[i-1].id;
 			} else {
@@ -152,6 +184,7 @@ var chat = {
 			if (!chat.data.lastID) {
 				chat.data.jspAPI.getContentPane().html('<p class="noChats">Ничего еще не написано</p>');
 			}
+            var nextRequest = 1500;
 			if (chat.data.noActivity > 3 && chat.data.noActivity < 30) {
 				nextRequest = 2000;
 			} else if(chat.data.noActivity > 30 && chat.data.noActivity < 60) {
@@ -160,20 +193,17 @@ var chat = {
                 nextRequest = 6000;
 			} else if(chat.data.noActivity > 120 && chat.data.noActivity < 240) {
 				nextRequest = 8000;
-			}
-            else if(chat.data.noActivity > 240) {
+			} else if(chat.data.noActivity > 240) {
                 nextRequest = 10000;
             }
-            else {
-                var nextRequest = 1500;
-            }
-			setTimeout(callback,nextRequest);
+			setTimeout(callback, nextRequest);
+            //console.log(nextRequest);
 		});
 	},
 	getUsers : function(callback){
 		$.tzGETgetUsers('getUsers',null,function(response){
-			var users = [];
-			for(var i=0; i< response.users.length;i++) {
+			var users = [], responseLength = response.users.length;
+			for(var i=0; i < responseLength; i++) {
 				if (response.users[i]) {
 					users.push(chat.render('user', response.users[i]));
 				}
@@ -181,8 +211,7 @@ var chat = {
 			var message = '';
 			if (response.total < 1) {
 				message = 'Online: 0';
-			}
-			else {
+			} else {
 				message = 'Online: ' + response.total;
 			}
 			users.push('<p class="count">' + message + '</p>');
@@ -202,7 +231,7 @@ $.tzGETgetChats = function(action,data,callback){
 	$.post('', {action:action, lastId:data}, callback, 'json');
 };
 $.tzGETgetUsers = function(action,data,callback){
-	$.post('', {action:action}, callback, 'json');
+	//$.post('', {action:action}, callback, 'json');
 };
 
 // Метод jQuery для замещающего текста:
@@ -210,11 +239,11 @@ $.fn.defaultText = function(value){
 	var element = this.eq(0);
 	element.data('defaultText',value);
 	element.focus(function(){
-		if(element.val() == value){
+		if (element.val() == value){
 			element.val('').removeClass('defaultText');
 		}
 	}).blur(function(){
-		if(element.val() == '' || element.val() == value){
+		if (element.val() == '' || element.val() == value){
 			element.addClass('defaultText').val(value);
 		}
 	});

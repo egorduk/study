@@ -2,6 +2,8 @@
 
 namespace Acme\SecureBundle\Controller;
 
+use Doctrine\Common\Cache\ArrayCache;
+use Doctrine\Common\Cache\MemcachedCache;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Finder\Iterator\SortableIterator;
@@ -17,7 +19,6 @@ use Acme\SecureBundle\Form\Author\AuthorProfileForm;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Acme\SecureBundle\Entity\Author\BidFormValidate;
 use Acme\SecureBundle\Form\Author\BidForm;
-use Doctrine\Common\Cache\ApcCache;
 
 
 class AuthorController extends Controller
@@ -52,7 +53,7 @@ class AuthorController extends Controller
     {
         if ($type == "view" || $type == "edit") {
             $userId = $this->get('security.context')->getToken()->getUser();
-            $userId = 2;
+            //$userId = 2;
             $user = Helper::getUserById($userId);
             $userInfo = $user->getUserInfo();
             $showWindow = false;
@@ -196,7 +197,7 @@ class AuthorController extends Controller
                 }
             }
             return $this->render(
-                'AcmeSecureBundle:Author:order_new.html.twig', array('showWindow' => $showWindow)
+                'AcmeSecureBundle:Author:orders_new.html.twig', array('showWindow' => $showWindow)
             );
         }
         elseif ($type == "favorite") {
@@ -249,7 +250,7 @@ class AuthorController extends Controller
                 }
             }
             return $this->render(
-                'AcmeSecureBundle:Author:order_favorite.html.twig', array('showWindow' => $showWindow)
+                'AcmeSecureBundle:Author:orders_favorite.html.twig', array('showWindow' => $showWindow)
             );
         }
         elseif ($type == "bid") {
@@ -301,7 +302,7 @@ class AuthorController extends Controller
                 }
             }
             return $this->render(
-                'AcmeSecureBundle:Author:order_bid.html.twig', array('showWindow' => $showWindow)
+                'AcmeSecureBundle:Author:orders_bid.html.twig', array('showWindow' => $showWindow)
             );
         }
         elseif ($type == "work") {
@@ -345,7 +346,7 @@ class AuthorController extends Controller
                 return new JsonResponse($response);
             }
             return $this->render(
-                'AcmeSecureBundle:Author:order_work.html.twig', array('showWindow' => $showWindow)
+                'AcmeSecureBundle:Author:orders_work.html.twig', array('showWindow' => $showWindow)
             );
         }
     }
@@ -373,66 +374,51 @@ class AuthorController extends Controller
             $filesOrder = Helper::getFilesForOrder($order);
             $statusOrder = $order->getStatusOrder()->getCode();
             if ($statusOrder == 'w') {
+                $cache = $this->get('winzou_cache.apc');
                 if ($request->isXmlHttpRequest()) {
                     $action = $request->request->get('action');
                     $lastId = $request->request->get('lastId');
                     if ($action == 'getChats') {
-                        /*$cache = $this->get('cache');
-                        $cache->setNamespace('webchat_cache');
-                        $cached_data = $cache->fetch('test');
-                        if ($cached_data === false) {
-                            $messages = Helper::getChatMessages($user, $order, $lastId);
-                            //$cached_data = $SOMEAPI->getData($params);
-                            $cache->save('test', $messages, 3600);//TTL 1h
-                            $cached_data = $messages;
-                        } /*else {
-                        }*/
-                        //$a = $this->get('annotation_reader');
-                        //$b = $this->get('cache');
-                        //$b = new \Doctrine\Common\Cache\ApcCache();
-                        //$b->save('test','123',3600);
-
-
-                        /*$cached_data = $this->get('cache')->get('test');
-                        if ($cached_data) {
-                            //$foo = unserialize($fooString);
-                            $messages = $cached_data;
+                        /*if ($cache->contains('bar')) {
+                            $messages = $cache->fetch('bar');
+                            $q = "yes";
+                            //var_dump($messages);die;
                         } else {
                             $messages = Helper::getChatMessages($user, $order, $lastId);
-                            //$this->get('cache')->save('test', serialize($foo));
-                            $this->get('cache')->save('test', $messages);
+                            $cache->save('bar', $messages);
+                            $q = "no";
                         }*/
-                        /*$cacheDriver = new ApcCache();
-                        if ($cacheDriver->contains('test2')) {
-                            $messages = $cacheDriver->fetch('test2');
-                            //$messages = unserialize($messages);
-                        } else {
-                            $messages = Helper::getChatMessages($user, $order, $lastId);
-                            //$messages = "123";
-                            $cacheDriver->save('test2', $messages, 60);
-                        }*/
-                        //var_dump($this->get('cache')->fetch('test'));die;
+                        //$cache->delete('bar');
                         $messages = Helper::getChatMessages($user, $order, $lastId);
                         $arr = [];
                         foreach($messages as $index => $msg) {
+                        //for($i=0;$i<count($messages);$i++) {
                             $arr[$index]['id'] = $msg->getId();
                             $arr[$index]['msg'] = $msg->getMessage();
                             $arr[$index]['login'] = $msg->getUser()->getLogin();
                             $arr[$index]['date'] = $msg->getDateWrite()->format("d.m.Y");
                             $arr[$index]['time'] = $msg->getDateWrite()->format("H:i:s");
-                            $arr[$index]['role'] = $user->getRole()->getId();
-                            $arr[$index]['role_sender'] = $msg->getUser()->getRole()->getId();
+                            //$arr[$index]['role'] = $user->getUserRole()->getId();
+                            $arr[$index]['role_sender'] = $msg->getUser()->getUserRole()->getId();
+                            /*$arr[$i]['id'] = $messages[$i]['id'];
+                            $arr[$i]['msg'] = $messages[$i]['msg'];
+                            $arr[$i]['date'] = $messages[$i]['date_write']->format("d.m.Y");
+                            $arr[$i]['time'] = $messages[$i]['date_write']->format("H:i:s");
+                            $arr[$i]['role'] = $user->getRole()->getId();
+                            $arr[$i]['role_sender'] = $messages[$i]['sender_id'];
+                            $arr[$i]['login'] = $messages[$i]['user_login'];*/
                         }
                         return new Response(json_encode(array('messages' => $arr)));
                     }
                     elseif ($action == 'sendMessage') {
                         $message = $request->request->get('text');
+                        //$cache->deleteAll();
                         $insertId = Helper::addNewWebchatMessage($user, $order, $message);
                         return new Response(json_encode(array('insertID' => $insertId)));
                     }
                 }
                 return $this->render(
-                    'AcmeSecureBundle:Author:order_work.html.twig', array('files' => $filesOrder, 'order' => $order, 'client' => $clientLink)
+                    'AcmeSecureBundle:Author:order_work.html.twig', array('files' => $filesOrder, 'order' => $order, 'client' => $clientLink, 'user' => $user)
                 );
             }
             else {

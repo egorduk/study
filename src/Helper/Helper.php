@@ -1512,28 +1512,40 @@ class Helper
 
 
     public static function getChatMessages($user, $order, $lastId) {
-        //$config = new \Doctrine\ORM\Configuration();
-        //$config->setQueryCacheImpl(new \Doctrine\Common\Cache\ApcCache());
-        //$config->setResultCacheImpl(new \Doctrine\Common\Cache\ApcCache());
        $em = self::getContainer()->get('doctrine')->getManager();
        $messages = $em->getRepository(self::$_tableWebchatMessage)->createQueryBuilder('wm')
-            ->andWhere('wm.id > :lastId')
+           //->select("u.id AS sender_id,wm.date_write,wm.message AS msg,wm.id,u.login AS user_login")
+           ->andWhere('wm.id > :lastId')
             ->innerJoin('wm.user','u')
-            //->andWhere('wm.user = :user')
             ->andWhere('wm.user_order = :order')
-            //->setParameter('user', $user)
             ->setParameter('order', $order)
             ->setParameter('lastId', $lastId)
             ->getQuery()
-            //->useResultCache(true, 3600, 'test')
+            //->useResultCache(true, 60, 'chat')
+            //->setResultCacheId('chat')
+            //->getArrayResult();
             ->getResult();
-        //var_dump($messages[0]->getUser()->getRole()->getName());die;
+       /* $query = $em->createQuery("SELECT u.id AS sender_id,wm.date_write,wm.message AS msg,wm.id,u.login AS user_login
+            FROM AcmeSecureBundle:WebchatMessage AS wm
+            INNER JOIN AcmeAuthBundle:User AS u WITH u = :user
+            WHERE wm.user_order = :order AND wm.id > '$lastId'")
+            ->setParameter('user', $user)
+            ->setParameter('order', $order)
+            ->useResultCache(true, 36000, 'chat')
+            //->useResultCache(true)
+            //->useQueryCache(true)
+            //->setResultCacheId('chat')
+        ;
+        //var_dump($query->getQueryCacheDriver());die;
+        $messages = $query->getResult();*/
         return $messages;
     }
 
 
     public static function addNewWebchatMessage($user, $order, $message) {
         $em = self::getContainer()->get('doctrine')->getManager();
+        //$cacheDriver = $em->getConfiguration()->getResultCacheImpl();
+        //$cacheDriver->delete('chat');
         $webchatMessage = new WebchatMessage();
         $webchatMessage->setUserOrder($order);
         $webchatMessage->setUser($user);

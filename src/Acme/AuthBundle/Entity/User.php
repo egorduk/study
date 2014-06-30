@@ -20,7 +20,7 @@ use Symfony\Component\Serializer;
  * @ORM\Table(name="user")
  */
 //class User extends EntityRepository implements AdvancedUserInterface
-class User extends EntityRepository implements UserInterface, \Serializable
+class User extends EntityRepository //implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -242,16 +242,6 @@ class User extends EntityRepository implements UserInterface, \Serializable
         return $this->recovery_password;
     }
 
-    public function getOpenId()
-    {
-        return $this->openid_id;
-    }
-
-    public function setOpenId($openId)
-    {
-        $this->openid_id = $openId;
-    }
-
     public function setIsConfirm($value)
     {
         $this->is_confirm = $value;
@@ -262,12 +252,12 @@ class User extends EntityRepository implements UserInterface, \Serializable
         return $this->is_confirm;
     }
 
-    public function getRole()
+    public function getUserRole()
     {
         return $this->role;
     }
 
-    public function setRole($role)
+    public function setUserRole($role)
     {
         $this->role = $role;
     }
