@@ -364,12 +364,9 @@ class AuthorController extends Controller
             if (!$order) {
                 return new RedirectResponse($this->generateUrl('secure_author_index'));
             }
-<<<<<<< HEAD
             $userId = $this->get('security.context')->getToken()->getUser();
             $user = Helper::getUserById($userId);
-=======
             $user = $this->get('security.context')->getToken()->getUser();
->>>>>>> 9ad53dd71bdf1ce3b393bc81d617b1c5fa69084c
             $access = Helper::checkUserAccessForOrder($user, $order);
             if (!$access) {
                 return new RedirectResponse($this->generateUrl('secure_author_index'));
