@@ -72,21 +72,18 @@ class AuthController extends Controller
                     $user = Helper::getUserByEmailAndIsConfirm($userEmail);
                     if (!$user) {
                         $errorData = "Введен неправильный Email или пароль!";
-                    }
-                    else {
+                    } else {
                         $encodedPassword = Helper::getRegPassword($userPassword, $user->getSalt());
                         if (!StringUtils::equals($encodedPassword, $user->getPassword())) {
                             $errorData = "Введен неправильный Email или пароль!";
-                        }
-                        else {
+                        } else {
                             $roleId = $user->getUserRole()->getId();
                             if ($roleId == 1) {
                                 $role = 'ROLE_AUTHOR';
-                            }
-                            else {
+                            } else {
                                 $role = 'ROLE_CLIENT';
                             }
-                            $token = new UsernamePasswordToken((string)$user->getId(), null, 'secured_area', array($role));
+                            $token = new UsernamePasswordToken($user, null, 'secured_area', array($role));
                             $this->get('security.context')->setToken($token);
                             if ($role == 'ROLE_AUTHOR') {
                                 return new RedirectResponse($this->generateUrl('secure_author_index'));

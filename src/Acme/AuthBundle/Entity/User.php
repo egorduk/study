@@ -20,7 +20,7 @@ use Symfony\Component\Serializer;
  * @ORM\Table(name="user")
  */
 //class User extends EntityRepository implements AdvancedUserInterface
-class User extends EntityRepository //implements UserInterface, \Serializable
+class User extends EntityRepository implements UserInterface//, \Serializable
 {
     /**
      * @ORM\Id
