@@ -17,7 +17,8 @@ var chat = {
 		//$('#submitForm').submit(function() {
         $("#btn-send-msg").click(function() {
 			chat.data.noActivity = 0;
-			var text = $('#chatText').val();
+            var chatText = $('#chatText');
+			var text = chatText.val();
 		    if (text.length == 0 || working) {
 				return false;
 			}
@@ -33,6 +34,7 @@ var chat = {
             };*/
             var nowDate = new Date();
             var hours = nowDate.getHours() < 10 ? '0' + nowDate.getHours() : nowDate.getHours();
+            //hours++;
             var minutes = nowDate.getMinutes() < 10 ? '0' + nowDate.getMinutes() : nowDate.getMinutes();
             var seconds = nowDate.getSeconds() < 10 ? '0' + nowDate.getSeconds() : nowDate.getSeconds();
             var time = hours + ':' + minutes + ':' + seconds;
@@ -51,10 +53,11 @@ var chat = {
             //params.id = tempID;
             arr.push(params);
             chat.addChatLine(arr);
+            chatText.val('');
             //chat.render('chatLine', params);
 			$.tzPOSTsubmitChat('sendMessage', text, function(response) {
 				working = false;
-				$('#chatText').val('').focus();
+                chatText.focus();
 				//$('div.chat-' + tempID).remove();
 				params['id'] = response.insertID;
             });

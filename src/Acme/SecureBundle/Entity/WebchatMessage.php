@@ -32,13 +32,13 @@ class WebchatMessage extends EntityRepository
      * @ORM\ManyToOne(targetEntity="Acme\AuthBundle\Entity\User", inversedBy="link_webchat_user", cascade={"all"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      **/
-    private $user;
+    protected $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="UserOrder", inversedBy="link_webchat_user_order", cascade={"all"})
      * @ORM\JoinColumn(name="user_order_id", referencedColumnName="id")
      **/
-    private $user_order;
+    protected $user_order;
 
 
     public function __construct(){

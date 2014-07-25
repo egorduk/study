@@ -10,6 +10,7 @@ use Acme\SecureBundle\Entity\StatusOrder;
 use Acme\SecureBundle\Entity\UserBid;
 use Acme\SecureBundle\Entity\UserOrder;
 use Acme\SecureBundle\Entity\WebchatMessage;
+use Proxies\__CG__\Acme\AuthBundle\Entity\User;
 use Proxies\__CG__\Acme\SecureBundle\Entity\Author\AuthorFile;
 use Symfony\Component\Yaml\Yaml;
 use Doctrine\ORM\EntityManager;
@@ -1546,13 +1547,25 @@ class Helper
         $em = self::getContainer()->get('doctrine')->getManager();
         //$cacheDriver = $em->getConfiguration()->getResultCacheImpl();
         //$cacheDriver->delete('chat');
+        //var_dump($em->getUnitOfWork());die;
+        //$detachedEntity = unserialize($user);
+        //$entity = $em->merge($detachedEntity);
         $webchatMessage = new WebchatMessage();
         $webchatMessage->setUserOrder($order);
+        $user = self::getUserById($user->getId());
         $webchatMessage->setUser($user);
         $webchatMessage->setMessage($message);
+        //$em->merge($entity);
         $em->persist($webchatMessage);
         $em->flush();
         return $webchatMessage->getId();
+        /*$date = new \DateTime();
+        $date = $date->format('Y-m-d H:i:s');
+        $userId = $user->getId();
+        $orderId = $order->getId();
+        $stmt = $em->getConnection()
+            ->prepare("INSERT INTO webchat_message(message, date_write, user_id, user_order_id) VALUES('$message','$date','$userId','$orderId')");
+        $stmt->execute();*/
     }
 
 

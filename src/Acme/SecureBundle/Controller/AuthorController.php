@@ -364,8 +364,8 @@ class AuthorController extends Controller
             if (!$order) {
                 return new RedirectResponse($this->generateUrl('secure_author_index'));
             }
-            $userId = $this->get('security.context')->getToken()->getUser();
-            $user = Helper::getUserById($userId);
+            //$userId = $this->get('security.context')->getToken()->getUser();
+            //$user = Helper::getUserById($userId);
             $user = $this->get('security.context')->getToken()->getUser();
             $access = Helper::checkUserAccessForOrder($user, $order);
             if (!$access) {
@@ -376,7 +376,7 @@ class AuthorController extends Controller
             $codeStatusOrder = $order->getStatusOrder()->getCode();
             if ($codeStatusOrder == 'w') {
                 $session = $request->getSession();
-                $session->set('curr_order', $order);
+                //$session->set('curr_order', $order);
                 $session->set('curr_user', $user);
                 $session->save();
                 return $this->render(
@@ -462,9 +462,8 @@ class AuthorController extends Controller
         }
         elseif (is_numeric($num) && $request->isXmlHttpRequest()) {
             //$cache = $this->get('winzou_cache.apc');
-            $session = $request->getSession();
-            $order = $session->get('curr_order');
-            $user = $session->get('curr_user');
+            $order = Helper::getOrderByNumForAuthor($num);
+            $user = $this->get('security.context')->getToken()->getUser();
             $action = $request->request->get('action');
             $lastId = $request->request->get('lastId');
             if ($action == 'getChats') {
@@ -485,16 +484,18 @@ class AuthorController extends Controller
                 }*/
                 //$cache->delete('bar');
                 $messages = Helper::getChatMessages($user, $order, $lastId);
-                $arr = [];
+                //var_dump($messages);die();
+                $messageArray = [];
                 foreach($messages as $index => $msg) {
+                    $messageArray[$index]['id'] = $msg->getId();
+                    $messageArray[$index]['msg'] = $msg->getMessage();
+                    $messageArray[$index]['login'] = $msg->getUser()->getLogin();
+                    $messageArray[$index]['date'] = $msg->getDateWrite()->format("d.m.Y");
+                    $messageArray[$index]['time'] = $msg->getDateWrite()->format("H:i:s");
+                    $messageArray[$index]['role_sender'] = $msg->getUser()->getUserRole()->getId();
+
                     //for($i=0;$i<count($messages);$i++) {
-                    $arr[$index]['id'] = $msg->getId();
-                    $arr[$index]['msg'] = $msg->getMessage();
-                    $arr[$index]['login'] = $msg->getUser()->getLogin();
-                    $arr[$index]['date'] = $msg->getDateWrite()->format("d.m.Y");
-                    $arr[$index]['time'] = $msg->getDateWrite()->format("H:i:s");
                     //$arr[$index]['role'] = $user->getUserRole()->getId();
-                    $arr[$index]['role_sender'] = $msg->getUser()->getUserRole()->getId();
                     /*$arr[$i]['id'] = $messages[$i]['id'];
                     $arr[$i]['msg'] = $messages[$i]['msg'];
                     $arr[$i]['date'] = $messages[$i]['date_write']->format("d.m.Y");
@@ -503,11 +504,16 @@ class AuthorController extends Controller
                     $arr[$i]['role_sender'] = $messages[$i]['sender_id'];
                     $arr[$i]['login'] = $messages[$i]['user_login'];*/
                 }
-                return new Response(json_encode(array('messages' => $arr)));
+                return new Response(json_encode(array('messages' => $messageArray)));
             }
             elseif ($action == 'sendMessage') {
                 $message = $request->request->get('text');
+                $order = Helper::getOrderByNumForAuthor($num);
+                //$session = $request->getSession();
+                //$user = $session->get('curr_user');
+                $user = $this->get('security.context')->getToken()->getUser();
                 //$cache->deleteAll();
+                //var_dump($user);die;
                 $insertId = Helper::addNewWebchatMessage($user, $order, $message);
                 return new Response(json_encode(array('insertID' => $insertId)));
             }
