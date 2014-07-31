@@ -132,8 +132,7 @@ class Helper
     }
 
 
-    public static function getContainer()
-    {
+    public static function getContainer() {
         if(self::$kernel instanceof \AppKernel) {
             if(!self::$kernel->getContainer() instanceof Container) {
                 self::$kernel->boot();
