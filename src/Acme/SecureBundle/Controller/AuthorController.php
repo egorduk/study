@@ -507,7 +507,7 @@ class AuthorController extends Controller
                 return new Response(json_encode(array('messages' => $messageArray)));
             }
             elseif ($action == 'sendMessage') {
-                $message = $request->request->get('text');
+                $message = $request->request->get('message');
                 $order = Helper::getOrderByNumForAuthor($num);
                 //$session = $request->getSession();
                 //$user = $session->get('curr_user');
@@ -516,6 +516,10 @@ class AuthorController extends Controller
                 //var_dump($user);die;
                 $insertId = Helper::addNewWebchatMessage($user, $order, $message);
                 return new Response(json_encode(array('insertID' => $insertId)));
+            }
+            elseif ($action == 'getUsers') {
+                $users = Helper::getUsersForWebchat();
+                return new Response(json_encode(array('users' => $users)));
             }
         }
         else {

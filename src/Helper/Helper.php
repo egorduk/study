@@ -1707,4 +1707,14 @@ class Helper
             ->getResult();
         return count($orders);
     }
+
+
+    public static function getUsersForWebchat() {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $stmt = $em->getConnection()
+            ->prepare("SELECT * FROM (SELECT b.user_id AS uid,b.*,u.avatar,u.login FROM user_bid AS b JOIN user_order AS uo ON b.user_order_id = uo.id JOIN `user` AS u ON b.user_id = u.id WHERE b.user_order_id = '$id' AND b.is_show_author = '1' ORDER BY b.date_bid DESC) AS t GROUP BY uid");
+        $stmt->execute();
+        $users = $stmt->fetchAll();
+        return $users;
+    }
 }

@@ -33,8 +33,15 @@ var chat = {
                 msg: text
             };*/
             var nowDate = new Date();
-            var hours = nowDate.getHours() < 10 ? '0' + nowDate.getHours() : nowDate.getHours();
-            //hours++;
+            var a = nowDate.getTimezoneOffset();
+            //console.log(a);
+            var b = (240 - Math.abs(a)) / 60;
+            //var hours = nowDate.getHours() < 10 ? '0' + nowDate.getHours() : nowDate.getHours();
+            var hours = nowDate.getHours();
+            hours = parseInt(hours, 10);
+            hours = hours + b;
+            hours = hours < 10 ? '0' + hours : hours;
+            //console.log(hours);
             var minutes = nowDate.getMinutes() < 10 ? '0' + nowDate.getMinutes() : nowDate.getMinutes();
             var seconds = nowDate.getSeconds() < 10 ? '0' + nowDate.getSeconds() : nowDate.getSeconds();
             var time = hours + ':' + minutes + ':' + seconds;
@@ -127,7 +134,7 @@ var chat = {
                         '<div id="chat-system" class="chat chat-', params.id,' rounded">' +
                             '<div class="row">' +
                                 '<div class="col-md-2">' +
-                                    '<span class="login">Система:</span></br>' +
+                                    '<span class="login">', params.login,':</span></br>' +
                                     '<span class="datetime">' +
                                         '<span class="date">', params.date + '</br>' + params.time,'</span>' +
                                     '</span>' +
@@ -138,6 +145,7 @@ var chat = {
                             '</div>' +
                         '</div>'
                     ];
+
 			break;
 			case 'user':
 				arr = [
@@ -204,18 +212,19 @@ var chat = {
 		});
 	},
 	getUsers : function(callback){
-		$.tzGETgetUsers('getUsers',null,function(response){
+		$.tzGETgetUsers('getUsers', null, function(response){
 			var users = [], responseLength = response.users.length;
-			for(var i=0; i < responseLength; i++) {
+            //console.log(response);
+			for(var i = 0; i < responseLength; i++) {
 				if (response.users[i]) {
 					users.push(chat.render('user', response.users[i]));
 				}
 			}
 			var message = '';
-			if (response.total < 1) {
+			if (responseLength < 1) {
 				message = 'Online: 0';
 			} else {
-				message = 'Online: ' + response.total;
+				message = 'Online: ' + responseLength;
 			}
 			users.push('<p class="count">' + message + '</p>');
 			$('#chatUsers').html(users.join(''));
@@ -228,13 +237,13 @@ $.tzPOST = function(action, data, callback){
 	$.post('', {action : action}, callback, 'json');
 };
 $.tzPOSTsubmitChat = function(action, data, callback){
-	$.post('', {action:action, text:data}, callback, 'json');
+	$.post('', {action : action, message : data}, callback, 'json');
 };
 $.tzGETgetChats = function(action,data,callback){
-	$.post('', {action:action, lastId:data}, callback, 'json');
+	$.post('', {action : action, lastId : data}, callback, 'json');
 };
-$.tzGETgetUsers = function(action,data,callback){
-	//$.post('', {action:action}, callback, 'json');
+$.tzGETgetUsers = function(action, data, callback){
+	$.post('', {action : action}, callback, 'json');
 };
 
 // Метод jQuery для замещающего текста:
@@ -251,4 +260,4 @@ $.fn.defaultText = function(value){
 		}
 	});
 	return element.blur();
-}
+};
