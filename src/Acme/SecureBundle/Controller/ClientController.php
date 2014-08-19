@@ -429,18 +429,39 @@ class ClientController extends Controller
      */
     public function actionAction(Request $request, $mode, $id)
     {
-        if ($mode == "info" && true === $this->get('security.context')->isGranted('ROLE_AUTHOR')) {
+        if ($mode == "info" && true === $this->get('security.context')->isGranted('ROLE_AUTHOR') && !$request->isXmlHttpRequest() && is_numeric($id)) {
             $user = Helper::getUserById($id);
-            $order = Helper::getStatisticAboutClient($user);
-            return $this->render(
-                'AcmeSecureBundle:Client:action_info.html.twig', array('mode' => 'authorView', 'user' => $user)
-            );
-        } elseif ($mode == "info" && true === $this->get('security.context')->isGranted('ROLE_CLIENT')) {
+            if ($user) {
+                $orders = Helper::getClientTotalOrders($user);
+                $user->setClientIdInfo($id);
+                return $this->render(
+                    'AcmeSecureBundle:Client:action_info.html.twig', array('mode' => 'authorView', 'user' => $user, 'countOrders' => count($orders))
+                );
+            } else {}
+        } elseif ($request->isXmlHttpRequest() && true === $this->get('security.context')->isGranted('ROLE_AUTHOR') && is_numeric($id) && $mode == "info") {
+            $user = Helper::getUserById($id);
+            if ($user) {
+                $response = new Response();
+                $orders = Helper::getClientTotalOrders($user);
+                foreach($orders as $index => $order) {
+                    $response->rows[$index]['id'] = $order->getId();
+                    $response->rows[$index]['cell'] = array(
+                        $order->getId(),
+                        $order->getNum(),
+                        $order->getSubjectOrder()->getChildName(),
+                        $order->getTypeOrder()->getName(),
+                        $order->getTheme()
+                    );
+                }
+                return new JsonResponse($response);
+            } else {}
+        }
+        /*elseif ($mode == "info" && true === $this->get('security.context')->isGranted('ROLE_CLIENT')) {
             $user = Helper::getUserById($id);
             return $this->render(
                 'AcmeSecureBundle:Client:action_info.html.twig', array('mode' => 'clientView', 'user' => $user)
             );
-        }
+        }*/
     }
 
 

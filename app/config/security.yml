@@ -56,7 +56,7 @@ security:
 
         - { path: ^/secure/author/*, roles: ROLE_AUTHOR } #ROLE_CLIENT
         - { path: ^/secure/client/.*/info, roles: ROLE_AUTHOR }
-        - { path: ^/secure/client/.*/info, roles: ROLE_CLIENT }
+        #- { path: ^/secure/client/.*/info, roles: ROLE_CLIENT }
         #- { path: ^/secure/client/.*, roles: ROLE_CLIENT }
         #- { path: ^/secure/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 

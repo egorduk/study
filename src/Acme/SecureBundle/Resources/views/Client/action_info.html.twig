@@ -1,12 +1,26 @@
 {% extends "AcmeSecureBundle::layout_client.html.twig" %}
 {% block title "Профиль заказчика" %}
     {% block content %}
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
+        <!--<script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.fmatter.js') }}"></script>-->
         <style>
-            .Message {
+            /*.Message {
                 position: relative;
             }
             .Message-body {
                 font-size: 18px;
+            }*/
+            .alt-row {
+                background-color: #f3f3f3;
+                background-image: none;
+            }
+            .grid-cell-num {
+                color: black;
+                font-size: 20px;
+                font-weight: bold;
             }
         </style>
             {% if (mode == 'authorView') %}
@@ -16,27 +30,52 @@
                         <p>Роль: {{ user.userrole.name }}</p>
                         <p>Дата регистрации в системе: {{ user.datereg.format("d.m.Y") }}</p>
                         <p>Страна: <img src='{{ asset('bundles/images/flags/') }}{{ user.userInfo.country.code }}.png' alt={{ user.userInfo.country.name }} title={{ user.userInfo.country.name }}></p>
-                        <p>Заказано работ в системе: {{  }}</p>
+                        <p>Заказано работ в системе: {{ countOrders }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div  class="">
+                        <table id="listTotalOrders"></table>
+                        <div id="pagerTotalOrders"></div>
                     </div>
                 </div>
             {% else %}
             <div class="row">
                 <div class="col-xs-4 col-xs-offset-4">
-
                 </div>
             </div>
             {% endif %}
-            <script>
-                $(document).ready(function() {
-                    /*function format(state) {
-                        return "<img title='" + state.text + "' class='flag' src='{{ asset('bundles/images/flags/') }}" + state.id.toLowerCase() + ".png'/>";
-                    }
-                    $("#formProfile_selectorCountry").select2({
-                        minimumResultsForSearch: -1,
-                        formatResult: format,
-                        formatSelection: format,
-                        escapeMarkup: function(m) { return m; }
-                    });*/
-                });
-            </script>
+        <script>
+        $(document).ready(function() {
+            $.fn.button.noConflict();
+            var grid = $("#listTotalOrders");
+            grid.jqGrid({
+                url: {{ path('secure_client_action', { mode: 'info', id: user.clientidinfo }) | json_encode | raw }},
+                datatype: 'json',
+                mtype: 'POST',
+                recordtext: "Просмотр заказов {0} - {1}",
+                colNames:['','№ заказа', 'Предмет', 'Тип работы', 'Тема работы'],
+                colModel :[
+                    {name:'id',index:'id',key:true,search:false,resize:false,hidden:true},
+                    {name:'num',index:'num',width:100,align:'center',resizable:false,editable:false,sortable:false},
+                    {name:'subject_order',index:'subject_order',width:160,align:'center',resizable:false,editable:false,sortable:false},
+                    {name:'type_order',index:'type_order',width:150,align:'center',resizable:false,editable:false,sortable:false},
+                    {name:'theme',index:'theme',width:290,align:'center',resizable:false,editable:false,sortable:false}
+                ],
+                pager: $('#pagerTotalOrders'),
+                rowNum: 10,
+                rowList: [15,25,35],
+                sortname: 'num',
+                sortorder: 'asc',
+                viewrecords: true,
+                hidegrid: false,
+                height: 'auto',
+                altRows: true,
+                altclass:'alt-row'
+            }).navGrid('#pagerTotalOrders',{view:false,search:false,del:false,add:false,edit:false,refresh:true},{},{},{},{},{});
+            function customNum(cellvalue) {
+                return ("<span class='grid-cell-num'>" + cellvalue + "</span>");
+            }
+        });
+        </script>
     {% endblock %}

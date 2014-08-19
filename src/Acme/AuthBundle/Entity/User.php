@@ -163,6 +163,7 @@ class User extends EntityRepository implements UserInterface//, \Serializable
 
 
     private $unEncodePass = "";
+    private $clientIdInfo;
 
 
     public function __construct()
@@ -378,6 +379,15 @@ class User extends EntityRepository implements UserInterface//, \Serializable
     public function getAvatar() {
         return $this->avatar;
     }
+
+    public function setClientIdInfo($id) {
+        $this->clientIdInfo = $id;
+    }
+
+    public function getClientIdInfo() {
+        return $this->clientIdInfo;
+    }
+
 
     /**
      * @see \Serializable::serialize()

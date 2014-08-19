@@ -104,8 +104,7 @@ class Helper
         return true;
     }
 
-    public static function isExistsUserById($userId)
-    {
+    public static function isExistsUserById($userId) {
         $container = self::getContainer();
         $em = $container->get('doctrine')->getManager();
         $query = $em->createQuery('SELECT u.id FROM AcmeAuthBundle:User u WHERE u.id = :id')
@@ -248,10 +247,10 @@ class Helper
     public static function getUserById($userId) {
         $user = self::getContainer()->get('doctrine')->getRepository(self::$_tableUser)
             ->findOneById($userId);
-        if (!$user) {
-            return false;
+        if ($user) {
+            return $user;
         }
-        return $user;
+        return false;
     }
 
 
@@ -1716,32 +1715,33 @@ class Helper
     }
 
 
-    public static function getStatisticAboutClient($user) {
+    public static function getClientTotalOrders($user) {
         $em = self::getContainer()->get('doctrine')->getManager();
-        /*$statusOrder = new StatusOrder();
-        $statusOrder->setCode('w');
-        $order = $em->getRepository(self::$_tableUserOrder)
-            ->findBy(array('user' => $user, 'status_order' => $statusOrder));*/
         $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
             ->innerJoin('AcmeSecureBundle:StatusOrder', 'so', 'WITH', 'so = uo.status_order')
             ->innerJoin('AcmeAuthBundle:User', 'u', 'WITH', 'uo.user = u')
             ->andWhere('uo.user = :user')
-           // ->andWhere('ub.user_order = uo')
-            ->andWhere('so.code = :code')
-            //->andWhere('ub.is_confirm_author = 1')
+            ->andWhere('so.code IN(:code)')
             ->andWhere('uo.is_show_client = 1')
             ->andWhere('uo.is_show_author = 1')
-            //->andWhere('ub.is_show_client = 1')
-            //->andWhere('ub.is_show_author = 1')
-            //->groupBy('ub.user_order')
             ->setParameter('user', $user)
-            ->setParameter('code', array('w', 'e', 'c', 'g'))
+            ->setParameter('code', array_values(array('w', 'e', 'ce', 'g')))
             ->getQuery()
             ->getResult();
-        var_dump(count($orders));die;
-        if ($order) {
-            return $order;
+        if ($orders) {
+            return $orders;
         }
         return false;
     }
+
+
+    /*public static function isExistsClientById($userId) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $user = $em->getRepository(self::$_tableUser)
+            ->findOneById($userId);
+        if (!$user) {
+            return false;
+        }
+        return true;
+    }*/
 }
