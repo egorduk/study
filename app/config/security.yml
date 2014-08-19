@@ -53,8 +53,11 @@ security:
         - { path: ^/auth/*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/client/*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/author/*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/secure/client/*, roles: ROLE_CLIENT }
+
         - { path: ^/secure/author/*, roles: ROLE_AUTHOR } #ROLE_CLIENT
+        - { path: ^/secure/client/.*/info, roles: ROLE_AUTHOR }
+        - { path: ^/secure/client/.*/info, roles: ROLE_CLIENT }
+        #- { path: ^/secure/client/.*, roles: ROLE_CLIENT }
         #- { path: ^/secure/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
     encoders:

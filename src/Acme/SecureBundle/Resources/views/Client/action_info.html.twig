@@ -1,0 +1,42 @@
+{% extends "AcmeSecureBundle::layout_client.html.twig" %}
+{% block title "Профиль заказчика" %}
+    {% block content %}
+        <style>
+            .Message {
+                position: relative;
+            }
+            .Message-body {
+                font-size: 18px;
+            }
+        </style>
+            {% if (mode == 'authorView') %}
+                <div class="row">
+                    <div  class="col-xs-5 col-xs-offset-4">
+                        <p>Ник: {{ user.login }}</p>
+                        <p>Роль: {{ user.userrole.name }}</p>
+                        <p>Дата регистрации в системе: {{ user.datereg.format("d.m.Y") }}</p>
+                        <p>Страна: <img src='{{ asset('bundles/images/flags/') }}{{ user.userInfo.country.code }}.png' alt={{ user.userInfo.country.name }} title={{ user.userInfo.country.name }}></p>
+                        <p>Заказано работ в системе: {{  }}</p>
+                    </div>
+                </div>
+            {% else %}
+            <div class="row">
+                <div class="col-xs-4 col-xs-offset-4">
+
+                </div>
+            </div>
+            {% endif %}
+            <script>
+                $(document).ready(function() {
+                    /*function format(state) {
+                        return "<img title='" + state.text + "' class='flag' src='{{ asset('bundles/images/flags/') }}" + state.id.toLowerCase() + ".png'/>";
+                    }
+                    $("#formProfile_selectorCountry").select2({
+                        minimumResultsForSearch: -1,
+                        formatResult: format,
+                        formatSelection: format,
+                        escapeMarkup: function(m) { return m; }
+                    });*/
+                });
+            </script>
+    {% endblock %}

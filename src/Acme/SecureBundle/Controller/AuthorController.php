@@ -6,6 +6,7 @@ use Doctrine\Common\Cache\ApcCache;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\MemcachedCache;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Finder\Iterator\SortableIterator;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\Query;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Symfony\Component\Security\Core\SecurityContext;
 use Helper\Helper;
 use Acme\SecureBundle\Entity\Author\AuthorProfileFormValidate;
@@ -367,9 +369,10 @@ class AuthorController extends Controller
             //$userId = $this->get('security.context')->getToken()->getUser();
             //$user = Helper::getUserById($userId);
             $user = $this->get('security.context')->getToken()->getUser();
-            $access = Helper::checkUserAccessForOrder($user, $order);
-            if (!$access) {
+            if (false === $this->get('security.context')->isGranted('ROLE_AUTHOR')) {
                 return new RedirectResponse($this->generateUrl('secure_author_index'));
+                //throw new \Symfony\Component\Security\Core\Exception\AccessDeniedException [403];
+                //throw new AccessException [500];
             }
             $clientLink = Helper::getUserLinkProfile($order, "client", $this->container);
             $filesOrder = Helper::getFilesForOrder($order);
@@ -377,8 +380,8 @@ class AuthorController extends Controller
             if ($codeStatusOrder == 'w') {
                 $session = $request->getSession();
                 //$session->set('curr_order', $order);
-                $session->set('curr_user', $user);
-                $session->save();
+                //$session->set('curr_user', $user);
+                //$session->save();
                 return $this->render(
                     'AcmeSecureBundle:Author:order_work.html.twig', array('files' => $filesOrder, 'order' => $order, 'client' => $clientLink, 'user' => $user)
                 );

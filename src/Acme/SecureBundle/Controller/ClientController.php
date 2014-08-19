@@ -74,11 +74,9 @@ class ClientController extends Controller
             $userInfo = $user->getUserInfo();
             $showWindow = false;
         }
-
         if ($type == "view") {
             return array('formProfile' =>'', 'user' => $user, 'userInfo' => $userInfo, 'showWindow' => $showWindow);
-        }
-        elseif ($type == "edit") {
+        } elseif ($type == "edit") {
             $profileValidate = new ClientProfileFormValidate();
             $profileValidate->setIcq($userInfo->getIcq());
             $profileValidate->setSkype($userInfo->getSkype());
@@ -88,10 +86,8 @@ class ClientController extends Controller
             $profileValidate->setSurname($userInfo->getSurname());
             $profileValidate->setLastname($userInfo->getLastname());
             $profileValidate->setCountry($userInfo->getCountry()->getCode());
-
             $formProfile = $this->createForm(new ClientProfileForm(), $profileValidate);
             $formProfile->handleRequest($request);
-
             if ($request->isMethod('POST')) {
                 if ($formProfile->get('save')->isClicked()) {
                     if ($formProfile->isValid()) {
@@ -101,10 +97,8 @@ class ClientController extends Controller
                     }
                 }
             }
-
             return array('formProfile' => $formProfile->createView(), 'user' => '', 'userInfo' => $userInfo, 'showWindow' => $showWindow);
-        }
-        else {
+        } else {
             return new RedirectResponse($this->generateUrl('secure_client_index'));
         }
     }
@@ -425,6 +419,27 @@ class ClientController extends Controller
         //else
         {
 
+        }
+    }
+
+
+    /**
+     * @Template()
+     * @return array
+     */
+    public function actionAction(Request $request, $mode, $id)
+    {
+        if ($mode == "info" && true === $this->get('security.context')->isGranted('ROLE_AUTHOR')) {
+            $user = Helper::getUserById($id);
+            $order = Helper::getStatisticAboutClient($user);
+            return $this->render(
+                'AcmeSecureBundle:Client:action_info.html.twig', array('mode' => 'authorView', 'user' => $user)
+            );
+        } elseif ($mode == "info" && true === $this->get('security.context')->isGranted('ROLE_CLIENT')) {
+            $user = Helper::getUserById($id);
+            return $this->render(
+                'AcmeSecureBundle:Client:action_info.html.twig', array('mode' => 'clientView', 'user' => $user)
+            );
         }
     }
 

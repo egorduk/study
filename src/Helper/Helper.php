@@ -1605,20 +1605,18 @@ class Helper
                 $authorAvatar = $user->getAvatar();
                 $authorId = $user->getId();
                 $pathAvatar = Helper::getFullPathToAvatar($authorAvatar);
-                $url = $container->get('router')->generate('secure_author_action', array('type' => 'view_author_profile', 'id' => $authorId));
-            }
-            else {
+                $url = $container->get('router')->generate('secure_author_action', array('mode' => 'info', 'id' => $authorId));
+            } else {
                 return null;
             }
-        }
-        else {
+        } else {
             $login = $order->getUser()->getLogin();
             $clientAvatar = $order->getUser()->getAvatar();
             $pathAvatar = Helper::getFullPathToAvatar($clientAvatar);
             $clientId = $order->getUser()->getId();
-            $url = $container->get('router')->generate('secure_client_action', array('type' => 'view_client_profile', 'id' => $clientId));
+            $url = $container->get('router')->generate('secure_client_action', array('mode' => 'info', 'id' => $clientId));
         }
-        $link = "<img src='$pathAvatar' align='middle' alt='Аватар' width='110px' height='auto' class='thumbnail'><a href='$url' class='label label-primary'>$login</a>";
+        $link = "<img src='$pathAvatar' align='middle' alt='Аватар' width='110px' height='auto' class='thumbnail'><a href='$url' target='_blank' class='label label-primary'>$login</a>";
         return $link;
     }
 
@@ -1715,5 +1713,35 @@ class Helper
         $stmt->execute();
         $users = $stmt->fetchAll();
         return $users;
+    }
+
+
+    public static function getStatisticAboutClient($user) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        /*$statusOrder = new StatusOrder();
+        $statusOrder->setCode('w');
+        $order = $em->getRepository(self::$_tableUserOrder)
+            ->findBy(array('user' => $user, 'status_order' => $statusOrder));*/
+        $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
+            ->innerJoin('AcmeSecureBundle:StatusOrder', 'so', 'WITH', 'so = uo.status_order')
+            ->innerJoin('AcmeAuthBundle:User', 'u', 'WITH', 'uo.user = u')
+            ->andWhere('uo.user = :user')
+           // ->andWhere('ub.user_order = uo')
+            ->andWhere('so.code = :code')
+            //->andWhere('ub.is_confirm_author = 1')
+            ->andWhere('uo.is_show_client = 1')
+            ->andWhere('uo.is_show_author = 1')
+            //->andWhere('ub.is_show_client = 1')
+            //->andWhere('ub.is_show_author = 1')
+            //->groupBy('ub.user_order')
+            ->setParameter('user', $user)
+            ->setParameter('code', array('w', 'e', 'c', 'g'))
+            ->getQuery()
+            ->getResult();
+        var_dump(count($orders));die;
+        if ($order) {
+            return $order;
+        }
+        return false;
     }
 }
