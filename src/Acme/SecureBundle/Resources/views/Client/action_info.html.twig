@@ -22,8 +22,11 @@
                 font-size: 20px;
                 font-weight: bold;
             }
+            .ui-jqgrid .ui-jqgrid-htable th div {
+                height: 21px;
+            }
         </style>
-            {% if (mode == 'authorView') %}
+            {% if (mode == 'authorView' and user.isban == 0) %}
                 <div class="row">
                     <div  class="col-xs-5 col-xs-offset-4">
                         <p>Ник: {{ user.login }}</p>
@@ -34,14 +37,21 @@
                     </div>
                 </div>
                 <div class="row">
+                    <span id="client-total-orders"><a href="#">Заказанные работы</a></span>
+                </div>
+                <div class="row">
                     <div  class="">
                         <table id="listTotalOrders"></table>
                         <div id="pagerTotalOrders"></div>
                     </div>
                 </div>
-            {% else %}
+                <div class="row">
+                    <span id="author-completed-orders"><a href="#">Мои выполненные работы</a></span>
+                </div>
+            {% elseif (user.isban) %}
             <div class="row">
                 <div class="col-xs-4 col-xs-offset-4">
+                    Banned
                 </div>
             </div>
             {% endif %}
@@ -53,11 +63,11 @@
                 url: {{ path('secure_client_action', { mode: 'info', id: user.clientidinfo }) | json_encode | raw }},
                 datatype: 'json',
                 mtype: 'POST',
-                recordtext: "Просмотр заказов {0} - {1}",
+                recordtext: "Просмотр работ {0} - {1}",
                 colNames:['','№ заказа', 'Предмет', 'Тип работы', 'Тема работы'],
                 colModel :[
                     {name:'id',index:'id',key:true,search:false,resize:false,hidden:true},
-                    {name:'num',index:'num',width:100,align:'center',resizable:false,editable:false,sortable:false},
+                    {name:'num',index:'num',width:100,align:'center',resizable:false,editable:false,sortable:false,formatter:customNum},
                     {name:'subject_order',index:'subject_order',width:160,align:'center',resizable:false,editable:false,sortable:false},
                     {name:'type_order',index:'type_order',width:150,align:'center',resizable:false,editable:false,sortable:false},
                     {name:'theme',index:'theme',width:290,align:'center',resizable:false,editable:false,sortable:false}
@@ -76,6 +86,7 @@
             function customNum(cellvalue) {
                 return ("<span class='grid-cell-num'>" + cellvalue + "</span>");
             }
+            grid.setCaption('Таблица заказанных работ');
         });
         </script>
     {% endblock %}
