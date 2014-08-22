@@ -5,7 +5,9 @@
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
-        <!--<script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.fmatter.js') }}"></script>-->
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.fmatter.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/highcharts/highcharts.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/highcharts/dark-blue.js') }}"></script>
         <style>
             /*.Message {
                 position: relative;
@@ -69,6 +71,9 @@
                 <div class="row">
                     <span style="display: none" id="author-completed-total-orders-after" class='label label-primary label-total-orders'>Мои выполненные работы<span class="icon-up-fat" style="padding-top:5px;padding-left:5px;"></span></span>
                 </div>
+                <div class="row">
+                    <div id="containerDiagramTotalOrders"></div>
+                </div>
             {% elseif (user.isban) %}
             <div class="row">
                 <div class="col-xs-4 col-xs-offset-4">
@@ -78,7 +83,64 @@
             {% endif %}
         <script>
         $(document).ready(function() {
+            var flagInitTotalOrders = 0, flagInitAuthorCompletedTotalOrders = 0;
             $.fn.button.noConflict();
+
+            Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function(color) {
+                return {
+                    radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+                    stops: [
+                        [0, color],
+                        [1, Highcharts.Color(color).brighten(-0.3).get('rgb')]
+                    ]
+                };
+            });
+            $('#containerDiagramTotalOrders').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Статистика по выполненным заказам за все время'
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    pointFormat: 'Выполнено: <b>{point.percentage:.0f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [{
+                    data: [{
+                        name: 'Дипломы',
+                        y: '0'
+        },{
+            name: 'Курсовые',
+            y: '1'
+        },{
+            name: 'Контрольные',
+                    y:'2',
+            color: '#BA55D3'
+        },{
+            name: 'Иное',
+                    y: '3',
+            color: '#4169E1'
+        }]
+        }]
+        });
+
+
             var initTableTotalOrders = function () {
                 var grid = $("#listTotalOrders");
                 grid.jqGrid({
@@ -122,9 +184,9 @@
                         {name:'type_order',index:'type_order',width:150,align:'center',resizable:false,editable:false,sortable:false},
                         {name:'theme',index:'theme',width:290,align:'center',resizable:false,editable:false,sortable:false},
                         {name:'date_complete',index:'date_complete',width:100,align:'center',resizable:false,editable:false,sortable:false},
-                        {name:'price',index:'price',width:100,align:'center',resizable:false,editable:false,sortable:false},
+                        {name:'price',index:'price',width:100,align:'center',resizable:false,editable:false,sortable:false,formatter:'currency',formatoptions:{defaultValue:'',thousandsSeparator: " ",decimalPlaces:0,suffix:" руб."}},
                         {name:'degree',index:'degree',width:100,align:'center',resizable:false,editable:false,sortable:false},
-                        {name:'comment',index:'comment',width:100,align:'center',resizable:false,editable:false,sortable:false}
+                        {name:'comment',index:'comment',width:200,align:'center',resizable:false,editable:false,sortable:false}
                     ],
                     pager: $('#pagerAuthorCompletedTotalOrders'),
                     rowNum: 10,
@@ -141,7 +203,10 @@
             };
             $("#client-total-orders-before").click(function() {
                 $("#list-total-orders").show();
-                initTableTotalOrders();
+                if (!flagInitTotalOrders) {
+                    initTableTotalOrders();
+                    flagInitTotalOrders++;
+                }
                 $("#client-total-orders-after").show();
                 $("#client-total-orders-before").hide();
             });
@@ -152,7 +217,10 @@
             });
             $("#author-completed-total-orders-before").click(function() {
                 $("#list-author-completed-total-orders").show();
-                initTableAuthorCompletedTotalOrders();
+                if (!flagInitAuthorCompletedTotalOrders) {
+                    initTableAuthorCompletedTotalOrders();
+                    flagInitAuthorCompletedTotalOrders++;
+                }
                 $("#author-completed-total-orders-after").show();
                 $("#author-completed-total-orders-before").hide();
             });

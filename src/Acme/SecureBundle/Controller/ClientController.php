@@ -462,8 +462,6 @@ class ClientController extends Controller
                 $author = $this->get('security.context')->getToken()->getUser();
                 $orders = Helper::getAuthorTotalCompletedOrdersForClient($client, $author);
                 foreach($orders as $index => $order) {
-                    //var_dump($order->getDateComplete());die;
-                    //var_dump($order[0]->getId());die;
                     $response->rows[$index]['id'] = $order[0]->getNum();
                     $response->rows[$index]['cell'] = array(
                         $order[0]->getNum(),
@@ -473,8 +471,8 @@ class ClientController extends Controller
                         $order[0]->getTheme(),
                         $order[0]->getDateComplete()->format("d.m.Y H:i"),
                         $order['curr_sum'],
-                        '123',
-                        '123'
+                        $order[0]->getClientDegree(),
+                        $order[0]->getClientComment()
                     );
                 }
                 return new JsonResponse($response);

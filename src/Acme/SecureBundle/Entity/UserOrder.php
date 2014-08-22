@@ -106,6 +106,16 @@ class UserOrder extends EntityRepository
     private $files_folder;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $client_comment;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $client_degree;
+
+    /**
      * @ORM\OneToMany(targetEntity="UserBid", mappedBy="user_order")
      **/
     private $link_bid_user_order;
@@ -377,6 +387,22 @@ class UserOrder extends EntityRepository
     public function setDateComplete($date) {
         $format = 'd/m/Y';
         $this->date_complete = Helper::getFormatDateForInsert($date, $format);
+    }
+
+    public function getClientComment() {
+        return $this->client_comment;
+    }
+
+    public function setClientComment($val) {
+        $this->client_comment = $val;
+    }
+
+    public function getClientDegree() {
+        return $this->client_degree;
+    }
+
+    public function setClientDegree($val) {
+        $this->client_degree = $val;
     }
 
 
