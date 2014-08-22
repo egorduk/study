@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="User_Order")
+ * @ORM\Table(name="user_order")
  */
 class UserOrder extends EntityRepository
 {
@@ -35,6 +35,11 @@ class UserOrder extends EntityRepository
      * @ORM\Column(type="datetime")
      */
     private $date_expire;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date_complete;
 
     /**
      * @ORM\Column(type="datetime")
@@ -364,5 +369,15 @@ class UserOrder extends EntityRepository
     public function getMinSum() {
         return $this->min_sum;
     }
+
+    public function getDateComplete() {
+        return $this->date_complete;
+    }
+
+    public function setDateComplete($date) {
+        $format = 'd/m/Y';
+        $this->date_complete = Helper::getFormatDateForInsert($date, $format);
+    }
+
 
 }

@@ -1684,6 +1684,31 @@ class Helper
     }
 
 
+    public static function getAuthorTotalCompletedOrdersForClient($client, $author) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
+            ->select('ub.sum AS curr_sum, uo')
+            ->innerJoin('AcmeSecureBundle:UserBid', 'ub', 'WITH', 'ub.user_order = uo')
+            ->andWhere('ub.user = :author')
+            ->andWhere('ub.user_order = uo')
+            ->innerJoin('AcmeSecureBundle:StatusOrder', 'so', 'WITH', 'so = uo.status_order')
+            ->andWhere('uo.user = :client')
+            ->andWhere('so.code = :code')
+            ->andWhere('uo.is_show_client = 1')
+            ->andWhere('uo.is_show_author = 1')
+            ->andWhere('ub.is_select_client = 1')
+            ->andWhere('ub.is_confirm_author = 1')
+            ->groupBy('ub.user_order')
+            ->orderBy('uo.id', 'asc')
+            ->setParameter('client', $client)
+            ->setParameter('author', $author)
+            ->setParameter('code', 'co')
+            ->getQuery()
+            ->getResult();
+            return $orders;
+    }
+
+
     public static function getCountWorkOrdersForAuthorGrid($user) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
@@ -1725,7 +1750,7 @@ class Helper
             ->andWhere('uo.is_show_client = 1')
             ->andWhere('uo.is_show_author = 1')
             ->setParameter('user', $user)
-            ->setParameter('code', array_values(array('w', 'e', 'ce', 'g')))
+            ->setParameter('code', array_values(array('w', 'e', 'co', 'g')))
             ->getQuery()
             ->getResult();
         if ($orders) {
@@ -1735,13 +1760,7 @@ class Helper
     }
 
 
-    /*public static function isExistsClientById($userId) {
-        $em = self::getContainer()->get('doctrine')->getManager();
-        $user = $em->getRepository(self::$_tableUser)
-            ->findOneById($userId);
-        if (!$user) {
-            return false;
-        }
-        return true;
-    }*/
+
+
+
 }

@@ -25,6 +25,10 @@
             .ui-jqgrid .ui-jqgrid-htable th div {
                 height: 21px;
             }
+            .label-total-orders {
+                font-size: 18px;
+                cursor: pointer;
+            }
         </style>
             {% if (mode == 'authorView' and user.isban == 0) %}
                 <div class="row">
@@ -37,16 +41,33 @@
                     </div>
                 </div>
                 <div class="row">
-                    <span id="client-total-orders"><a href="#">Заказанные работы</a></span>
+                    <span id="client-total-orders-before" class='label label-primary label-total-orders'>Заказанные работы<span class="icon-down-fat" style="padding-top:5px;padding-left:5px;"></span></span>
                 </div>
+                </br>
                 <div class="row">
-                    <div  class="">
+                    <div id="list-total-orders" style="display: none">
                         <table id="listTotalOrders"></table>
                         <div id="pagerTotalOrders"></div>
                     </div>
                 </div>
+                </br>
                 <div class="row">
-                    <span id="author-completed-orders"><a href="#">Мои выполненные работы</a></span>
+                    <span style="display: none" id="client-total-orders-after" class='label label-primary label-total-orders'>Заказанные работы<span class="icon-up-fat" style="padding-top:5px;padding-left:5px;"></span></span>
+                </div>
+                </br>
+                <div class="row">
+                    <span id="author-completed-total-orders-before" class='label label-primary label-total-orders'>Мои выполненные работы<span class="icon-down-fat" style="padding-top:5px;padding-left:5px;"></span></span>
+                </div>
+                </br>
+                <div class="row">
+                    <div id="list-author-completed-total-orders" style="display: none">
+                        <table id="listAuthorCompletedTotalOrders"></table>
+                        <div id="pagerAuthorCompletedTotalOrders"></div>
+                    </div>
+                </div>
+                </br>
+                <div class="row">
+                    <span style="display: none" id="author-completed-total-orders-after" class='label label-primary label-total-orders'>Мои выполненные работы<span class="icon-up-fat" style="padding-top:5px;padding-left:5px;"></span></span>
                 </div>
             {% elseif (user.isban) %}
             <div class="row">
@@ -58,35 +79,91 @@
         <script>
         $(document).ready(function() {
             $.fn.button.noConflict();
-            var grid = $("#listTotalOrders");
-            grid.jqGrid({
-                url: {{ path('secure_client_action', { mode: 'info', id: user.clientidinfo }) | json_encode | raw }},
-                datatype: 'json',
-                mtype: 'POST',
-                recordtext: "Просмотр работ {0} - {1}",
-                colNames:['','№ заказа', 'Предмет', 'Тип работы', 'Тема работы'],
-                colModel :[
-                    {name:'id',index:'id',key:true,search:false,resize:false,hidden:true},
-                    {name:'num',index:'num',width:100,align:'center',resizable:false,editable:false,sortable:false,formatter:customNum},
-                    {name:'subject_order',index:'subject_order',width:160,align:'center',resizable:false,editable:false,sortable:false},
-                    {name:'type_order',index:'type_order',width:150,align:'center',resizable:false,editable:false,sortable:false},
-                    {name:'theme',index:'theme',width:290,align:'center',resizable:false,editable:false,sortable:false}
-                ],
-                pager: $('#pagerTotalOrders'),
-                rowNum: 10,
-                rowList: [15,25,35],
-                sortname: 'num',
-                sortorder: 'asc',
-                viewrecords: true,
-                hidegrid: false,
-                height: 'auto',
-                altRows: true,
-                altclass:'alt-row'
-            }).navGrid('#pagerTotalOrders',{view:false,search:false,del:false,add:false,edit:false,refresh:true},{},{},{},{},{});
+            var initTableTotalOrders = function () {
+                var grid = $("#listTotalOrders");
+                grid.jqGrid({
+                    url: {{ path('secure_client_action', { mode: 'info_total_orders', id: user.clientidinfo }) | json_encode | raw }},
+                    datatype: 'json',
+                    mtype: 'POST',
+                    recordtext: "Просмотр работ {0} - {1}",
+                    colNames:['','№ заказа', 'Предмет', 'Тип работы', 'Тема работы'],
+                    colModel :[
+                        {name:'id',index:'id',key:true,search:false,resize:false,hidden:true},
+                        {name:'num',index:'num',width:100,align:'center',resizable:false,editable:false,sortable:false,formatter:customNum},
+                        {name:'subject_order',index:'subject_order',width:160,align:'center',resizable:false,editable:false,sortable:false},
+                        {name:'type_order',index:'type_order',width:150,align:'center',resizable:false,editable:false,sortable:false},
+                        {name:'theme',index:'theme',width:290,align:'center',resizable:false,editable:false,sortable:false}
+                    ],
+                    pager: $('#pagerTotalOrders'),
+                    rowNum: 10,
+                    rowList: [15,25,35],
+                    sortname: 'num',
+                    sortorder: 'asc',
+                    viewrecords: true,
+                    hidegrid: false,
+                    height: 'auto',
+                    altRows: true,
+                    altclass:'alt-row'
+                }).navGrid('#pagerTotalOrders',{view:false,search:false,del:false,add:false,edit:false,refresh:true},{},{},{},{},{});
+                grid.setCaption('Таблица заказанных работ');
+            };
+            var initTableAuthorCompletedTotalOrders = function () {
+                var grid = $("#listAuthorCompletedTotalOrders");
+                grid.jqGrid({
+                    url: {{ path('secure_client_action', { mode: 'info_author_completed_total_orders', id: user.clientidinfo }) | json_encode | raw }},
+                    datatype: 'json',
+                    mtype: 'POST',
+                    recordtext: "Просмотр работ {0} - {1}",
+                    colNames:['','№ заказа', 'Предмет', 'Тип работы', 'Тема работы', 'Выполнен', 'Стоимость', 'Оценка', 'Отзыв'],
+                    colModel :[
+                        {name:'id',index:'id',key:true,search:false,resize:false,hidden:true},
+                        {name:'num',index:'num',width:100,align:'center',resizable:false,editable:false,sortable:false,formatter:customNum},
+                        {name:'subject_order',index:'subject_order',width:160,align:'center',resizable:false,editable:false,sortable:false},
+                        {name:'type_order',index:'type_order',width:150,align:'center',resizable:false,editable:false,sortable:false},
+                        {name:'theme',index:'theme',width:290,align:'center',resizable:false,editable:false,sortable:false},
+                        {name:'date_complete',index:'date_complete',width:100,align:'center',resizable:false,editable:false,sortable:false},
+                        {name:'price',index:'price',width:100,align:'center',resizable:false,editable:false,sortable:false},
+                        {name:'degree',index:'degree',width:100,align:'center',resizable:false,editable:false,sortable:false},
+                        {name:'comment',index:'comment',width:100,align:'center',resizable:false,editable:false,sortable:false}
+                    ],
+                    pager: $('#pagerAuthorCompletedTotalOrders'),
+                    rowNum: 10,
+                    rowList: [15,25,35],
+                    sortname: 'num',
+                    sortorder: 'asc',
+                    viewrecords: true,
+                    hidegrid: false,
+                    height: 'auto',
+                    altRows: true,
+                    altclass:'alt-row'
+                }).navGrid('#pagerAuthorCompletedTotalOrders',{view:false,search:false,del:false,add:false,edit:false,refresh:true},{},{},{},{},{});
+                grid.setCaption('Таблица выполненных работ для заказчика');
+            };
+            $("#client-total-orders-before").click(function() {
+                $("#list-total-orders").show();
+                initTableTotalOrders();
+                $("#client-total-orders-after").show();
+                $("#client-total-orders-before").hide();
+            });
+            $("#client-total-orders-after").click(function() {
+                $("#list-total-orders").hide();
+                $("#client-total-orders-after").hide();
+                $("#client-total-orders-before").show();
+            });
+            $("#author-completed-total-orders-before").click(function() {
+                $("#list-author-completed-total-orders").show();
+                initTableAuthorCompletedTotalOrders();
+                $("#author-completed-total-orders-after").show();
+                $("#author-completed-total-orders-before").hide();
+            });
+            $("#author-completed-total-orders-after").click(function() {
+                $("#list-author-completed-total-orders").hide();
+                $("#author-completed-total-orders-after").hide();
+                $("#author-completed-total-orders-before").show();
+            });
             function customNum(cellvalue) {
                 return ("<span class='grid-cell-num'>" + cellvalue + "</span>");
             }
-            grid.setCaption('Таблица заказанных работ');
-        });
+        })
         </script>
     {% endblock %}

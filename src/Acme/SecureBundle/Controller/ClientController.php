@@ -438,7 +438,7 @@ class ClientController extends Controller
                     'AcmeSecureBundle:Client:action_info.html.twig', array('mode' => 'authorView', 'user' => $user, 'countOrders' => count($orders))
                 );
             } else {}
-        } elseif ($request->isXmlHttpRequest() && true === $this->get('security.context')->isGranted('ROLE_AUTHOR') && is_numeric($id) && $mode == "info") {
+        } elseif ($request->isXmlHttpRequest() && true === $this->get('security.context')->isGranted('ROLE_AUTHOR') && is_numeric($id) && $mode == "info_total_orders") {
             $user = Helper::getUserById($id);
             if ($user) {
                 $response = new Response();
@@ -455,7 +455,33 @@ class ClientController extends Controller
                 }
                 return new JsonResponse($response);
             } else {}
-        }
+        } elseif ($request->isXmlHttpRequest() && true === $this->get('security.context')->isGranted('ROLE_AUTHOR') && is_numeric($id) && $mode == "info_author_completed_total_orders") {
+            $client = Helper::getUserById($id);
+            if ($client) {
+                $response = new Response();
+                $author = $this->get('security.context')->getToken()->getUser();
+                $orders = Helper::getAuthorTotalCompletedOrdersForClient($client, $author);
+                foreach($orders as $index => $order) {
+                    //var_dump($order->getDateComplete());die;
+                    //var_dump($order[0]->getId());die;
+                    $response->rows[$index]['id'] = $order[0]->getNum();
+                    $response->rows[$index]['cell'] = array(
+                        $order[0]->getNum(),
+                        $order[0]->getNum(),
+                        $order[0]->getSubjectOrder()->getChildName(),
+                        $order[0]->getTypeOrder()->getName(),
+                        $order[0]->getTheme(),
+                        $order[0]->getDateComplete()->format("d.m.Y H:i"),
+                        $order['curr_sum'],
+                        '123',
+                        '123'
+                    );
+                }
+                return new JsonResponse($response);
+            } else {}
+        } 
+        return NULL;
+
         /*elseif ($mode == "info" && true === $this->get('security.context')->isGranted('ROLE_CLIENT')) {
             $user = Helper::getUserById($id);
             return $this->render(
