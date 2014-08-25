@@ -1804,15 +1804,27 @@ class Helper
     }
 
 
-    public static function getCancelRequestsByOrderForAuthor($user, $order) {
+    public static function getCancelRequestsByOrderForAuthor($order) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $cancelRequests = $em->getRepository(self::$_tableCancelRequest)
             ->findBy(
                 array('user_order' => $order),
-                array('date_create' => 'desc')
+                array('date_create' => 'ASC')
             );
         //var_dump(count($cancelRequests));die;
         return $cancelRequests;
+    }
+
+
+    public static function getDateVerdict($order) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $orderId = $order->getId();
+        $query = $em->getConnection()
+            ->prepare("SELECT date_verdict FROM cancel_request WHERE cancel_request.user_order_id = '$orderId' LIMIT 1");
+        $query->execute();
+        $dateVerdict = $query->fetch();
+        $dateVerdict = date("d.m.Y H:i", strtotime($dateVerdict['date_verdict']));
+        return $dateVerdict;
     }
 
 }

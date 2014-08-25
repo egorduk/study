@@ -399,11 +399,10 @@ class AuthorController extends Controller
                 //$session->set('curr_order', $order);
                 //$session->set('curr_user', $user);
                 //$session->save();
-
-                $cancelRequests = Helper::getCancelRequestsByOrderForAuthor($user, $order);
-
+                $cancelRequests = Helper::getCancelRequestsByOrderForAuthor($order);
+                $dateVerdict = Helper::getDateVerdict($order);
                 return $this->render(
-                    'AcmeSecureBundle:Author:order_work.html.twig', array('files' => $filesOrder, 'order' => $order, 'client' => $clientLink, 'user' => $user, 'cancelRequests' => $cancelRequests)
+                    'AcmeSecureBundle:Author:order_work.html.twig', array('files' => $filesOrder, 'order' => $order, 'client' => $clientLink, 'user' => $user, 'cancelRequests' => $cancelRequests, 'dateVerdict' => $dateVerdict)
                 );
             }
             else {
@@ -540,7 +539,9 @@ class AuthorController extends Controller
                     $cancelRequest->setCreator($user->getId());
                     Helper::createCancelOrderRequest($cancelRequest);
                     $dateCreate = $cancelRequest->getDateCreate()->format("d.m.Y H:i");
-                    return new Response(json_encode(array('response' => 'valid', 'dateCreate' => $dateCreate, 'comment' => wordwrap($comment, true))));
+                    $percent = $togetherApply ? "" : $selectPercent . '%';
+                    $dateVerdict = Helper::getDateVerdict($order);
+                    return new Response(json_encode(array('response' => 'valid', 'dateCreate' => $dateCreate, 'percent' => $percent, 'dateVerdict' => $dateVerdict, 'comment' => wordwrap($comment, 60, "\n", true))));
                 }
             }
         }

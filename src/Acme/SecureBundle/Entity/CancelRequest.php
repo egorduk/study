@@ -95,7 +95,7 @@ class CancelRequest extends EntityRepository
     }
 
     public function getComment() {
-        return $this->comment;
+        return wordwrap($this->comment, 60, "\n", true);
     }
 
     public function setPercent($val) {

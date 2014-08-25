@@ -52,6 +52,9 @@
                 box-shadow: 0 0 5px #E9322D!important;
                 border-radius: 5px;
             }
+            #line-date-verdict {
+
+            }
         </style>
         <div class="container" data-role="{{ user.userrole.id }}" data-login="{{ user.login }}">
             <div class="row">
@@ -144,9 +147,10 @@
                     </div>
                 </div>
             </div>
-            {% if cancelRequests | length > 0 %}
+            {% if cancelRequests | length > 0 %} {% endif %}
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
+                    <span id="line-date-verdict" class="label label-primary">Решение будет принято до {{ dateVerdict }}</span>
                     <div id="block-history-cancel-request" style="/*display: none*/">
                         <table class="table table-hover table-history-cancel-request">
                             <thead>
@@ -159,10 +163,24 @@
                             </thead>
                             <tbody>
                             {% for request in cancelRequests %}
-                                <tr>
-                                    <td></td>
+                                {% if request.creator != user.id %}
+                                    <tr class="danger">
+                                {% else %}
+                                    <tr>
+                                {% endif %}
+                                    <td>
+                                        {% if request.creator == user.id %}
+                                            Вы
+                                        {% else %}
+                                            Заказчик
+                                        {% endif %}
+                                    </td>
                                     <td>{{ request.comment }}</td>
-                                    <td>{{ request.percent }}</td>
+                                    <td>
+                                        {% if request.percent != "" %}
+                                            {{ request.percent }}%
+                                        {% endif %}
+                                    </td>
                                     <td>{{ request.datecreate.format("d.m.Y H:i") }}</td>
                                 </tr>
                             {% endfor %}
@@ -171,11 +189,15 @@
                     </div>
                 </div>
             </div>
-            {% endif %}
+
         </div>
         <script>
             $(document).ready(function() {
+                //$("#block-create-cancel-request").css('display','none');
                 document.title = "Просмотр заказа № " + {{ order.num }};
+                /*if ({{ cancelRequests | length }} > 0) {
+                    $("#block-create-cancel-request").show();
+                }*/
                 //$.fn.button.noConflict();
                 var selectPercent = $("#select-percent");
                 selectPercent.select2({
@@ -230,7 +252,11 @@
                             if (responseObject.response == "valid") {
                                 $("#block-history-cancel-request").show();
                                 //$("#block-form-cancel-request").remove();
-                                var comment = responseObject.comment, percent = selectPercent.val() + '%', dateCreate = responseObject.dateCreate;
+                                var comment = responseObject.comment, percent = responseObject.percent, dateCreate = responseObject.dateCreate, dateVerdict = responseObject.dateVerdict;
+                                var lineDateVerdict = $("#line-date-verdict");
+                                if (lineDateVerdict.html() == "") {
+                                    lineDateVerdict.append(dateVerdict);
+                                }
                                 $(".table-history-cancel-request tbody").append("<tr><td>Вы</td><td>" + comment + "</td><td>" + percent + "</td><td>" + dateCreate + "</td></tr>");
                             }
                         }
