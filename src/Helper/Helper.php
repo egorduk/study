@@ -41,6 +41,7 @@ class Helper
     private static $_tableUserBid = 'AcmeSecureBundle:UserBid';
     private static $_tableFavoriteOrder = 'AcmeSecureBundle:FavoriteOrder';
     private static $_tableWebchatMessage = 'AcmeSecureBundle:WebchatMessage';
+    private static $_tableCancelRequest = 'AcmeSecureBundle:CancelRequest';
     private static $kernel;
 
     public function __construct() {
@@ -736,7 +737,7 @@ class Helper
         $sentence = mb_substr($sentence, 0, $size, "UTF-8");
         $pos = strrpos($sentence, ' ');
         if ($pos === false) {
-            $sentence . '...';
+            $sentence = $sentence . '...';
         }
         else {
             $sentence = substr($sentence, 0, $pos) . '...';
@@ -1208,6 +1209,7 @@ class Helper
      * @param $order
      */
     public static function setAuthorBid($postData, $user, $order) {
+        //$user = self::getUserById($user->getId());
         $sum = $postData['fieldSum'];
         $comment = $postData['fieldComment'];
         $userBid = new UserBid();
@@ -1222,7 +1224,7 @@ class Helper
             $userBid->setIsClientDate(1);
         }
         $em = self::getContainer()->get('doctrine')->getManager();
-        $em->persist($userBid);
+        $em->merge($userBid);
         $bids = $em->getRepository(self::$_tableUserBid)->createQueryBuilder('ub')
             ->innerJoin('ub.user_order', 'uo')
             ->andWhere('ub.user = :user')
@@ -1585,6 +1587,17 @@ class Helper
     }
 
 
+    /*public static function checkUserAccessForOrders($user) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $user = $em->getRepository(self::$_tableUser)
+            ->findOneByUser($user);
+        if ($allowAccess) {
+            return true;
+        }
+        return false;
+    }*/
+
+
     public static function getUserAvatar($user) {
         $avatar = $user->getAvatar();
         $pathAvatar = Helper::getFullPathToAvatar($avatar);
@@ -1655,33 +1668,77 @@ class Helper
     }
 
 
-    public static function getWorkOrdersForAuthorGrid($firstRowIndex, $rowsPerPage, $user) {
+    public static function getWorkOrdersForAuthorGrid($firstRowIndex = null, $rowsPerPage = null, $user, $mode) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        if ($mode == "getRecords") {
+            $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
+                ->select('ub.sum AS curr_sum, uo')
+                ->innerJoin('AcmeSecureBundle:UserBid', 'ub', 'WITH', 'ub.user_order = uo')
+                ->andWhere('ub.user = :user')
+                ->andWhere('ub.user_order = uo')
+                ->innerJoin('AcmeSecureBundle:StatusOrder', 'so', 'WITH', 'so = uo.status_order')
+                ->andWhere('so.code IN(:code)')
+                ->andWhere('ub.is_select_client = 1')
+                ->andWhere('ub.is_confirm_author = 1')
+                ->andWhere('uo.is_show_client = 1')
+                ->andWhere('uo.is_show_author = 1')
+                ->andWhere('ub.is_show_client = 1')
+                ->andWhere('ub.is_show_author = 1')
+                //->andWhere('uo.date_expire > :now')
+                ->groupBy('ub.user_order')
+                ->orderBy('uo.date_expire', 'asc')
+                ->setFirstResult($firstRowIndex)
+                ->setMaxResults($rowsPerPage)
+                ->setParameter('user', $user)
+                ->setParameter('code', array_values(array('w', 'e', 'g')))
+                //->setParameter('now', new \DateTime('now'))
+                ->getQuery()
+                ->getResult();
+            return $orders;
+        } else {
+            $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
+                ->select('ub.sum AS curr_sum, uo')
+                ->innerJoin('AcmeSecureBundle:UserBid', 'ub', 'WITH', 'ub.user_order = uo')
+                ->andWhere('ub.user = :user')
+                ->andWhere('ub.user_order = uo')
+                ->innerJoin('AcmeSecureBundle:StatusOrder', 'so', 'WITH', 'so = uo.status_order')
+                ->andWhere('so.code IN(:code)')
+                ->andWhere('ub.is_select_client = 1')
+                ->andWhere('ub.is_confirm_author = 1')
+                ->andWhere('uo.is_show_client = 1')
+                ->andWhere('uo.is_show_author = 1')
+                ->andWhere('ub.is_show_client = 1')
+                ->andWhere('ub.is_show_author = 1')
+                ->groupBy('ub.user_order')
+                ->orderBy('uo.date_expire', 'asc')
+                ->setParameter('user', $user)
+                ->setParameter('code', array_values(array('w', 'e', 'g')))
+                ->getQuery()
+                ->getResult();
+            return count($orders);
+        }
+    }
+
+
+    /*public static function getCountWorkOrdersForAuthorGrid($user) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
-            ->select('ub.sum AS curr_sum, uo, so')
             ->innerJoin('AcmeSecureBundle:UserBid', 'ub', 'WITH', 'ub.user_order = uo')
             ->andWhere('ub.user = :user')
             ->andWhere('ub.user_order = uo')
             ->innerJoin('uo.status_order', 'so', 'WITH', 'so = uo.status_order')
-            //->innerJoin('uo.status_order', 'so')
-            //->andWhere('so.name = sa')
             ->andWhere('ub.is_select_client = 1')
             ->andWhere('ub.is_confirm_author = 1')
             ->andWhere('uo.is_show_client = 1')
             ->andWhere('uo.is_show_author = 1')
             ->andWhere('ub.is_show_client = 1')
             ->andWhere('ub.is_show_author = 1')
-            //->andWhere('uo.date_expire > :now')
             ->groupBy('ub.user_order')
-            ->orderBy('uo.date_expire', 'asc')
-            ->setFirstResult($firstRowIndex)
-            ->setMaxResults($rowsPerPage)
             ->setParameter('user', $user)
-            //->setParameter('now', new \DateTime('now'))
             ->getQuery()
             ->getResult();
-        return $orders;
-    }
+        return count($orders);
+    }*/
 
 
     public static function getAuthorTotalCompletedOrdersForClient($client, $author) {
@@ -1709,27 +1766,6 @@ class Helper
     }
 
 
-    public static function getCountWorkOrdersForAuthorGrid($user) {
-        $em = self::getContainer()->get('doctrine')->getManager();
-        $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
-            ->innerJoin('AcmeSecureBundle:UserBid', 'ub', 'WITH', 'ub.user_order = uo')
-            ->andWhere('ub.user = :user')
-            ->andWhere('ub.user_order = uo')
-            ->innerJoin('uo.status_order', 'so', 'WITH', 'so = uo.status_order')
-            ->andWhere('ub.is_select_client = 1')
-            ->andWhere('ub.is_confirm_author = 1')
-            ->andWhere('uo.is_show_client = 1')
-            ->andWhere('uo.is_show_author = 1')
-            ->andWhere('ub.is_show_client = 1')
-            ->andWhere('ub.is_show_author = 1')
-            ->groupBy('ub.user_order')
-            ->setParameter('user', $user)
-            ->getQuery()
-            ->getResult();
-        return count($orders);
-    }
-
-
     public static function getUsersForWebchat() {
         $em = self::getContainer()->get('doctrine')->getManager();
         $stmt = $em->getConnection()
@@ -1750,7 +1786,8 @@ class Helper
             ->andWhere('uo.is_show_client = 1')
             ->andWhere('uo.is_show_author = 1')
             ->setParameter('user', $user)
-            ->setParameter('code', array_values(array('w', 'e', 'co', 'g')))
+            ->setParameter('code', array_values(array('w', 'e', 'co', 'g', 'cl')))
+            ->orderBy('uo.num', 'asc')
             ->getQuery()
             ->getResult();
         if ($orders) {
@@ -1760,7 +1797,22 @@ class Helper
     }
 
 
+    public static function createCancelOrderRequest($cancelRequest) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $em->persist($cancelRequest);
+        $em->flush();
+    }
 
 
+    public static function getCancelRequestsByOrderForAuthor($user, $order) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $cancelRequests = $em->getRepository(self::$_tableCancelRequest)
+            ->findBy(
+                array('user_order' => $order),
+                array('date_create' => 'desc')
+            );
+        //var_dump(count($cancelRequests));die;
+        return $cancelRequests;
+    }
 
 }

@@ -145,6 +145,11 @@ class UserOrder extends EntityRepository
      **/
     private $link_webchat_user_order;
 
+    /**
+     * @ORM\OneToMany(targetEntity="CancelRequest", mappedBy="user_order")
+     **/
+    private $link_cancel_request_user_order;
+
 
     private $count_bids;
     private $is_favorite = 0;

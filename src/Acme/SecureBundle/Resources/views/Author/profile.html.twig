@@ -1,10 +1,10 @@
 {% extends "AcmeSecureBundle::layout_author.html.twig" %}
-{% block title "Профиль исполнителя" %}
+{% block title "Мой профиль" %}
     {% block content %}
         <div class="container">
             <style>
                 .reset-margin-left{
-                    padding-left: 0px;
+                    padding-left: 0;
                 }
                 .thumbnail-image{
                     padding-top: 20px;
@@ -30,6 +30,9 @@
                 .Message-body {
                     font-size: 18px;
                 }
+                #help-popover {
+                    cursor: pointer;
+                }
             </style>
             {% if (formProfile == null) %}
                 <div class="row">
@@ -40,7 +43,7 @@
                         <hr style="border:solid 1px black">
                         <p>Ваш Email: {{ user.email }}</p>
                         <hr style="border:solid 1px black">
-                        <p>Ваш статус: {{ user.role.name }}</p>
+                        <p>Ваш статус: {{ user.userrole.name }}</p>
                         <hr style="border:solid 1px black">
                         <p>Дата регистрации в системе: {{ user.datereg.format("d.m.Y H:i") }}</p>
                         <hr style="border:solid 1px black">
@@ -60,7 +63,11 @@
                         <hr style="border:solid 1px black">
                         <p>Ваше отчество: {{ userInfo.lastname }}</p>
                         <hr style="border:solid 1px black">
-                        <p>Доступ к заказам: {{ user.isaccessorder }}</p>
+                        {% if (user.isaccessorder == 1) %}
+                            <p>Доступ к заказам: <span class="icon-ok-circled-2" style="color: #008000"></span></p>
+                        {% else %}
+                            <p>Доступ к заказам: <span class="icon-cancel-circled-4" style="color: #FF0000"></span><span id="help-popover" class="icon-help-circled-3" data-container="body" data-trigger="click" data-placement="right"></span></p>
+                        {% endif %}
                     </div>
                 </div>
             {% else %}
@@ -168,6 +175,12 @@
                         escapeMarkup: function(m) { return m; }
                     });
                     {% if (user.isaccessorder == 0) %}
+                        $("#help-popover").popover({
+                            html : true,
+                            content : function() {
+                                return "Для получения доступа к заказам требуется пройти <a href=''>процедуру подтверждения личности</a>";
+                            }
+                        });
                         new PunkAveFileUploader({
                             'uploadUrl': {{ path('secure_author_upload', { editId: user.id, action: 'profile' }) | json_encode | raw }},
                             'viewUrl': {{ ('/study/web/uploads/author/' ~ user.id)| json_encode | raw }},

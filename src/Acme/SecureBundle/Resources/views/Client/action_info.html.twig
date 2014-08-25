@@ -1,4 +1,4 @@
-{% extends "AcmeSecureBundle::layout_client.html.twig" %}
+{% extends "AcmeSecureBundle::layout_author.html.twig" %}
 {% block title "Профиль заказчика" %}
     {% block content %}
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.css') }}" />
@@ -6,15 +6,9 @@
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.fmatter.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/js/highcharts/highcharts.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/js/highcharts/dark-blue.js') }}"></script>
+        <!--<script type="text/javascript" src="{{ asset('bundles/js/highcharts/highcharts.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/highcharts/dark-blue.js') }}"></script>-->
         <style>
-            /*.Message {
-                position: relative;
-            }
-            .Message-body {
-                font-size: 18px;
-            }*/
             .alt-row {
                 background-color: #f3f3f3;
                 background-image: none;
@@ -35,11 +29,13 @@
             {% if (mode == 'authorView' and user.isban == 0) %}
                 <div class="row">
                     <div  class="col-xs-5 col-xs-offset-4">
-                        <p>Ник: {{ user.login }}</p>
+                        <p>{{ avatar | raw }}</p>
+                        <p class="">{{ user.login }}</p>
                         <p>Роль: {{ user.userrole.name }}</p>
                         <p>Дата регистрации в системе: {{ user.datereg.format("d.m.Y") }}</p>
                         <p>Страна: <img src='{{ asset('bundles/images/flags/') }}{{ user.userInfo.country.code }}.png' alt={{ user.userInfo.country.name }} title={{ user.userInfo.country.name }}></p>
-                        <p>Заказано работ в системе: {{ countOrders }}</p>
+                        <p>Заказано работ: {{ countTotalOrders }}</p>
+                        <p>Отменено работ: {{ countCanceledOrders }}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -71,9 +67,17 @@
                 <div class="row">
                     <span style="display: none" id="author-completed-total-orders-after" class='label label-primary label-total-orders'>Мои выполненные работы<span class="icon-up-fat" style="padding-top:5px;padding-left:5px;"></span></span>
                 </div>
-                <div class="row">
-                    <div id="containerDiagramTotalOrders"></div>
+                <!--<div class="row">
+                    <span id="diagram-total-orders-before" class='label label-primary label-total-orders'>Статистика по заказам<span class="icon-down-fat" style="padding-top:5px;padding-left:5px;"></span></span>
                 </div>
+                </br>
+                <div class="row">
+                    <div style="display: none" id="containerDiagramTotalOrders"></div>
+                </div>
+                </br>
+                <div class="row">
+                    <span style="display: none" id="diagram-total-orders-after" class='label label-primary label-total-orders'>Статистика по заказам<span class="icon-up-fat" style="padding-top:5px;padding-left:5px;"></span></span>
+                </div>-->
             {% elseif (user.isban) %}
             <div class="row">
                 <div class="col-xs-4 col-xs-offset-4">
@@ -83,64 +87,63 @@
             {% endif %}
         <script>
         $(document).ready(function() {
-            var flagInitTotalOrders = 0, flagInitAuthorCompletedTotalOrders = 0;
+            var flagInitTotalOrders = 0, flagInitAuthorCompletedTotalOrders = 0, flagInitDiagramTotalOrders = 0;
             $.fn.button.noConflict();
-
-            Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function(color) {
-                return {
-                    radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
-                    stops: [
-                        [0, color],
-                        [1, Highcharts.Color(color).brighten(-0.3).get('rgb')]
-                    ]
-                };
-            });
-            $('#containerDiagramTotalOrders').highcharts({
-                chart: {
-                    plotBackgroundColor: null,
-                    plotBorderWidth: null,
-                    plotShadow: false,
-                    type: 'pie'
-                },
-                title: {
-                    text: 'Статистика по выполненным заказам за все время'
-                },
-                credits: {
-                    enabled: false
-                },
-                tooltip: {
-                    pointFormat: 'Выполнено: <b>{point.percentage:.0f}%</b>'
-                },
-                plotOptions: {
-                    pie: {
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        dataLabels: {
-                            enabled: false
-                        },
-                        showInLegend: true
-                    }
-                },
-                series: [{
-                    data: [{
-                        name: 'Дипломы',
-                        y: '0'
-        },{
-            name: 'Курсовые',
-            y: '1'
-        },{
-            name: 'Контрольные',
-                    y:'2',
-            color: '#BA55D3'
-        },{
-            name: 'Иное',
-                    y: '3',
-            color: '#4169E1'
-        }]
-        }]
-        });
-
-
+            /*var initDiagramTotalOrders = function () {
+                Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function(color) {
+                    return {
+                        radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+                        stops: [
+                            [0, color],
+                            [1, Highcharts.Color(color).brighten(-0.3).get('rgb')]
+                        ]
+                    };
+                });
+                $('#containerDiagramTotalOrders').highcharts({
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    title: {
+                        text: 'Статистика по типу заказанных работ за все время'
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        pointFormat: 'Выполнено: <b>{point.percentage:.0f}%</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: false
+                            },
+                            showInLegend: true
+                        }
+                    },
+                    series: [{
+                        data: [{
+                            name: 'Дипломы',
+                            y: 0
+                        },{
+                            name: 'Курсовые',
+                            y: 1
+                        },{
+                            name: 'Контрольные',
+                            y: 2,
+                            color: '#BA55D3'
+                        },{
+                            name: 'Иное',
+                            y: 3,
+                            color: '#4169E1'
+                        }]
+                    }]
+                });
+            };*/
             var initTableTotalOrders = function () {
                 var grid = $("#listTotalOrders");
                 grid.jqGrid({
@@ -229,6 +232,20 @@
                 $("#author-completed-total-orders-after").hide();
                 $("#author-completed-total-orders-before").show();
             });
+            /*$("#diagram-total-orders-before").click(function() {
+                $("#containerDiagramTotalOrders").show();
+                if (!flagInitDiagramTotalOrders) {
+                    initDiagramTotalOrders();
+                    flagInitDiagramTotalOrders++;
+                }
+                $("#diagram-total-orders-after").show();
+                $("#diagram-total-orders-before").hide();
+            });
+            $("#diagram-total-orders-after").click(function() {
+                $("#containerDiagramTotalOrders").hide();
+                $("#diagram-total-orders-after").hide();
+                $("#diagram-total-orders-before").show();
+            });*/
             function customNum(cellvalue) {
                 return ("<span class='grid-cell-num'>" + cellvalue + "</span>");
             }

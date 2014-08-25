@@ -433,9 +433,17 @@ class ClientController extends Controller
             $user = Helper::getUserById($id);
             if ($user) {
                 $orders = Helper::getClientTotalOrders($user);
+                $countCanceledOrders = 0;
+                foreach($orders as $order) {
+                    if ($order->getStatusOrder()->getCode() == 'cl') {
+                        $countCanceledOrders++;
+                    }
+                }
                 $user->setClientIdInfo($id);
+                $pathAvatar = Helper::getFullPathToAvatar($user->getAvatar());
+                $avatar = "<img src='$pathAvatar' align='middle' alt='client_avatar' width='110px' height='auto' class='thumbnail'>";
                 return $this->render(
-                    'AcmeSecureBundle:Client:action_info.html.twig', array('mode' => 'authorView', 'user' => $user, 'countOrders' => count($orders))
+                    'AcmeSecureBundle:Client:action_info.html.twig', array('mode' => 'authorView', 'user' => $user, 'countTotalOrders' => count($orders), 'countCanceledOrders' => $countCanceledOrders , 'avatar' => $avatar)
                 );
             } else {}
         } elseif ($request->isXmlHttpRequest() && true === $this->get('security.context')->isGranted('ROLE_AUTHOR') && is_numeric($id) && $mode == "info_total_orders") {
