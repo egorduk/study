@@ -111,7 +111,7 @@
                         <span id="create-cancel-request-before" class='label label-primary'>Сформировать отказ от выполнения<span class="icon-down-fat" style="padding-top:5px;padding-left:5px;"></span></span>
                     </div>
                     </br>
-                    <div id="block-form-cancel-request" style="/*display: none*/">
+                    <div id="block-form-cancel-request" style="display: none">
                         <form class="form-horizontal" name="form-cancel-request" id="form-cancel-request">
                             <div class="form-group">
                                 <textarea name="textarea-comment" class="form-control" id="textarea-comment" rows="3" maxlength="255" placeholder="Комментарий"></textarea>
@@ -149,9 +149,9 @@
             </div>
             {% if cancelRequests | length > 0 %} {% endif %}
             <div class="row">
-                <div class="col-md-8 col-md-offset-2">
+                <div class="col-md-8 col-md-offset-2" id="block-history-cancel-request" style="display: none">
                     <span id="line-date-verdict" class="label label-primary">Решение будет принято до {{ dateVerdict }}</span>
-                    <div id="block-history-cancel-request" style="/*display: none*/">
+                    <div>
                         <table class="table table-hover table-history-cancel-request">
                             <thead>
                             <tr>
@@ -193,11 +193,11 @@
         </div>
         <script>
             $(document).ready(function() {
-                //$("#block-create-cancel-request").css('display','none');
+                //$("#block-history-cancel-request").css('display','none');
                 document.title = "Просмотр заказа № " + {{ order.num }};
-                /*if ({{ cancelRequests | length }} > 0) {
-                    $("#block-create-cancel-request").show();
-                }*/
+                if ({{ cancelRequests | length }} > 0) {
+                    $("#block-history-cancel-request").show();
+                }
                 //$.fn.button.noConflict();
                 var selectPercent = $("#select-percent");
                 selectPercent.select2({
