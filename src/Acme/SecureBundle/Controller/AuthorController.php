@@ -93,6 +93,9 @@ class AuthorController extends Controller
     }
 
 
+    /**
+     * @Route("/upload", name="upload")
+     */
     public function uploadAction()
     {
         $editId = $this->getRequest()->get('editId');
@@ -112,6 +115,7 @@ class AuthorController extends Controller
                     $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/orders/' . $editId));
                 }
             }
+            return new Response(json_encode(array('action' => 'success')));
         }
         return new Response(json_encode(array('action' => 'error')));
     }

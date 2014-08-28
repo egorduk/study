@@ -509,7 +509,7 @@ class Helper
 
     public static function getSizeFile($bytes){
         $label = array('B', 'KB', 'MB');
-        for($i = 0; $bytes >= 1024 && $i < (count($label) - 1); $bytes /= 1024, $i++);
+        for ($i = 0; $bytes >= 1024 && $i < (count($label) - 1); $bytes /= 1024, $i++);
         return(round($bytes, 1) . " " . $label[$i]);
     }
 

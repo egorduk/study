@@ -21,6 +21,6 @@ doctrine:
         password: '%database_password%'
         charset: UTF-8
 
-parameters:
-    beryllium_cache.client.servers: { "localhost": 11211 }
-    beryllium_cache.default_ttl: 3600
+#parameters:
+#    beryllium_cache.client.servers: { "localhost": 11211 }
+#    beryllium_cache.default_ttl: 3600

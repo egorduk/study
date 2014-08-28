@@ -27,6 +27,10 @@ parameters:
     - dotx #application/vnd.openxmlformats-officedocument.wordprocessingml.template
     - txt #text/plain
     - rtf #text/rtf
+    #- bmp #images/bmp
+    - rar #application/rar
+    - zip #application/zip
+    - 7z  #application/octet-stream
 
   # Folder where originals are uploaded. This is the only folder populated for
   # uploads that are not images
