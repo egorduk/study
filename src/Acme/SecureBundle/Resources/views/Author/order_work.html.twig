@@ -199,8 +199,13 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2" id="block-completed-order" style="">
                     <form class="form-horizontal" name="form-completed-order" id="form-completed-order">
-                        <div class="form-group">
-                            <input type="button" id="btn-upload-order" class="btn btn-primary" value="Загрузить заказ">
+                        <!--<div class="form-group">
+                            <input type="button" id="btn-upload-order" class="btn btn-primary" value="Загрузить файлы">
+                        </div>-->
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="check-completed-order" id="check-completed-order">Заказ выполнен
+                            </label>
                         </div>
                         <div class="input-group">
                             <div class="file-uploader"></div>
@@ -280,14 +285,16 @@
                     });
                 });
                 var fileUploader = new PunkAveFileUploader({
-                    'uploadUrl': {{ path('secure_author_upload', { editId: folderFiles }) | json_encode | raw }},
-                    'viewUrl': {{ ('/study/web/uploads/files/' ~ folderFiles)| json_encode | raw }},
+                    'uploadUrl': {{ path('secure_author_upload', { editId: order.num, action: 'order' }) | json_encode | raw }},
+                    'viewUrl': {{ ('/study/web/uploads/attachments/orders/' ~ order.num)| json_encode | raw }},
                     'el': '.file-uploader',
-                    'existingFiles': {{ punkave_get_files('attachments/' ~ folderFiles) | json_encode | raw }},
+                    'existingFiles': {{ punkave_get_files('attachments/orders/' ~ order.num) | json_encode | raw }},
                     'delaySubmitWhileUploading': '.edit-form',
                     'errorCallback': function(errorObj) {
                         if (errorObj.error == 'maxNumberOfFiles') {
                             alert("Maximum uploaded files exceeded!");
+                        } else if (errorObj.error == 'acceptFileTypes') {
+                            alert("Такой файл запрещен!");
                         }
                     }
                 });

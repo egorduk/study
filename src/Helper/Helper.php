@@ -12,6 +12,7 @@ use Acme\SecureBundle\Entity\UserOrder;
 use Acme\SecureBundle\Entity\WebchatMessage;
 use Proxies\__CG__\Acme\AuthBundle\Entity\User;
 use Proxies\__CG__\Acme\SecureBundle\Entity\Author\AuthorFile;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Yaml\Yaml;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\Container;
@@ -551,6 +552,7 @@ class Helper
         if (file_exists($filename)) {
             return date("Y-m-d H:i:s", filemtime($filename));
         }
+        return new Exception();
     }
 
 
@@ -561,10 +563,15 @@ class Helper
         elseif ($type == "author") {
             return dirname($_SERVER['SCRIPT_FILENAME']) . "/uploads/author/" . $folderFiles . "/originals";
         }
+        /*elseif ($type == "order") {
+            return dirname($_SERVER['SCRIPT_FILENAME']) . "/uploads/attachments/" . $folderFiles . "/originals";
+        }*/
         elseif ($type == null) {
             return dirname($_SERVER['SCRIPT_FILENAME']) . "/uploads/attachments/" . $folderFiles;
         }
-
+        else {
+            return new Exception();
+        }
     }
 
 

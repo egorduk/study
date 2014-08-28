@@ -24,6 +24,7 @@ function PunkAveFileUploader(options)
         'thumbnail_url': viewUrl + '/thumbnails/' + file,
         'url': viewUrl + '/originals/' + file,
         'name': file
+        //'size':
         });
     });
   };
@@ -91,10 +92,8 @@ function PunkAveFileUploader(options)
   // Expects thumbnail_url, url, and name properties. thumbnail_url can be undefined if
   // url does not end in gif, jpg, jpeg or png. This is designed to work with the
   // result returned by the UploadHandler class on the PHP side
-  function appendEditableImage(info)
-  {
-    if (info.error)
-    {
+  function appendEditableImage(info) { //delete image
+    if (info.error) {
       self.errorCallback(info);
       return;
     }
@@ -112,11 +111,9 @@ function PunkAveFileUploader(options)
                 file.remove();
             })
         }
-
       });
       return false;
     });
-
     thumbnails.append(li);
   }
 

@@ -49,17 +49,11 @@ class FileManager
     public function removeFiles($options = array())
     {
         $options = array_merge($this->options, $options);
-
-
         $folder = $options['file_base_path'] . '/' . $options['folder'];
-
-        if (!strlen(trim($options['file_base_path'])))
-        {
+        if (!strlen(trim($options['file_base_path']))) {
             throw \Exception("file_base_path option looks empty, bailing out");
         }
-
-        if (!strlen(trim($options['folder'])))
-        {
+        if (!strlen(trim($options['folder']))) {
             throw \Exception("folder option looks empty, bailing out");
         }
         system("rm -rf " . escapeshellarg($folder));

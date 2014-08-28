@@ -100,16 +100,20 @@ class AuthorController extends Controller
         $action = $this->getRequest()->get('action');
         if (preg_match('/^\d+$/', $editId)) {
             if ($action == "profile") {
-                if ($fileName){
+                if ($fileName) {
                     $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'author/' . $editId, 'action' => 'delete'));
-                } else{
+                } else {
                     $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'author/' . $editId));
                 }
             } elseif ($action == "order") {
-                
+                if ($fileName) {
+                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/orders/' . $editId, 'action' => 'delete'));
+                } else {
+                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/orders/' . $editId));
+                }
             }
         }
-        return new Response(json_encode(array('action' => 'false')));
+        return new Response(json_encode(array('action' => 'error')));
     }
 
 
@@ -151,8 +155,7 @@ class AuthorController extends Controller
                         $postData['fieldComment'] = "";
                         $actionResponse = Helper::setAuthorBid($postData, $user, $order);
                         return new Response(json_encode(array('action' => $actionResponse)));
-                    }
-                    else {
+                    } else {
                         $postData = $request->request->all();
                         $curPage = $postData['page'];
                         $rowsPerPage = $postData['rows'];
@@ -215,8 +218,7 @@ class AuthorController extends Controller
                         $type = "unfavorite";
                         $actionResponse = Helper::favoriteOrder($orderId, $user, $type);
                         return new Response(json_encode(array('action' => $actionResponse)));
-                    }
-                    else {
+                    } else {
                         $postData = $request->request->all();
                         $curPage = $postData['page'];
                         $rowsPerPage = $postData['rows'];
@@ -402,8 +404,10 @@ class AuthorController extends Controller
                 //$session->save();
                 $cancelRequests = Helper::getCancelRequestsByOrderForAuthor($order);
                 $dateVerdict = Helper::getDateVerdict($order);
+                $folderFiles = $order->getFilesFolder();
+                //var_dump($folderFiles);die;
                 return $this->render(
-                    'AcmeSecureBundle:Author:order_work.html.twig', array('files' => $filesOrder, 'order' => $order, 'client' => $clientLink, 'user' => $user, 'cancelRequests' => $cancelRequests, 'dateVerdict' => $dateVerdict, 'folderFiles' => 'test_dir')
+                    'AcmeSecureBundle:Author:order_work.html.twig', array('files' => $filesOrder, 'order' => $order, 'client' => $clientLink, 'user' => $user, 'cancelRequests' => $cancelRequests, 'dateVerdict' => $dateVerdict, 'folderFiles' => $folderFiles)
                 );
             }
             else {

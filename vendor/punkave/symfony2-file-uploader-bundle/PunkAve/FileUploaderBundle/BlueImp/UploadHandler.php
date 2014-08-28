@@ -56,10 +56,10 @@ class UploadHandler
                 ),
                 */
                 'thumbnail' => array(
-                    'upload_dir' => dirname($_SERVER['SCRIPT_FILENAME']).'/thumbnails/',
+                    /*'upload_dir' => dirname($_SERVER['SCRIPT_FILENAME']).'/thumbnails/',
                     'upload_url' => $this->getFullUrl().'/thumbnails/',
                     'max_width' => 80,
-                    'max_height' => 80
+                    'max_height' => 80*/
                 )
             )
         );
@@ -79,8 +79,7 @@ class UploadHandler
     }
 
     protected function set_file_delete_url($file) {
-        $file->delete_url = $this->options['script_url']
-            .'?file='.rawurlencode($file->name);
+        $file->delete_url = $this->options['script_url'] . '?file='.rawurlencode($file->name);
         $file->delete_type = $this->options['delete_type'];
         if ($file->delete_type !== 'DELETE') {
             $file->delete_url .= '&_method=DELETE';
@@ -419,8 +418,7 @@ class UploadHandler
     }
 
     public function delete() {
-        $file_name = isset($_REQUEST['file']) ?
-            basename(stripslashes($_REQUEST['file'])) : null;
+        $file_name = isset($_REQUEST['file']) ? basename(stripslashes($_REQUEST['file'])) : null;
         $file_path = $this->options['upload_dir'].$file_name;
         $success = is_file($file_path) && $file_name[0] !== '.' && unlink($file_path);
         if ($success) {
