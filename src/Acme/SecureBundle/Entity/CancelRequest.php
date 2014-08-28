@@ -62,7 +62,7 @@ class CancelRequest extends EntityRepository
 
     public function __construct(){
         $this->date_create = new \DateTime();
-        $this->date_verdict = new \DateTime(date("Y-m-d H:i:s", strtotime("+3 day")));;
+        $this->date_verdict = new \DateTime(date("Y-m-d H:i:s", strtotime("+3 day")));
         $this->verdict = "";
     }
 

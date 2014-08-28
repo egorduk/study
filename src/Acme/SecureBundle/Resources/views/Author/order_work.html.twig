@@ -56,6 +56,7 @@
 
             }
         </style>
+        {% include "PunkAveFileUploaderBundle:Default:templates.html.twig" %}
         <div class="container" data-role="{{ user.userrole.id }}" data-login="{{ user.login }}">
             <div class="row">
                 <div class="col-md-7">
@@ -119,6 +120,7 @@
                             <div class="form-group">
                                 <select name="select-percent" id="select-percent" class="populate">
                                     <option></option>
+                                    <option value="0">0%</option>
                                     <option value="10">10%</option>
                                     <option value="20">20%</option>
                                     <option value="30">30%</option>
@@ -147,7 +149,6 @@
                     </div>
                 </div>
             </div>
-            {% if cancelRequests | length > 0 %} {% endif %}
             <div class="row">
                 <div class="col-md-8 col-md-offset-2" id="block-history-cancel-request" style="display: none">
                     <span id="line-date-verdict" class="label label-primary">Решение будет принято до {{ dateVerdict }}</span>
@@ -175,10 +176,16 @@
                                             Заказчик
                                         {% endif %}
                                     </td>
-                                    <td>{{ request.comment }}</td>
                                     <td>
-                                        {% if request.percent != "" %}
+                                        {% if request.comment != "" %}
+                                            {{ request.comment }}
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if request.percent != 111 and request.istogetherapply == 0 %}
                                             {{ request.percent }}%
+                                        {% else %}
+                                            По обоюдному согласию с заказчиком.
                                         {% endif %}
                                     </td>
                                     <td>{{ request.datecreate.format("d.m.Y H:i") }}</td>
@@ -189,8 +196,18 @@
                     </div>
                 </div>
             </div>
-
-        </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2" id="block-completed-order" style="">
+                    <form class="form-horizontal" name="form-completed-order" id="form-completed-order">
+                        <div class="form-group">
+                            <input type="button" id="btn-upload-order" class="btn btn-primary" value="Загрузить заказ">
+                        </div>
+                        <div class="input-group">
+                            <div class="file-uploader"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         <script>
             $(document).ready(function() {
                 //$("#block-history-cancel-request").css('display','none');
@@ -262,6 +279,22 @@
                         }
                     });
                 });
+                var fileUploader = new PunkAveFileUploader({
+                    'uploadUrl': {{ path('secure_author_upload', { editId: folderFiles }) | json_encode | raw }},
+                    'viewUrl': {{ ('/study/web/uploads/files/' ~ folderFiles)| json_encode | raw }},
+                    'el': '.file-uploader',
+                    'existingFiles': {{ punkave_get_files('attachments/' ~ folderFiles) | json_encode | raw }},
+                    'delaySubmitWhileUploading': '.edit-form',
+                    'errorCallback': function(errorObj) {
+                        if (errorObj.error == 'maxNumberOfFiles') {
+                            alert("Maximum uploaded files exceeded!");
+                        }
+                    }
+                });
             });
         </script>
+        <script type="text/javascript" src="{{ asset('bundles/js/underscore.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/jquery.fileupload.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/jquery.iframe-transport.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/FileUploader.js') }}"></script>
     {% endblock %}

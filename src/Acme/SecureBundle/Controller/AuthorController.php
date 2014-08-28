@@ -106,6 +106,7 @@ class AuthorController extends Controller
                     $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'author/' . $editId));
                 }
             } elseif ($action == "order") {
+                
             }
         }
         return new Response(json_encode(array('action' => 'false')));
@@ -402,7 +403,7 @@ class AuthorController extends Controller
                 $cancelRequests = Helper::getCancelRequestsByOrderForAuthor($order);
                 $dateVerdict = Helper::getDateVerdict($order);
                 return $this->render(
-                    'AcmeSecureBundle:Author:order_work.html.twig', array('files' => $filesOrder, 'order' => $order, 'client' => $clientLink, 'user' => $user, 'cancelRequests' => $cancelRequests, 'dateVerdict' => $dateVerdict)
+                    'AcmeSecureBundle:Author:order_work.html.twig', array('files' => $filesOrder, 'order' => $order, 'client' => $clientLink, 'user' => $user, 'cancelRequests' => $cancelRequests, 'dateVerdict' => $dateVerdict, 'folderFiles' => 'test_dir')
                 );
             }
             else {
@@ -527,10 +528,13 @@ class AuthorController extends Controller
                 } elseif ($action == 'createCancelRequest') {
                     //$user = $this->get('security.context')->getToken()->getUser();
                    // $order = Helper::getOrderByNumForAuthor($num);
+                    $arrayPercent = array('0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100');
                     $comment = strip_tags($request->request->get('textarea-comment'), 'br');
                     $togetherApply = $request->request->get('check-together-apply');
                     $togetherApply = $togetherApply == "on" ? 1 : 0;
                     $selectPercent = $togetherApply == 0 ? (int)$request->request->get('select-percent') : 0;
+                    $selectPercent = (is_numeric($selectPercent) && in_array($selectPercent, $arrayPercent) && $selectPercent >= 0) ? $selectPercent : 111;
+                    $percent = ($togetherApply || $selectPercent == 111) ? "По обоюдному согласию с заказчиком." : $selectPercent . '%';
                     $cancelRequest = new CancelRequest();
                     $cancelRequest->setUserOrder($order);
                     $cancelRequest->setComment($comment);
@@ -539,7 +543,6 @@ class AuthorController extends Controller
                     $cancelRequest->setCreator($user->getId());
                     Helper::createCancelOrderRequest($cancelRequest);
                     $dateCreate = $cancelRequest->getDateCreate()->format("d.m.Y H:i");
-                    $percent = $togetherApply ? "" : $selectPercent . '%';
                     $dateVerdict = Helper::getDateVerdict($order);
                     return new Response(json_encode(array('response' => 'valid', 'dateCreate' => $dateCreate, 'percent' => $percent, 'dateVerdict' => $dateVerdict, 'comment' => wordwrap($comment, 60, "\n", true))));
                 }

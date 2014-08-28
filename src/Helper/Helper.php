@@ -1823,7 +1823,7 @@ class Helper
             ->prepare("SELECT date_verdict FROM cancel_request WHERE cancel_request.user_order_id = '$orderId' LIMIT 1");
         $query->execute();
         $dateVerdict = $query->fetch();
-        $dateVerdict = date("d.m.Y H:i", strtotime($dateVerdict['date_verdict']));
+        $dateVerdict = date("d.m.Y H:i") < date("d.m.Y H:i", strtotime($dateVerdict['date_verdict'])) ? date("d.m.Y H:i", strtotime($dateVerdict['date_verdict'])) : "";
         return $dateVerdict;
     }
 
