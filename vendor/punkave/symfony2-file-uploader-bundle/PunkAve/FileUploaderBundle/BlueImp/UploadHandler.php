@@ -391,6 +391,7 @@ class UploadHandler
                 isset($upload['error']) ? $upload['error'] : null
             );
         }
+        //var_dump($info);die;
         header('Vary: Accept');
         $json = json_encode($info); //response about uploaded file
         $redirect = isset($_REQUEST['redirect']) ? stripslashes($_REQUEST['redirect']) : null;

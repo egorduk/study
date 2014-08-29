@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="main.css">
+    <meta name="robots" content="noindex,nofollow"/>
+    <title>Webchat</title>
+</head>
+<body>
+<div class="demo">
+    <div class="chat">
+        <div class="messages" id="messages"></div>
+
+        <div class="panel">
+            <span class="nick"></span> <input type="text" name="message_text" id="message_text">
+            <button type="button" id="message_btn">Отправить</button>
+        </div>
+    </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://localhost:8008/socket.io/socket.io.js" defer></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var messages = $("#messages");
+        try {
+            var socket = io.connect('http://localhost:8008');
+        }
+        catch(e) {
+            msg_system("Server is down");
+            return;
+        }
+        //socket.emit('join', {name: 'User_4666'});
+        var name = 'User_' + (Math.round(Math.random() * 10000));
+        //var name = "User_4666";
+
+        var message_txt = $("#message_text");
+        $('.chat .nick').text(name);
+
+        function msg(nick, message) {
+            var m = '<div class="msg">' +
+                    '<span class="user">' + safe(nick) + ':</span> '
+                    + safe(message) +
+                    '</div>';
+            messages.append(m).scrollTop(messages[0].scrollHeight);
+        }
+
+        function msg_system(message) {
+            var m = '<div class="msg system">' + safe(message) + '</div>';
+            messages.append(m).scrollTop(messages[0].scrollHeight);
+        }
+
+        socket.on('connecting', function () {
+            msg_system('Соединение...');
+        });
+
+        socket.on('connect', function () {
+            msg_system('Соединение установленно!');
+            socket.emit("log_connection", {name: name});
+        });
+
+        socket.on('message', function (data) {
+            msg(data.name, data.message);
+            message_txt.focus();
+        });
+
+        socket.on('response', function (data) {
+            //alert(data.message);
+            data.forEach(function (obj) {
+                msg(obj.from,obj.message);
+            });
+            msg_system("Count - " + data.length);
+        });
+
+        socket.on('disconnect', function (data) {
+            msg_system("Server off");
+        });
+
+        $("#message_btn").click(function () {
+            var text = $("#message_text").val();
+            if (text.length <= 0) {
+                return;
+            }
+            message_txt.val("");
+            socket.emit("message", {message: text, name: name});
+        });
+
+        function safe(str) {
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+    });
+</script>
+</body>
+</html>

@@ -27,7 +27,7 @@ parameters:
     #- dotx #application/vnd.openxmlformats-officedocument.wordprocessingml.template
     - txt #text/plain
     - rtf #text/rtf
-    #- bmp #images/bmp
+    - bmp #images/bmp
     - rar #application/rar
     - zip #application/zip
     - 7z  #application/octet-stream
