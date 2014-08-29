@@ -23,7 +23,8 @@ class UploadHandler
         $this->options = array(
             'script_url' => $this->getFullUrl().'/',
             'upload_dir' => dirname($_SERVER['SCRIPT_FILENAME']) . '/files/',
-            'upload_url' => $this->getFullUrl().'/files/',
+            'upload_url' => $this->getFullUrl() . '/files/',
+            'icon_url' => '/study/web/bundles/images/icons/',
             'param_name' => 'files',
             // Set the following option to 'POST', if your server does not support
             // DELETE requests. This is a parameter sent to the client:
@@ -191,33 +192,25 @@ class UploadHandler
         } else {
             $file_size = $_SERVER['CONTENT_LENGTH'];
         }
-        if ($this->options['max_file_size'] && (
-                $file_size > $this->options['max_file_size'] ||
-                $file->size > $this->options['max_file_size'])
-            ) {
+        if ($this->options['max_file_size'] && ($file_size > $this->options['max_file_size'] || $file->size > $this->options['max_file_size'])) {
             $file->error = 'maxFileSize';
             return false;
         }
-        if ($this->options['min_file_size'] &&
-            $file_size < $this->options['min_file_size']) {
+        if ($this->options['min_file_size'] && $file_size < $this->options['min_file_size']) {
             $file->error = 'minFileSize';
             return false;
         }
-        if (is_int($this->options['max_number_of_files']) && (
-                count($this->get_file_objects()) >= $this->options['max_number_of_files'])
-            ) {
+        if (is_int($this->options['max_number_of_files']) && (count($this->get_file_objects()) >= $this->options['max_number_of_files'])) {
             $file->error = 'maxNumberOfFiles';
             return false;
         }
         list($img_width, $img_height) = @getimagesize($uploaded_file);
         if (is_int($img_width)) {
-            if ($this->options['max_width'] && $img_width > $this->options['max_width'] ||
-                    $this->options['max_height'] && $img_height > $this->options['max_height']) {
+            if ($this->options['max_width'] && $img_width > $this->options['max_width'] || $this->options['max_height'] && $img_height > $this->options['max_height']) {
                 $file->error = 'maxResolution';
                 return false;
             }
-            if ($this->options['min_width'] && $img_width < $this->options['min_width'] ||
-                    $this->options['min_height'] && $img_height < $this->options['min_height']) {
+            if ($this->options['min_width'] && $img_width < $this->options['min_width'] || $this->options['min_height'] && $img_height < $this->options['min_height']) {
                 $file->error = 'minResolution';
                 return false;
             }
@@ -304,10 +297,10 @@ class UploadHandler
         $file = new \stdClass();
         $file->name = $this->trim_file_name($name, $type);
         $file->size = intval($size);
-        $file->type = $type;
+        $file->type = Helper::getMimeType($type);
         if ($this->validate($uploaded_file, $file, $error)) {
             //$this->handle_form_data($file, $index);
-            $file_path = $this->options['upload_dir'].$file->name;
+            $file_path = $this->options['upload_dir'] . $file->name;
             $append_file = !$this->options['discard_aborted_uploads'] && is_file($file_path) && $file->size > filesize($file_path);
             clearstatcache();
             if ($uploaded_file && is_uploaded_file($uploaded_file)) {
@@ -330,7 +323,7 @@ class UploadHandler
             	/*if ($this->options['orient_image']) {
             		$this->orient_image($file_path);
             	}*/
-                $file->url = $this->options['upload_url'] . rawurlencode($file->name);
+                $file->url = '/study/web' . $this->options['upload_url'] . rawurlencode($file->name);
                 foreach($this->options['image_versions'] as $version => $options) {
                     if ($this->create_scaled_image($file->name, $options)) {
                         if ($this->options['upload_dir'] !== $options['upload_dir']) {
@@ -339,6 +332,8 @@ class UploadHandler
                             clearstatcache();
                             $file_size = filesize($file_path);
                         }
+                    } else {
+                        $file->thumbnail_url = $this->options['icon_url'] . $file->type . '.png';
                     }
                 }
             } else if ($this->options['discard_aborted_uploads']) {
@@ -359,7 +354,7 @@ class UploadHandler
         } else {
             $info = $this->get_file_objects();
         }
-        header('Content-type: application/json');
+        header('Content-type: text/plain');
         echo json_encode($info);
     }
 

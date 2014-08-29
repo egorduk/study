@@ -110,9 +110,9 @@ class AuthorController extends Controller
                 }
             } elseif ($action == "order") {
                 if ($fileName) {
-                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/orders/' . $editId, 'action' => 'delete'));
+                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/orders/' . $editId/*, 'action' => 'delete'*/));
                 } else {
-                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/orders/' . $editId));
+                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/orders/' . $editId/*, 'max_number_of_files' => 2*/));
                 }
             }
             return new Response(json_encode(array('action' => 'success')));

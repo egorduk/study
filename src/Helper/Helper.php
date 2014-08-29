@@ -507,39 +507,42 @@ class Helper
     }
 
 
-    public static function getSizeFile($bytes){
+    public static function getSizeFile($bytes) {
         $label = array('B', 'KB', 'MB');
         for ($i = 0; $bytes >= 1024 && $i < (count($label) - 1); $bytes /= 1024, $i++);
         return(round($bytes, 1) . " " . $label[$i]);
     }
 
 
-    /*public static function getTypeFile($filename){
-        $mime_types = array(
+    public static function getMimeType($type) {
+        $mimeTypes = array(
             'txt' => 'text/plain',
             'png' => 'image/png',
             'jpeg' => 'image/jpeg',
             'jpg' => 'image/jpeg',
             'gif' => 'image/gif',
             'bmp' => 'image/bmp',
-            '7z' => 'application/x-7z-compressed',
+            '7z' => 'application/octet-stream',
             'zip' => 'application/zip',
-            'rar' => 'application/x-rar-compressed',
+            'rar' => 'application/rar',
             'pdf' => 'application/pdf',
             'doc' => 'application/msword',
-            'rtf' => 'application/rtf',
+            //'rtf' => 'application/rtf',
             'xls' => 'application/vnd.ms-excel',
             'ppt' => 'application/vnd.ms-powerpoint',
+            'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'rtf' => 'text/rtf'
         );
-
-        $ext = strtolower(array_pop(explode('.', $filename)));
-        if (array_key_exists($ext, $mime_types)) {
-            return $mime_types[$ext];
+        //$ext = strtolower(array_pop(explode('.', $filename)));
+        /*if (array_search($type, $mimeTypes)) {
+            return $mimeTypes[$type];
         }
         else{
-
-        }
-    }*/
+            return "FALSE";
+        }*/
+        return array_search($type,$mimeTypes);
+    }
 
 
     public static function getExtensionFile($filename) {

@@ -13,18 +13,18 @@ parameters:
     - jpg #image/jpeg
     - jpeg #image/jpeg
     - pdf #application/pdf
-    - mp3 #audio/mpeg
+    #- mp3 #audio/mpeg
     - xls #application/vnd.ms-excel
     - ppt #application/vnd.ms-powerpoint
     - doc #application/msword
     - pptx #application/vnd.openxmlformats-officedocument.presentationml.presentation
     - sldx #application/vnd.openxmlformats-officedocument.presentationml.slide
-    - ppsx #application/vnd.openxmlformats-officedocument.presentationml.slideshow
-    - potx #application/vnd.openxmlformats-officedocument.presentationml.template
+    #- ppsx #application/vnd.openxmlformats-officedocument.presentationml.slideshow
+    #- potx #application/vnd.openxmlformats-officedocument.presentationml.template
     - xlsx #application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-    - xltx #application/vnd.openxmlformats-officedocument.spreadsheetml.template
+    #- xltx #application/vnd.openxmlformats-officedocument.spreadsheetml.template
     - docx #application/vnd.openxmlformats-officedocument.wordprocessingml.document
-    - dotx #application/vnd.openxmlformats-officedocument.wordprocessingml.template
+    #- dotx #application/vnd.openxmlformats-officedocument.wordprocessingml.template
     - txt #text/plain
     - rtf #text/rtf
     #- bmp #images/bmp
