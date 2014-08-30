@@ -532,7 +532,8 @@ class Helper
             'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
             'ppt' => 'application/vnd.ms-powerpoint',
             'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-            'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            //'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'docx' => 'binary/octet-stream',
             'rtf' => 'text/rtf'
         );
         //$ext = strtolower(array_pop(explode('.', $filename)));

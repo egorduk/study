@@ -297,6 +297,8 @@
                             alert("Maximum uploaded files exceeded!");
                         } else if (errorObj.error == 'acceptFileTypes') {
                             alert("Такой файл запрещен!");
+                        } else if (errorObj.error == 'minFileSize') {
+                            alert("Файл слишком маленький!");
                         }
                     }
                 });

@@ -11,14 +11,15 @@ function PunkAveFileUploader(options)
   self.errorCallback = 'errorCallback' in options ? options.errorCallback : function( info ) { if (window.console && console.log) { console.log(info) } },
 
   self.addExistingFiles = function(files) {
+      //console.log(files);
     _.each(files, function(file) {
-      //console.log(viewUrl);
       appendEditableImage({
         // cmsMediaUrl is a global variable set by the underscoreTemplates partial of MediaItems.html.twig
-        'thumbnail_url': viewUrl + '/thumbnails/' + file,
+        //'thumbnail_url': viewUrl + '/thumbnails/' + file,
+        'thumbnail_url': file.thumbnail == null ? viewUrl + '/thumbnails/' + file.name : file.thumbnail,
         'url': viewUrl + '/originals/' + file,
-        'name': file
-        //'size':
+        'name': file.name,
+        'size': file.size
         });
     });
   };
@@ -27,21 +28,15 @@ function PunkAveFileUploader(options)
   // Note that you are welcome to examine the
   // uploading property yourself if this isn't
   // quite right for you
-  self.delaySubmitWhileUploading = function(sel)
-  {
+  self.delaySubmitWhileUploading = function(sel) {
     $(sel).submit(function(e) {
-        if (!self.uploading)
-        {
+        if (!self.uploading) {
             return true;
         }
-        function attempt()
-        {
-            if (self.uploading)
-            {
+        function attempt() {
+            if (self.uploading) {
                 setTimeout(attempt, 100);
-            }
-            else
-            {
+            } else {
                 $(sel).submit();
             }
         }
@@ -50,23 +45,20 @@ function PunkAveFileUploader(options)
     });
   }
 
-  if (options.blockFormWhileUploading)
-  {
+  if (options.blockFormWhileUploading) {
     self.blockFormWhileUploading(options.blockFormWhileUploading);
   }
 
-  if (options.existingFiles)
-  {
+  if (options.existingFiles) {
     self.addExistingFiles(options.existingFiles);
   }
 
-  editor.fileupload({
+  editor.fileupload({ // uploading proccess
     dataType: 'json',
     url: uploadUrl,
     dropZone: $el.find('[data-dropzone="1"]'),
     done: function (e, data) {
-      if (data)
-      {
+      if (data) {
         _.each(data.result, function(item) {
            // console.log(item);
           appendEditableImage(item);
@@ -91,7 +83,9 @@ function PunkAveFileUploader(options)
       self.errorCallback(info);
       return;
     }
+      //console.log(info);
     var li = $(fileTemplate(info));
+    /*If clicked for deleting selected file*/
     li.find('[data-action="delete"]').click(function(event) {
       var file = $(this).closest('[data-name]');
       var name = file.attr('data-name');
@@ -117,21 +111,16 @@ function PunkAveFileUploader(options)
     var baseURL = tempArray[0];
     var additionalURL = tempArray[1]; 
     var temp = "";
-    if (additionalURL)
-    {
+    if (additionalURL) {
         var tempArray = additionalURL.split("&");
-        var i;
-        for (i = 0; i < tempArray.length; i++)
-        {
-            if (tempArray[i].split('=')[0] != param )
-            {
+        for (var i = 0; i < tempArray.length; i++) {
+            if (tempArray[i].split('=')[0] != param ) {
                 newAdditionalURL += temp + tempArray[i];
                 temp = "&";
             }
         }
     }
-    var newTxt = temp + "" + param + "=" + encodeURIComponent(paramVal);
-    var finalURL = baseURL + "?" + newAdditionalURL + newTxt;
+    var newTxt = temp + "" + param + "=" + encodeURIComponent(paramVal), finalURL = baseURL + "?" + newAdditionalURL + newTxt;
     return finalURL;
   }
 }

@@ -104,7 +104,7 @@ class AuthorController extends Controller
         if (preg_match('/^\d+$/', $editId)) {
             if ($action == "profile") {
                 if ($fileName) {
-                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'author/' . $editId, 'action' => 'delete'));
+                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'author/' . $editId/*, 'action' => 'delete'*/));
                 } else {
                     $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'author/' . $editId));
                 }
@@ -112,7 +112,7 @@ class AuthorController extends Controller
                 if ($fileName) {
                     $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/orders/' . $editId/*, 'action' => 'delete'*/));
                 } else {
-                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/orders/' . $editId/*, 'max_number_of_files' => 2*/));
+                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/orders/' . $editId, /*'max_number_of_files' => 5, 'min_file_size' => '2'*/));
                 }
             }
             return new Response(json_encode(array('action' => 'success')));

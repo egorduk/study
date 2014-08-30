@@ -2,12 +2,13 @@
 
 namespace PunkAve\FileUploaderBundle\Services;
 
+use Helper\Helper;
+
 class FileManager
 {
     protected $options;
 
-    public function __construct($options)
-    {
+    public function __construct($options) {
         $this->options = $options;
     }
 
@@ -16,27 +17,35 @@ class FileManager
      * If you pass consistent options to this method and handleFileUpload with
      * regard to paths, then you will get consistent results.
      */
-    public function getFiles($options = array())
-    {
+    public function getFiles($options = array()) {
         $options = array_merge($this->options, $options);
-
+        //var_dump($options);
         $folder = $options['file_base_path'] . '/' . $options['folder'];
-        if (file_exists($folder))
-        {
+        if (file_exists($folder)) {
             $dirs = glob("$folder/originals/*");
             $fullPath = isset($options['full_path']) ? $options['full_path'] : false;
-            if ($fullPath)
-            {
+            if ($fullPath) {
                 return $dirs;
             }
             if (!is_array($dirs)) {
                 $dirs = array();
             }
-            $result = array_map(function($s) { return preg_replace('|^.+[\\/]|', '', $s); }, $dirs);
+            //$result[0] = array_map(function($s) { return preg_replace('|^.+[\\/]|', '', $s); }, $dirs);
+            $result = [];
+            //$finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $arrayAllowExt = ['jpg', 'jpeg', 'png', 'gif'];
+            foreach($dirs as $dir) {
+                $file = new \stdClass();
+                $file->name = preg_replace('|^.+[\\/]|', '', $dir);
+                $file->size = Helper::getSizeFile(filesize($dir));
+                //$file->type = Helper::getExtensionFile($dir);
+                //$file->type = Helper::getMimeType(finfo_file($finfo, $dir)); //mime_content_type
+                $file->thumbnail = !in_array(Helper::getExtensionFile($dir), $arrayAllowExt) ? '/study/web/bundles/images/icons/' . Helper::getExtensionFile($dir) . '.png' : null;
+                $result[] = $file;
+            }
+            //var_dump($result);
             return $result;
-        }
-        else
-        {
+        } else {
             return array();
         }
     }
@@ -46,8 +55,7 @@ class FileManager
      * If you pass consistent options to this method and handleFileUpload with
      * regard to paths, then you will get consistent results.
      */
-    public function removeFiles($options = array())
-    {
+    public function removeFiles($options = array()) {
         $options = array_merge($this->options, $options);
         $folder = $options['file_base_path'] . '/' . $options['folder'];
         if (!strlen(trim($options['file_base_path']))) {

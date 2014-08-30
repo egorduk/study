@@ -19,7 +19,8 @@ class UploadHandler
 {
     protected $options;
 
-    function __construct($options=null) {
+    function __construct($options = null) {
+        //var_dump($options);
         $this->options = array(
             'script_url' => $this->getFullUrl().'/',
             'upload_dir' => dirname($_SERVER['SCRIPT_FILENAME']) . '/files/',
@@ -28,14 +29,14 @@ class UploadHandler
             'param_name' => 'files',
             // Set the following option to 'POST', if your server does not support
             // DELETE requests. This is a parameter sent to the client:
-            'delete_type' => 'DELETE',
+            //'delete_type' => 'DELETE',
             // The php.ini settings upload_max_filesize and post_max_size
             // take precedence over the following max_file_size setting:
             'max_file_size' => null,
             'min_file_size' => null,
             'accept_file_types' => '/.+$/i',
             // The maximum number of files for the upload directory:
-            'max_number_of_files' => null,
+            //'max_number_of_files' => null,
             // Image resolution restrictions:
             'max_width' => null,
             'max_height' => null,
@@ -69,7 +70,6 @@ class UploadHandler
         if ($options) {
             $this->options = array_replace_recursive($this->options, $options);
         }
-        //var_dump($this->options['upload_url']);die;
     }
 
     protected function getFullUrl() {
@@ -91,7 +91,7 @@ class UploadHandler
     }
 
     protected function get_file_object($file_name) {
-        $file_path = $this->options['upload_dir'].$file_name;
+        $file_path = $this->options['upload_dir'] . $file_name;
         if (is_file($file_path) && $file_name[0] !== '.') {
             $file = new \stdClass();
             $file->name = $file_name;
@@ -109,10 +109,7 @@ class UploadHandler
     }
 
     protected function get_file_objects() {
-        return array_values(array_filter(array_map(
-            array($this, 'get_file_object'),
-            scandir($this->options['upload_dir'])
-        )));
+        return array_values(array_filter(array_map(array($this, 'get_file_object'), scandir($this->options['upload_dir']))));
     }
 
     protected function create_scaled_image($file_name, $options) {
@@ -175,6 +172,7 @@ class UploadHandler
     }
 
     protected function validate($uploaded_file, $file, $error) {
+        //var_dump($this->options);
         if ($error) {
             $file->error = $error;
             return false;
@@ -251,9 +249,9 @@ class UploadHandler
         return $file_name;
     }
 
-    protected function handle_form_data($file, $index) {
+    /*protected function handle_form_data($file, $index) {
         // Handle form data, e.g. $_REQUEST['description'][$index]
-    }
+    }*/
 
     protected function orient_image($file_path) {
       	$exif = @exif_read_data($file_path);
@@ -297,7 +295,8 @@ class UploadHandler
         $file = new \stdClass();
         $file->name = $this->trim_file_name($name, $type);
         $file->size = intval($size);
-        $file->type = Helper::getMimeType($type);
+        //$file->type = Helper::getMimeType($type);
+        $file->type = Helper::getExtensionFile($file->name);
         if ($this->validate($uploaded_file, $file, $error)) {
             //$this->handle_form_data($file, $index);
             $file_path = $this->options['upload_dir'] . $file->name;
@@ -336,7 +335,7 @@ class UploadHandler
                         $file->thumbnail_url = $this->options['icon_url'] . $file->type . '.png';
                     }
                 }
-            } else if ($this->options['discard_aborted_uploads']) {
+            } elseif ($this->options['discard_aborted_uploads']) {
                 unlink($file_path);
                 $file->error = 'abort';
             }
@@ -348,17 +347,17 @@ class UploadHandler
     }
 
     public function get() {
-        $file_name = isset($_REQUEST['file']) ? basename(stripslashes($_REQUEST['file'])) : null;
+        /*$file_name = isset($_REQUEST['file']) ? basename(stripslashes($_REQUEST['file'])) : null;
         if ($file_name) {
             $info = $this->get_file_object($file_name);
         } else {
             $info = $this->get_file_objects();
         }
         header('Content-type: text/plain');
-        echo json_encode($info);
+        echo json_encode($info);*/
     }
 
-    public function post() {
+    public function post() { //if file uploaded
         /*if (isset($_REQUEST['_method']) && $_REQUEST['_method'] === 'DELETE') {
             return $this->delete();
         }
@@ -407,7 +406,7 @@ class UploadHandler
         echo $json;
     }
 
-    public function delete() {
+    public function delete() { // deletes selected file
         $file_name = isset($_REQUEST['file']) ? basename(stripslashes($_REQUEST['file'])) : null;
         $file_path = $this->options['upload_dir'] . $file_name;
         $success = is_file($file_path) && $file_name[0] !== '.' && unlink($file_path);
