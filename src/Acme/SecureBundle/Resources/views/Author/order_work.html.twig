@@ -299,6 +299,8 @@
                             alert("Такой файл запрещен!");
                         } else if (errorObj.error == 'minFileSize') {
                             alert("Файл слишком маленький!");
+                        } else if (errorObj.error == 'maxFileSize') {
+                            alert("Файл слишком большой!");
                         }
                     }
                 });

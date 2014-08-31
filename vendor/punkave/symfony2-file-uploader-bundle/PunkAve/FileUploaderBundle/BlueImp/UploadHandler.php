@@ -91,10 +91,10 @@ class UploadHandler
     }
 
     protected function get_file_object($file_name) {
-        $file_path = $this->options['upload_dir'] . $file_name;
+        /*$file_path = $this->options['upload_dir'] . $file_name;
         if (is_file($file_path) && $file_name[0] !== '.') {
             $file = new \stdClass();
-            $file->name = $file_name;
+            $file->name = iconv('CP1251', 'UTF-8', $file_name);
             $file->size = filesize($file_path);
             $file->url = $this->options['upload_url'] . rawurlencode($file->name);
             foreach($this->options['image_versions'] as $version => $options) {
@@ -105,11 +105,11 @@ class UploadHandler
             $this->set_file_delete_url($file);
             return $file;
         }
-        return null;
+        return null;*/
     }
 
     protected function get_file_objects() {
-        return array_values(array_filter(array_map(array($this, 'get_file_object'), scandir($this->options['upload_dir']))));
+        //return array_values(array_filter(array_map(array($this, 'get_file_object'), scandir($this->options['upload_dir']))));
     }
 
     protected function create_scaled_image($file_name, $options) {
@@ -291,9 +291,10 @@ class UploadHandler
      * @param $error
      * @return \stdClass
      */
-    protected function handle_file_upload($uploaded_file, $name, $size, $type, $error) {
+    protected function handle_file_upload($uploaded_file, $name, $size, $type, $error) { // if uploaded
         $file = new \stdClass();
-        $file->name = $this->trim_file_name($name, $type);
+        $file->name = iconv('UTF-8', 'CP1251', $this->trim_file_name($name, $type));
+        //$file->name = $this->trim_file_name($name, $type);
         $file->size = intval($size);
         //$file->type = Helper::getMimeType($type);
         $file->type = Helper::getExtensionFile($file->name);
@@ -322,7 +323,7 @@ class UploadHandler
             	/*if ($this->options['orient_image']) {
             		$this->orient_image($file_path);
             	}*/
-                $file->url = '/study/web' . $this->options['upload_url'] . rawurlencode($file->name);
+                $file->url = '/study/web' . $this->options['upload_url'] . rawurlencode(iconv('CP1251', 'UTF-8', $file->name));
                 foreach($this->options['image_versions'] as $version => $options) {
                     if ($this->create_scaled_image($file->name, $options)) {
                         if ($this->options['upload_dir'] !== $options['upload_dir']) {
@@ -339,23 +340,26 @@ class UploadHandler
                 unlink($file_path);
                 $file->error = 'abort';
             }
+
+            $file->name = iconv('CP1251', 'UTF-8', $file->name);
             $file->size = Helper::getSizeFile($file_size);
-            $this->set_file_delete_url($file);
+            $file->detele_url = $this->options['script_url'] . '?file=' . rawurlencode(iconv('UTF-8', 'CP1251', $file->name));
+            //$this->set_file_delete_url($file);
         }
         //$file->thumbnail_url = '/study/web/uploads/attachments/orders/7/thumbnails/1.jpg';
         return $file;
     }
 
-    public function get() {
-        /*$file_name = isset($_REQUEST['file']) ? basename(stripslashes($_REQUEST['file'])) : null;
+    /*public function get() {
+        $file_name = isset($_REQUEST['file']) ? basename(stripslashes($_REQUEST['file'])) : null;
         if ($file_name) {
             $info = $this->get_file_object($file_name);
         } else {
             $info = $this->get_file_objects();
         }
         header('Content-type: text/plain');
-        echo json_encode($info);*/
-    }
+        echo json_encode($info);
+    }*/
 
     public function post() { //if file uploaded
         /*if (isset($_REQUEST['_method']) && $_REQUEST['_method'] === 'DELETE') {
@@ -372,6 +376,7 @@ class UploadHandler
             // $_FILES is a multi-dimensional array:
             foreach ($upload['tmp_name'] as $index => $value) {
                 $info[] = $this->handle_file_upload(
+                    //iconv('UTF-8', 'CP1251', $upload['tmp_name'][$index]),
                     $upload['tmp_name'][$index],
                     isset($_SERVER['HTTP_X_FILE_NAME']) ? $_SERVER['HTTP_X_FILE_NAME'] : $upload['name'][$index],
                     isset($_SERVER['HTTP_X_FILE_SIZE']) ? $_SERVER['HTTP_X_FILE_SIZE'] : $upload['size'][$index],
@@ -412,7 +417,7 @@ class UploadHandler
         $success = is_file($file_path) && $file_name[0] !== '.' && unlink($file_path);
         if ($success) {
             foreach($this->options['image_versions'] as $options) {
-                $file = $options['upload_dir'] . $file_name;
+                $file = $options['upload_dir'] . iconv('UTF-8', 'CP1251', $file_name);
                 if (is_file($file)) {
                     unlink($file);
                 }

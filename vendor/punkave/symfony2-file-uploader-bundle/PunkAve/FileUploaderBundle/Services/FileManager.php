@@ -36,7 +36,7 @@ class FileManager
             $arrayAllowExt = ['jpg', 'jpeg', 'png', 'gif'];
             foreach($dirs as $dir) {
                 $file = new \stdClass();
-                $file->name = preg_replace('|^.+[\\/]|', '', $dir);
+                $file->name = iconv('CP1251', 'UTF-8', preg_replace('|^.+[\\/]|', '', $dir));
                 $file->size = Helper::getSizeFile(filesize($dir));
                 //$file->type = Helper::getExtensionFile($dir);
                 //$file->type = Helper::getMimeType(finfo_file($finfo, $dir)); //mime_content_type

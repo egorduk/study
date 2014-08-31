@@ -111,6 +111,8 @@ class FileUploader
                 'image_versions' => $sizes,
                 'accept_file_types' => $allowedExtensionsRegex,
                 'max_number_of_files' => $options['max_number_of_files'],
+                'min_file_size' => $options['min_file_size'],
+                'max_file_size' => $options['max_file_size']
             ));
 
         // From https://github.com/blueimp/jQuery-File-Upload/blob/master/server/php/index.php
@@ -121,20 +123,20 @@ class FileUploader
         //header('Content-type: text/plain');
         header('Pragma: no-cache');
         header('Cache-Control: no-store, no-cache, must-revalidate');
-        header('Content-Disposition: inline; filename="files.json"');
+        //header('Content-Disposition: inline; filename="files.json"');
         header('X-Content-Type-Options: nosniff');
         header('Access-Control-Allow-Origin: *');
        // header('Access-Control-Allow-Methods: OPTIONS, HEAD, GET, POST, PUT, DELETE');
         header('Access-Control-Allow-Headers: X-File-Name, X-File-Type, X-File-Size');
 
-        switch ($_SERVER['REQUEST_METHOD']) {
-            case 'OPTIONS':
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            /*case 'OPTIONS':
                 break;
             case 'HEAD':
             case 'GET':
                 $upload_handler->get();
-                break;
-            case 'POST':
+                break;*/
+          //  case 'POST':
                 /*if (isset($_REQUEST['_method']) && $_REQUEST['_method'] === 'DELETE') {
                     $upload_handler->delete();
                 } else {*/
@@ -143,9 +145,11 @@ class FileUploader
                 break;
             case 'DELETE':
                 $upload_handler->delete();*/
-                break;
+               /* break;
             default:
-                header('HTTP/1.1 405 Method Not Allowed');
+                header('HTTP/1.1 405 Method Not Allowed');*/
+        } else {
+            header('HTTP/1.1 405 Method Not Allowed');
         }
 
         // Without this Symfony will try to respond; the BlueImp upload handler class already did,
