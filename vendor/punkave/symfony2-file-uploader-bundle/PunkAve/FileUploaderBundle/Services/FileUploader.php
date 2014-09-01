@@ -112,7 +112,8 @@ class FileUploader
                 'accept_file_types' => $allowedExtensionsRegex,
                 'max_number_of_files' => $options['max_number_of_files'],
                 'min_file_size' => $options['min_file_size'],
-                'max_file_size' => $options['max_file_size']
+                'max_file_size' => $options['max_file_size'],
+                'test' => $options['test']
             ));
 
         // From https://github.com/blueimp/jQuery-File-Upload/blob/master/server/php/index.php

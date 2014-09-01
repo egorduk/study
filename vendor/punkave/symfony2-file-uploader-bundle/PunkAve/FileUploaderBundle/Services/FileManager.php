@@ -17,7 +17,7 @@ class FileManager
      * If you pass consistent options to this method and handleFileUpload with
      * regard to paths, then you will get consistent results.
      */
-    public function getFiles($options = array()) {
+    public function getFiles($options = array()) {  //Get existing files from folder
         $options = array_merge($this->options, $options);
         //var_dump($options);
         $folder = $options['file_base_path'] . '/' . $options['folder'];
@@ -33,14 +33,14 @@ class FileManager
             //$result[0] = array_map(function($s) { return preg_replace('|^.+[\\/]|', '', $s); }, $dirs);
             $result = [];
             //$finfo = finfo_open(FILEINFO_MIME_TYPE);
-            $arrayAllowExt = ['jpg', 'jpeg', 'png', 'gif'];
+            $arrayAllowedExt = ['jpg', 'jpeg', 'png', 'gif'];
             foreach($dirs as $dir) {
                 $file = new \stdClass();
-                $file->name = iconv('CP1251', 'UTF-8', preg_replace('|^.+[\\/]|', '', $dir));
+                $file->name = iconv('CP1251', 'UTF-8', preg_replace('|^.+[\\/]|', '', $dir));/*preg_replace('|^.+[\\/]|', '', $dir);*/
                 $file->size = Helper::getSizeFile(filesize($dir));
                 //$file->type = Helper::getExtensionFile($dir);
                 //$file->type = Helper::getMimeType(finfo_file($finfo, $dir)); //mime_content_type
-                $file->thumbnail = !in_array(Helper::getExtensionFile($dir), $arrayAllowExt) ? '/study/web/bundles/images/icons/' . Helper::getExtensionFile($dir) . '.png' : null;
+                $file->thumbnail = !in_array(Helper::getExtensionFile($dir), $arrayAllowedExt) ? '/study/web/bundles/images/icons/' . Helper::getExtensionFile($dir) . '.png' : null;
                 $result[] = $file;
             }
             //var_dump($result);

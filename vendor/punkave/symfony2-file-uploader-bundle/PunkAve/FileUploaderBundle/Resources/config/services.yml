@@ -4,6 +4,7 @@ parameters:
   file_uploader.web_base_path: "/uploads"
   file_uploader.min_file_size: ~
   file_uploader.max_file_size: ~
+  file_uploader.test: ~
   file_uploader.allowed_extensions:
     # Mime types are just for documentation's sake.
     # BlueImp filters by supplied extension. No checking of the
@@ -81,6 +82,7 @@ services:
             max_number_of_files: '%file_uploader.max_number_of_files%'
             min_file_size: '%file_uploader.min_file_size%'
             max_file_size: '%file_uploader.max_file_size%'
+            test: '%file_uploader.test%'
         scope: request
 
     # You usually won't need this sub-service directly,

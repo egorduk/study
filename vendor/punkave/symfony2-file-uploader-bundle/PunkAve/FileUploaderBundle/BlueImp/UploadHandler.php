@@ -83,7 +83,7 @@ class UploadHandler
     }
 
     protected function set_file_delete_url($file) {
-        $file->delete_url = $this->options['script_url'] . '?file='.rawurlencode($file->name);
+        //$file->delete_url = $this->options['script_url'] . '?file='.rawurlencode($file->name);
         /*$file->delete_type = $this->options['delete_type'];
         if ($file->delete_type !== 'DELETE') {
             $file->delete_url .= '&_method=DELETE';
@@ -239,10 +239,10 @@ class UploadHandler
         // Add missing file extension for known image types:
         if (strpos($file_name, '.') === false &&
             preg_match('/^image\/(gif|jpe?g|png)/', $type, $matches)) {
-            $file_name .= '.'.$matches[1];
+            $file_name .= '.' . $matches[1];
         }
         if ($this->options['discard_aborted_uploads']) {
-            while(is_file($this->options['upload_dir'].$file_name)) {
+            while(is_file($this->options['upload_dir'] . $file_name)) {
                 $file_name = $this->upcount_name($file_name);
             }
         }
@@ -293,7 +293,7 @@ class UploadHandler
      */
     protected function handle_file_upload($uploaded_file, $name, $size, $type, $error) { // if uploaded
         $file = new \stdClass();
-        $file->name = iconv('UTF-8', 'CP1251', $this->trim_file_name($name, $type));
+        $file->name = /*iconv('UTF-8', 'CP1251', $this->trim_file_name($name, $type));*/$this->trim_file_name($name, $type);
         //$file->name = $this->trim_file_name($name, $type);
         $file->size = intval($size);
         //$file->type = Helper::getMimeType($type);
@@ -301,6 +301,7 @@ class UploadHandler
         if ($this->validate($uploaded_file, $file, $error)) {
             //$this->handle_form_data($file, $index);
             $file_path = $this->options['upload_dir'] . $file->name;
+            //var_dump(mb_detect_encoding($file_path)); utf-8
             $append_file = !$this->options['discard_aborted_uploads'] && is_file($file_path) && $file->size > filesize($file_path);
             clearstatcache();
             if ($uploaded_file && is_uploaded_file($uploaded_file)) {
@@ -308,7 +309,9 @@ class UploadHandler
                 if ($append_file) {
                     file_put_contents($file_path, fopen($uploaded_file, 'r'), FILE_APPEND);
                 } else {
+                    //var_dump(mb_detect_encoding($file_path)); //utf-8
                     move_uploaded_file($uploaded_file, $file_path);
+                    die("yi");
                 }
             } /*else {
                 // Non-multipart uploads (PUT method support)
@@ -318,6 +321,7 @@ class UploadHandler
                     $append_file ? FILE_APPEND : 0
                 );
             }*/
+            //var_dump($file_path);
             $file_size = filesize($file_path);
             if ($file_size === $file->size) {
             	/*if ($this->options['orient_image']) {
@@ -340,10 +344,13 @@ class UploadHandler
                 unlink($file_path);
                 $file->error = 'abort';
             }
-
             $file->name = iconv('CP1251', 'UTF-8', $file->name);
             $file->size = Helper::getSizeFile($file_size);
-            $file->detele_url = $this->options['script_url'] . '?file=' . rawurlencode(iconv('UTF-8', 'CP1251', $file->name));
+            /*if ($this->options['test'] == 1) {
+                $file->detele_url = $this->options['script_url'] . '?file=' . rawurlencode(iconv('UTF-8', 'CP1251', $file->name));
+            } else {
+                $file->detele_url = 'duk';
+            }*/
             //$this->set_file_delete_url($file);
         }
         //$file->thumbnail_url = '/study/web/uploads/attachments/orders/7/thumbnails/1.jpg';
@@ -417,7 +424,7 @@ class UploadHandler
         $success = is_file($file_path) && $file_name[0] !== '.' && unlink($file_path);
         if ($success) {
             foreach($this->options['image_versions'] as $options) {
-                $file = $options['upload_dir'] . iconv('UTF-8', 'CP1251', $file_name);
+                $file = $options['upload_dir'] . $file_name;
                 if (is_file($file)) {
                     unlink($file);
                 }

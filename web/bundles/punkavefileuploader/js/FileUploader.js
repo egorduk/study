@@ -17,7 +17,7 @@ function PunkAveFileUploader(options)
         // cmsMediaUrl is a global variable set by the underscoreTemplates partial of MediaItems.html.twig
         //'thumbnail_url': viewUrl + '/thumbnails/' + file,
         'thumbnail_url': file.thumbnail == null ? viewUrl + '/thumbnails/' + file.name : file.thumbnail,
-        'url': viewUrl + '/originals/' + file,
+        'url': viewUrl + '/originals/' + file.name,
         'name': file.name,
         'size': file.size
         });
@@ -79,6 +79,7 @@ function PunkAveFileUploader(options)
   // url does not end in gif, jpg, jpeg or png. This is designed to work with the
   // result returned by the UploadHandler class on the PHP side
   function appendEditableImage(info) { //delete image
+     // console.log(info);
     if (info.error) {
       self.errorCallback(info);
       return;
