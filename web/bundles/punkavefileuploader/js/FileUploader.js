@@ -17,7 +17,7 @@ function PunkAveFileUploader(options)
         // cmsMediaUrl is a global variable set by the underscoreTemplates partial of MediaItems.html.twig
         //'thumbnail_url': viewUrl + '/thumbnails/' + file,
         'thumbnail_url': file.thumbnail == null ? viewUrl + '/thumbnails/' + file.name : file.thumbnail,
-        'url': viewUrl + '/originals/' + file,
+        'url': viewUrl + '/originals/' + file.name,
         'name': file.name,
         'size': file.size
         });

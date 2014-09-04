@@ -293,7 +293,7 @@ class UploadHandler
      */
     protected function handle_file_upload($uploaded_file, $name, $size, $type, $error) { // if uploaded
         $file = new \stdClass();
-        $file->name = iconv('UTF-8', 'CP1251', $this->trim_file_name($name, $type));
+        $file->name = $this->trim_file_name($name, $type);
         //$file->name = $this->trim_file_name($name, $type);
         $file->size = intval($size);
         //$file->type = Helper::getMimeType($type);
@@ -305,10 +305,33 @@ class UploadHandler
             clearstatcache();
             if ($uploaded_file && is_uploaded_file($uploaded_file)) {
                 // multipart/formdata uploads (POST method uploads)
+                $file_path = (iconv('UTF-8', 'CP1251', $file_path));
                 if ($append_file) {
                     file_put_contents($file_path, fopen($uploaded_file, 'r'), FILE_APPEND);
+                    //die("yo");
                 } else {
+
+                    //var_dump($file_path);die;
                     move_uploaded_file($uploaded_file, $file_path);
+                    $fileHandler = opendir($this->options['upload_dir']);
+                    $arrayInfoFiles = [];
+                    $file_path = iconv('CP1251', 'UTF-8', $file_path);
+                    while (false !== ($filename = readdir($fileHandler))) {
+                        if ($filename != "." && $filename != "..") {
+                            if (mb_detect_encoding($filename) == 'UTF-8') {
+                                $a = iconv('CP1251','UTF-8',$filename);
+                                if ($this->options['upload_dir'] . $a == $file_path) {
+                                    //die("yo");
+                                    $new = $file_path . '1';
+                                    rename('D:\OpenServer\domains\localhost\study\web\uploads\attachments\orders\22\originals\ôûâ.png', 'D:\OpenServer\domains\localhost\study\web\uploads\attachments\orders\22\originals\ôûâ123.png');
+                                }
+                            }
+                        }
+                    }
+                    closedir($fileHandler);
+                    //var_dump($arrayInfoFiles);
+
+                    //var_dump(mb_detect_encoding($file_path));
                 }
             } /*else {
                 // Non-multipart uploads (PUT method support)
@@ -323,7 +346,7 @@ class UploadHandler
             	/*if ($this->options['orient_image']) {
             		$this->orient_image($file_path);
             	}*/
-                $file->url = '/study/web' . $this->options['upload_url'] . rawurlencode(iconv('CP1251', 'UTF-8', $file->name));
+                $file->url = '/study/web' . $this->options['upload_url'] . rawurlencode($file->name);
                 foreach($this->options['image_versions'] as $version => $options) {
                     if ($this->create_scaled_image($file->name, $options)) {
                         if ($this->options['upload_dir'] !== $options['upload_dir']) {
@@ -340,10 +363,9 @@ class UploadHandler
                 unlink($file_path);
                 $file->error = 'abort';
             }
-
-            $file->name = iconv('CP1251', 'UTF-8', $file->name);
+            //$file->name = $file->name;
             $file->size = Helper::getSizeFile($file_size);
-            $file->detele_url = $this->options['script_url'] . '?file=' . rawurlencode(iconv('UTF-8', 'CP1251', $file->name));
+            //$file->detele_url = $this->options['script_url'] . '?file=' . rawurlencode(iconv('UTF-8', 'CP1251', $file->name));
             //$this->set_file_delete_url($file);
         }
         //$file->thumbnail_url = '/study/web/uploads/attachments/orders/7/thumbnails/1.jpg';
@@ -371,6 +393,7 @@ class UploadHandler
         }
         $upload = isset($_FILES[$this->options['param_name']]) ? $_FILES[$this->options['param_name']] : null;
         $info = array();
+        //var_dump($upload)
         if ($upload && is_array($upload['tmp_name'])) {
             // param_name is an array identifier like "files[]",
             // $_FILES is a multi-dimensional array:
