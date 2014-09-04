@@ -14,6 +14,7 @@ namespace PunkAve\FileUploaderBundle\BlueImp;
  */
 
 use Helper\Helper;
+//setlocale(LC_ALL, 'ru_RU.UTF-8');
 
 class UploadHandler
 {
@@ -83,7 +84,7 @@ class UploadHandler
     }
 
     protected function set_file_delete_url($file) {
-        //$file->delete_url = $this->options['script_url'] . '?file='.rawurlencode($file->name);
+        $file->delete_url = $this->options['script_url'] . '?file='.rawurlencode($file->name);
         /*$file->delete_type = $this->options['delete_type'];
         if ($file->delete_type !== 'DELETE') {
             $file->delete_url .= '&_method=DELETE';
@@ -239,10 +240,10 @@ class UploadHandler
         // Add missing file extension for known image types:
         if (strpos($file_name, '.') === false &&
             preg_match('/^image\/(gif|jpe?g|png)/', $type, $matches)) {
-            $file_name .= '.' . $matches[1];
+            $file_name .= '.'.$matches[1];
         }
         if ($this->options['discard_aborted_uploads']) {
-            while(is_file($this->options['upload_dir'] . $file_name)) {
+            while(is_file($this->options['upload_dir'].$file_name)) {
                 $file_name = $this->upcount_name($file_name);
             }
         }
@@ -293,7 +294,7 @@ class UploadHandler
      */
     protected function handle_file_upload($uploaded_file, $name, $size, $type, $error) { // if uploaded
         $file = new \stdClass();
-        $file->name = /*iconv('UTF-8', 'CP1251', $this->trim_file_name($name, $type));*/$this->trim_file_name($name, $type);
+        $file->name = $this->trim_file_name($name, $type);
         //$file->name = $this->trim_file_name($name, $type);
         $file->size = intval($size);
         //$file->type = Helper::getMimeType($type);
@@ -301,17 +302,54 @@ class UploadHandler
         if ($this->validate($uploaded_file, $file, $error)) {
             //$this->handle_form_data($file, $index);
             $file_path = $this->options['upload_dir'] . $file->name;
-            //var_dump(mb_detect_encoding($file_path)); utf-8
             $append_file = !$this->options['discard_aborted_uploads'] && is_file($file_path) && $file->size > filesize($file_path);
             clearstatcache();
             if ($uploaded_file && is_uploaded_file($uploaded_file)) {
                 // multipart/formdata uploads (POST method uploads)
+                $file_path = iconv("UTF-8", "WINDOWS-1251", $file_path);
                 if ($append_file) {
-                    file_put_contents($file_path, fopen($uploaded_file, 'r'), FILE_APPEND);
+                    //file_put_contents($file_path, fopen($uploaded_file, 'r'), FILE_APPEND);
+                    //die("yo");
                 } else {
-                    //var_dump(mb_detect_encoding($file_path)); //utf-8
+                    //var_dump($file_path);
+                    if (file_exists($file_path)) {
+                        $count = 0;
+                        $fileHandler = opendir($this->options['upload_dir']);
+                        while (false !== ($filename = readdir($fileHandler))) {
+                            if ($filename != "." && $filename != "..") {
+                                //if (mb_detect_encoding($filename) == 'UTF-8') {
+                                    $a = iconv('WINDOWS-1251', 'UTF-8', $filename);
+                                var_dump($a);
+                                    if (strripos($this->options['upload_dir'] . $a, $file_path) !== false) {
+                                        $count++;
+                                    }
+                               // }
+                            }
+                        }
+                        closedir($fileHandler);
+                        //$file_path = $file_path . '1';
+                        $arr = explode('.', $name);
+                        $file_path = $this->options['upload_dir'] . $arr[0] . $count . '.docx';
+                    }
+                    $file_path = iconv("UTF-8", "WINDOWS-1251", $file_path);
                     move_uploaded_file($uploaded_file, $file_path);
-                    die("yi");
+                    //copy($uploaded_file, $file_path);
+                    /*$fileHandler = opendir($this->options['upload_dir']);
+                    $arrayInfoFiles = [];
+                    $file_path = iconv('CP1251', 'UTF-8', $file_path);
+                    while (false !== ($filename = readdir($fileHandler))) {
+                        if ($filename != "." && $filename != "..") {
+                            if (mb_detect_encoding($filename) == 'UTF-8') {
+                                $a = iconv('CP1251','UTF-8',$filename);
+                                if ($this->options['upload_dir'] . $a == $file_path) {
+                                    //die("yo");
+                                    $new = $file_path . '1';
+                                    rename('D:\OpenServer\domains\localhost\study\web\uploads\attachments\orders\22\originals\???.png', 'D:\OpenServer\domains\localhost\study\web\uploads\attachments\orders\22\originals\???123.png');
+                                }
+                            }
+                        }
+                    }
+                    closedir($fileHandler);*/
                 }
             } /*else {
                 // Non-multipart uploads (PUT method support)
@@ -321,13 +359,12 @@ class UploadHandler
                     $append_file ? FILE_APPEND : 0
                 );
             }*/
-            //var_dump($file_path);
             $file_size = filesize($file_path);
             if ($file_size === $file->size) {
             	/*if ($this->options['orient_image']) {
             		$this->orient_image($file_path);
             	}*/
-                $file->url = '/study/web' . $this->options['upload_url'] . rawurlencode(iconv('CP1251', 'UTF-8', $file->name));
+                $file->url = '/study/web' . $this->options['upload_url'] . rawurlencode($file->name);
                 foreach($this->options['image_versions'] as $version => $options) {
                     if ($this->create_scaled_image($file->name, $options)) {
                         if ($this->options['upload_dir'] !== $options['upload_dir']) {
@@ -344,13 +381,9 @@ class UploadHandler
                 unlink($file_path);
                 $file->error = 'abort';
             }
-            $file->name = iconv('CP1251', 'UTF-8', $file->name);
+            //$file->name = $file->name;
             $file->size = Helper::getSizeFile($file_size);
-            /*if ($this->options['test'] == 1) {
-                $file->detele_url = $this->options['script_url'] . '?file=' . rawurlencode(iconv('UTF-8', 'CP1251', $file->name));
-            } else {
-                $file->detele_url = 'duk';
-            }*/
+            //$file->detele_url = $this->options['script_url'] . '?file=' . rawurlencode(iconv('UTF-8', 'CP1251', $file->name));
             //$this->set_file_delete_url($file);
         }
         //$file->thumbnail_url = '/study/web/uploads/attachments/orders/7/thumbnails/1.jpg';
@@ -378,6 +411,7 @@ class UploadHandler
         }
         $upload = isset($_FILES[$this->options['param_name']]) ? $_FILES[$this->options['param_name']] : null;
         $info = array();
+        //var_dump($upload)
         if ($upload && is_array($upload['tmp_name'])) {
             // param_name is an array identifier like "files[]",
             // $_FILES is a multi-dimensional array:
@@ -385,6 +419,7 @@ class UploadHandler
                 $info[] = $this->handle_file_upload(
                     //iconv('UTF-8', 'CP1251', $upload['tmp_name'][$index]),
                     $upload['tmp_name'][$index],
+                    //iconv('cp1251', 'utf-8', $upload['tmp_name'][$index]),
                     isset($_SERVER['HTTP_X_FILE_NAME']) ? $_SERVER['HTTP_X_FILE_NAME'] : $upload['name'][$index],
                     isset($_SERVER['HTTP_X_FILE_SIZE']) ? $_SERVER['HTTP_X_FILE_SIZE'] : $upload['size'][$index],
                     isset($_SERVER['HTTP_X_FILE_TYPE']) ? $_SERVER['HTTP_X_FILE_TYPE'] : $upload['type'][$index],
@@ -394,13 +429,13 @@ class UploadHandler
         } elseif ($upload || isset($_SERVER['HTTP_X_FILE_NAME'])) {
             // param_name is a single object identifier like "file",
             // $_FILES is a one-dimensional array:
-            $info[] = $this->handle_file_upload(
+            /*$info[] = $this->handle_file_upload(
                 isset($upload['tmp_name']) ? $upload['tmp_name'] : null,
                 isset($_SERVER['HTTP_X_FILE_NAME']) ? $_SERVER['HTTP_X_FILE_NAME'] : (isset($upload['name']) ? $upload['name'] : null),
                 isset($_SERVER['HTTP_X_FILE_SIZE']) ? $_SERVER['HTTP_X_FILE_SIZE'] : (isset($upload['size']) ? $upload['size'] : null),
                 isset($_SERVER['HTTP_X_FILE_TYPE']) ? $_SERVER['HTTP_X_FILE_TYPE'] : (isset($upload['type']) ? $upload['type'] : null),
                 isset($upload['error']) ? $upload['error'] : null
-            );
+            );*/
         }
         //var_dump($info);die;
         header('Vary: Accept');
@@ -424,7 +459,7 @@ class UploadHandler
         $success = is_file($file_path) && $file_name[0] !== '.' && unlink($file_path);
         if ($success) {
             foreach($this->options['image_versions'] as $options) {
-                $file = $options['upload_dir'] . $file_name;
+                $file = $options['upload_dir'] . iconv('UTF-8', 'CP1251', $file_name);
                 if (is_file($file)) {
                     unlink($file);
                 }
