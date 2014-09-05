@@ -306,33 +306,33 @@ class UploadHandler
             clearstatcache();
             if ($uploaded_file && is_uploaded_file($uploaded_file)) {
                 // multipart/formdata uploads (POST method uploads)
-                $file_path = iconv("UTF-8", "WINDOWS-1251", $file_path);
+                $file_path = iconv("UTF-8", "CP1251", $file_path);
                 if ($append_file) {
                     //file_put_contents($file_path, fopen($uploaded_file, 'r'), FILE_APPEND);
                     //die("yo");
                 } else {
-                    //var_dump($file_path);
-                    if (file_exists($file_path)) {
-                        $count = 0;
-                        $fileHandler = opendir($this->options['upload_dir']);
-                        while (false !== ($filename = readdir($fileHandler))) {
-                            if ($filename != "." && $filename != "..") {
-                                //if (mb_detect_encoding($filename) == 'UTF-8') {
-                                    $a = iconv('WINDOWS-1251', 'UTF-8', $filename);
-                                var_dump($a);
-                                    if (strripos($this->options['upload_dir'] . $a, $file_path) !== false) {
+                    //var_dump(mb_detect_encoding($file->name));
+                    if (mb_detect_encoding($file->name) != 'ASCII') {
+                        if (file_exists($file_path)) {
+                            $count = 0;
+                            $fileHandler = opendir($this->options['upload_dir']);
+                            while (false !== ($filename = readdir($fileHandler))) {
+                                if ($filename != "." && $filename != "..") {
+                                    if (preg_match_all(iconv('UTF-8', 'CP1251', '/фыв\(*?[\d]*?\)*?.png/'), $file_path) != 0) {
                                         $count++;
                                     }
-                               // }
+                                }
                             }
+                            closedir($fileHandler);
+                            $arr = explode('.', $name);
+                            $file_path = $this->options['upload_dir'] . iconv('UTF-8', 'CP1251', $arr[0]) . '(' . $count . ').' . $file->type;
+                            $file->name = $arr[0] . '(' . $count . ').' . $file->type;
                         }
-                        closedir($fileHandler);
-                        //$file_path = $file_path . '1';
-                        $arr = explode('.', $name);
-                        $file_path = $this->options['upload_dir'] . $arr[0] . $count . '.docx';
                     }
-                    $file_path = iconv("UTF-8", "WINDOWS-1251", $file_path);
                     move_uploaded_file($uploaded_file, $file_path);
+                    //$a = 'фыв.png';
+                    //var_dump(iconv('CP1251', 'UTF-8', $file_path));
+                    //var_dump(strripos(iconv('CP1251', 'UTF-8', $file_path), $a));die;
                     //copy($uploaded_file, $file_path);
                     /*$fileHandler = opendir($this->options['upload_dir']);
                     $arrayInfoFiles = [];
@@ -365,6 +365,7 @@ class UploadHandler
             		$this->orient_image($file_path);
             	}*/
                 $file->url = '/study/web' . $this->options['upload_url'] . rawurlencode($file->name);
+                //var_dump($file->name);die;
                 foreach($this->options['image_versions'] as $version => $options) {
                     if ($this->create_scaled_image($file->name, $options)) {
                         if ($this->options['upload_dir'] !== $options['upload_dir']) {
