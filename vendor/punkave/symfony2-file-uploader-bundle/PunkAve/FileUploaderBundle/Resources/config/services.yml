@@ -52,7 +52,7 @@ parameters:
   # You need not specify any sizes if you don't want FileUploader to scale images for you
   file_uploader.sizes:
     thumbnail:
-      folder: thumbnails
+      #folder: thumbnails
       max_width: 80
       max_height: 80
     #small:
@@ -78,7 +78,7 @@ services:
             file_manager: '@punk_ave.file_uploader_file_manager'
             allowed_extensions: '%file_uploader.allowed_extensions%'
             sizes: '%file_uploader.sizes%'
-            originals: '%file_uploader.originals%'
+            #originals: '%file_uploader.originals%'
             max_number_of_files: '%file_uploader.max_number_of_files%'
             min_file_size: '%file_uploader.min_file_size%'
             max_file_size: '%file_uploader.max_file_size%'
@@ -94,6 +94,7 @@ services:
         arguments:
           # For bc reasons we're not changing the names of the parameters
           - file_base_path: '%file_uploader.file_base_path%'
+            #file_test: 'yo'
 
     punk_ave.twig.file_extension:
         class: PunkAve\FileUploaderBundle\Twig\FileExtension

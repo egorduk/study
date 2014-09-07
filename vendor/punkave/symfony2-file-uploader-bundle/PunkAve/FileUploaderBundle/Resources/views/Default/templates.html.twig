@@ -13,11 +13,12 @@
 <script type="text/template" id="file-uploader-file-template">
     <li data-name="<%- name %>" class="thumbnail">
         <% if ('undefined' != typeof thumbnail_url) { %>
-            <img src="<%- thumbnail_url %>" class="thumbnail-image" />
+            <img src="<%- thumbnail_url %>" class="thumbnail-image" alt="thumbnail"/>
         <% } %>
         <div class="caption">
             <span class="filename"><%- name %></span>
             <p class="">Размер:<%- size %></p>
+            <p class="">Загружен:<%- date_upload %></p>
             <a rel="tooltip" title="Скачать" class="download thumbnail-action btn" target="download" href="<%- url %>"><i class="icon-download"></i></a>
             <a rel="tooltip" title="Удалить" data-action="delete" class="delete thumbnail-action btn" href="#delete"><i class="icon-trash"></i></a>
         </div>

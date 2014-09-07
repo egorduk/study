@@ -83,15 +83,6 @@
                     <p>Выполнение до: {{ order.dateexpire.format("d.m.Y H:i") }}</p>
                     <hr style="border:solid 1px black">
                     <p>Заказчик: <div id="block-client">{{ client | raw }}</div></p>
-                    <div>
-                        {% for file in files %}
-                            <div class="block-file">
-                                <p>Файл: {{ file.name }} </p>
-                                <p>Размер: {{ file.size }} </p>
-                                <p>Загружен: {{ file.dateupload.format("d.m.Y H:i") }} </p>
-                            </div>
-                        {% endfor %}
-                    </div>
                 </div>
                 <div class="col-md-5">
                     <!--<div id="chatContainer">
@@ -199,7 +190,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-8 col-md-offset-2" id="block-completed-order" style="">
+                <div class="col-md-8" id="block-completed-order">
                     <form class="form-horizontal" name="form-completed-order" id="form-completed-order" enctype="multipart/form-data">
                         <!--<div class="form-group">
                             <input type="button" id="btn-upload-order" class="btn btn-primary" value="Загрузить файлы">
@@ -210,10 +201,27 @@
                             </label>
                         </div>
                         <div class="input-group">
+                            <p>Мои файлы</p>
                             <div class="file-uploader"></div>
                         </div>
                     </form>
                 </div>
+                {% if authorFiles | length != 0 %}
+                <div class="col-md-4">
+                    <p>Файлы заказчика</p>
+                    {% for file in authorFiles %}
+                        <div class="">
+                            <div class="caption thumbnail">
+                                <img src="{{ file.thumbnailurl }}" class="thumbnail-image" alt="thumbnail"/>
+                                <span class="filename">{{ file.name }}</span>
+                                <p class="">Размер:{{ file.size }}</p>
+                                <p class="">Загружен:{{ file.dateupload.format("d.m.Y H:i") }}</p>
+                                <a rel="tooltip" title="Скачать" class="download thumbnail-action btn" target="download" href="{{ file.url }}"><i class="icon-download"></i></a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
             </div>
         <script>
             $(document).ready(function() {
@@ -288,9 +296,10 @@
                 });
                 var fileUploader = new PunkAveFileUploader({
                     'uploadUrl': {{ path('secure_author_upload', { editId: order.num, action: 'order' }) | json_encode | raw }},
-                    'viewUrl': {{ ('/study/web/uploads/attachments/orders/' ~ order.num)| json_encode | raw }},
+                    'thumbnailUrl': {{ ('/study/web/uploads/attachments/orders/' ~ order.num ~ '/thumbnails_author')| json_encode | raw }},
+                    'viewUrl': {{ ('/study/web/uploads/attachments/orders/' ~ order.num ~ '/author')| json_encode | raw }},
                     'el': '.file-uploader',
-                    'existingFiles': {{ punkave_get_files('attachments/orders/' ~ order.num) | json_encode | raw }},
+                    'existingFiles': {{ punkave_get_files('attachments/orders/' ~ order.num ~ '/author') | json_encode | raw }},
                     'delaySubmitWhileUploading': '.edit-form',
                     'errorCallback': function(errorObj) {
                         if (errorObj.error == 'maxNumberOfFiles') {

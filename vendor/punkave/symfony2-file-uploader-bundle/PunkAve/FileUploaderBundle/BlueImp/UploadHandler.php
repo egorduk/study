@@ -14,7 +14,6 @@ namespace PunkAve\FileUploaderBundle\BlueImp;
  */
 
 use Helper\Helper;
-//setlocale(LC_ALL, 'ru_RU.UTF-8');
 
 class UploadHandler
 {
@@ -114,8 +113,8 @@ class UploadHandler
     }
 
     protected function create_scaled_image($file_name, $options) {
-        $file_path = $this->options['upload_dir'] . $file_name;
-        $new_file_path = $options['upload_dir'] . $file_name;
+        $file_path = $this->options['upload_dir'] . iconv('utf-8','cp1251',$file_name);
+        $new_file_path = $options['upload_dir'] . iconv('utf-8','cp1251',$file_name);
         list($img_width, $img_height) = @getimagesize($file_path);
         if (!$img_width || !$img_height) {
             return false;
@@ -309,47 +308,25 @@ class UploadHandler
                 $file_path = iconv("UTF-8", "CP1251", $file_path);
                 if ($append_file) {
                     //file_put_contents($file_path, fopen($uploaded_file, 'r'), FILE_APPEND);
-                    //die("yo");
                 } else {
-                    //var_dump(mb_detect_encoding($file->name));
                     if (mb_detect_encoding($file->name) != 'ASCII') {
                         if (file_exists($file_path)) {
                             $count = 0;
+                            $arr = explode('.', $name);
                             $fileHandler = opendir($this->options['upload_dir']);
                             while (false !== ($filename = readdir($fileHandler))) {
                                 if ($filename != "." && $filename != "..") {
-                                    if (preg_match_all(iconv('UTF-8', 'CP1251', '/фыв\(*?[\d]*?\)*?.png/'), $file_path) != 0) {
+                                    if (preg_match(iconv('UTF-8', 'CP1251', '/' . $arr[0] . '\(*?[\d]*?\)*?.' . $arr[1] . '/'), $filename) != 0) {
                                         $count++;
                                     }
                                 }
                             }
                             closedir($fileHandler);
-                            $arr = explode('.', $name);
                             $file_path = $this->options['upload_dir'] . iconv('UTF-8', 'CP1251', $arr[0]) . '(' . $count . ').' . $file->type;
                             $file->name = $arr[0] . '(' . $count . ').' . $file->type;
                         }
                     }
                     move_uploaded_file($uploaded_file, $file_path);
-                    //$a = 'фыв.png';
-                    //var_dump(iconv('CP1251', 'UTF-8', $file_path));
-                    //var_dump(strripos(iconv('CP1251', 'UTF-8', $file_path), $a));die;
-                    //copy($uploaded_file, $file_path);
-                    /*$fileHandler = opendir($this->options['upload_dir']);
-                    $arrayInfoFiles = [];
-                    $file_path = iconv('CP1251', 'UTF-8', $file_path);
-                    while (false !== ($filename = readdir($fileHandler))) {
-                        if ($filename != "." && $filename != "..") {
-                            if (mb_detect_encoding($filename) == 'UTF-8') {
-                                $a = iconv('CP1251','UTF-8',$filename);
-                                if ($this->options['upload_dir'] . $a == $file_path) {
-                                    //die("yo");
-                                    $new = $file_path . '1';
-                                    rename('D:\OpenServer\domains\localhost\study\web\uploads\attachments\orders\22\originals\???.png', 'D:\OpenServer\domains\localhost\study\web\uploads\attachments\orders\22\originals\???123.png');
-                                }
-                            }
-                        }
-                    }
-                    closedir($fileHandler);*/
                 }
             } /*else {
                 // Non-multipart uploads (PUT method support)
@@ -384,6 +361,7 @@ class UploadHandler
             }
             //$file->name = $file->name;
             $file->size = Helper::getSizeFile($file_size);
+            $file->date_upload = Helper::addAndGetFileDateUpload($file);
             //$file->detele_url = $this->options['script_url'] . '?file=' . rawurlencode(iconv('UTF-8', 'CP1251', $file->name));
             //$this->set_file_delete_url($file);
         }
@@ -427,18 +405,17 @@ class UploadHandler
                     $upload['error'][$index]
                 );
             }
-        } elseif ($upload || isset($_SERVER['HTTP_X_FILE_NAME'])) {
+        } /*elseif ($upload || isset($_SERVER['HTTP_X_FILE_NAME'])) {
             // param_name is a single object identifier like "file",
             // $_FILES is a one-dimensional array:
-            /*$info[] = $this->handle_file_upload(
+            $info[] = $this->handle_file_upload(
                 isset($upload['tmp_name']) ? $upload['tmp_name'] : null,
                 isset($_SERVER['HTTP_X_FILE_NAME']) ? $_SERVER['HTTP_X_FILE_NAME'] : (isset($upload['name']) ? $upload['name'] : null),
                 isset($_SERVER['HTTP_X_FILE_SIZE']) ? $_SERVER['HTTP_X_FILE_SIZE'] : (isset($upload['size']) ? $upload['size'] : null),
                 isset($_SERVER['HTTP_X_FILE_TYPE']) ? $_SERVER['HTTP_X_FILE_TYPE'] : (isset($upload['type']) ? $upload['type'] : null),
                 isset($upload['error']) ? $upload['error'] : null
-            );*/
-        }
-        //var_dump($info);die;
+            );
+        }*/
         header('Vary: Accept');
         $json = json_encode($info); //response about uploaded file
         $redirect = isset($_REQUEST['redirect']) ? stripslashes($_REQUEST['redirect']) : null;

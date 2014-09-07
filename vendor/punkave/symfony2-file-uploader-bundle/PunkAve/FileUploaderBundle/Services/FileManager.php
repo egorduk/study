@@ -19,10 +19,10 @@ class FileManager
      */
     public function getFiles($options = array()) {  //Get existing files from folder
         $options = array_merge($this->options, $options);
-        //var_dump($options);
         $folder = $options['file_base_path'] . '/' . $options['folder'];
         if (file_exists($folder)) {
-            $dirs = glob("$folder/originals/*");
+            $dirs = glob("$folder/*.*");
+            //var_dump($dirs);
             $fullPath = isset($options['full_path']) ? $options['full_path'] : false;
             if ($fullPath) {
                 return $dirs;
@@ -30,7 +30,6 @@ class FileManager
             if (!is_array($dirs)) {
                 $dirs = array();
             }
-            //$result[0] = array_map(function($s) { return preg_replace('|^.+[\\/]|', '', $s); }, $dirs);
             $result = [];
             //$finfo = finfo_open(FILEINFO_MIME_TYPE);
             $arrayAllowedExt = ['jpg', 'jpeg', 'png', 'gif'];
@@ -38,12 +37,11 @@ class FileManager
                 $file = new \stdClass();
                 $file->name = iconv('CP1251', 'UTF-8', preg_replace('|^.+[\\/]|', '', $dir));/*preg_replace('|^.+[\\/]|', '', $dir);*/
                 $file->size = Helper::getSizeFile(filesize($dir));
-                //$file->type = Helper::getExtensionFile($dir);
-                //$file->type = Helper::getMimeType(finfo_file($finfo, $dir)); //mime_content_type
-                $file->thumbnail = !in_array(Helper::getExtensionFile($dir), $arrayAllowedExt) ? '/study/web/bundles/images/icons/' . Helper::getExtensionFile($dir) . '.png' : null;
+                $file->date_upload = date("d.m.Y H:i", filemtime($dir));
+                $extensionFile = Helper::getExtensionFile($dir);
+                $file->thumbnail = !in_array($extensionFile, $arrayAllowedExt) ? '/study/web/bundles/images/icons/' . $extensionFile . '.png' : null;
                 $result[] = $file;
             }
-            //var_dump($result);
             return $result;
         } else {
             return array();

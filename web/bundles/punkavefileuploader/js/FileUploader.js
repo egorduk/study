@@ -2,6 +2,7 @@ function PunkAveFileUploader(options)
 {
   var self = this, uploadUrl = options.uploadUrl, viewUrl = options.viewUrl, $el = $(options.el), uploaderTemplate = _.template($.trim($('#file-uploader-template').html()));
   $el.html(uploaderTemplate({}));
+    //console.log(options);
 
   var fileTemplate = _.template($.trim($('#file-uploader-file-template').html())),
     editor = $el.find('[data-files="1"]'),
@@ -14,12 +15,11 @@ function PunkAveFileUploader(options)
       //console.log(files);
     _.each(files, function(file) {
       appendEditableImage({
-        // cmsMediaUrl is a global variable set by the underscoreTemplates partial of MediaItems.html.twig
-        //'thumbnail_url': viewUrl + '/thumbnails/' + file,
-        'thumbnail_url': file.thumbnail == null ? viewUrl + '/thumbnails/' + file.name : file.thumbnail,
-        'url': viewUrl + '/originals/' + file.name,
+        'thumbnail_url': file.thumbnail == null ? viewUrl + '/' + file.name : file.thumbnail,
+        'url': viewUrl + '/' + file.name,
         'name': file.name,
-        'size': file.size
+        'size': file.size,
+        'date_upload': file.date_upload
         });
     });
   };

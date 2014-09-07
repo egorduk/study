@@ -161,6 +161,11 @@ class User extends EntityRepository implements UserInterface//, \Serializable
      **/
     private $link_auction_user;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Acme\SecureBundle\Entity\OrderFile", mappedBy="user")
+     **/
+    private $link_order_file_user;
+
 
     private $unEncodePass = "";
     private $clientIdInfo;
@@ -185,6 +190,7 @@ class User extends EntityRepository implements UserInterface//, \Serializable
         $this->link_webchat_user = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_favorite_user = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_auction_user = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->link_order_file_user = new \Doctrine\Common\Collections\ArrayCollection();
         $this->is_ban = 0;
         $this->date_confirm_recovery = Helper::getFormatDateForInsert("0000-00-00 00:00:00", "Y-m-d H:i:s");
         $this->date_confirm_reg = Helper::getFormatDateForInsert("0000-00-00 00:00:00", "Y-m-d H:i:s");

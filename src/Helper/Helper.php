@@ -1187,10 +1187,28 @@ class Helper
     }
 
 
-    public static function getFilesForOrder($order) {
+    public static function getFilesForOrder($order, $mode = null, $user = null) {
         $em = self::getContainer()->get('doctrine')->getManager();
-        $files = $em->getRepository(self::$_tableOrderFile)
-            ->findBy(array('user_order' => $order));
+        if ($mode == 'client' && !empty($user)) {
+            //$files = $em->getRepository(self::$_tableOrderFile)
+            //    ->findBy(array('user_order' => $order));
+            $files = $em->getRepository(self::$_tableOrderFile)->createQueryBuilder('f')
+                //->select('f')
+                ->innerJoin(self::$_tableUser, 'u', 'WITH', 'f.user = u')
+                ->innerJoin(self::$_tableUserOrder, 'uo', 'WITH', 'f.user_order = uo')
+                ->andWhere('f.user != :user')
+                ->andWhere('f.user_order = :user_order')
+                ->andWhere('f.is_delete = 0')
+                ->orderBy('f.date_upload', 'desc')
+                ->setParameter('user', $user)
+                ->setParameter('user_order', $order)
+                ->getQuery()
+                ->getResult();
+            //var_dump(count($files));die;
+        } else {
+            $files = $em->getRepository(self::$_tableOrderFile)
+                ->findBy(array('user_order' => $order));
+        }
         return $files;
     }
 
@@ -1837,6 +1855,42 @@ class Helper
         $dateVerdict = $query->fetch();
         $dateVerdict = date("d.m.Y H:i") < date("d.m.Y H:i", strtotime($dateVerdict['date_verdict'])) ? date("d.m.Y H:i", strtotime($dateVerdict['date_verdict'])) : "";
         return $dateVerdict;
+    }
+
+
+    public static function addAndGetFileDateUpload($fileUpload) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $file = new OrderFile();
+        $file->setName($fileUpload->name);
+        $file->setSize($fileUpload->size);
+        $session = self::getContainer()->get('session');
+        $file->setUser(self::getUserById($session->get('user')));
+        $order = self::getOrderByNumForAuthor($session->get('order'));
+        $file->setUserOrder($order);
+        $em->persist($file);
+        $em->flush();
+        $session->remove('user');
+        $session->remove('order');
+        return $file->getDateUpload()->format('d.m.Y H:i');
+    }
+
+
+    public static function getFullUrl() {
+        return
+            (isset($_SERVER['HTTPS']) ? 'https://' : 'http://').
+            (isset($_SERVER['REMOTE_USER']) ? $_SERVER['REMOTE_USER'].'@' : '').
+            (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : ($_SERVER['SERVER_NAME'].
+                (isset($_SERVER['HTTPS']) && $_SERVER['SERVER_PORT'] === 443 ||
+                $_SERVER['SERVER_PORT'] === 80 ? '' : ':'.$_SERVER['SERVER_PORT']))).
+            substr($_SERVER['SCRIPT_NAME'],0, strrpos($_SERVER['SCRIPT_NAME'], '/'));
+    }
+
+
+    public static function getThumbnailUrlFile($fileName, $order){
+        $arrayAllowedExt = ['jpg', 'jpeg', 'png', 'gif'];
+        $extensionFile = self::getExtensionFile($fileName);
+        $thumbnailUrl = !in_array($extensionFile, $arrayAllowedExt) ? '/study/web/bundles/images/icons/' . $extensionFile . '.png' : '/study/web/uploads/attachments/orders/' . $order->getNum() . '/thumbnails_client/' . $fileName;
+        return $thumbnailUrl;
     }
 
 }

@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\Query;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Symfony\Component\Security\Core\SecurityContext;
 use Helper\Helper;
@@ -96,23 +97,28 @@ class AuthorController extends Controller
     /**
      * @Route("/upload", name="upload")
      */
-    public function uploadAction()
+    public function uploadAction(Request $request)
     {
-        $editId = $this->getRequest()->get('editId');
+        $orderNum = $this->getRequest()->get('editId');
         $fileName = $this->getRequest()->get('file');
         $action = $this->getRequest()->get('action');
-        if (preg_match('/^\d+$/', $editId)) {
+        if (preg_match('/^\d+$/', $orderNum)) {
             if ($action == "profile") {
                 if ($fileName) {
-                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'author/' . $editId/*, 'action' => 'delete'*/));
+                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'author/' . $orderNum/*, 'action' => 'delete'*/));
                 } else {
-                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'author/' . $editId));
+                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'author/' . $orderNum));
                 }
             } elseif ($action == "order") {
                 if ($fileName) {
-                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/orders/' . $editId));
+                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/orders/' . $orderNum));
                 } else {
-                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/orders/' . $editId, 'max_number_of_files' => 10/*, 'max_file_size' => 4*/));
+                    $user = $this->get('security.context')->getToken()->getUser();
+                    $session = new Session();
+                    $session->set('user', $user->getId());
+                    $session->set('order', $orderNum);
+                    $session->save();
+                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/orders/' . $orderNum . '/author', 'max_number_of_files' => 10/*, 'max_file_size' => 4*/));
                 }
             }
             return new Response(json_encode(array('action' => 'success')));
@@ -408,10 +414,18 @@ class AuthorController extends Controller
                 //$session->save();
                 $cancelRequests = Helper::getCancelRequestsByOrderForAuthor($order);
                 $dateVerdict = Helper::getDateVerdict($order);
-                $folderFiles = $order->getFilesFolder();
-                //var_dump($folderFiles);die;
+                //$filesFolder = $order->getFilesFolder();
+                //var_dump(Helper::getFullUrl());die;
+                //var_dump(($_SERVER['SCRIPT_FILENAME']) . '/uploads/attachments/orders/' . $num . '/author/');die;
+                $authorFiles = Helper::getFilesForOrder($order, 'client', $user);
+                $arrayAuthorFiles = [];
+                foreach($authorFiles as $file) {
+                    $file->setUrl(Helper::getFullUrl() . '/uploads/attachments/orders/' . $num . '/client/' . $file->getName());
+                    $file->setThumbnailUrl(Helper::getThumbnailUrlFile($file->getName(), $order));
+                    $arrayAuthorFiles[] = $file;
+                }
                 return $this->render(
-                    'AcmeSecureBundle:Author:order_work.html.twig', array('files' => $filesOrder, 'order' => $order, 'client' => $clientLink, 'user' => $user, 'cancelRequests' => $cancelRequests, 'dateVerdict' => $dateVerdict, 'folderFiles' => $folderFiles)
+                    'AcmeSecureBundle:Author:order_work.html.twig', array('order' => $order, 'client' => $clientLink, 'user' => $user, 'cancelRequests' => $cancelRequests, 'dateVerdict' => $dateVerdict, 'authorFiles' => $arrayAuthorFiles)
                 );
             }
             else {
