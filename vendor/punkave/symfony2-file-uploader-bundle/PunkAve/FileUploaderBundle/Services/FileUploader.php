@@ -89,6 +89,7 @@ class FileUploader
         //$uploadDir = $filePath . '/' . $originals['folder'] . '/';
         $arrayExplode = explode('/', $options['folder']);
         $folder = end($arrayExplode);
+        @mkdir($filePath, 0777, true);
         $uploadDir = str_replace($folder, 'thumbnails_' . $folder . '/', $filePath);
         //$uploadDir = $filePath . '/';
         //var_dump($uploadDir);
@@ -106,14 +107,14 @@ class FileUploader
                 'max_number_of_files' => $options['max_number_of_files'],
                 'min_file_size' => $options['min_file_size'],
                 'max_file_size' => $options['max_file_size'],
-                'test' => $options['test']
+                //'test' => $options['test']
             ));
         //header('Content-type: text/plain');
         header('Pragma: no-cache');
         header('Cache-Control: no-store, no-cache, must-revalidate');
         //header('Content-Disposition: inline; filename="files.json"');
         header('X-Content-Type-Options: nosniff');
-        header('Access-Control-Allow-Origin: *');
+        //header('Access-Control-Allow-Origin: *');
        // header('Access-Control-Allow-Methods: OPTIONS, HEAD, GET, POST, PUT, DELETE');
         header('Access-Control-Allow-Headers: X-File-Name, X-File-Type, X-File-Size');
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

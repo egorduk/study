@@ -27,6 +27,7 @@ class UploadHandler
             'upload_url' => $this->getFullUrl() . '/files/',
             'icon_url' => '/study/web/bundles/images/icons/',
             'param_name' => 'files',
+            'thumbnail_dir' => dirname($_SERVER['SCRIPT_FILENAME']),
             // Set the following option to 'POST', if your server does not support
             // DELETE requests. This is a parameter sent to the client:
             //'delete_type' => 'DELETE',
@@ -113,8 +114,17 @@ class UploadHandler
     }
 
     protected function create_scaled_image($file_name, $options) {
-        $file_path = $this->options['upload_dir'] . iconv('utf-8','cp1251',$file_name);
-        $new_file_path = $options['upload_dir'] . iconv('utf-8','cp1251',$file_name);
+        $file_path = $this->options['upload_dir'] . iconv('utf-8','cp1251', $file_name);
+        //$new_file_path = $options['upload_dir'] . iconv('utf-8','cp1251', $file_name);
+        if (preg_match('/\/uploads\/attachments\/orders\/[\d]*?\/(author|client)/', $options['upload_url'])) {
+            $arrayExplode = explode('/', $options['upload_url']);
+            $slug = $arrayExplode[5];
+            $thumbnailUrl = $options['upload_url'];
+            $thumbnailUrl = str_replace($slug . '/', 'thumbnails_' . $slug, $thumbnailUrl);
+        } else {
+            $thumbnailUrl = null;
+        }
+        $new_file_path = $this->options['thumbnail_dir'] . $thumbnailUrl . iconv('utf-8','cp1251', $file_name);
         list($img_width, $img_height) = @getimagesize($file_path);
         if (!$img_width || !$img_height) {
             return false;
@@ -165,6 +175,7 @@ class UploadHandler
             $img_width,
             $img_height
         ) && $write_image($new_img, $new_file_path, $image_quality);
+        //var_dump($new_file_path);die;
         // Free up memory (imagedestroy does not delete files):
         @imagedestroy($src_img);
         @imagedestroy($new_img);
@@ -322,8 +333,8 @@ class UploadHandler
                                 }
                             }
                             closedir($fileHandler);
-                            $file_path = $this->options['upload_dir'] . iconv('UTF-8', 'CP1251', $arr[0]) . '(' . $count . ').' . $file->type;
-                            $file->name = $arr[0] . '(' . $count . ').' . $file->type;
+                            $file_path = $this->options['upload_dir'] . iconv('UTF-8', 'CP1251', $arr[0]) . ' (' . $count . ').' . $file->type;
+                            $file->name = $arr[0] . ' (' . $count . ').' . $file->type;
                         }
                     }
                     move_uploaded_file($uploaded_file, $file_path);
@@ -346,7 +357,18 @@ class UploadHandler
                 foreach($this->options['image_versions'] as $version => $options) {
                     if ($this->create_scaled_image($file->name, $options)) {
                         if ($this->options['upload_dir'] !== $options['upload_dir']) {
-                            $file->{$version.'_url'} = '/study/web/' . $options['upload_url'] . rawurlencode($file->name);
+                            //$file->{$version.'_url'} = '/study/web/' . $options['upload_url'] . rawurlencode($file->name);
+                            //var_dump($options);
+                            if (preg_match('/\/uploads\/attachments\/orders\/[\d]*?\/(author|client)/', $options['upload_url'])) {
+                                $arrayExplode = explode('/', $options['upload_url']);
+                                //$slug = end($arrayExplode);
+                                $slug = $arrayExplode[5];
+                                $thumbnailUrl = $options['upload_url'];
+                                $thumbnailUrl = str_replace($slug . '/', 'thumbnails_' . $slug, $thumbnailUrl);
+                            } else {
+                                $thumbnailUrl = null;
+                            }
+                            $file->{$version.'_url'} = '/study/web/' . $thumbnailUrl . rawurlencode($file->name);
                         } else {
                             clearstatcache();
                             $file_size = filesize($file_path);
@@ -364,6 +386,7 @@ class UploadHandler
             $file->date_upload = Helper::addAndGetFileDateUpload($file);
             //$file->detele_url = $this->options['script_url'] . '?file=' . rawurlencode(iconv('UTF-8', 'CP1251', $file->name));
             //$this->set_file_delete_url($file);
+            //var_dump($file);
         }
         //$file->thumbnail_url = '/study/web/uploads/attachments/orders/7/thumbnails/1.jpg';
         return $file;
@@ -390,7 +413,7 @@ class UploadHandler
         }
         $upload = isset($_FILES[$this->options['param_name']]) ? $_FILES[$this->options['param_name']] : null;
         $info = array();
-        //var_dump($upload)
+        //var_dump($upload);
         if ($upload && is_array($upload['tmp_name'])) {
             // param_name is an array identifier like "files[]",
             // $_FILES is a multi-dimensional array:

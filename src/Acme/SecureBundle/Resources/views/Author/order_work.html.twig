@@ -206,10 +206,10 @@
                         </div>
                     </form>
                 </div>
-                {% if authorFiles | length != 0 %}
+                {% if clientFiles | length != 0 %}
                 <div class="col-md-4">
                     <p>Файлы заказчика</p>
-                    {% for file in authorFiles %}
+                    {% for file in clientFiles %}
                         <div class="">
                             <div class="caption thumbnail">
                                 <img src="{{ file.thumbnailurl }}" class="thumbnail-image" alt="thumbnail"/>

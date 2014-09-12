@@ -417,15 +417,18 @@ class AuthorController extends Controller
                 //$filesFolder = $order->getFilesFolder();
                 //var_dump(Helper::getFullUrl());die;
                 //var_dump(($_SERVER['SCRIPT_FILENAME']) . '/uploads/attachments/orders/' . $num . '/author/');die;
-                $authorFiles = Helper::getFilesForOrder($order, 'client', $user);
-                $arrayAuthorFiles = [];
-                foreach($authorFiles as $file) {
-                    $file->setUrl(Helper::getFullUrl() . '/uploads/attachments/orders/' . $num . '/client/' . $file->getName());
-                    $file->setThumbnailUrl(Helper::getThumbnailUrlFile($file->getName(), $order));
-                    $arrayAuthorFiles[] = $file;
+                $clientFiles = Helper::getFilesForOrder($order, 'client', $user);
+                $arrayClientFiles = [];
+                foreach($clientFiles as $file) {
+                    $dir = dirname($_SERVER['SCRIPT_FILENAME']) . Helper::getAttachmentsUrl('client', $num) . $file->getName();
+                    if (file_exists($dir)) {
+                        $file->setUrl(Helper::getFullUrl() . Helper::getAttachmentsUrl('client', $num) . $file->getName());
+                        $file->setThumbnailUrl(Helper::getThumbnailUrlFile($file->getName(), $order));
+                        $arrayClientFiles[] = $file;
+                    }
                 }
                 return $this->render(
-                    'AcmeSecureBundle:Author:order_work.html.twig', array('order' => $order, 'client' => $clientLink, 'user' => $user, 'cancelRequests' => $cancelRequests, 'dateVerdict' => $dateVerdict, 'authorFiles' => $arrayAuthorFiles)
+                    'AcmeSecureBundle:Author:order_work.html.twig', array('order' => $order, 'client' => $clientLink, 'user' => $user, 'cancelRequests' => $cancelRequests, 'dateVerdict' => $dateVerdict, 'clientFiles' => $arrayClientFiles)
                 );
             }
             else {

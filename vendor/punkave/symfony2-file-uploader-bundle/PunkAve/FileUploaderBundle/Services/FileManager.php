@@ -3,6 +3,7 @@
 namespace PunkAve\FileUploaderBundle\Services;
 
 use Helper\Helper;
+use PunkAve\FileUploaderBundle\BlueImp\UploadHandler;
 
 class FileManager
 {
@@ -20,6 +21,7 @@ class FileManager
     public function getFiles($options = array()) {  //Get existing files from folder
         $options = array_merge($this->options, $options);
         $folder = $options['file_base_path'] . '/' . $options['folder'];
+        //var_dump($options);
         if (file_exists($folder)) {
             $dirs = glob("$folder/*.*");
             //var_dump($dirs);
@@ -32,14 +34,23 @@ class FileManager
             }
             $result = [];
             //$finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $f = $options['folder'];
+            $arrayExplode = explode('/', $f);
+            $slug = end($arrayExplode);
+            $f = str_replace($slug, 'thumbnails_' . $slug, $f);
             $arrayAllowedExt = ['jpg', 'jpeg', 'png', 'gif'];
+            $arrayFiles = [];
             foreach($dirs as $dir) {
+                $arrayFiles[$dir] = date("d.m.Y H:i", filemtime($dir));
+            }
+            asort($arrayFiles);
+            foreach($arrayFiles as $dir => $dateUpload) {
                 $file = new \stdClass();
                 $file->name = iconv('CP1251', 'UTF-8', preg_replace('|^.+[\\/]|', '', $dir));/*preg_replace('|^.+[\\/]|', '', $dir);*/
                 $file->size = Helper::getSizeFile(filesize($dir));
-                $file->date_upload = date("d.m.Y H:i", filemtime($dir));
+                $file->date_upload = $dateUpload;
                 $extensionFile = Helper::getExtensionFile($dir);
-                $file->thumbnail = !in_array($extensionFile, $arrayAllowedExt) ? '/study/web/bundles/images/icons/' . $extensionFile . '.png' : null;
+                $file->thumbnail = (!in_array($extensionFile, $arrayAllowedExt) || !file_exists($options['file_base_path'] . '/' . $f . '/' . iconv('UTF-8', 'CP1251', $file->name))) ? '/study/web/bundles/images/icons/' . $extensionFile . '.png' : null;
                 $result[] = $file;
             }
             return $result;

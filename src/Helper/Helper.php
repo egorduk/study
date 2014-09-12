@@ -1893,4 +1893,13 @@ class Helper
         return $thumbnailUrl;
     }
 
+
+    public static function getAttachmentsUrl($mode, $num) {
+        if ($mode == 'client') {
+            return '/uploads/attachments/orders/' . $num . '/client/';
+        } elseif ($mode == 'author') {
+            return '/uploads/attachments/orders/' . $num . '/author/';
+        }
+    }
+
 }

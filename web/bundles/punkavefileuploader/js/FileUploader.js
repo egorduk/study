@@ -1,21 +1,25 @@
 function PunkAveFileUploader(options)
 {
-  var self = this, uploadUrl = options.uploadUrl, viewUrl = options.viewUrl, $el = $(options.el), uploaderTemplate = _.template($.trim($('#file-uploader-template').html()));
+  var self = this, uploadUrl = options.uploadUrl, thumbnailUrl = options.thumbnailUrl, viewUrl = options.viewUrl, $el = $(options.el), uploaderTemplate = _.template($.trim($('#file-uploader-template').html()));
   $el.html(uploaderTemplate({}));
     //console.log(options);
 
   var fileTemplate = _.template($.trim($('#file-uploader-file-template').html())),
-    editor = $el.find('[data-files="1"]'),
-    thumbnails = $el.find('[data-thumbnails="1"]');
+    editor = $el.find('[data-files="1"]'), thumbnails = $el.find('[data-thumbnails="1"]');
   
   self.uploading = false;
-  self.errorCallback = 'errorCallback' in options ? options.errorCallback : function( info ) { if (window.console && console.log) { console.log(info) } },
+  self.errorCallback = 'errorCallback' in options ? options.errorCallback : function(info) {
+      if (window.console && console.log) {
+          //console.log(info)
+      }
+  },
 
   self.addExistingFiles = function(files) {
       //console.log(files);
     _.each(files, function(file) {
       appendEditableImage({
-        'thumbnail_url': file.thumbnail == null ? viewUrl + '/' + file.name : file.thumbnail,
+        //'thumbnail_url': file.thumbnail == null ? viewUrl + '/' + file.name : file.thumbnail,
+        'thumbnail_url': file.thumbnail == null ? thumbnailUrl + '/' + file.name : file.thumbnail,
         'url': viewUrl + '/' + file.name,
         'name': file.name,
         'size': file.size,
@@ -78,32 +82,34 @@ function PunkAveFileUploader(options)
   // Expects thumbnail_url, url, and name properties. thumbnail_url can be undefined if
   // url does not end in gif, jpg, jpeg or png. This is designed to work with the
   // result returned by the UploadHandler class on the PHP side
-  function appendEditableImage(info) { //delete image
-     // console.log(info);
-    if (info.error) {
-      self.errorCallback(info);
-      return;
-    }
+  function appendEditableImage(info) {
+      // console.log(info);
+      if (info.error) {
+          self.errorCallback(info);
+          return;
+      }
       //console.log(info);
-    var li = $(fileTemplate(info));
-    /*If clicked for deleting selected file*/
-    li.find('[data-action="delete"]').click(function(event) {
-      var file = $(this).closest('[data-name]');
-      var name = file.attr('data-name');
-      $.ajax({
-        dataType: 'json',
-        type: 'post',
-        //url: uploadUrl + '&file=' + name,
-        url: setQueryParameter(uploadUrl, 'file', name),
-        success: function() {
-            li.hide("slow", function(){
-                file.remove();
-            })
-        }
+      var li = $(fileTemplate(info));
+      /*If clicked for deleting selected file*/
+      li.find('[data-action="delete"]').click(function(event) {
+          var file = $(this).closest('[data-name]');
+          var name = file.attr('data-name');
+          $.ajax({
+              dataType: 'json',
+              type: 'post',
+              //url: uploadUrl + '&file=' + name,
+              url: setQueryParameter(uploadUrl, 'file', name),
+              success: function() {
+                  li.hide("slow", function(){
+                      file.remove();
+                  })
+              }
+          });
+          return false;
       });
-      return false;
-    });
-    thumbnails.append(li);
+      var a = $(".thumbnails");
+      a.after(li);
+      //thumbnails.append(li);
   }
 
   function setQueryParameter(url, param, paramVal) {
