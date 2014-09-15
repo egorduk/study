@@ -1,14 +1,3 @@
-/*
- * jQuery File Upload Plugin 5.11.2
- * https://github.com/blueimp/jQuery-File-Upload
- *
- * Copyright 2010, Sebastian Tschan
- * https://blueimp.net
- *
- * Licensed under the MIT license:
- * http://www.opensource.org/licenses/MIT
- */
-
 /*jslint nomen: true, unparam: true, regexp: true */
 /*global define, window, document, Blob, FormData, location */
 
@@ -137,7 +126,14 @@
             // handlers using jQuery's Deferred callbacks:
             // data.submit().done(func).fail(func).always(func);
             add: function (e, data) {
-                data.submit();
+                $("#btn-upload").show().click(function() {
+                    if (data != null) {
+                        data.submit().done(function() {
+                            data = null;
+                        });
+                        $(this).hide();
+                    }
+                });
             },
 
             // Other callbacks:
@@ -174,6 +170,10 @@
             contentType: false,
             cache: false
         },
+
+        /*qwe: function() {
+            alert("fdg");
+        },*/
 
         // A list of options that require a refresh after assigning a new value:
         _refreshOptionsList: [
