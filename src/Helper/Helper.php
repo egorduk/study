@@ -1864,13 +1864,12 @@ class Helper
         $file->setName($fileUpload->name);
         $file->setSize($fileUpload->size);
         $session = self::getContainer()->get('session');
-        $file->setUser(self::getUserById($session->get('user')));
+        $user = self::getUserById($session->get('user'));
         $order = self::getOrderByNumForAuthor($session->get('order'));
+        $file->setUser($user);
         $file->setUserOrder($order);
         $em->persist($file);
         $em->flush();
-        $session->remove('user');
-        $session->remove('order');
         return $file->getDateUpload()->format('d.m.Y H:i');
     }
 
