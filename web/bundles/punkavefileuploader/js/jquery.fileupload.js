@@ -15,6 +15,7 @@
     }
 }(function ($) {
     'use strict';
+    var f = true;
 
     // The FileReader API is not actually used, but works as feature detection,
     // as e.g. Safari supports XHR file uploads via the FormData API,
@@ -31,7 +32,6 @@
     // "add" method are uploaded immediately, but it is possible to override
     // the "add" callback option to queue file uploads.
     $.widget('blueimp.fileupload', {
-
         options: {
             // The namespace used for event handler binding on the dropZone and
             // fileInput collections.
@@ -126,6 +126,22 @@
             // handlers using jQuery's Deferred callbacks:
             // data.submit().done(func).fail(func).always(func);
             add: function (e, data) {
+                //console.log(data.originalFiles.length);
+                if (f == true)
+                {
+                    if (data.originalFiles.length == 1) {
+                        $("#a").html(data.files[0].name);
+                    } else {
+                        for (var i = 0; i < data.originalFiles.length; i++) {
+                            console.log(data.originalFiles[i].name);
+                        }
+                        f = false;
+                        /*data.originalFiles.each(function(index, elem) {
+                            console.log(elem);
+                            //$("#a").appendChild(elem);
+                        });*/
+                    }
+                }
                 $("#btn-upload").show().click(function() {
                     if (data != null) {
                         data.submit().done(function() {

@@ -2,10 +2,11 @@ function PunkAveFileUploader(options)
 {
   var self = this, uploadUrl = options.uploadUrl, thumbnailUrl = options.thumbnailUrl, viewUrl = options.viewUrl, $el = $(options.el), uploaderTemplate = _.template($.trim($('#file-uploader-template').html()));
   $el.html(uploaderTemplate({}));
-    //console.log(options);
+  //console.log($el);
 
   var fileTemplate = _.template($.trim($('#file-uploader-file-template').html())),
-    editor = $el.find('[data-files="1"]'), thumbnails = $el.find('[data-thumbnails="1"]');
+    /*editor = $el.find('[data-files="1"]')*/editor = $("#fileUploader"), thumbnails = $el.find('[data-thumbnails="1"]');
+    //console.log(editor);
   
   self.uploading = false;
   self.errorCallback = 'errorCallback' in options ? options.errorCallback : function(info) {
