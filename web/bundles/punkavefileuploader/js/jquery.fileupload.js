@@ -15,7 +15,7 @@
     }
 }(function ($) {
     'use strict';
-    var f = true;
+    var a;
 
     // The FileReader API is not actually used, but works as feature detection,
     // as e.g. Safari supports XHR file uploads via the FormData API,
@@ -49,7 +49,7 @@
             // each input field change event. This is required for iframe transport
             // queues and allows change events to be fired for the same file
             // selection, but can be disabled by setting the following option to false:
-            replaceFileInput: true,
+            replaceFileInput: false,
             // The parameter name for the file form data (the request argument name).
             // If undefined or empty, the name property of the file input field is
             // used, or "files[]" if the file input name property is also empty,
@@ -58,7 +58,7 @@
             // By default, each file of a selection is uploaded using an individual
             // request for XHR type uploads. Set to false to upload file
             // selections in one request each:
-            singleFileUploads: true,
+            singleFileUploads: false,
             // To limit the number of files uploaded with one XHR request,
             // set the following option to an integer greater than 0:
             limitMultiFileUploads: undefined,
@@ -126,30 +126,34 @@
             // handlers using jQuery's Deferred callbacks:
             // data.submit().done(func).fail(func).always(func);
             add: function (e, data) {
-                //console.log(data.originalFiles.length);
-                if (f == true)
-                {
-                    if (data.originalFiles.length == 1) {
-                        $("#a").html(data.files[0].name);
-                    } else {
-                        for (var i = 0; i < data.originalFiles.length; i++) {
-                            console.log(data.originalFiles[i].name);
+               // console.log(FormData);
+                var filesPreview = $("#files-preview"), ind = 0;
+                //if (a != e.timeStamp) {
+                    filesPreview.html('');
+                    for (var i = 0; i < e.currentTarget.files.length; i++) {
+                        var label = ['B', 'KB', 'MB', 'GB'], size = e.currentTarget.files[i].size;
+                        while((size / 1024) > 1) {
+                            size = size / 1024;
+                            ind++;
                         }
-                        f = false;
-                        /*data.originalFiles.each(function(index, elem) {
-                            console.log(elem);
-                            //$("#a").appendChild(elem);
-                        });*/
+                        filesPreview.append("<p>" + e.currentTarget.files[i].name + " [" + Math.round(size*10)/10  + ' ' + label[ind] + "]" + "</p>");
                     }
-                }
+                    a = e.timeStamp;
+                //}
                 $("#btn-upload").show().click(function() {
-                    if (data != null) {
+                   // console.log(data);
+                    if (data != null && a == e.timeStamp) {
                         data.submit().done(function() {
                             data = null;
+                            filesPreview.html('');
                         });
                         $(this).hide();
                     }
                 });
+            },
+
+            change: function (e, data) {
+                //console.log(Blob);
             },
 
             // Other callbacks:
@@ -186,10 +190,6 @@
             contentType: false,
             cache: false
         },
-
-        /*qwe: function() {
-            alert("fdg");
-        },*/
 
         // A list of options that require a refresh after assigning a new value:
         _refreshOptionsList: [
@@ -244,10 +244,12 @@
             $.each(files, function (index, file) {
                 total += file.size || 1;
             });
+            //console.log(files);
             return total;
         },
 
         _onProgress: function (e, data) {
+            //console.log(data);
             if (e.lengthComputable) {
                 var now = +(new Date()),
                     total,
@@ -425,14 +427,11 @@
         },
 
         _getParamName: function (options) {
-            var fileInput = $(options.fileInput),
-                paramName = options.paramName;
+            var fileInput = $(options.fileInput), paramName = options.paramName;
             if (!paramName) {
                 paramName = [];
                 fileInput.each(function () {
-                    var input = $(this),
-                        name = input.prop('name') || 'files[]',
-                        i = (input.prop('files') || [1]).length;
+                    var input = $(this), name = input.prop('name') || 'files[]', i = (input.prop('files') || [1]).length;
                     while (i) {
                         paramName.push(name);
                         i -= 1;
@@ -444,6 +443,7 @@
             } else if (!$.isArray(paramName)) {
                 paramName = [paramName];
             }
+            //console.log(paramName);
             return paramName;
         },
 
@@ -745,7 +745,10 @@
                 paramNameSet = paramName;
             }
             data.originalFiles = data.files;
+           // console.log(data);
+
             $.each(fileSet || data.files, function (index, element) {
+                //console.log('yo');
                 var newData = $.extend({}, data);
                 newData.files = fileSet ? element : [element];
                 newData.paramName = paramNameSet[index];

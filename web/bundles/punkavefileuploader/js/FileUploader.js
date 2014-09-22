@@ -5,7 +5,7 @@ function PunkAveFileUploader(options)
   //console.log($el);
 
   var fileTemplate = _.template($.trim($('#file-uploader-file-template').html())),
-    /*editor = $el.find('[data-files="1"]')*/editor = $("#fileUploader"), thumbnails = $el.find('[data-thumbnails="1"]');
+    editor = $el.find('[data-files="1"]'), thumbnails = $el.find('[data-thumbnails="1"]');
     //console.log(editor);
   
   self.uploading = false;
@@ -63,6 +63,7 @@ function PunkAveFileUploader(options)
     url: uploadUrl,
     dropZone: $el.find('[data-dropzone="1"]'),
     done: function (e, data) {
+       // console.log(data);
       if (data) {
         _.each(data.result, function(item) {
            // console.log(item);
