@@ -333,8 +333,12 @@ class UploadHandler
                                 }
                             }
                             closedir($fileHandler);
-                            $file_path = $this->options['upload_dir'] . iconv('UTF-8', 'CP1251', $arr[0]) . ' (' . $count . ').' . $file->type;
-                            $file->name = $arr[0] . ' (' . $count . ').' . $file->type;
+                            $name = str_replace('.' . $file->type, '', $name);
+                            $name = str_replace($name, $name . ' (' . $count . ').', $name);
+                            //var_dump($name);
+                            $file_path = $this->options['upload_dir'] . iconv('UTF-8', 'CP1251', $name) . $file->type;
+                            //$file->name = $arr[0] . ' (' . $count . ').' . $file->type;
+                            $file->name = $name . $file->type;
                         }
                     }
                     move_uploaded_file($uploaded_file, $file_path);

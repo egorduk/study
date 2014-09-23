@@ -126,22 +126,19 @@
             // handlers using jQuery's Deferred callbacks:
             // data.submit().done(func).fail(func).always(func);
             add: function (e, data) {
-               // console.log(FormData);
-                var filesPreview = $("#files-preview"), ind = 0;
-                //if (a != e.timeStamp) {
-                    filesPreview.html('');
-                    for (var i = 0; i < e.currentTarget.files.length; i++) {
-                        var label = ['B', 'KB', 'MB', 'GB'], size = e.currentTarget.files[i].size;
-                        while((size / 1024) > 1) {
-                            size = size / 1024;
-                            ind++;
-                        }
-                        filesPreview.append("<p>" + e.currentTarget.files[i].name + " [" + Math.round(size*10)/10  + ' ' + label[ind] + "]" + "</p>");
+                var filesPreview = $("#files-preview"), ind = 0, label = ['B', 'KB', 'MB', 'GB'];
+                filesPreview.html('');
+                for (var i = 0; i < e.currentTarget.files.length; i++) {
+                    var size = e.currentTarget.files[i].size;
+                    while((size / 1024) > 1) {
+                        size /= 1024;
+                        ind++;
                     }
-                    a = e.timeStamp;
-                //}
+                    filesPreview.append("<p>" + e.currentTarget.files[i].name + " [" + Math.round(size*10)/10  + ' ' + label[ind] + "]" + "</p>");
+                }
+                a = e.timeStamp;
                 $("#btn-upload").show().click(function() {
-                   // console.log(data);
+                    // console.log(data);
                     if (data != null && a == e.timeStamp) {
                         data.submit().done(function() {
                             data = null;
