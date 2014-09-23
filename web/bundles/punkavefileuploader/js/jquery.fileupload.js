@@ -135,13 +135,26 @@
                         ind++;
                     }
                     filesPreview.append("<p>" + e.currentTarget.files[i].name + " [" + Math.round(size*10)/10  + ' ' + label[ind] + "]" + "</p>");
+                    ind = 0;
                 }
                 a = e.timeStamp;
                 $("#btn-upload").show().click(function() {
-                    // console.log(data);
                     if (data != null && a == e.timeStamp) {
                         data.submit().done(function() {
                             data = null;
+                            var checkCompletedOrder = $("#check-completed-order").val();
+                            if (checkCompletedOrder == 'on') {
+                                $.ajax({
+                                    type: 'POST',
+                                    data: 'action=completeOrder' + '&checkCompletedOrder=' + checkCompletedOrder,
+                                    success: function(response) {
+                                        console.log(response);
+                                        /*var responseObject = window.JSON.parse(response);
+                                        if (responseObject.response == "valid") {
+                                        }*/
+                                    }
+                                });
+                            }
                             filesPreview.html('');
                         });
                         $(this).hide();

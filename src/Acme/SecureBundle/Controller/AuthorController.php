@@ -468,8 +468,7 @@ class AuthorController extends Controller
             //$cache = $this->get('winzou_cache.apc');
             $order = Helper::getOrderByNumForAuthor($num);
             $user = $this->get('security.context')->getToken()->getUser();
-            $action = $request->request->get('action');
-            $lastId = $request->request->get('lastId');
+            //$lastId = $request->request->get('lastId');
             $bids = Helper::getAllAuthorsBidsForSelectedOrder($user, $order);
             $nd = $request->request->get('nd');
             $action = $request->request->get('action');
@@ -572,6 +571,14 @@ class AuthorController extends Controller
                     $dateCreate = $cancelRequest->getDateCreate()->format("d.m.Y H:i");
                     $dateVerdict = Helper::getDateVerdict($order);
                     return new Response(json_encode(array('response' => 'valid', 'dateCreate' => $dateCreate, 'percent' => $percent, 'dateVerdict' => $dateVerdict, 'comment' => wordwrap($comment, 60, "\n", true))));
+                } elseif ($action == 'completeOrder') {
+                    $checkCompletedOrder = $request->request->get('checkCompletedOrder');
+                    if ($checkCompletedOrder == 'on') {
+                        $files = Helper::getFilesForOrder($order, 'author' , $user);
+                        if (count($files) > 0) {
+                            return new Response(json_encode(array('response' => 'valid')));
+                        }
+                    }
                 }
             }
         }

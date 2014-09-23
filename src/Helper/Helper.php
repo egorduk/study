@@ -1189,11 +1189,8 @@ class Helper
 
     public static function getFilesForOrder($order, $mode = null, $user = null) {
         $em = self::getContainer()->get('doctrine')->getManager();
-        if ($mode == 'client' && !empty($user)) {
-            //$files = $em->getRepository(self::$_tableOrderFile)
-            //    ->findBy(array('user_order' => $order));
+        if ($mode == 'client' && !empty($user) && !empty($order)) {
             $files = $em->getRepository(self::$_tableOrderFile)->createQueryBuilder('f')
-                //->select('f')
                 ->innerJoin(self::$_tableUser, 'u', 'WITH', 'f.user = u')
                 ->innerJoin(self::$_tableUserOrder, 'uo', 'WITH', 'f.user_order = uo')
                 ->andWhere('f.user != :user')
@@ -1204,7 +1201,18 @@ class Helper
                 ->setParameter('user_order', $order)
                 ->getQuery()
                 ->getResult();
-            //var_dump(count($files));die;
+        } elseif ($mode == 'author' && !empty($user) && !empty($order)) {
+            $files = $em->getRepository(self::$_tableOrderFile)->createQueryBuilder('f')
+                ->innerJoin(self::$_tableUser, 'u', 'WITH', 'f.user = u')
+                ->innerJoin(self::$_tableUserOrder, 'uo', 'WITH', 'f.user_order = uo')
+                ->andWhere('f.user = :user')
+                ->andWhere('f.user_order = :user_order')
+                ->andWhere('f.is_delete = 0')
+                ->orderBy('f.date_upload', 'desc')
+                ->setParameter('user', $user)
+                ->setParameter('user_order', $order)
+                ->getQuery()
+                ->getResult();
         } else {
             $files = $em->getRepository(self::$_tableOrderFile)
                 ->findBy(array('user_order' => $order));
