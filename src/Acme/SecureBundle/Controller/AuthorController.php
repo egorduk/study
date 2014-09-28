@@ -2,6 +2,8 @@
 
 namespace Acme\SecureBundle\Controller;
 
+use Acme\SecureBundle\Form\Author\AuthorCreatePsForm;
+use Acme\SecureBundle\Entity\Author\CreatePsFormValidate;
 use Acme\SecureBundle\Entity\CancelRequest;
 use Doctrine\Common\Cache\ApcCache;
 use Doctrine\Common\Cache\ArrayCache;
@@ -221,8 +223,7 @@ class AuthorController extends Controller
                 return $this->render(
                     'AcmeSecureBundle:Author:orders_new.html.twig', array('showWindow' => $showWindow)
                 );
-            }
-            elseif ($type == "favorite") {
+            } elseif ($type == "favorite") {
                 if ($request->isXmlHttpRequest()) {
                     $action = $request->request->get('action');
                     if ($action == 'unfavoriteOrder') {
@@ -231,9 +232,8 @@ class AuthorController extends Controller
                         $actionResponse = Helper::favoriteOrder($orderId, $user, $type);
                         return new Response(json_encode(array('action' => $actionResponse)));
                     } else {
-                        $postData = $request->request->all();
-                        $curPage = $postData['page'];
-                        $rowsPerPage = $postData['rows'];
+                        $curPage = $request->request->get('page');
+                        $rowsPerPage = $request->request->get('rows');
                         $countOrders = Helper::getCountOrdersForAuthorGrid();
                         $firstRowIndex = $curPage * $rowsPerPage - $rowsPerPage;
                         $orders = Helper::getFavoriteOrdersForAuthorGrid($firstRowIndex, $rowsPerPage, $user);
@@ -282,16 +282,14 @@ class AuthorController extends Controller
                         $actionResponse = Helper::deleteAuthorBid($user, $numOrder);
                         return new Response(json_encode(array('action' => $actionResponse)));
                     } else {
-                        $postData = $request->request->all();
-                        $curPage = $postData['page'];
-                        $rowsPerPage = $postData['rows'];
+                        $curPage = $request->request->get('page');
+                        $rowsPerPage = $request->request->get('rows');
                         $firstRowIndex = $curPage * $rowsPerPage - $rowsPerPage;
+                        $user = Helper::getUserById($user->getId());
                         $orders = Helper::getBidOrdersForAuthorGrid($firstRowIndex, $rowsPerPage, $user);
                         $countOrders = Helper::getCountBidOrdersForAuthorGrid($user);
-                        //var_dump($countOrders);die;
                         $response = new Response();
                         $response->total = ceil($countOrders / $rowsPerPage);
-                        //var_dump($countOrders); die;
                         $response->records = $countOrders;
                         $response->page = $curPage;
                         foreach($orders as $index => $order) {
@@ -329,9 +327,8 @@ class AuthorController extends Controller
             elseif ($type == "work") {
                 if ($request->isXmlHttpRequest()) {
                     $user = Helper::getUserById($user->getId());
-                    $postData = $request->request->all();
-                    $curPage = $postData['page'];
-                    $rowsPerPage = $postData['rows'];
+                    $curPage = $request->request->get('page');
+                    $rowsPerPage = $request->request->get('rows');
                     $firstRowIndex = $curPage * $rowsPerPage - $rowsPerPage;
                     $orders = Helper::getWorkOrdersForAuthorGrid($firstRowIndex, $rowsPerPage, $user, "getRecords");
                     $countOrders = Helper::getWorkOrdersForAuthorGrid(null, null, $user, "getCountRecords");
@@ -347,9 +344,7 @@ class AuthorController extends Controller
                             $task = Helper::getCutSentence($task, 45);
                         }
                         $dateOrderExpire = $order[0]->getDateExpire();
-                        $dateNow = new \DateTime();
-                        $remaining = date_diff($dateNow, $dateOrderExpire);
-                        //var_dump($dateOrderExpire->format("d.m.Y H:i"));die;
+                        $remaining = Helper::getDiffBetweenDates($dateOrderExpire);
                         $dateExpire = Helper::getMonthNameFromDate($order[0]->getDateExpire()->format("d.m.Y"));
                         //$remaining = (strtotime($dateOrderExpire->format("d.m.Y H:i")) - strtotime($dateNow->format("d.m.Y H:i")))/3600;
                         //$remaining = date_create($remaining);
@@ -407,18 +402,19 @@ class AuthorController extends Controller
             //$user = Helper::getUserById($userId);
             $user = $this->get('security.context')->getToken()->getUser();
             $clientLink = Helper::getUserLinkProfile($order, "client", $this->container);
-            $filesOrder = Helper::getFilesForOrder($order);
             $codeStatusOrder = $order->getStatusOrder()->getCode();
-            if ($codeStatusOrder == 'w') {
+            if ($codeStatusOrder == 'w' || $codeStatusOrder == 'g' || $codeStatusOrder == 'e') {
+                $filesOrder = Helper::getFilesForOrder($order);
                 //$session = $request->getSession();
                 //$session->set('curr_order', $order);
                 //$session->set('curr_user', $user);
                 //$session->save();
                 $cancelRequests = Helper::getCancelRequestsByOrderForAuthor($order);
                 $dateVerdict = Helper::getDateVerdict($order);
-                //$filesFolder = $order->getFilesFolder();
-                //var_dump(Helper::getFullUrl());die;
-                //var_dump(($_SERVER['SCRIPT_FILENAME']) . '/uploads/attachments/orders/' . $num . '/author/');die;
+                if ($codeStatusOrder == 'e') {
+                    $diffExpired = Helper::getDiffBetweenDates($order->getDateExpire());
+                    $order->setDiffExpired($diffExpired);
+                }
                 $clientFiles = Helper::getFilesForOrder($order, 'client', $user);
                 $arrayClientFiles = [];
                 foreach($clientFiles as $file) {
@@ -431,6 +427,10 @@ class AuthorController extends Controller
                 }
                 return $this->render(
                     'AcmeSecureBundle:Author:order_work.html.twig', array('order' => $order, 'client' => $clientLink, 'user' => $user, 'cancelRequests' => $cancelRequests, 'dateVerdict' => $dateVerdict, 'clientFiles' => $arrayClientFiles)
+                );
+            } elseif ($codeStatusOrder == 'f') {
+                return $this->render(
+                    'AcmeSecureBundle:Author:order_finish.html.twig', array('order' => $order, 'client' => $clientLink, 'user' => $user)
                 );
             }
             else {
@@ -572,13 +572,19 @@ class AuthorController extends Controller
                     $dateVerdict = Helper::getDateVerdict($order);
                     return new Response(json_encode(array('response' => 'valid', 'dateCreate' => $dateCreate, 'percent' => $percent, 'dateVerdict' => $dateVerdict, 'comment' => wordwrap($comment, 60, "\n", true))));
                 } elseif ($action == 'completeOrder') {
-                    $checkCompletedOrder = $request->request->get('checkCompletedOrder');
-                    if ($checkCompletedOrder == 'on') {
-                        $files = Helper::getFilesForOrder($order, 'author' , $user);
-                        if (count($files) > 0) {
-                            return new Response(json_encode(array('response' => 'valid')));
+                    if ($order->getStatusOrder()->getCode() == 'w' || $order->getStatusOrder()->getCode() == 'e') {
+                        $checkCompletedOrder = $request->request->get('checkCompletedOrder');
+                        if ($checkCompletedOrder == 'true') {
+                            $files = Helper::getFilesForOrder($order, 'author' , $user);
+                            if (count($files) > 0) {
+                                Helper::setOrderStatus($order, 'guarantee');
+                                $statusOrder = $order->getStatusOrder()->getName();
+                                $dateGuarantee = $order->getDateGuarantee()->format("d.m.Y H:i");
+                                return new Response(json_encode(array('response' => 'valid', 'statusOrder' => $statusOrder, 'dateGuarantee' => $dateGuarantee)));
+                            }
                         }
                     }
+                    return new Response(json_encode(array('response' => null)));
                 }
             }
         }
@@ -588,6 +594,42 @@ class AuthorController extends Controller
         return $this->render(
             'AcmeSecureBundle:Author:order_select.html.twig', array('formBid' => "", 'files' => "", 'order' => $order, 'client' => "", 'bids' => $bids, 'showDialogConfirmSelection' => "")
         );
+    }
+
+
+    /**
+     * @Template()
+     * @return array
+     */
+    public function settingsAction(Request $request, $type)
+    {
+        if ($type == 'view') {
+            /*if (false === $this->get('security.context')->isGranted('ROLE_AUTHOR')) {
+                return new RedirectResponse($this->generateUrl('secure_author_index'));
+            }*/
+            $user = $this->get('security.context')->getToken()->getUser();
+            $userInfo = $user->getUserInfo();
+            $userPs = Helper::getUserPsByUserInfo($userInfo);
+            $psValidate = new CreatePsFormValidate();
+            $psValidate->setNum('123');
+            $formCreatePs = $this->createForm(new AuthorCreatePsForm(), $psValidate);
+            $formCreatePs->handleRequest($request);
+            if ($request->isMethod('POST')) {
+                if ($formCreatePs->get('save')->isClicked()) {
+                    if ($formCreatePs->isValid()) {
+                        $postData = $request->request->get('formProfile');
+                        /*Helper::updateUserInfo($postData, $userInfo);
+                        if (!$isAccessOrder) {
+                            Helper::uploadAuthorFileInfo($user);
+                        }*/
+                        $showWindow = true;
+                    }
+                }
+            }
+            return $this->render(
+                'AcmeSecureBundle:Author:settings.html.twig', array('formCreatePs' => $formCreatePs->createView(), 'user' => $user, 'userPs' => $userPs, 'showWindow' => false)
+            );
+        }
     }
 
 }

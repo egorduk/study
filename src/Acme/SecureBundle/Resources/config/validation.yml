@@ -50,3 +50,10 @@ Acme\SecureBundle\Entity\Author\BidFormValidate:
           #- NotBlank: { message: "Введите количество дней!" }
         #fieldComment:
         #  - Regex: { pattern: "/^[A-Za-zА-Яа-я\d]+$/", message: "Только цифрыи буквы!" }
+
+Acme\SecureBundle\Entity\Author\CreatePsFormValidate:
+    properties:
+        fieldNum:
+          - Length: { min: 1, minMessage: "Слишком мало цифр!" }
+          - Regex: { pattern: "/^[\d]+$/u", message: "Только цифры!" }
+          - NotBlank: { message: "Введите номер кошелька!" }

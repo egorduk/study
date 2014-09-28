@@ -52,6 +52,11 @@ class UserOrder extends EntityRepository
     private $date_edit;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date_guarantee;
+
+    /**
      * @ORM\Column(type="string")
      */
     private $task;
@@ -156,6 +161,7 @@ class UserOrder extends EntityRepository
     private $author_last_sum_bid = null;
     private $min_sum = null;
     private $max_sum = null;
+    private $diffExpired = 0;
 
     public function __construct($container, $action = null){
         $this->date_create = new \DateTime();
@@ -183,55 +189,45 @@ class UserOrder extends EntityRepository
         $this->count_bids = 0;
     }
 
-    public function setTheme($theme)
-    {
+    public function setTheme($theme) {
         $this->theme = $theme;
     }
 
-    public function getTheme()
-    {
+    public function getTheme() {
         return $this->theme;
     }
 
-    public function setFilesFolder($folder)
-    {
+    public function setFilesFolder($folder) {
         $this->files_folder = $folder;
     }
 
-    public function getFilesFolder()
-    {
+    public function getFilesFolder() {
         return $this->files_folder;
     }
 
-    public function setDateExpire($date)
-    {
+    public function setDateExpire($date) {
         $format = 'd/m/Y';
         $this->date_expire = Helper::getFormatDateForInsert($date, $format);
     }
 
-    public function getDateExpire()
-    {
+    public function getDateExpire() {
         return $this->date_expire;
     }
 
-    public function setDateCreate($date)
-    {
+    public function setDateCreate($date) {
         $format = 'd/m/Y';
         $this->date_create = Helper::getFormatDateForInsert($date, $format);
     }
 
-    public function setTask($task)
-    {
+    public function setTask($task) {
         $this->task = $task;
     }
 
-    public function getTask()
-    {
+    public function getTask() {
         return $this->task;
     }
 
-    public function setOriginality($originality)
-    {
+    public function setOriginality($originality) {
         $this->originality = $originality;
     }
 
@@ -240,103 +236,83 @@ class UserOrder extends EntityRepository
         return $this->originality;
     }
 
-    public function setCountSheet($count)
-    {
+    public function setCountSheet($count) {
         $this->count_sheet = $count;
     }
 
-    public function getCountSheet()
-    {
+    public function getCountSheet() {
         return $this->count_sheet;
     }
 
-    public function getSubjectOrder()
-    {
+    public function getSubjectOrder() {
         return $this->subject_order;
     }
 
-    public function setSubjectOrder($subject)
-    {
+    public function setSubjectOrder($subject) {
         $this->subject_order = $subject;
     }
 
-    public function getTypeOrder()
-    {
+    public function getTypeOrder() {
         return $this->type_order;
     }
 
-    public function setTypeOrder($type)
-    {
+    public function setTypeOrder($type) {
         $this->type_order = $type;
     }
 
-    public function getStatusOrder()
-    {
+    public function getStatusOrder() {
         return $this->status_order;
     }
 
-    public function setStatusOrder($status)
-    {
+    public function setStatusOrder($status) {
         $this->status_order = $status;
     }
 
-    public function setNum($num)
-    {
+    public function setNum($num) {
         $this->num = $num;
     }
 
-    public function getNum()
-    {
+    public function getNum() {
         return $this->num;
     }
 
-    public function setIsShowAuthor($val)
-    {
+    public function setIsShowAuthor($val) {
         $this->is_show_author = $val;
     }
 
-    public function getIsShowAuthor()
-    {
+    public function getIsShowAuthor() {
         return $this->is_show_author;
     }
 
-    public function setIsShowClient($val)
-    {
+    public function setIsShowClient($val) {
         $this->is_show_client = $val;
     }
 
-    public function getIsShowClient()
-    {
+    public function getIsShowClient() {
         return $this->is_show_client;
     }
 
-    public function setUser($user)
-    {
+    public function setUser($user) {
         $this->user = $user;
     }
 
-    public function getUser()
-    {
+    public function getUser() {
         return $this->user;
     }
 
-    public function setId($id)
-    {
+    public function setId($id) {
         $this->id = $id;
     }
 
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
-    public function getDateCreate()
-    {
+    public function getDateCreate() {
         return $this->date_create;
     }
 
-    public function setDateEdit($date)
-    {
+    public function setDateEdit($date) {
         $this->date_edit = $date;
     }
 
@@ -344,28 +320,23 @@ class UserOrder extends EntityRepository
         return $this->count_bids;
     }
 
-    public function setCountAuthorBids($val)
-    {
+    public function setCountAuthorBids($val) {
         $this->count_bids = $val;
     }
 
-    public function setIsFavorite($val)
-    {
+    public function setIsFavorite($val) {
         $this->is_favorite = $val;
     }
 
-    public function getIsFavorite()
-    {
+    public function getIsFavorite() {
         return $this->is_favorite;
     }
 
-    public function setAuthorLastSumBid($val)
-    {
+    public function setAuthorLastSumBid($val) {
         $this->author_last_sum_bid = $val;
     }
 
-    public function getAuthorLastSumBid()
-    {
+    public function getAuthorLastSumBid() {
         return $this->author_last_sum_bid;
     }
 
@@ -410,5 +381,21 @@ class UserOrder extends EntityRepository
         $this->client_degree = $val;
     }
 
+    public function setDateGuarantee($date) {
+        //$format = 'd/m/Y';
+        //$this->date_guarantee = Helper::getFormatDateForInsert($date, $format);
+        $this->date_guarantee = $date;
+    }
 
+    public function getDateGuarantee() {
+        return $this->date_guarantee;
+    }
+
+    public function setDiffExpired($val) {
+        $this->diffExpired = $val;
+    }
+
+    public function getDiffExpired() {
+        return $this->diffExpired;
+    }
 }

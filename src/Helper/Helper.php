@@ -43,6 +43,8 @@ class Helper
     private static $_tableFavoriteOrder = 'AcmeSecureBundle:FavoriteOrder';
     private static $_tableWebchatMessage = 'AcmeSecureBundle:WebchatMessage';
     private static $_tableCancelRequest = 'AcmeSecureBundle:CancelRequest';
+    private static $_tableUserPs = 'AcmeSecureBundle:UserPs';
+    private static $_tableTypePs = 'AcmeSecureBundle:TypePs';
     private static $kernel;
 
     public function __construct() {
@@ -1733,7 +1735,7 @@ class Helper
                 ->getQuery()
                 ->getResult();
             return $orders;
-        } else {
+        } elseif ($mode == 'getCountRecords') {
             $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
                 ->select('ub.sum AS curr_sum, uo')
                 ->innerJoin('AcmeSecureBundle:UserBid', 'ub', 'WITH', 'ub.user_order = uo')
@@ -1907,6 +1909,39 @@ class Helper
         } elseif ($mode == 'author') {
             return '/uploads/attachments/orders/' . $num . '/author/';
         }
+    }
+
+
+    public static function setOrderStatus($order, $statusName) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $arrayStatus = ['completed' => 'co', 'work' => 'w', 'guarantee' => 'g'];
+        $newStatusCode = $arrayStatus[$statusName];
+        $status = $em->getRepository(self::$_tableStatusOrder)
+            ->findOneByCode($newStatusCode);
+        if ($newStatusCode == 'g') {
+            $order->setStatusOrder($status);
+            //Guarantee period ???
+            $dateGuarantee = date("Y-m-d", strtotime(date('Y-m-d') . ' + 7 days'));
+            $dateGuarantee = self::getFormatDateForInsert($dateGuarantee, 'Y-m-d');
+            $order->setDateGuarantee($dateGuarantee);
+            $em->flush();
+            //return $status->getName();
+        }
+    }
+
+
+    public static function getDiffBetweenDates($date) {
+        $dateNow = new \DateTime();
+        return date_diff($dateNow, $date);
+        //return date("d", (strtotime($dateNow->format("d.m.Y")) - strtotime($date->format("d.m.Y"))));
+    }
+
+
+    public static function getUserPsByUserInfo($userInfo) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $userPs = $em->getRepository(self::$_tableUserPs)
+            ->findBy(array('user_info' => $userInfo));
+        return $userPs;
     }
 
 }

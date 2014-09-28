@@ -39,12 +39,13 @@
                         url: {{ path('secure_author_orders', { type: 'bid' }) | json_encode | raw }},
                         datatype: 'json',
                         mtype: 'POST',
+                        title: 'false',
                         caption: 'Таблица оцененных заказов',
                         recordtext: "Просмотр заказов {0} - {1}",
                         colNames:['','№ заказа', 'Предмет', 'Тип работы', 'Тема работы', 'Задание', 'Выполнение до', 'Mоя ставка', 'Оценен', 'Действия'],
                         colModel :[
                             {name:'id',index:'id',key:true,search:false,resize:false,hidden:true},
-                            {name:'num',index:'num',width:120,align:'center',resizable:false,editable:false,sortable:false,title:false,formatter:customNum},
+                            {name:'num',index:'num',width:120,align:'center',resizable:false,editable:false,sortable:false,formatter:customNum},
                             {name:'subject_order',index:'subject_order',width:170,align:'center',resizable:false,sortable:false,editable:false},
                             {name:'type_order',index:'type_order',width:150,align:'center',resizable:false,editable:false,sortable:false},
                             {name:'theme',index:'theme',width:350,align:'center',resizable:false,editable:false,sortable:false},
@@ -54,11 +55,10 @@
                             {name:'date_bid',index:'date_bid',width:150,align:'center',resizable:false,editable:false,sortable:false},
                             {name:'action',width:80,align:'center',sortable:false,resize:false,search:false,formatter:function() {
                                 return "<div class='delete-bid' style='margin-left:19px;'>" +
-                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Удалить ставку на заказ' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' data-title='Удалить ставку' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='left'>" +
                                         "<span class='icon-trash-6'></span></div></div>";
                             }}
                         ],
-                        //postData: {attempt : new Date()},
                         pager: $('#pagerOrders'),
                         rowNum: 15,
                         rowList: [15,25,35],
@@ -75,6 +75,12 @@
                             function getRow(a) {
                                 return a.parent().parent();
                             }
+                            grid.find("tr").each(function() {
+                                var arrayTd = $(this).find("td");
+                                arrayTd.each(function() {
+                                    $(this).removeAttr('title');
+                                });
+                            });
                             $(".delete-bid").click(function(e) {
                                 var rowId = getRowId(e), row = getRow($(this));
                                 if (rowId) {

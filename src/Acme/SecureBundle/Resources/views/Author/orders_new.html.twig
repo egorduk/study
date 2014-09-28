@@ -110,10 +110,10 @@
                         colModel :[
                             {name:'id',index:'id',key:true,search:false,resize:false,hidden:true},
                             {name:'num',index:'num',width:100,align:'center',resizable:false,editable:false,searchrules:{"required":true, "number":true, "maxValue":13},searchoptions:{sopt:['eq','ne','bw','cn']},formatter:customNum},
-                            {name:'subject_order',index:'subject_order',width:160,align:'center',resizable:false, editable:false, searchoptions:{sopt:['eq','ne','bw','cn']}},
-                            {name:'type_order',index:'type_order',width:150,align:'center',resizable:false,editable:false, searchoptions:{sopt:['eq','ne','bw','cn']}},
-                            {name:'theme',index:'theme',width:290,align:'center',resizable:false,editable:false, searchoptions:{sopt:['eq','bw','cn']}},
-                            {name:'task',index:'task',width:280,align:'center',resizable:false, editable:false, searchoptions:{sopt:['eq','bw','cn']}},
+                            {name:'subject_order',index:'subject_order',width:160,align:'center',resizable:false, editable:false,searchoptions:{sopt:['eq','ne','bw','cn']}},
+                            {name:'type_order',index:'type_order',width:150,align:'center',resizable:false,editable:false,searchoptions:{sopt:['eq','ne','bw','cn']}},
+                            {name:'theme',index:'theme',width:290,align:'center',resizable:false,editable:false,searchoptions:{sopt:['eq','bw','cn']}},
+                            {name:'task',index:'task',width:280,align:'center',resizable:false,editable:false,searchoptions:{sopt:['eq','bw','cn']}},
                             {name:'date_expire',index:'date_expire',width:160,align:'center',resizable:false,editable:false,search:false},
                             {name:'max_bid',index:'max_bid',width:110,align:'center',resizable:false,editable:false,search:false,sortable:false,formatter:'currency',formatoptions:{defaultValue:'',thousandsSeparator: " ",decimalPlaces:0,suffix:" руб."}},
                             {name:'min_bid',index:'min_bid',width:110,align:'center',resizable:false,editable:false,search:false,sortable:false,formatter:'currency',formatoptions:{defaultValue:'',thousandsSeparator: " ",decimalPlaces:0,suffix:" руб."}},
@@ -121,13 +121,13 @@
                             {name:'date_create',index:'date_create',width:120,align:'center',resizable:false,editable:false,search:false},
                             {name:'action',width:80,align:'center',sortable:false,resize:false,search:false,formatter:function() {
                                 return "<div class='bid-order' style='margin-left:8px;'>" +
-                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Поставить ставку' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' data-title='Поставить ставку' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='left'>" +
                                         "<span class='icon-hammer'></span></div></div>" +
                                         "<div class='favorite-order' style='margin-left:8px;'>" +
-                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='В избранные заказы' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' data-title='В избранные заказы' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='left'>" +
                                         "<span class='icon-star-empty-2'></span></div></div>" +
                                         "<div class='unfavorite-order' style='margin-left:8px;'>" +
-                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Из избранных заказов' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' data-title='Из избранных заказов' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='left'>" +
                                         "<span class='icon-star'></span></div></div>";
                             }},
                             {name:'is_favorite_order',index:'is_favorite_order',key:false,search:false,hidden:true}
@@ -152,6 +152,12 @@
                             function getRow(a) {
                                 return a.parent().parent();
                             }
+                            grid.find("tr").each(function() {
+                                var arrayTd = $(this).find("td");
+                                arrayTd.each(function() {
+                                    $(this).removeAttr('title');
+                                });
+                            });
                             $(".favorite-order").click(function(e) {
                                 var rowId = getRowId(e), row = getRow($(this));
                                 if (rowId) {

@@ -1,0 +1,82 @@
+{% extends "AcmeSecureBundle::layout_author.html.twig" %}
+{% block title "Настройки аккаунта" %}
+    {% block content %}
+        <div class="body">
+            <div class="row">
+                <p>Мои кошельки:</p>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Система</th>
+                        <th>Номер кошелька</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for ps in userPs %}
+                        <tr class="danger">
+                            <td>{{ ps.typeps.name }}</td>
+                            <td>{{ ps.num }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                {% form_theme formCreatePs "TwigBundle::layout.html.twig" %}
+                {{ form_start(formCreatePs) }}
+                {{ form_label(formCreatePs.fieldNum) }}
+                {{ form_errors(formCreatePs.fieldNum) }}
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
+                    {{ form_widget(formCreatePs.fieldNum) }}
+                </div>
+                <div class="input-group">
+                    <label for="formCreatePs_add" class="btn btn-success"><span class="icon-floppy">&nbspСохранить</span></label>
+                    {{ form_widget(formCreatePs.add) }}
+                    <label for="formCreatePs_reset" class="btn btn-success"><span class="icon-trash-1">&nbspОчистить</span></label>
+                    {{ form_widget(formCreatePs.reset) }}
+                </div>
+                {{ form_end(formCreatePs) }}
+                <a href="{{ path('secure_client_profile', {'type': 'edit'}) }}">Изменить данные</a>
+            </div>
+            {% if (showWindow) %}
+                <div id="success-window">
+                    <div class="Message Message--green" id="js-timer">
+                        <div class="Message-icon">
+                            <i class="fa fa-check"></i>
+                        </div>
+                        <div class="Message-body">
+                            <p align="center">Ваши данные сохранены!</p>
+                        </div>
+                        <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+            {% endif %}
+            <script>
+                $(document).ready(function() {
+                    function format(state) {
+                        return "<img title='" + state.text + "' class='flag' src='{{ asset('bundles/images/flags/') }}" + state.id.toLowerCase() + ".png'/>";
+                    }
+
+                    $("#formProfile_selectorCountry").select2({
+                        minimumResultsForSearch: -1,
+                        formatResult: format,
+                        formatSelection: format,
+                        escapeMarkup: function(m) { return m; }
+                    });
+
+                    function closeMessage(el) {
+                        el.addClass('is-hidden');
+                    }
+
+                    $('.js-messageClose').on('click', function(e) {
+                        closeMessage($(this).closest('.Message'));
+                    });
+
+                    setTimeout(function() {
+                        closeMessage($('#js-timer'));
+                    }, 1500);
+                });
+            </script>
+        </div>
+    {% endblock %}

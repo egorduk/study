@@ -58,30 +58,32 @@
                 width: 60px;
             }
         </style>
-        {% include "PunkAveFileUploaderBundle:Default:templates.html.twig" %}
         <div class="container" data-role="{{ user.userrole.id }}" data-login="{{ user.login }}">
             <div class="row">
                 <div class="col-md-7">
                     <p class="block-num">Номер заказа: {{ order.num }}</p>
                     <hr style="border:solid 1px black">
                     <p class="block-theme">Тема работы: {{ order.theme }}</p>
-                    <hr style="border:solid 1px black">
                     <p>Задание: {{ order.task | raw }}</p>
-                    <hr style="border:solid 1px black">
-                    <p>Объем заказа: {{ order.countsheet }} стр.</p>
-                    <hr style="border:solid 1px black">
-                    <p>Оригинальность заказа: {{ order.originality }}%</p>
-                    <hr style="border:solid 1px black">
+                    <p>Объем работы: {{ order.countsheet }} стр.</p>
+                    <p>Оригинальность работы: {{ order.originality }}%</p>
                     <p>Предмет: {{ order.subjectorder.childname }}</p>
-                    <hr style="border:solid 1px black">
-                    <p>Тип заказа: {{ order.typeorder.name }}</p>
-                    <hr style="border:solid 1px black">
-                    <p>Статус заказа: {{ order.statusorder.name }}</p>
-                    <hr style="border:solid 1px black">
+                    <p>Тип работы: {{ order.typeorder.name }}</p>
+                    <p id="block-status-order">Статус заказа: {{ order.statusorder.name }}</p>
+                    {% if order.statusorder.code == 'g' %}
+                        <p id="block-date-guarantee">На гарантии до: {{ order.dateguarantee.format("d.m.Y H:i") }}</p>
+                    {% endif %}
+                    {% if order.statusorder.code == 'e' %}
+                        <p id="block-diff-expired">
+                        {% if order.diffexpired.days > 0 %}
+                            Просрочен на: {{ order.diffexpired.days }} дн.
+                        {% else %}
+                            Просрочен на: {{ order.diffexpired.format("%d дн. %h ч. %i мин.") }}
+                        {% endif %}
+                        </p>
+                    {% endif %}
                     <p>Дата создания: {{ order.datecreate.format("d.m.Y H:i") }}</p>
-                    <hr style="border:solid 1px black">
-                    <p>Выполнение до: {{ order.dateexpire.format("d.m.Y H:i") }}</p>
-                    <hr style="border:solid 1px black">
+                    <p id="block-date-expire">Выполнение до: {{ order.dateexpire.format("d.m.Y H:i") }}</p>
                     <p>Заказчик: <div id="block-client">{{ client | raw }}</div></p>
                 </div>
                 <div class="col-md-5">
@@ -99,7 +101,8 @@
                     </div>-->
                 </div>
             </div>
-            <div class="row">
+            {% if (order.statusorder.code == 'w' or order.statusorder.code == 'g' or order.statusorder.code == 'e') %}
+                <div class="row">
                 <div class="col-md-4 col-md-offset-4" id="block-create-cancel-request">
                     <div class="row">
                         <span id="create-cancel-request-before" class='label label-primary'>Сформировать отказ от выполнения<span class="icon-down-fat" style="padding-top:5px;padding-left:5px;"></span></span>
@@ -142,7 +145,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+                <div class="row">
                 <div class="col-md-8 col-md-offset-2" id="block-history-cancel-request" style="display: none">
                     <span id="line-date-verdict" class="label label-primary">Решение будет принято до {{ dateVerdict }}</span>
                     <div>
@@ -189,37 +192,41 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-8" id="block-completed-order">
-                    <form class="form-horizontal" name="form-completed-order" id="form-completed-order" enctype="multipart/form-data">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="check-completed-order" id="check-completed-order">Заказ выполнен
-                            </label>
-                        </div>
-                        <div class="input-group">
-                            <p>Мои файлы</p>
-                            <div class="file-uploader"></div>
-                        </div>
-                    </form>
-                </div>
-                {% if clientFiles | length != 0 %}
-                <div class="col-md-4">
-                    <p>Файлы заказчика</p>
-                    {% for file in clientFiles %}
-                        <div class="">
-                            <div class="caption thumbnail">
-                                <img src="{{ file.thumbnailurl }}" class="thumbnail-image" alt="thumbnail"/>
-                                <span class="filename">{{ file.name }}</span>
-                                <p class="">Размер:{{ file.size }}</p>
-                                <p class="">Загружен:{{ file.dateupload.format("d.m.Y H:i") }}</p>
-                                <a rel="tooltip" title="Скачать" class="download thumbnail-action btn" target="download" href="{{ file.url }}"><i class="icon-download"></i></a>
+            {% endif %}
+            {% if (order.statusorder.code == 'w' or order.statusorder.code == 'g' or order.statusorder.code == 'e') %}
+                <div class="row">
+                    {% include "PunkAveFileUploaderBundle:Default:templates.html.twig" %}
+                    <div class="col-md-8" id="block-completed-order">
+                        <form class="form-horizontal" name="form-completed-order" id="form-completed-order" enctype="multipart/form-data">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="check-completed-order" id="check-completed-order">Заказ выполнен
+                                </label>
                             </div>
-                        </div>
-                    {% endfor %}
-                </div>
+                            <div class="input-group">
+                                <p>Мои файлы</p>
+                                <div class="file-uploader"></div>
+                            </div>
+                        </form>
+                    </div>
+                {% if clientFiles | length != 0 %}
+                    <div class="col-md-4">
+                        <p>Файлы заказчика</p>
+                        {% for file in clientFiles %}
+                            <div class="">
+                                <div class="caption thumbnail">
+                                    <img src="{{ file.thumbnailurl }}" class="thumbnail-image" alt="thumbnail"/>
+                                    <span class="filename">{{ file.name }}</span>
+                                    <p class="">Размер:{{ file.size }}</p>
+                                    <p class="">Загружен:{{ file.dateupload.format("d.m.Y H:i") }}</p>
+                                    <a rel="tooltip" title="Скачать" class="download thumbnail-action btn" target="download" href="{{ file.url }}"><i class="icon-download"></i></a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
                 {% endif %}
-            </div>
+                </div>
+            {% endif %}
         <script>
             $(document).ready(function() {
                 //$("#block-history-cancel-request").css('display','none');

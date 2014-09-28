@@ -142,16 +142,22 @@
                     if (data != null && a == e.timeStamp) {
                         data.submit().done(function() {
                             data = null;
-                            var checkCompletedOrder = $("#check-completed-order").val();
-                            if (checkCompletedOrder == 'on') {
+                            var checkCompletedOrder = $("#check-completed-order");
+                            if (checkCompletedOrder[0].checked) {
                                 $.ajax({
                                     type: 'POST',
-                                    data: 'action=completeOrder' + '&checkCompletedOrder=' + checkCompletedOrder,
+                                    data: 'action=completeOrder' + '&checkCompletedOrder=' + checkCompletedOrder[0].checked,
                                     success: function(response) {
-                                        console.log(response);
-                                        /*var responseObject = window.JSON.parse(response);
-                                        if (responseObject.response == "valid") {
-                                        }*/
+                                        //console.log(response);
+                                        if (response != null) {
+                                            var responseObject = window.JSON.parse(response);
+                                            if (responseObject.response == "valid") {
+                                                $("#block-status-order").html('<p>Статус заказа: ' + responseObject.statusOrder + '</p>');
+                                                $("#block-status-order").append('<p>На гарантии до: ' + responseObject.dateGuarantee + '</p>');
+                                                $("#block-diff-expired").html('');
+                                                checkCompletedOrder[0].checked = false;
+                                            }
+                                        }
                                     }
                                 });
                             }
