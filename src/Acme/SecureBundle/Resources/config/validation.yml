@@ -54,6 +54,8 @@ Acme\SecureBundle\Entity\Author\BidFormValidate:
 Acme\SecureBundle\Entity\Author\CreatePsFormValidate:
     properties:
         fieldNum:
-          - Length: { min: 1, minMessage: "Слишком мало цифр!" }
+          - Length: { min: 6, minMessage: "Слишком мало цифр!" }
           - Regex: { pattern: "/^[\d]+$/u", message: "Только цифры!" }
           - NotBlank: { message: "Введите номер кошелька!" }
+        #fieldType:
+        #  - NotBlank: { message: "Введите номер кошелька!" }

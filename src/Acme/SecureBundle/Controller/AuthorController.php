@@ -611,11 +611,10 @@ class AuthorController extends Controller
             $userInfo = $user->getUserInfo();
             $userPs = Helper::getUserPsByUserInfo($userInfo);
             $psValidate = new CreatePsFormValidate();
-            $psValidate->setNum('123');
             $formCreatePs = $this->createForm(new AuthorCreatePsForm(), $psValidate);
             $formCreatePs->handleRequest($request);
             if ($request->isMethod('POST')) {
-                if ($formCreatePs->get('save')->isClicked()) {
+                if ($formCreatePs->get('add')->isClicked()) {
                     if ($formCreatePs->isValid()) {
                         $postData = $request->request->get('formProfile');
                         /*Helper::updateUserInfo($postData, $userInfo);

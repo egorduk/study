@@ -30,8 +30,13 @@
                     <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
                     {{ form_widget(formCreatePs.fieldNum) }}
                 </div>
+                {{ form_label(formCreatePs.fieldType) }}
                 <div class="input-group">
-                    <label for="formCreatePs_add" class="btn btn-success"><span class="icon-floppy">&nbspСохранить</span></label>
+                    {{ form_widget(formCreatePs.fieldType) }}
+                </div>
+                </br>
+                <div class="input-group">
+                    <label for="formCreatePs_add" class="btn btn-success"><span class="icon-floppy"></span>&nbspДобавить</label>
                     {{ form_widget(formCreatePs.add) }}
                     <label for="formCreatePs_reset" class="btn btn-success"><span class="icon-trash-1">&nbspОчистить</span></label>
                     {{ form_widget(formCreatePs.reset) }}
@@ -55,24 +60,22 @@
             <script>
                 $(document).ready(function() {
                     function format(state) {
-                        return "<img title='" + state.text + "' class='flag' src='{{ asset('bundles/images/flags/') }}" + state.id.toLowerCase() + ".png'/>";
+                        return "<img title='" + state.text + "' class='icon' src='{{ asset('bundles/images/ps/') }}" + state.id.toLowerCase() + ".png'/> " + state.text + "";
                     }
-
-                    $("#formProfile_selectorCountry").select2({
+                    $("#formCreatePs_selectorTypePs").select2({
                         minimumResultsForSearch: -1,
                         formatResult: format,
                         formatSelection: format,
+                        width: '170',
                         escapeMarkup: function(m) { return m; }
                     });
 
                     function closeMessage(el) {
                         el.addClass('is-hidden');
                     }
-
                     $('.js-messageClose').on('click', function(e) {
                         closeMessage($(this).closest('.Message'));
                     });
-
                     setTimeout(function() {
                         closeMessage($('#js-timer'));
                     }, 1500);
