@@ -141,7 +141,7 @@
                 $("#btn-upload").show().click(function() {
                     if (data != null && a == e.timeStamp) {
                         data.submit().done(function() {
-                            data = null;
+                            //data = null;
                             var checkCompletedOrder = $("#check-completed-order");
                             if (checkCompletedOrder[0].checked) {
                                 $.ajax({
@@ -163,7 +163,7 @@
                             }
                             filesPreview.html('');
                         });
-                        $(this).hide();
+                       // $(this).hide();
                     }
                 });
             },

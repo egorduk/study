@@ -1,0 +1,14 @@
+{% spaceless %}
+<script type="text/template" id="file-uploader-template">
+  <div class="uploader" data-dropzone="1" style="margin-top: 10px; margin-bottom: 10px">
+    <div class="controls" style="margin-bottom: 20px">
+      <div id="files-preview"></div>
+      <input type="file" data-files="1" style="color: white"/>
+      <input type="button" id="btn-upload" value="Загрузить" style="display:none"/>
+      <span class="spinner" data-spinner="1" style="display: none">
+        <img src="{{ asset('bundles/punkavefileuploader/images/spinner.gif') }}" /> Загрузка...
+      </span>
+    </div>
+  </div>
+</script>
+{% endspaceless %}

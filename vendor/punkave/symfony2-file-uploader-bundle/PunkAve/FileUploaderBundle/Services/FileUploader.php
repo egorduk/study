@@ -74,6 +74,7 @@ class FileUploader
             throw new \Exception("You must pass the 'folder' option to distinguish this set of files from others");
         }
         $options = array_merge($this->options, $options);
+        //var_dump($options);die;
         $allowedExtensions = $options['allowed_extensions'];
         // Build a regular expression like /(\.gif|\.jpg|\.jpeg|\.png)$/i
         $allowedExtensionsRegex = '/(' . implode('|', array_map(function($extension) { return '\.' . $extension; }, $allowedExtensions)) . ')$/i';
@@ -90,13 +91,10 @@ class FileUploader
         $arrayExplode = explode('/', $options['folder']);
         $folder = end($arrayExplode);
         @mkdir($filePath, 0777, true);
-        $uploadDir = str_replace($folder, 'thumbnails_' . $folder . '/', $filePath);
-        //$uploadDir = $filePath . '/';
-        //var_dump($uploadDir);
-        /*foreach ($sizes as &$size) {
-            @mkdir($size['upload_dir'], 0777, true);
-        }*/
-        @mkdir($uploadDir, 0777, true);
+        if ($options['mode'] == 'order') {
+            $uploadDir = str_replace($folder, 'thumbnails_' . $folder . '/', $filePath);
+            @mkdir($uploadDir, 0777, true);
+        }
         $upload_handler = new \PunkAve\FileUploaderBundle\BlueImp\UploadHandler(
             array(
                 'upload_dir' => $filePath . '/',
@@ -107,7 +105,7 @@ class FileUploader
                 'max_number_of_files' => $options['max_number_of_files'],
                 'min_file_size' => $options['min_file_size'],
                 'max_file_size' => $options['max_file_size'],
-                //'test' => $options['test']
+                'mode' => $options['mode']
             ));
         //header('Content-type: text/plain');
         header('Pragma: no-cache');

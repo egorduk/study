@@ -2,9 +2,12 @@
 
 namespace Acme\SecureBundle\Controller;
 
+use Acme\SecureBundle\Entity\Author\MailOptionsFormValidate;
+use Acme\SecureBundle\Form\Author\AuthorCreateMailOptionsForm;
 use Acme\SecureBundle\Form\Author\AuthorCreatePsForm;
 use Acme\SecureBundle\Entity\Author\CreatePsFormValidate;
 use Acme\SecureBundle\Entity\CancelRequest;
+use Acme\SecureBundle\Form\Author\AuthorMailOptionsForm;
 use Doctrine\Common\Cache\ApcCache;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\MemcachedCache;
@@ -61,6 +64,7 @@ class AuthorController extends Controller
         if ($type == "view" || $type == "edit") {
             $user = $this->get('security.context')->getToken()->getUser();
             $userInfo = $user->getUserInfo();
+            //$avatar = Helper::getUserAvatar($user);
             $showWindow = false;
         }
         else {
@@ -77,13 +81,23 @@ class AuthorController extends Controller
             $profileValidate->setSurname($userInfo->getSurname());
             $profileValidate->setLastname($userInfo->getLastname());
             $profileValidate->setCountry($userInfo->getCountry()->getCode());
+            $avatarOption = Helper::getAvatarOption($user);
+            $profileValidate->setAvatarOption($avatarOption);
             $formProfile = $this->createForm(new AuthorProfileForm(), $profileValidate);
             $formProfile->handleRequest($request);
             if ($request->isMethod('POST')) {
                 if ($formProfile->get('save')->isClicked()) {
                     if ($formProfile->isValid()) {
                         $postData = $request->request->get('formProfile');
+                        //var_dump($postData);die;
                         Helper::updateUserInfo($postData, $userInfo);
+                        $avatarOption = $postData['selectorAvatarOptions'];
+                        if ($avatarOption == 'man' || $avatarOption == 'woman') {
+                            $arrAvatarOptions = ['man' => 'default_m.jpg', 'woman' => 'default_w.jpg'];
+                            $fileName = $arrAvatarOptions[$avatarOption];
+                            $newAvatar = Helper::updateUserAvatar($fileName, $user, $mode = 'controller');
+                            $user->setAvatar($newAvatar);
+                        }
                         if (!$isAccessOrder) {
                             Helper::uploadAuthorFileInfo($user);
                         }
@@ -92,7 +106,8 @@ class AuthorController extends Controller
                 }
             }
         }
-        return array('formProfile' => (isset($formProfile)?$formProfile->createView():null), 'user' => $user, 'userInfo' => $userInfo, 'showWindow' => $showWindow);
+        $avatar = Helper::getUserAvatar($user);
+        return array('formProfile' => (isset($formProfile)?$formProfile->createView():null), 'user' => $user, 'userInfo' => $userInfo, 'showWindow' => $showWindow, 'avatar' => $avatar);
     }
 
 
@@ -107,9 +122,14 @@ class AuthorController extends Controller
         if (preg_match('/^\d+$/', $orderNum)) {
             if ($action == "profile") {
                 if ($fileName) {
-                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'author/' . $orderNum/*, 'action' => 'delete'*/));
+                   // $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'avatars/author/' . $orderNum, 'action' => 'delete'));
                 } else {
-                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'author/' . $orderNum));
+                    $user = $this->get('security.context')->getToken()->getUser();
+                    $session = new Session();
+                    $session->set('user', $user->getId());
+                    $session->save();
+                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'avatars/author/' . $orderNum, 'mode' => 'profile', 'allowed_extensions' => array('gif', 'png', 'jpeg', 'jpg')));
+                    $session->remove('user');
                 }
             } elseif ($action == "order") {
                 if ($fileName) {
@@ -608,25 +628,61 @@ class AuthorController extends Controller
                 return new RedirectResponse($this->generateUrl('secure_author_index'));
             }*/
             $user = $this->get('security.context')->getToken()->getUser();
-            $userInfo = $user->getUserInfo();
-            $userPs = Helper::getUserPsByUserInfo($userInfo);
+            $showWindow = false;
+            if ($request->isXmlHttpRequest()) {
+                $psId = $request->request->get('psId');
+                $isUserPs = Helper::getUserPsByPsId($user, $psId);
+                $response = 'null';
+                if ($isUserPs) {
+                    $response = 'valid';
+                    Helper::deleteUserPs($psId);
+                }
+                return new Response(json_encode(array('response' => $response)));
+            }
             $psValidate = new CreatePsFormValidate();
             $formCreatePs = $this->createForm(new AuthorCreatePsForm(), $psValidate);
+            $formCreatePsCloned = clone $formCreatePs;
             $formCreatePs->handleRequest($request);
+            $mailOptions = Helper::getMailOptions($user);
+            $formMailOptions = $this->createForm(new AuthorMailOptionsForm(), $mailOptions);
+            $formMailOptions->handleRequest($request);
             if ($request->isMethod('POST')) {
-                if ($formCreatePs->get('add')->isClicked()) {
+                if ($formCreatePs->get('add')->isClicked() || $formCreatePs->get('change')->isClicked()) {
                     if ($formCreatePs->isValid()) {
-                        $postData = $request->request->get('formProfile');
+                        $postData = $request->request->get('formCreatePs');
+                        if (isset($postData['fieldHiddenPsId']) && $postData['fieldHiddenPsId'] > 0 && $formCreatePs->get('change')->isClicked()) {
+                            $psId = $postData['fieldHiddenPsId'];
+                            $isUserPs = Helper::getUserPsByPsId($user, $psId);
+                            if ($isUserPs) {
+                                Helper::updateUserPs($psId, $postData);
+                            }
+                        } elseif ($formCreatePs->get('add')->isClicked()) {
+                            Helper::addNewUserPs($user, $postData);
+                        }
+                        //var_dump($postData);die;
                         /*Helper::updateUserInfo($postData, $userInfo);
                         if (!$isAccessOrder) {
                             Helper::uploadAuthorFileInfo($user);
                         }*/
                         $showWindow = true;
-                    }
+                    } else{
+                        $userPs = Helper::getUserPsByUser($user);
+                        return $this->render(
+                            'AcmeSecureBundle:Author:settings.html.twig', array('formCreatePs' => $formCreatePs->createView(), 'user' => $user, 'userPs' => $userPs, 'showWindow' => $showWindow)
+                        );
+                    };
+                } elseif ($formMailOptions->get('save')->isClicked()) {
+                    if ($formMailOptions->isValid()) {
+                        $postData = $request->request->get('formMailOptions');
+                        //var_dump($postData);die;
+                        $fieldOptions = $postData['fieldOptions'];
+                        Helper::updateMailOptions($user, $fieldOptions);
+                    } else {}
                 }
             }
+            $userPs = Helper::getUserPsByUser($user);
             return $this->render(
-                'AcmeSecureBundle:Author:settings.html.twig', array('formCreatePs' => $formCreatePs->createView(), 'user' => $user, 'userPs' => $userPs, 'showWindow' => false)
+                'AcmeSecureBundle:Author:settings.html.twig', array('formCreatePs' => $formCreatePsCloned->createView(), 'formMailOptions' => $formMailOptions->createView(), 'user' => $user, 'userPs' => $userPs, 'showWindow' => $showWindow)
             );
         }
     }

@@ -66,6 +66,12 @@ class UploadHandler
                     'max_width' => 80,
                     'max_height' => 80
                 )
+            ),
+            'avatar_param' => array(
+              //  'upload_dir' => dirname($_SERVER['SCRIPT_FILENAME']) . '/thumbnails/',
+                //'upload_url' => $this->getFullUrl() . '/thumbnails/',
+                'max_width' => 100,
+                'max_height' => 100
             )
         );
         if ($options) {
@@ -110,22 +116,30 @@ class UploadHandler
     }
 
     protected function get_file_objects() {
-        //return array_values(array_filter(array_map(array($this, 'get_file_object'), scandir($this->options['upload_dir']))));
+        return array_values(array_filter(array_map(array($this, 'get_file_object'), scandir($this->options['upload_dir']))));
     }
 
     protected function create_scaled_image($file_name, $options) {
         $file_path = $this->options['upload_dir'] . iconv('utf-8','cp1251', $file_name);
+        //var_dump($file_path);die;
         //$new_file_path = $options['upload_dir'] . iconv('utf-8','cp1251', $file_name);
-        if (preg_match('/\/uploads\/attachments\/orders\/[\d]*?\/(author|client)/', $options['upload_url'])) {
-            $arrayExplode = explode('/', $options['upload_url']);
-            $slug = $arrayExplode[5];
-            $thumbnailUrl = $options['upload_url'];
-            $thumbnailUrl = str_replace($slug . '/', 'thumbnails_' . $slug, $thumbnailUrl);
-        } else {
-            $thumbnailUrl = null;
+        if ($this->options['mode'] == 'order') {
+            if (preg_match('/\/uploads\/attachments\/orders\/[\d]*?\/(author|client)/', $options['upload_url'])) {
+                $arrayExplode = explode('/', $options['upload_url']);
+                $slug = $arrayExplode[5];
+                $thumbnailUrl = $options['upload_url'];
+                $thumbnailUrl = str_replace($slug . '/', 'thumbnails_' . $slug, $thumbnailUrl);
+            } else {
+                $thumbnailUrl = null;
+            }
+            $new_file_path = $this->options['thumbnail_dir'] . $thumbnailUrl . iconv('utf-8','cp1251', $file_name);
+            list($img_width, $img_height) = @getimagesize($file_path);
+        } elseif ($this->options['mode'] == 'profile') {
+            $new_file_path = $file_path;
+            //var_dump($new_file_path);die;
+            $img_width = $options['width'];
+            $img_height = $options['height'];
         }
-        $new_file_path = $this->options['thumbnail_dir'] . $thumbnailUrl . iconv('utf-8','cp1251', $file_name);
-        list($img_width, $img_height) = @getimagesize($file_path);
         if (!$img_width || !$img_height) {
             return false;
         }
@@ -139,6 +153,8 @@ class UploadHandler
             }
             return true;
         }
+        //var_dump($file_path);die;
+        $file_path = $options['tmp'];
         $new_width = $img_width * $scale;
         $new_height = $img_height * $scale;
         $new_img = @imagecreatetruecolor($new_width, $new_height);
@@ -248,12 +264,11 @@ class UploadHandler
         // Also remove control characters and spaces (\x00..\x20) around the filename:
         $file_name = trim(basename(stripslashes($name)), ".\x00..\x20");
         // Add missing file extension for known image types:
-        if (strpos($file_name, '.') === false &&
-            preg_match('/^image\/(gif|jpe?g|png)/', $type, $matches)) {
-            $file_name .= '.'.$matches[1];
+        if (strpos($file_name, '.') === false && preg_match('/^image\/(gif|jpe?g|png)/', $type, $matches)) {
+            $file_name .= '.' . $matches[1];
         }
         if ($this->options['discard_aborted_uploads']) {
-            while(is_file($this->options['upload_dir'].$file_name)) {
+            while(is_file($this->options['upload_dir'] . $file_name)) {
                 $file_name = $this->upcount_name($file_name);
             }
         }
@@ -304,22 +319,22 @@ class UploadHandler
      */
     protected function handle_file_upload($uploaded_file, $name, $size, $type, $error) { // if uploaded
         $file = new \stdClass();
-        $file->name = $this->trim_file_name($name, $type);
-        //$file->name = $this->trim_file_name($name, $type);
         $file->size = intval($size);
         //$file->type = Helper::getMimeType($type);
         $file->type = Helper::getExtensionFile($file->name);
+        if ($this->options['mode'] == 'order') {
+            $file->name = $this->trim_file_name($name, $type);
+        } elseif ($this->options['mode'] == 'profile') {
+            $file->name = $name;
+        }
         if ($this->validate($uploaded_file, $file, $error)) {
             //$this->handle_form_data($file, $index);
             $file_path = $this->options['upload_dir'] . $file->name;
-            $append_file = !$this->options['discard_aborted_uploads'] && is_file($file_path) && $file->size > filesize($file_path);
+           // $append_file = !$this->options['discard_aborted_uploads'] && is_file($file_path) && $file->size > filesize($file_path);
             clearstatcache();
-            if ($uploaded_file && is_uploaded_file($uploaded_file)) {
-                // multipart/formdata uploads (POST method uploads)
-                $file_path = iconv("UTF-8", "CP1251", $file_path);
-                if ($append_file) {
-                    //file_put_contents($file_path, fopen($uploaded_file, 'r'), FILE_APPEND);
-                } else {
+            if ($this->options['mode'] == 'order') {
+                if ($uploaded_file && is_uploaded_file($uploaded_file)) {
+                    $file_path = iconv("UTF-8", "CP1251", $file_path);
                     if (mb_detect_encoding($file->name) != 'ASCII') {
                         if (file_exists($file_path)) {
                             $count = 0;
@@ -335,65 +350,74 @@ class UploadHandler
                             closedir($fileHandler);
                             $name = str_replace('.' . $file->type, '', $name);
                             $name = str_replace($name, $name . ' (' . $count . ').', $name);
-                            //var_dump($name);
                             $file_path = $this->options['upload_dir'] . iconv('UTF-8', 'CP1251', $name) . $file->type;
-                            //$file->name = $arr[0] . ' (' . $count . ').' . $file->type;
                             $file->name = $name . $file->type;
                         }
                     }
                     move_uploaded_file($uploaded_file, $file_path);
                 }
-            } /*else {
-                // Non-multipart uploads (PUT method support)
-                file_put_contents(
-                    $file_path,
-                    fopen('php://input', 'r'),
-                    $append_file ? FILE_APPEND : 0
-                );
-            }*/
-            $file_size = filesize($file_path);
+                $file_size = filesize($file_path);
+            } elseif ($this->options['mode'] == 'profile') {
+                $file_size = $file->size;
+            }
             if ($file_size === $file->size) {
             	/*if ($this->options['orient_image']) {
             		$this->orient_image($file_path);
             	}*/
                 $file->url = '/study/web' . $this->options['upload_url'] . rawurlencode($file->name);
                 //var_dump($file->name);die;
-                foreach($this->options['image_versions'] as $version => $options) {
-                    if ($this->create_scaled_image($file->name, $options)) {
-                        if ($this->options['upload_dir'] !== $options['upload_dir']) {
-                            //$file->{$version.'_url'} = '/study/web/' . $options['upload_url'] . rawurlencode($file->name);
-                            //var_dump($options);
-                            if (preg_match('/\/uploads\/attachments\/orders\/[\d]*?\/(author|client)/', $options['upload_url'])) {
-                                $arrayExplode = explode('/', $options['upload_url']);
-                                //$slug = end($arrayExplode);
-                                $slug = $arrayExplode[5];
-                                $thumbnailUrl = $options['upload_url'];
-                                $thumbnailUrl = str_replace($slug . '/', 'thumbnails_' . $slug, $thumbnailUrl);
+                if ($this->options['mode'] == 'order') {
+                    foreach($this->options['image_versions'] as $version => $options) {
+                        if ($this->create_scaled_image($file->name, $options)) {
+                            if ($this->options['upload_dir'] !== $options['upload_dir']) {
+                                //$file->{$version.'_url'} = '/study/web/' . $options['upload_url'] . rawurlencode($file->name);
+                                //var_dump($options);
+                                if (preg_match('/\/uploads\/attachments\/orders\/[\d]*?\/(author|client)/', $options['upload_url'])) {
+                                    $arrayExplode = explode('/', $options['upload_url']);
+                                    //$slug = end($arrayExplode);
+                                    $slug = $arrayExplode[5];
+                                    $thumbnailUrl = $options['upload_url'];
+                                    $thumbnailUrl = str_replace($slug . '/', 'thumbnails_' . $slug, $thumbnailUrl);
+                                } else {
+                                    $thumbnailUrl = null;
+                                }
+                                $file->{$version.'_url'} = '/study/web/' . $thumbnailUrl . rawurlencode($file->name);
                             } else {
-                                $thumbnailUrl = null;
+                                clearstatcache();
+                                $file_size = filesize($file_path);
                             }
-                            $file->{$version.'_url'} = '/study/web/' . $thumbnailUrl . rawurlencode($file->name);
                         } else {
-                            clearstatcache();
-                            $file_size = filesize($file_path);
+                            $file->thumbnail_url = $this->options['icon_url'] . $file->type . '.png';
                         }
-                    } else {
-                        $file->thumbnail_url = $this->options['icon_url'] . $file->type . '.png';
                     }
+                    $file->size = Helper::getSizeFile($file_size);
+                    $file->date_upload = Helper::addNewOrderFile($file);
+                    return $file;
+                } elseif ($this->options['mode'] == 'profile') {
+                    $options = $this->options['avatar_param'];
+                    list($img_width, $img_height) = @getimagesize($uploaded_file);
+                    $options['width'] = $img_width;
+                    $options['height'] = $img_height;
+                    $options['tmp'] = $uploaded_file;
+                    $dir = $this->options['upload_dir'];
+                    foreach(glob($dir . '*.*') as $f){
+                        unlink($f);
+                    }
+                    //var_dump($this->create_scaled_image($file->name, $options));die;
+                    if ($this->create_scaled_image($file->name, $options)) {
+                        Helper::updateUserAvatar($file->name);
+                    } else {
+                        //unlink($file_path);
+                        $file->error = 'incorrectImage';
+                    }
+                    //return isset($file->error) ? $file->error : true;
+                    return $file;
                 }
             } elseif ($this->options['discard_aborted_uploads']) {
                 unlink($file_path);
                 $file->error = 'abort';
             }
-            //$file->name = $file->name;
-            $file->size = Helper::getSizeFile($file_size);
-            $file->date_upload = Helper::addAndGetFileDateUpload($file);
-            //$file->detele_url = $this->options['script_url'] . '?file=' . rawurlencode(iconv('UTF-8', 'CP1251', $file->name));
-            //$this->set_file_delete_url($file);
-            //var_dump($file);
         }
-        //$file->thumbnail_url = '/study/web/uploads/attachments/orders/7/thumbnails/1.jpg';
-        return $file;
     }
 
     /*public function get() {
@@ -427,6 +451,7 @@ class UploadHandler
                     $upload['tmp_name'][$index],
                     //iconv('cp1251', 'utf-8', $upload['tmp_name'][$index]),
                     isset($_SERVER['HTTP_X_FILE_NAME']) ? $_SERVER['HTTP_X_FILE_NAME'] : $upload['name'][$index],
+                    //$upload['name'][$index],
                     isset($_SERVER['HTTP_X_FILE_SIZE']) ? $_SERVER['HTTP_X_FILE_SIZE'] : $upload['size'][$index],
                     isset($_SERVER['HTTP_X_FILE_TYPE']) ? $_SERVER['HTTP_X_FILE_TYPE'] : $upload['type'][$index],
                     $upload['error'][$index]

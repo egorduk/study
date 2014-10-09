@@ -60,6 +60,11 @@ class User extends EntityRepository implements UserInterface//, \Serializable
     protected $date_confirm_recovery;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $date_upload_avatar;
+
+    /**
      * @ORM\Column(type="string")
      */
     protected $salt;
@@ -166,6 +171,16 @@ class User extends EntityRepository implements UserInterface//, \Serializable
      **/
     private $link_order_file_user;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Acme\SecureBundle\Entity\UserPs", mappedBy="user")
+     **/
+    protected $link_user_ps;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Acme\SecureBundle\Entity\MailOption", mappedBy="user")
+     **/
+    protected $link_mail_option;
+
 
     private $unEncodePass = "";
     private $clientIdInfo;
@@ -191,9 +206,12 @@ class User extends EntityRepository implements UserInterface//, \Serializable
         $this->link_favorite_user = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_auction_user = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_order_file_user = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->link_user_ps = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->link_mail_option = new \Doctrine\Common\Collections\ArrayCollection();
         $this->is_ban = 0;
         $this->date_confirm_recovery = Helper::getFormatDateForInsert("0000-00-00 00:00:00", "Y-m-d H:i:s");
         $this->date_confirm_reg = Helper::getFormatDateForInsert("0000-00-00 00:00:00", "Y-m-d H:i:s");
+        $this->date_upload_avatar = Helper::getFormatDateForInsert("0000-00-00 00:00:00", "Y-m-d H:i:s");
     }
 
     public function getId()
@@ -358,6 +376,14 @@ class User extends EntityRepository implements UserInterface//, \Serializable
         $this->date_confirm_recovery = $date;
     }
 
+    public function getDateUploadAvatar() {
+        return $this->date_upload_avatar;
+    }
+
+    public function setDateUploadAvatar($date) {
+        $this->date_upload_avatar = $date;
+    }
+
     public function setUserInfo($userInfo) {
         $this->userInfo = $userInfo;
     }
@@ -384,6 +410,10 @@ class User extends EntityRepository implements UserInterface//, \Serializable
 
     public function getAvatar() {
         return $this->avatar;
+    }
+
+    public function setAvatar($val) {
+        return $this->avatar = $val;
     }
 
     public function setClientIdInfo($id) {

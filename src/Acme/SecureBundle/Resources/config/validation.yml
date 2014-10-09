@@ -54,8 +54,17 @@ Acme\SecureBundle\Entity\Author\BidFormValidate:
 Acme\SecureBundle\Entity\Author\CreatePsFormValidate:
     properties:
         fieldNum:
-          - Length: { min: 6, minMessage: "Слишком мало цифр!" }
+          - Length: { min: 6, max: 20, maxMessage: "Слишком много цифр!", minMessage: "Слишком мало цифр!" }
           - Regex: { pattern: "/^[\d]+$/u", message: "Только цифры!" }
           - NotBlank: { message: "Введите номер кошелька!" }
-        #fieldType:
-        #  - NotBlank: { message: "Введите номер кошелька!" }
+        fieldName:
+          - Length: { max: 20, maxMessage: "Слишком много символов!!" }
+        #fieldHiddenPsId:
+        #  - NotBlank: { message: "Ошибка!" }
+
+#Acme\SecureBundle\Entity\Author\MailOptionsFormValidate:
+#    properties:
+#        fieldOptions:
+#          - NotBlank: { message: "Ошибка!" }
+#          - NotNull: ~
+#          - Valid: ~

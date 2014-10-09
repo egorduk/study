@@ -8,9 +8,9 @@ use Helper\Helper;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="user_ps")
+ * @ORM\Table(name="mail_option")
  */
-class UserPs extends EntityRepository
+class MailOption extends EntityRepository
 {
     /**
      * @ORM\Id
@@ -20,19 +20,14 @@ class UserPs extends EntityRepository
     protected $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
      */
-    private $name;
+    private $new_orders;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
      */
-    private $num;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $date_create;
+    private $chat_response;
 
     /**
      * @ORM\Column(type="datetime")
@@ -40,37 +35,30 @@ class UserPs extends EntityRepository
     private $date_edit;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Acme\AuthBundle\Entity\User", inversedBy="link_user_ps", cascade={"merge"})
+     * @ORM\ManyToOne(targetEntity="Acme\AuthBundle\Entity\User", inversedBy="link_mail_option", cascade={"merge"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      **/
     private $user;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="TypePs", inversedBy="link_type_ps", cascade={"merge"})
-     * @ORM\JoinColumn(name="type_ps_id", referencedColumnName="id")
-     **/
-    private $type_ps;
-
 
     public function __construct(){
-        $this->date_create = new \DateTime();
         $this->date_edit = Helper::getFormatDateForInsert("0000-00-00 00:00:00", "Y-m-d H:i:s");
     }
 
-    public function setName($val) {
-        $this->name = $val;
+    public function setChatResponse($val) {
+        $this->chat_response = $val;
     }
 
-    public function getName() {
-        return $this->name;
+    public function getChatResponse() {
+        return $this->chat_response;
     }
 
-    public function setNum($val) {
-        $this->num = $val;
+    public function setNewOrders($val) {
+        $this->new_orders = $val;
     }
 
-    public function getNum() {
-        return $this->num;
+    public function getNewOrders() {
+        return $this->new_orders;
     }
 
     public function getId() {
@@ -87,14 +75,6 @@ class UserPs extends EntityRepository
 
     public function getUser() {
         return $this->user;
-    }
-
-    public function setTypePs($val) {
-        $this->type_ps = $val;
-    }
-
-    public function getTypePs() {
-        return $this->type_ps;
     }
 
     public function getDateEdit() {

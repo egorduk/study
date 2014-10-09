@@ -64,11 +64,6 @@ class UserInfo extends EntityRepository
      **/
     protected $link_user_info;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Acme\SecureBundle\Entity\UserPs", mappedBy="user_info")
-     **/
-    protected $link_user_ps;
-
 
     public function __construct()
     {
@@ -80,7 +75,6 @@ class UserInfo extends EntityRepository
         $this->surname = "";
         $this->lastname = "";
         $this->link_user_info = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->link_user_ps = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function getSkype()

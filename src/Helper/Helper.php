@@ -9,6 +9,7 @@ use Acme\SecureBundle\Entity\SelectBid;
 use Acme\SecureBundle\Entity\StatusOrder;
 use Acme\SecureBundle\Entity\UserBid;
 use Acme\SecureBundle\Entity\UserOrder;
+use Acme\SecureBundle\Entity\UserPs;
 use Acme\SecureBundle\Entity\WebchatMessage;
 use Proxies\__CG__\Acme\AuthBundle\Entity\User;
 use Proxies\__CG__\Acme\SecureBundle\Entity\Author\AuthorFile;
@@ -45,6 +46,7 @@ class Helper
     private static $_tableCancelRequest = 'AcmeSecureBundle:CancelRequest';
     private static $_tableUserPs = 'AcmeSecureBundle:UserPs';
     private static $_tableTypePs = 'AcmeSecureBundle:TypePs';
+    private static $_tableMailOption = 'AcmeSecureBundle:MailOption';
     private static $kernel;
 
     public function __construct() {
@@ -1291,8 +1293,14 @@ class Helper
     }
 
 
-    public static function getFullPathToAvatar($fileName) {
-        return '/study/web/uploads/avatars/' . $fileName;
+    public static function getFullPathToAvatar($user) {
+        $fileName = $user->getAvatar();
+        if ($fileName == 'default_m.jpg' || $fileName == 'default_w.jpg') {
+            return '/study/web/uploads/avatars/' . $fileName;
+        } else {
+            $userId = $user->getId();
+            return '/study/web/uploads/avatars/author/' . $userId . '/' . $fileName;
+        }
     }
 
     /** Select author bid and send notice mail to author
@@ -1639,9 +1647,8 @@ class Helper
 
 
     public static function getUserAvatar($user) {
-        $avatar = $user->getAvatar();
-        $pathAvatar = Helper::getFullPathToAvatar($avatar);
-        $userAvatar = "<img src='$pathAvatar' align='middle' alt='Аватар' width='110px' height='auto' class='thumbnail'>";
+        $pathAvatar = Helper::getFullPathToAvatar($user);
+        $userAvatar = "<img src='$pathAvatar' align='middle' alt='Аватар' width='100px' height='auto' class='thumbnail'>";
         return $userAvatar;
     }
 
@@ -1868,7 +1875,7 @@ class Helper
     }
 
 
-    public static function addAndGetFileDateUpload($fileUpload) {
+    public static function addNewOrderFile($fileUpload) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $file = new OrderFile();
         $file->setName($fileUpload->name);
@@ -1937,11 +1944,126 @@ class Helper
     }
 
 
-    public static function getUserPsByUserInfo($userInfo) {
+    public static function getUserPsByUser($user) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $userPs = $em->getRepository(self::$_tableUserPs)
-            ->findBy(array('user_info' => $userInfo));
+            ->findBy(array('user' => $user));
+        // ->array($sField => $sortingOrder);
         return $userPs;
+    }
+
+
+    public static function addNewUserPs($user, $postData) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $typePs = $em->getRepository(self::$_tableTypePs)
+            ->findOneByCode($postData['fieldType']);
+        $user = Helper::getUserById($user->getId());
+       // $em->detach($user);
+        //var_dump($user);die;
+        $userPs = new UserPs();
+        $userPs->setNum($postData['fieldNum']);
+        $userPs->setName($postData['fieldName']);
+        $userPs->setTypePs($typePs);
+        $userPs->setUser($user);
+        $em->persist($userPs);
+        $em->flush();
+    }
+
+
+    public static function getUserPsByPsId($user, $psId) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $userPs = $em->getRepository(self::$_tableUserPs)
+            ->findOneBy(array('user' => $user, 'id' => $psId));
+        if ($userPs) {
+            return true;
+        }
+        return false;
+    }
+
+
+    public static function deleteUserPs($psId) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $userPs = $em->getRepository(self::$_tableUserPs)
+            ->findOneById($psId);
+        $em->remove($userPs);
+        $em->flush();
+    }
+
+
+    public static function updateUserPs($psId, $postData) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $userPs = $em->getRepository(self::$_tableUserPs)
+            ->findOneById($psId);
+        $typePs = $em->getRepository(self::$_tableTypePs)
+            ->findOneByCode($postData['fieldType']);
+        $userPs->setNum($postData['fieldNum']);
+        $userPs->setName($postData['fieldName']);
+        $userPs->setTypePs($typePs);
+        $userPs->setDateEdit(new \DateTime());
+        $em->flush();
+    }
+
+
+    public static function updateMailOptions($user, $arrayOptions) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $mailOptions = $em->getRepository(self::$_tableMailOption)
+            ->findOneByUser($user);
+        $mailOptions->setChatResponse(0);
+        $mailOptions->setNewOrders(0);
+        if (is_array($arrayOptions)) {
+            if (in_array('cr', $arrayOptions)) {
+                $mailOptions->setChatResponse(1);
+            }
+            if (in_array('no', $arrayOptions)) {
+                $mailOptions->setNewOrders(1);
+            }
+        }
+        $mailOptions->setDateEdit(new \DateTime());
+        $em->flush();
+    }
+
+
+    public static function getMailOptions($user) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $mailOptions = $em->getRepository(self::$_tableMailOption)
+            ->findOneByUser($user);
+        $str = "";
+        if ($mailOptions->getChatResponse()) {
+            $str = 'cr';
+        }
+        if ($mailOptions->getNewOrders()) {
+            $str .= 'no';
+        }
+        return str_split($str, 2);
+    }
+
+
+    public static function updateUserAvatar($fileName, $user = null, $mode = null) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        if ($mode == 'controller') {
+            $user = self::getUserById($user->getId());
+        } else {
+            $session = self::getContainer()->get('session');
+            $user = self::getUserById($session->get('user'));
+        }
+        $user->setAvatar($fileName);
+        $user->setDateUploadAvatar(new \DateTime());
+        $em->flush();
+        return $user->getAvatar();
+    }
+
+
+    public static function getAvatarOption($user) {
+        $avatar = $user->getAvatar();
+        if (!empty($avatar)) {
+            $arrAvatars = ['man' => 'default_m.jpg', 'woman' => 'default_w.jpg'];
+            if ($key = array_search($avatar, $arrAvatars)) {
+                return $key;
+            }
+            return $avatar;
+        } else {
+            return 'Error';
+        }
     }
 
 }
