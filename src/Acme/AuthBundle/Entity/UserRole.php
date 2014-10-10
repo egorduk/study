@@ -25,6 +25,11 @@ class UserRole extends EntityRepository
     protected $name;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    protected $code;
+
+    /**
      * @ORM\OneToMany(targetEntity="User", mappedBy="role")
      **/
     protected $link_role;
@@ -53,5 +58,10 @@ class UserRole extends EntityRepository
     public function getName()
     {
         return $this->name;
+    }
+
+    public function getCode()
+    {
+        return $this->code;
     }
 }

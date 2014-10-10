@@ -89,14 +89,15 @@ class AuthorController extends Controller
                 if ($formProfile->get('save')->isClicked()) {
                     if ($formProfile->isValid()) {
                         $postData = $request->request->get('formProfile');
-                        //var_dump($postData);die;
                         Helper::updateUserInfo($postData, $userInfo);
                         $avatarOption = $postData['selectorAvatarOptions'];
                         if ($avatarOption == 'man' || $avatarOption == 'woman') {
                             $arrAvatarOptions = ['man' => 'default_m.jpg', 'woman' => 'default_w.jpg'];
                             $fileName = $arrAvatarOptions[$avatarOption];
-                            $newAvatar = Helper::updateUserAvatar($fileName, $user, $mode = 'controller');
-                            $user->setAvatar($newAvatar);
+                            Helper::updateUserAvatar($fileName, $user, $mode = 'controller');
+                            $folder = Helper::getAvatarFolder($user);
+                            Helper::deleteAllFilesFromFolder($folder);
+                            $user->setAvatar($fileName);
                         }
                         if (!$isAccessOrder) {
                             Helper::uploadAuthorFileInfo($user);
@@ -128,7 +129,12 @@ class AuthorController extends Controller
                     $session = new Session();
                     $session->set('user', $user->getId());
                     $session->save();
-                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'avatars/author/' . $orderNum, 'mode' => 'profile', 'allowed_extensions' => array('gif', 'png', 'jpeg', 'jpg')));
+                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'avatars/author/' . $orderNum,
+                        'mode' => 'profile',
+                        'allowed_extensions' => array('gif', 'png', 'jpeg', 'jpg'),
+                        //'max_number_of_files' => 1,
+                        'max_file_size' => 10485760 // 10MB
+                    ));
                     $session->remove('user');
                 }
             } elseif ($action == "order") {

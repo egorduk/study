@@ -2041,7 +2041,8 @@ class Helper
     public static function updateUserAvatar($fileName, $user = null, $mode = null) {
         $em = self::getContainer()->get('doctrine')->getManager();
         if ($mode == 'controller') {
-            $user = self::getUserById($user->getId());
+            //$user = self::getUserById($user->getId());
+            $user = $em->merge($user);
         } else {
             $session = self::getContainer()->get('session');
             $user = self::getUserById($session->get('user'));
@@ -2049,7 +2050,9 @@ class Helper
         $user->setAvatar($fileName);
         $user->setDateUploadAvatar(new \DateTime());
         $em->flush();
-        return $user->getAvatar();
+        /*try {
+            $em->flush();
+        } catch (\Exception $exc){die($exc);};*/
     }
 
 
@@ -2060,9 +2063,24 @@ class Helper
             if ($key = array_search($avatar, $arrAvatars)) {
                 return $key;
             }
-            return $avatar;
+            return 'custom';
         } else {
             return 'Error';
+        }
+    }
+
+
+    public static function deleteAllFilesFromFolder($dir) {
+        foreach(glob($dir . '*.*') as $file){
+            unlink($file);
+        }
+    }
+
+
+    public static function getAvatarFolder($user) {
+        $userRole = $user->getUserRole()->getCode();
+        if ($userRole == 'author') {
+            return $_SERVER['DOCUMENT_ROOT'] . '/study/web/uploads/avatars/author/' . $user->getId() . '/';
         }
     }
 

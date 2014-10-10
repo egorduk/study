@@ -33,9 +33,12 @@ class AuthorProfileForm extends AbstractType
             ->add('fieldIcq', 'text', array('label'=>'Icq', 'required' => false, 'data' => $options['data']->fieldIcq, 'attr' => array('class' => 'form-control', 'title' => 'Введите Ваш Icq', 'size' => 20, 'maxlength' => 10, 'placeholder' => 'Введите Icq...')))
             ->add('selectorCountry', 'choice', array(
                 'label'=>'Страна:',
+                'required' => true,
                 'data' => $options['data']->selectorCountry,
                 'mapped'   => false,
                 'choices' => $this->buildCountryChoices(),
+                'invalid_message' => 'Ошибка!',
+                'constraints' => new NotBlank(array('message' => 'Ошибка!'))
             ))
             ->add('save', 'submit', array('label'=>'Сохранить', 'attr' => array('class' => 'hidden')))
             ->add('reset', 'reset', array('label'=>'Очистить', 'attr' => array('class' => 'hidden')));
@@ -52,6 +55,7 @@ class AuthorProfileForm extends AbstractType
         $table2Objects = $table2Repository->findAll();
         foreach ($table2Objects as $table2Obj) {
             $choices[$table2Obj->getCode()] = $table2Obj->getName();
+            //$choices[$table2Obj->getCode()]['attr'] = 'duk';
         }
         return $choices;
     }

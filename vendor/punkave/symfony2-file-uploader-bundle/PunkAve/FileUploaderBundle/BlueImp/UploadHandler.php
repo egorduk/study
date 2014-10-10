@@ -23,8 +23,8 @@ class UploadHandler
         //var_dump($options);
         $this->options = array(
             'script_url' => $this->getFullUrl().'/',
-            'upload_dir' => dirname($_SERVER['SCRIPT_FILENAME']) . '/files/',
-            'upload_url' => $this->getFullUrl() . '/files/',
+            //'upload_dir' => dirname($_SERVER['SCRIPT_FILENAME']) . '/files/',
+            //'upload_url' => $this->getFullUrl() . '/files/',
             'icon_url' => '/study/web/bundles/images/icons/',
             'param_name' => 'files',
             'thumbnail_dir' => dirname($_SERVER['SCRIPT_FILENAME']),
@@ -98,21 +98,21 @@ class UploadHandler
     }
 
     protected function get_file_object($file_name) {
-        /*$file_path = $this->options['upload_dir'] . $file_name;
+        $file_path = $this->options['upload_dir'] . $file_name;
         if (is_file($file_path) && $file_name[0] !== '.') {
             $file = new \stdClass();
             $file->name = iconv('CP1251', 'UTF-8', $file_name);
             $file->size = filesize($file_path);
             $file->url = $this->options['upload_url'] . rawurlencode($file->name);
-            foreach($this->options['image_versions'] as $version => $options) {
+            /*foreach($this->options['image_versions'] as $version => $options) {
                 if (is_file($options['upload_dir'].$file_name)) {
                     $file->{$version.'_url'} = $options['upload_url'] . rawurlencode($file->name);
                 }
             }
-            $this->set_file_delete_url($file);
+            $this->set_file_delete_url($file);*/
             return $file;
         }
-        return null;*/
+        return null;
     }
 
     protected function get_file_objects() {
@@ -229,7 +229,7 @@ class UploadHandler
             $file->error = 'maxNumberOfFiles';
             return false;
         }
-        list($img_width, $img_height) = @getimagesize($uploaded_file);
+        /*list($img_width, $img_height) = @getimagesize($uploaded_file);
         if (is_int($img_width)) {
             if ($this->options['max_width'] && $img_width > $this->options['max_width'] || $this->options['max_height'] && $img_height > $this->options['max_height']) {
                 $file->error = 'maxResolution';
@@ -239,7 +239,7 @@ class UploadHandler
                 $file->error = 'minResolution';
                 return false;
             }
-        }
+        }*/
         return true;
     }
 
@@ -321,7 +321,8 @@ class UploadHandler
         $file = new \stdClass();
         $file->size = intval($size);
         //$file->type = Helper::getMimeType($type);
-        $file->type = Helper::getExtensionFile($file->name);
+        //$file->type = Helper::getExtensionFile($file->name);
+        $file->type = Helper::getExtensionFile($name);
         if ($this->options['mode'] == 'order') {
             $file->name = $this->trim_file_name($name, $type);
         } elseif ($this->options['mode'] == 'profile') {
@@ -392,7 +393,7 @@ class UploadHandler
                     }
                     $file->size = Helper::getSizeFile($file_size);
                     $file->date_upload = Helper::addNewOrderFile($file);
-                    return $file;
+                    //return $file;
                 } elseif ($this->options['mode'] == 'profile') {
                     $options = $this->options['avatar_param'];
                     list($img_width, $img_height) = @getimagesize($uploaded_file);
@@ -400,9 +401,8 @@ class UploadHandler
                     $options['height'] = $img_height;
                     $options['tmp'] = $uploaded_file;
                     $dir = $this->options['upload_dir'];
-                    foreach(glob($dir . '*.*') as $f){
-                        unlink($f);
-                    }
+                    //var_dump($dir);die;
+                    Helper::deleteAllFilesFromFolder($dir);
                     //var_dump($this->create_scaled_image($file->name, $options));die;
                     if ($this->create_scaled_image($file->name, $options)) {
                         Helper::updateUserAvatar($file->name);
@@ -411,13 +411,15 @@ class UploadHandler
                         $file->error = 'incorrectImage';
                     }
                     //return isset($file->error) ? $file->error : true;
-                    return $file;
+                    //var_dump($file);die;
+                    //return $file;
                 }
             } elseif ($this->options['discard_aborted_uploads']) {
                 unlink($file_path);
                 $file->error = 'abort';
             }
         }
+        return $file;
     }
 
     /*public function get() {
@@ -441,7 +443,6 @@ class UploadHandler
         }
         $upload = isset($_FILES[$this->options['param_name']]) ? $_FILES[$this->options['param_name']] : null;
         $info = array();
-        //var_dump($upload);
         if ($upload && is_array($upload['tmp_name'])) {
             // param_name is an array identifier like "files[]",
             // $_FILES is a multi-dimensional array:
@@ -470,6 +471,11 @@ class UploadHandler
         }*/
         header('Vary: Accept');
         $json = json_encode($info); //response about uploaded file
+        /*if ($this->options['mode'] == 'profile') {
+            if (count($upload['tmp_name']) > 1) {
+                $json = json_encode(end($info));
+            }
+        }*/
         $redirect = isset($_REQUEST['redirect']) ? stripslashes($_REQUEST['redirect']) : null;
         if ($redirect) {
             header('Location: '.sprintf($redirect, rawurlencode($json)));

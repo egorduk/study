@@ -140,10 +140,11 @@
                 a = e.timeStamp;
                 $("#btn-upload").show().click(function() {
                     if (data != null && a == e.timeStamp) {
-                        data.submit().done(function() {
-                            //data = null;
+                        data.submit().done(function(e, data) {
+                            //console.log(e);
+                            data = null;
                             var checkCompletedOrder = $("#check-completed-order");
-                            if (checkCompletedOrder[0].checked) {
+                            if (checkCompletedOrder.length > 0 && checkCompletedOrder[0].checked) {
                                 $.ajax({
                                     type: 'POST',
                                     data: 'action=completeOrder' + '&checkCompletedOrder=' + checkCompletedOrder[0].checked,
@@ -163,7 +164,7 @@
                             }
                             filesPreview.html('');
                         });
-                       // $(this).hide();
+                        $(this).hide();
                     }
                 });
             },
@@ -171,6 +172,10 @@
             change: function (e, data) {
                 //console.log(Blob);
             },
+
+            /*getSize: function (a) {
+
+            },*/
 
             // Other callbacks:
             // Callback for the submit event of each file upload:

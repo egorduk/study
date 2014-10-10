@@ -63,7 +63,7 @@ function PunkAveFileUploader(options)
     url: uploadUrl,
     dropZone: $el.find('[data-dropzone="1"]'),
     done: function (e, data) {
-       // console.log(data);
+      //console.log(data);
       if (data) {
         _.each(data.result, function(item) {
            // console.log(item);

@@ -135,7 +135,7 @@ class User extends EntityRepository implements UserInterface//, \Serializable
     protected $link_user_bid;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserRole", inversedBy="link_role", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="UserRole", inversedBy="link_role", cascade={"refresh"})
      * @ORM\JoinColumn(name="user_role_id", referencedColumnName="id")
      **/
     protected $role;

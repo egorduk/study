@@ -103,7 +103,7 @@
             <div class="row">
                 {% form_theme formProfile "TwigBundle::layout.html.twig" %}
                 <div class="col-xs-6 col-xs-offset-3">
-                    <p>{{ avatar | raw }}</p>
+                    <p id="user-avatar">{{ avatar | raw }}</p>
                     {{ form_start(formProfile) }}
                     <div class="input-group">
                         <label for="btn-change-avatar" class="btn btn-success"><span class="icon-trash-1">&nbspИзменить</span></label>
@@ -161,6 +161,7 @@
                     {% block form_mobile_tel %}
                         {{ form_label(formProfile.fieldMobilePhone) }}
                         {{ form_errors(formProfile.fieldMobilePhone) }}
+                        {{ form_errors(formProfile.selectorCountry) }}
                         <div class="row">
                             <div class="form-group col-xs-2">
                                 <div class="input-group">
@@ -213,7 +214,8 @@
                     $("#block-choose-woman-avatar").show();
                 }
                 function format(state) {
-                    return "<img title='" + state.text + "' class='flag' src='{{ asset('bundles/images/flags/') }}" + state.id.toLowerCase() + ".png'/>";
+                    console.log(state);
+                    return "<img title='" + state.text + "' class='flag' src='{{ asset('bundles/images/flags/') }}" + state.id.toLowerCase() + ".png'/> ()";
                 }
                 $("#formProfile_selectorCountry").select2({
                     minimumResultsForSearch: -1,
@@ -260,7 +262,7 @@
                         if (errorObj.error == 'maxNumberOfFiles') {
                             alert("Maximum uploaded files exceeded!");
                         } else if (errorObj.error == 'acceptFileTypes') {
-                            alert("Такой файл запрещен!");
+                            alert("Такой тип файла запрещен!");
                         } else if (errorObj.error == 'minFileSize') {
                             alert("Файл слишком маленький!");
                         } else if (errorObj.error == 'maxFileSize') {
@@ -270,9 +272,12 @@
                         }
                     }
                 });
-                $(".file-uploader-avatar").bind('fileuploadsubmit', function (e, data) {
-                   // alert("yo");
-                    //console.log(data);
+                $(".file-uploader-avatar").bind('fileuploaddone', function (e, data) {
+                    //window.location = location.href;
+                    //console.log(data.result[data.result.length-1]);
+                    var url = data.result[data.result.length-1].url;
+                    $("#user-avatar").find('img').attr('src', url);
+
                 });
                 manAvatarOption.click(function() {
                     $("#block-upload-avatar").hide();

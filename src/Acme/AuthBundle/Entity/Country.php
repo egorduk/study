@@ -29,6 +29,11 @@ class Country extends EntityRepository
     protected $code;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    protected $mobile_code;
+
+    /**
      * @ORM\OneToMany(targetEntity="Openid", mappedBy="country")
      **/
     protected $link_country;
@@ -72,6 +77,11 @@ class Country extends EntityRepository
     public function getCode()
     {
         return $this->code;
+    }
+
+    public function getMobileCode()
+    {
+        return $this->mobile_code;
     }
 
 }
