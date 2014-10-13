@@ -1023,49 +1023,55 @@ class Helper
                     );*/
                 $now = new \DateTime('now');
                 $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
+                    //->select('favorite_order AS favorite')
+                    //->select('MAX(ub.sum) AS max_sum, uo, ub.date_bid AS date_bid')
+                    //->select('fo')
+                    //->innerJoin('AcmeSecureBundle:UserBid', 'ub', 'WITH', 'ub.user_order = uo')
+                    //->innerJoin('AcmeSecureBundle:UserBid', 'ub')
+                    //->andWhere('ub.user_order = uo')
+                    //->innerJoin('AcmeSecureBundle:StatusOrder', 'so', 'WITH', 'so = uo.status_order')
+                    //->innerJoin(self::$_tableFavoriteOrder, 'fo')
+                    //->innerJoin(self::$_tableFavoriteOrder, 'uo')
                     ->innerJoin('uo.status_order', 'so')
                     ->andWhere('uo.is_show_author = 1')
                     ->andWhere('uo.is_show_client = 1')
                     ->andWhere('uo.date_expire > :now')
-                    ->andWhere("so.code = 'sa'")
-                    ->orWhere("so.code = 'ca'")
+                    ->andWhere('so.code IN(:code)')
+                    //->groupBy('ub.user_order')
+                    //->orWhere("so.code = 'ca'")
                     ->orderBy('uo.' . $sortingField, $sortingOrder)
                     ->setParameter('now', $now)
+                    ->setParameter('code', array_values(array('sa', 'ca')))
                     ->setFirstResult($firstRowIndex)
                     ->setMaxResults($rowsPerPage)
                     ->getQuery()
                     ->getResult();
-                $query = $em->createQuery("SELECT MAX(ub.sum) AS max_sum,uo.id AS order_id FROM AcmeSecureBundle:UserOrder AS uo
+                //var_dump(count($orders));die;
+                $query = $em->createQuery("SELECT MAX(ub.sum) AS max_sum, MIN(ub.sum) AS min_sum, uo.id AS order_id FROM AcmeSecureBundle:UserOrder AS uo
                     JOIN AcmeSecureBundle:UserBid AS ub WITH ub.user_order = uo
-                    WHERE uo.is_show_author = 1 AND uo.is_show_client = 1 AND ub.is_show_author = 1 AND ub.is_show_client = 1 AND uo.date_expire > :now
+                    WHERE uo.is_show_author = 1
+                    AND uo.is_show_client = 1
+                    AND ub.is_show_author = 1
+                    AND ub.is_show_client = 1
+                    AND uo.date_expire > :now
                     GROUP BY uo.id");
                 $query->setParameter('now', $now);
-                $maxBids = $query->getResult();
+                $bids = $query->getResult();
+                $favoriteOrders = $em->getRepository(self::$_tableFavoriteOrder)
+                    ->findByUser($user);
                 foreach($orders as $order) {
-                    foreach($maxBids as $bid) {
+                    foreach($bids as $bid) {
                         if ($order->getId() == $bid['order_id']) {
                             $order->setMaxSum($bid['max_sum']);
                             break;
                         }
                     }
-                }
-                $query = $em->createQuery("SELECT MIN(ub.sum) AS min_sum,uo.id AS order_id FROM AcmeSecureBundle:UserOrder AS uo
-                    JOIN AcmeSecureBundle:UserBid AS ub WITH ub.user_order = uo
-                    WHERE uo.is_show_author = 1 AND uo.is_show_client = 1 AND ub.is_show_author = 1 AND ub.is_show_client = 1 AND uo.date_expire > :now
-                    GROUP BY uo.id");
-                $query->setParameter('now', $now);
-                $minBids = $query->getResult();
-                foreach($orders as $order) {
-                    foreach($minBids as $bid) {
+                    foreach($bids as $bid) {
                         if ($order->getId() == $bid['order_id']) {
                             $order->setMinSum($bid['min_sum']);
                             break;
                         }
                     }
-                }
-                $favoriteOrders = $em->getRepository(self::$_tableFavoriteOrder)
-                    ->findByUser($user);
-                foreach($orders as $order) {
                     foreach($favoriteOrders as $favoriteOrder) {
                         if ($order->getId() == $favoriteOrder->getUserOrder()->getId()) {
                             $order->setIsFavorite(1);
@@ -1073,7 +1079,8 @@ class Helper
                         }
                     }
                 }
-                $userId = $user->getId();
+                
+                /*$userId = $user->getId();
                 $query = $em->getConnection()
                     ->prepare("SELECT * FROM (SELECT ub.user_id AS uid,ub.sum,uo.id AS order_id FROM user_bid AS ub JOIN user_order AS uo ON ub.user_order_id = uo.id JOIN `user` AS u ON ub.user_id = u.id WHERE ub.is_show_author = '1' AND u.id = '$userId' ORDER BY ub.date_bid DESC) AS t GROUP BY order_id");
                 $query->execute();
@@ -1086,7 +1093,7 @@ class Helper
                             break;
                         }
                     }
-                }
+                }*/
             }
             else {
                 $orders = $em->getRepository(self::$_tableUserOrder)
@@ -2043,9 +2050,11 @@ class Helper
         if ($mode == 'controller') {
             //$user = self::getUserById($user->getId());
             $user = $em->merge($user);
-        } else {
+        } elseif ($mode == 'uploader') {
             $session = self::getContainer()->get('session');
-            $user = self::getUserById($session->get('user'));
+            //$user = self::getUserById($session->get('user'));
+            $user = $session->get('user');
+            $user = $em->merge($user);
         }
         $user->setAvatar($fileName);
         $user->setDateUploadAvatar(new \DateTime());

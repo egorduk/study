@@ -127,7 +127,8 @@ class AuthorController extends Controller
                 } else {
                     $user = $this->get('security.context')->getToken()->getUser();
                     $session = new Session();
-                    $session->set('user', $user->getId());
+                    //$session->set('user', $user->getId());
+                    $session->set('user', $user);
                     $session->save();
                     $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'avatars/author/' . $orderNum,
                         'mode' => 'profile',
@@ -195,7 +196,7 @@ class AuthorController extends Controller
                         $postData['fieldComment'] = "";
                         $actionResponse = Helper::setAuthorBid($postData, $user, $order);
                         return new Response(json_encode(array('action' => $actionResponse)));
-                    } else {
+                    } elseif ($action = 'new') {
                         $postData = $request->request->all();
                         $curPage = $postData['page'];
                         $rowsPerPage = $postData['rows'];

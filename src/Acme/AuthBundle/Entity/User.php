@@ -141,7 +141,7 @@ class User extends EntityRepository implements UserInterface//, \Serializable
     protected $role;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserInfo", inversedBy="link_user_info", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="UserInfo", inversedBy="link_user_info", cascade={"refresh"})
      * @ORM\JoinColumn(name="user_info_id", referencedColumnName="id")
      **/
     protected $userInfo;

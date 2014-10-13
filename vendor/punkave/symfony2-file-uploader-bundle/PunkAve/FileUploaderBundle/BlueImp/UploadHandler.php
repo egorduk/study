@@ -405,7 +405,7 @@ class UploadHandler
                     Helper::deleteAllFilesFromFolder($dir);
                     //var_dump($this->create_scaled_image($file->name, $options));die;
                     if ($this->create_scaled_image($file->name, $options)) {
-                        Helper::updateUserAvatar($file->name);
+                        Helper::updateUserAvatar($file->name, null, 'uploader');
                     } else {
                         //unlink($file_path);
                         $file->error = 'incorrectImage';

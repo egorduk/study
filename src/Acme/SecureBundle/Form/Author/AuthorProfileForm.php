@@ -54,8 +54,8 @@ class AuthorProfileForm extends AbstractType
         $table2Repository = $container->get('doctrine')->getRepository('Acme\AuthBundle\Entity\Country');
         $table2Objects = $table2Repository->findAll();
         foreach ($table2Objects as $table2Obj) {
+            //$choices[$table2Obj->getCode()] = $table2Obj->getName() . ' +' . $table2Obj->getMobileCode();
             $choices[$table2Obj->getCode()] = $table2Obj->getName();
-            //$choices[$table2Obj->getCode()]['attr'] = 'duk';
         }
         return $choices;
     }

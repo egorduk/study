@@ -3,7 +3,7 @@
     {% block content %}
         <div class="container">
         <style>
-            .reset-margin-left{
+            .reset-padding {
                 padding-left: 0;
             }
             .thumbnail-image{
@@ -105,7 +105,7 @@
                 <div class="col-xs-6 col-xs-offset-3">
                     <p id="user-avatar">{{ avatar | raw }}</p>
                     {{ form_start(formProfile) }}
-                    <div class="input-group">
+                    <div class="input-group form-group">
                         <label for="btn-change-avatar" class="btn btn-success"><span class="icon-trash-1">&nbspИзменить</span></label>
                         <input type="button" id="btn-change-avatar" class="hidden">
                     </div>
@@ -130,31 +130,31 @@
                     </div>
                     {{ form_label(formProfile.fieldUsername) }}
                     {{ form_errors(formProfile.fieldUsername) }}
-                    <div class="input-group">
+                    <div class="input-group form-group">
                         <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
                         {{ form_widget(formProfile.fieldUsername) }}
                     </div>
                     {{ form_label(formProfile.fieldSurname) }}
                     {{ form_errors(formProfile.fieldSurname) }}
-                    <div class="input-group">
+                    <div class="input-group form-group">
                         <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
                         {{ form_widget(formProfile.fieldSurname) }}
                     </div>
                     {{ form_label(formProfile.fieldLastname) }}
                     {{ form_errors(formProfile.fieldLastname) }}
-                    <div class="input-group">
+                    <div class="input-group form-group">
                         <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
                         {{ form_widget(formProfile.fieldLastname) }}
                     </div>
                     {{ form_label(formProfile.fieldSkype) }}
                     {{ form_errors(formProfile.fieldSkype) }}
-                    <div class="input-group">
+                    <div class="input-group form-group">
                         <span class="input-group-addon"><i class="icon-skype-1"></i></span>
                         {{ form_widget(formProfile.fieldSkype) }}
                     </div>
                     {{ form_label(formProfile.fieldIcq) }}
                     {{ form_errors(formProfile.fieldIcq) }}
-                    <div class="input-group">
+                    <div class="input-group form-group">
                         <span class="input-group-addon"><i class="icon-icq"></i></span>
                         {{ form_widget(formProfile.fieldIcq) }}
                     </div>
@@ -168,7 +168,7 @@
                                     {{ form_widget(formProfile.selectorCountry) }}
                                 </div>
                             </div>
-                            <div class="form-group col-xs-10 reset-margin-left">
+                            <div class="form-group col-xs-10 reset-padding">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="icon-mobile-alt"></i></span>
                                     {{ form_widget(formProfile.fieldMobilePhone) }}
@@ -178,17 +178,16 @@
                     {% endblock %}
                     {{ form_label(formProfile.fieldStaticPhone) }}
                     {{ form_errors(formProfile.fieldStaticPhone) }}
-                    <div class="input-group">
+                    <div class="input-group form-group">
                         <span class="input-group-addon"><i class="icon-phone-3"></i></span>
                         {{ form_widget(formProfile.fieldStaticPhone) }}
                     </div>
-                    </br>
                     {% if (user.isaccessorder == 0) %}
                         <div class="input-group">
                             <div class="file-uploader"></div>
                         </div>
                     {% endif %}
-                    <div class="input-group">
+                    <div class="input-group form-group">
                         <label for="formProfile_save" class="btn btn-success"><span class="icon-floppy">&nbspСохранить</span></label>
                         {{ form_widget(formProfile.save) }}
                         <label for="formProfile_reset" class="btn btn-success"><span class="icon-trash-1">&nbspОчистить</span></label>
@@ -214,8 +213,10 @@
                     $("#block-choose-woman-avatar").show();
                 }
                 function format(state) {
-                    console.log(state);
-                    return "<img title='" + state.text + "' class='flag' src='{{ asset('bundles/images/flags/') }}" + state.id.toLowerCase() + ".png'/> ()";
+                    /*var a = state.text;
+                    var ind = a.indexOf('+');
+                    var code = a.substring(ind);*/
+                    return "<img title='" + state.text + "' class='flag' src='{{ asset('bundles/images/flags/') }}" + state.id.toLowerCase() + ".png'/>";
                 }
                 $("#formProfile_selectorCountry").select2({
                     minimumResultsForSearch: -1,
