@@ -165,20 +165,14 @@ class AuthorController extends Controller
     public function ordersAction(Request $request, $type)
     {
         $user = $this->get('security.context')->getToken()->getUser();
-        //var_dump($user);die;
-        //$userId = 1;
-        //$user = Helper::getUserById($userId);
         $showWindow = false;
-        //$allowAccess = Helper::checkUserAccessForOrders($user);
-        //var_dump($user->getIsAccessOrder());
         if ($user->getIsAccessOrder()) {
             if ($type == "new") {
                 if ($request->isXmlHttpRequest()) {
                     $action = $request->request->get('action');
                     if ($action == 'favoriteOrder') {
                         $orderId = $request->request->get('orderId');
-                        $type = "favorite";
-                        $actionResponse = Helper::favoriteOrder($orderId, $user, $type);
+                        $actionResponse = Helper::favoriteOrder($orderId, $user, "favorite");
                         return new Response(json_encode(array('action' => $actionResponse)));
                     }
                     elseif ($action == 'unfavoriteOrder') {
@@ -209,9 +203,9 @@ class AuthorController extends Controller
                             $sData = $postData['searchString'];
                             $sField = $postData['searchField'];
                         }
-                        $countOrders = Helper::getCountOrdersForAuthorGrid();
+                        $countOrders = Helper::getCountNewOrdersForAuthorGrid();
                         $firstRowIndex = $curPage * $rowsPerPage - $rowsPerPage;
-                        $orders = Helper::getClientOrdersForAuthorGrid($sOper, $sField, $sData, $firstRowIndex, $rowsPerPage, $sortingField, $sortingOrder, $user);
+                        $orders = Helper::getNewOrdersForAuthorGrid($sOper, $sField, $sData, $firstRowIndex, $rowsPerPage, $sortingField, $sortingOrder, $user);
                         $response = new Response();
                         $response->total = ceil($countOrders / $rowsPerPage);
                         $response->records = $countOrders;
@@ -459,32 +453,29 @@ class AuthorController extends Controller
                 return $this->render(
                     'AcmeSecureBundle:Author:order_finish.html.twig', array('order' => $order, 'client' => $clientLink, 'user' => $user)
                 );
-            }
-            else {
+            } else {
                 $bidValidate = new BidFormValidate();
                 $showDialogConfirmSelection = Helper::getClientSelectedBid($user, $order);
                 $formBid = $this->createForm(new BidForm(), $bidValidate);
                 if (is_numeric($num) && $num > 0 && $request->isXmlHttpRequest() && isset($postDataFormBid)) {
-                    //else {
-                        $formBid->handleRequest($request);
-                        if ($formBid->isValid()) {
-                            $postData = $request->request->get('formBid');
-                            Helper::setAuthorBid($postData, $user, $order);
-                            return new Response(json_encode(array('response' => 'valid')));
-                        } else {
-                            $errors = [];
-                            $arrayResponse = [];
-                            foreach ($formBid as $fieldName => $formField) {
-                                $errors[$fieldName] = $formField->getErrors();
-                            }
-                            foreach ($errors as $index => $error) {
-                                if (isset($error[0])) {
-                                    $arrayResponse[$index] = $error[0]->getMessage();
-                                }
-                            }
-                            return  new Response(json_encode(array('response' => $arrayResponse)));
+                    $formBid->handleRequest($request);
+                    if ($formBid->isValid()) {
+                        $postData = $request->request->get('formBid');
+                        Helper::setAuthorBid($postData, $user, $order);
+                        return new Response(json_encode(array('response' => 'valid')));
+                    } else {
+                        $errors = [];
+                        $arrayResponse = [];
+                        foreach ($formBid as $fieldName => $formField) {
+                            $errors[$fieldName] = $formField->getErrors();
                         }
-                    //}
+                        foreach ($errors as $index => $error) {
+                            if (isset($error[0])) {
+                                $arrayResponse[$index] = $error[0]->getMessage();
+                            }
+                        }
+                        return  new Response(json_encode(array('response' => $arrayResponse)));
+                    }
                 }
                 return $this->render(
                     'AcmeSecureBundle:Author:order_select.html.twig', array('formBid' => $formBid->createView(), 'files' => $filesOrder, 'order' => $order, 'client' => $clientLink, 'bids' => "", 'showDialogConfirmSelection' => $showDialogConfirmSelection)

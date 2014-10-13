@@ -599,12 +599,14 @@ class Helper
     }
 
 
-    public static function getCountOrdersForAuthorGrid() {
+    public static function getCountNewOrdersForAuthorGrid() {
         $em = self::getContainer()->get('doctrine')->getManager();
         $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
             ->andWhere('uo.is_show_author = 1')
             ->andWhere('uo.is_show_client = 1')
             ->andWhere('uo.date_expire > :now')
+            ->innerJoin('uo.status_order', 'so')
+            ->andWhere("so.code = 'sa'")
             ->setParameter('now', new \DateTime('now'))
             ->getQuery()
             ->getResult();
@@ -924,7 +926,7 @@ class Helper
     }
 
 
-    public static function getClientOrdersForAuthorGrid($sOper = null, $sField = null, $sData = null, $firstRowIndex, $rowsPerPage, $sortingField, $sortingOrder, $user) {
+    public static function getNewOrdersForAuthorGrid($sOper = null, $sField = null, $sData = null, $firstRowIndex, $rowsPerPage, $sortingField, $sortingOrder, $user) {
         $em = self::getContainer()->get('doctrine')->getManager();
         if ($sField != null && $sOper != null && $sData != null) {
             if ($sField == "subject_order") {
@@ -1041,7 +1043,7 @@ class Helper
                     //->orWhere("so.code = 'ca'")
                     ->orderBy('uo.' . $sortingField, $sortingOrder)
                     ->setParameter('now', $now)
-                    ->setParameter('code', array_values(array('sa', 'ca')))
+                    ->setParameter('code', array_values(array('sa')))
                     ->setFirstResult($firstRowIndex)
                     ->setMaxResults($rowsPerPage)
                     ->getQuery()
@@ -1302,7 +1304,7 @@ class Helper
 
     public static function getFullPathToAvatar($user) {
         $fileName = $user->getAvatar();
-        if ($fileName == 'default_m.jpg' || $fileName == 'default_w.jpg') {
+        if ($fileName == 'default_m.jpg' || $fileName == 'default_w.jpg' || $fileName == 'default.png') {
             return '/study/web/uploads/avatars/' . $fileName;
         } else {
             $userId = $user->getId();
@@ -1505,23 +1507,26 @@ class Helper
 
     public static function favoriteOrder($orderId, $user, $type) {
         $em = self::getContainer()->get('doctrine')->getManager();
-        $order = $em->getRepository(self::$_tableUserOrder)
-            ->findOneById($orderId);
-        if ($order) {
-            if ($type == "favorite") {
-                $favoriteOrder = new FavoriteOrder();
-                $favoriteOrder->setUserOrder($order);
-                $favoriteOrder->setUser($user);
-                $em->persist($favoriteOrder);
-                $em->flush();
+        if ($type == "favorite" || $type == "unfavorite") {
+            $order = $em->getRepository(self::$_tableUserOrder)
+                ->findOneById($orderId);
+            if ($order) {
+                $user = $em->merge($user);
+                if ($type == "favorite") {
+                    $favoriteOrder = new FavoriteOrder();
+                    $favoriteOrder->setUserOrder($order);
+                    $favoriteOrder->setUser($user);
+                    $em->persist($favoriteOrder);
+                    $em->flush();
+                }
+                else {
+                    $favoriteOrder = $em->getRepository(self::$_tableFavoriteOrder)
+                        ->findOneBy(array('user_order' => $order, 'user' => $user));
+                    $em->remove($favoriteOrder);
+                    $em->flush();
+                }
+                return true;
             }
-            else {
-                $favoriteOrder = $em->getRepository(self::$_tableFavoriteOrder)
-                    ->findOneBy(array('user_order' => $order, 'user' => $user));
-                $em->remove($favoriteOrder);
-                $em->flush();
-            }
-            return true;
         }
         return false;
     }
@@ -1668,17 +1673,16 @@ class Helper
             if ($bid) {
                 $user = $bid->getUser();
                 $login = $user->getLogin();
-                $authorAvatar = $user->getAvatar();
+                //$authorAvatar = $user->getAvatar();
                 $authorId = $user->getId();
-                $pathAvatar = Helper::getFullPathToAvatar($authorAvatar);
+                $pathAvatar = Helper::getFullPathToAvatar($user);
                 $url = $container->get('router')->generate('secure_author_action', array('mode' => 'info', 'id' => $authorId));
             } else {
                 return null;
             }
-        } else {
+        } elseif ($role == "client") {
             $login = $order->getUser()->getLogin();
-            $clientAvatar = $order->getUser()->getAvatar();
-            $pathAvatar = Helper::getFullPathToAvatar($clientAvatar);
+            $pathAvatar = Helper::getFullPathToAvatar($order->getUser());
             $clientId = $order->getUser()->getId();
             $url = $container->get('router')->generate('secure_client_action', array('mode' => 'info', 'id' => $clientId));
         }
@@ -2091,6 +2095,14 @@ class Helper
         if ($userRole == 'author') {
             return $_SERVER['DOCUMENT_ROOT'] . '/study/web/uploads/avatars/author/' . $user->getId() . '/';
         }
+    }
+
+
+    public static function getOrderIdByOrderNum($orderNum) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $order = $em->getRepository(self::$_tableUserOrder)
+            ->findOneByNum($orderNum);
+        return $order->getId();
     }
 
 }

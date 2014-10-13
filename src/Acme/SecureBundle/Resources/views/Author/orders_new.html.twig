@@ -59,6 +59,12 @@
                 /*#gbox_listOrders {
                     width: 1440px;
                 }*/
+                .row label.required:after {
+                    content: "*";
+                }
+                #dialog-message-bid-order {
+                    height: auto !important;
+                }
             </style>
         <div class="">
             <div class="row">
@@ -80,7 +86,7 @@
                 <div id="dialog-message-bid-order" title="Поставить ставку">
                     <label for="bid-sum">Цена</label>
                     <div class="input-group">
-                        <input type="text" name="bid-sum" id="bid-sum" required placeholder="Введите цену..." class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="6">
+                        <input type="text" name="bid-sum" id="bid-sum" required placeholder="Введите цену" class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="6">
                         <span class="input-group-addon"><i class="icon-rouble"></i></span>
                     </div>
                     <label for="bid-in-date">В срок заказчика</label>
@@ -89,7 +95,12 @@
                     </div>
                     <label for="bid-day">Дней на выполнение</label>
                     <div class="input-group">
-                        <input type="text" name="bid-day" id="bid-day" required placeholder="Введите количество дней..." class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="3">
+                        <input type="text" name="bid-day" id="bid-day" required placeholder="Введите количество дней" class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="3">
+                        <span class="input-group-addon"><i class="icon-clock-5"></i></span>
+                    </div>
+                    <label for="bid-comment">Комментарий</label>
+                    <div class="input-group">
+                        <input type="text" name="bid-comment" id="bid-comment" required placeholder="Введите комментарий" class="form-control" maxlength="3">
                         <span class="input-group-addon"><i class="icon-clock-5"></i></span>
                     </div>
                 </div>
@@ -165,8 +176,8 @@
                                         type: 'POST',
                                         data: 'orderId=' + rowId + '&action=favoriteOrder',
                                         success: function(response) {
-                                            var resposeObject = window.JSON.parse(response);
-                                            if (resposeObject.action) {
+                                            var responseObject = window.JSON.parse(response);
+                                            if (responseObject.action) {
                                                 //grid.trigger('reloadGrid');
                                                 actionFavoriteOrder(row, "favorite");
                                             }
@@ -181,9 +192,8 @@
                                         type: 'POST',
                                         data: 'orderId=' + rowId + '&action=unfavoriteOrder',
                                         success: function(response) {
-                                            var resposeObject = window.JSON.parse(response);
-                                            if (resposeObject.action) {
-                                                //grid.trigger('reloadGrid');
+                                            var responseObject = window.JSON.parse(response);
+                                            if (responseObject.action) {
                                                 actionFavoriteOrder(row, "unfavorite");
                                             }
                                         }
@@ -193,9 +203,7 @@
                             $(".bid-order").click(function(e) {
                                 var rowId = getRowId(e);
                                 if (rowId) {
-                                    var bidSum = $("#bid-sum");
-                                    var bidDay = $("#bid-day");
-                                    var bidInDate = $("#bid-in-date");
+                                    var bidSum = $("#bid-sum"), bidDay = $("#bid-day"), bidInDate = $("#bid-in-date");
                                     $("#dialog-message-bid-order").dialog({
                                         modal: true,
                                         resizable: false,
@@ -223,12 +231,12 @@
                                                         success: function(response) {
                                                             var responseObject = window.JSON.parse(response);
                                                             if (responseObject.action) {
-                                                                $("#dialog-message-bid-order").dialog('close');
+                                                                /*$("#dialog-message-bid-order").dialog('close');
                                                                 grid.trigger('reloadGrid');
                                                                 $("#modal-window").css({'display':'block'});
                                                                 setTimeout(function() {
                                                                     closeMessage($('#modal-window'));
-                                                                }, 2000);
+                                                                }, 2000);*/
                                                             }
                                                         }
                                                     });
@@ -269,8 +277,7 @@
                             if (iCol != 11) {
                                 //var rowData = grid.getRowData(rowid);
                                 //var num = rowData['num'];
-                                num = $("tr.jqgrow#" + rowid).find('td').eq(1).attr('title');
-                                var url = "{{ path("secure_author_order", {'num': 'num'}) }}";
+                                var num = $("tr.jqgrow#" + rowid).find('td').eq(1).find('span')[0].innerHTML, url = "{{ path("secure_author_order", {'num': 'num'}) }}";
                                 location.href = url.replace("num", num);
                             }
                         }
@@ -297,9 +304,7 @@
                             blockUnfavoriteOrder.hide();
                         }
                     }
-                    var fieldSum = $("#bid-sum");
-                    var fieldDay = $("#bid-day");
-                    var isClientDate = $("#bid-in-date");
+                    var fieldSum = $("#bid-sum"), fieldDay = $("#bid-day"), isClientDate = $("#bid-in-date");
                     if (isClientDate.prop("checked")) {
                         fieldDay.prop('disabled', true);
                     } else {

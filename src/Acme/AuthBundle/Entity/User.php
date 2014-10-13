@@ -195,7 +195,7 @@ class User extends EntityRepository implements UserInterface//, \Serializable
         $this->recovery_password = '';
         $this->hash_code = '';
         $this->account = 0;
-        $this->avatar = "default.jpg";
+        $this->avatar = "default.png";
         $this->is_access_order = 0;
         $this->link_user_order = new \Doctrine\Common\Collections\ArrayCollection();
         $this->link_openid = new \Doctrine\Common\Collections\ArrayCollection();

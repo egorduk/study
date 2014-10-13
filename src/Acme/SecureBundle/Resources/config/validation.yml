@@ -42,7 +42,7 @@ Acme\SecureBundle\Entity\Client\CreateOrderFormValidate:
 Acme\SecureBundle\Entity\Author\BidFormValidate:
     properties:
         fieldSum:
-          - Length: { min: 1, minMessage: "Слишком маленькая сумма!" }
+          - Length: { min: 1, minMessage: "Слишком маленькая сумма!", max: 6, maxMessage: "Слишком большая сумма!" }
           - Regex: { pattern: "/^[\d]+$/u", message: "Только цифры!" }
           - NotBlank: { message: "Введите сумму!" }
         fieldDay:
