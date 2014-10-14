@@ -168,6 +168,8 @@ class AuthorController extends Controller
         $showWindow = false;
         if ($user->getIsAccessOrder()) {
             if ($type == "new") {
+                $bidValidate = new BidFormValidate();
+                $formBid = $this->createForm(new BidForm(), $bidValidate);
                 if ($request->isXmlHttpRequest()) {
                     $action = $request->request->get('action');
                     if ($action == 'favoriteOrder') {
@@ -182,14 +184,33 @@ class AuthorController extends Controller
                         return new Response(json_encode(array('action' => $actionResponse)));
                     }
                     elseif ($action == 'newBid') {
-                        $orderId = $request->request->get('orderId');
+                            $formBid->handleRequest($request);
+                            if ($formBid->isValid()) {
+                                $postData = $request->request->get('formBid');
+                                //Helper::setAuthorBid($postData, $user, $order);
+                                return new Response(json_encode(array('response' => 'valid')));
+                            } else {
+                                $errors = [];
+                                $arrayResponse = [];
+                                foreach ($formBid as $fieldName => $formField) {
+                                    $errors[$fieldName] = $formField->getErrors();
+                                }
+                                foreach ($errors as $index => $error) {
+                                    if (isset($error[0])) {
+                                        $arrayResponse[$index] = $error[0]->getMessage();
+                                    }
+                                }
+                                return  new Response(json_encode(array('response' => $arrayResponse)));
+                            }
+
+                        /*$orderId = $request->request->get('orderId');
                         $order = Helper::getOrderById($orderId);
                         $postData = [];
                         $postData['fieldSum'] = $request->request->get('bidSum');
                         $postData['fieldDay'] = $request->request->get('bidDay');
-                        $postData['fieldComment'] = "";
+                        $postData['fieldComment'] = $request->request->get('bidComment');
                         $actionResponse = Helper::setAuthorBid($postData, $user, $order);
-                        return new Response(json_encode(array('action' => $actionResponse)));
+                        return new Response(json_encode(array('action' => $actionResponse)));*/
                     } elseif ($action = 'new') {
                         $postData = $request->request->all();
                         $curPage = $postData['page'];
@@ -242,7 +263,7 @@ class AuthorController extends Controller
                     }
                 }
                 return $this->render(
-                    'AcmeSecureBundle:Author:orders_new.html.twig', array('showWindow' => $showWindow)
+                    'AcmeSecureBundle:Author:orders_new.html.twig', array('showWindow' => $showWindow, 'formBid' => $formBid->createView())
                 );
             } elseif ($type == "favorite") {
                 if ($request->isXmlHttpRequest()) {

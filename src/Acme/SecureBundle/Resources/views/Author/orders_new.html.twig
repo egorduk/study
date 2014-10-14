@@ -65,6 +65,9 @@
                 #dialog-message-bid-order {
                     height: auto !important;
                 }
+                .error{
+                    color: red;
+                }
             </style>
         <div class="">
             <div class="row">
@@ -83,7 +86,7 @@
                 </div>
             </div>
             <div class="row">
-                <div id="dialog-message-bid-order" title="Поставить ставку">
+                <!--<div id="dialog-message-bid-order" title="Поставить ставку">
                     <label for="bid-sum">Цена</label>
                     <div class="input-group">
                         <input type="text" name="bid-sum" id="bid-sum" required placeholder="Введите цену" class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="6">
@@ -100,9 +103,46 @@
                     </div>
                     <label for="bid-comment">Комментарий</label>
                     <div class="input-group">
-                        <input type="text" name="bid-comment" id="bid-comment" required placeholder="Введите комментарий" class="form-control" maxlength="3">
+                        <input type="text" name="bid-comment" id="bid-comment" placeholder="Введите комментарий" class="form-control" maxlength="50">
                         <span class="input-group-addon"><i class="icon-clock-5"></i></span>
                     </div>
+                </div>-->
+                <div id="dialog-message-bid-order" title="Поставить ставку">
+                    {% form_theme formBid "TwigBundle::layout.html.twig" %}
+                    {{ form_start(formBid, {'attr': {'id' : 'formBid'}}) }}
+                    <div class="form-group">
+                        {{ form_label(formBid.fieldSum) }}
+                        {{ form_errors(formBid.fieldSum) }}
+                        <div class="input-group">
+                            {{ form_widget(formBid.fieldSum) }}
+                            <span class="input-group-addon"><i class=" icon-rouble"></i></span>
+                        </div>
+                        {{ form_label(formBid.fieldDay) }}
+                        {{ form_errors(formBid.fieldDay) }}
+                        <div class="input-group">
+                            {{ form_widget(formBid.fieldDay) }}
+                            <span class="input-group-addon"><i class="icon-clock-5"></i></span>
+                        </div>
+                        {{ form_label(formBid.isClientDate) }}
+                        {{ form_errors(formBid.isClientDate) }}
+                        <div class="input-group">
+                            {{ form_widget(formBid.isClientDate) }}
+                        </div>
+                        {{ form_label(formBid.fieldComment) }}
+                        {{ form_errors(formBid.fieldComment) }}
+                        <div class="input-group">
+                            {{ form_widget(formBid.fieldComment) }}
+                            <span class="input-group-addon"><i class="icon-pencil-6"></i></span>
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <label for="formBid_bid" class="btn btn-success"><span class="icon-hammer">&nbspПоставить</span></label>
+                            {{ form_widget(formBid.bid) }}
+                            <label for="formBid_cancel" class="btn btn-success"><span class="icon-cancel-2">&nbspОтмена</span></label>
+                            {{ form_widget(formBid.cancel) }}
+                        </div>
+                    </div>
+                    {{ form_end(formBid) }}
                 </div>
             </div>
             <div class="row">
@@ -200,61 +240,79 @@
                                     });
                                 }
                             });
-                            $(".bid-order").click(function(e) {
-                                var rowId = getRowId(e);
+                            $(".bid-order").on('click', function(e) {
+                                var rowId = getRowId(e), bidSum = $("#formBid_fieldSum"), bidDay = $("#formBid_fieldDay"), bidInDate = $("#formBid_isClientDate"), bidComment = $("#formBid_fieldComment");
                                 if (rowId) {
-                                    var bidSum = $("#bid-sum"), bidDay = $("#bid-day"), bidInDate = $("#bid-in-date");
                                     $("#dialog-message-bid-order").dialog({
                                         modal: true,
                                         resizable: false,
-                                        height: 340,
+                                        // height: 340,
                                         width: 350,
-                                        buttons: {
-                                            "Поставить": function() {
-                                                var error = false;
-                                                if (!isNormalInteger(bidSum.val())) {
-                                                    error = true;
-                                                    bidSum.addClass('bootstrap-error').tooltip('show');
-                                                } else {
-                                                    bidSum.removeClass('bootstrap-error').tooltip('hide');
-                                                }
-                                                if (!isNormalInteger(bidDay.val()) && !bidInDate.prop('checked')) {
-                                                    error = true;
-                                                    bidDay.addClass('bootstrap-error').tooltip('show');
-                                                } else {
-                                                    bidDay.removeClass('bootstrap-error').tooltip('hide');
-                                                }
-                                                if (!error) {
-                                                    $.ajax({
-                                                        type: 'POST',
-                                                        data: 'orderId=' + rowId + '&bidSum=' + bidSum.val() + '&bidDay=' + bidDay.val() + '&bidIsClientDate=' + bidInDate.prop('checked') + '&action=newBid',
-                                                        success: function(response) {
-                                                            var responseObject = window.JSON.parse(response);
-                                                            if (responseObject.action) {
-                                                                /*$("#dialog-message-bid-order").dialog('close');
-                                                                grid.trigger('reloadGrid');
-                                                                $("#modal-window").css({'display':'block'});
-                                                                setTimeout(function() {
-                                                                    closeMessage($('#modal-window'));
-                                                                }, 2000);*/
-                                                            }
-                                                        }
-                                                    });
-                                                }
-                                            },
-                                            "Отмена": function() {
-                                                $(this).dialog("close");
-                                            }
-                                        },
                                         close: function() {
                                             bidInDate.prop('checked', false);
                                             bidDay.removeClass('bootstrap-error').prop('disabled', false).val("").tooltip('hide');
                                             bidSum.removeClass('bootstrap-error').val("").tooltip('hide');
+                                            bidComment.val("");
                                         }
                                     });
+
                                 }
+                                $("#formBid_cancel").on('click', function() {
+                                    $("#dialog-message-bid-order").dialog('close');
+                                });
+                                $("#formBid_bid").on('click', function() {
+                                    var error = false;
+                                    if (!isNormalInteger(bidSum.val())) {
+                                        error = true;
+                                        bidSum.addClass('bootstrap-error').tooltip('show');
+                                    } else {
+                                        bidSum.removeClass('bootstrap-error').tooltip('hide');
+                                    }
+                                    if (!isNormalInteger(bidDay.val()) && !bidInDate.prop('checked')) {
+                                        error = true;
+                                        bidDay.addClass('bootstrap-error').tooltip('show');
+                                    } else {
+                                        bidDay.removeClass('bootstrap-error').tooltip('hide');
+                                    }
+                                    if (!error) {
+                                        var formBid = $("#formBid");
+                                        $.ajax({
+                                            type: 'POST',
+                                            //data: 'orderId=' + rowId + '&bidSum=' + bidSum.val()+ '&bidComment=' + bidComment.val() + '&bidDay=' + bidDay.val() + '&bidIsClientDate=' + bidInDate.prop('checked') + '&action=newBid',
+                                            data: formBid.serialize() + '&action=newBid',
+                                            success: function(response) {
+                                                var responseObject = window.JSON.parse(response);
+                                                if (responseObject.response == 'valid') {
+                                                    /*$("#dialog-message-bid-order").dialog('close');
+                                                    grid.trigger('reloadGrid');
+                                                    $("#modal-window").css({'display':'block'});
+                                                    setTimeout(function() {
+                                                        closeMessage($('#modal-window'));
+                                                    }, 2000);*/
+                                                } else {
+                                                    $(".error").remove();
+                                                    $.each(responseObject.response, function(index, value) {
+                                                        var selector  = "#formBid_" + index;
+                                                        $(selector).parent().before("<p><span class='icon-warning error'>" + value + "</span></p>");
+                                                    });
+                                                }
+                                            }
+                                        });
+                                    }
+                                });
+                                if (bidInDate.prop("checked")) {
+                                    bidDay.prop('disabled', true);
+                                } else {
+                                    bidDay.prop('disabled', false);
+                                }
+                                bidInDate.change(function() {
+                                    if ($(this).prop("checked")) {
+                                        bidDay.removeClass('bootstrap-error').prop('disabled', true).tooltip('hide');
+                                    } else {
+                                        bidDay.prop('disabled', false).val("");
+                                    }
+                                });
                             });
-                            //$(".ui-widget-content td").removeAttr('title');
                             var grids = grid.getDataIDs(),
                                     gridsLength = grids.length;
                             for (var i = 0; i < gridsLength; i++) {
@@ -284,6 +342,7 @@
                     }).navGrid('#pagerOrders',{view:false, search:true, searchtext: 'Поиск', del:false, add:false, edit:false, refresh:true, refreshtext: 'Обновить'},
                             {},{},{},{},{}
                     );
+                    //$(".ui-widget-content td").removeAttr('title');
                     grid.setCaption('Таблица новых заказов ' + '<span id="help-popover" class="icon-help-circled" data-container="body" data-trigger="click" data-placement="bottom"></span>');
                     function closeMessage(el) {
                         el.addClass('is-hidden').css({'display':'none'});
@@ -304,19 +363,6 @@
                             blockUnfavoriteOrder.hide();
                         }
                     }
-                    var fieldSum = $("#bid-sum"), fieldDay = $("#bid-day"), isClientDate = $("#bid-in-date");
-                    if (isClientDate.prop("checked")) {
-                        fieldDay.prop('disabled', true);
-                    } else {
-                        fieldDay.prop('disabled', false);
-                    }
-                    isClientDate.change(function() {
-                        if ($(this).prop("checked")) {
-                            fieldDay.removeClass('bootstrap-error').prop('disabled', true).tooltip('hide');
-                        } else {
-                            fieldDay.prop('disabled', false).val("");
-                        }
-                    });
                     function isNormalInteger(str) {
                         return /^\+?([1-9]\d*)$/.test(str);
                     }
