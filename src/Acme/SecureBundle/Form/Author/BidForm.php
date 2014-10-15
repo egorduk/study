@@ -4,6 +4,9 @@ namespace Acme\SecureBundle\Form\Author;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 
 class BidForm extends AbstractType
@@ -15,6 +18,15 @@ class BidForm extends AbstractType
                 ->add('isClientDate', 'checkbox', array('label'=>'В срок заказчика',/* 'data' => filter_var($options['data']->is_client_date, FILTER_VALIDATE_BOOLEAN),*/ 'required' => false, 'attr' => array('class' => '', 'title' => 'Установите флажок, если Вы согласны выполнить в указанный срок заказчика')))
                 ->add('bid', 'button', array('label'=>'', 'attr' => array('class' => 'hidden')))
                 ->add('cancel', 'button', array('label'=>'', 'attr' => array('class' => 'hidden')));
+
+        $builder->addEventListener(FormEvents::POST_BIND, function(FormEvent $event) {
+            $form = $event->getForm();
+            $fieldIsClientDate = $form->get('isClientDate')->getData();
+            $fieldDay = $form->get('fieldDay')->getData();
+            if (isset($fieldIsClientDate) && $fieldIsClientDate != null && $fieldDay != null && is_numeric($fieldDay)) {
+                $form->get('fieldDay')->addError(new FormError('Ошибка!'));
+            }
+        });
     }
 
     public function getName() {
