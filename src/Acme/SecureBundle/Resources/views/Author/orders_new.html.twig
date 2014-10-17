@@ -270,17 +270,17 @@
                                         var formBid = $("#formBid");
                                         $.ajax({
                                             type: 'POST',
-                                            data: formBid.serialize() + '&action=newBid',
+                                            data: formBid.serialize() + '&action=newBid' + '&orderId=' + rowId,
                                             success: function(response) {
                                                 var responseObject = window.JSON.parse(response);
                                                 if (responseObject.response == 'valid') {
                                                     $(".error, .block-error").remove();
-                                                    /*$("#dialog-message-bid-order").dialog('close');
+                                                    $("#dialog-message-bid-order").dialog('close');
                                                     grid.trigger('reloadGrid');
                                                     $("#modal-window").css({'display':'block'});
                                                     setTimeout(function() {
                                                         closeMessage($('#modal-window'));
-                                                    }, 2000);*/
+                                                    }, 2000);
                                                 } else {
                                                     $(".error, .block-error").remove();
                                                     $.each(responseObject.response, function(index, value) {

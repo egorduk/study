@@ -37,22 +37,20 @@ use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Helper\Helper;
 //use Symfony\Component\Security\Core\Util\SecureRandom;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 require_once '..\src\Acme\AuthBundle\Lib\recaptchalib.php';
 
 
 class AuthController extends Controller
 {
-    //private $tableCountry = 'AcmeAuthBundle:Country';
-   // private $tableUserRole = 'AcmeAuthBundle:UserRole';
-
     /**
      * @Template()
      * @return Response
      */
     public function loginAction(Request $request)
     {
-        $loginValidate = new LoginFormValidate();
+        /*$loginValidate = new LoginFormValidate();
         $formLogin = $this->createForm(new LoginForm(), $loginValidate);
         $formLogin->handleRequest($request);
         $socialToken = $request->request->get('token');
@@ -95,7 +93,31 @@ class AuthController extends Controller
                 }
             }
         }
-        return array('formLogin' => $formLogin->createView(), 'errorData' => $errorData);
+        return array('formLogin' => $formLogin->createView(), 'errorData' => $errorData);*/
+        $session = $request->getSession();
+        var_dump($this->getUser());
+        var_dump($request->getSession()->all());
+        // get the login error if there is one
+        if ($request->attributes->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(
+                SecurityContextInterface::AUTHENTICATION_ERROR
+            );
+        } elseif (null !== $session && $session->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
+            $error = $session->get(SecurityContextInterface::AUTHENTICATION_ERROR);
+            $session->remove(SecurityContextInterface::AUTHENTICATION_ERROR);
+        } else {
+            $error = '';
+        }
+        // last username entered by the user
+        $lastUsername = (null === $session) ? '' : $session->get(SecurityContextInterface::LAST_USERNAME);
+        return $this->render(
+            'AcmeAuthBundle:Auth:login.html.twig',
+            array(
+                // last username entered by the user
+                'last_username' => $lastUsername,
+                'error'         => $error,
+            )
+        );
     }
 
 

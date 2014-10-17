@@ -17,33 +17,18 @@
                 color : red;
             }
         </style>
-        {% form_theme formLogin "TwigBundle::layout.html.twig" %}
-        <div id="block-form-login">
-            <span id="block-error">{{ errorData }}</span>
-            {{ form_start(formLogin) }}
-            {{ form_label(formLogin.fieldEmail) }}
-            {{ form_errors(formLogin.fieldEmail) }}
-            <div class="input-group">
-                <span class="input-group-addon"><i class="icon-mail-8"></i></span>
-                {{ form_widget(formLogin.fieldEmail) }}
-            </div>
-            {{ form_label(formLogin.fieldPass) }}
-            {{ form_errors(formLogin.fieldPass) }}
-            <div class="input-group">
-                <span class="input-group-addon"><i class="icon-key-5"></i></span>
-                {{ form_widget(formLogin.fieldPass) }}
-            </div>
-            <div class="row block-button">
-                <div class="col-xs-2">
-                    <label for="formLogin_enter" class="btn btn-success"><span class="icon-login-1">&nbspВойти</span></label>
-                    {{ form_widget(formLogin.enter) }}
-                </div>
-                <div class="col-xs-3">
-                    <a class="btn btn-success" id="btn-reg" href="{{ path('login') }}"><span class="icon-user-add">&nbspРегистрация</span></a>
-                </div>
-            </div>
-            {{ form_end(formLogin) }}
-        </div>
+        <form action="{{ path('login') }}" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" />
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="_password" />
+            {#
+                If you want to control the URL the user
+                is redirected to on success (more details below)
+                <input type="hidden" name="_target_path" value="/account" />
+            #}
+            <button type="submit">login</button>
+        </form>
         <div>
             <p><a href="{{ path('recovery_password') }}">Забыли пароль?</a></p>
         </div>

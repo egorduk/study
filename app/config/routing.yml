@@ -6,6 +6,9 @@ login:
   pattern:   /login
   defaults:  { _controller: AcmeAuthBundle:Auth:login }
 
+#login_check:
+#    path: /login_check
+
 openid_auth:
   pattern:   /auth/openid
   defaults:  { _controller: AcmeAuthBundle:Auth:openid }

@@ -3,16 +3,15 @@
 namespace Acme\AuthBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\NoResultException;
 use Helper\Helper;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\NoResultException;
 use Symfony\Component\Serializer;
 
 /**
@@ -20,7 +19,7 @@ use Symfony\Component\Serializer;
  * @ORM\Table(name="user")
  */
 //class User extends EntityRepository implements AdvancedUserInterface
-class User extends EntityRepository implements UserInterface//, \Serializable
+class User implements UserInterface, EquatableInterface
 {
     /**
      * @ORM\Id
@@ -431,8 +430,6 @@ class User extends EntityRepository implements UserInterface//, \Serializable
     public function serialize() {
         return serialize(array(
             $this->id,
-            $this->password,
-            $this->email
         ));
     }
 
@@ -442,8 +439,6 @@ class User extends EntityRepository implements UserInterface//, \Serializable
     public function unserialize($serialized) {
         list (
             $this->id,
-            $this->password,
-            $this->email
             ) = unserialize($serialized);
     }
 
@@ -453,5 +448,69 @@ class User extends EntityRepository implements UserInterface//, \Serializable
 
     public function getUnEncodePass() {
         return $this->unEncodePass;
+    }
+
+    public function loadUserByUsername($username)
+    {
+        $q = $this
+            ->createQueryBuilder('u')
+            ->where('u.login = :username')
+            ->setParameter('username', $username)
+            //->setParameter('email', $username)
+            ->getQuery();
+        try {
+            // The Query::getSingleResult() method throws an exception
+            // if there is no record matching the criteria.
+            $user = $q->getSingleResult();
+        } catch (NoResultException $e) {
+            $message = sprintf(
+                'Unable to find an active admin AcmeUserBundle:User object identified by "%s".',
+                $username
+            );
+            throw new UsernameNotFoundException($message, 0, $e);
+        }
+
+        return $user;
+    }
+
+    public function refreshUser(UserInterface $user)
+    {
+        $class = get_class($user);
+        if (!$this->supportsClass($class)) {
+            throw new UnsupportedUserException(
+                sprintf(
+                    'Instances of "%s" are not supported.',
+                    $class
+                )
+            );
+        }
+        return $this->find($user->getId());
+    }
+
+    public function supportsClass($class)
+    {
+        return $this->getEntityName() === $class
+        || is_subclass_of($class, $this->getEntityName());
+    }
+
+    public function isEqualTo(UserInterface $user)
+    {
+        if (!$user instanceof User) {
+            return false;
+        }
+
+        if ($this->password !== $user->getPassword()) {
+            return false;
+        }
+
+        if ($this->salt !== $user->getSalt()) {
+            return false;
+        }
+
+        if ($this->login !== $user->getLogin()) {
+            return false;
+        }
+
+        return true;
     }
 }
