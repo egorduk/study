@@ -39,7 +39,10 @@ class AuthorController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $userId = $this->get('security.context')->getToken()->getUser();
+        var_dump($this->getUser());
+       // var_dump($request->getSession()->all());
+        die;
+        //$userId = $this->get('security.context')->getToken()->getUser();
         //$userId = 2;
         $session = $request->getSession();
         $sessionCreated = $session->getMetadataBag()->getCreated();
