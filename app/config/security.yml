@@ -68,9 +68,9 @@ security:
     providers:
            #user_db:
            user:
-                id: user_provider
-                #entity: { class: Acme\AuthBundle\Entity\User, property: id }
-                # entity: { class: Acme\AuthBundle\Entity\User }
+                #id: user_provider
+                entity: { class: Acme\AuthBundle\Entity\User, property: email }
+                #entity: { class: AcmeAuthBundle:User }
            #in_memory:
            #   memory:
            #       users:
