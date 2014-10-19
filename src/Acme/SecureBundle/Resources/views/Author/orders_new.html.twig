@@ -5,7 +5,8 @@
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.fmatter.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.fmatter.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.contextMenu.js') }}"></script>
             <style type="text/css">
                 .alt-row {
                     background-color: #f3f3f3;
@@ -68,6 +69,9 @@
                 .error{
                     color: red;
                 }
+                /*#jqContextMenu ul{
+                    width: auto !important;
+                }*/
             </style>
         <div class="">
             <div class="row">
@@ -86,27 +90,6 @@
                 </div>
             </div>
             <div class="row">
-                <!--<div id="dialog-message-bid-order" title="Поставить ставку">
-                    <label for="bid-sum">Цена</label>
-                    <div class="input-group">
-                        <input type="text" name="bid-sum" id="bid-sum" required placeholder="Введите цену" class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="6">
-                        <span class="input-group-addon"><i class="icon-rouble"></i></span>
-                    </div>
-                    <label for="bid-in-date">В срок заказчика</label>
-                    <div class="input-group">
-                        <input type="checkbox" name="bid-in-date" id="bid-in-date" value="0">
-                    </div>
-                    <label for="bid-day">Дней на выполнение</label>
-                    <div class="input-group">
-                        <input type="text" name="bid-day" id="bid-day" required placeholder="Введите количество дней" class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="3">
-                        <span class="input-group-addon"><i class="icon-clock-5"></i></span>
-                    </div>
-                    <label for="bid-comment">Комментарий</label>
-                    <div class="input-group">
-                        <input type="text" name="bid-comment" id="bid-comment" placeholder="Введите комментарий" class="form-control" maxlength="50">
-                        <span class="input-group-addon"><i class="icon-clock-5"></i></span>
-                    </div>
-                </div>-->
                 <div id="dialog-message-bid-order" title="Поставить ставку">
                     {% form_theme formBid "TwigBundle::layout.html.twig" %}
                     {{ form_start(formBid, {'attr': {'id' : 'formBid'}}) }}
@@ -123,9 +106,10 @@
                             {{ form_widget(formBid.fieldDay) }}
                             <span class="input-group-addon"><i class="icon-clock-5"></i></span>
                         </div>
+                        <div class="input-group">
                         {{ form_label(formBid.isClientDate) }}
                         {{ form_errors(formBid.isClientDate) }}
-                        <div class="input-group">
+
                             {{ form_widget(formBid.isClientDate) }}
                         </div>
                         {{ form_label(formBid.fieldComment) }}
@@ -148,6 +132,13 @@
             <div class="row">
                 <table id="listOrders"></table>
                 <div id="pagerOrders"></div>
+                <div class="contextMenu" id="contextMenu" style="display:none">
+                    <ul>
+                        <li id="open-in-new-tab">
+                            <span style="font-size:100%">Открыть в новой вкладке</span>
+                        </li>
+                    </ul>
+                </div>
                 <script>
                 $(document).ready(function() {
                     $.fn.button.noConflict();
@@ -195,6 +186,7 @@
                         //width:'1440',
                         //shrinkToFit:false,
                         altclass:'alt-row',
+                        gridComplete: initGrid,
                         loadComplete : function() {
                             function getRowId(e) {
                                 var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'), rowId = $tr.attr('id');
@@ -249,13 +241,13 @@
                                         // height: 340,
                                         width: 350,
                                         close: function() {
+                                            $(".error, .block-error").remove();
                                             bidInDate.prop('checked', false);
                                             bidDay.removeClass('bootstrap-error').prop('disabled', false).val("").tooltip('hide');
                                             bidSum.removeClass('bootstrap-error').val("").tooltip('hide');
                                             bidComment.val("");
                                         }
                                     });
-
                                 }
                                 $("#formBid_cancel").on('click', function() {
                                     $("#dialog-message-bid-order").dialog('close');
@@ -278,22 +270,22 @@
                                         var formBid = $("#formBid");
                                         $.ajax({
                                             type: 'POST',
-                                            //data: 'orderId=' + rowId + '&bidSum=' + bidSum.val()+ '&bidComment=' + bidComment.val() + '&bidDay=' + bidDay.val() + '&bidIsClientDate=' + bidInDate.prop('checked') + '&action=newBid',
-                                            data: formBid.serialize() + '&action=newBid',
+                                            data: formBid.serialize() + '&action=newBid' + '&orderId=' + rowId,
                                             success: function(response) {
                                                 var responseObject = window.JSON.parse(response);
                                                 if (responseObject.response == 'valid') {
-                                                    /*$("#dialog-message-bid-order").dialog('close');
+                                                    $(".error, .block-error").remove();
+                                                    $("#dialog-message-bid-order").dialog('close');
                                                     grid.trigger('reloadGrid');
                                                     $("#modal-window").css({'display':'block'});
                                                     setTimeout(function() {
                                                         closeMessage($('#modal-window'));
-                                                    }, 2000);*/
+                                                    }, 2000);
                                                 } else {
-                                                    $(".error").remove();
+                                                    $(".error, .block-error").remove();
                                                     $.each(responseObject.response, function(index, value) {
                                                         var selector  = "#formBid_" + index;
-                                                        $(selector).parent().before("<p><span class='icon-warning error'>" + value + "</span></p>");
+                                                        $(selector).parent().before("<p class='block-error'><span class='icon-warning error'>" + value + "</span></p>");
                                                     });
                                                 }
                                             }
@@ -307,7 +299,7 @@
                                 }
                                 bidInDate.change(function() {
                                     if ($(this).prop("checked")) {
-                                        bidDay.removeClass('bootstrap-error').prop('disabled', true).tooltip('hide');
+                                        bidDay.removeClass('bootstrap-error').prop('disabled', true).tooltip('hide').val("");
                                     } else {
                                         bidDay.prop('disabled', false).val("");
                                     }
@@ -330,6 +322,25 @@
                                     blockUnfavoriteOrder.hide();
                                 }
                             }
+                            /*$(".jqgrow", "#jqGrid").contextMenu('contextMenu', {
+                                bindings: {
+                                    'edit': function (t) {
+                                        alert("Edit Row Command Selected");
+                                    },
+                                    'add': function (t) {
+                                        alert("Add Row Command Selected");
+                                    },
+                                    'del': function (t) {
+                                        alert("Delete Row Command Selected");
+                                    }
+                                },
+                                onContextMenu: function (event, menu) {
+                                    var rowId = $(event.target).parent("tr").attr("id")
+                                    var grid = $("#jqGrid");
+                                    grid.setSelection(rowId);
+                                    return true;
+                                }
+                            })*/
                         },
                         onCellSelect: function(rowid, iCol) {
                             if (iCol != 11) {
@@ -343,7 +354,40 @@
                             {},{},{},{},{}
                     );
                     //$(".ui-widget-content td").removeAttr('title');
-                    grid.setCaption('Таблица новых заказов ' + '<span id="help-popover" class="icon-help-circled" data-container="body" data-trigger="click" data-placement="bottom"></span>');
+                    grid.setCaption('Таблица новых заказов ' + '<span id="help-popover" class="icon-help-circled" onmouseout="$(this).popover(\'hide\')" onmouseover="$(this).popover(\'show\')" data-container="body" data-placement="bottom"></span>');
+                    function initGrid() {
+                        grid.contextMenu('contextMenu', {
+                            bindings: {
+                                'open-in-new-tab': function () {
+                                    var rowId = grid.getGridParam("selrow");
+                                    var num = $("tr.jqgrow#" + rowId).find('td').eq(1).find('span')[0].innerHTML, url = "{{ path("secure_author_order", {'num': 'num'}) }}";
+                                    //location.href = url.replace("num", num);
+                                    url = url.replace("num", num);
+                                    window.open(url, "_blank");
+                                }
+                            },
+                            menuStyle: {
+                                backgroundColor: '#fcfdfd',
+                                border: '1px solid #a6c9e2',
+                                maxWidth: '600px', // to be sure
+                                width: '100%' // to have good width of the menu
+                            },
+                            itemHoverStyle: {
+                                border: '1px solid #79b7e7',
+                                color: '#1d5987',
+                                backgroundColor: '#d0e5f5'
+                            },
+                            onContextMenu: function (event, menu) {
+                                var rowId = $(event.target).parent("tr").attr("id");
+                                //var grid = $("#jqGrid");
+                                if (!rowId) {
+                                    return false; // no contex menu on rows having no "jqgrow" class
+                                }
+                                grid.setSelection(rowId);
+                                return true;
+                            }
+                        });
+                    }
                     function closeMessage(el) {
                         el.addClass('is-hidden').css({'display':'none'});
                     }
@@ -369,7 +413,7 @@
                     function customNum(cellvalue) {
                         return ("<span class='grid-cell-num'>" + cellvalue + "</span>");
                     }
-                    $(".ui-jqgrid-titlebar").live('mouseenter', function() {
+                    /*$(".ui-jqgrid-titlebar").live('mouseenter', function() {*/
                         $("#help-popover").popover({
                             html : true,
                             content : function() {
@@ -380,7 +424,7 @@
                                         "Для того,чтобы поставить ставку на заказ,нажмите на <div style=\"display: inline-block\"><span class=\"icon-hammer\"></span></div>";
                             }
                         });
-                    });
+                    /*});*/
                 });
                 </script>
             </div>

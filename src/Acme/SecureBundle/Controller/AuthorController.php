@@ -187,7 +187,9 @@ class AuthorController extends Controller
                             $formBid->handleRequest($request);
                             if ($formBid->isValid()) {
                                 $postData = $request->request->get('formBid');
-                                //Helper::setAuthorBid($postData, $user, $order);
+                                $orderId = $request->request->get('orderId');
+                                $order = Helper::getOrderById($orderId);
+                                Helper::setAuthorBid($postData, $user, $order);
                                 return new Response(json_encode(array('response' => 'valid')));
                             } else {
                                 $errors = [];
@@ -202,7 +204,6 @@ class AuthorController extends Controller
                                 }
                                 return  new Response(json_encode(array('response' => $arrayResponse)));
                             }
-
                         /*$orderId = $request->request->get('orderId');
                         $order = Helper::getOrderById($orderId);
                         $postData = [];

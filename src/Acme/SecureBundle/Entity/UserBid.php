@@ -69,13 +69,13 @@ class UserBid extends EntityRepository
     private $is_confirm_author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Acme\AuthBundle\Entity\User", inversedBy="link_user_bid", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Acme\AuthBundle\Entity\User", inversedBy="link_user_bid", cascade={"refresh"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      **/
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserOrder", inversedBy="link_bid_user_order", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="UserOrder", inversedBy="link_bid_user_order", cascade={"refresh"})
      * @ORM\JoinColumn(name="user_order_id", referencedColumnName="id")
      **/
     private $user_order;

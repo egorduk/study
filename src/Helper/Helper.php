@@ -1061,6 +1061,15 @@ class Helper
                 $bids = $query->getResult();
                 $favoriteOrders = $em->getRepository(self::$_tableFavoriteOrder)
                     ->findByUser($user);
+
+                $userId = $user->getId();
+                $query = $em->getConnection()
+                    ->prepare("SELECT * FROM (SELECT ub.user_id AS uid,ub.sum,uo.id AS order_id FROM user_bid AS ub JOIN user_order AS uo ON ub.user_order_id = uo.id JOIN `user` AS u ON ub.user_id = u.id WHERE ub.is_show_author = '1' AND u.id = '$userId' ORDER BY ub.date_bid DESC) AS t GROUP BY order_id");
+                $query->execute();
+                $authorBids = $query->fetchAll();
+                $countBids = count($authorBids);
+                var_dump($countBids);die;
+
                 foreach($orders as $order) {
                     foreach($bids as $bid) {
                         if ($order->getId() == $bid['order_id']) {
@@ -1080,22 +1089,14 @@ class Helper
                             break;
                         }
                     }
-                }
-                
-                /*$userId = $user->getId();
-                $query = $em->getConnection()
-                    ->prepare("SELECT * FROM (SELECT ub.user_id AS uid,ub.sum,uo.id AS order_id FROM user_bid AS ub JOIN user_order AS uo ON ub.user_order_id = uo.id JOIN `user` AS u ON ub.user_id = u.id WHERE ub.is_show_author = '1' AND u.id = '$userId' ORDER BY ub.date_bid DESC) AS t GROUP BY order_id");
-                $query->execute();
-                $bids = $query->fetchAll();
-                $countBids = count($bids);
-                foreach($orders as $order) {
                     for ($i = 0; $i < $countBids; $i++) {
-                        if ($order->getId() == $bids[$i]['order_id']) {
-                            $order->setAuthorLastSumBid($bids[$i]['sum']);
+                        if ($order->getId() == $authorBids[$i]['order_id']) {
+                            $order->setAuthorLastSumBid($authorBids[$i]['sum']);
                             break;
                         }
                     }
-                }*/
+                }
+
             }
             else {
                 $orders = $em->getRepository(self::$_tableUserOrder)
@@ -1260,10 +1261,11 @@ class Helper
      * @param $order
      */
     public static function setAuthorBid($postData, $user, $order) {
-        //$user = self::getUserById($user->getId());
+        $em = self::getContainer()->get('doctrine')->getManager();
         $sum = $postData['fieldSum'];
         $comment = $postData['fieldComment'];
         $userBid = new UserBid();
+        $user = $em->merge($user);
         $userBid->setUser($user);
         $userBid->setUserOrder($order);
         $userBid->setSum($sum);
@@ -1274,8 +1276,7 @@ class Helper
         } else {
             $userBid->setIsClientDate(1);
         }
-        $em = self::getContainer()->get('doctrine')->getManager();
-        $em->merge($userBid);
+        $em->persist($userBid);
         $bids = $em->getRepository(self::$_tableUserBid)->createQueryBuilder('ub')
             ->innerJoin('ub.user_order', 'uo')
             ->andWhere('ub.user = :user')

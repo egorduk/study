@@ -5,7 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79828e02-5540-4157-bcbe-d9d8b8a4a7b1" name="Default" comment="">
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\.idea\workspace.xml" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/UserProvider.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/js/jqgrid/jquery.jqGrid.contextMenu.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/AuthController.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Controller/AuthController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Form/Author/BidForm.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Form/Author/BidForm.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Helper/Helper.php" afterPath="$PROJECT_DIR$/src/Helper/Helper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/UserBid.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/UserBid.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Auth/login.html.twig" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Auth/login.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_new.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_new.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/security.yml" afterPath="$PROJECT_DIR$/app/config/security.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/services.xml" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Resources/config/services.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="D:\OpenServer\domains\localhost\study\web\bundles\js\jqgrid\jquery.fmatter.js" afterPath="$PROJECT_DIR$/web/bundles/js/jqgrid/jquery.jqGrid.fmatter.js" />
     </list>
     <ignored path="study.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,98 +43,66 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AuthorController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="372" column="55" selection-start="20849" selection-end="20849" vertical-scroll-proportion="-106.451614" vertical-offset="4312" max-vertical-offset="15158">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Helper.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1085" column="16" selection-start="44457" selection-end="44457" vertical-scroll-proportion="0.5135624" vertical-offset="22948" max-vertical-offset="45870">
-              <folding>
-                <element signature="e#42810#43287#0" expanded="false" />
-                <marker date="1413308914174" expanded="true" signature="4644:4705" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1413308914174" expanded="true" signature="5070:5125" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1413308914174" expanded="true" signature="5495:5556" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1413308914174" expanded="true" signature="11041:11156" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1413308914174" expanded="true" signature="11620:11758" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1413308914174" expanded="true" signature="42828:43285" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-                <marker date="1413308914174" expanded="true" signature="43110:43419" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-                <marker date="1413308914174" expanded="true" signature="44905:45178" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1413308914174" expanded="true" signature="44920:45044" placeholder="SELECT ub.us..user_bid..." />
-                <marker date="1413308914174" expanded="true" signature="46400:46673" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1413308914174" expanded="true" signature="46415:46539" placeholder="SELECT ub.us..user_bid..." />
-                <marker date="1413308914174" expanded="true" signature="46763:47036" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1413308914174" expanded="true" signature="46778:46902" placeholder="SELECT ub.us..user_bid..." />
-                <marker date="1413308914174" expanded="true" signature="52032:52297" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1413308914174" expanded="true" signature="52047:52164" placeholder="SELECT b.use..user_bid..." />
-                <marker date="1413308914174" expanded="true" signature="52385:52650" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1413308914174" expanded="true" signature="52400:52517" placeholder="SELECT b.use..user_bid..." />
-                <marker date="1413308914174" expanded="true" signature="75944:76209" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1413308914174" expanded="true" signature="75959:76076" placeholder="SELECT b.use..user_bid..." />
-                <marker date="1413308914174" expanded="true" signature="76453:76718" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1413308914174" expanded="true" signature="76468:76585" placeholder="SELECT b.use..user_bid..." />
-                <marker date="1413308914174" expanded="true" signature="78025:78120" placeholder="SELECT date_..cancel_request..." />
-                <marker date="1413308914174" expanded="true" signature="78478:78573" placeholder="SELECT date_..cancel_request..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="orders_new.html.twig" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_new.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="189" column="42" selection-start="11954" selection-end="11954" vertical-scroll-proportion="-30.516129" vertical-offset="3212" max-vertical-offset="8624">
+            <state line="180" column="42" selection-start="10856" selection-end="10856" vertical-scroll-proportion="-30.516129" vertical-offset="3014" max-vertical-offset="9592">
               <folding>
-                <marker date="1413308914173" expanded="true" signature="761:24812" placeholder="{% block content ...%}" />
-                <marker date="1413308914173" expanded="true" signature="16862:19302" placeholder="{...}" />
-                <marker date="1413308914173" expanded="true" signature="17036:17233" placeholder="{...}" />
-                <marker date="1413308914173" expanded="true" signature="17386:17497" placeholder="{...}" />
-                <marker date="1413308914173" expanded="true" signature="17503:17819" placeholder="{...}" />
-                <marker date="1413308914173" expanded="true" signature="18002:19268" placeholder="{...}" />
-                <marker date="1413308914173" expanded="true" signature="18091:19228" placeholder="{&quot;type&quot;: 'POST'...}" />
-                <marker date="1413308914173" expanded="true" signature="18395:19186" placeholder="{...}" />
-                <marker date="1413308914173" expanded="true" signature="18564:19140" placeholder="{...}" />
-                <marker date="1413308914173" expanded="true" signature="18867:19088" placeholder="{...}" />
-                <marker date="1413308914173" expanded="true" signature="21243:21275" placeholder="{...}" />
-                <marker date="1413308914173" expanded="true" signature="21382:21455" placeholder="{...}" />
-                <marker date="1413308914173" expanded="true" signature="21533:21757" placeholder="{...}" />
-                <marker date="1413308914173" expanded="true" signature="22007:22120" placeholder="{...}" />
-                <marker date="1413308914173" expanded="true" signature="22126:22434" placeholder="{...}" />
-                <marker date="1413308914173" expanded="true" signature="22685:22726" placeholder="{...}" />
-                <marker date="1413308914173" expanded="true" signature="22732:22914" placeholder="{...}" />
-                <marker date="1413308914173" expanded="true" signature="22994:23247" placeholder="{...}" />
-                <marker date="1413308914173" expanded="true" signature="23051:23113" placeholder="{...}" />
-                <marker date="1413308914173" expanded="true" signature="23119:23225" placeholder="{...}" />
-                <marker date="1413308914173" expanded="false" signature="23842:23863" placeholder="..." />
-                <marker date="1413308914173" expanded="false" signature="24021:24042" placeholder="..." />
-                <marker date="1413308914173" expanded="false" signature="24208:24229" placeholder="..." />
-                <marker date="1413308914173" expanded="false" signature="24393:24414" placeholder="..." />
-                <marker date="1413308914173" expanded="false" signature="24579:24600" placeholder="..." />
+                <element signature="e#6096#6116#0" expanded="true" />
+                <element signature="e#6227#6249#0" expanded="true" />
+                <marker date="1413582331857" expanded="true" signature="9264:9280" placeholder="..." />
+                <marker date="1413582331857" expanded="true" signature="9339:9366" placeholder="..." />
+                <marker date="1413582331857" expanded="true" signature="9684:9700" placeholder="..." />
+                <marker date="1413582331857" expanded="true" signature="9759:9786" placeholder="..." />
+                <marker date="1413582331857" expanded="true" signature="10114:10130" placeholder="..." />
+                <marker date="1413582331857" expanded="true" signature="10189:10216" placeholder="..." />
+                <marker date="1413582331857" expanded="true" signature="25821:25842" placeholder="..." />
+                <marker date="1413582331857" expanded="true" signature="26000:26021" placeholder="..." />
+                <marker date="1413582331857" expanded="true" signature="26187:26208" placeholder="..." />
+                <marker date="1413582331857" expanded="true" signature="26372:26393" placeholder="..." />
+                <marker date="1413582331857" expanded="true" signature="26558:26579" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="profile.html.twig" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/profile.html.twig">
+      <file leaf-file-name="AuthController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/AuthController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="1" selection-start="639" selection-end="639" vertical-scroll-proportion="117.09677" vertical-offset="4092" max-vertical-offset="6886">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="38.322582" vertical-offset="1188" max-vertical-offset="9856">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UploadHandler.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/BlueImp/UploadHandler.php">
+      <file leaf-file-name="login.html.twig" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Auth/login.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="407" column="40" selection-start="18332" selection-end="18332" vertical-scroll-proportion="-18.193548" vertical-offset="8390" max-vertical-offset="11286">
-              <folding />
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2090">
+              <folding>
+                <marker date="1413582331853" expanded="true" signature="332:685" placeholder="..." />
+                <marker date="1413582331853" expanded="true" signature="375:424" placeholder="{...}" />
+                <marker date="1413582331853" expanded="true" signature="461:507" placeholder="{...}" />
+                <marker date="1413582331853" expanded="true" signature="625:669" placeholder="{...}" />
+                <marker date="1413582331853" expanded="true" signature="743:1302" placeholder="..." />
+                <marker date="1413582331853" expanded="true" signature="1316:1411" placeholder="..." />
+                <marker date="1413582331853" expanded="true" signature="1443:1797" placeholder="..." />
+                <marker date="1413582331853" expanded="true" signature="1763:1782" placeholder="..." />
+                <marker date="1413582331853" expanded="true" signature="1858:2523" placeholder="..." />
+                <marker date="1413582331853" expanded="true" signature="1888:2508" placeholder="..." />
+                <marker date="1413582331853" expanded="true" signature="1927:2187" placeholder="..." />
+                <marker date="1413582331853" expanded="true" signature="2032:2164" placeholder="..." />
+                <marker date="1413582331853" expanded="true" signature="2226:2489" placeholder="..." />
+                <marker date="1413582331853" expanded="true" signature="2334:2466" placeholder="..." />
+                <marker date="1413582331853" expanded="true" signature="2536:3725" placeholder="..." />
+                <marker date="1413582331853" expanded="true" signature="2575:3710" placeholder="{...}" />
+                <marker date="1413582331853" expanded="true" signature="2659:3044" placeholder="{...}" />
+                <marker date="1413582331853" expanded="true" signature="2713:2998" placeholder="{&quot;modal&quot;: true...}" />
+                <marker date="1413582331853" expanded="true" signature="2889:2980" placeholder="{...}" />
+                <marker date="1413582331853" expanded="true" signature="3096:3698" placeholder="{...}" />
+                <marker date="1413582331853" expanded="true" signature="3260:3461" placeholder="{...}" />
+                <marker date="1413582331853" expanded="true" signature="3483:3684" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1148,7 +1130,123 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Acme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AuthBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Auth" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Acme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AuthBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Acme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AuthBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Entity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Acme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AuthBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1231,7 +1329,7 @@
     <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32721382" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32683983" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1271,13 +1369,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Form/Author/AuthorProfileForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="67" selection-start="4272" selection-end="4272" vertical-scroll-proportion="0.0" vertical-offset="1254" max-vertical-offset="1650">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/BlueImp/UploadHandler.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="455" column="20" selection-start="20475" selection-end="20475" vertical-scroll-proportion="0.0" vertical-offset="9528" max-vertical-offset="11286">
@@ -1318,29 +1409,31 @@
         <state line="2065" column="26" selection-start="84943" selection-end="84943" vertical-scroll-proportion="0.0" vertical-offset="44992" max-vertical-offset="46046">
           <folding>
             <element signature="e#42810#43287#0" expanded="false" />
-            <marker date="1413308914174" expanded="true" signature="4644:4705" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1413308914174" expanded="true" signature="5070:5125" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1413308914174" expanded="true" signature="5495:5556" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1413308914174" expanded="true" signature="11041:11156" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1413308914174" expanded="true" signature="11620:11758" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1413308914174" expanded="true" signature="42828:43285" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-            <marker date="1413308914174" expanded="true" signature="43110:43419" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-            <marker date="1413308914174" expanded="true" signature="44905:45178" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413308914174" expanded="true" signature="44920:45044" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1413308914174" expanded="true" signature="46400:46673" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413308914174" expanded="true" signature="46415:46539" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1413308914174" expanded="true" signature="46763:47036" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413308914174" expanded="true" signature="46778:46902" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1413308914174" expanded="true" signature="52032:52297" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413308914174" expanded="true" signature="52047:52164" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1413308914174" expanded="true" signature="52385:52650" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413308914174" expanded="true" signature="52400:52517" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1413308914174" expanded="true" signature="75944:76209" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413308914174" expanded="true" signature="75959:76076" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1413308914174" expanded="true" signature="76453:76718" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413308914174" expanded="true" signature="76468:76585" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1413308914174" expanded="true" signature="78025:78120" placeholder="SELECT date_..cancel_request..." />
-            <marker date="1413308914174" expanded="true" signature="78478:78573" placeholder="SELECT date_..cancel_request..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT date_..cancel_request..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT date_..cancel_request..." />
           </folding>
         </state>
       </provider>
@@ -1399,29 +1492,31 @@
         <state line="1295" column="27" selection-start="53785" selection-end="53785" vertical-scroll-proportion="0.0" vertical-offset="28807" max-vertical-offset="45320">
           <folding>
             <element signature="e#42810#43287#0" expanded="false" />
-            <marker date="1413308914174" expanded="true" signature="4644:4705" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1413308914174" expanded="true" signature="5070:5125" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1413308914174" expanded="true" signature="5495:5556" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1413308914174" expanded="true" signature="11041:11156" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1413308914174" expanded="true" signature="11620:11758" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1413308914174" expanded="true" signature="42828:43285" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-            <marker date="1413308914174" expanded="true" signature="43110:43419" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-            <marker date="1413308914174" expanded="true" signature="44905:45178" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413308914174" expanded="true" signature="44920:45044" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1413308914174" expanded="true" signature="46400:46673" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413308914174" expanded="true" signature="46415:46539" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1413308914174" expanded="true" signature="46763:47036" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413308914174" expanded="true" signature="46778:46902" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1413308914174" expanded="true" signature="52032:52297" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413308914174" expanded="true" signature="52047:52164" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1413308914174" expanded="true" signature="52385:52650" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413308914174" expanded="true" signature="52400:52517" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1413308914174" expanded="true" signature="75944:76209" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413308914174" expanded="true" signature="75959:76076" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1413308914174" expanded="true" signature="76453:76718" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413308914174" expanded="true" signature="76468:76585" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1413308914174" expanded="true" signature="78025:78120" placeholder="SELECT date_..cancel_request..." />
-            <marker date="1413308914174" expanded="true" signature="78478:78573" placeholder="SELECT date_..cancel_request..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT date_..cancel_request..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT date_..cancel_request..." />
           </folding>
         </state>
       </provider>
@@ -1620,74 +1715,101 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_new.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="189" column="42" selection-start="11954" selection-end="11954" vertical-scroll-proportion="-30.516129" vertical-offset="3212" max-vertical-offset="8624">
-          <folding>
-            <marker date="1413308914173" expanded="true" signature="761:24812" placeholder="{% block content ...%}" />
-            <marker date="1413308914173" expanded="true" signature="16862:19302" placeholder="{...}" />
-            <marker date="1413308914173" expanded="true" signature="17036:17233" placeholder="{...}" />
-            <marker date="1413308914173" expanded="true" signature="17386:17497" placeholder="{...}" />
-            <marker date="1413308914173" expanded="true" signature="17503:17819" placeholder="{...}" />
-            <marker date="1413308914173" expanded="true" signature="18002:19268" placeholder="{...}" />
-            <marker date="1413308914173" expanded="true" signature="18091:19228" placeholder="{&quot;type&quot;: 'POST'...}" />
-            <marker date="1413308914173" expanded="true" signature="18395:19186" placeholder="{...}" />
-            <marker date="1413308914173" expanded="true" signature="18564:19140" placeholder="{...}" />
-            <marker date="1413308914173" expanded="true" signature="18867:19088" placeholder="{...}" />
-            <marker date="1413308914173" expanded="true" signature="21243:21275" placeholder="{...}" />
-            <marker date="1413308914173" expanded="true" signature="21382:21455" placeholder="{...}" />
-            <marker date="1413308914173" expanded="true" signature="21533:21757" placeholder="{...}" />
-            <marker date="1413308914173" expanded="true" signature="22007:22120" placeholder="{...}" />
-            <marker date="1413308914173" expanded="true" signature="22126:22434" placeholder="{...}" />
-            <marker date="1413308914173" expanded="true" signature="22685:22726" placeholder="{...}" />
-            <marker date="1413308914173" expanded="true" signature="22732:22914" placeholder="{...}" />
-            <marker date="1413308914173" expanded="true" signature="22994:23247" placeholder="{...}" />
-            <marker date="1413308914173" expanded="true" signature="23051:23113" placeholder="{...}" />
-            <marker date="1413308914173" expanded="true" signature="23119:23225" placeholder="{...}" />
-            <marker date="1413308914173" expanded="false" signature="23842:23863" placeholder="..." />
-            <marker date="1413308914173" expanded="false" signature="24021:24042" placeholder="..." />
-            <marker date="1413308914173" expanded="false" signature="24208:24229" placeholder="..." />
-            <marker date="1413308914173" expanded="false" signature="24393:24414" placeholder="..." />
-            <marker date="1413308914173" expanded="false" signature="24579:24600" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="372" column="55" selection-start="20849" selection-end="20849" vertical-scroll-proportion="-106.451614" vertical-offset="4312" max-vertical-offset="15158">
+        <state line="374" column="55" selection-start="21064" selection-end="21064" vertical-scroll-proportion="3.8641686" vertical-offset="4356" max-vertical-offset="15180">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1085" column="16" selection-start="44457" selection-end="44457" vertical-scroll-proportion="0.5135624" vertical-offset="22948" max-vertical-offset="45870">
+        <state line="1084" column="16" selection-start="44638" selection-end="44638" vertical-scroll-proportion="1.0538641" vertical-offset="22310" max-vertical-offset="45892">
           <folding>
             <element signature="e#42810#43287#0" expanded="false" />
-            <marker date="1413308914174" expanded="true" signature="4644:4705" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1413308914174" expanded="true" signature="5070:5125" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1413308914174" expanded="true" signature="5495:5556" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1413308914174" expanded="true" signature="11041:11156" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1413308914174" expanded="true" signature="11620:11758" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1413308914174" expanded="true" signature="42828:43285" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-            <marker date="1413308914174" expanded="true" signature="43110:43419" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-            <marker date="1413308914174" expanded="true" signature="44905:45178" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413308914174" expanded="true" signature="44920:45044" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1413308914174" expanded="true" signature="46400:46673" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413308914174" expanded="true" signature="46415:46539" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1413308914174" expanded="true" signature="46763:47036" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413308914174" expanded="true" signature="46778:46902" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1413308914174" expanded="true" signature="52032:52297" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413308914174" expanded="true" signature="52047:52164" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1413308914174" expanded="true" signature="52385:52650" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413308914174" expanded="true" signature="52400:52517" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1413308914174" expanded="true" signature="75944:76209" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413308914174" expanded="true" signature="75959:76076" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1413308914174" expanded="true" signature="76453:76718" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413308914174" expanded="true" signature="76468:76585" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1413308914174" expanded="true" signature="78025:78120" placeholder="SELECT date_..cancel_request..." />
-            <marker date="1413308914174" expanded="true" signature="78478:78573" placeholder="SELECT date_..cancel_request..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT date_..cancel_request..." />
+            <marker date="1413582331865" expanded="true" signature="-1:-1" placeholder="SELECT date_..cancel_request..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_new.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="180" column="42" selection-start="10856" selection-end="10856" vertical-scroll-proportion="-30.516129" vertical-offset="3014" max-vertical-offset="9592">
+          <folding>
+            <element signature="e#6096#6116#0" expanded="true" />
+            <element signature="e#6227#6249#0" expanded="true" />
+            <marker date="1413582331857" expanded="true" signature="9264:9280" placeholder="..." />
+            <marker date="1413582331857" expanded="true" signature="9339:9366" placeholder="..." />
+            <marker date="1413582331857" expanded="true" signature="9684:9700" placeholder="..." />
+            <marker date="1413582331857" expanded="true" signature="9759:9786" placeholder="..." />
+            <marker date="1413582331857" expanded="true" signature="10114:10130" placeholder="..." />
+            <marker date="1413582331857" expanded="true" signature="10189:10216" placeholder="..." />
+            <marker date="1413582331857" expanded="true" signature="25821:25842" placeholder="..." />
+            <marker date="1413582331857" expanded="true" signature="26000:26021" placeholder="..." />
+            <marker date="1413582331857" expanded="true" signature="26187:26208" placeholder="..." />
+            <marker date="1413582331857" expanded="true" signature="26372:26393" placeholder="..." />
+            <marker date="1413582331857" expanded="true" signature="26558:26579" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Controller/AuthController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="38.322582" vertical-offset="1188" max-vertical-offset="9856">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Resources/views/Auth/login.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2090">
+          <folding>
+            <marker date="1413582331853" expanded="true" signature="332:685" placeholder="..." />
+            <marker date="1413582331853" expanded="true" signature="375:424" placeholder="{...}" />
+            <marker date="1413582331853" expanded="true" signature="461:507" placeholder="{...}" />
+            <marker date="1413582331853" expanded="true" signature="625:669" placeholder="{...}" />
+            <marker date="1413582331853" expanded="true" signature="743:1302" placeholder="..." />
+            <marker date="1413582331853" expanded="true" signature="1316:1411" placeholder="..." />
+            <marker date="1413582331853" expanded="true" signature="1443:1797" placeholder="..." />
+            <marker date="1413582331853" expanded="true" signature="1763:1782" placeholder="..." />
+            <marker date="1413582331853" expanded="true" signature="1858:2523" placeholder="..." />
+            <marker date="1413582331853" expanded="true" signature="1888:2508" placeholder="..." />
+            <marker date="1413582331853" expanded="true" signature="1927:2187" placeholder="..." />
+            <marker date="1413582331853" expanded="true" signature="2032:2164" placeholder="..." />
+            <marker date="1413582331853" expanded="true" signature="2226:2489" placeholder="..." />
+            <marker date="1413582331853" expanded="true" signature="2334:2466" placeholder="..." />
+            <marker date="1413582331853" expanded="true" signature="2536:3725" placeholder="..." />
+            <marker date="1413582331853" expanded="true" signature="2575:3710" placeholder="{...}" />
+            <marker date="1413582331853" expanded="true" signature="2659:3044" placeholder="{...}" />
+            <marker date="1413582331853" expanded="true" signature="2713:2998" placeholder="{&quot;modal&quot;: true...}" />
+            <marker date="1413582331853" expanded="true" signature="2889:2980" placeholder="{...}" />
+            <marker date="1413582331853" expanded="true" signature="3096:3698" placeholder="{...}" />
+            <marker date="1413582331853" expanded="true" signature="3260:3461" placeholder="{...}" />
+            <marker date="1413582331853" expanded="true" signature="3483:3684" placeholder="{...}" />
           </folding>
         </state>
       </provider>
