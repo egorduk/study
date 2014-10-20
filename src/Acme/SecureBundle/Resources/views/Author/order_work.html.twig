@@ -3,6 +3,7 @@
     {% block content %}
        <!--<link rel="stylesheet" href="{{ asset('bundles/js/bootstrap.min.js') }}" />-->
         <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-maxlength.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/select2.min.js') }}"></script>
         <!--<link rel="stylesheet" href="{{ asset('bundles/css/chat/jScrollPane.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/chat/chat.css') }}" />
         <script type="text/javascript" src="{{ asset('bundles/js/chat/jquery.mousewheel.js') }}"></script>
@@ -10,35 +11,9 @@
         <script type="text/javascript" src="{{ asset('bundles/js/chat/chat.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/chat/fancywebsocket.js') }}"></script>-->
         <style>
-            /*.bootstrap-error{
-                border-color: #E9322D!important;
-                box-shadow: 0 0 6px #E9322D!important;
-            }*/
-            .thumbnail {
-                margin-bottom: 7px;
-                margin-left: 45px;
-            }
             .block-file{
                 border: 1px solid #000000;
                 width: 300px;
-            }
-            .alt-row {
-                background-color: #f3f3f3;
-                background-image: none;
-            }
-            #block-client {
-                width: 200px;
-                text-align: center;
-            }
-            hr {
-                margin: 3px;
-            }
-            .block-theme {
-                font-size: 18px;
-            }
-            .block-num {
-                font-size: 20px;
-                color: green;
             }
             textarea {
                 resize: none;
@@ -51,8 +26,6 @@
                 border-color: #E9322D!important;
                 box-shadow: 0 0 5px #E9322D!important;
                 border-radius: 5px;
-            }
-            #line-date-verdict {
             }
             .thumbnail > img {
                 width: 60px;

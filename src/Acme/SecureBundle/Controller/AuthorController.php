@@ -39,11 +39,7 @@ class AuthorController extends Controller
      */
     public function indexAction(Request $request)
     {
-        var_dump($this->getUser());
-       // var_dump($request->getSession()->all());
-        die;
-        //$userId = $this->get('security.context')->getToken()->getUser();
-        //$userId = 2;
+        $user = $this->getUser();
         $session = $request->getSession();
         $sessionCreated = $session->getMetadataBag()->getCreated();
         $sessionLifeTime = $session->getMetadataBag()->getLifetime();
@@ -52,9 +48,8 @@ class AuthorController extends Controller
         $nowTimestamp = strtotime("now");
         $sessionRemaining = $sessionRemaining - $nowTimestamp;
         $sessionRemaining = Helper::getDateFromTimestamp($sessionRemaining, "i:s");
-        $user = Helper::getUserById($userId);
-        $avatar = Helper::getUserAvatar($user);
-        return array('user' => $user, 'whenLogin' => $whenLogin, 'remainingTime' => $sessionRemaining, 'avatar' => $avatar);
+        $user = Helper::getUserAvatar($user);
+        return array('user' => $user, 'whenLogin' => $whenLogin, 'remainingTime' => $sessionRemaining);
     }
 
 
@@ -167,7 +162,7 @@ class AuthorController extends Controller
      */
     public function ordersAction(Request $request, $type)
     {
-        $user = $this->get('security.context')->getToken()->getUser();
+        $user = $this->getUser();
         $showWindow = false;
         if ($user->getIsAccessOrder()) {
             if ($type == "new") {
@@ -187,34 +182,26 @@ class AuthorController extends Controller
                         return new Response(json_encode(array('action' => $actionResponse)));
                     }
                     elseif ($action == 'newBid') {
-                            $formBid->handleRequest($request);
-                            if ($formBid->isValid()) {
-                                $postData = $request->request->get('formBid');
-                                $orderId = $request->request->get('orderId');
-                                $order = Helper::getOrderById($orderId);
-                                Helper::setAuthorBid($postData, $user, $order);
-                                return new Response(json_encode(array('response' => 'valid')));
-                            } else {
-                                $errors = [];
-                                $arrayResponse = [];
-                                foreach ($formBid as $fieldName => $formField) {
-                                    $errors[$fieldName] = $formField->getErrors();
-                                }
-                                foreach ($errors as $index => $error) {
-                                    if (isset($error[0])) {
-                                        $arrayResponse[$index] = $error[0]->getMessage();
-                                    }
-                                }
-                                return  new Response(json_encode(array('response' => $arrayResponse)));
+                        $formBid->handleRequest($request);
+                        if ($formBid->isValid()) {
+                            $postData = $request->request->get('formBid');
+                            $orderId = $request->request->get('orderId');
+                            $order = Helper::getOrderById($orderId);
+                            Helper::setAuthorBid($postData, $user, $order);
+                            return new Response(json_encode(array('response' => 'valid')));
+                        } else {
+                            $errors = [];
+                            $arrayResponse = [];
+                            foreach ($formBid as $fieldName => $formField) {
+                                $errors[$fieldName] = $formField->getErrors();
                             }
-                        /*$orderId = $request->request->get('orderId');
-                        $order = Helper::getOrderById($orderId);
-                        $postData = [];
-                        $postData['fieldSum'] = $request->request->get('bidSum');
-                        $postData['fieldDay'] = $request->request->get('bidDay');
-                        $postData['fieldComment'] = $request->request->get('bidComment');
-                        $actionResponse = Helper::setAuthorBid($postData, $user, $order);
-                        return new Response(json_encode(array('action' => $actionResponse)));*/
+                            foreach ($errors as $index => $error) {
+                                if (isset($error[0])) {
+                                    $arrayResponse[$index] = $error[0]->getMessage();
+                                }
+                            }
+                            return  new Response(json_encode(array('response' => $arrayResponse)));
+                        }
                     } elseif ($action = 'new') {
                         $postData = $request->request->all();
                         $curPage = $postData['page'];
@@ -369,8 +356,7 @@ class AuthorController extends Controller
                 return $this->render(
                     'AcmeSecureBundle:Author:orders_bid.html.twig', array('showWindow' => $showWindow)
                 );
-            }
-            elseif ($type == "work") {
+            } elseif ($type == "work") {
                 if ($request->isXmlHttpRequest()) {
                     $user = Helper::getUserById($user->getId());
                     $curPage = $request->request->get('page');
@@ -416,6 +402,44 @@ class AuthorController extends Controller
                 }
                 return $this->render(
                     'AcmeSecureBundle:Author:orders_work.html.twig', array('showWindow' => $showWindow)
+                );
+            } elseif ($type == "finish") {
+                if ($request->isXmlHttpRequest()) {
+                    $curPage = $request->request->get('page');
+                    $rowsPerPage = $request->request->get('rows');
+                    $firstRowIndex = $curPage * $rowsPerPage - $rowsPerPage;
+                    $orders = Helper::getFinishOrdersForAuthorGrid($firstRowIndex, $rowsPerPage, $user, "getRecords");
+                    $countOrders = Helper::getFinishOrdersForAuthorGrid(null, null, $user, "getCountRecords");
+                    $response = new Response();
+                    $response->total = ceil($countOrders / $rowsPerPage);
+                    $response->records = $countOrders;
+                    $response->page = $curPage;
+                    foreach($orders as $index => $order) {
+                        $task = strip_tags($order->getTask());
+                        $task = stripcslashes($task);
+                        $task = preg_replace("/&nbsp;/", "", $task);
+                        if (strlen($task) >= 20) {
+                            $task = Helper::getCutSentence($task, 45);
+                        }
+                        $dateComplete = Helper::getMonthNameFromDate($order->getDateComplete()->format("d.m.Y H:i"));
+                        $response->rows[$index]['id'] = $order->getNum();
+                        $response->rows[$index]['cell'] = array(
+                            $order->getNum(),
+                            $order->getNum(),
+                            $order->getSubjectOrder()->getChildName(),
+                            $order->getTypeOrder()->getName(),
+                            $order->getTheme(),
+                            $task,
+                            $dateComplete,
+                            $order->getIsDelay(),
+                            $order->getClientDegree(),
+                            $order->getClientComment(),
+                        );
+                    }
+                    return new JsonResponse($response);
+                }
+                return $this->render(
+                    'AcmeSecureBundle:Author:orders_finish.html.twig'
                 );
             }
         }

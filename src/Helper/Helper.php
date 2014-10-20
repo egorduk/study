@@ -167,7 +167,7 @@ class Helper
     }
 
 
-    public static function getRegPassword($userPassword, $salt)
+    public static function getUserPassword($userPassword, $salt)
     {
         $parsedYml = Helper::getEncodersParam();
         $encoder = new MessageDigestPasswordEncoder($parsedYml['algorithm'], $parsedYml['baseAs64'], $parsedYml['iterations']);
@@ -1064,26 +1064,27 @@ class Helper
 
                 $userId = $user->getId();
                 $query = $em->getConnection()
-                    ->prepare("SELECT * FROM (SELECT ub.user_id AS uid,ub.sum,uo.id AS order_id FROM user_bid AS ub JOIN user_order AS uo ON ub.user_order_id = uo.id JOIN `user` AS u ON ub.user_id = u.id WHERE ub.is_show_author = '1' AND u.id = '$userId' ORDER BY ub.date_bid DESC) AS t GROUP BY order_id");
+                    ->prepare("SELECT * FROM (
+                    SELECT ub.user_id AS uid,ub.sum,uo.id AS order_id FROM user_bid AS ub JOIN user_order AS uo ON ub.user_order_id = uo.id JOIN `user` AS u ON ub.user_id = u.id JOIN status_order so ON uo.status_order_id = so.id WHERE so.`code` = 'sa' AND ub.is_show_author = '1' AND u.id = '$userId' ORDER BY ub.date_bid DESC) AS t GROUP BY order_id");
                 $query->execute();
                 $authorBids = $query->fetchAll();
                 $countBids = count($authorBids);
-                var_dump($countBids);die;
+                //var_dump($countBids);die;
 
                 foreach($orders as $order) {
-                    foreach($bids as $bid) {
+                    foreach($bids as $index => $bid) {
                         if ($order->getId() == $bid['order_id']) {
                             $order->setMaxSum($bid['max_sum']);
                             break;
                         }
                     }
-                    foreach($bids as $bid) {
+                    foreach($bids as $index => $bid) {
                         if ($order->getId() == $bid['order_id']) {
                             $order->setMinSum($bid['min_sum']);
                             break;
                         }
                     }
-                    foreach($favoriteOrders as $favoriteOrder) {
+                    foreach($favoriteOrders as $index => $favoriteOrder) {
                         if ($order->getId() == $favoriteOrder->getUserOrder()->getId()) {
                             $order->setIsFavorite(1);
                             break;
@@ -1096,7 +1097,6 @@ class Helper
                         }
                     }
                 }
-
             }
             else {
                 $orders = $em->getRepository(self::$_tableUserOrder)
@@ -1662,7 +1662,8 @@ class Helper
     public static function getUserAvatar($user) {
         $pathAvatar = Helper::getFullPathToAvatar($user);
         $userAvatar = "<img src='$pathAvatar' align='middle' alt='Аватар' width='100px' height='auto' class='thumbnail'>";
-        return $userAvatar;
+        $user->setAvatar($userAvatar);
+        return $user;
     }
 
 
@@ -1772,6 +1773,46 @@ class Helper
                 ->orderBy('uo.date_expire', 'asc')
                 ->setParameter('user', $user)
                 ->setParameter('code', array_values(array('w', 'e', 'g')))
+                ->getQuery()
+                ->getResult();
+            return count($orders);
+        }
+    }
+
+
+    public static function getFinishOrdersForAuthorGrid($firstRowIndex = null, $rowsPerPage = null, $user, $mode) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $user = $em->merge($user);
+        if ($mode == "getRecords") {
+            $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
+                ->innerJoin(self::$_tableUserBid, 'ub', 'WITH', 'ub.user_order = uo')
+                ->andWhere('ub.user = :user')
+                ->andWhere('ub.user_order = uo')
+                ->innerJoin(self::$_tableStatusOrder, 'so', 'WITH', 'so = uo.status_order')
+                ->andWhere('so.code = :code')
+                ->andWhere('ub.is_select_client = 1')
+                ->andWhere('ub.is_confirm_author = 1')
+                ->groupBy('ub.user_order')
+                ->orderBy('uo.date_complete', 'desc')
+                ->setFirstResult($firstRowIndex)
+                ->setMaxResults($rowsPerPage)
+                ->setParameter('user', $user)
+                ->setParameter('code', 'f')
+                ->getQuery()
+                ->getResult();
+            return $orders;
+        } elseif ($mode == 'getCountRecords') {
+            $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
+                ->innerJoin(self::$_tableUserBid, 'ub', 'WITH', 'ub.user_order = uo')
+                ->andWhere('ub.user = :user')
+                ->andWhere('ub.user_order = uo')
+                ->innerJoin(self::$_tableStatusOrder, 'so', 'WITH', 'so = uo.status_order')
+                ->andWhere('so.code = :code')
+                ->andWhere('ub.is_select_client = 1')
+                ->andWhere('ub.is_confirm_author = 1')
+                ->groupBy('ub.user_order')
+                ->setParameter('user', $user)
+                ->setParameter('code', 'f')
                 ->getQuery()
                 ->getResult();
             return count($orders);

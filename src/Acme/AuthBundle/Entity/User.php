@@ -186,7 +186,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->date_reg = new \DateTime();
-        $this->is_active = true;
+        $this->is_active = 1;
         $this->ip_reg = ip2long($_SERVER['REMOTE_ADDR']);
         $this->is_confirm = 0;
         $this->recovery_password = '';

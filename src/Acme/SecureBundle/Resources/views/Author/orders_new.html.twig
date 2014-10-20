@@ -354,7 +354,7 @@
                             {},{},{},{},{}
                     );
                     //$(".ui-widget-content td").removeAttr('title');
-                    grid.setCaption('Таблица новых заказов ' + '<span id="help-popover" class="icon-help-circled" onmouseout="$(this).popover(\'hide\')" onmouseover="$(this).popover(\'show\')" data-container="body" data-placement="bottom"></span>');
+                    grid.setCaption('Таблица новых заказов ' + '<span id="help-popover" class="icon-help-circled" data-container="body" data-placement="bottom"></span>');
                     function initGrid() {
                         grid.contextMenu('contextMenu', {
                             bindings: {
@@ -413,7 +413,7 @@
                     function customNum(cellvalue) {
                         return ("<span class='grid-cell-num'>" + cellvalue + "</span>");
                     }
-                    /*$(".ui-jqgrid-titlebar").live('mouseenter', function() {*/
+                    $(".ui-jqgrid-titlebar").live('mouseenter', function() {
                         $("#help-popover").popover({
                             html : true,
                             content : function() {
@@ -424,7 +424,7 @@
                                         "Для того,чтобы поставить ставку на заказ,нажмите на <div style=\"display: inline-block\"><span class=\"icon-hammer\"></span></div>";
                             }
                         });
-                    /*});*/
+                    });
                 });
                 </script>
             </div>

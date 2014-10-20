@@ -31,8 +31,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ClientController extends Controller
 {
-    private $_tableUserInfo = 'AcmeAuthBundle:UserInfo';
-
     /**
      * @Template()
      * @return array
@@ -40,9 +38,7 @@ class ClientController extends Controller
     public function indexAction(Request $request)
     {
         //throw new NotFoundHttpException('Sorry not existing!');
-        $userId = $this->get('security.context')->getToken()->getUser();
-        //$userId = 1;
-        //$userRole = $this->get('security.context')->getToken()->getRoles();
+        $user = $this->getUser();
         $session = $request->getSession();
         $sessionCreated = $session->getMetadataBag()->getCreated();
         $sessionLifeTime = $session->getMetadataBag()->getLifetime();
@@ -53,9 +49,8 @@ class ClientController extends Controller
         $nowTimestamp = strtotime("now");
         $sessionRemaining = $sessionRemaining - $nowTimestamp;
         $sessionRemaining = Helper::getDateFromTimestamp($sessionRemaining, "i:s");
-        $user = Helper::getUserById($userId);
         $userLogin = $user->getLogin();
-        $userRole = $user->getRole()->getName();
+        $userRole = $user->getUserRole()->getName();
         $avatar = Helper::getUserAvatar($user);
         return array('user' => $user, 'whenLogin' => $whenLogin, 'remainingTime' => $sessionRemaining, 'avatar' => $avatar);
     }

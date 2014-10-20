@@ -11,25 +11,19 @@ class LoginFormValidate
     {
     }
 
-    public function getPassword()
-    {
+    public function getPassword() {
         return $this->fieldPass;
     }
 
-    public function setPassword($password)
-    {
+    public function setPassword($password) {
         $this->fieldPass = $password;
     }
 
-    public function setEmail($email)
-    {
+    public function setEmail($email) {
         $this->fieldEmail = $email;
     }
 
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->fieldEmail;
     }
-
-
 }

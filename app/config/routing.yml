@@ -1,4 +1,4 @@
-index:
+дindex:
   pattern:   /index
   defaults:  { _controller: AcmeIndexBundle:Index:index }
 
@@ -36,7 +36,7 @@ client_reg:
   defaults:  { _controller: AcmeAuthBundle:Auth:reg }
 
 
-##--------------------SecureBundle-----------------------##
+##-------------------------------------------SecureBundle------------------------------------------------------------##
 
 secure_client_index:
   pattern:   /secure/client/index

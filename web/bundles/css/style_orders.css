@@ -1,0 +1,6 @@
+tr.ui-widget-content.jqgrow.alt-row {
+    background: #f3f3f3 none no-repeat;
+}
+tr.ui-widget-content.jqgrow.ui-state-highlight.alt-row {
+     background: url("jqgrid/custom-theme1/images/ui-bg_highlight-soft_25_ffef8f_1x100.png") repeat-x scroll 50% top #ffef8f;
+}
