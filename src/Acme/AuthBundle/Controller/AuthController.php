@@ -2,11 +2,7 @@
 
 namespace Acme\AuthBundle\Controller;
 
-use Acme\AuthBundle\Entity\Country;
-use Acme\AuthBundle\Entity\Openid;
 use Acme\AuthBundle\Entity\User;
-use Acme\AuthBundle\Entity\UserRole;
-use Acme\AuthBundle\Entity\Provider;
 use Acme\AuthBundle\Entity\ClientRegFormValidate;
 use Acme\AuthBundle\Entity\AuthorRegFormValidate;
 use Acme\AuthBundle\Entity\LoginFormValidate;
@@ -22,22 +18,15 @@ use Symfony\Component\Finder\Iterator\SortableIterator;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\Query;
-use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\PropertyAccess\Exception\AccessException;
+use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Core\Util\StringUtils;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Helper\Helper;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\PropertyAccess\Exception\AccessException;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Core\Role\Role;
-use Symfony\Component\Security\Core\SecurityContext;
-use Symfony\Component\Security\Core\Util\StringUtils;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Helper\Helper;
-//use Symfony\Component\Security\Core\Util\SecureRandom;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 require_once '..\src\Acme\AuthBundle\Lib\recaptchalib.php';
 
@@ -50,74 +39,53 @@ class AuthController extends Controller
      */
     public function loginAction(Request $request)
     {
-        /*$loginValidate = new LoginFormValidate();
-        $formLogin = $this->createForm(new LoginForm(), $loginValidate);
-        $formLogin->handleRequest($request);
-        $socialToken = $request->request->get('token');
-        $errorData = "";
-        if (isset($socialToken) && $socialToken != null) {
-            $session = $request->getSession();
-            $session->set('socialToken', $socialToken);
-            $session->save();
-            return new RedirectResponse($this->generateUrl('openid_auth'));
-        }
-        if ($request->isMethod('POST')) {
-            if ($formLogin->get('enter')->isClicked()) {
-                if ($formLogin->isValid()) {
-                    $postData = $request->request->get('formLogin');
-                    $userEmail = $postData['fieldEmail'];
-                    $userPassword = $postData['fieldPass'];
-                    $user = Helper::getUserByEmailAndIsConfirm($userEmail);
-                    if (!$user) {
-                        $errorData = "Введен неправильный Email или пароль!";
-                    } else {
-                        $encodedPassword = Helper::getRegPassword($userPassword, $user->getSalt());
-                        if (!StringUtils::equals($encodedPassword, $user->getPassword())) {
-                            $errorData = "Введен неправильный Email или пароль!";
+        if (!$this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $loginValidate = new LoginFormValidate();
+            $formLogin = $this->createForm(new LoginForm(), $loginValidate);
+            $formLogin->handleRequest($request);
+            $socialToken = $request->request->get('token');
+            $errorData = "";
+            if (isset($socialToken) && $socialToken != null) {
+                $session = $request->getSession();
+                $session->set('socialToken', $socialToken);
+                $session->save();
+                return new RedirectResponse($this->generateUrl('openid_auth'));
+            }
+            if ($request->isMethod('POST')) {
+                if ($formLogin->get('enter')->isClicked()) {
+                    if ($formLogin->isValid()) {
+                        $postData = $request->request->get('formLogin');
+                        $userEmail = $postData['fieldEmail'];
+                        $userPassword = $postData['fieldPass'];
+                        $user = Helper::getUserByEmailAndIsConfirm($userEmail);
+                        if (!$user) {
+                            $errorData = "Введен неправильный Email или пароль";
                         } else {
-                            $roleId = $user->getUserRole()->getId();
-                            if ($roleId == 1) {
-                                $role = 'ROLE_AUTHOR';
+                            $encodedPassword = Helper::getUserPassword($userPassword, $user->getSalt());
+                            if (!StringUtils::equals($encodedPassword, $user->getPassword())) {
+                                $errorData = "Введен неправильный Email или пароль";
                             } else {
-                                $role = 'ROLE_CLIENT';
-                            }
-                            $token = new UsernamePasswordToken($user, null, 'secured_area', array($role));
-                            $this->get('security.context')->setToken($token);
-                            if ($role == 'ROLE_AUTHOR') {
-                                return new RedirectResponse($this->generateUrl('secure_author_index'));
-                            } else {
-                                return new RedirectResponse($this->generateUrl('secure_client_index'));
+                                $roleCode = $user->getUserRole()->getCode();
+                                if ($roleCode == 'author') {
+                                    $role = 'ROLE_AUTHOR';
+                                } elseif ($roleCode == 'client') {
+                                    $role = 'ROLE_CLIENT';
+                                }
+                                $token = new UsernamePasswordToken($user, null, 'secured_area', array($role));
+                                $this->get('security.context')->setToken($token);
+                                if ($role == 'ROLE_AUTHOR') {
+                                    return new RedirectResponse($this->generateUrl('secure_author_index'));
+                                } elseif ($role == 'ROLE_CLIENT') {
+                                    return new RedirectResponse($this->generateUrl('secure_client_index'));
+                                }
                             }
                         }
                     }
                 }
             }
-        }
-        return array('formLogin' => $formLogin->createView(), 'errorData' => $errorData);*/
-        $session = $request->getSession();
-        var_dump($this->getUser());
-        var_dump($request->getSession()->all());
-        // get the login error if there is one
-        if ($request->attributes->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
-            $error = $request->attributes->get(
-                SecurityContextInterface::AUTHENTICATION_ERROR
-            );
-        } elseif (null !== $session && $session->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
-            $error = $session->get(SecurityContextInterface::AUTHENTICATION_ERROR);
-            $session->remove(SecurityContextInterface::AUTHENTICATION_ERROR);
+            return array('formLogin' => $formLogin->createView(), 'errorData' => $errorData);
         } else {
-            $error = '';
         }
-        // last username entered by the user
-        $lastUsername = (null === $session) ? '' : $session->get(SecurityContextInterface::LAST_USERNAME);
-        return $this->render(
-            'AcmeAuthBundle:Auth:login.html.twig',
-            array(
-                // last username entered by the user
-                'last_username' => $lastUsername,
-                'error'         => $error,
-            )
-        );
     }
 
 

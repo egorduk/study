@@ -1,0 +1,15 @@
+.block-theme {
+    font-size: 18px;
+}
+.block-num {
+    font-size: 20px;
+    color: green;
+}
+.thumbnail {
+    margin-bottom: 7px;
+    margin-left: 45px;
+}
+#block-client {
+    width: 200px;
+    text-align: center;
+}

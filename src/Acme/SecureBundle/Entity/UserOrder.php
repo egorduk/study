@@ -106,6 +106,11 @@ class UserOrder extends EntityRepository
     private $is_show_client;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $is_delay;
+
+    /**
      * @ORM\Column(type="string")
      */
     private $files_folder;
@@ -168,6 +173,7 @@ class UserOrder extends EntityRepository
         $this->date_edit = new \DateTime();
         $this->is_show_author = 1;
         $this->is_show_client = 1;
+        $this->is_delay = 0;
         //$this->is_favorite = 0;
         $this->files_dir = "";
         if ($action == "new") {
@@ -286,6 +292,14 @@ class UserOrder extends EntityRepository
 
     public function setIsShowClient($val) {
         $this->is_show_client = $val;
+    }
+
+    public function getIsDelay() {
+        return $this->is_delay;
+    }
+
+    public function setIsDelay($val) {
+        $this->is_delay = $val;
     }
 
     public function getIsShowClient() {

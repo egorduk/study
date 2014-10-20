@@ -3,11 +3,14 @@ Acme\AuthBundle\Entity\ClientRegFormValidate:
         fieldLogin:
           - Length: { min: 5, minMessage: "Слишком короткий логин!" }
           - Regex: { pattern: "/^[a-zA-Z]+$/u", message: "Только латинские буквы!" }
+          - NotBlank: { message: "Введите логин!" }
         fieldPass:
           - Length: { min: 5, minMessage: "Слишком короткий пароль!" }
           - Regex: { pattern: "/^[a-zA-Z0-9]+$/u", message: "Только латинские буквы и цифры!" }
+          - NotBlank: { message: "Введите пароль!" }
         fieldEmail:
           - Email: { message: "Указана неверная почта!", checkMX: false }
+          - NotBlank: { message: "Введите почту!" }
 
 Acme\AuthBundle\Entity\AuthorRegFormValidate:
     properties:
@@ -31,7 +34,10 @@ Acme\AuthBundle\Entity\LoginFormValidate:
     properties:
         fieldEmail:
           - Email: { message: "Указана неверная почта!", checkMX: false }
+          - Length: {max: 25, maxMessage: "Слишком длинная почта!" }
+          - NotBlank: { message: "Введите почту!" }
         fieldPass:
-          - Length: { min: 5, minMessage: "Слишком короткий пароль!" }
+          - Length: { min: 5, max: 10, minMessage: "Слишком короткий пароль!", maxMessage: "Слишком длинный пароль!" }
           - Regex: { pattern: "/^[a-zA-Z0-9]+$/u", message: "Только латинские буквы и цифры!" }
+          - NotBlank: { message: "Введите пароль!" }
 
