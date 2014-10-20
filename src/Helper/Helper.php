@@ -1730,13 +1730,14 @@ class Helper
 
     public static function getWorkOrdersForAuthorGrid($firstRowIndex = null, $rowsPerPage = null, $user, $mode) {
         $em = self::getContainer()->get('doctrine')->getManager();
+        $user = $em->merge($user);
         if ($mode == "getRecords") {
             $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
                 ->select('ub.sum AS curr_sum, uo')
-                ->innerJoin('AcmeSecureBundle:UserBid', 'ub', 'WITH', 'ub.user_order = uo')
+                ->innerJoin(self::$_tableUserBid, 'ub', 'WITH', 'ub.user_order = uo')
                 ->andWhere('ub.user = :user')
                 ->andWhere('ub.user_order = uo')
-                ->innerJoin('AcmeSecureBundle:StatusOrder', 'so', 'WITH', 'so = uo.status_order')
+                ->innerJoin(self::$_tableStatusOrder, 'so', 'WITH', 'so = uo.status_order')
                 ->andWhere('so.code IN(:code)')
                 ->andWhere('ub.is_select_client = 1')
                 ->andWhere('ub.is_confirm_author = 1')
@@ -1757,11 +1758,10 @@ class Helper
             return $orders;
         } elseif ($mode == 'getCountRecords') {
             $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
-                ->select('ub.sum AS curr_sum, uo')
-                ->innerJoin('AcmeSecureBundle:UserBid', 'ub', 'WITH', 'ub.user_order = uo')
+                ->innerJoin(self::$_tableUserBid, 'ub', 'WITH', 'ub.user_order = uo')
                 ->andWhere('ub.user = :user')
                 ->andWhere('ub.user_order = uo')
-                ->innerJoin('AcmeSecureBundle:StatusOrder', 'so', 'WITH', 'so = uo.status_order')
+                ->innerJoin(self::$_tableStatusOrder, 'so', 'WITH', 'so = uo.status_order')
                 ->andWhere('so.code IN(:code)')
                 ->andWhere('ub.is_select_client = 1')
                 ->andWhere('ub.is_confirm_author = 1')
@@ -1770,7 +1770,6 @@ class Helper
                 ->andWhere('ub.is_show_client = 1')
                 ->andWhere('ub.is_show_author = 1')
                 ->groupBy('ub.user_order')
-                ->orderBy('uo.date_expire', 'asc')
                 ->setParameter('user', $user)
                 ->setParameter('code', array_values(array('w', 'e', 'g')))
                 ->getQuery()
@@ -1991,9 +1990,22 @@ class Helper
 
 
     public static function getDiffBetweenDates($date) {
+       //var_dump($date);die;
         $dateNow = new \DateTime();
         return date_diff($dateNow, $date);
         //return date("d", (strtotime($dateNow->format("d.m.Y")) - strtotime($date->format("d.m.Y"))));
+        /*$date1 = strtotime($date->format('Y-m-d H:i'));
+        $date2 = time();
+        $subTime = $date1 - $date2;
+        $y = ($subTime/(60*60*24*365));
+        $d = ($subTime/(60*60*24))%365;
+        $h = ($subTime/(60*60))%24;
+        $m = ($subTime/60)%60;
+        echo "Difference between ".date('Y-m-d H:i:s',$date1)." and ".date('Y-m-d H:i:s',$date2)." is:\n";
+        echo $y." years\n";
+        echo $d." days\n";
+        echo $h." hours\n";
+        echo $m." minutes\n";*/
     }
 
 
@@ -2145,6 +2157,18 @@ class Helper
         $order = $em->getRepository(self::$_tableUserOrder)
             ->findOneByNum($orderNum);
         return $order->getId();
+    }
+
+
+    public static function getRemainingTime($order, $mode) {
+        if ($mode == 'work') {
+            $dateOrderExpire = $order[0]->getDateExpire();
+            $remaining = self::getDiffBetweenDates($dateOrderExpire);
+        } elseif ($mode == 'guarantee') {
+            $dateOrderGuarantee = $order[0]->getDateGuarantee();
+            $remaining = self::getDiffBetweenDates($dateOrderGuarantee);
+        }
+        return $remaining->format('%d дн. %h ч. %i мин.');
     }
 
 }
