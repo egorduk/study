@@ -470,7 +470,7 @@ class AuthorController extends Controller
             }
             //$userId = $this->get('security.context')->getToken()->getUser();
             //$user = Helper::getUserById($userId);
-            $user = $this->get('security.context')->getToken()->getUser();
+            $user = $this->getUser();
             $clientLink = Helper::getUserLinkProfile($order, "client", $this->container);
             $codeStatusOrder = $order->getStatusOrder()->getCode();
             if ($codeStatusOrder == 'w' || $codeStatusOrder == 'g' || $codeStatusOrder == 'e') {

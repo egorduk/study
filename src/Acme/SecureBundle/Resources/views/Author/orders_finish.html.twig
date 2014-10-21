@@ -82,10 +82,9 @@
                                 }
                             });
                         },
-                        onCellSelect: function(rowid, iCol) {
+                        onCellSelect: function(rowid) {
                             var num = $("tr.jqgrow#" + rowid).find('td').eq(1).find('span')[0].innerHTML, url = "{{ path("secure_author_order", {'num': 'num'}) }}";
                             location.href = url.replace("num", num);
-
                         }
                     }).navGrid('#pagerOrders',{view:false,search:false,del:false,add:false,edit:false,refresh:true},
                             {},{},{},{},{}
@@ -123,9 +122,9 @@
                             }
                         });
                     }
-                    function customNum(cellvalue) {
+                    /*function customNum(cellvalue) {
                         return ("<span class='grid-cell-num'>" + cellvalue + "</span>");
-                    }
+                    }*/
                 });
             </script>
         </div>
