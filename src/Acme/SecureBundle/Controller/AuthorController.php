@@ -358,7 +358,6 @@ class AuthorController extends Controller
                 );
             } elseif ($type == "work") {
                 if ($request->isXmlHttpRequest()) {
-                    $user = Helper::getUserById($user->getId());
                     $curPage = $request->request->get('page');
                     $rowsPerPage = $request->request->get('rows');
                     $firstRowIndex = $curPage * $rowsPerPage - $rowsPerPage;
@@ -375,25 +374,26 @@ class AuthorController extends Controller
                         if (strlen($task) >= 20) {
                             $task = Helper::getCutSentence($task, 45);
                         }
-                        $dateOrderExpire = $order[0]->getDateExpire();
-                        $remaining = Helper::getDiffBetweenDates($dateOrderExpire);
-                        $dateExpire = Helper::getMonthNameFromDate($order[0]->getDateExpire()->format("d.m.Y"));
+                        //$dateOrderExpire = $order[0]->getDateExpire();
+                        //$remaining = Helper::getDiffBetweenDates($dateOrderExpire);
+                        $dateExpire = Helper::getMonthNameFromDate($order[0]->getDateExpire()->format("d.m.Y H:i"));
                         //$remaining = (strtotime($dateOrderExpire->format("d.m.Y H:i")) - strtotime($dateNow->format("d.m.Y H:i")))/3600;
                         //$remaining = date_create($remaining);
                         //$remaining = (\DateTime::createFromFormat('d.m.Y', $dateOrderExpire->format("d.m.Y"))->diff(new \DateTime($dateNow->format("d.m.Y")))->days);
                         //var_dump($remaining);die;
                         //$dateExpire = $dateExpire . "<br><span class='gridCellTime'>" . $order[0]->getDateExpire()->format("H:i") . "</span>";
-                        $response->rows[$index]['id'] = $order[0]->getNum();
+                        $response->rows[$index]['id'] = $order[0]->getId();
                         $codeStatusOrder = $order[0]->getStatusOrder()->getCode();
                         $response->rows[$index]['cell'] = array(
-                            $order[0]->getNum(),
+                            $order[0]->getId(),
                             $order[0]->getNum(),
                             $order[0]->getSubjectOrder()->getChildName(),
                             $order[0]->getTypeOrder()->getName(),
                             $order[0]->getTheme(),
                             $task,
                             $dateExpire,
-                            ($codeStatusOrder != "g" && $codeStatusOrder != "e") ? $remaining->format('%d дн. %h ч. %i мин.') : "",
+                          //  ($codeStatusOrder == "w") ? Helper::getRemainingTime($order, 'work') : (($codeStatusOrder == "g") ? Helper::getRemainingTime($order, 'guarantee') : ""),
+                            ($codeStatusOrder == "w") ? Helper::getRemainingTime($order, 'work') : (($codeStatusOrder == "g") ? Helper::getRemainingTime($order, 'guarantee') : ""),
                             $order[0]->getStatusOrder()->getName(),
                             $orders[$index]['curr_sum']
                         );
@@ -470,7 +470,7 @@ class AuthorController extends Controller
             }
             //$userId = $this->get('security.context')->getToken()->getUser();
             //$user = Helper::getUserById($userId);
-            $user = $this->get('security.context')->getToken()->getUser();
+            $user = $this->getUser();
             $clientLink = Helper::getUserLinkProfile($order, "client", $this->container);
             $codeStatusOrder = $order->getStatusOrder()->getCode();
             if ($codeStatusOrder == 'w' || $codeStatusOrder == 'g' || $codeStatusOrder == 'e') {

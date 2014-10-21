@@ -5,12 +5,10 @@
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.fmatter.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.fmatter.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.contextMenu.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/script_posts.js') }}"></script>
             <style type="text/css">
-                .alt-row {
-                    background-color: #f3f3f3;
-                    background-image: none;
-                }
                 .ui-jqgrid .ui-jqgrid-htable th div {
                     height: 21px;
                 }
@@ -30,6 +28,13 @@
                 <div class="">
                     <table id="listOrders"></table>
                     <div id="pagerOrders"></div>
+                </div>
+                <div class="contextMenu" id="contextMenu" style="display:none">
+                    <ul>
+                        <li id="open-in-new-tab">
+                            <span style="font-size:100%">Открыть в новой вкладке</span>
+                        </li>
+                    </ul>
                 </div>
                 <script>
                 $(document).ready(function() {
@@ -63,16 +68,51 @@
                         height: '600',
                         altRows: true,
                         altclass:'alt-row',
-                        onCellSelect: function(rowid, iCol) {
-                            var url = "{{ path("secure_author_order", {'num': 'num'}) }}";
-                            location.href = url.replace("num", rowid);
+                        gridComplete: initMenu,
+                        loadComplete : function() {
+                            grid.find("tr").find("td").removeAttr('title');
+                        },
+                        onCellSelect: function(rowid) {
+                            var num = $("tr.jqgrow#" + rowid).find('td').eq(1).find('span')[0].innerHTML, url = "{{ path("secure_author_order", {'num': 'num'}) }}";
+                            location.href = url.replace("num", num);
                         }
-                    }).navGrid('#pagerOrders',{view:false,search:false,del:false,add:false,edit:false,refresh:true,refreshtext:'Обновить'},
+                    }).navGrid('#pagerOrders',{view:false,search:false,del:false,add:false,edit:false,refresh:true},
                             {},{},{},{},{}
                     );
-                    function customNum(cellvalue) {
-                        return ("<span class='grid-cell-num'>" + cellvalue + "</span>");
+                    function initMenu() {
+                        grid.contextMenu('contextMenu', {
+                            bindings: {
+                                'open-in-new-tab': function () {
+                                    var rowId = grid.getGridParam("selrow");
+                                    var num = $("tr.jqgrow#" + rowId).find('td').eq(1).find('span')[0].innerHTML, url = "{{ path("secure_author_order", {'num': 'num'}) }}";
+                                    url = url.replace("num", num);
+                                    window.open(url, "_blank");
+                                }
+                            },
+                            menuStyle: {
+                                backgroundColor: '#fcfdfd',
+                                border: '1px solid #a6c9e2',
+                                maxWidth: '600px',
+                                width: '100%'
+                            },
+                            itemHoverStyle: {
+                                border: '1px solid #79b7e7',
+                                color: '#1d5987',
+                                backgroundColor: '#d0e5f5'
+                            },
+                            onContextMenu: function (event, menu) {
+                                var rowId = $(event.target).parent("tr").attr("id");
+                                if (!rowId) {
+                                    return false;
+                                }
+                                grid.setSelection(rowId);
+                                return true;
+                            }
+                        });
                     }
+                    /*function customNum(cellvalue) {
+                        return ("<span class='grid-cell-num'>" + cellvalue + "</span>");
+                    }*/
                 });
                 </script>
             </div>

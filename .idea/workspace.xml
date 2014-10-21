@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79828e02-5540-4157-bcbe-d9d8b8a4a7b1" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/js/script_posts.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Helper/Helper.php" afterPath="$PROJECT_DIR$/src/Helper/Helper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_finish.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_finish.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_work.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_work.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="study.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,9 +38,10 @@
       <file leaf-file-name="AuthorController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="483" column="46" selection-start="27163" selection-end="27163" vertical-scroll-proportion="-9.870968" vertical-offset="8714" max-vertical-offset="14740">
+            <state line="464" column="61" selection-start="26059" selection-end="26059" vertical-scroll-proportion="-11.354838" vertical-offset="8250" max-vertical-offset="12034">
               <folding>
-                <element signature="e#19858#23035#0" expanded="false" />
+                <element signature="e#19858#23208#0" expanded="false" />
+                <element signature="e#30374#38299#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -43,43 +50,48 @@
       <file leaf-file-name="Helper.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1305" column="27" selection-start="54279" selection-end="54279" vertical-scroll-proportion="3.612903" vertical-offset="28338" max-vertical-offset="46948">
+            <state line="1329" column="27" selection-start="55242" selection-end="55242" vertical-scroll-proportion="3.612903" vertical-offset="28866" max-vertical-offset="47476">
               <folding>
-                <marker date="1413751754072" expanded="true" signature="4644:4705" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1413751754072" expanded="true" signature="5070:5125" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1413751754072" expanded="true" signature="5495:5556" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1413751754072" expanded="true" signature="11042:11157" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1413751754072" expanded="true" signature="11621:11759" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1413751754072" expanded="true" signature="42829:43286" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-                <marker date="1413751754072" expanded="true" signature="43628:43994" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1413751754072" expanded="true" signature="43664:43788" placeholder="SELECT ub.us..user_bid..." />
-                <marker date="1413751754072" expanded="true" signature="46510:46783" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1413751754072" expanded="true" signature="46525:46649" placeholder="SELECT ub.us..user_bid..." />
-                <marker date="1413751754072" expanded="true" signature="52142:52407" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1413751754072" expanded="true" signature="52157:52274" placeholder="SELECT b.use..user_bid..." />
-                <marker date="1413751754072" expanded="true" signature="78028:78293" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1413751754072" expanded="true" signature="78043:78160" placeholder="SELECT b.use..user_bid..." />
-                <marker date="1413751754072" expanded="true" signature="80109:80204" placeholder="SELECT date_..cancel_request..." />
+                <marker date="1413831072947" expanded="true" signature="4644:4705" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1413831072947" expanded="true" signature="5070:5125" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1413831072947" expanded="true" signature="5495:5556" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1413831072947" expanded="true" signature="11042:11157" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1413831072947" expanded="true" signature="11621:11759" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1413831072947" expanded="true" signature="42829:43286" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+                <marker date="1413831072947" expanded="true" signature="43628:43994" placeholder="SELECT * FRO..user_id..." />
+                <marker date="1413831072947" expanded="true" signature="43664:43788" placeholder="SELECT ub.us..user_bid..." />
+                <marker date="1413831072947" expanded="true" signature="46510:46783" placeholder="SELECT * FRO..user_id..." />
+                <marker date="1413831072947" expanded="true" signature="46525:46649" placeholder="SELECT ub.us..user_bid..." />
+                <marker date="1413831072947" expanded="true" signature="52142:52407" placeholder="SELECT * FRO..user_id..." />
+                <marker date="1413831072947" expanded="true" signature="52157:52274" placeholder="SELECT b.use..user_bid..." />
+                <marker date="1413831072947" expanded="true" signature="77937:78202" placeholder="SELECT * FRO..user_id..." />
+                <marker date="1413831072947" expanded="true" signature="77952:78069" placeholder="SELECT b.use..user_bid..." />
+                <marker date="1413831072947" expanded="true" signature="79183:79448" placeholder="SELECT * FRO..user_id..." />
+                <marker date="1413831072947" expanded="true" signature="79198:79315" placeholder="SELECT b.use..user_bid..." />
+                <marker date="1413831072947" expanded="true" signature="80018:80113" placeholder="SELECT date_..cancel_request..." />
+                <marker date="1413831072947" expanded="true" signature="81072:81167" placeholder="SELECT date_..cancel_request..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="order_work.html.twig" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig">
+      <file leaf-file-name="orders_work.html.twig" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_work.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="24" selection-start="1040" selection-end="1040" vertical-scroll-proportion="0.517179" vertical-offset="0" max-vertical-offset="6688">
+            <state line="74" column="55" selection-start="4737" selection-end="4737" vertical-scroll-proportion="0.51053864" vertical-offset="1192" max-vertical-offset="2728">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="order_finish.html.twig" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_finish.html.twig">
+      <file leaf-file-name="order_work.html.twig" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="94" selection-start="862" selection-end="862" vertical-scroll-proportion="-9.935484" vertical-offset="0" max-vertical-offset="880">
+            <state line="125" column="24" selection-start="7641" selection-end="7641" vertical-scroll-proportion="-6.129032" vertical-offset="1284" max-vertical-offset="5434">
               <folding>
-                <element signature="e#318#348#0" expanded="true" />
+                <element signature="tag#style#0" expanded="false" />
+                <element signature="tag#div#0;tag#div#0;tag#div#0" expanded="false" />
+                <element signature="tag#div#1;tag#div#0;tag#div#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -88,7 +100,7 @@
       <file leaf-file-name="layout_author.html.twig" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/layout_author.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="95" selection-start="1425" selection-end="1512" vertical-scroll-proportion="-12.774194" vertical-offset="0" max-vertical-offset="3718">
+            <state line="4" column="79" selection-start="181" selection-end="252" vertical-scroll-proportion="-2.8387096" vertical-offset="0" max-vertical-offset="3718">
               <folding />
             </state>
           </provider>
@@ -108,18 +120,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state line="5" column="1" selection-start="264" selection-end="264" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="242">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="orders_finish.html.twig" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_finish.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="116" column="40" selection-start="6832" selection-end="6832" vertical-scroll-proportion="-82.32258" vertical-offset="0" max-vertical-offset="3014">
-              <folding>
-                <element signature="e#1505#1525#0" expanded="true" />
-                <element signature="e#1624#1646#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -160,14 +160,16 @@
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_new.html.twig" />
         <option value="$PROJECT_DIR$/app/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/UserOrder.php" />
-        <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_finish.html.twig" />
         <option value="$PROJECT_DIR$/web/bundles/css/style_order.css" />
         <option value="$PROJECT_DIR$/web/bundles/css/style_orders.css" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/layout_author.html.twig" />
         <option value="$PROJECT_DIR$/src/Helper/Helper.php" />
-        <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_finish.html.twig" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig" />
+        <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" />
+        <option value="$PROJECT_DIR$/web/bundles/js/script_posts.js" />
+        <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_finish.html.twig" />
+        <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_work.html.twig" />
       </list>
     </option>
   </component>
@@ -291,6 +293,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="bundles" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bundles" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1451,15 +1475,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32575756" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32575756" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12832801" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.118743345" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19755058" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19169329" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1498,16 +1522,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Services/FileUploader.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="88" selection-start="4146" selection-end="4146" vertical-scroll-proportion="0.0" vertical-offset="1500" max-vertical-offset="2882" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/bundles/punkavefileuploader/js/FileUploader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="12" selection-start="686" selection-end="686" vertical-scroll-proportion="0.0" vertical-offset="66" max-vertical-offset="3146" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/bundles/punkavefileuploader/js/jquery.fileupload.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="140" column="58" selection-start="8041" selection-end="8041" vertical-scroll-proportion="0.0" vertical-offset="2904" max-vertical-offset="21780" />
@@ -1741,61 +1755,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_finish.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="116" column="40" selection-start="6832" selection-end="6832" vertical-scroll-proportion="-82.32258" vertical-offset="0" max-vertical-offset="3014">
-          <folding>
-            <element signature="e#1505#1525#0" expanded="true" />
-            <element signature="e#1624#1646#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/bundles/css/style_orders.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="1" selection-start="264" selection-end="264" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="242">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1305" column="27" selection-start="54279" selection-end="54279" vertical-scroll-proportion="3.612903" vertical-offset="28338" max-vertical-offset="46948">
-          <folding>
-            <marker date="1413751754072" expanded="true" signature="4644:4705" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1413751754072" expanded="true" signature="5070:5125" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1413751754072" expanded="true" signature="5495:5556" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1413751754072" expanded="true" signature="11042:11157" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1413751754072" expanded="true" signature="11621:11759" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1413751754072" expanded="true" signature="42829:43286" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-            <marker date="1413751754072" expanded="true" signature="43628:43994" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413751754072" expanded="true" signature="43664:43788" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1413751754072" expanded="true" signature="46510:46783" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413751754072" expanded="true" signature="46525:46649" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1413751754072" expanded="true" signature="52142:52407" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413751754072" expanded="true" signature="52157:52274" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1413751754072" expanded="true" signature="78028:78293" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1413751754072" expanded="true" signature="78043:78160" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1413751754072" expanded="true" signature="80109:80204" placeholder="SELECT date_..cancel_request..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="483" column="46" selection-start="27163" selection-end="27163" vertical-scroll-proportion="-9.870968" vertical-offset="8714" max-vertical-offset="14740">
-          <folding>
-            <element signature="e#19858#23035#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_finish.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="94" selection-start="862" selection-end="862" vertical-scroll-proportion="-9.935484" vertical-offset="0" max-vertical-offset="880">
-          <folding>
-            <element signature="e#318#348#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1808,14 +1771,84 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/layout_author.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="95" selection-start="1425" selection-end="1512" vertical-scroll-proportion="-12.774194" vertical-offset="0" max-vertical-offset="3718">
+        <state line="4" column="79" selection-start="181" selection-end="252" vertical-scroll-proportion="-2.8387096" vertical-offset="0" max-vertical-offset="3718">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/bundles/js/script_posts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="5" selection-start="153" selection-end="153" vertical-scroll-proportion="0.10034207" vertical-offset="0" max-vertical-offset="877">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1329" column="27" selection-start="55242" selection-end="55242" vertical-scroll-proportion="3.612903" vertical-offset="28866" max-vertical-offset="47476">
+          <folding>
+            <marker date="1413831072947" expanded="true" signature="4644:4705" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1413831072947" expanded="true" signature="5070:5125" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1413831072947" expanded="true" signature="5495:5556" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1413831072947" expanded="true" signature="11042:11157" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1413831072947" expanded="true" signature="11621:11759" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1413831072947" expanded="true" signature="42829:43286" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+            <marker date="1413831072947" expanded="true" signature="43628:43994" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413831072947" expanded="true" signature="43664:43788" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1413831072947" expanded="true" signature="46510:46783" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413831072947" expanded="true" signature="46525:46649" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1413831072947" expanded="true" signature="52142:52407" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413831072947" expanded="true" signature="52157:52274" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1413831072947" expanded="true" signature="77937:78202" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413831072947" expanded="true" signature="77952:78069" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1413831072947" expanded="true" signature="79183:79448" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1413831072947" expanded="true" signature="79198:79315" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1413831072947" expanded="true" signature="80018:80113" placeholder="SELECT date_..cancel_request..." />
+            <marker date="1413831072947" expanded="true" signature="81072:81167" placeholder="SELECT date_..cancel_request..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="464" column="61" selection-start="26059" selection-end="26059" vertical-scroll-proportion="-11.354838" vertical-offset="8250" max-vertical-offset="12034">
+          <folding>
+            <element signature="e#19858#23208#0" expanded="false" />
+            <element signature="e#30374#38299#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_finish.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="94" selection-start="862" selection-end="862" vertical-scroll-proportion="0.35524797" vertical-offset="0" max-vertical-offset="880">
+          <folding>
+            <element signature="e#318#348#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="24" selection-start="1040" selection-end="1040" vertical-scroll-proportion="0.517179" vertical-offset="0" max-vertical-offset="6688">
+        <state line="125" column="24" selection-start="7641" selection-end="7641" vertical-scroll-proportion="-6.129032" vertical-offset="1284" max-vertical-offset="5434">
+          <folding>
+            <element signature="tag#style#0" expanded="false" />
+            <element signature="tag#div#0;tag#div#0;tag#div#0" expanded="false" />
+            <element signature="tag#div#1;tag#div#0;tag#div#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_finish.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="27" selection-start="4966" selection-end="5172" vertical-scroll-proportion="0.6498829" vertical-offset="1315" max-vertical-offset="2992">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_work.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="55" selection-start="4737" selection-end="4737" vertical-scroll-proportion="0.51053864" vertical-offset="1192" max-vertical-offset="2728">
           <folding />
         </state>
       </provider>
