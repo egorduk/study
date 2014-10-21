@@ -3,11 +3,13 @@
 namespace Acme\SecureBundle\Controller;
 
 use Acme\SecureBundle\Entity\Author\MailOptionsFormValidate;
+use Acme\SecureBundle\Entity\CancelRequestFormValidate;
 use Acme\SecureBundle\Form\Author\AuthorCreateMailOptionsForm;
 use Acme\SecureBundle\Form\Author\AuthorCreatePsForm;
 use Acme\SecureBundle\Entity\Author\CreatePsFormValidate;
 use Acme\SecureBundle\Entity\CancelRequest;
 use Acme\SecureBundle\Form\Author\AuthorMailOptionsForm;
+use Acme\SecureBundle\Form\CancelRequestForm;
 use Doctrine\Common\Cache\ApcCache;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\MemcachedCache;
@@ -374,8 +376,6 @@ class AuthorController extends Controller
                         if (strlen($task) >= 20) {
                             $task = Helper::getCutSentence($task, 45);
                         }
-                        //$dateOrderExpire = $order[0]->getDateExpire();
-                        //$remaining = Helper::getDiffBetweenDates($dateOrderExpire);
                         $dateExpire = Helper::getMonthNameFromDate($order[0]->getDateExpire()->format("d.m.Y H:i"));
                         //$remaining = (strtotime($dateOrderExpire->format("d.m.Y H:i")) - strtotime($dateNow->format("d.m.Y H:i")))/3600;
                         //$remaining = date_create($remaining);
@@ -392,7 +392,6 @@ class AuthorController extends Controller
                             $order[0]->getTheme(),
                             $task,
                             $dateExpire,
-                          //  ($codeStatusOrder == "w") ? Helper::getRemainingTime($order, 'work') : (($codeStatusOrder == "g") ? Helper::getRemainingTime($order, 'guarantee') : ""),
                             ($codeStatusOrder == "w") ? Helper::getRemainingTime($order, 'work') : (($codeStatusOrder == "g") ? Helper::getRemainingTime($order, 'guarantee') : ""),
                             $order[0]->getStatusOrder()->getName(),
                             $orders[$index]['curr_sum']
@@ -463,46 +462,60 @@ class AuthorController extends Controller
             //throw new AccessException [500];
         }
         $postDataFormBid = $request->request->get('formBid');
-        if ((is_numeric($num) && $num > 0 && !$request->isXmlHttpRequest()) || (is_numeric($num) && $num > 0 && $request->isXmlHttpRequest() && isset($postDataFormBid))) {
-            $order = Helper::getOrderByNumForAuthor($num);
+        $postDataFormCancelRequest = $request->request->get('formCancelRequest');
+
+        $user = $this->getUser();
+        if (Helper::isCorrectOrder($num) && (!$request->isXmlHttpRequest() || ($request->isXmlHttpRequest() && (isset($postDataFormBid) || isset($postDataFormCancelRequest))))) {
+            $order = Helper::getOrderByNumForAuthor($num, $user);
             if (!$order) {
                 return new RedirectResponse($this->generateUrl('secure_author_index'));
             }
-            //$userId = $this->get('security.context')->getToken()->getUser();
-            //$user = Helper::getUserById($userId);
-            $user = $this->getUser();
             $clientLink = Helper::getUserLinkProfile($order, "client", $this->container);
             $codeStatusOrder = $order->getStatusOrder()->getCode();
             if ($codeStatusOrder == 'w' || $codeStatusOrder == 'g' || $codeStatusOrder == 'e') {
-                $filesOrder = Helper::getFilesForOrder($order);
+                $filesOrder = Helper::getOrderFiles($order);
                 //$session = $request->getSession();
                 //$session->set('curr_order', $order);
                 //$session->set('curr_user', $user);
                 //$session->save();
+                $cancelRequestValidate = new CancelRequestFormValidate();
+                $formCancelRequest = $this->createForm(new CancelRequestForm(), $cancelRequestValidate);
+                if (is_numeric($num) && $num > 0 && $request->isXmlHttpRequest() && isset($postDataFormCancelRequest)) {
+                    $formCancelRequest->handleRequest($request);
+                    if ($request->isMethod('POST')) {
+                        if ($formCancelRequest->isValid()) {
+                            $comment = $postDataFormCancelRequest['fieldComment'];
+                            $isTogetherApply = isset($postDataFormCancelRequest['fieldIsTogetherApply']) ? 1 : 0;;
+                            $percent = $postDataFormCancelRequest['fieldPercent'];
+                            $comment = strip_tags($comment, 'br');
+                            $textPercent = $isTogetherApply ? "По обоюдному согласию с заказчиком." : $percent . '%';
+                            $percent = $isTogetherApply ? 0 : $percent;
+                            $cancelRequest = Helper::createCancelOrderRequest($order, $comment, $percent, $isTogetherApply, $user);
+                            $comment = wordwrap($comment, 60, "\n", true);
+                            $dateVerdict = Helper::getDateVerdict($order);
+                            $obj = array('comment' => $comment, 'percent' => $textPercent, 'dateCreate' => $cancelRequest->getDateCreate()->format('d.m.y H:i:s'));
+                            return new Response(json_encode(array('response' => 'valid', 'obj' => $obj, 'dateVerdict' => $dateVerdict)));
+                        } else {
+                            $arrayResponse = Helper::getFormErrors($formCancelRequest);
+                            return new Response(json_encode(array('response' => $arrayResponse)));
+                        }
+                    }
+                }
                 $cancelRequests = Helper::getCancelRequestsByOrderForAuthor($order);
                 $dateVerdict = Helper::getDateVerdict($order);
                 if ($codeStatusOrder == 'e') {
                     $diffExpired = Helper::getDiffBetweenDates($order->getDateExpire());
                     $order->setDiffExpired($diffExpired);
                 }
-                $clientFiles = Helper::getFilesForOrder($order, 'client', $user);
-                $arrayClientFiles = [];
-                foreach($clientFiles as $file) {
-                    $dir = dirname($_SERVER['SCRIPT_FILENAME']) . Helper::getAttachmentsUrl('client', $num) . $file->getName();
-                    if (file_exists($dir)) {
-                        $file->setUrl(Helper::getFullUrl() . Helper::getAttachmentsUrl('client', $num) . $file->getName());
-                        $file->setThumbnailUrl(Helper::getThumbnailUrlFile($file->getName(), $order));
-                        $arrayClientFiles[] = $file;
-                    }
-                }
+                $clientFiles = Helper::getOrderFiles($order, 'client', $user);
                 return $this->render(
-                    'AcmeSecureBundle:Author:order_work.html.twig', array('order' => $order, 'client' => $clientLink, 'user' => $user, 'cancelRequests' => $cancelRequests, 'dateVerdict' => $dateVerdict, 'clientFiles' => $arrayClientFiles)
+                    'AcmeSecureBundle:Author:order_work.html.twig', array('formCancelRequest' => $formCancelRequest->createView(), 'order' => $order, 'client' => $clientLink, 'user' => $user, 'cancelRequests' => $cancelRequests, 'dateVerdict' => $dateVerdict, 'clientFiles' => $clientFiles)
                 );
             } elseif ($codeStatusOrder == 'f') {
                 return $this->render(
                     'AcmeSecureBundle:Author:order_finish.html.twig', array('order' => $order, 'client' => $clientLink, 'user' => $user)
                 );
-            } else {
+            } elseif ($codeStatusOrder == 'sa') {
                 $bidValidate = new BidFormValidate();
                 $showDialogConfirmSelection = Helper::getClientSelectedBid($user, $order);
                 $formBid = $this->createForm(new BidForm(), $bidValidate);
@@ -513,16 +526,7 @@ class AuthorController extends Controller
                         Helper::setAuthorBid($postData, $user, $order);
                         return new Response(json_encode(array('response' => 'valid')));
                     } else {
-                        $errors = [];
-                        $arrayResponse = [];
-                        foreach ($formBid as $fieldName => $formField) {
-                            $errors[$fieldName] = $formField->getErrors();
-                        }
-                        foreach ($errors as $index => $error) {
-                            if (isset($error[0])) {
-                                $arrayResponse[$index] = $error[0]->getMessage();
-                            }
-                        }
+                        $arrayResponse = Helper::getFormErrors($formBid);
                         return  new Response(json_encode(array('response' => $arrayResponse)));
                     }
                 }
@@ -531,10 +535,10 @@ class AuthorController extends Controller
                 );
             }
         }
-        elseif (is_numeric($num) && $request->isXmlHttpRequest() && $num > 0) {
+        elseif (Helper::isCorrectOrder($num) && $request->isXmlHttpRequest()) {
             //$cache = $this->get('winzou_cache.apc');
             $order = Helper::getOrderByNumForAuthor($num);
-            $user = $this->get('security.context')->getToken()->getUser();
+            $user = $this->getUser();
             //$lastId = $request->request->get('lastId');
             $bids = Helper::getAllAuthorsBidsForSelectedOrder($user, $order);
             $nd = $request->request->get('nd');
@@ -621,23 +625,20 @@ class AuthorController extends Controller
                 } elseif ($action == 'createCancelRequest') {
                     //$user = $this->get('security.context')->getToken()->getUser();
                    // $order = Helper::getOrderByNumForAuthor($num);
-                    $arrayPercent = array('0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100');
+                    /*$arrayPercent = array('0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100');
                     $comment = strip_tags($request->request->get('textarea-comment'), 'br');
                     $togetherApply = $request->request->get('check-together-apply');
                     $togetherApply = $togetherApply == "on" ? 1 : 0;
                     $selectPercent = $togetherApply == 0 ? (int)$request->request->get('select-percent') : 0;
                     $selectPercent = (is_numeric($selectPercent) && in_array($selectPercent, $arrayPercent) && $selectPercent >= 0) ? $selectPercent : 111;
-                    $percent = ($togetherApply || $selectPercent == 111) ? "По обоюдному согласию с заказчиком." : $selectPercent . '%';
-                    $cancelRequest = new CancelRequest();
-                    $cancelRequest->setUserOrder($order);
-                    $cancelRequest->setComment($comment);
-                    $cancelRequest->setPercent($selectPercent);
-                    $cancelRequest->setIsTogetherApply($togetherApply);
-                    $cancelRequest->setCreator($user->getId());
-                    Helper::createCancelOrderRequest($cancelRequest);
-                    $dateCreate = $cancelRequest->getDateCreate()->format("d.m.Y H:i");
-                    $dateVerdict = Helper::getDateVerdict($order);
-                    return new Response(json_encode(array('response' => 'valid', 'dateCreate' => $dateCreate, 'percent' => $percent, 'dateVerdict' => $dateVerdict, 'comment' => wordwrap($comment, 60, "\n", true))));
+                    $textPercent = ($togetherApply || $selectPercent == 111) ? "По обоюдному согласию с заказчиком." : $selectPercent . '%';
+                    $cancelRequest = Helper::createCancelOrderRequest($order, $comment, $selectPercent, $togetherApply, $user);
+                    $comment = wordwrap($comment, 60, "\n", true);
+                    $cancelRequest->setTextPercent($textPercent);
+                    $cancelRequest->setComment($comment);*/
+                    //$dateCreate = $cancelRequest->getDateCreate()->format("d.m.Y H:i");
+                    //$dateVerdict = Helper::getDateVerdict($order);
+                    //return new Response(json_encode(array('response' => 'valid', 'cancelRequest' => $cancelRequest, 'dateVerdict' => $dateVerdict)));
                 } elseif ($action == 'completeOrder') {
                     if ($order->getStatusOrder()->getCode() == 'w' || $order->getStatusOrder()->getCode() == 'e') {
                         $checkCompletedOrder = $request->request->get('checkCompletedOrder');
@@ -658,9 +659,9 @@ class AuthorController extends Controller
         else {
             return new RedirectResponse($this->generateUrl('secure_author_index'));
         }
-        return $this->render(
+        /*return $this->render(
             'AcmeSecureBundle:Author:order_select.html.twig', array('formBid' => "", 'files' => "", 'order' => $order, 'client' => "", 'bids' => $bids, 'showDialogConfirmSelection' => "")
-        );
+        );*/
     }
 
 
@@ -674,7 +675,7 @@ class AuthorController extends Controller
             /*if (false === $this->get('security.context')->isGranted('ROLE_AUTHOR')) {
                 return new RedirectResponse($this->generateUrl('secure_author_index'));
             }*/
-            $user = $this->get('security.context')->getToken()->getUser();
+            $user = $this->getUser();
             $showWindow = false;
             if ($request->isXmlHttpRequest()) {
                 $psId = $request->request->get('psId');

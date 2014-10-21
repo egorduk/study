@@ -1,7 +1,7 @@
 {% extends "AcmeSecureBundle::layout_author.html.twig" %}
 {% block title "Просмотр заказа" %}
     {% block content %}
-       <!--<link rel="stylesheet" href="{{ asset('bundles/js/bootstrap.min.js') }}" />-->
+        <!--<link rel="stylesheet" href="{{ asset('bundles/js/bootstrap.min.js') }}" />-->
         <link href="{{ asset('bundles/css/select2.css') }}" rel="stylesheet" />
         <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-maxlength.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/select2.min.js') }}"></script>
@@ -23,278 +23,304 @@
                 font-size: 18px;
                 cursor: pointer;
             }
-            .invalid {
-                border-color: #E9322D!important;
-                box-shadow: 0 0 5px #E9322D!important;
-                border-radius: 5px;
-            }
             .thumbnail > img {
                 width: 60px;
             }
         </style>
-        <div class="container" data-role="{{ user.userrole.id }}" data-login="{{ user.login }}">
-            <div class="row">
-                <div class="col-md-7">
-                    <p class="block-num">Номер заказа: {{ order.num }}</p>
-                    <hr style="border:solid 1px black">
-                    <p class="block-theme">Тема работы: {{ order.theme }}</p>
-                    <p>Задание: {{ order.task | raw }}</p>
-                    <p>Объем работы: {{ order.countsheet }} стр.</p>
-                    <p>Оригинальность работы: {{ order.originality }}%</p>
-                    <p>Предмет: {{ order.subjectorder.childname }}</p>
-                    <p>Тип работы: {{ order.typeorder.name }}</p>
-                    <p id="block-status-order">Статус заказа: {{ order.statusorder.name }}</p>
-                    {% if order.statusorder.code == 'g' %}
-                        <p id="block-date-guarantee">На гарантии до: {{ order.dateguarantee.format("d.m.Y H:i") }}</p>
-                    {% endif %}
-                    {% if order.statusorder.code == 'e' %}
-                        <p id="block-diff-expired">
-                        {% if order.diffexpired.days > 0 %}
-                            Просрочен на: {{ order.diffexpired.days }} дн.
-                        {% else %}
-                            Просрочен на: {{ order.diffexpired.format("%d дн. %h ч. %i мин.") }}
-                        {% endif %}
-                        </p>
-                    {% endif %}
-                    <p>Дата создания: {{ order.datecreate.format("d.m.Y H:i") }}</p>
-                    <p id="block-date-expire">Выполнение до: {{ order.dateexpire.format("d.m.Y H:i") }}</p>
-                    <p>Заказчик: <div id="block-client">{{ client | raw }}</div></p>
-                </div>
-                <div class="col-md-5">
-                    <!--<div id="chatContainer">
-                        <div id="chatTopBar" class="rounded"></div>
-                        <div id="chatLineHolder"></div>
-                        <div id="chatUsers" class="rounded"></div>
-                        <div id="chatBottomBar" class="rounded">
-                            <div class="tip"></div>
-                            <form id="submitForm" method="post" action="">
-                                <textarea id="chatText" name="chatText" class="rounded form-control" ></textarea>
-                                <input type="button" id="btn-send-msg" class="blueButton btn btn-primary" value="Отправить" />
-                            </form>
-                        </div>
-                    </div>-->
-                </div>
-            </div>
-            {% if (order.statusorder.code == 'w' or order.statusorder.code == 'g' or order.statusorder.code == 'e') %}
-                <div class="row">
-                <div class="col-md-4 col-md-offset-4" id="block-create-cancel-request">
-                    <div class="row">
-                        <span id="create-cancel-request-before" class='label label-primary'>Сформировать отказ от выполнения<span class="icon-down-fat" style="padding-top:5px;padding-left:5px;"></span></span>
-                    </div>
-                    </br>
-                    <div id="block-form-cancel-request" style="display: none">
-                        <form class="form-horizontal" name="form-cancel-request" id="form-cancel-request">
-                            <div class="form-group">
-                                <textarea name="textarea-comment" class="form-control" id="textarea-comment" rows="3" maxlength="255" placeholder="Комментарий"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <select name="select-percent" id="select-percent" class="populate">
-                                    <option></option>
-                                    <option value="0">0%</option>
-                                    <option value="10">10%</option>
-                                    <option value="20">20%</option>
-                                    <option value="30">30%</option>
-                                    <option value="40">40%</option>
-                                    <option value="50">50%</option>
-                                    <option value="60">60%</option>
-                                    <option value="70">70%</option>
-                                    <option value="80">80%</option>
-                                    <option value="90">90%</option>
-                                    <option value="100">100%</option>
-                                </select>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="check-together-apply" id="check-together-apply">По обоюдному согласию с заказчиком
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="button" id="btn-cancel-request" class="btn btn-primary" value="Отменить выполнение заказа">
-                            </div>
-                        </form>
-                    </div>
-                    </br>
-                    <div class="row">
-                        <span style="display: none" id="create-cancel-request-after" class='label label-primary'>Сформировать отказ от выполнения<span class="icon-up-fat" style="padding-top:5px;padding-left:5px;"></span></span>
-                    </div>
-                </div>
-            </div>
-                <div class="row">
-                <div class="col-md-8 col-md-offset-2" id="block-history-cancel-request" style="display: none">
-                    <span id="line-date-verdict" class="label label-primary">Решение будет принято до {{ dateVerdict }}</span>
-                    <div>
-                        <table class="table table-hover table-history-cancel-request">
-                            <thead>
-                            <tr>
-                                <th></th>
-                                <th>Комментарий</th>
-                                <th>Оценка</th>
-                                <th>Дата</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for request in cancelRequests %}
-                                {% if request.creator != user.id %}
-                                    <tr class="danger">
-                                {% else %}
-                                    <tr>
-                                {% endif %}
-                                    <td>
-                                        {% if request.creator == user.id %}
-                                            Вы
-                                        {% else %}
-                                            Заказчик
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        {% if request.comment != "" %}
-                                            {{ request.comment }}
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        {% if request.percent != 111 and request.istogetherapply == 0 %}
-                                            {{ request.percent }}%
-                                        {% else %}
-                                            По обоюдному согласию с заказчиком.
-                                        {% endif %}
-                                    </td>
-                                    <td>{{ request.datecreate.format("d.m.Y H:i") }}</td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+    <div class="container" data-role="{{ user.userrole.id }}" data-login="{{ user.login }}">
+    <div class="row">
+        <div class="col-md-7">
+            <p class="block-num">Номер заказа: {{ order.num }}</p>
+            <hr style="border:solid 1px black">
+            <p class="block-theme">Тема работы: {{ order.theme }}</p>
+            <p>Задание: {{ order.task | raw }}</p>
+            <p>Объем работы: {{ order.countsheet }} стр.</p>
+            <p>Оригинальность работы: {{ order.originality }}%</p>
+            <p>Предмет: {{ order.subjectorder.childname }}</p>
+            <p>Тип работы: {{ order.typeorder.name }}</p>
+            <p id="block-status-order">Статус заказа: {{ order.statusorder.name }}</p>
+            {% if order.statusorder.code == 'g' %}
+                <p id="block-date-guarantee">На гарантии до: {{ order.dateguarantee.format("d.m.Y H:i") }}</p>
             {% endif %}
-            {% if (order.statusorder.code == 'w' or order.statusorder.code == 'g' or order.statusorder.code == 'e') %}
+            {% if order.statusorder.code == 'e' %}
+                <p id="block-diff-expired">
+                    {% if order.diffexpired.days > 0 %}
+                        Просрочен на: {{ order.diffexpired.days }} дн.
+                    {% else %}
+                        Просрочен на: {{ order.diffexpired.format("%d дн. %h ч. %i мин.") }}
+                    {% endif %}
+                </p>
+            {% endif %}
+            <p>Дата создания: {{ order.datecreate.format("d.m.Y H:i") }}</p>
+            <p id="block-date-expire">Выполнение до: {{ order.dateexpire.format("d.m.Y H:i") }}</p>
+            <p>Заказчик: <div id="block-client">{{ client | raw }}</div></p>
+        </div>
+        <div class="col-md-5">
+            <!--<div id="chatContainer">
+                <div id="chatTopBar" class="rounded"></div>
+                <div id="chatLineHolder"></div>
+                <div id="chatUsers" class="rounded"></div>
+                <div id="chatBottomBar" class="rounded">
+                    <div class="tip"></div>
+                    <form id="submitForm" method="post" action="">
+                        <textarea id="chatText" name="chatText" class="rounded form-control" ></textarea>
+                        <input type="button" id="btn-send-msg" class="blueButton btn btn-primary" value="Отправить" />
+                    </form>
+                </div>
+            </div>-->
+        </div>
+    </div>
+    {% if (order.statusorder.code == 'w' or order.statusorder.code == 'g' or order.statusorder.code == 'e') %}
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4" id="block-create-cancel-request">
                 <div class="row">
-                    {% include "PunkAveFileUploaderBundle:Default:templates.html.twig" %}
-                    <div class="col-md-8" id="block-completed-order">
-                        <form class="form-horizontal" name="form-completed-order" id="form-completed-order" enctype="multipart/form-data">
+                    <span id="create-cancel-request-before" class='label label-primary'>Сформировать отказ от выполнения<span class="icon-down-fat" style="padding-top:5px;padding-left:5px;"></span></span>
+                </div>
+                </br>
+                <div id="block-form-cancel-request" style="display: block">
+                    <!--<form class="form-horizontal" name="form-cancel-request" id="form-cancel-request">
+                        <div class="form-group">
+                            <textarea name="textarea-comment" class="form-control" id="textarea-comment" rows="3" maxlength="255" placeholder="Комментарий"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <select name="select-percent" id="select-percent" class="populate">
+                                <option></option>
+                                <option value="0">0%</option>
+                                <option value="10">10%</option>
+                                <option value="20">20%</option>
+                                <option value="30">30%</option>
+                                <option value="40">40%</option>
+                                <option value="50">50%</option>
+                                <option value="60">60%</option>
+                                <option value="70">70%</option>
+                                <option value="80">80%</option>
+                                <option value="90">90%</option>
+                                <option value="100">100%</option>
+                            </select>
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" name="check-completed-order" id="check-completed-order">Заказ выполнен
+                                    <input type="checkbox" name="check-together-apply" id="check-together-apply">По обоюдному согласию с заказчиком
                                 </label>
                             </div>
-                            <div class="input-group">
-                                <p>Мои файлы</p>
-                                <div class="file-uploader"></div>
-                            </div>
-                        </form>
+                        </div>
+                        <div class="form-group">
+                            <input type="button" id="btn-cancel-request" class="btn btn-primary" value="Отменить выполнение заказа">
+                        </div>
+                    </form>-->
+                    {% form_theme formCancelRequest "TwigBundle::layout.html.twig" %}
+                    {{ form_start(formCancelRequest, {'attr': {'id' : 'formCancelRequest'}}) }}
+                    {{ form_label(formCancelRequest.fieldComment) }}
+                    {{ form_errors(formCancelRequest.fieldComment) }}
+                    <div class="input-group form-group">
+                        <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
+                        {{ form_widget(formCancelRequest.fieldComment) }}
                     </div>
-                {% if clientFiles | length != 0 %}
-                    <div class="col-md-4">
-                        <p>Файлы заказчика</p>
-                        {% for file in clientFiles %}
-                            <div class="">
-                                <div class="caption thumbnail">
-                                    <img src="{{ file.thumbnailurl }}" class="thumbnail-image" alt="thumbnail"/>
-                                    <span class="filename">{{ file.name }}</span>
-                                    <p class="">Размер:{{ file.size }}</p>
-                                    <p class="">Загружен:{{ file.dateupload.format("d.m.Y H:i") }}</p>
-                                    <a rel="tooltip" title="Скачать" class="download thumbnail-action btn" target="download" href="{{ file.url }}"><i class="icon-download"></i></a>
-                                </div>
-                            </div>
+                    {{ form_label(formCancelRequest.fieldPercent) }}
+                    {{ form_errors(formCancelRequest.fieldPercent) }}
+                    <div class="input-group form-group">
+                        {{ form_widget(formCancelRequest.fieldPercent) }}
+                    </div>
+                    {{ form_label(formCancelRequest.fieldIsTogetherApply) }}
+                    {{ form_errors(formCancelRequest.fieldIsTogetherApply) }}
+                    <div class="input-group form-group">
+                        {{ form_widget(formCancelRequest.fieldIsTogetherApply) }}
+                    </div>
+                    <div class="input-group form-group">
+                        <label for="formCancelRequest_create" class="btn btn-success"><span class="">&nbspСоздать</span></label>
+                        {{ form_widget(formCancelRequest.create) }}
+                    </div>
+                    {{ form_end(formCancelRequest) }}
+                </div>
+                </br>
+                <div class="row">
+                    <span style="display: none" id="create-cancel-request-after" class='label label-primary'>Сформировать отказ от выполнения<span class="icon-up-fat" style="padding-top:5px;padding-left:5px;"></span></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2" id="block-history-cancel-request" style="display: none">
+                <span id="line-date-verdict" class="label label-primary">Решение будет принято до {{ dateVerdict }}</span>
+                <div>
+                    <table class="table table-hover table-history-cancel-request" style="border: 1px solid #428BCA">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Комментарий</th>
+                            <th>Оценка</th>
+                            <th>Дата</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for request in cancelRequests %}
+                            {% if request.creator != user.id %}
+                                <tr class="danger">
+                            {% else %}
+                                <tr>
+                            {% endif %}
+                            <td>
+                                {% if request.creator == user.id %}
+                                    Вы
+                                {% else %}
+                                    Заказчик
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if request.comment != "" %}
+                                    {{ request.comment }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if request.percent != 111 and request.istogetherapply == 0 %}
+                                    {{ request.percent }}%
+                                {% else %}
+                                    По обоюдному согласию с заказчиком.
+                                {% endif %}
+                            </td>
+                            <td>{{ request.datecreate.format("d.m.Y H:i") }}</td>
+                            </tr>
                         {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if (order.statusorder.code == 'w' or order.statusorder.code == 'g' or order.statusorder.code == 'e') %}
+        <div class="row">
+            {% include "PunkAveFileUploaderBundle:Default:templates.html.twig" %}
+            <div class="col-md-8" id="block-completed-order">
+                <form class="form-horizontal" name="form-completed-order" id="form-completed-order" enctype="multipart/form-data">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="check-completed-order" id="check-completed-order">Заказ выполнен
+                        </label>
                     </div>
-                {% endif %}
+                    <div class="input-group">
+                        <p>Мои файлы</p>
+                        <div class="file-uploader"></div>
+                    </div>
+                </form>
+            </div>
+            {% if clientFiles | length != 0 %}
+                <div class="col-md-4">
+                    <p>Файлы заказчика</p>
+                    {% for file in clientFiles %}
+                        <div class="">
+                            <div class="caption thumbnail">
+                                <img src="{{ file.thumbnailurl }}" class="thumbnail-image" alt="thumbnail"/>
+                                <span class="filename">{{ file.name }}</span>
+                                <p class="">Размер:{{ file.size }}</p>
+                                <p class="">Загружен:{{ file.dateupload.format("d.m.Y H:i") }}</p>
+                                <a rel="tooltip" title="Скачать" class="download thumbnail-action btn" target="download" href="{{ file.url }}"><i class="icon-download"></i></a>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             {% endif %}
-        <script>
-            $(document).ready(function() {
-                //$("#block-history-cancel-request").css('display','none');
-                document.title = "Просмотр заказа № " + {{ order.num }};
-                if ({{ cancelRequests | length }} > 0) {
-                    $("#block-history-cancel-request").show();
+        </div>
+    {% endif %}
+    <script>
+        $(document).ready(function() {
+            //$("#block-history-cancel-request").css('display','none');
+            document.title = "Просмотр заказа № " + {{ order.num }};
+            if ({{ cancelRequests | length }} > 0) {
+                $("#block-history-cancel-request").show();
+            }
+            //$.fn.button.noConflict();
+            var selectPercent = $("#formCancelRequest_fieldPercent"), checkTogetherApply = $("#formCancelRequest_fieldIsTogetherApply"), comment = $("#formCancelRequest_fieldComment");
+            selectPercent.select2({
+                placeholder: "Оцените работу",
+                allowClear: true,
+                width: 200,
+                minimumResultsForSearch: -1
+            }).on("select2-selecting", function(e) {
+                if (e.val != "") {
+                    $(this).removeClass('invalid-selector');
                 }
-                //$.fn.button.noConflict();
-                var selectPercent = $("#select-percent");
-                selectPercent.select2({
-                    placeholder: "Оцените работу",
-                    allowClear: true,
-                    width: 200,
-                    minimumResultsForSearch: -1
-                }).on("select2-selecting", function(e) {
-                    if (e.val != "") {
-                        $(this).removeClass('invalid');
-                    }
-                });
-                var checkTogetherApply = $("#check-together-apply");
-                if (checkTogetherApply[0].checked) {
+            });
+            if (checkTogetherApply[0].checked) {
+                selectPercent.select2("readonly", true);
+            }
+            comment.maxlength({
+                alwaysShow: true
+            });
+            $("#create-cancel-request-before").click(function() {
+                $("#block-form-cancel-request").show();
+                $("#create-cancel-request-after").show();
+                $("#create-cancel-request-before").hide();
+            });
+            $("#create-cancel-request-after").click(function() {
+                $("#block-form-cancel-request").hide();
+                $("#create-cancel-request-after").hide();
+                $("#create-cancel-request-before").show();
+            });
+            checkTogetherApply.click(function() {
+                if (selectPercent[0].readOnly) {
+                    selectPercent.select2("readonly", false);
+                } else {
                     selectPercent.select2("readonly", true);
                 }
-                $("textarea#textarea-comment").maxlength({
-                    alwaysShow: true
-                });
-                $("#create-cancel-request-before").click(function() {
-                    $("#block-form-cancel-request").show();
-                    $("#create-cancel-request-after").show();
-                    $("#create-cancel-request-before").hide();
-                });
-                $("#create-cancel-request-after").click(function() {
-                    $("#block-form-cancel-request").hide();
-                    $("#create-cancel-request-after").hide();
-                    $("#create-cancel-request-before").show();
-                });
-                checkTogetherApply.click(function() {
-                    if (selectPercent[0].readOnly) {
-                        selectPercent.select2("readonly", false);
-                    } else {
-                        selectPercent.select2("readonly", true);
-                    }
-                });
-                $("#btn-cancel-request").click(function() {
-                    var checkTogetherApply = $("#check-together-apply");
-                    if (selectPercent.val() == "" && !selectPercent[0].readOnly && !checkTogetherApply[0].checked) {
-                        selectPercent.addClass("invalid");
-                        return;
-                    }
-                    if (checkTogetherApply[0].checked) {
-                        selectPercent.removeClass("invalid");
-                    }
-                    var formCancelRequest = $("form#form-cancel-request");
-                    $.ajax({
-                        type: 'POST',
-                        data: formCancelRequest.serialize() + '&action=createCancelRequest',
-                        success: function(response) {
-                            var responseObject = window.JSON.parse(response);
-                            if (responseObject.response == "valid") {
-                                $("#block-history-cancel-request").show();
-                                //$("#block-form-cancel-request").remove();
-                                var comment = responseObject.comment, percent = responseObject.percent, dateCreate = responseObject.dateCreate, dateVerdict = responseObject.dateVerdict;
-                                var lineDateVerdict = $("#line-date-verdict");
-                                if (lineDateVerdict.html() == "") {
-                                    lineDateVerdict.append(dateVerdict);
-                                }
-                                $(".table-history-cancel-request tbody").append("<tr><td>Вы</td><td>" + comment + "</td><td>" + percent + "</td><td>" + dateCreate + "</td></tr>");
+            });
+            $("#formCancelRequest_create").click(function() {
+                if (selectPercent.val() == "" && !selectPercent[0].readOnly && !checkTogetherApply[0].checked) {
+                    selectPercent.addClass("invalid-selector");
+                    return;
+                }
+                if (checkTogetherApply[0].checked) {
+                    selectPercent.removeClass("invalid-selector");
+                }
+                var formCancelRequest = $("#formCancelRequest");
+                $.ajax({
+                    type: 'POST',
+                    data: formCancelRequest.serialize() + '&action=createCancelRequest',
+                    success: function(response) {
+                        var responseObject = window.JSON.parse(response);
+                        if (responseObject.response == "valid") {
+                            selectPercent.select2("readonly", false);
+                            selectPercent.select2("val", "");
+                            checkTogetherApply[0].checked = false;
+                            comment.val('');
+                            //console.log(responseObject);
+                            $("#block-history-cancel-request").show();
+                            //$("#block-form-cancel-request").remove();
+                            var authorComment = responseObject.obj.comment, percent = responseObject.obj.percent, dateCreate = responseObject.obj.dateCreate, dateVerdict = responseObject.dateVerdict, lineDateVerdict = $("#line-date-verdict");
+                            if (lineDateVerdict.html() == "") {
+                                lineDateVerdict.append(dateVerdict);
                             }
-                        }
-                    });
-                });
-                var fileUploader = new PunkAveFileUploader({
-                    'uploadUrl': {{ path('secure_author_upload', { editId: order.num, action: 'order' }) | json_encode | raw }},
-                    'thumbnailUrl': {{ ('/study/web/uploads/attachments/orders/' ~ order.num ~ '/thumbnails_author')| json_encode | raw }},
-                    'viewUrl': {{ ('/study/web/uploads/attachments/orders/' ~ order.num ~ '/author')| json_encode | raw }},
-                    'el': '.file-uploader',
-                    'existingFiles': {{ punkave_get_files('attachments/orders/' ~ order.num ~ '/author') | json_encode | raw }},
-                    'delaySubmitWhileUploading': '.edit-form',
-                    'errorCallback': function(errorObj) {
-                        if (errorObj.error == 'maxNumberOfFiles') {
-                            alert("Maximum uploaded files exceeded!");
-                        } else if (errorObj.error == 'acceptFileTypes') {
-                            alert("Такой файл запрещен!");
-                        } else if (errorObj.error == 'minFileSize') {
-                            alert("Файл слишком маленький!");
-                        } else if (errorObj.error == 'maxFileSize') {
-                            alert("Файл слишком большой!");
+                            $(".table-history-cancel-request tbody").append("<tr><td>Вы</td><td>" + authorComment + "</td><td>" + percent + "</td><td>" + dateCreate + "</td></tr>");
+                        } else {
+                            $(".error, .block-error").remove();
+                            $.each(responseObject.response, function(index, value) {
+                                var selector  = "#formCancelRequest_" + index;
+                                $(selector).parent().before("<p class='block-error'><span class='icon-warning error'>" + value + "</span></p>");
+                            });
                         }
                     }
                 });
             });
-        </script>
-        <script type="text/javascript" src="{{ asset('bundles/js/underscore.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/jquery.fileupload.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/jquery.iframe-transport.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/FileUploader.js') }}"></script>
+            var fileUploader = new PunkAveFileUploader({
+                'uploadUrl': {{ path('secure_author_upload', { editId: order.num, action: 'order' }) | json_encode | raw }},
+                'thumbnailUrl': {{ ('/study/web/uploads/attachments/orders/' ~ order.num ~ '/thumbnails_author')| json_encode | raw }},
+                'viewUrl': {{ ('/study/web/uploads/attachments/orders/' ~ order.num ~ '/author')| json_encode | raw }},
+                'el': '.file-uploader',
+                'existingFiles': {{ punkave_get_files('attachments/orders/' ~ order.num ~ '/author') | json_encode | raw }},
+                'delaySubmitWhileUploading': '.edit-form',
+                'errorCallback': function(errorObj) {
+                    if (errorObj.error == 'maxNumberOfFiles') {
+                        alert("Maximum uploaded files exceeded!");
+                    } else if (errorObj.error == 'acceptFileTypes') {
+                        alert("Такой файл запрещен!");
+                    } else if (errorObj.error == 'minFileSize') {
+                        alert("Файл слишком маленький!");
+                    } else if (errorObj.error == 'maxFileSize') {
+                        alert("Файл слишком большой!");
+                    }
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript" src="{{ asset('bundles/js/underscore.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/jquery.fileupload.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/jquery.iframe-transport.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/FileUploader.js') }}"></script>
     {% endblock %}

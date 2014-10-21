@@ -8,10 +8,6 @@
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.fmatter.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.contextMenu.js') }}"></script>
             <style type="text/css">
-                .alt-row {
-                    background-color: #f3f3f3;
-                    background-image: none;
-                }
                 .ui-jqgrid .ui-jqgrid-htable th div {
                     height: 21px;
                 }
@@ -65,9 +61,6 @@
                 }
                 #dialog-message-bid-order {
                     height: auto !important;
-                }
-                .error{
-                    color: red;
                 }
                 /*#jqContextMenu ul{
                     width: auto !important;
@@ -410,9 +403,9 @@
                     function isNormalInteger(str) {
                         return /^\+?([1-9]\d*)$/.test(str);
                     }
-                    function customNum(cellvalue) {
+                    /*function customNum(cellvalue) {
                         return ("<span class='grid-cell-num'>" + cellvalue + "</span>");
-                    }
+                    }*/
                     $(".ui-jqgrid-titlebar").live('mouseenter', function() {
                         $("#help-popover").popover({
                             html : true,

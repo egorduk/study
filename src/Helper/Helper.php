@@ -3,6 +3,7 @@
 namespace Helper;
 
 use Acme\SecureBundle\Entity\AuctionBid;
+use Acme\SecureBundle\Entity\CancelRequest;
 use Acme\SecureBundle\Entity\FavoriteOrder;
 use Acme\SecureBundle\Entity\OrderFile;
 use Acme\SecureBundle\Entity\SelectBid;
@@ -888,12 +889,27 @@ class Helper
     }
 
 
-    public static function getOrderByNumForAuthor($num) {
+    public static function getOrderByNumForAuthor($num, $user) {
         $em = self::getContainer()->get('doctrine')->getManager();
-        $order = $em->getRepository(self::$_tableUserOrder)
-            ->findOneBy(array('is_show_author' => 1, 'is_show_client' => 1, 'num' => $num));
+        $user = $em->merge($user);
+        $order = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
+            ->innerJoin(self::$_tableUserBid, 'ub', 'WITH', 'ub.user_order = uo')
+            ->innerJoin('uo.status_order', 'so')
+            ->andWhere('uo.num = :num')
+            ->andWhere('ub.user = :user')
+            ->andWhere('ub.is_show_client = 1')
+            ->andWhere('ub.is_show_author = 1')
+            ->andWhere('ub.is_select_client = 1')
+            ->andWhere('ub.is_confirm_author = 1')
+            ->andWhere('so.code IN(:code)')
+            ->setParameter('code', array_values(array('sa', 'w', 'e', 'g', /*'ca', */'f', 'cl')))
+            ->setParameter('user', $user)
+            ->setParameter('num', $num)
+            ->setMaxResults('1')
+            ->getQuery()
+            ->getResult();
         if ($order) {
-            return $order;
+            return $order[0];
         }
         return false;
     }
@@ -1201,7 +1217,7 @@ class Helper
     }
 
 
-    public static function getFilesForOrder($order, $mode = null, $user = null) {
+    public static function getOrderFiles($order, $mode = null, $user = null) {
         $em = self::getContainer()->get('doctrine')->getManager();
         if ($mode == 'client' && !empty($user) && !empty($order)) {
             $files = $em->getRepository(self::$_tableOrderFile)->createQueryBuilder('f')
@@ -1215,6 +1231,16 @@ class Helper
                 ->setParameter('user_order', $order)
                 ->getQuery()
                 ->getResult();
+            $arrayClientFiles = [];
+            foreach($files as $file) {
+                $dir = dirname($_SERVER['SCRIPT_FILENAME']) . self::getAttachmentsUrl('client', $order->getNum()) . $file->getName();
+                if (file_exists($dir)) {
+                    $file->setUrl(Helper::getFullUrl() . self::getAttachmentsUrl('client', $order->getNum()) . $file->getName());
+                    $file->setThumbnailUrl(self::getThumbnailUrlFile($file->getName(), $order));
+                    $arrayClientFiles[] = $file;
+                }
+            }
+            return $arrayClientFiles;
         } elseif ($mode == 'author' && !empty($user) && !empty($order)) {
             $files = $em->getRepository(self::$_tableOrderFile)->createQueryBuilder('f')
                 ->innerJoin(self::$_tableUser, 'u', 'WITH', 'f.user = u')
@@ -1896,10 +1922,17 @@ class Helper
     }
 
 
-    public static function createCancelOrderRequest($cancelRequest) {
+    public static function createCancelOrderRequest($order, $comment, $percent, $isTogetherApply, $user) {
         $em = self::getContainer()->get('doctrine')->getManager();
+        $cancelRequest = new CancelRequest();
+        $cancelRequest->setUserOrder($order);
+        $cancelRequest->setComment($comment);
+        $cancelRequest->setPercent($percent);
+        $cancelRequest->setIsTogetherApply($isTogetherApply);
+        $cancelRequest->setCreator($user->getId());
         $em->persist($cancelRequest);
         $em->flush();
+        return $cancelRequest;
     }
 
 
@@ -2169,6 +2202,29 @@ class Helper
             $remaining = self::getDiffBetweenDates($dateOrderGuarantee);
         }
         return $remaining->format('%d дн. %h ч. %i мин.');
+    }
+
+
+    public static function getFormErrors($form) {
+        $errors = [];
+        $arrayResponse = [];
+        foreach ($form as $fieldName => $formField) {
+            $errors[$fieldName] = $formField->getErrors();
+        }
+        foreach ($errors as $index => $error) {
+            if (isset($error[0])) {
+                $arrayResponse[$index] = $error[0]->getMessage();
+            }
+        }
+        return $arrayResponse;
+    }
+
+
+    public static function isCorrectOrder($num) {
+        if (is_numeric($num) && $num > 0) {
+            return true;
+        }
+        return false;
     }
 
 }
