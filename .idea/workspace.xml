@@ -6,10 +6,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79828e02-5540-4157-bcbe-d9d8b8a4a7b1" name="Default" comment="15-10&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/js/script_posts.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Helper/Helper.php" afterPath="$PROJECT_DIR$/src/Helper/Helper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_work.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_work.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="study.iws" />
@@ -33,10 +29,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AuthorController.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="AuthorController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="395" column="143" selection-start="22749" selection-end="22749" vertical-scroll-proportion="-18.51724" vertical-offset="3143" max-vertical-offset="10640">
+            <state line="396" column="67" selection-start="22854" selection-end="22854" vertical-scroll-proportion="0.6499417" vertical-offset="3143" max-vertical-offset="10640">
               <folding>
                 <element signature="e#7773#25378#0" expanded="false" />
                 <element signature="e#13505#16515#0" expanded="false" />
@@ -46,10 +42,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Helper.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Helper.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2162" column="60" selection-start="88949" selection-end="88949" vertical-scroll-proportion="0.57993" vertical-offset="42303" max-vertical-offset="43160">
+            <state line="2169" column="9" selection-start="89299" selection-end="89299" vertical-scroll-proportion="-21.965517" vertical-offset="42303" max-vertical-offset="43160">
               <folding>
                 <marker date="1413823063688" expanded="true" signature="4644:4705" placeholder="SELECT u.id ..AcmeAuthBundle..." />
                 <marker date="1413823063688" expanded="true" signature="5070:5125" placeholder="SELECT u.id ..AcmeAuthBundle..." />
@@ -1593,20 +1589,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="395" column="143" selection-start="22749" selection-end="22749" vertical-scroll-proportion="-18.51724" vertical-offset="3143" max-vertical-offset="10640">
-          <folding>
-            <element signature="e#7773#25378#0" expanded="false" />
-            <element signature="e#13505#16515#0" expanded="false" />
-            <element signature="e#16707#19857#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2162" column="60" selection-start="88949" selection-end="88949" vertical-scroll-proportion="0.57993" vertical-offset="42303" max-vertical-offset="43160">
+        <state line="2169" column="9" selection-start="89299" selection-end="89299" vertical-scroll-proportion="-21.965517" vertical-offset="42303" max-vertical-offset="43160">
           <folding>
             <marker date="1413823063688" expanded="true" signature="4644:4705" placeholder="SELECT u.id ..AcmeAuthBundle..." />
             <marker date="1413823063688" expanded="true" signature="5070:5125" placeholder="SELECT u.id ..AcmeAuthBundle..." />
@@ -1623,6 +1608,17 @@
             <marker date="1413823063688" expanded="true" signature="77937:78202" placeholder="SELECT * FRO..user_id..." />
             <marker date="1413823063688" expanded="true" signature="77952:78069" placeholder="SELECT b.use..user_bid..." />
             <marker date="1413823063688" expanded="true" signature="80018:80113" placeholder="SELECT date_..cancel_request..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="396" column="67" selection-start="22854" selection-end="22854" vertical-scroll-proportion="0.6499417" vertical-offset="3143" max-vertical-offset="10640">
+          <folding>
+            <element signature="e#7773#25378#0" expanded="false" />
+            <element signature="e#13505#16515#0" expanded="false" />
+            <element signature="e#16707#19857#0" expanded="false" />
           </folding>
         </state>
       </provider>
