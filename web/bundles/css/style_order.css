@@ -13,3 +13,14 @@
     width: 200px;
     text-align: center;
 }
+.row label.required:after {
+    content: "*";
+}
+.error {
+    color: red;
+}
+.invalid-selector {
+    border-color: #E9322D!important;
+    box-shadow: 0 0 5px #E9322D!important;
+    border-radius: 5px;
+}

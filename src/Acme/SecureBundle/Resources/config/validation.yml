@@ -64,6 +64,11 @@ Acme\SecureBundle\Entity\Author\CreatePsFormValidate:
         #fieldHiddenPsId:
         #  - NotBlank: { message: "Ошибка!" }
 
+Acme\SecureBundle\Entity\CancelRequestFormValidate:
+    properties:
+        fieldComment:
+          - Length: { max: 255, maxMessage: "Слишком много символов!" }
+
 #Acme\SecureBundle\Entity\Author\MailOptionsFormValidate:
 #    properties:
 #        fieldOptions:

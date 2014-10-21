@@ -59,6 +59,8 @@ class CancelRequest extends EntityRepository
      */
     private $percent;
 
+    private $text_percent;
+
 
     public function __construct(){
         $this->date_create = new \DateTime();
@@ -136,5 +138,9 @@ class CancelRequest extends EntityRepository
 
     public function setCreator($val) {
         $this->creator = $val;
+    }
+
+    public function setTextPercent($val) {
+        $this->text_percent = $val;
     }
 }

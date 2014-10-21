@@ -3,6 +3,7 @@
 namespace Helper;
 
 use Acme\SecureBundle\Entity\AuctionBid;
+use Acme\SecureBundle\Entity\CancelRequest;
 use Acme\SecureBundle\Entity\FavoriteOrder;
 use Acme\SecureBundle\Entity\OrderFile;
 use Acme\SecureBundle\Entity\SelectBid;
@@ -1896,10 +1897,17 @@ class Helper
     }
 
 
-    public static function createCancelOrderRequest($cancelRequest) {
+    public static function createCancelOrderRequest($order, $comment, $percent, $isTogetherApply, $user) {
         $em = self::getContainer()->get('doctrine')->getManager();
+        $cancelRequest = new CancelRequest();
+        $cancelRequest->setUserOrder($order);
+        $cancelRequest->setComment($comment);
+        $cancelRequest->setPercent($percent);
+        $cancelRequest->setIsTogetherApply($isTogetherApply);
+        $cancelRequest->setCreator($user->getId());
         $em->persist($cancelRequest);
         $em->flush();
+        return $cancelRequest;
     }
 
 
@@ -2169,6 +2177,21 @@ class Helper
             $remaining = self::getDiffBetweenDates($dateOrderGuarantee);
         }
         return $remaining->format('%d дн. %h ч. %i мин.');
+    }
+
+
+    public static function getFormErrors($form) {
+        $errors = [];
+        $arrayResponse = [];
+        foreach ($form as $fieldName => $formField) {
+            $errors[$fieldName] = $formField->getErrors();
+        }
+        foreach ($errors as $index => $error) {
+            if (isset($error[0])) {
+                $arrayResponse[$index] = $error[0]->getMessage();
+            }
+        }
+        return $arrayResponse;
     }
 
 }
