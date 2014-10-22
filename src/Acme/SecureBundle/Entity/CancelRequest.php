@@ -60,6 +60,7 @@ class CancelRequest extends EntityRepository
     private $percent;
 
     private $text_percent;
+    private $creator_role;
 
 
     public function __construct(){
@@ -142,5 +143,13 @@ class CancelRequest extends EntityRepository
 
     public function setTextPercent($val) {
         $this->text_percent = $val;
+    }
+
+    public function setCreatorRole($val) {
+        $this->creator_role = $val;
+    }
+
+    public function getCreatorRole() {
+        return $this->creator_role;
     }
 }

@@ -7,13 +7,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 
 class CancelRequestForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('fieldComment', 'textarea', array('label' => 'Комментарий', 'required' => false, 'attr' => array('class' => 'form-control', 'size' => 100, 'maxlength' => 255, 'placeholder' => 'Введите комментарий')))
+        $builder->add('fieldComment', 'textarea', array('label' => 'Комментарий', 'required' => false, 'attr' => array('class' => 'form-control', 'maxlength' => 255, 'placeholder' => 'Введите комментарий')))
             ->add('fieldIsTogetherApply', 'checkbox', array('label' => 'По обоюдному согласию с заказчиком ', 'required' => false, 'attr' => array('class' => 'form-control')))
             ->add('fieldPercent', 'choice', array(
                 'label' => 'Оценка выполненной работы',

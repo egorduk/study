@@ -891,25 +891,42 @@ class Helper
 
     public static function getOrderByNumForAuthor($num, $user) {
         $em = self::getContainer()->get('doctrine')->getManager();
-        $user = $em->merge($user);
         $order = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
-            ->innerJoin(self::$_tableUserBid, 'ub', 'WITH', 'ub.user_order = uo')
             ->innerJoin('uo.status_order', 'so')
             ->andWhere('uo.num = :num')
-            ->andWhere('ub.user = :user')
-            ->andWhere('ub.is_show_client = 1')
-            ->andWhere('ub.is_show_author = 1')
-            ->andWhere('ub.is_select_client = 1')
-            ->andWhere('ub.is_confirm_author = 1')
-            ->andWhere('so.code IN(:code)')
-            ->setParameter('code', array_values(array('sa', 'w', 'e', 'g', /*'ca', */'f', 'cl')))
-            ->setParameter('user', $user)
+            ->andWhere('uo.is_show_client = 1')
+            ->andWhere('uo.is_show_author = 1')
+            ->andWhere('so.code = :code')
             ->setParameter('num', $num)
+            ->setParameter('code', 'sa')
             ->setMaxResults('1')
             ->getQuery()
             ->getResult();
         if ($order) {
             return $order[0];
+        } else {
+            $user = $em->merge($user);
+            $order = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
+                ->innerJoin(self::$_tableUserBid, 'ub', 'WITH', 'ub.user_order = uo')
+                ->innerJoin('uo.status_order', 'so')
+                ->andWhere('uo.num = :num')
+                ->andWhere('ub.user = :user')
+                ->andWhere('ub.is_show_client = 1')
+                ->andWhere('ub.is_show_author = 1')
+                ->andWhere('ub.is_select_client = 1')
+                ->andWhere('ub.is_confirm_author = 1')
+                ->andWhere('uo.is_show_client = 1')
+                ->andWhere('uo.is_show_author = 1')
+                ->andWhere('so.code IN(:code)')
+                ->setParameter('code', array_values(array('w', 'e', 'g', 'f', 'cl', 'co')))
+                ->setParameter('user', $user)
+                ->setParameter('num', $num)
+                ->setMaxResults('1')
+                ->getQuery()
+                ->getResult();
+            if ($order) {
+                return $order[0];
+            }
         }
         return false;
     }
@@ -1128,33 +1145,47 @@ class Helper
     }
 
 
-    public static function getFavoriteOrdersForAuthorGrid($firstRowIndex, $rowsPerPage, $user) {
+    public static function getFavoriteOrdersForAuthorGrid($firstRowIndex = null, $rowsPerPage = null, $user, $mode) {
         $em = self::getContainer()->get('doctrine')->getManager();
-        $orders = $em->getRepository(self::$_tableFavoriteOrder)->createQueryBuilder('fo')
-            ->innerJoin('fo.user_order', 'uo')
-            ->andWhere('fo.user = :user')
-            ->andWhere('uo.is_show_client = 1')
-            ->andWhere('uo.is_show_author = 1')
-            ->setParameter('user', $user)
-            ->setFirstResult($firstRowIndex)
-            ->setMaxResults($rowsPerPage)
-            ->getQuery()
-            ->getResult();
-        $userId = $user->getId();
-        $query = $em->getConnection()
-            ->prepare("SELECT * FROM (SELECT ub.user_id AS uid,ub.sum,uo.id AS order_id FROM user_bid AS ub JOIN user_order AS uo ON ub.user_order_id = uo.id JOIN `user` AS u ON ub.user_id = u.id WHERE ub.is_show_author = '1' AND u.id = '$userId' ORDER BY ub.date_bid DESC) AS t GROUP BY order_id");
-        $query->execute();
-        $bids = $query->fetchAll();
-        foreach($orders as $order) {
-            $userOrder = $order->getUserOrder();
-            foreach($bids as $bid) {
-                if ($userOrder->getId() == $bid['order_id']) {
-                    $userOrder->setAuthorLastSumBid($bid['sum']);
-                    break;
+        $user = $em->merge($user);
+        if ($mode == 'orders') {
+            $orders = $em->getRepository(self::$_tableFavoriteOrder)->createQueryBuilder('fo')
+                ->innerJoin('fo.user_order', 'uo')
+                ->andWhere('fo.user = :user')
+                ->andWhere('uo.is_show_client = 1')
+                ->andWhere('uo.is_show_author = 1')
+                ->setParameter('user', $user)
+                ->setFirstResult($firstRowIndex)
+                ->setMaxResults($rowsPerPage)
+                ->orderBy('fo.date_favorite', 'desc')
+                ->getQuery()
+                ->getResult();
+            $userId = $user->getId();
+            $query = $em->getConnection()
+                ->prepare("SELECT * FROM (SELECT ub.user_id AS uid,ub.sum,uo.id AS order_id FROM user_bid AS ub JOIN user_order AS uo ON ub.user_order_id = uo.id JOIN `user` AS u ON ub.user_id = u.id WHERE ub.is_show_author = '1' AND u.id = '$userId' ORDER BY ub.date_bid DESC) AS t GROUP BY order_id");
+            $query->execute();
+            $bids = $query->fetchAll();
+            foreach($orders as $order) {
+                $userOrder = $order->getUserOrder();
+                foreach($bids as $bid) {
+                    if ($userOrder->getId() == $bid['order_id']) {
+                        $userOrder->setAuthorLastSumBid($bid['sum']);
+                        break;
+                    }
                 }
             }
+            return $orders;
+        } elseif ($mode == 'count') {
+            $orders = $em->getRepository(self::$_tableFavoriteOrder)->createQueryBuilder('fo')
+                ->innerJoin('fo.user_order', 'uo')
+                ->andWhere('fo.user = :user')
+                ->andWhere('uo.is_show_client = 1')
+                ->andWhere('uo.is_show_author = 1')
+                ->setParameter('user', $user)
+                ->getQuery()
+                ->getResult();
+            return count($orders);
         }
-        return $orders;
     }
 
 
@@ -1545,8 +1576,7 @@ class Helper
                     $favoriteOrder->setUser($user);
                     $em->persist($favoriteOrder);
                     $em->flush();
-                }
-                else {
+                } else {
                     $favoriteOrder = $em->getRepository(self::$_tableFavoriteOrder)
                         ->findOneBy(array('user_order' => $order, 'user' => $user));
                     $em->remove($favoriteOrder);
@@ -1870,10 +1900,10 @@ class Helper
         $em = self::getContainer()->get('doctrine')->getManager();
         $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
             ->select('ub.sum AS curr_sum, uo')
-            ->innerJoin('AcmeSecureBundle:UserBid', 'ub', 'WITH', 'ub.user_order = uo')
+            ->innerJoin(self::$_tableUserBid, 'ub', 'WITH', 'ub.user_order = uo')
             ->andWhere('ub.user = :author')
             ->andWhere('ub.user_order = uo')
-            ->innerJoin('AcmeSecureBundle:StatusOrder', 'so', 'WITH', 'so = uo.status_order')
+            ->innerJoin(self::$_tableStatusOrder, 'so', 'WITH', 'so = uo.status_order')
             ->andWhere('uo.user = :client')
             ->andWhere('so.code = :code')
             ->andWhere('uo.is_show_client = 1')
@@ -1904,8 +1934,8 @@ class Helper
     public static function getClientTotalOrders($user) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
-            ->innerJoin('AcmeSecureBundle:StatusOrder', 'so', 'WITH', 'so = uo.status_order')
-            ->innerJoin('AcmeAuthBundle:User', 'u', 'WITH', 'uo.user = u')
+            ->innerJoin(self::$_tableStatusOrder, 'so', 'WITH', 'so = uo.status_order')
+            ->innerJoin(self::$_tableUser, 'u', 'WITH', 'uo.user = u')
             ->andWhere('uo.user = :user')
             ->andWhere('so.code IN(:code)')
             ->andWhere('uo.is_show_client = 1')
@@ -1922,13 +1952,13 @@ class Helper
     }
 
 
-    public static function createCancelOrderRequest($order, $comment, $percent, $isTogetherApply, $user) {
+    public static function createCancelOrderRequest($order, $preparedData, $user) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $cancelRequest = new CancelRequest();
         $cancelRequest->setUserOrder($order);
-        $cancelRequest->setComment($comment);
-        $cancelRequest->setPercent($percent);
-        $cancelRequest->setIsTogetherApply($isTogetherApply);
+        $cancelRequest->setComment($preparedData['comment']);
+        $cancelRequest->setPercent($preparedData['percent']);
+        $cancelRequest->setIsTogetherApply($preparedData['isTogetherApply']);
         $cancelRequest->setCreator($user->getId());
         $em->persist($cancelRequest);
         $em->flush();
@@ -1936,14 +1966,25 @@ class Helper
     }
 
 
-    public static function getCancelRequestsByOrderForAuthor($order) {
+    public static function getCancelRequestsByOrderForAuthor($order, $user) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $cancelRequests = $em->getRepository(self::$_tableCancelRequest)
             ->findBy(
                 array('user_order' => $order),
                 array('date_create' => 'ASC')
             );
-        //var_dump(count($cancelRequests));die;
+        $arrayRoles = ['author' => 'Автор', 'client' => 'Заказчик', 'system' => 'Система'];
+        foreach($cancelRequests as $cancelRequest) {
+            if ($cancelRequest->getCreator() == $user->getId()) {
+                $codeRole = $user->getUserRole()->getCode();
+                $cancelRequest->setCreatorRole($arrayRoles[$codeRole]);
+            } elseif ($cancelRequest->getCreator() == '17') {
+                $cancelRequest->setCreatorRole($arrayRoles['system']);
+            } elseif ($cancelRequest->getCreator() != '17') {
+                $codeRole = $order->getUser()->getUserRole()->getCode();
+                $cancelRequest->setCreatorRole($arrayRoles[$codeRole]);
+            }
+        }
         return $cancelRequests;
     }
 
@@ -2225,6 +2266,33 @@ class Helper
             return true;
         }
         return false;
+    }
+
+
+    public static function prepareCancelRequestData($postData) {
+        $comment = $postData['fieldComment'];
+        $comment = strip_tags($comment, 'br');
+        $isTogetherApply = isset($postData['fieldIsTogetherApply']) ? 1 : 0;;
+        $percent = $postData['fieldPercent'];
+        $textPercent = $isTogetherApply ? "По обоюдному согласию с заказчиком." : $percent . '%';
+        $percent = $isTogetherApply ? 0 : $percent;
+        $arrPreparedData = [];
+        $arrPreparedData['comment'] = $comment;
+        $arrPreparedData['percent'] = $percent;
+        $arrPreparedData['isTogetherApply'] = $isTogetherApply;
+        $arrPreparedData['textPercent'] = $textPercent;
+        return $arrPreparedData;
+    }
+
+
+    public static function getOrderTask($task) {
+        $task = strip_tags($task);
+        $task = stripcslashes($task);
+        $task = preg_replace("/&nbsp;/", "", $task);
+        if (strlen($task) >= 20) {
+            $task = self::getCutSentence($task, 45);
+        }
+        return $task;
     }
 
 }

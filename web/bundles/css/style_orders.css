@@ -4,3 +4,28 @@ tr.ui-widget-content.jqgrow.alt-row {
 tr.ui-widget-content.jqgrow.ui-state-highlight.alt-row {
      background: url("jqgrid/custom-theme1/images/ui-bg_highlight-soft_25_ffef8f_1x100.png") repeat-x scroll 50% top #ffef8f;
 }
+.grid-cell-num {
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+}
+.ui-jqgrid .ui-jqgrid-htable th div {
+    height: 21px !important;
+}
+.gridCellTime {
+    color: blue;
+}
+.grid-cell-author-last-bid {
+    color: #398439;
+    font-size: 17px;
+    font-weight: bold;
+}
+#pagerOrders {
+    height: 30px;
+}
+input.ui-pg-input {
+    height: auto !important;
+}
+.ui-dialog label.required:after {
+    content: "*";
+}
