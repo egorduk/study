@@ -7,13 +7,8 @@
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.fmatter.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.contextMenu.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/script_posts.js') }}"></script>
             <style type="text/css">
-                .ui-jqgrid .ui-jqgrid-htable th div {
-                    height: 21px;
-                }
-                .gridCellTime {
-                    color: blue;
-                }
                 .popover {
                     max-width: none;
                 }
@@ -44,11 +39,7 @@
                 #modal-window {
                     display: none;
                 }
-                .grid-cell-num {
-                    color: black;
-                    font-size: 20px;
-                    font-weight: bold;
-                }
+
                 .cell-author-last-bid {
                     color: green;
                     font-size: 20px !important;
@@ -56,9 +47,6 @@
                 /*#gbox_listOrders {
                     width: 1440px;
                 }*/
-                .row label.required:after {
-                    content: "*";
-                }
                 #dialog-message-bid-order {
                     height: auto !important;
                 }
@@ -102,7 +90,6 @@
                         <div class="input-group">
                         {{ form_label(formBid.isClientDate) }}
                         {{ form_errors(formBid.isClientDate) }}
-
                             {{ form_widget(formBid.isClientDate) }}
                         </div>
                         {{ form_label(formBid.fieldComment) }}
@@ -125,13 +112,7 @@
             <div class="row">
                 <table id="listOrders"></table>
                 <div id="pagerOrders"></div>
-                <div class="contextMenu" id="contextMenu" style="display:none">
-                    <ul>
-                        <li id="open-in-new-tab">
-                            <span style="font-size:100%">Открыть в новой вкладке</span>
-                        </li>
-                    </ul>
-                </div>
+                {% include "AcmeSecureBundle:Secure:layout_context_menu.html.twig" %}
                 <script>
                 $(document).ready(function() {
                     $.fn.button.noConflict();
@@ -179,7 +160,7 @@
                         //width:'1440',
                         //shrinkToFit:false,
                         altclass:'alt-row',
-                        gridComplete: initGrid,
+                        gridComplete: initMenu(),
                         loadComplete : function() {
                             function getRowId(e) {
                                 var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'), rowId = $tr.attr('id');
@@ -188,12 +169,7 @@
                             function getRow(a) {
                                 return a.parent().parent();
                             }
-                            grid.find("tr").each(function() {
-                                var arrayTd = $(this).find("td");
-                                arrayTd.each(function() {
-                                    $(this).removeAttr('title');
-                                });
-                            });
+                            grid.find("tr").find("td").removeAttr('title');
                             $(".favorite-order").click(function(e) {
                                 var rowId = getRowId(e), row = getRow($(this));
                                 if (rowId) {
@@ -348,7 +324,7 @@
                     );
                     //$(".ui-widget-content td").removeAttr('title');
                     grid.setCaption('Таблица новых заказов ' + '<span id="help-popover" class="icon-help-circled" data-container="body" data-placement="bottom"></span>');
-                    function initGrid() {
+                    function initMenu() {
                         grid.contextMenu('contextMenu', {
                             bindings: {
                                 'open-in-new-tab': function () {

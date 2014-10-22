@@ -263,27 +263,21 @@ class AuthorController extends Controller
                     $action = $request->request->get('action');
                     if ($action == 'unfavoriteOrder') {
                         $orderId = $request->request->get('orderId');
-                        $type = "unfavorite";
-                        $actionResponse = Helper::favoriteOrder($orderId, $user, $type);
+                        $actionResponse = Helper::favoriteOrder($orderId, $user, 'unfavorite');
                         return new Response(json_encode(array('action' => $actionResponse)));
                     } else {
                         $curPage = $request->request->get('page');
                         $rowsPerPage = $request->request->get('rows');
-                        $countOrders = Helper::getCountOrdersForAuthorGrid();
                         $firstRowIndex = $curPage * $rowsPerPage - $rowsPerPage;
-                        $orders = Helper::getFavoriteOrdersForAuthorGrid($firstRowIndex, $rowsPerPage, $user);
+                        $countOrders = Helper::getFavoriteOrdersForAuthorGrid(null, null, $user, 'count');
+                        $orders = Helper::getFavoriteOrdersForAuthorGrid($firstRowIndex, $rowsPerPage, $user, 'orders');
                         $response = new Response();
                         $response->total = ceil($countOrders / $rowsPerPage);
                         $response->records = $countOrders;
                         $response->page = $curPage;
                         foreach($orders as $index => $order) {
                             $userOrder = $order->getUserOrder();
-                            $task = strip_tags($userOrder->getTask());
-                            $task = stripcslashes($task);
-                            $task = preg_replace("/&nbsp;/", "", $task);
-                            if (strlen($task) >= 20) {
-                                $task = Helper::getCutSentence($task, 45);
-                            }
+                            $task = Helper::getOrderTask($userOrder->getTask());
                             $dateFavorite = Helper::getMonthNameFromDate($order->getDateFavorite()->format("d.m.Y"));
                             $dateFavorite = $dateFavorite . "<br><span class='gridCellTime'>" . $order->getDateFavorite()->format("H:s") . "</span>";
                             $dateExpire = Helper::getMonthNameFromDate($userOrder->getDateExpire()->format("d.m.Y"));
@@ -328,19 +322,14 @@ class AuthorController extends Controller
                         $response->records = $countOrders;
                         $response->page = $curPage;
                         foreach($orders as $index => $order) {
-                            $task = strip_tags($order[0]->getTask());
-                            $task = stripcslashes($task);
-                            $task = preg_replace("/&nbsp;/", "", $task);
-                            if (strlen($task) >= 20) {
-                                $task = Helper::getCutSentence($task, 45);
-                            }
+                            $task = Helper::getOrderTask($order[0]->getTask());
                             $dateBid = Helper::getMonthNameFromDate($orders[$index]['date_bid']->format("d.m.Y"));
                             $dateBid = $dateBid . "<br><span class='gridCellTime'>" . $orders[$index]['date_bid']->format("H:i") . "</span>";
                             $dateExpire = Helper::getMonthNameFromDate($order[0]->getDateExpire()->format("d.m.Y"));
                             $dateExpire = $dateExpire . "<br><span class='gridCellTime'>" . $order[0]->getDateExpire()->format("H:i") . "</span>";
-                            $response->rows[$index]['id'] = $order[0]->getNum();
+                            $response->rows[$index]['id'] = $order[0]->getId();
                             $response->rows[$index]['cell'] = array(
-                                $order[0]->getNum(),
+                                $order[0]->getId(),
                                 $order[0]->getNum(),
                                 $order[0]->getSubjectOrder()->getChildName(),
                                 $order[0]->getTypeOrder()->getName(),
@@ -414,12 +403,7 @@ class AuthorController extends Controller
                     $response->records = $countOrders;
                     $response->page = $curPage;
                     foreach($orders as $index => $order) {
-                        $task = strip_tags($order->getTask());
-                        $task = stripcslashes($task);
-                        $task = preg_replace("/&nbsp;/", "", $task);
-                        if (strlen($task) >= 20) {
-                            $task = Helper::getCutSentence($task, 45);
-                        }
+                        $task = Helper::getOrderTask($order->getTask());
                         $dateComplete = Helper::getMonthNameFromDate($order->getDateComplete()->format("d.m.Y H:i"));
                         $response->rows[$index]['id'] = $order->getNum();
                         $response->rows[$index]['cell'] = array(
@@ -463,16 +447,17 @@ class AuthorController extends Controller
         }
         $postDataFormBid = $request->request->get('formBid');
         $postDataFormCancelRequest = $request->request->get('formCancelRequest');
-        if ((is_numeric($num) && $num > 0 && !$request->isXmlHttpRequest()) || (is_numeric($num) && $num > 0 && $request->isXmlHttpRequest() && (isset($postDataFormBid) || isset($postDataFormCancelRequest)))) {
-            $order = Helper::getOrderByNumForAuthor($num);
+
+        $user = $this->getUser();
+        if (Helper::isCorrectOrder($num) && (!$request->isXmlHttpRequest() || ($request->isXmlHttpRequest() && (isset($postDataFormBid) || isset($postDataFormCancelRequest))))) {
+            $order = Helper::getOrderByNumForAuthor($num, $user);
             if (!$order) {
                 return new RedirectResponse($this->generateUrl('secure_author_index'));
             }
-            $user = $this->getUser();
             $clientLink = Helper::getUserLinkProfile($order, "client", $this->container);
             $codeStatusOrder = $order->getStatusOrder()->getCode();
-            if ($codeStatusOrder == 'w' || $codeStatusOrder == 'g' || $codeStatusOrder == 'e') {
-                $filesOrder = Helper::getFilesForOrder($order);
+            if ($codeStatusOrder == 'w' || $codeStatusOrder == 'g' || $codeStatusOrder == 'e' || $codeStatusOrder == 'ca') {
+                //$filesOrder = Helper::getOrderFiles($order);
                 //$session = $request->getSession();
                 //$session->set('curr_order', $order);
                 //$session->set('curr_user', $user);
@@ -483,14 +468,10 @@ class AuthorController extends Controller
                     $formCancelRequest->handleRequest($request);
                     if ($request->isMethod('POST')) {
                         if ($formCancelRequest->isValid()) {
-                            $comment = $postDataFormCancelRequest['fieldComment'];
-                            $isTogetherApply = isset($postDataFormCancelRequest['fieldIsTogetherApply']) ? 1 : 0;;
-                            $percent = $postDataFormCancelRequest['fieldPercent'];
-                            $comment = strip_tags($comment, 'br');
-                            $textPercent = $isTogetherApply ? "По обоюдному согласию с заказчиком." : $percent . '%';
-                            $percent = $isTogetherApply ? 0 : $percent;
-                            $cancelRequest = Helper::createCancelOrderRequest($order, $comment, $percent, $isTogetherApply, $user);
-                            $comment = wordwrap($comment, 60, "\n", true);
+                            $preparedData = Helper::prepareCancelRequestData($postDataFormCancelRequest);
+                            $cancelRequest = Helper::createCancelOrderRequest($order, $preparedData, $user);
+                            $comment = wordwrap($preparedData['comment'], 60, "\n", true);
+                            $textPercent = $preparedData['textPercent'];
                             $dateVerdict = Helper::getDateVerdict($order);
                             $obj = array('comment' => $comment, 'percent' => $textPercent, 'dateCreate' => $cancelRequest->getDateCreate()->format('d.m.y H:i:s'));
                             return new Response(json_encode(array('response' => 'valid', 'obj' => $obj, 'dateVerdict' => $dateVerdict)));
@@ -506,18 +487,9 @@ class AuthorController extends Controller
                     $diffExpired = Helper::getDiffBetweenDates($order->getDateExpire());
                     $order->setDiffExpired($diffExpired);
                 }
-                $clientFiles = Helper::getFilesForOrder($order, 'client', $user);
-                $arrayClientFiles = [];
-                foreach($clientFiles as $file) {
-                    $dir = dirname($_SERVER['SCRIPT_FILENAME']) . Helper::getAttachmentsUrl('client', $num) . $file->getName();
-                    if (file_exists($dir)) {
-                        $file->setUrl(Helper::getFullUrl() . Helper::getAttachmentsUrl('client', $num) . $file->getName());
-                        $file->setThumbnailUrl(Helper::getThumbnailUrlFile($file->getName(), $order));
-                        $arrayClientFiles[] = $file;
-                    }
-                }
+                $clientFiles = Helper::getOrderFiles($order, 'client', $user);
                 return $this->render(
-                    'AcmeSecureBundle:Author:order_work.html.twig', array('formCancelRequest' => $formCancelRequest->createView(), 'order' => $order, 'client' => $clientLink, 'user' => $user, 'cancelRequests' => $cancelRequests, 'dateVerdict' => $dateVerdict, 'clientFiles' => $arrayClientFiles)
+                    'AcmeSecureBundle:Author:order_work.html.twig', array('formCancelRequest' => $formCancelRequest->createView(), 'order' => $order, 'client' => $clientLink, 'user' => $user, 'cancelRequests' => $cancelRequests, 'dateVerdict' => $dateVerdict, 'clientFiles' => $clientFiles)
                 );
             } elseif ($codeStatusOrder == 'f') {
                 return $this->render(
@@ -543,9 +515,9 @@ class AuthorController extends Controller
                 );
             }
         }
-        elseif (is_numeric($num) && $request->isXmlHttpRequest() && $num > 0) {
+        elseif (Helper::isCorrectOrder($num) && $request->isXmlHttpRequest()) {
             //$cache = $this->get('winzou_cache.apc');
-            $order = Helper::getOrderByNumForAuthor($num);
+            $order = Helper::getOrderByNumForAuthor($num, $user);
             $user = $this->getUser();
             //$lastId = $request->request->get('lastId');
             $bids = Helper::getAllAuthorsBidsForSelectedOrder($user, $order);
@@ -667,9 +639,9 @@ class AuthorController extends Controller
         else {
             return new RedirectResponse($this->generateUrl('secure_author_index'));
         }
-        return $this->render(
+        /*return $this->render(
             'AcmeSecureBundle:Author:order_select.html.twig', array('formBid' => "", 'files' => "", 'order' => $order, 'client' => "", 'bids' => $bids, 'showDialogConfirmSelection' => "")
-        );
+        );*/
     }
 
 
