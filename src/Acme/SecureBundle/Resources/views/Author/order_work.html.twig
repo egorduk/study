@@ -16,18 +16,12 @@
                 border: 1px solid #000000;
                 width: 300px;
             }
-            textarea {
-                resize: none;
-            }
             #block-create-cancel-request .label {
                 font-size: 18px;
                 cursor: pointer;
             }
-            .thumbnail > img {
-                width: 60px;
-            }
         </style>
-    <div class="container" data-role="{{ user.userrole.id }}" data-login="{{ user.login }}">
+        <div class="container">
     <div class="row">
         <div class="col-md-7">
             <p class="block-num">Номер заказа: {{ order.num }}</p>
@@ -78,35 +72,6 @@
                 </div>
                 </br>
                 <div id="block-form-cancel-request" style="display: block">
-                    <!--<form class="form-horizontal" name="form-cancel-request" id="form-cancel-request">
-                        <div class="form-group">
-                            <textarea name="textarea-comment" class="form-control" id="textarea-comment" rows="3" maxlength="255" placeholder="Комментарий"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <select name="select-percent" id="select-percent" class="populate">
-                                <option></option>
-                                <option value="0">0%</option>
-                                <option value="10">10%</option>
-                                <option value="20">20%</option>
-                                <option value="30">30%</option>
-                                <option value="40">40%</option>
-                                <option value="50">50%</option>
-                                <option value="60">60%</option>
-                                <option value="70">70%</option>
-                                <option value="80">80%</option>
-                                <option value="90">90%</option>
-                                <option value="100">100%</option>
-                            </select>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="check-together-apply" id="check-together-apply">По обоюдному согласию с заказчиком
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="button" id="btn-cancel-request" class="btn btn-primary" value="Отменить выполнение заказа">
-                        </div>
-                    </form>-->
                     {% form_theme formCancelRequest "TwigBundle::layout.html.twig" %}
                     {{ form_start(formCancelRequest, {'attr': {'id' : 'formCancelRequest'}}) }}
                     {{ form_label(formCancelRequest.fieldComment) }}
@@ -128,6 +93,10 @@
                     <div class="input-group form-group">
                         <label for="formCancelRequest_create" class="btn btn-success"><span class="">&nbspСоздать</span></label>
                         {{ form_widget(formCancelRequest.create) }}
+                        {% if (cancelRequests | length) > 0 %}
+                        <label for="formCancelRequest_cancel" class="btn btn-success"><span class="">&nbspОтменить заявку</span></label>
+                        {{ form_widget(formCancelRequest.cancel) }}
+                        {% endif %}
                     </div>
                     {{ form_end(formCancelRequest) }}
                 </div>
@@ -137,55 +106,13 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2" id="block-history-cancel-request" style="display: none">
-                <span id="line-date-verdict" class="label label-primary">Решение будет принято до {{ dateVerdict }}</span>
-                <div>
-                    <table class="table table-hover table-history-cancel-request" style="border: 1px solid #428BCA">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th>Комментарий</th>
-                            <th>Оценка</th>
-                            <th>Дата</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for request in cancelRequests %}
-                            {% if request.creator != user.id %}
-                                <tr class="danger">
-                            {% else %}
-                                <tr>
-                            {% endif %}
-                            <td>
-                                {% if request.creator == user.id %}
-                                    Вы
-                                {% else %}
-                                    Заказчик
-                                {% endif %}
-                            </td>
-                            <td>
-                                {% if request.comment != "" %}
-                                    {{ request.comment }}
-                                {% endif %}
-                            </td>
-                            <td>
-                                {% if request.percent != 111 and request.istogetherapply == 0 %}
-                                    {{ request.percent }}%
-                                {% else %}
-                                    По обоюдному согласию с заказчиком.
-                                {% endif %}
-                            </td>
-                            <td>{{ request.datecreate.format("d.m.Y H:i") }}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+        {% if (cancelRequests | length) > 0 %}
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2" id="block-history-cancel-request">
+                    {% include "AcmeSecureBundle:Secure:layout_table_cancel_request.html.twig" %}
                 </div>
             </div>
-        </div>
-    {% endif %}
-    {% if (order.statusorder.code == 'w' or order.statusorder.code == 'g' or order.statusorder.code == 'e') %}
+        {% endif %}
         <div class="row">
             {% include "PunkAveFileUploaderBundle:Default:templates.html.twig" %}
             <div class="col-md-8" id="block-completed-order">
@@ -221,11 +148,7 @@
     {% endif %}
     <script>
         $(document).ready(function() {
-            //$("#block-history-cancel-request").css('display','none');
             document.title = "Просмотр заказа № " + {{ order.num }};
-            if ({{ cancelRequests | length }} > 0) {
-                $("#block-history-cancel-request").show();
-            }
             //$.fn.button.noConflict();
             var selectPercent = $("#formCancelRequest_fieldPercent"), checkTogetherApply = $("#formCancelRequest_fieldIsTogetherApply"), comment = $("#formCancelRequest_fieldComment");
             selectPercent.select2({
@@ -261,6 +184,9 @@
                     selectPercent.select2("readonly", true);
                 }
             });
+            $("#formCancelRequest_cancel").click(function() {
+
+            });
             $("#formCancelRequest_create").click(function() {
                 if (selectPercent.val() == "" && !selectPercent[0].readOnly && !checkTogetherApply[0].checked) {
                     selectPercent.addClass("invalid-selector");
@@ -275,6 +201,7 @@
                     data: formCancelRequest.serialize() + '&action=createCancelRequest',
                     success: function(response) {
                         var responseObject = window.JSON.parse(response);
+                        $(".error, .block-error").remove();
                         if (responseObject.response == "valid") {
                             selectPercent.select2("readonly", false);
                             selectPercent.select2("val", "");
@@ -282,14 +209,12 @@
                             comment.val('');
                             //console.log(responseObject);
                             $("#block-history-cancel-request").show();
-                            //$("#block-form-cancel-request").remove();
                             var authorComment = responseObject.obj.comment, percent = responseObject.obj.percent, dateCreate = responseObject.obj.dateCreate, dateVerdict = responseObject.dateVerdict, lineDateVerdict = $("#line-date-verdict");
                             if (lineDateVerdict.html() == "") {
                                 lineDateVerdict.append(dateVerdict);
                             }
-                            $(".table-history-cancel-request tbody").append("<tr><td>Вы</td><td>" + authorComment + "</td><td>" + percent + "</td><td>" + dateCreate + "</td></tr>");
+                            $(".table-history-cancel-request tbody").append("<tr><td>Автор</td><td>" + authorComment + "</td><td>" + percent + "</td><td>" + dateCreate + "</td></tr>");
                         } else {
-                            $(".error, .block-error").remove();
                             $.each(responseObject.response, function(index, value) {
                                 var selector  = "#formCancelRequest_" + index;
                                 $(selector).parent().before("<p class='block-error'><span class='icon-warning error'>" + value + "</span></p>");

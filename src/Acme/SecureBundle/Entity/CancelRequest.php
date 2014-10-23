@@ -24,11 +24,6 @@ class CancelRequest extends EntityRepository
     private $date_create;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $date_verdict;
-
-    /**
      * @ORM\ManyToOne(targetEntity="UserOrder", inversedBy="link_cancel_request_user_order", cascade={"all"})
      * @ORM\JoinColumn(name="user_order_id", referencedColumnName="id")
      **/
@@ -60,6 +55,7 @@ class CancelRequest extends EntityRepository
     private $percent;
 
     private $text_percent;
+    private $creator_role;
 
 
     public function __construct(){
@@ -124,14 +120,6 @@ class CancelRequest extends EntityRepository
         return $this->verdict;
     }
 
-    public function getDateVerdict() {
-        return $this->date_verdict;
-    }
-
-    public function setDateVerdict($date) {
-        $this->date_verdict = $date;
-    }
-
     public function getCreator() {
         return $this->creator;
     }
@@ -142,5 +130,13 @@ class CancelRequest extends EntityRepository
 
     public function setTextPercent($val) {
         $this->text_percent = $val;
+    }
+
+    public function setCreatorRole($val) {
+        $this->creator_role = $val;
+    }
+
+    public function getCreatorRole() {
+        return $this->creator_role;
     }
 }

@@ -464,7 +464,19 @@ class AuthorController extends Controller
                 //$session->save();
                 $cancelRequestValidate = new CancelRequestFormValidate();
                 $formCancelRequest = $this->createForm(new CancelRequestForm(), $cancelRequestValidate);
-                if (is_numeric($num) && $num > 0 && $request->isXmlHttpRequest() && isset($postDataFormCancelRequest)) {
+                $cancelRequests = Helper::getCancelRequestsByOrder($order, $user);
+                if (count($cancelRequests) > 0) {
+                    $dateVerdict = Helper::getDateVerdict($order);
+                    $isVerdict = Helper::isVerdictCancelRequest($cancelRequests);
+                    if ($isVerdict) {
+                        $order = Helper::setOrderStatus($order, 'cancel');
+                        $codeStatusOrder = $order->getStatusOrder()->getCode();
+                        //$isVerdict = false;
+                    }
+                } else {
+                    $cancelRequests = null;
+                }
+                if (Helper::isCorrectOrder($num) && $request->isXmlHttpRequest() && isset($postDataFormCancelRequest)) {
                     $formCancelRequest->handleRequest($request);
                     if ($request->isMethod('POST')) {
                         if ($formCancelRequest->isValid()) {
@@ -472,7 +484,7 @@ class AuthorController extends Controller
                             $cancelRequest = Helper::createCancelOrderRequest($order, $preparedData, $user);
                             $comment = wordwrap($preparedData['comment'], 60, "\n", true);
                             $textPercent = $preparedData['textPercent'];
-                            $dateVerdict = Helper::getDateVerdict($order);
+                            //$dateVerdict = Helper::getDateVerdict($order);
                             $obj = array('comment' => $comment, 'percent' => $textPercent, 'dateCreate' => $cancelRequest->getDateCreate()->format('d.m.y H:i:s'));
                             return new Response(json_encode(array('response' => 'valid', 'obj' => $obj, 'dateVerdict' => $dateVerdict)));
                         } else {
@@ -481,17 +493,21 @@ class AuthorController extends Controller
                         }
                     }
                 }
-                $cancelRequests = Helper::getCancelRequestsByOrderForAuthor($order);
-                $dateVerdict = Helper::getDateVerdict($order);
                 if ($codeStatusOrder == 'e') {
                     $diffExpired = Helper::getDiffBetweenDates($order->getDateExpire());
                     $order->setDiffExpired($diffExpired);
                 }
+                if ($codeStatusOrder == 'cl') {
+                    return $this->render(
+                        'AcmeSecureBundle:Author:order_finish.html.twig', array('formCancelRequest' => $formCancelRequest->createView(), 'order' => $order, 'client' => $clientLink, 'user' => $user, 'cancelRequests' => $cancelRequests)
+                    );
+                }
                 $clientFiles = Helper::getOrderFiles($order, 'client', $user);
+
                 return $this->render(
                     'AcmeSecureBundle:Author:order_work.html.twig', array('formCancelRequest' => $formCancelRequest->createView(), 'order' => $order, 'client' => $clientLink, 'user' => $user, 'cancelRequests' => $cancelRequests, 'dateVerdict' => $dateVerdict, 'clientFiles' => $clientFiles)
                 );
-            } elseif ($codeStatusOrder == 'f') {
+            } elseif ($codeStatusOrder == 'f' || $codeStatusOrder == 'cl') {
                 return $this->render(
                     'AcmeSecureBundle:Author:order_finish.html.twig', array('order' => $order, 'client' => $clientLink, 'user' => $user)
                 );

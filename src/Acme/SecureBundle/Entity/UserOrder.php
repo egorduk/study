@@ -39,6 +39,11 @@ class UserOrder extends EntityRepository
     /**
      * @ORM\Column(type="datetime")
      */
+    private $date_cancel;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
     private $date_complete;
 
     /**
@@ -411,5 +416,13 @@ class UserOrder extends EntityRepository
 
     public function getDiffExpired() {
         return $this->diffExpired;
+    }
+
+    public function setDateCancel($val) {
+        $this->date_cancel = $val;
+    }
+
+    public function getDateCancel() {
+        return $this->date_cancel;
     }
 }

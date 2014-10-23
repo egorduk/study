@@ -1966,14 +1966,25 @@ class Helper
     }
 
 
-    public static function getCancelRequestsByOrderForAuthor($order) {
+    public static function getCancelRequestsByOrder($order, $user) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $cancelRequests = $em->getRepository(self::$_tableCancelRequest)
             ->findBy(
                 array('user_order' => $order),
                 array('date_create' => 'ASC')
             );
-        //var_dump(count($cancelRequests));die;
+        $arrayRoles = ['author' => 'Автор', 'client' => 'Заказчик', 'system' => 'Система'];
+        foreach($cancelRequests as $cancelRequest) {
+            if ($cancelRequest->getCreator() == $user->getId()) {
+                $codeRole = $user->getUserRole()->getCode();
+                $cancelRequest->setCreatorRole($arrayRoles[$codeRole]);
+            } elseif ($cancelRequest->getCreator() == '17') {
+                $cancelRequest->setCreatorRole($arrayRoles['system']);
+            } elseif ($cancelRequest->getCreator() != '17') {
+                $codeRole = $order->getUser()->getUserRole()->getCode();
+                $cancelRequest->setCreatorRole($arrayRoles[$codeRole]);
+            }
+        }
         return $cancelRequests;
     }
 
@@ -1982,10 +1993,12 @@ class Helper
         $em = self::getContainer()->get('doctrine')->getManager();
         $orderId = $order->getId();
         $query = $em->getConnection()
-            ->prepare("SELECT date_verdict FROM cancel_request WHERE cancel_request.user_order_id = '$orderId' LIMIT 1");
+            ->prepare("SELECT date_create FROM cancel_request WHERE cancel_request.user_order_id = '$orderId' LIMIT 1");
         $query->execute();
-        $dateVerdict = $query->fetch();
-        $dateVerdict = date("d.m.Y H:i") < date("d.m.Y H:i", strtotime($dateVerdict['date_verdict'])) ? date("d.m.Y H:i", strtotime($dateVerdict['date_verdict'])) : "";
+        $result = $query->fetch();
+        //??? days for verdict
+        $dateVerdict = date("d.m.Y H:i", strtotime($result['date_create'] . ' + 3 days'));
+        $dateVerdict = date("d.m.Y H:i") <  $dateVerdict ? $dateVerdict : "";
         return $dateVerdict;
     }
 
@@ -2036,8 +2049,8 @@ class Helper
 
     public static function setOrderStatus($order, $statusName) {
         $em = self::getContainer()->get('doctrine')->getManager();
-        $arrayStatus = ['completed' => 'co', 'work' => 'w', 'guarantee' => 'g'];
-        $newStatusCode = $arrayStatus[$statusName];
+        $arrayStatuses = ['completed' => 'co', 'work' => 'w', 'guarantee' => 'g', 'cancel' => 'cl'];
+        $newStatusCode = $arrayStatuses[$statusName];
         $status = $em->getRepository(self::$_tableStatusOrder)
             ->findOneByCode($newStatusCode);
         if ($newStatusCode == 'g') {
@@ -2048,6 +2061,11 @@ class Helper
             $order->setDateGuarantee($dateGuarantee);
             $em->flush();
             //return $status->getName();
+        } elseif ($newStatusCode == 'cl') {
+            $order->setStatusOrder($status);
+            $order->setDateCancel(new \DateTime());
+            $em->flush();
+            return $order;
         }
     }
 
@@ -2282,6 +2300,17 @@ class Helper
             $task = self::getCutSentence($task, 45);
         }
         return $task;
+    }
+
+
+    public static function isVerdictCancelRequest($cancelRequests) {
+        foreach ($cancelRequests as $cancelRequest) {
+            $creatorId = $cancelRequest->getCreator();
+            if ($creatorId == 17) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

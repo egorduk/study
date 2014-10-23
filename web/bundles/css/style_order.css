@@ -24,3 +24,6 @@
     box-shadow: 0 0 5px #E9322D!important;
     border-radius: 5px;
 }
+textarea {
+    resize: none;
+}
