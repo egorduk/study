@@ -31,6 +31,7 @@ use Acme\SecureBundle\Form\Author\AuthorProfileForm;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Acme\SecureBundle\Entity\Author\BidFormValidate;
 use Acme\SecureBundle\Form\Author\BidForm;
+use Symfony\Component\Security\Csrf\CsrfToken;
 
 
 class AuthorController extends Controller
@@ -479,6 +480,13 @@ class AuthorController extends Controller
                 if (Helper::isCorrectOrder($num) && $request->isXmlHttpRequest() && isset($postDataFormCancelRequest)) {
                     $formCancelRequest->handleRequest($request);
                     if ($request->isMethod('POST')) {
+
+                        //$token = $request->request->get('formCancelRequest');
+                        $token = $postDataFormCancelRequest['_token'];
+                        $csrf_token = new CsrfToken('', $token);
+                        //var_dump($csrf_token);die;
+                        var_dump($this->get('security.csrf.token_manager')->isTokenValid($csrf_token));die;
+
                         if ($formCancelRequest->isValid()) {
                             $preparedData = Helper::prepareCancelRequestData($postDataFormCancelRequest);
                             $cancelRequest = Helper::createCancelOrderRequest($order, $preparedData, $user);

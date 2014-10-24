@@ -93,7 +93,7 @@
                     <div class="input-group form-group">
                         <label for="formCancelRequest_create" class="btn btn-success"><span class="">&nbspСоздать</span></label>
                         {{ form_widget(formCancelRequest.create) }}
-                        {% if (cancelRequests | length) > 0 %}
+                        {% if (cancelRequests | length) > 0 and cancelRequests[0].creator == user.id %}
                         <label for="formCancelRequest_cancel" class="btn btn-success"><span class="">&nbspОтменить заявку</span></label>
                         {{ form_widget(formCancelRequest.cancel) }}
                         {% endif %}
@@ -185,7 +185,33 @@
                 }
             });
             $("#formCancelRequest_cancel").click(function() {
-
+                var formCancelRequest = $("#formCancelRequest");
+                $.ajax({
+                    type: 'POST',
+                    data: formCancelRequest.serialize() + '&action=removeCancelRequest',
+                    success: function(response) {
+                        /*var responseObject = window.JSON.parse(response);
+                        $(".error, .block-error").remove();
+                        if (responseObject.response == "valid") {
+                            selectPercent.select2("readonly", false);
+                            selectPercent.select2("val", "");
+                            checkTogetherApply[0].checked = false;
+                            comment.val('');
+                            //console.log(responseObject);
+                            $("#block-history-cancel-request").show();
+                            var authorComment = responseObject.obj.comment, percent = responseObject.obj.percent, dateCreate = responseObject.obj.dateCreate, dateVerdict = responseObject.dateVerdict, lineDateVerdict = $("#line-date-verdict");
+                            if (lineDateVerdict.html() == "") {
+                                lineDateVerdict.append(dateVerdict);
+                            }
+                            $(".table-history-cancel-request tbody").append("<tr><td>Автор</td><td>" + authorComment + "</td><td>" + percent + "</td><td>" + dateCreate + "</td></tr>");
+                        } else {
+                            $.each(responseObject.response, function(index, value) {
+                                var selector  = "#formCancelRequest_" + index;
+                                $(selector).parent().before("<p class='block-error'><span class='icon-warning error'>" + value + "</span></p>");
+                            });
+                        }*/
+                    }
+                });
             });
             $("#formCancelRequest_create").click(function() {
                 if (selectPercent.val() == "" && !selectPercent[0].readOnly && !checkTogetherApply[0].checked) {
