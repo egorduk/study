@@ -14,6 +14,7 @@ use Doctrine\Common\Cache\ApcCache;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\MemcachedCache;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderAdapter;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Finder\Iterator\SortableIterator;
@@ -480,12 +481,14 @@ class AuthorController extends Controller
                 if (Helper::isCorrectOrder($num) && $request->isXmlHttpRequest() && isset($postDataFormCancelRequest)) {
                     $formCancelRequest->handleRequest($request);
                     if ($request->isMethod('POST')) {
+                        $csrfProvider = new CsrfProviderAdapter($this->get('form.csrf_provider'));
+                        $csrfToken = new CsrfToken('formCancelRequest', $postDataFormCancelRequest['_token']);
+                        if ($csrfProvider->isTokenValid($csrfToken)) {
 
-                        //$token = $request->request->get('formCancelRequest');
-                        $token = $postDataFormCancelRequest['_token'];
-                        $csrf_token = new CsrfToken('', $token);
-                        //var_dump($csrf_token);die;
-                        var_dump($this->get('security.csrf.token_manager')->isTokenValid($csrf_token));die;
+                        } else {
+                            $arrayResponse = Helper::getFormErrors($formCancelRequest);
+                            return new Response(json_encode(array('response' => $arrayResponse)));
+                        }
 
                         if ($formCancelRequest->isValid()) {
                             $preparedData = Helper::prepareCancelRequestData($postDataFormCancelRequest);
