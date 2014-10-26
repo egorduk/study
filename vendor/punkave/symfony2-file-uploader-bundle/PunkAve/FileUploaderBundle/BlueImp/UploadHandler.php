@@ -61,8 +61,8 @@ class UploadHandler
                 ),
                 */
                 'thumbnail' => array(
-                    'upload_dir' => dirname($_SERVER['SCRIPT_FILENAME']) . '/thumbnails/',
-                    'upload_url' => $this->getFullUrl() . '/thumbnails/',
+                    //'upload_dir' => dirname($_SERVER['SCRIPT_FILENAME']) . '/thumbnails/',
+                    //'upload_url' => $this->getFullUrl() . '/thumbnails/',
                     'max_width' => 80,
                     'max_height' => 80
                 )
@@ -153,8 +153,9 @@ class UploadHandler
             }
             return true;
         }
-        //var_dump($file_path);die;
-        $file_path = $options['tmp'];
+        if ($this->options['mode'] == 'profile') {
+            $file_path = $options['tmp'];
+        }
         $new_width = $img_width * $scale;
         $new_height = $img_height * $scale;
         $new_img = @imagecreatetruecolor($new_width, $new_height);
@@ -191,7 +192,7 @@ class UploadHandler
             $img_width,
             $img_height
         ) && $write_image($new_img, $new_file_path, $image_quality);
-        //var_dump($new_file_path);die;
+        //var_dump($src_img);die;
         // Free up memory (imagedestroy does not delete files):
         @imagedestroy($src_img);
         @imagedestroy($new_img);
@@ -369,6 +370,7 @@ class UploadHandler
                 //var_dump($file->name);die;
                 if ($this->options['mode'] == 'order') {
                     foreach($this->options['image_versions'] as $version => $options) {
+                        //var_dump($this->create_scaled_image($file->name, $options));die;
                         if ($this->create_scaled_image($file->name, $options)) {
                             if ($this->options['upload_dir'] !== $options['upload_dir']) {
                                 //$file->{$version.'_url'} = '/study/web/' . $options['upload_url'] . rawurlencode($file->name);
