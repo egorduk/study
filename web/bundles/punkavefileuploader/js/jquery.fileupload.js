@@ -1,3 +1,14 @@
+/*
+ * jQuery File Upload Plugin 5.11.2
+ * https://github.com/blueimp/jQuery-File-Upload
+ *
+ * Copyright 2010, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+
 /*jslint nomen: true, unparam: true, regexp: true */
 /*global define, window, document, Blob, FormData, location */
 
@@ -14,8 +25,8 @@
         factory(window.jQuery);
     }
 }(function ($) {
-    'use strict';
     var a;
+    'use strict';
 
     // The FileReader API is not actually used, but works as feature detection,
     // as e.g. Safari supports XHR file uploads via the FormData API,
@@ -32,6 +43,7 @@
     // "add" method are uploaded immediately, but it is possible to override
     // the "add" callback option to queue file uploads.
     $.widget('blueimp.fileupload', {
+
         options: {
             // The namespace used for event handler binding on the dropZone and
             // fileInput collections.
@@ -49,7 +61,7 @@
             // each input field change event. This is required for iframe transport
             // queues and allows change events to be fired for the same file
             // selection, but can be disabled by setting the following option to false:
-            replaceFileInput: false,
+            replaceFileInput: true,
             // The parameter name for the file form data (the request argument name).
             // If undefined or empty, the name property of the file input field is
             // used, or "files[]" if the file input name property is also empty,
@@ -58,7 +70,7 @@
             // By default, each file of a selection is uploaded using an individual
             // request for XHR type uploads. Set to false to upload file
             // selections in one request each:
-            singleFileUploads: false,
+            singleFileUploads: true,
             // To limit the number of files uploaded with one XHR request,
             // set the following option to an integer greater than 0:
             limitMultiFileUploads: undefined,
@@ -169,13 +181,6 @@
                 });
             },
 
-            change: function (e, data) {
-                //console.log(Blob);
-            },
-
-            /*getSize: function (a) {
-
-            },*/
 
             // Other callbacks:
             // Callback for the submit event of each file upload:
@@ -265,12 +270,10 @@
             $.each(files, function (index, file) {
                 total += file.size || 1;
             });
-            //console.log(files);
             return total;
         },
 
         _onProgress: function (e, data) {
-            //console.log(data);
             if (e.lengthComputable) {
                 var now = +(new Date()),
                     total,
@@ -448,11 +451,14 @@
         },
 
         _getParamName: function (options) {
-            var fileInput = $(options.fileInput), paramName = options.paramName;
+            var fileInput = $(options.fileInput),
+                paramName = options.paramName;
             if (!paramName) {
                 paramName = [];
                 fileInput.each(function () {
-                    var input = $(this), name = input.prop('name') || 'files[]', i = (input.prop('files') || [1]).length;
+                    var input = $(this),
+                        name = input.prop('name') || 'files[]',
+                        i = (input.prop('files') || [1]).length;
                     while (i) {
                         paramName.push(name);
                         i -= 1;
@@ -464,7 +470,6 @@
             } else if (!$.isArray(paramName)) {
                 paramName = [paramName];
             }
-            //console.log(paramName);
             return paramName;
         },
 
@@ -766,10 +771,7 @@
                 paramNameSet = paramName;
             }
             data.originalFiles = data.files;
-           // console.log(data);
-
             $.each(fileSet || data.files, function (index, element) {
-                //console.log('yo');
                 var newData = $.extend({}, data);
                 newData.files = fileSet ? element : [element];
                 newData.paramName = paramNameSet[index];

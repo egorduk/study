@@ -24,6 +24,7 @@ class CancelRequestForm extends AbstractType
                 'empty_value' => ''
             ))
             ->add('create', 'button', array('attr' => array('class' => 'hidden')));
+           // ->add('cancel', 'button', array('attr' => array('class' => 'hidden')));
 
         $builder->addEventListener(FormEvents::POST_BIND, function(FormEvent $event) {
             $form = $event->getForm();

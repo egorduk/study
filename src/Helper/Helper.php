@@ -15,9 +15,9 @@ use Acme\SecureBundle\Entity\WebchatMessage;
 use Proxies\__CG__\Acme\AuthBundle\Entity\User;
 use Proxies\__CG__\Acme\SecureBundle\Entity\Author\AuthorFile;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Yaml\Yaml;
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
@@ -48,7 +48,7 @@ class Helper
     private static $_tableUserPs = 'AcmeSecureBundle:UserPs';
     private static $_tableTypePs = 'AcmeSecureBundle:TypePs';
     private static $_tableMailOption = 'AcmeSecureBundle:MailOption';
-    private static $kernel;
+    //private static $kernel;
 
     public function __construct() {
     }
@@ -138,7 +138,7 @@ class Helper
     }
 
 
-    public static function getContainer() {
+    /*public static function getContainer() {
         if(self::$kernel instanceof \AppKernel) {
             if(!self::$kernel->getContainer() instanceof Container) {
                 self::$kernel->boot();
@@ -149,8 +149,14 @@ class Helper
         self::$kernel = new \AppKernel($environment, false);
         self::$kernel->boot();
         return self::$kernel->getContainer();
-    }
+    }*/
 
+
+    public static function getContainer() {
+        global $kernel;
+        $container = $kernel->getContainer();
+        return $container;
+    }
 
     public static function getSalt()
     {
@@ -214,7 +220,6 @@ class Helper
             );
         //->setBody($this->renderView('HelloBundle:Hello:email', array('name' => $name)));
         $mailer->send($message);
-
         return true;
     }
 
@@ -1717,7 +1722,7 @@ class Helper
 
     public static function getUserAvatar($user) {
         $pathAvatar = Helper::getFullPathToAvatar($user);
-        $userAvatar = "<img src='$pathAvatar' align='middle' alt='Аватар' width='100px' height='auto' class='thumbnail'>";
+        $userAvatar = "<img src='$pathAvatar' align='middle' alt='Аватар' width='110px' height='auto' class='thumbnail'>";
         $user->setAvatar($userAvatar);
         return $user;
     }
@@ -1962,15 +1967,16 @@ class Helper
         $cancelRequest->setCreator($user->getId());
         $em->persist($cancelRequest);
         $em->flush();
+        self::sendEmail('createCancelRequest', $user, $order, $preparedData);
         return $cancelRequest;
     }
 
 
-    public static function getCancelRequestsByOrderForAuthor($order, $user) {
+    public static function getCancelRequestsByOrder($order, $user) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $cancelRequests = $em->getRepository(self::$_tableCancelRequest)
             ->findBy(
-                array('user_order' => $order),
+                array('user_order' => $order, 'is_show' => 1),
                 array('date_create' => 'ASC')
             );
         $arrayRoles = ['author' => 'Автор', 'client' => 'Заказчик', 'system' => 'Система'];
@@ -1993,27 +1999,33 @@ class Helper
         $em = self::getContainer()->get('doctrine')->getManager();
         $orderId = $order->getId();
         $query = $em->getConnection()
-            ->prepare("SELECT date_verdict FROM cancel_request WHERE cancel_request.user_order_id = '$orderId' LIMIT 1");
+            ->prepare("SELECT date_create FROM cancel_request cr WHERE cr.user_order_id = '$orderId' AND cr.is_show = '1' LIMIT 1");
         $query->execute();
-        $dateVerdict = $query->fetch();
-        $dateVerdict = date("d.m.Y H:i") < date("d.m.Y H:i", strtotime($dateVerdict['date_verdict'])) ? date("d.m.Y H:i", strtotime($dateVerdict['date_verdict'])) : "";
+        $result = $query->fetch();
+        //??? days for verdict
+        $dateVerdict = date("d.m.Y H:i", strtotime($result['date_create'] . ' + 3 days'));
+       // $dateVerdict = date("d.m.Y H:i") <  $dateVerdict ? $dateVerdict : "";
         return $dateVerdict;
     }
 
 
     public static function addNewOrderFile($fileUpload) {
         $em = self::getContainer()->get('doctrine')->getManager();
-        $file = new OrderFile();
-        $file->setName($fileUpload->name);
-        $file->setSize($fileUpload->size);
         $session = self::getContainer()->get('session');
-        $user = self::getUserById($session->get('user'));
-        $order = self::getOrderByNumForAuthor($session->get('order'));
-        $file->setUser($user);
-        $file->setUserOrder($order);
-        $em->persist($file);
-        $em->flush();
-        return $file->getDateUpload()->format('d.m.Y H:i');
+       // $user = self::getUserById($session->get('user'));
+        $user = $em->merge($session->get('user'));
+        $order = self::getOrderByNumForAuthor($session->get('order'), $user);
+        if ($order) {
+            $file = new OrderFile();
+            $file->setName($fileUpload->name);
+            $file->setSize($fileUpload->size);
+            $file->setUser($user);
+            $file->setUserOrder($order);
+            $em->persist($file);
+            $em->flush();
+            return $file->getDateUpload()->format('d.m.Y H:i');
+        }
+        return null;
     }
 
 
@@ -2047,8 +2059,8 @@ class Helper
 
     public static function setOrderStatus($order, $statusName) {
         $em = self::getContainer()->get('doctrine')->getManager();
-        $arrayStatus = ['completed' => 'co', 'work' => 'w', 'guarantee' => 'g'];
-        $newStatusCode = $arrayStatus[$statusName];
+        $arrayStatuses = ['completed' => 'co', 'work' => 'w', 'guarantee' => 'g', 'cancel' => 'cl'];
+        $newStatusCode = $arrayStatuses[$statusName];
         $status = $em->getRepository(self::$_tableStatusOrder)
             ->findOneByCode($newStatusCode);
         if ($newStatusCode == 'g') {
@@ -2059,6 +2071,11 @@ class Helper
             $order->setDateGuarantee($dateGuarantee);
             $em->flush();
             //return $status->getName();
+        } elseif ($newStatusCode == 'cl') {
+            $order->setStatusOrder($status);
+            $order->setDateCancel(new \DateTime());
+            $em->flush();
+            return $order;
         }
     }
 
@@ -2295,4 +2312,65 @@ class Helper
         return $task;
     }
 
+
+    public static function isVerdictCancelRequest($cancelRequests) {
+        foreach ($cancelRequests as $cancelRequest) {
+            $creatorId = $cancelRequest->getCreator();
+            if ($creatorId == 17) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public static function removeCancelRequest($user, $cancelRequests) {
+        if ($cancelRequests[0]->getCreator() == $user->getId() && $cancelRequests != null) {
+            $em = self::getContainer()->get('doctrine')->getManager();
+            foreach ($cancelRequests as $cancelRequest) {
+                $cancelRequest->setIsShow(0);
+            }
+            $em->flush();
+            $order = $cancelRequests[0]->getUserOrder();
+            self::sendEmail('removeCancelRequest', $user, $order);
+            return 'valid';
+        }
+        return 'error';
+    }
+
+
+    public static function getBtnRemoveCancelRequest() {
+        return '<label class="btn btn-success" for="formCancelRequest_cancel"><span class="">&nbsp;Отменить заявку</span></label><button class="hidden" name="formCancelRequest[cancel]" id="formCancelRequest_cancel" type="button">Cancel</button>';
+    }
+
+
+    public static function sendEmail($mode, $user = null, $order = null, $param = null) {
+        $container = self::getContainer();
+        $mailSender = $container->getParameter('mail_sender');
+        $mailTitle = $container->getParameter('mail_title');
+        $userEmail = $user->getEmail();
+        if ($mode == 'createCancelRequest') {
+            $subject = 'Создана заявка на отмену заказа номер ' . $order->getNum();
+            $template = MailTemplate::getCreateCancelRequest($order, $param);
+        } elseif ($mode == 'removeCancelRequest') {
+            $subject = 'Отменен арбитраж по заказу номер ' . $order->getNum();
+            $template = MailTemplate::getRemoveCancelRequest($order, $param);
+        }
+        $message = \Swift_Message::newInstance()
+            ->setSubject($subject)
+            ->setFrom($mailSender, $mailTitle)
+            //->setTo($userEmail)
+            ->setTo('egorduk@yandex.ru')
+            ->setBody(
+                '<html>' .
+                '<head></head>' .
+                '<body>' .
+                $template .
+                '</body>' .
+                '</html>',
+                'text/html'
+            );
+            //->setBody($this->renderView('HelloBundle:Hello:email', array('name' => $name)));
+        $container->get('mailer')->send($message);
+    }
 }

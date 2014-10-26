@@ -13,6 +13,7 @@ namespace Symfony\Component\Validator\Tests\Validator;
 
 use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Constraints\GroupSequence;
+use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\Traverse;
 use Symfony\Component\Validator\Constraints\Valid;
 use Symfony\Component\Validator\ConstraintViolationInterface;
@@ -42,7 +43,7 @@ abstract class Abstract2Dot5ApiTest extends AbstractValidatorTest
      *
      * @return ValidatorInterface
      */
-    abstract protected function createValidator(MetadataFactoryInterface $metadataFactory);
+    abstract protected function createValidator(MetadataFactoryInterface $metadataFactory, array $objectInitializers = array());
 
     protected function setUp()
     {
@@ -64,6 +65,13 @@ abstract class Abstract2Dot5ApiTest extends AbstractValidatorTest
     protected function validatePropertyValue($object, $propertyName, $value, $groups = null)
     {
         return $this->validator->validatePropertyValue($object, $propertyName, $value, $groups);
+    }
+
+    public function testValidateConstraintWithoutGroup()
+    {
+        $violations = $this->validator->validate(null, new NotNull());
+
+        $this->assertCount(1, $violations);
     }
 
     public function testGroupSequenceAbortsAfterFailedGroup()
@@ -193,13 +201,26 @@ abstract class Abstract2Dot5ApiTest extends AbstractValidatorTest
         $entity = new Entity();
         $entity->reference = new Reference();
 
-        $callback1 = function ($value, ExecutionContextInterface $context) {
+        $callback1 = function ($value, ExecutionContextInterface $context) use ($test) {
+            $previousValue = $context->getValue();
+            $previousObject = $context->getObject();
+            $previousMetadata = $context->getMetadata();
+            $previousPath = $context->getPropertyPath();
+            $previousGroup = $context->getGroup();
+
             $context
                 ->getValidator()
                 ->inContext($context)
                 ->atPath('subpath')
                 ->validate($value->reference)
             ;
+
+            // context changes shouldn't leak out of the validate() call
+            $test->assertSame($previousValue, $context->getValue());
+            $test->assertSame($previousObject, $context->getObject());
+            $test->assertSame($previousMetadata, $context->getMetadata());
+            $test->assertSame($previousPath, $context->getPropertyPath());
+            $test->assertSame($previousGroup, $context->getGroup());
         };
 
         $callback2 = function ($value, ExecutionContextInterface $context) use ($test, $entity) {
@@ -244,13 +265,26 @@ abstract class Abstract2Dot5ApiTest extends AbstractValidatorTest
         $entity = new Entity();
         $entity->reference = new Reference();
 
-        $callback1 = function ($value, ExecutionContextInterface $context) {
+        $callback1 = function ($value, ExecutionContextInterface $context) use ($test) {
+            $previousValue = $context->getValue();
+            $previousObject = $context->getObject();
+            $previousMetadata = $context->getMetadata();
+            $previousPath = $context->getPropertyPath();
+            $previousGroup = $context->getGroup();
+
             $context
                 ->getValidator()
                 ->inContext($context)
                 ->atPath('subpath')
                 ->validate(array('key' => $value->reference))
             ;
+
+            // context changes shouldn't leak out of the validate() call
+            $test->assertSame($previousValue, $context->getValue());
+            $test->assertSame($previousObject, $context->getObject());
+            $test->assertSame($previousMetadata, $context->getMetadata());
+            $test->assertSame($previousPath, $context->getPropertyPath());
+            $test->assertSame($previousGroup, $context->getGroup());
         };
 
         $callback2 = function ($value, ExecutionContextInterface $context) use ($test, $entity) {
@@ -677,5 +711,53 @@ abstract class Abstract2Dot5ApiTest extends AbstractValidatorTest
         $this->validator->validate($entity);
 
         $this->assertTrue($called);
+    }
+
+    public function testInitializeObjectsOnFirstValidation()
+    {
+        $test = $this;
+        $entity = new Entity();
+        $entity->initialized = false;
+
+        // prepare initializers that set "initialized" to true
+        $initializer1 = $this->getMock('Symfony\\Component\\Validator\\ObjectInitializerInterface');
+        $initializer2 = $this->getMock('Symfony\\Component\\Validator\\ObjectInitializerInterface');
+
+        $initializer1->expects($this->once())
+            ->method('initialize')
+            ->with($entity)
+            ->will($this->returnCallback(function ($object) {
+                $object->initialized = true;
+            }));
+
+        $initializer2->expects($this->once())
+            ->method('initialize')
+            ->with($entity);
+
+        $this->validator = $this->createValidator($this->metadataFactory, array(
+            $initializer1,
+            $initializer2,
+        ));
+
+        // prepare constraint which
+        // * checks that "initialized" is set to true
+        // * validates the object again
+        $callback = function ($object, ExecutionContextInterface $context) use ($test) {
+            $test->assertTrue($object->initialized);
+
+            // validate again in same group
+            $validator = $context->getValidator()->inContext($context);
+
+            $validator->validate($object);
+
+            // validate again in other group
+            $validator->validate($object, null, 'SomeGroup');
+        };
+
+        $this->metadata->addConstraint(new Callback($callback));
+
+        $this->validate($entity);
+
+        $this->assertTrue($entity->initialized);
     }
 }

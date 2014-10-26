@@ -41,7 +41,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->arrayNode('trusted_proxies')
                     ->beforeNormalization()
-                        ->ifTrue(function ($v) { return !is_array($v) && !is_null($v); })
+                        ->ifTrue(function ($v) { return !is_array($v) && null !== $v; })
                         ->then(function ($v) { return is_bool($v) ? array() : preg_split('/\s*,\s*/', $v); })
                     ->end()
                     ->prototype('scalar')
@@ -445,7 +445,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('cache')->end()
                         ->booleanNode('enable_annotations')->defaultFalse()->end()
                         ->arrayNode('static_method')
-                            ->defaultValue(array('loadClassMetadata'))
+                            ->defaultValue(array('loadValidatorMetadata'))
                             ->prototype('scalar')->end()
                             ->treatFalseLike(array())
                             ->validate()
@@ -457,14 +457,29 @@ class Configuration implements ConfigurationInterface
                         ->booleanNode('strict_email')->defaultFalse()->end()
                         ->enumNode('api')
                             ->values(array('2.4', '2.5', '2.5-bc', 'auto'))
-                            ->defaultValue('auto')
                             ->beforeNormalization()
+                                // XML/YAML parse as numbers, not as strings
                                 ->ifTrue(function ($v) { return is_scalar($v); })
                                 ->then(function ($v) { return (string) $v; })
                             ->end()
                         ->end()
                     ->end()
                 ->end()
+            ->end()
+            ->validate()
+                ->ifTrue(function ($v) { return !isset($v['validation']['api']) || 'auto' === $v['validation']['api']; })
+                ->then(function ($v) {
+                    // This condition is duplicated in ValidatorBuilder. This
+                    // duplication is necessary in order to know the desired
+                    // API version already during container configuration
+                    // (to adjust service classes etc.)
+                    // See https://github.com/symfony/symfony/issues/11580
+                    $v['validation']['api'] = version_compare(PHP_VERSION, '5.3.9', '<')
+                        ? '2.4'
+                        : '2.5-bc';
+
+                    return $v;
+                })
             ->end()
         ;
     }

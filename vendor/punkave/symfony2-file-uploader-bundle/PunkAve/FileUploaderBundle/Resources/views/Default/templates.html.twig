@@ -1,29 +1,28 @@
 {% spaceless %}
-<script type="text/template" id="file-uploader-template">
-  <div class="uploader" data-dropzone="1" style="margin-top: 10px; margin-bottom: 10px">
-    <div class="controls" style="margin-bottom: 20px">
-      <div id="files-preview"></div>
-      <input type="file" data-files="1" multiple style="color: white"/>
-      <input type="button" id="btn-upload" value="Загрузить" style="display:none"/>
+    <script type="text/template" id="file-uploader-template">
+        <div class="uploader" data-dropzone="1" style="margin-top: 10px; margin-bottom: 10px">
+            <div class="controls" style="margin-bottom: 20px">
+                <input type="file" id="fileUploader" name="fileUploader" multiple style="color: white"/>
+                <input type="button" id="btn-upload" value="Загрузить" style="display:none"/>
       <span class="spinner" data-spinner="1" style="display: none">
         <img src="{{ asset('bundles/punkavefileuploader/images/spinner.gif') }}" /> Загрузка...
       </span>
-    </div>
-    <ul class="thumbnails" data-thumbnails="1"></ul>
-  </div>
-</script>
-<script type="text/template" id="file-uploader-file-template">
-    <li data-name="<%- name %>" class="thumbnail">
-        <% if ('undefined' != typeof thumbnail_url) { %>
-            <img src="<%- thumbnail_url %>" class="thumbnail-image" alt="thumbnail"/>
-        <% } %>
-        <div class="caption">
-            <span class="filename"><%- name %></span>
-            <p class="">Размер:<%- size %></p>
-            <p class="">Загружен:<%- date_upload %></p>
-            <a rel="tooltip" title="Скачать" class="download thumbnail-action btn" target="download" href="<%- url %>"><i class="icon-download"></i></a>
-            <a rel="tooltip" title="Удалить" data-action="delete" class="delete thumbnail-action btn" href="#delete"><i class="icon-trash"></i></a>
+            </div>
+            <ul class="thumbnails" data-thumbnails="1"></ul>
         </div>
-    </li>
-</script>
+    </script>
+    <script type="text/template" id="file-uploader-file-template">
+        <li data-name="<%- name %>" class="thumbnail">
+            <% if ('undefined' != typeof thumbnail_url) { %>
+            <img src="<%- thumbnail_url %>" class="thumbnail-image" alt="thumbnail"/>
+            <% } %>
+            <div class="caption">
+                <span class="filename"><%- name %></span>
+                <p class="">Размер:<%- size %></p>
+                <p class="">Загружен:<%- date_upload %></p>
+                <a rel="tooltip" title="Скачать" class="download thumbnail-action btn" target="download" href="<%- url %>"><i class="icon-download"></i></a>
+                <a rel="tooltip" title="Удалить" data-action="delete" class="delete thumbnail-action btn" href="#delete"><i class="icon-trash"></i></a>
+            </div>
+        </li>
+    </script>
 {% endspaceless %}

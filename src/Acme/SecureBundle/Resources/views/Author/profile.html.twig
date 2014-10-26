@@ -1,6 +1,10 @@
 {% extends "AcmeSecureBundle::layout_author.html.twig" %}
 {% block title "Мой профиль" %}
     {% block content %}
+        <link href="{{ asset('bundles/css/window.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/css/select2.css') }}" rel="stylesheet" />
+        <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-maxlength.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/select2.min.js') }}"></script>
         <div class="container">
         <style>
             .reset-padding {
@@ -43,7 +47,7 @@
         {% if (formProfile == null) %}
             <div class="row">
                 <div  class="col-xs-5 col-xs-offset-4">
-                    <p>{{ avatar | raw }}</p>
+                    <p>{{ user.avatar | raw }}</p>
                     <p>Ваш ID: {{ user.id }}</p>
                     <hr style="border:solid 1px black">
                     <p>Ваш ник: {{ user.login }}</p>
@@ -54,21 +58,21 @@
                     <hr style="border:solid 1px black">
                     <p>Дата регистрации в системе: {{ user.datereg.format("d.m.Y H:i") }}</p>
                     <hr style="border:solid 1px black">
-                    <p>Ваш Skype: {{ userInfo.skype }}</p>
+                    <p>Ваш Skype: {{ user.userInfo.skype }}</p>
                     <hr style="border:solid 1px black">
-                    <p>Ваш Icq: {{ userInfo.icq }}</p>
+                    <p>Ваш Icq: {{ user.userInfo.icq }}</p>
                     <hr style="border:solid 1px black">
-                    <p>Ваш номер мобильного телефона: {{ userInfo.mobilephone }}</p>
+                    <p>Ваш номер мобильного телефона: {{ user.userInfo.mobilephone }}</p>
                     <hr style="border:solid 1px black">
-                    <p>Ваш номер стационарного телефона: {{ userInfo.staticphone }}</p>
+                    <p>Ваш номер стационарного телефона: {{ user.userInfo.staticphone }}</p>
                     <hr style="border:solid 1px black">
-                    <p>Ваша страна: <img src='{{ asset('bundles/images/flags/') }}{{ userInfo.country.code }}.png' alt={{ userInfo.country.name }} title={{ userInfo.country.name }}></p>
+                    <p>Ваша страна: <img src='{{ asset('bundles/images/flags/') }}{{ user.userInfo.country.code }}.png' alt={{ user.userInfo.country.name }} title={{ user.userInfo.country.name }}></p>
                     <hr style="border:solid 1px black">
-                    <p>Ваше имя: {{ userInfo.username }}</p>
+                    <p>Ваше имя: {{ user.userInfo.username }}</p>
                     <hr style="border:solid 1px black">
-                    <p>Ваша фамилия: {{ userInfo.surname }}</p>
+                    <p>Ваша фамилия: {{ user.userInfo.surname }}</p>
                     <hr style="border:solid 1px black">
-                    <p>Ваше отчество: {{ userInfo.lastname }}</p>
+                    <p>Ваше отчество: {{ user.userInfo.lastname }}</p>
                     <hr style="border:solid 1px black">
                     {% if (user.isaccessorder == 1) %}
                         <p>Доступ к заказам: <span class="icon-ok-circled-2" style="color: #008000"></span></p>
@@ -100,7 +104,7 @@
             <div class="row">
                 {% form_theme formProfile "TwigBundle::layout.html.twig" %}
                 <div class="col-xs-6 col-xs-offset-3">
-                    <p id="user-avatar">{{ avatar | raw }}</p>
+                    <p id="user-avatar">{{ user.avatar | raw }}</p>
                     {{ form_start(formProfile) }}
                     <div class="input-group form-group">
                         <label for="btn-change-avatar" class="btn btn-success"><span class="icon-trash-1">&nbspИзменить</span></label>
@@ -295,6 +299,12 @@
                 $("#btn-change-avatar").click(function() {
                     $("#block-change-avatar").toggle();
                 });
+               $("input[id^=formProfile_field]").maxlength({
+                   alwaysShow: true
+               });
+                /*$("#formProfile_fieldUsername, #formProfile_fieldSurname, #formProfile_fieldLastname").maxlength({
+                    alwaysShow: true
+                });*/
             });
         </script>
         <script type="text/javascript" src="{{ asset('bundles/js/underscore.js') }}"></script>

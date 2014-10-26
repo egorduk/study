@@ -20,7 +20,10 @@ class AppKernel extends Kernel
             new PunkAve\FileUploaderBundle\PunkAveFileUploaderBundle(),
             //new Beryllium\CacheBundle\BerylliumCacheBundle(),
             //new Aequasi\Bundle\MemcachedBundle\AequasiMemcachedBundle(),
-            new winzou\CacheBundle\winzouCacheBundle(),
+            //new winzou\CacheBundle\winzouCacheBundle(),
+            new Maxmind\Bundle\GeoipBundle\MaxmindGeoipBundle(),
+            new WhiteOctober\TCPDFBundle\WhiteOctoberTCPDFBundle(),
+            //new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
@@ -39,5 +42,11 @@ class AppKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
+    }
+
+    public function init()
+    {
+        date_default_timezone_set( 'Europe/Moscow' );
+        parent::init();
     }
 }

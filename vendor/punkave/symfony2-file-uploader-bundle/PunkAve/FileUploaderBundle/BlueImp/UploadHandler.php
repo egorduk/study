@@ -70,8 +70,8 @@ class UploadHandler
             'avatar_param' => array(
               //  'upload_dir' => dirname($_SERVER['SCRIPT_FILENAME']) . '/thumbnails/',
                 //'upload_url' => $this->getFullUrl() . '/thumbnails/',
-                'max_width' => 100,
-                'max_height' => 100
+                'max_width' => 110,
+                'max_height' => 110
             )
         );
         if ($options) {
