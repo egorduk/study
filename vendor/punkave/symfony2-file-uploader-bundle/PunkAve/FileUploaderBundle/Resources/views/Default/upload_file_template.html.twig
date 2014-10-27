@@ -3,12 +3,16 @@
         <div class="uploader" data-dropzone="1" style="margin-top: 10px; margin-bottom: 10px">
             <div class="controls" style="margin-bottom: 20px">
                 <div id="files-preview"></div>
-                <input type="file" data-files="1" multiple style="color: white"/>
+                <a class='btn btn-primary' href='javascript:;'>
+                    <span class="icon-folder-open-1">&nbspОбзор</span>
+                <input type="file" data-files="1" multiple style="color: white" onchange='$("#a").html($(this).val());'/>
+                    </a>
                 <input type="button" id="btn-upload" value="Загрузить" style="display:none"/>
       <span class="spinner" data-spinner="1" style="display: none">
         <img src="{{ asset('bundles/punkavefileuploader/images/spinner.gif') }}" /> Загрузка...
       </span>
             </div>
+            <p id='a'></p>
             <ul class="thumbnails" data-thumbnails="1"></ul>
         </div>
     </script>
