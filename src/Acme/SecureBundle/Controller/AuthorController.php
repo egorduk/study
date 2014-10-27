@@ -473,7 +473,6 @@ class AuthorController extends Controller
                     if ($isVerdict) {
                         $order = Helper::setOrderStatus($order, 'cancel');
                         $codeStatusOrder = $order->getStatusOrder()->getCode();
-                        //$isVerdict = false;
                     }
                 } else {
                     $cancelRequests = null;

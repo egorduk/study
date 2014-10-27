@@ -41,6 +41,8 @@ framework:
         cache:  file
         file_cache_dir: "%kernel.cache_dir%/annotations"
         debug: "%kernel.debug%"
+    #profiler:
+            #collect: false
 
 services:
     cache:
