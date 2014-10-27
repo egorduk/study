@@ -64,25 +64,25 @@ class AuthorController extends Controller
     public function profileAction(Request $request, $type)
     {
         if ($type == "view" || $type == "edit") {
-            $user = $this->get('security.context')->getToken()->getUser();
-            $userInfo = $user->getUserInfo();
+            $user = $this->getUser();
+            //var_dump($user->getId());
+            //$userInfo = $user->getUserInfo();
             //$avatar = Helper::getUserAvatar($user);
             $showWindow = false;
-        }
-        else {
+        } else {
             return new RedirectResponse($this->generateUrl('secure_author_index'));
         }
         if ($type == "edit") {
             $isAccessOrder = $user->getIsAccessOrder();
             $profileValidate = new AuthorProfileFormValidate();
-            $profileValidate->setIcq($userInfo->getIcq());
-            $profileValidate->setSkype($userInfo->getSkype());
-            $profileValidate->setMobilePhone($userInfo->getMobilePhone());
-            $profileValidate->setStaticPhone($userInfo->getStaticPhone());
-            $profileValidate->setUsername($userInfo->getUsername());
-            $profileValidate->setSurname($userInfo->getSurname());
-            $profileValidate->setLastname($userInfo->getLastname());
-            $profileValidate->setCountry($userInfo->getCountry()->getCode());
+            $profileValidate->setIcq($user->getUserInfo()->getIcq());
+            $profileValidate->setSkype($user->getUserInfo()->getSkype());
+            $profileValidate->setMobilePhone($user->getUserInfo()->getMobilePhone());
+            $profileValidate->setStaticPhone($user->getUserInfo()->getStaticPhone());
+            $profileValidate->setUsername($user->getUserInfo()->getUsername());
+            $profileValidate->setSurname($user->getUserInfo()->getSurname());
+            $profileValidate->setLastname($user->getUserInfo()->getLastname());
+            $profileValidate->setCountry($user->getUserInfo()->getCountry()->getCode());
             $avatarOption = Helper::getAvatarOption($user);
             $profileValidate->setAvatarOption($avatarOption);
             $formProfile = $this->createForm(new AuthorProfileForm(), $profileValidate);
@@ -91,7 +91,7 @@ class AuthorController extends Controller
                 if ($formProfile->get('save')->isClicked()) {
                     if ($formProfile->isValid()) {
                         $postData = $request->request->get('formProfile');
-                        Helper::updateUserInfo($postData, $userInfo);
+                        Helper::updateUserInfo($postData, $user->getUserInfo());
                         $avatarOption = $postData['selectorAvatarOptions'];
                         if ($avatarOption == 'man' || $avatarOption == 'woman') {
                             $arrAvatarOptions = ['man' => 'default_m.jpg', 'woman' => 'default_w.jpg'];
@@ -109,8 +109,9 @@ class AuthorController extends Controller
                 }
             }
         }
-        $avatar = Helper::getUserAvatar($user);
-        return array('formProfile' => (isset($formProfile)?$formProfile->createView():null), 'user' => $user, 'userInfo' => $userInfo, 'showWindow' => $showWindow, 'avatar' => $avatar);
+        $user = Helper::getUserAvatar($user);
+        //var_dump($avatar);die;
+        return array('formProfile' => (isset($formProfile)?$formProfile->createView():null), 'user' => $user, 'showWindow' => $showWindow);
     }
 
 
@@ -125,7 +126,7 @@ class AuthorController extends Controller
         if (preg_match('/^\d+$/', $orderNum)) {
             if ($action == "profile") {
                 if ($fileName) {
-                   // $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'avatars/author/' . $orderNum, 'action' => 'delete'));
+                    // $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'avatars/author/' . $orderNum, 'action' => 'delete'));
                 } else {
                     $user = $this->get('security.context')->getToken()->getUser();
                     $session = new Session();
@@ -142,14 +143,16 @@ class AuthorController extends Controller
                 }
             } elseif ($action == "order") {
                 if ($fileName) {
-                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/orders/' . $orderNum));
+                    //$this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/orders/' . $orderNum));
                 } else {
-                    $user = $this->get('security.context')->getToken()->getUser();
+                    $user = $this->getUser();
                     $session = new Session();
-                    $session->set('user', $user->getId());
+                    $session->set('user', $user);
                     $session->set('order', $orderNum);
                     $session->save();
-                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/orders/' . $orderNum . '/author', 'max_number_of_files' => 10/*, 'max_file_size' => 4*/));
+                    $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/orders/' . $orderNum . '/author',
+                        'mode' => 'order',
+                        /*'max_number_of_files' => 10/*, 'max_file_size' => 4*/));
                     $session->remove('user');
                     $session->remove('order');
                 }
@@ -447,6 +450,8 @@ class AuthorController extends Controller
             //throw new \Symfony\Component\Security\Core\Exception\AccessDeniedException [403];
             //throw new AccessException [500];
         }
+        //$geoip = $this->get('maxmind.geoip')->lookup('86.57.193.27');
+        //var_dump($geoip->getCountryCode());die;
         $postDataFormBid = $request->request->get('formBid');
         $postDataFormCancelRequest = $request->request->get('formCancelRequest');
 
@@ -459,11 +464,6 @@ class AuthorController extends Controller
             $clientLink = Helper::getUserLinkProfile($order, "client", $this->container);
             $codeStatusOrder = $order->getStatusOrder()->getCode();
             if ($codeStatusOrder == 'w' || $codeStatusOrder == 'g' || $codeStatusOrder == 'e' || $codeStatusOrder == 'ca') {
-                //$filesOrder = Helper::getOrderFiles($order);
-                //$session = $request->getSession();
-                //$session->set('curr_order', $order);
-                //$session->set('curr_user', $user);
-                //$session->save();
                 $cancelRequestValidate = new CancelRequestFormValidate();
                 $formCancelRequest = $this->createForm(new CancelRequestForm(), $cancelRequestValidate);
                 $cancelRequests = Helper::getCancelRequestsByOrder($order, $user);
@@ -473,34 +473,37 @@ class AuthorController extends Controller
                     if ($isVerdict) {
                         $order = Helper::setOrderStatus($order, 'cancel');
                         $codeStatusOrder = $order->getStatusOrder()->getCode();
-                        //$isVerdict = false;
                     }
                 } else {
                     $cancelRequests = null;
                 }
-                if (Helper::isCorrectOrder($num) && $request->isXmlHttpRequest() && isset($postDataFormCancelRequest)) {
+                if ($request->isXmlHttpRequest() && isset($postDataFormCancelRequest)) {
                     $formCancelRequest->handleRequest($request);
                     if ($request->isMethod('POST')) {
-                        $csrfProvider = new CsrfProviderAdapter($this->get('form.csrf_provider'));
-                        $csrfToken = new CsrfToken('formCancelRequest', $postDataFormCancelRequest['_token']);
-                        if ($csrfProvider->isTokenValid($csrfToken)) {
-
-                        } else {
-                            $arrayResponse = Helper::getFormErrors($formCancelRequest);
-                            return new Response(json_encode(array('response' => $arrayResponse)));
-                        }
-
-                        if ($formCancelRequest->isValid()) {
-                            $preparedData = Helper::prepareCancelRequestData($postDataFormCancelRequest);
-                            $cancelRequest = Helper::createCancelOrderRequest($order, $preparedData, $user);
-                            $comment = wordwrap($preparedData['comment'], 60, "\n", true);
-                            $textPercent = $preparedData['textPercent'];
-                            //$dateVerdict = Helper::getDateVerdict($order);
-                            $obj = array('comment' => $comment, 'percent' => $textPercent, 'dateCreate' => $cancelRequest->getDateCreate()->format('d.m.y H:i:s'));
-                            return new Response(json_encode(array('response' => 'valid', 'obj' => $obj, 'dateVerdict' => $dateVerdict)));
-                        } else {
-                            $arrayResponse = Helper::getFormErrors($formCancelRequest);
-                            return new Response(json_encode(array('response' => $arrayResponse)));
+                        $action = $request->request->get('action');
+                        if ($action == 'removeCancelRequest') {
+                            $csrfProvider = new CsrfProviderAdapter($this->get('form.csrf_provider'));
+                            $csrfToken = new CsrfToken('formCancelRequest', $postDataFormCancelRequest['_token']);
+                            if ($csrfProvider->isTokenValid($csrfToken)) {
+                                $response = Helper::removeCancelRequest($user, $cancelRequests);
+                                return new Response(json_encode(array('response' => $response)));
+                            } else {
+                                return new Response(json_encode(array('response' => 'error')));
+                            }
+                        } elseif ($action == 'createCancelRequest') {
+                            if ($formCancelRequest->isValid()) {
+                                $preparedData = Helper::prepareCancelRequestData($postDataFormCancelRequest);
+                                $cancelRequest = Helper::createCancelOrderRequest($order, $preparedData, $user);
+                                $comment = wordwrap($preparedData['comment'], 60, "\n", true);
+                                $textPercent = $preparedData['textPercent'];
+                                $dateVerdict = Helper::getDateVerdict($order);
+                                $btnRemoveCancelRequest = Helper::getBtnRemoveCancelRequest();
+                                $obj = array('comment' => $comment, 'percent' => $textPercent, 'dateVerdict' => $dateVerdict , 'dateCreate' => $cancelRequest->getDateCreate()->format('d.m.y H:i:s'));
+                                return new Response(json_encode(array('response' => 'valid', 'obj' => $obj, 'btnRemoveCancelRequest' => $btnRemoveCancelRequest)));
+                            } else {
+                                $arrayResponse = Helper::getFormErrors($formCancelRequest);
+                                return new Response(json_encode(array('response' => $arrayResponse)));
+                            }
                         }
                     }
                 }
@@ -514,7 +517,15 @@ class AuthorController extends Controller
                     );
                 }
                 $clientFiles = Helper::getOrderFiles($order, 'client', $user);
-
+                /*$pdfObj = $this->get("white_october.tcpdf")->create();
+                $pdfObj->SetSubject('subject');
+                $pdfObj->SetTitle('title');
+                $pdfObj->SetAuthor('author');
+                $pdfObj->SetCreator('creator');
+                $pdfObj->AddPage();
+                $html = '<img width="110px" height="auto" align="middle" class="thumbnail" alt="Аватар" src="/study/web/uploads/avatars/default.png">';
+                $pdfObj->writeHTML($html, true, false, true, false, '');
+                $pdfObj->output('test.pdf');*/
                 return $this->render(
                     'AcmeSecureBundle:Author:order_work.html.twig', array('formCancelRequest' => $formCancelRequest->createView(), 'order' => $order, 'client' => $clientLink, 'user' => $user, 'cancelRequests' => $cancelRequests, 'dateVerdict' => $dateVerdict, 'clientFiles' => $clientFiles)
                 );
@@ -631,7 +642,7 @@ class AuthorController extends Controller
                     return new Response(json_encode(array('users' => $users)));
                 } elseif ($action == 'createCancelRequest') {
                     //$user = $this->get('security.context')->getToken()->getUser();
-                   // $order = Helper::getOrderByNumForAuthor($num);
+                    // $order = Helper::getOrderByNumForAuthor($num);
                     /*$arrayPercent = array('0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100');
                     $comment = strip_tags($request->request->get('textarea-comment'), 'br');
                     $togetherApply = $request->request->get('check-together-apply');

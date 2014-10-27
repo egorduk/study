@@ -1,22 +1,28 @@
 Acme\SecureBundle\Entity\Client\ClientProfileFormValidate:
     properties:
         fieldMobilePhone:
-          - Length: { min: 7, minMessage: "Слишком короткий номер!" }
-          - Regex: { pattern: "/^((8|\+7|\+375)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,14}$/", message: "Некорректный номер!" }
+          - Length: { min: 7, minMessage: "Слишком короткий номер!", max: 17, maxMessage: "Слишком много символов!" }
+          - Regex: { pattern: "/^((8|\+7|\+375)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,17}$/", message: "Некорректный номер!" }
+          - NotBlank: { message: "Введите номер телефона!" }
         fieldStaticPhone:
-          - Length: { min: 7, minMessage: "Слишком короткий номер!" }
-          - Regex: { pattern: "/^((8|\+7|\+375)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,14}$/", message: "Некорректный номер!" }
+          - Length: { min: 7, minMessage: "Слишком короткий номер!", max: 17, maxMessage: "Слишком много символов!" }
+          - Regex: { pattern: "/^((8|\+7|\+375)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,17}$/", message: "Некорректный номер!" }
         fieldIcq:
-          - Length: { min: 6, minMessage: "Слишком короткий номер!" }
+          - Length: { min: 6, minMessage: "Слишком короткий номер!", max: 10, maxMessage: "Слишком много символов!" }
           - Regex: { pattern: "/^[\d]+$/", message: "Только цифры!" }
+        fieldSkype:
+          - Length: { min: 1, minMessage: "Слишком мало символов!", max: 20, maxMessage: "Слишком много символов!" }
         fieldUsername:
-          - Length: { min: 1, minMessage: "Слишком короткое имя!" }
+          - NotBlank: { message: "Введите имя!" }
+          - Length: { min: 3, minMessage: "Слишком короткое имя!", max: 20, maxMessage: "Слишком много символов!" }
           - Regex: { pattern: "/^[а-яА-Я]+$/u", message: "Только русские буквы!" }
         fieldSurname:
-          - Length: { min: 1, minMessage: "Слишком короткая фамилия!" }
+          - NotBlank: { message: "Введите фамилию!" }
+          - Length: { min: 3, minMessage: "Слишком короткая фамилия!", max: 20, maxMessage: "Слишком много символов!" }
           - Regex: { pattern: "/^[а-яА-Я]+$/u", message: "Только русские буквы!" }
         fieldLastname:
-          - Length: { min: 1, minMessage: "Слишком короткое отчество!" }
+          - NotBlank: { message: "Введите отчество!!" }
+          - Length: { min: 3, minMessage: "Слишком короткое отчество!", max: 20, maxMessage: "Слишком много символов!" }
           - Regex: { pattern: "/^[а-яА-Я]+$/u", message: "Только русские буквы!" }
 
 Acme\SecureBundle\Entity\Client\CreateOrderFormValidate:
@@ -24,6 +30,7 @@ Acme\SecureBundle\Entity\Client\CreateOrderFormValidate:
         fieldTheme:
           - Length: { min: 4, minMessage: "Слишком короткое название темы!" }
           - Regex: { pattern: "/^[a-zA-Zа-яА-Я-+()\s+\d]+$/u", message: "Только русские буквы!" }
+          - NotBlank: { message: "Введите тему!!" }
         fieldOriginality:
           - Regex: { pattern: "/^[\d]+$/", message: "Только цифры!" }
           - GreaterThan: { value: 0, message: "Процент не может быть меньше 0!" }

@@ -54,6 +54,11 @@ class CancelRequest extends EntityRepository
      */
     private $percent;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $is_show;
+
     private $text_percent;
     private $creator_role;
 
@@ -62,6 +67,7 @@ class CancelRequest extends EntityRepository
         $this->date_create = new \DateTime();
         $this->date_verdict = new \DateTime(date("Y-m-d H:i:s", strtotime("+3 day")));
         $this->verdict = "";
+        $this->is_show = 1;
     }
 
     public function getId() {
@@ -138,5 +144,13 @@ class CancelRequest extends EntityRepository
 
     public function getCreatorRole() {
         return $this->creator_role;
+    }
+
+    public function setIsShow($val) {
+        $this->is_show = $val;
+    }
+
+    public function getIsShow() {
+        return $this->is_show;
     }
 }

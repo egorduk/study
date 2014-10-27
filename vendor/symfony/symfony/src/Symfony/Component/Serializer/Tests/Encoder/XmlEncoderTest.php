@@ -67,11 +67,11 @@ class XmlEncoderTest extends \PHPUnit_Framework_TestCase
         $obj->xmlFoo = array(
             'foo-bar' => array(
                 '@id' => 1,
-                '@name' => 'Bar'
+                '@name' => 'Bar',
             ),
             'Foo' => array(
                 'Bar' => "Test",
-                '@Type' => 'test'
+                '@Type' => 'test',
             ),
             'föo_bär' => 'a',
             "Bar" => array(1,2,3),
@@ -141,7 +141,7 @@ class XmlEncoderTest extends \PHPUnit_Framework_TestCase
     {
         $array = array(
           '#' => 'Paul',
-          '@gender' => 'm'
+          '@gender' => 'm',
         );
 
         $expected = '<?xml version="1.0"?>'."\n".
@@ -154,7 +154,7 @@ class XmlEncoderTest extends \PHPUnit_Framework_TestCase
     {
         $array = array(
           'firstname' => 'Paul',
-          '@gender' => 'm'
+          '@gender' => 'm',
         );
 
         $expected = '<?xml version="1.0"?>'."\n".
@@ -228,6 +228,31 @@ class XmlEncoderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(get_object_vars($obj), $this->encoder->decode($source, 'xml'));
     }
 
+    public function testDecodeCdataWrapping()
+    {
+        $expected = array(
+            'firstname' => 'Paul <or Me>',
+        );
+
+        $xml = '<?xml version="1.0"?>'."\n".
+            '<response><firstname><![CDATA[Paul <or Me>]]></firstname></response>'."\n";
+
+        $this->assertEquals($expected, $this->encoder->decode($xml, 'xml'));
+    }
+
+    public function testDecodeCdataWrappingAndWhitespace()
+    {
+        $expected = array(
+            'firstname' => 'Paul <or Me>',
+        );
+
+        $xml = '<?xml version="1.0"?>'."\n".
+            '<response><firstname>'."\n".
+                '<![CDATA[Paul <or Me>]]></firstname></response>'."\n";
+
+        $this->assertEquals($expected, $this->encoder->decode($xml, 'xml'));
+    }
+
     public function testDecodeScalarWithAttribute()
     {
         $source = '<?xml version="1.0"?>'."\n".
@@ -247,7 +272,7 @@ class XmlEncoderTest extends \PHPUnit_Framework_TestCase
 
         $expected = array(
             '#' => 'Peter',
-            '@gender' => 'M'
+            '@gender' => 'M',
         );
 
         $this->assertEquals($expected, $this->encoder->decode($source, 'xml'));
@@ -261,7 +286,7 @@ class XmlEncoderTest extends \PHPUnit_Framework_TestCase
         $expected = array(
             'firstname' => 'Peter',
             'lastname' => 'Mac Calloway',
-            '@gender' => 'M'
+            '@gender' => 'M',
         );
 
         $this->assertEquals($expected, $this->encoder->decode($source, 'xml'));
@@ -280,8 +305,8 @@ class XmlEncoderTest extends \PHPUnit_Framework_TestCase
         $expected = array(
             'people' => array('person' => array(
                 array('firstname' => 'Benjamin', 'lastname' => 'Alexandre'),
-                array('firstname' => 'Damien', 'lastname' => 'Clay')
-            ))
+                array('firstname' => 'Damien', 'lastname' => 'Clay'),
+            )),
         );
 
         $this->assertEquals($expected, $this->encoder->decode($source, 'xml'));
@@ -293,11 +318,11 @@ class XmlEncoderTest extends \PHPUnit_Framework_TestCase
         $obj->xmlFoo = array(
             'foo-bar' => array(
                 '@key' => "value",
-                'item' => array("@key" => 'key', "key-val" => 'val')
+                'item' => array("@key" => 'key', "key-val" => 'val'),
             ),
             'Foo' => array(
                 'Bar' => "Test",
-                '@Type' => 'test'
+                '@Type' => 'test',
             ),
             'föo_bär' => 'a',
             "Bar" => array(1,2,3),
@@ -306,11 +331,11 @@ class XmlEncoderTest extends \PHPUnit_Framework_TestCase
         $expected = array(
             'foo-bar' => array(
                 '@key' => "value",
-                'key' => array('@key' => 'key', "key-val" => 'val')
+                'key' => array('@key' => 'key', "key-val" => 'val'),
             ),
             'Foo' => array(
                 'Bar' => "Test",
-                '@Type' => 'test'
+                '@Type' => 'test',
             ),
             'föo_bär' => 'a',
             "Bar" => array(1,2,3),

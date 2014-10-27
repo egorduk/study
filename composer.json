@@ -13,7 +13,6 @@
         "doctrine/doctrine-bundle": "~1.2",
         "twig/extensions": "~1.0",
         "symfony/security-csrf": "~2.4",
-        "twig/twig": "~1.12",
         "symfony/assetic-bundle": "~2.3",
         "symfony/swiftmailer-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.4",
@@ -24,15 +23,16 @@
         "winzou/cache-bundle": "dev-master",
         "genemu/form-bundle": "2.2.*",
         "symfony/finder": "2.3.*",
-        "geoip/geoip": "~1.14",
+        "maxmind/geoip": "dev-master",
 		"punkave/symfony2-file-uploader-bundle": "1.0.*@dev",
 		"Beryllium/CacheBundle": "dev-master",
-		"leaseweb/memcache-bundle": "*"
+		"knplabs/knp-snappy-bundle": "~1.2",
+		"whiteoctober/tcpdf-bundle": "~1.0"
     },
     "config":{
         "bin-dir": "bin",
         "github-oauth":{
-            "github.com":"5ddb1a3691859acf470d05b73177c40c0749cd51"
+            "github.com":"d78ef1bd61f3feea7b06b2ee24dceee687fd7f7e"
         }
     },
     "scripts": {
@@ -60,5 +60,8 @@
         "branch-alias": {
             "dev-master": "2.4-dev"
         }
+    },
+    "require-dev": {
+        "twig/twig": "~1.16"
     }
 }

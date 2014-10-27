@@ -41,6 +41,8 @@ framework:
         cache:  file
         file_cache_dir: "%kernel.cache_dir%/annotations"
         debug: "%kernel.debug%"
+    #profiler:
+            #collect: false
 
 services:
     cache:
@@ -57,10 +59,10 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: true
-    bundles:
-       -  AcmeIndexBundle
-       -  AcmeAuthBundle
-       -  AcmeSecureBundle
+    #bundles:
+    #   -  AcmeIndexBundle
+    #   -  AcmeAuthBundle
+    #   -  AcmeSecureBundle
 
     #java: /usr/bin/java
     filters:
@@ -83,6 +85,8 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
+        #mapping_types:
+        #              bit: boolean
         # if using pdo_sqlite as your database driver, add the path in parameters.yml
         # e.g. database_path: "%kernel.root_dir%/data/data.db3"
         # path:     "%database_path%"
@@ -107,13 +111,23 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
-    encryption: ssl
-    disable_delivery: false #true if off mail send
+    transport:  gmail
+    #encryption: ssl
+    auth_mode:  login
+    host:       smtp.gmail.com
+    #host: ~
+    username:  egordukk@tut.by
+    password:  rezistor
+    #transport: "%mailer_transport%"
+    #host:      "%mailer_host%"
+    #username:  "%mailer_user%"
+    #password:  "%mailer_password%"
+    #spool:     { type: memory }
+    spool:
+       type: file
+       path: "%kernel.root_dir%/spool"
+    #encryption: ssl
+    #disable_delivery: false #true if off mail send
     #sender_address:
     #spool:
     #    type:   file
@@ -131,3 +145,16 @@ genemu_form:
     #options:
         #cache_dir: "%kernel.cache_dir%/winzou"
         #default_driver: apc
+
+#knp_snappy:
+#    pdf:
+#        enabled:    true
+#        binary:     C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf
+#        options:    []
+#    image:
+#        enabled:    true
+#        binary:     /usr/local/bin/wkhtmltoimage
+#        options:    []
+white_october_tcpdf:
+    tcpdf:
+        k_tcpdf_external_config: false
