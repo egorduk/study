@@ -5,12 +5,16 @@
         <link href="{{ asset('bundles/css/select2.css') }}" rel="stylesheet" />
         <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-maxlength.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/select2.min.js') }}"></script>
+        <link rel="stylesheet" href="{{ asset('bundles/css/timer/jquery.countdown.css') }}" />
         <!--<link rel="stylesheet" href="{{ asset('bundles/css/chat/jScrollPane.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/chat/chat.css') }}" />
         <script type="text/javascript" src="{{ asset('bundles/js/chat/jquery.mousewheel.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/chat/jScrollPane.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/chat/chat.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/chat/fancywebsocket.js') }}"></script>-->
+        <script type="text/javascript" src="{{ asset('bundles/js/timer/jquery.plugin.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/timer/jquery.countdown.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/timer/jquery.countdown-ru.js') }}"></script>
         <style>
             .block-file{
                 border: 1px solid #000000;
@@ -22,6 +26,10 @@
             }
             .thumbnail > img {
                 width: 60px;
+            }
+            #timer {
+                height: 45px;
+                /*width: 210px;*/
             }
         </style>
         <div class="container">
@@ -35,21 +43,20 @@
             <p>Оригинальность работы: {{ order.originality }}%</p>
             <p>Предмет: {{ order.subjectorder.childname }}</p>
             <p>Тип работы: {{ order.typeorder.name }}</p>
+            <p>Дата создания: {{ order.datecreate.format("d.m.Y H:i") }}</p>
             <p id="block-status-order">Статус заказа: {{ order.statusorder.name }}</p>
             {% if order.statusorder.code == 'g' %}
                 <p id="block-date-guarantee">На гарантии до: {{ order.dateguarantee.format("d.m.Y H:i") }}</p>
             {% endif %}
             {% if order.statusorder.code == 'e' %}
-                <p id="block-diff-expired">
-                    {% if order.diffexpired.days > 0 %}
-                        Просрочен на: {{ order.diffexpired.days }} дн.
-                    {% else %}
-                        Просрочен на: {{ order.diffexpired.format("%d дн. %h ч. %i мин.") }}
-                    {% endif %}
-                </p>
+
+                <div id="timer"></div>
+
             {% endif %}
-            <p>Дата создания: {{ order.datecreate.format("d.m.Y H:i") }}</p>
             <p id="block-date-expire">Выполнение до: {{ order.dateexpire.format("d.m.Y H:i") }}</p>
+            {% if order.statusorder.code == 'w' %}
+                <div id="timer"></div>
+            {% endif %}
             <p>Заказчик: <div id="block-client">{{ client | raw }}</div></p>
         </div>
         <div class="col-md-5">
@@ -96,7 +103,7 @@
                     <div class="input-group form-group">
                         <label for="formCancelRequest_create" class="btn btn-success"><span class="">&nbspСоздать</span></label>
                         {{ form_widget(formCancelRequest.create) }}
-                        {% if (cancelRequests | length) > 0 and cancelRequests[0].creator == user.id %}
+                        {% if (cancelRequests | length) > 0 and cancelRequests|first.creator == user.id %}
                             <label for="formCancelRequest_cancel" class="btn btn-success"><span class="">&nbspОтменить заявку</span></label>
                             <button class="hidden" id="formCancelRequest_cancel" type="button"></button>
                         {% endif %}
@@ -109,7 +116,7 @@
                 </div>
             </div>
         </div>
-            <div class="row" id="block-history-cancel-request" style="display: none">
+            <div class="row" id="block-history-cancel-request" style="display: none; padding-top: 20px">
                 <div class="col-md-8 col-md-offset-2">
                     {% include "AcmeSecureBundle:Secure:layout_table_cancel_request.html.twig" %}
                 </div>
@@ -150,6 +157,13 @@
     <script>
         $(document).ready(function() {
             document.title = "Просмотр заказа № " + {{ order.num }};
+            if ('{{ order.statusorder.code }}' == 'w') {
+                var seconds = '{{ order.diffwork }}';
+                $('#timer').countdown({until: + seconds, description: 'Осталось на выполнение'}, $.countdown.regionalOptions['ru']);
+            } else if ('{{ order.statusorder.code }}' == 'e') {
+                var seconds = '{{ order.diffexpire }}';
+                $('#timer').countdown({since: '-1d', description: 'Просрочен на'}, $.countdown.regionalOptions['ru']);
+            }
             if ({{ cancelRequests | length }} > 0) {
                 $("#block-history-cancel-request").show();
             }
@@ -201,6 +215,9 @@
                             $("#line-date-verdict").empty();
                             $("button#formCancelRequest_cancel").remove();
                             $("label[for='formCancelRequest_cancel']").remove();
+                            $("#block-form-cancel-request").toggle();
+                            $("#create-cancel-request-before").toggle();
+                            $("#create-cancel-request-after").toggle();
                         }
                     }
                 });
@@ -240,6 +257,9 @@
                                 var btnRemoveCancelRequest = responseObject.btnRemoveCancelRequest;
                                 $("button#formCancelRequest_create").after(btnRemoveCancelRequest);
                             }
+                            $("#block-form-cancel-request").toggle();
+                            $("#create-cancel-request-before").toggle();
+                            $("#create-cancel-request-after").toggle();
                         } else {
                             $.each(responseObject.response, function(index, value) {
                                 var selector  = "#formCancelRequest_" + index;
