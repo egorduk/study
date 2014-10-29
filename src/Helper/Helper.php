@@ -2340,7 +2340,7 @@ class Helper
 
 
     public static function getBtnRemoveCancelRequest() {
-        return '<label class="btn btn-success" for="formCancelRequest_cancel"><span class="">&nbsp;Отменить заявку</span></label><button class="hidden" name="formCancelRequest[cancel]" id="formCancelRequest_cancel" type="button">Cancel</button>';
+        return '<label class="btn btn-success" for="formCancelRequest_cancel"><span class="icon-cancel-circled-4">&nbsp;Отменить заявку</span></label><button class="hidden" name="formCancelRequest[cancel]" id="formCancelRequest_cancel" type="button">Cancel</button>';
     }
 
 
@@ -2372,5 +2372,27 @@ class Helper
             );
             //->setBody($this->renderView('HelloBundle:Hello:email', array('name' => $name)));
         $container->get('mailer')->send($message);
+    }
+
+
+    public static function createPdfOrder($order) {
+        $pdfObj = self::getContainer()->get("white_october.tcpdf")->create();
+        //var_dump($pdfObj);die;
+        //$pdfObj->SetSubject('subject');
+        $pdfObj->SetTitle('Заказ № ' . $order->getNum());
+        //$pdfObj->SetAuthor('author');
+        //$pdfObj->SetCreator('creator');
+        $num = $order->getNum();
+        $pdfObj->AddPage();
+        $pdfObj->setPrintHeader(false);
+        $pdfObj->setPrintFooter(false);
+        $pdfObj->SetMargins(20, 25, 25);
+        $html = '
+        <H1>Заказ № ' . $num . '</H1>
+        <img width="110px" height="auto" align="middle" class="thumbnail" alt="Аватар" src="/study/web/uploads/avatars/default.png">';
+        $html=iconv("WINDOWS-1251","UTF-8",$html);
+
+        $pdfObj->writeHTML($html, true, false, true, false, '');
+        return $pdfObj;
     }
 }
