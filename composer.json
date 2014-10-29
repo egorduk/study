@@ -27,7 +27,8 @@
 		"punkave/symfony2-file-uploader-bundle": "1.0.*@dev",
 		"Beryllium/CacheBundle": "dev-master",
 		"knplabs/knp-snappy-bundle": "~1.2",
-		"whiteoctober/tcpdf-bundle": "~1.0"
+		"whiteoctober/tcpdf-bundle": "~1.0",
+		"slik/dompdf-bundle" : "dev-master"
     },
     "config":{
         "bin-dir": "bin",

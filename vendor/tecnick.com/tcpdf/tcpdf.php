@@ -1842,7 +1842,7 @@ class TCPDF {
 	 * @public
 	 * @see getPageSizeFromFormat(), setPageFormat()
 	 */
-	public function __construct($orientation='P', $unit='mm', $format='A4', $unicode=true, $encoding='UTF-8', $diskcache=false, $pdfa=false) {
+	public function __construct($orientation='P', $unit='mm', $format='A4', $unicode=false, $encoding='UTF-8', $diskcache=false, $pdfa=false) {
 		/* Set internal character encoding to ASCII */
 		if (function_exists('mb_internal_encoding') AND mb_internal_encoding()) {
 			$this->internal_encoding = mb_internal_encoding();
@@ -1992,6 +1992,11 @@ class TCPDF {
 		$this->default_graphic_vars = $this->getGraphicVars();
 		$this->header_xobj_autoreset = false;
 		$this->custom_xmp = '';
+        //if (@file_exists(dirname(__FILE__).'rus.php')) {
+           // require_once(dirname(__FILE__).'/rus.php');
+            //var_dump($l);die;
+          //  $this->setLanguageArray($l);
+        //}
 	}
 
 	/**

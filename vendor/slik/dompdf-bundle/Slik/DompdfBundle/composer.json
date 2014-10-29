@@ -1,0 +1,31 @@
+{
+    "name": "slik/dompdf-bundle",
+    "version": "1.0.0-alpha",
+    "description": "A wrapper for using DomPDF inside Symfony 2",
+    "keywords": ["symfony", "development", "bundle"],
+    "type": "symfony-bundle",
+    "license": "All Rights Reserved",
+    "authors": [
+        {
+            "name": "Christian Vermeulen",
+            "email": "info@christianvermeulen.net",
+            "homepage": "http://christianvermeulen.net",
+            "role": "Developer"
+        },
+        {
+            "name": "Slik BV",
+            "email": "info@slik.eu",
+            "homepage": "http://www.slik.eu",
+            "role": "Copyright Owner"
+        }
+    ],
+    "require": {
+        "php": ">=5.3",
+        "symfony/framework-bundle": "2.*",
+        "symfony/symfony": "2.*"
+    },
+    "autoload":     {
+        "psr-0": { "Slik\\DompdfBundle": "" }
+    },
+    "target-dir": "Slik/DompdfBundle"
+}

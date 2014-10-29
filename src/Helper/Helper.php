@@ -2340,7 +2340,7 @@ class Helper
 
 
     public static function getBtnRemoveCancelRequest() {
-        return '<label class="btn btn-success" for="formCancelRequest_cancel"><span class="">&nbsp;Отменить заявку</span></label><button class="hidden" name="formCancelRequest[cancel]" id="formCancelRequest_cancel" type="button">Cancel</button>';
+        return '<label class="btn btn-success" for="formCancelRequest_cancel"><span class="icon-cancel-circled-4">&nbsp;Отменить заявку</span></label><button class="hidden" name="formCancelRequest[cancel]" id="formCancelRequest_cancel" type="button">Cancel</button>';
     }
 
 
@@ -2372,5 +2372,18 @@ class Helper
             );
             //->setBody($this->renderView('HelloBundle:Hello:email', array('name' => $name)));
         $container->get('mailer')->send($message);
+    }
+
+
+    public static function createPdfOrder($order) {
+        //$pdfObj = self::getContainer()->get("white_october.tcpdf")->create();
+        $num = $order->getNum();
+        $pdfObj = self::getContainer()->get('slik_dompdf');
+        $html =
+            '<html><meta http-equiv="content-type" content="text/html; charset=utf-8" /><body>'.
+            '<h1>Заказ № ' . $num . '</h1>'.
+            '</body></html>';
+        $pdfObj->getpdf($html);
+        return $pdfObj;
     }
 }

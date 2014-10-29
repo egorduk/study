@@ -33,6 +33,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Acme\SecureBundle\Entity\Author\BidFormValidate;
 use Acme\SecureBundle\Form\Author\BidForm;
 use Symfony\Component\Security\Csrf\CsrfToken;
+use Zend\I18n\Validator\DateTime;
 
 
 class AuthorController extends Controller
@@ -509,8 +510,7 @@ class AuthorController extends Controller
                 }
                 if ($codeStatusOrder == 'e') {
                     $dateExpire = $order->getDateExpire();
-                    $diffExpire = time() - strtotime($dateExpire->format("d.m.Y H:i:s"));
-                    $order->setDiffExpire($diffExpire);
+                    $order->setDiffExpire(time() - strtotime($dateExpire->format("d.m.Y H:i:s")));
                 }
                 if ($codeStatusOrder == 'cl') {
                     return $this->render(
@@ -518,22 +518,20 @@ class AuthorController extends Controller
                     );
                 }
                 $clientFiles = Helper::getOrderFiles($order, 'client', $user);
-                /*$pdfObj = $this->get("white_october.tcpdf")->create();
-                $pdfObj->SetSubject('subject');
-                $pdfObj->SetTitle('title');
-                $pdfObj->SetAuthor('author');
-                $pdfObj->SetCreator('creator');
-                $pdfObj->AddPage();
-                $html = '<img width="110px" height="auto" align="middle" class="thumbnail" alt="Аватар" src="/study/web/uploads/avatars/default.png">';
-                $pdfObj->writeHTML($html, true, false, true, false, '');
-                $pdfObj->output('test.pdf');*/
+                $pdfObj = Helper::createPdfOrder($order);
+                $pdfObj->stream("myfile.pdf");
                 if ($codeStatusOrder == 'w') {
                     $dateExpire = $order->getDateExpire();
                     $diffWork = strtotime($dateExpire->format("d.m.Y H:i:s")) - time();
                     $order->setDiffWork($diffWork);
                 }
+                $obj = [];
+                $obj['client'] = $clientLink;
+                $obj['dateVerdict'] = $dateVerdict;
+                $obj['clientFiles'] = $clientFiles;
+                $obj['cancelRequests'] = $cancelRequests;
                 return $this->render(
-                    'AcmeSecureBundle:Author:order_work.html.twig', array('formCancelRequest' => $formCancelRequest->createView(), 'order' => $order, 'client' => $clientLink, 'user' => $user, 'cancelRequests' => $cancelRequests, 'dateVerdict' => $dateVerdict, 'clientFiles' => $clientFiles)
+                    'AcmeSecureBundle:Author:order_work.html.twig', array('formCancelRequest' => $formCancelRequest->createView(), 'order' => $order, 'user' => $user, 'obj' => $obj)
                 );
             } elseif ($codeStatusOrder == 'f' || $codeStatusOrder == 'cl') {
                 return $this->render(

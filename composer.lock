@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "68ffb689d94202e107ad0a88fa5590b8",
+    "hash": "41aebec8945347a7e2b21dd119ae5f71",
     "packages": [
         {
             "name": "Beryllium/CacheBundle",
@@ -1383,6 +1383,58 @@
             "time": "2014-09-22 14:56:14"
         },
         {
+            "name": "slik/dompdf-bundle",
+            "version": "dev-master",
+            "target-dir": "Slik/DompdfBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SlikNL/DompdfBundle.git",
+                "reference": "151f4ebc6ea2c6cb86e7315a8a0048101a117306"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SlikNL/DompdfBundle/zipball/151f4ebc6ea2c6cb86e7315a8a0048101a117306",
+                "reference": "151f4ebc6ea2c6cb86e7315a8a0048101a117306",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3",
+                "symfony/framework-bundle": "2.*",
+                "symfony/symfony": "2.*"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Slik\\DompdfBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "All Rights Reserved"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Vermeulen",
+                    "email": "info@christianvermeulen.net",
+                    "homepage": "http://christianvermeulen.net",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Slik BV",
+                    "email": "info@slik.eu",
+                    "homepage": "http://www.slik.eu",
+                    "role": "Copyright Owner"
+                }
+            ],
+            "description": "A wrapper for using DomPDF inside Symfony 2",
+            "keywords": [
+                "bundle",
+                "development",
+                "symfony"
+            ],
+            "time": "2013-01-28 10:36:34"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.3.0",
             "source": {
@@ -2042,7 +2094,8 @@
         "winzou/cache-bundle": 20,
         "maxmind/geoip": 20,
         "punkave/symfony2-file-uploader-bundle": 20,
-        "beryllium/cachebundle": 20
+        "beryllium/cachebundle": 20,
+        "slik/dompdf-bundle": 20
     },
     "prefer-stable": false,
     "platform": {

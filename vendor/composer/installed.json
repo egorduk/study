@@ -2094,5 +2094,59 @@
             "TCPDF",
             "pdf"
         ]
+    },
+    {
+        "name": "slik/dompdf-bundle",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "target-dir": "Slik/DompdfBundle",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/SlikNL/DompdfBundle.git",
+            "reference": "151f4ebc6ea2c6cb86e7315a8a0048101a117306"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/SlikNL/DompdfBundle/zipball/151f4ebc6ea2c6cb86e7315a8a0048101a117306",
+            "reference": "151f4ebc6ea2c6cb86e7315a8a0048101a117306",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3",
+            "symfony/framework-bundle": "2.*",
+            "symfony/symfony": "2.*"
+        },
+        "time": "2013-01-28 10:36:34",
+        "type": "symfony-bundle",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Slik\\DompdfBundle": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "All Rights Reserved"
+        ],
+        "authors": [
+            {
+                "name": "Christian Vermeulen",
+                "email": "info@christianvermeulen.net",
+                "homepage": "http://christianvermeulen.net",
+                "role": "Developer"
+            },
+            {
+                "name": "Slik BV",
+                "email": "info@slik.eu",
+                "homepage": "http://www.slik.eu",
+                "role": "Copyright Owner"
+            }
+        ],
+        "description": "A wrapper for using DomPDF inside Symfony 2",
+        "keywords": [
+            "bundle",
+            "development",
+            "symfony"
+        ]
     }
 ]
