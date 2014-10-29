@@ -6,17 +6,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79828e02-5540-4157-bcbe-d9d8b8a4a7b1" name="Default" comment="sdfsfsdfs">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/css/timer/countdownGlowing.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/css/timer/countdownLED.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/js/timer/jquery.countdown-ru.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/css/timer/jquery.countdown.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/js/timer/jquery.countdown.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/js/timer/jquery.plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/UserOrder.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/UserOrder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bundles/punkavefileuploader/js/jquery.fileupload.js" afterPath="$PROJECT_DIR$/web/bundles/punkavefileuploader/js/jquery.fileupload.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/views/Default/upload_file_template.html.twig" afterPath="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/views/Default/upload_file_template.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="study.iws" />
@@ -53,7 +42,7 @@
       <file leaf-file-name="order_work.html.twig" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="165" column="56" selection-start="9524" selection-end="9524" vertical-scroll-proportion="0.4847775" vertical-offset="3128" max-vertical-offset="6578">
+            <state line="165" column="56" selection-start="9524" selection-end="9524" vertical-scroll-proportion="0.74864376" vertical-offset="3128" max-vertical-offset="6578">
               <folding>
                 <element signature="e#2113#2143#0" expanded="true" />
                 <element signature="e#4421#4462#0" expanded="true" />
@@ -1040,10 +1029,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32575756" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32575756" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1516,7 +1505,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="165" column="56" selection-start="9524" selection-end="9524" vertical-scroll-proportion="0.4847775" vertical-offset="3128" max-vertical-offset="6578">
+        <state line="165" column="56" selection-start="9524" selection-end="9524" vertical-scroll-proportion="0.74864376" vertical-offset="3128" max-vertical-offset="6578">
           <folding>
             <element signature="e#2113#2143#0" expanded="true" />
             <element signature="e#4421#4462#0" expanded="true" />
