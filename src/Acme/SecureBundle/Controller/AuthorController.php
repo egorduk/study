@@ -508,8 +508,9 @@ class AuthorController extends Controller
                     }
                 }
                 if ($codeStatusOrder == 'e') {
-                    $diffExpired = Helper::getDiffBetweenDates($order->getDateExpire());
-                    $order->setDiffExpired($diffExpired);
+                    $dateExpire = $order->getDateExpire();
+                    $diffExpire = time() - strtotime($dateExpire->format("d.m.Y H:i:s"));
+                    $order->setDiffExpire($diffExpire);
                 }
                 if ($codeStatusOrder == 'cl') {
                     return $this->render(
@@ -526,6 +527,11 @@ class AuthorController extends Controller
                 $html = '<img width="110px" height="auto" align="middle" class="thumbnail" alt="Аватар" src="/study/web/uploads/avatars/default.png">';
                 $pdfObj->writeHTML($html, true, false, true, false, '');
                 $pdfObj->output('test.pdf');*/
+                if ($codeStatusOrder == 'w') {
+                    $dateExpire = $order->getDateExpire();
+                    $diffWork = strtotime($dateExpire->format("d.m.Y H:i:s")) - time();
+                    $order->setDiffWork($diffWork);
+                }
                 return $this->render(
                     'AcmeSecureBundle:Author:order_work.html.twig', array('formCancelRequest' => $formCancelRequest->createView(), 'order' => $order, 'client' => $clientLink, 'user' => $user, 'cancelRequests' => $cancelRequests, 'dateVerdict' => $dateVerdict, 'clientFiles' => $clientFiles)
                 );
@@ -660,8 +666,8 @@ class AuthorController extends Controller
                 } elseif ($action == 'completeOrder') {
                     if ($order->getStatusOrder()->getCode() == 'w' || $order->getStatusOrder()->getCode() == 'e') {
                         $checkCompletedOrder = $request->request->get('checkCompletedOrder');
-                        if ($checkCompletedOrder == 'true') {
-                            $files = Helper::getFilesForOrder($order, 'author' , $user);
+                        if (filter_var($checkCompletedOrder, FILTER_VALIDATE_BOOLEAN)) {
+                            $files = Helper::getOrderFiles($order, 'author', $user);
                             if (count($files) > 0) {
                                 Helper::setOrderStatus($order, 'guarantee');
                                 $statusOrder = $order->getStatusOrder()->getName();

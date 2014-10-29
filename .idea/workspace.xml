@@ -6,6 +6,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79828e02-5540-4157-bcbe-d9d8b8a4a7b1" name="Default" comment="sdfsfsdfs">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/css/timer/countdownGlowing.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/css/timer/countdownLED.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/js/timer/jquery.countdown-ru.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/css/timer/jquery.countdown.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/js/timer/jquery.countdown.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/js/timer/jquery.plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/UserOrder.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/UserOrder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bundles/punkavefileuploader/js/jquery.fileupload.js" afterPath="$PROJECT_DIR$/web/bundles/punkavefileuploader/js/jquery.fileupload.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/views/Default/upload_file_template.html.twig" afterPath="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/views/Default/upload_file_template.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="study.iws" />
@@ -33,8 +44,22 @@
       <file leaf-file-name="AuthorController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="152" column="26" selection-start="7323" selection-end="7323" vertical-scroll-proportion="-22.419355" vertical-offset="1989" max-vertical-offset="16104">
+            <state line="531" column="41" selection-start="30700" selection-end="30700" vertical-scroll-proportion="-21.225807" vertical-offset="10364" max-vertical-offset="16236">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="order_work.html.twig" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="165" column="56" selection-start="9524" selection-end="9524" vertical-scroll-proportion="0.4847775" vertical-offset="3128" max-vertical-offset="6578">
+              <folding>
+                <element signature="e#2113#2143#0" expanded="true" />
+                <element signature="e#4421#4462#0" expanded="true" />
+                <element signature="e#4575#4596#0" expanded="true" />
+                <element signature="tag#div#2;tag#div#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -65,19 +90,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="order_work.html.twig" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="259" column="9" selection-start="14882" selection-end="14882" vertical-scroll-proportion="-13.5161295" vertical-offset="5191" max-vertical-offset="6116">
-              <folding>
-                <element signature="e#4099#4140#0" expanded="true" />
-                <element signature="e#4253#4274#0" expanded="true" />
-                <element signature="tag#div#2;tag#div#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="style_order.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/bundles/css/style_order.css">
           <provider selected="true" editor-type-id="text-editor">
@@ -96,28 +108,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="upload_file_template.html.twig" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="upload_file_template.html.twig" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/views/Default/upload_file_template.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="44" selection-start="927" selection-end="927" vertical-scroll-proportion="0.596745" vertical-offset="0" max-vertical-offset="836">
+            <state line="18" column="44" selection-start="1154" selection-end="1154" vertical-scroll-proportion="-12.774194" vertical-offset="0" max-vertical-offset="902">
               <folding>
-                <marker date="1414438186481" expanded="true" signature="133:170" placeholder="..." />
-                <marker date="1414438186481" expanded="true" signature="171:1658" placeholder="..." />
-                <marker date="1414438186481" expanded="true" signature="171:957" placeholder="..." />
-                <marker date="1414438186481" expanded="true" signature="214:233" placeholder="..." />
-                <marker date="1414438186481" expanded="true" signature="234:1658" placeholder="..." />
-                <marker date="1414438186481" expanded="true" signature="234:854" placeholder="..." />
-                <marker date="1414438186481" expanded="true" signature="234:854" placeholder="..." />
-                <marker date="1414438186481" expanded="true" signature="345:563" placeholder="..." />
-                <marker date="1414438186481" expanded="true" signature="346:1658" placeholder="..." />
-                <marker date="1414438186481" expanded="true" signature="346:559" placeholder="..." />
-                <marker date="1414438186481" expanded="true" signature="484:496" placeholder="..." />
-                <marker date="1414438186481" expanded="true" signature="643:655" placeholder="..." />
-                <marker date="1414438186481" expanded="true" signature="711:724" placeholder="..." />
-                <marker date="1414438186481" expanded="true" signature="725:835" placeholder="..." />
-                <marker date="1414438186481" expanded="true" signature="725:835" placeholder="..." />
-                <marker date="1414438186481" expanded="true" signature="1093:1653" placeholder="..." />
-                <marker date="1414438186481" expanded="true" signature="1294:1639" placeholder="..." />
+                <marker date="1414566192741" expanded="true" signature="133:170" placeholder="..." />
+                <marker date="1414566192741" expanded="true" signature="171:1885" placeholder="..." />
+                <marker date="1414566192741" expanded="true" signature="171:1184" placeholder="..." />
+                <marker date="1414566192741" expanded="true" signature="214:233" placeholder="..." />
+                <marker date="1414566192741" expanded="true" signature="234:1885" placeholder="..." />
+                <marker date="1414566192741" expanded="true" signature="234:1081" placeholder="..." />
+                <marker date="1414566192741" expanded="true" signature="234:1081" placeholder="..." />
+                <marker date="1414566192741" expanded="true" signature="334:884" placeholder="..." />
+                <marker date="1414566192741" expanded="true" signature="552:564" placeholder="..." />
+                <marker date="1414566192741" expanded="true" signature="622:635" placeholder="..." />
+                <marker date="1414566192741" expanded="true" signature="636:861" placeholder="..." />
+                <marker date="1414566192741" expanded="true" signature="884:1885" placeholder="..." />
+                <marker date="1414566192741" expanded="true" signature="938:951" placeholder="..." />
+                <marker date="1414566192741" expanded="true" signature="952:1062" placeholder="..." />
+                <marker date="1414566192741" expanded="true" signature="952:1062" placeholder="..." />
+                <marker date="1414566192741" expanded="true" signature="1320:1880" placeholder="..." />
+                <marker date="1414566192741" expanded="true" signature="1521:1866" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -190,12 +202,12 @@
         <option value="$PROJECT_DIR$/web/bundles/punkavefileuploader/js/FileUploader.js" />
         <option value="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/views/Default/avatar_template.html.twig" />
         <option value="$PROJECT_DIR$/src/Helper/Helper.php" />
-        <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" />
         <option value="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/BlueImp/UploadHandler.php" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/profile.html.twig" />
         <option value="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/views/Default/templates.html.twig" />
         <option value="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/views/Default/upload_file_template.html.twig" />
+        <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig" />
       </list>
     </option>
   </component>
@@ -946,13 +958,13 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="FullScreen" value="false" />
     <property name="SearchEverywhereHistory" value="" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="271" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="273" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="300" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="302" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="304" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="306" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="960" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="967" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="295" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
@@ -1028,10 +1040,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32575756" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32575756" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1400,17 +1412,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="259" column="9" selection-start="14882" selection-end="14882" vertical-scroll-proportion="-13.5161295" vertical-offset="5191" max-vertical-offset="6116">
-          <folding>
-            <element signature="e#4099#4140#0" expanded="true" />
-            <element signature="e#4253#4274#0" expanded="true" />
-            <element signature="tag#div#2;tag#div#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/bundles/punkavefileuploader/js/FileUploader.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="60" selection-start="100" selection-end="100" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3080">
@@ -1481,34 +1482,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/views/Default/upload_file_template.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="44" selection-start="1154" selection-end="1154" vertical-scroll-proportion="-12.774194" vertical-offset="0" max-vertical-offset="902">
+          <folding>
+            <marker date="1414566192741" expanded="true" signature="133:170" placeholder="..." />
+            <marker date="1414566192741" expanded="true" signature="171:1885" placeholder="..." />
+            <marker date="1414566192741" expanded="true" signature="171:1184" placeholder="..." />
+            <marker date="1414566192741" expanded="true" signature="214:233" placeholder="..." />
+            <marker date="1414566192741" expanded="true" signature="234:1885" placeholder="..." />
+            <marker date="1414566192741" expanded="true" signature="234:1081" placeholder="..." />
+            <marker date="1414566192741" expanded="true" signature="234:1081" placeholder="..." />
+            <marker date="1414566192741" expanded="true" signature="334:884" placeholder="..." />
+            <marker date="1414566192741" expanded="true" signature="552:564" placeholder="..." />
+            <marker date="1414566192741" expanded="true" signature="622:635" placeholder="..." />
+            <marker date="1414566192741" expanded="true" signature="636:861" placeholder="..." />
+            <marker date="1414566192741" expanded="true" signature="884:1885" placeholder="..." />
+            <marker date="1414566192741" expanded="true" signature="938:951" placeholder="..." />
+            <marker date="1414566192741" expanded="true" signature="952:1062" placeholder="..." />
+            <marker date="1414566192741" expanded="true" signature="952:1062" placeholder="..." />
+            <marker date="1414566192741" expanded="true" signature="1320:1880" placeholder="..." />
+            <marker date="1414566192741" expanded="true" signature="1521:1866" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="152" column="26" selection-start="7323" selection-end="7323" vertical-scroll-proportion="-22.419355" vertical-offset="1989" max-vertical-offset="16104">
+        <state line="531" column="41" selection-start="30700" selection-end="30700" vertical-scroll-proportion="-21.225807" vertical-offset="10364" max-vertical-offset="16236">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/views/Default/upload_file_template.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="44" selection-start="927" selection-end="927" vertical-scroll-proportion="0.596745" vertical-offset="0" max-vertical-offset="836">
+        <state line="165" column="56" selection-start="9524" selection-end="9524" vertical-scroll-proportion="0.4847775" vertical-offset="3128" max-vertical-offset="6578">
           <folding>
-            <marker date="1414438186481" expanded="true" signature="133:170" placeholder="..." />
-            <marker date="1414438186481" expanded="true" signature="171:1658" placeholder="..." />
-            <marker date="1414438186481" expanded="true" signature="171:957" placeholder="..." />
-            <marker date="1414438186481" expanded="true" signature="214:233" placeholder="..." />
-            <marker date="1414438186481" expanded="true" signature="234:1658" placeholder="..." />
-            <marker date="1414438186481" expanded="true" signature="234:854" placeholder="..." />
-            <marker date="1414438186481" expanded="true" signature="234:854" placeholder="..." />
-            <marker date="1414438186481" expanded="true" signature="345:563" placeholder="..." />
-            <marker date="1414438186481" expanded="true" signature="346:1658" placeholder="..." />
-            <marker date="1414438186481" expanded="true" signature="346:559" placeholder="..." />
-            <marker date="1414438186481" expanded="true" signature="484:496" placeholder="..." />
-            <marker date="1414438186481" expanded="true" signature="643:655" placeholder="..." />
-            <marker date="1414438186481" expanded="true" signature="711:724" placeholder="..." />
-            <marker date="1414438186481" expanded="true" signature="725:835" placeholder="..." />
-            <marker date="1414438186481" expanded="true" signature="725:835" placeholder="..." />
-            <marker date="1414438186481" expanded="true" signature="1093:1653" placeholder="..." />
-            <marker date="1414438186481" expanded="true" signature="1294:1639" placeholder="..." />
+            <element signature="e#2113#2143#0" expanded="true" />
+            <element signature="e#4421#4462#0" expanded="true" />
+            <element signature="e#4575#4596#0" expanded="true" />
+            <element signature="tag#div#2;tag#div#0" expanded="false" />
           </folding>
         </state>
       </provider>

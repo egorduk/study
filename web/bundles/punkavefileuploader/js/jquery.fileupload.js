@@ -150,9 +150,10 @@
                     ind = 0;
                 }
                 a = e.timeStamp;
-                $("#btn-upload").show().click(function() {
+                $("#block-btn-upload").show();
+                $("#btn-upload").click(function() {
                     if (data != null && a == e.timeStamp) {
-                        data.submit().done(function(e, data) {
+                        data.submit().done(function(e) {
                             //console.log(e);
                             data = null;
                             var checkCompletedOrder = $("#check-completed-order");
@@ -167,7 +168,7 @@
                                             if (responseObject.response == "valid") {
                                                 $("#block-status-order").html('<p>Статус заказа: ' + responseObject.statusOrder + '</p>');
                                                 $("#block-status-order").append('<p>На гарантии до: ' + responseObject.dateGuarantee + '</p>');
-                                                $("#block-diff-expired").html('');
+                                                $("#block-diff-expire, #block-diff-work").html('');
                                                 checkCompletedOrder[0].checked = false;
                                             }
                                         }
@@ -176,7 +177,7 @@
                             }
                             filesPreview.html('');
                         });
-                        $(this).hide();
+                        $("#block-btn-upload").hide();
                     }
                 });
             },

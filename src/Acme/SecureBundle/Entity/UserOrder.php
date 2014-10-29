@@ -171,7 +171,8 @@ class UserOrder extends EntityRepository
     private $author_last_sum_bid = null;
     private $min_sum = null;
     private $max_sum = null;
-    private $diffExpired = 0;
+    private $diffExpire = 0;
+    private $diffWork = 0;
 
     public function __construct($container, $action = null){
         $this->date_create = new \DateTime();
@@ -410,12 +411,12 @@ class UserOrder extends EntityRepository
         return $this->date_guarantee;
     }
 
-    public function setDiffExpired($val) {
-        $this->diffExpired = $val;
+    public function setDiffExpire($val) {
+        $this->diffExpire = $val;
     }
 
-    public function getDiffExpired() {
-        return $this->diffExpired;
+    public function getDiffExpire() {
+        return $this->diffExpire;
     }
 
     public function setDateCancel($val) {
@@ -424,5 +425,13 @@ class UserOrder extends EntityRepository
 
     public function getDateCancel() {
         return $this->date_cancel;
+    }
+
+    public function setDiffWork($val) {
+        $this->diffWork = $val;
+    }
+
+    public function getDiffWork() {
+        return $this->diffWork;
     }
 }
