@@ -5,6 +5,7 @@ parameters:
   file_uploader.min_file_size: ~
   file_uploader.max_file_size: ~
   file_uploader.mode: ~
+  file_uploader.num_order: ~
   file_uploader.allowed_extensions:
     # Mime types are just for documentation's sake.
     # BlueImp filters by supplied extension. No checking of the
@@ -83,6 +84,7 @@ services:
             min_file_size: '%file_uploader.min_file_size%'
             max_file_size: '%file_uploader.max_file_size%'
             mode: '%file_uploader.mode%'
+            num_order: '%file_uploader.num_order%'
         scope: request
 
     # You usually won't need this sub-service directly,

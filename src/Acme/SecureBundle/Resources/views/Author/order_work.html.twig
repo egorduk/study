@@ -284,7 +284,6 @@
             var fileUploader = new PunkAveFileUploader({
                 'uploadUrl': {{ path('secure_author_upload', { editId: order.num, action: 'order' }) | json_encode | raw }},
                 'thumbnailUrl': {{ ('/study/web/uploads/attachments/orders/' ~ order.num ~ '/thumbnails_author')| json_encode | raw }},
-                //'viewUrl': {{ ('/study/web/uploads/attachments/orders/' ~ order.num ~ '/author')| json_encode | raw }},
                 'viewUrl': {{ path('secure_author_download_file', {'type': 'attachments', 'num': order.num}) | json_encode | raw }},
                 'el': '.file-uploader',
                 'existingFiles': {{ punkave_get_files('attachments/orders/' ~ order.num ~ '/author') | json_encode | raw }},

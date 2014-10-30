@@ -105,7 +105,8 @@ class FileUploader
                 'max_number_of_files' => $options['max_number_of_files'],
                 'min_file_size' => $options['min_file_size'],
                 'max_file_size' => $options['max_file_size'],
-                'mode' => $options['mode']
+                'mode' => $options['mode'],
+                'num_order' => $options['num_order']
             ));
         //header('Content-type: text/plain');
         header('Pragma: no-cache');

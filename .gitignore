@@ -3,4 +3,7 @@
 /app/cache/*
 
 .idea/
+
 /app/spool/*
+
+/web/uploads/*

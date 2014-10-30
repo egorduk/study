@@ -421,6 +421,8 @@ class UploadHandler
                 $file->error = 'abort';
             }
         }
+       // var_dump($this->options['num_order']);die;
+        $file->url = Helper::getFileUrl($file->name, $this->options['num_order']);
         return $file;
     }
 

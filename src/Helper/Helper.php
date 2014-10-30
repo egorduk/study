@@ -2418,4 +2418,9 @@ class Helper
         $filePath = '/study/web/uploads/pdf/2/order_' . $num . '.pdf';
         return $filePath;
     }
+
+
+    public static function getFileUrl($filename, $orderNum) {
+        return self::getContainer()->get('router')->generate('secure_author_download_file', array('type' => 'attachments', 'num' => $orderNum, 'filename' => $filename));
+    }
 }

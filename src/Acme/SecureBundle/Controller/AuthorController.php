@@ -155,6 +155,7 @@ class AuthorController extends Controller
                     $session->save();
                     $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'attachments/orders/' . $orderNum . '/author',
                         'mode' => 'order',
+                        'num_order' => $orderNum
                         /*'max_number_of_files' => 10/*, 'max_file_size' => 4*/));
                     $session->remove('user');
                     $session->remove('order');

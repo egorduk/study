@@ -6,465 +6,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79828e02-5540-4157-bcbe-d9d8b8a4a7b1" name="Default" comment="sdfsfsdfs">
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\CHANGELOG.TXT" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\LICENSE.TXT" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\README.TXT" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\composer.json" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\config\tcpdf_config.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\barcodes\example_1d_html.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\barcodes\example_1d_png.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\barcodes\example_1d_svg.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\barcodes\example_1d_svgi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\barcodes\example_2d_datamatrix_html.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\barcodes\example_2d_datamatrix_png.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\barcodes\example_2d_datamatrix_svg.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\barcodes\example_2d_datamatrix_svgi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\barcodes\example_2d_pdf417_html.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\barcodes\example_2d_pdf417_png.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\barcodes\example_2d_pdf417_svg.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\barcodes\example_2d_pdf417_svgi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\barcodes\example_2d_qrcode_html.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\barcodes\example_2d_qrcode_png.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\barcodes\example_2d_qrcode_svg.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\barcodes\example_2d_qrcode_svgi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\barcodes\tcpdf_barcodes_1d_include.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\barcodes\tcpdf_barcodes_2d_include.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\config\tcpdf_config_alt.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\data\cert\tcpdf.crt" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\data\cert\tcpdf.fdf" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\data\cert\tcpdf.p12" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\data\chapter_demo_1.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\data\chapter_demo_2.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\data\table_data_demo.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\data\utf8test.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_001.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_002.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_003.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_004.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_005.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_006.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_007.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_008.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_009.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_010.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_011.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_012.pdf" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_012.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_013.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_014.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_015.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_016.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_017.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_018.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_019.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_020.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_021.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_022.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_023.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_024.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_025.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_026.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_027.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_028.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_029.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_030.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_031.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_032.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_033.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_034.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_035.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_036.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_037.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_038.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_039.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_040.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_041.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_042.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_043.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_044.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_045.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_046.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_047.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_048.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_049.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_050.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_051.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_052.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_053.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_054.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_055.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_056.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_057.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_058.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_059.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_060.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_061.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_062.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_063.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_064.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\example_065.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\images\_blank.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\images\alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\images\image_demo.jpg" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\images\image_with_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\images\img.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\images\logo_example.gif" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\images\logo_example.jpg" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\images\logo_example.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\images\tcpdf_box.ai" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\images\tcpdf_box.svg" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\images\tcpdf_cell.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\images\tcpdf_logo.jpg" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\images\tcpdf_signature.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\images\testsvg.svg" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\images\tux.svg" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\index.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\afr.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\ara.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\aze.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\bel.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\bra.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\bul.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\cat.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\ces.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\chi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\cym.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\dan.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\eng.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\est.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\eus.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\far.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\fra.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\ger.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\gle.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\glg.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\hat.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\heb.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\hrv.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\hun.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\hye.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\ind.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\ita.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\jpn.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\kat.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\kor.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\mkd.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\mlt.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\msa.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\nld.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\nob.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\pol.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\por.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\ron.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\rus.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\slv.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\spa.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\sqi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\srp.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\swa.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\swe.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\ukr.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\urd.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\yid.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\lang\zho.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\examples\tcpdf_include.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\ae_fonts_2.0\COPYING" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\ae_fonts_2.0\ChangeLog" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\ae_fonts_2.0\README" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\aealarabiya.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\aealarabiya.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\aealarabiya.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\aefurat.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\aefurat.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\aefurat.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\cid0cs.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\cid0ct.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\cid0jp.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\cid0kr.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\courier.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\courierb.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\courierbi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\courieri.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavu-fonts-ttf-2.33\AUTHORS" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavu-fonts-ttf-2.33\BUGS" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavu-fonts-ttf-2.33\LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavu-fonts-ttf-2.33\NEWS" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavu-fonts-ttf-2.33\README" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavu-fonts-ttf-2.33\langcover.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavu-fonts-ttf-2.33\status.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavu-fonts-ttf-2.33\unicover.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavu-fonts-ttf-2.34\AUTHORS" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavu-fonts-ttf-2.34\BUGS" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavu-fonts-ttf-2.34\LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavu-fonts-ttf-2.34\NEWS" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavu-fonts-ttf-2.34\README" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavu-fonts-ttf-2.34\langcover.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavu-fonts-ttf-2.34\status.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavu-fonts-ttf-2.34\unicover.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusans.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusans.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusans.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansb.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansb.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansb.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansbi.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansbi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansbi.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusanscondensed.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusanscondensed.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusanscondensed.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusanscondensedb.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusanscondensedb.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusanscondensedb.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusanscondensedbi.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusanscondensedbi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusanscondensedbi.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusanscondensedi.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusanscondensedi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusanscondensedi.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansextralight.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansextralight.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansextralight.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansi.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansi.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansmono.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansmono.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansmono.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansmonob.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansmonob.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansmonob.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansmonobi.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansmonobi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansmonobi.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansmonoi.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansmonoi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavusansmonoi.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserif.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserif.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserif.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserifb.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserifb.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserifb.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserifbi.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserifbi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserifbi.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserifcondensed.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserifcondensed.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserifcondensed.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserifcondensedb.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserifcondensedb.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserifcondensedb.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserifcondensedbi.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserifcondensedbi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserifcondensedbi.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserifcondensedi.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserifcondensedi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserifcondensedi.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserifi.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserifi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\dejavuserifi.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freefont-20100919\AUTHORS" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freefont-20100919\COPYING" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freefont-20100919\CREDITS" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freefont-20100919\ChangeLog" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freefont-20100919\INSTALL" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freefont-20100919\README" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freefont-20120503\AUTHORS" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freefont-20120503\COPYING" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freefont-20120503\CREDITS" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freefont-20120503\ChangeLog" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freefont-20120503\INSTALL" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freefont-20120503\README" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freefont-20120503\TROUBLESHOOTING" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freefont-20120503\USAGE" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freemono.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freemono.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freemono.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freemonob.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freemonob.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freemonob.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freemonobi.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freemonobi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freemonobi.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freemonoi.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freemonoi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freemonoi.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freesans.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freesans.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freesans.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freesansb.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freesansb.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freesansb.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freesansbi.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freesansbi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freesansbi.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freesansi.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freesansi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freesansi.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freeserif.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freeserif.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freeserif.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freeserifb.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freeserifb.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freeserifb.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freeserifbi.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freeserifbi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freeserifbi.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freeserifi.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freeserifi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\freeserifi.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\helvetica.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\helveticab.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\helveticabi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\helveticai.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\hysmyeongjostdmedium.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\kozgopromedium.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\kozminproregular.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\msungstdlight.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfacourier.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfacourier.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfacourierb.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfacourierb.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfacourierbi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfacourierbi.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfacourieri.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfacourieri.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfahelvetica.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfahelvetica.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfahelveticab.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfahelveticab.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfahelveticabi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfahelveticabi.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfahelveticai.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfahelveticai.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfasymbol.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfasymbol.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfatimes.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfatimes.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfatimesb.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfatimesb.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfatimesbi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfatimesbi.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfatimesi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfatimesi.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfazapfdingbats.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\pdfazapfdingbats.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\stsongstdlight.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\symbol.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\times.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\timesb.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\timesbi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\timesi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\uni2cid_ac15.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\uni2cid_ag15.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\uni2cid_aj16.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\uni2cid_ak12.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\utils\arial.ttf" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\utils\ttf2ufm.exe" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts - Copy\zapfdingbats.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\ae_fonts_2.0\COPYING" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\ae_fonts_2.0\ChangeLog" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\ae_fonts_2.0\README" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\arial.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\arial.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\arial.ufm" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\arial.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\arialb.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\arialb.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\arialb.ufm" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\arialb.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\arialbi.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\arialbi.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\arialbi.ufm" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\arialbi.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\ariali.ctg.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\ariali.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\ariali.ufm" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\ariali.z" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\default\helvetica.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\dejavu-fonts-ttf-2.33\AUTHORS" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\dejavu-fonts-ttf-2.33\BUGS" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\dejavu-fonts-ttf-2.33\LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\dejavu-fonts-ttf-2.33\NEWS" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\dejavu-fonts-ttf-2.33\README" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\dejavu-fonts-ttf-2.33\langcover.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\dejavu-fonts-ttf-2.33\status.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\dejavu-fonts-ttf-2.33\unicover.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\dejavu-fonts-ttf-2.34\AUTHORS" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\dejavu-fonts-ttf-2.34\BUGS" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\dejavu-fonts-ttf-2.34\LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\dejavu-fonts-ttf-2.34\NEWS" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\dejavu-fonts-ttf-2.34\README" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\dejavu-fonts-ttf-2.34\langcover.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\dejavu-fonts-ttf-2.34\status.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\dejavu-fonts-ttf-2.34\unicover.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\freefont-20100919\AUTHORS" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\freefont-20100919\COPYING" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\freefont-20100919\CREDITS" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\freefont-20100919\ChangeLog" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\freefont-20100919\INSTALL" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\freefont-20100919\README" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\freefont-20120503\AUTHORS" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\freefont-20120503\COPYING" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\freefont-20120503\CREDITS" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\freefont-20120503\ChangeLog" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\freefont-20120503\INSTALL" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\freefont-20120503\README" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\freefont-20120503\TROUBLESHOOTING" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\freefont-20120503\USAGE" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\helvetica.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\utils\arial.ttf" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\fonts\utils\ttf2ufm.exe" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\include\barcodes\datamatrix.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\include\barcodes\pdf417.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\include\barcodes\qrcode.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\include\sRGB.icc" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\include\tcpdf_colors.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\include\tcpdf_filters.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\include\tcpdf_font_data.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\include\tcpdf_fonts.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\include\tcpdf_images.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\include\tcpdf_static.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\makerus\fonts.bat" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\makerus\php\filestolower.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\makerus\php\no_include_font.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\makerus\rus_fonts\arial.ttf" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\makerus\rus_fonts\arialb.ttf" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\makerus\rus_fonts\arialbi.ttf" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\makerus\rus_fonts\ariali.ttf" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\rus.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\tcpdf.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\tcpdf_autoconfig.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\tcpdf_barcodes_1d.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\tcpdf_barcodes_2d.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\tcpdf_import.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\tcpdf_parser.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\tools\.htaccess" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\tools\convert_fonts_examples.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\tecnick.com\tcpdf\tools\tcpdf_addfont.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\whiteoctober\tcpdf-bundle\WhiteOctober\TCPDFBundle\Controller\TCPDFController.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\whiteoctober\tcpdf-bundle\WhiteOctober\TCPDFBundle\DependencyInjection\Configuration.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\whiteoctober\tcpdf-bundle\WhiteOctober\TCPDFBundle\DependencyInjection\WhiteOctoberTCPDFExtension.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\whiteoctober\tcpdf-bundle\WhiteOctober\TCPDFBundle\README.md" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\whiteoctober\tcpdf-bundle\WhiteOctober\TCPDFBundle\Resources\config\services.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\whiteoctober\tcpdf-bundle\WhiteOctober\TCPDFBundle\Resources\meta\LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\whiteoctober\tcpdf-bundle\WhiteOctober\TCPDFBundle\WhiteOctoberTCPDFBundle.php" afterPath="" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\vendor\whiteoctober\tcpdf-bundle\WhiteOctober\TCPDFBundle\composer.json" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/slik/dompdf-bundle/Slik/DompdfBundle/Wrapper/DompdfWrapper.php" afterPath="$PROJECT_DIR$/vendor/slik/dompdf-bundle/Slik/DompdfBundle/Wrapper/DompdfWrapper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bundles/punkavefileuploader/js/FileUploader.js" afterPath="$PROJECT_DIR$/web/bundles/punkavefileuploader/js/FileUploader.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Services/FileUploader.php" afterPath="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Services/FileUploader.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Helper/Helper.php" afterPath="$PROJECT_DIR$/src/Helper/Helper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/UserOrder.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/UserOrder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/slik/dompdf-bundle/Slik/DompdfBundle/DomPDF/include/dompdf.cls.php" afterPath="$PROJECT_DIR$/vendor/slik/dompdf-bundle/Slik/DompdfBundle/DomPDF/include/dompdf.cls.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/slik/dompdf-bundle/Slik/DompdfBundle/DomPDF/dompdf_config.custom.inc.php" afterPath="$PROJECT_DIR$/vendor/slik/dompdf-bundle/Slik/DompdfBundle/DomPDF/dompdf_config.custom.inc.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/slik/dompdf-bundle/Slik/DompdfBundle/DomPDF/dompdf_config.inc.php" afterPath="$PROJECT_DIR$/vendor/slik/dompdf-bundle/Slik/DompdfBundle/DomPDF/dompdf_config.inc.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bundles/punkavefileuploader/js/jquery.fileupload.js" afterPath="$PROJECT_DIR$/web/bundles/punkavefileuploader/js/jquery.fileupload.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/BlueImp/UploadHandler.php" afterPath="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/BlueImp/UploadHandler.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/slik/dompdf-bundle/Slik/DompdfBundle/DomPDF/lib/fonts/log.htm" afterPath="$PROJECT_DIR$/vendor/slik/dompdf-bundle/Slik/DompdfBundle/DomPDF/lib/fonts/log.htm" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/config/services.yml" afterPath="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/config/services.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="study.iws" />
@@ -489,44 +38,44 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AuthorController.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AuthorController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="521" column="46" selection-start="30053" selection-end="30053" vertical-scroll-proportion="0.93851715" vertical-offset="10943" max-vertical-offset="17534">
+            <state line="157" column="48" selection-start="7675" selection-end="7675" vertical-scroll-proportion="-14.064516" vertical-offset="3018" max-vertical-offset="17556">
               <folding>
-                <element signature="e#165#227#0" expanded="true" />
+                <element signature="e#48#108#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Helper.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
+      <file leaf-file-name="upload_file_template.html.twig" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/views/Default/upload_file_template.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2417" column="31" selection-start="99966" selection-end="99966" vertical-scroll-proportion="-21.161291" vertical-offset="52518" max-vertical-offset="53394">
+            <state line="35" column="0" selection-start="2101" selection-end="2101" vertical-scroll-proportion="-24.838709" vertical-offset="0" max-vertical-offset="902">
               <folding>
-                <element signature="e#26#66#0" expanded="true" />
-                <marker date="1414696844817" expanded="true" signature="4697:4758" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1414696844817" expanded="true" signature="5123:5178" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1414696844817" expanded="true" signature="5548:5609" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1414696844817" expanded="true" signature="11246:11361" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1414696844817" expanded="true" signature="11825:11963" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1414696844817" expanded="true" signature="44462:44919" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-                <marker date="1414696844817" expanded="true" signature="45261:45627" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1414696844817" expanded="true" signature="45297:45421" placeholder="SELECT ub.us..user_bid..." />
-                <marker date="1414696844817" expanded="true" signature="48338:48611" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1414696844817" expanded="true" signature="48353:48477" placeholder="SELECT ub.us..user_bid..." />
-                <marker date="1414696844817" expanded="true" signature="55096:55361" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1414696844817" expanded="true" signature="55111:55228" placeholder="SELECT b.use..user_bid..." />
-                <marker date="1414696844817" expanded="true" signature="82412:82679" placeholder="..." />
-                <marker date="1414696844817" expanded="true" signature="82413:82678" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1414696844817" expanded="true" signature="82428:82545" placeholder="SELECT b.use..user_bid..." />
-                <marker date="1414696844817" expanded="true" signature="85551:85659" placeholder="..." />
-                <marker date="1414696844817" expanded="true" signature="85552:85658" placeholder="SELECT date_..cancel_request..." />
-                <marker date="1414696844817" expanded="true" signature="98694:98702" placeholder="..." />
-                <marker date="1414696844817" expanded="true" signature="98848:98867" placeholder="..." />
-                <marker date="1414696844817" expanded="true" signature="100030:100036" placeholder="..." />
+                <marker date="1414608756171" expanded="false" signature="133:170" placeholder="..." />
+                <marker date="1414608756171" expanded="true" signature="171:1184" placeholder="..." />
+                <marker date="1414608756171" expanded="false" signature="214:233" placeholder="..." />
+                <marker date="1414608756171" expanded="true" signature="234:1081" placeholder="..." />
+                <marker date="1414608756171" expanded="true" signature="334:884" placeholder="..." />
+                <marker date="1414608756171" expanded="false" signature="552:564" placeholder="..." />
+                <marker date="1414608756171" expanded="false" signature="622:635" placeholder="..." />
+                <marker date="1414608756171" expanded="true" signature="636:861" placeholder="..." />
+                <marker date="1414608756171" expanded="false" signature="938:951" placeholder="..." />
+                <marker date="1414608756171" expanded="true" signature="952:1062" placeholder="..." />
+                <marker date="1414608756171" expanded="true" signature="1320:2066" placeholder="..." />
+                <marker date="1414608756171" expanded="true" signature="1586:2052" placeholder="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UploadHandler.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/BlueImp/UploadHandler.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="424" column="37" selection-start="19071" selection-end="19071" vertical-scroll-proportion="0.84307694" vertical-offset="8780" max-vertical-offset="11374">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -534,7 +83,7 @@
       <file leaf-file-name="order_work.html.twig" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="176" column="17" selection-start="10271" selection-end="10271" vertical-scroll-proportion="-13.354838" vertical-offset="3458" max-vertical-offset="6930">
+            <state line="284" column="78" selection-start="16290" selection-end="16290" vertical-scroll-proportion="-10.5161295" vertical-offset="5834" max-vertical-offset="6820">
               <folding>
                 <element signature="e#2390#2420#0" expanded="true" />
                 <element signature="e#4847#4888#0" expanded="true" />
@@ -545,29 +94,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="font_metrics.cls.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/slik/dompdf-bundle/Slik/DompdfBundle/DomPDF/include/font_metrics.cls.php">
+      <file leaf-file-name="Helper.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="39" selection-start="1902" selection-end="1902" vertical-scroll-proportion="-6.483871" vertical-offset="943" max-vertical-offset="7326">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="load_font.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/slik/dompdf-bundle/Slik/DompdfBundle/DomPDF/load_font.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="23" selection-start="375" selection-end="375" vertical-scroll-proportion="-2.7096775" vertical-offset="4" max-vertical-offset="3762">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dompdf_config.inc.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/slik/dompdf-bundle/Slik/DompdfBundle/DomPDF/dompdf_config.inc.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="209" column="33" selection-start="7462" selection-end="7462" vertical-scroll-proportion="-12.064516" vertical-offset="4048" max-vertical-offset="8404">
-              <folding />
+            <state line="2412" column="33" selection-start="99792" selection-end="99792" vertical-scroll-proportion="-13.354838" vertical-offset="52650" max-vertical-offset="53504">
+              <folding>
+                <element signature="e#26#66#0" expanded="true" />
+                <marker date="1414710471138" expanded="true" signature="4697:4758" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1414710471138" expanded="true" signature="5123:5178" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1414710471138" expanded="true" signature="5548:5609" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1414710471138" expanded="true" signature="11246:11361" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1414710471138" expanded="true" signature="11825:11963" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1414710471138" expanded="true" signature="44462:44919" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+                <marker date="1414710471138" expanded="true" signature="45261:45627" placeholder="SELECT * FRO..user_id..." />
+                <marker date="1414710471138" expanded="true" signature="45297:45421" placeholder="SELECT ub.us..user_bid..." />
+                <marker date="1414710471138" expanded="true" signature="48338:48611" placeholder="SELECT * FRO..user_id..." />
+                <marker date="1414710471138" expanded="true" signature="48353:48477" placeholder="SELECT ub.us..user_bid..." />
+                <marker date="1414710471138" expanded="true" signature="55096:55361" placeholder="SELECT * FRO..user_id..." />
+                <marker date="1414710471138" expanded="true" signature="55111:55228" placeholder="SELECT b.use..user_bid..." />
+                <marker date="1414710471138" expanded="true" signature="81171:81436" placeholder="SELECT * FRO..user_id..." />
+                <marker date="1414710471138" expanded="true" signature="81186:81303" placeholder="SELECT b.use..user_bid..." />
+                <marker date="1414710471138" expanded="true" signature="82413:82678" placeholder="SELECT * FRO..user_id..." />
+                <marker date="1414710471138" expanded="true" signature="82428:82545" placeholder="SELECT b.use..user_bid..." />
+                <marker date="1414710471138" expanded="true" signature="84385:84491" placeholder="SELECT date_..cancel_request..." />
+                <marker date="1414710471138" expanded="true" signature="85552:85658" placeholder="SELECT date_..cancel_request..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -575,7 +126,7 @@
       <file leaf-file-name="FileUploader.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/bundles/punkavefileuploader/js/FileUploader.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="18" selection-start="58" selection-end="58" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3080">
+            <state line="23" column="20" selection-start="1175" selection-end="1175" vertical-scroll-proportion="0.0" vertical-offset="413" max-vertical-offset="3080">
               <folding />
             </state>
           </provider>
@@ -594,8 +145,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php" />
-        <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/index.html.twig" />
         <option value="$PROJECT_DIR$/app/config/security.yml" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/LoginFormValidate.php" />
         <option value="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php" />
@@ -633,18 +182,20 @@
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Form/Author/AuthorProfileForm.php" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/config/validation.yml" />
         <option value="$PROJECT_DIR$/web/bundles/punkavefileuploader/js/jquery.fileupload.js" />
-        <option value="$PROJECT_DIR$/web/bundles/punkavefileuploader/js/FileUploader.js" />
         <option value="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/views/Default/avatar_template.html.twig" />
-        <option value="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/BlueImp/UploadHandler.php" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/profile.html.twig" />
         <option value="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/views/Default/templates.html.twig" />
         <option value="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/views/Default/upload_file_template.html.twig" />
-        <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig" />
         <option value="$PROJECT_DIR$/vendor/slik/dompdf-bundle/Slik/DompdfBundle/DomPDF/dompdf_config.custom.inc.php" />
         <option value="$PROJECT_DIR$/vendor/slik/dompdf-bundle/Slik/DompdfBundle/DomPDF/dompdf_config.inc.php" />
-        <option value="$PROJECT_DIR$/src/Helper/Helper.php" />
         <option value="$PROJECT_DIR$/app/AppKernel.php" />
+        <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig" />
+        <option value="$PROJECT_DIR$/web/bundles/punkavefileuploader/js/FileUploader.js" />
+        <option value="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/config/services.yml" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" />
+        <option value="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Services/FileUploader.php" />
+        <option value="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/BlueImp/UploadHandler.php" />
+        <option value="$PROJECT_DIR$/src/Helper/Helper.php" />
       </list>
     </option>
   </component>
@@ -730,10 +281,6 @@
               <option name="myItemId" value="uploads" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="avatars" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -756,28 +303,6 @@
               <option name="myItemId" value="avatars" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="author" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="uploads" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -794,352 +319,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="bundles" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bundles" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="punkavefileuploader" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bundles" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="punkavefileuploader" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="slik" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dompdf-bundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Slik" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DompdfBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="punkave" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="symfony2-file-uploader-bundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PunkAve" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FileUploaderBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="punkave" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="symfony2-file-uploader-bundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PunkAve" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FileUploaderBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Services" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="punkave" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="symfony2-file-uploader-bundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PunkAve" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FileUploaderBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Default" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="punkave" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="symfony2-file-uploader-bundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PunkAve" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FileUploaderBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="punkave" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="symfony2-file-uploader-bundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PunkAve" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FileUploaderBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="punkave" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="symfony2-file-uploader-bundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PunkAve" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FileUploaderBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="punkave" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="symfony2-file-uploader-bundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PunkAve" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FileUploaderBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BlueImp" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1212,184 +391,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SecureBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SecureBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Author" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SecureBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SecureBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SecureBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Entity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Acme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spool" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1485,10 +486,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32575756" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22077923" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1554,16 +555,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/bootstrap.php.cache">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-78.45581" vertical-offset="67472" max-vertical-offset="68332">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/SymfonyRequirements.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-16.67213" vertical-offset="14238" max-vertical-offset="15092">
@@ -1630,13 +621,6 @@
     <entry file="file://$PROJECT_DIR$/src/Helper/MailTemplate.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="47" selection-start="630" selection-end="630" vertical-scroll-proportion="-12.774194" vertical-offset="0" max-vertical-offset="594">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/config/services.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="40" selection-start="2907" selection-end="2907" vertical-scroll-proportion="0.25252524" vertical-offset="1500" max-vertical-offset="2398">
           <folding />
         </state>
       </provider>
@@ -1785,34 +769,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Services/FileManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="16" selection-start="793" selection-end="793" vertical-scroll-proportion="6.387097" vertical-offset="726" max-vertical-offset="3168">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/bundles/punkavefileuploader/js/FileUploader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="18" selection-start="58" selection-end="58" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4114">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Services/FileUploader.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="69" selection-start="4270" selection-end="4270" vertical-scroll-proportion="-2.8387096" vertical-offset="2046" max-vertical-offset="2882">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/BlueImp/UploadHandler.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="372" column="26" selection-start="15957" selection-end="15957" vertical-scroll-proportion="0.51740694" vertical-offset="7753" max-vertical-offset="11330">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/profile.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="114" column="81" selection-start="5859" selection-end="5859" vertical-scroll-proportion="0.82593036" vertical-offset="1820" max-vertical-offset="7040">
@@ -1834,32 +790,6 @@
             <marker date="1414437884263" expanded="true" signature="-1:-1" placeholder="..." />
             <marker date="1414437884263" expanded="true" signature="-1:-1" placeholder="..." />
             <marker date="1414437884263" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/views/Default/upload_file_template.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="44" selection-start="1154" selection-end="1154" vertical-scroll-proportion="-12.774194" vertical-offset="0" max-vertical-offset="902">
-          <folding>
-            <marker date="1414608756171" expanded="true" signature="-1:-1" placeholder="{% spaceless ...%}" />
-            <marker date="1414608756171" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414608756171" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414608756171" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414608756171" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414608756171" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414608756171" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414608756171" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414608756171" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414608756171" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414608756171" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414608756171" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414608756171" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414608756171" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414608756171" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414608756171" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414608756171" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414608756171" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -1892,9 +822,128 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="14" selection-start="1140" selection-end="1140" vertical-scroll-proportion="0.55824685" vertical-offset="22" max-vertical-offset="1276">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/ResponseHeaderBag.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="28" selection-start="608" selection-end="626" vertical-scroll-proportion="0.36299765" vertical-offset="108" max-vertical-offset="6996">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Services/FileManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="20" selection-start="515" selection-end="515" vertical-scroll-proportion="-0.14285715" vertical-offset="537" max-vertical-offset="3168">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/bundles/punkavefileuploader/js/FileUploader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="20" selection-start="1175" selection-end="1175" vertical-scroll-proportion="0.0" vertical-offset="413" max-vertical-offset="3080">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="120" column="45" selection-start="3494" selection-end="3502" vertical-scroll-proportion="0.7491448" vertical-offset="1983" max-vertical-offset="2860">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/views/Default/upload_file_template.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="0" selection-start="2101" selection-end="2101" vertical-scroll-proportion="-24.838709" vertical-offset="0" max-vertical-offset="902">
+          <folding>
+            <marker date="1414608756171" expanded="false" signature="133:170" placeholder="..." />
+            <marker date="1414608756171" expanded="true" signature="171:1184" placeholder="..." />
+            <marker date="1414608756171" expanded="false" signature="214:233" placeholder="..." />
+            <marker date="1414608756171" expanded="true" signature="234:1081" placeholder="..." />
+            <marker date="1414608756171" expanded="true" signature="334:884" placeholder="..." />
+            <marker date="1414608756171" expanded="false" signature="552:564" placeholder="..." />
+            <marker date="1414608756171" expanded="false" signature="622:635" placeholder="..." />
+            <marker date="1414608756171" expanded="true" signature="636:861" placeholder="..." />
+            <marker date="1414608756171" expanded="false" signature="938:951" placeholder="..." />
+            <marker date="1414608756171" expanded="true" signature="952:1062" placeholder="..." />
+            <marker date="1414608756171" expanded="true" signature="1320:2066" placeholder="..." />
+            <marker date="1414608756171" expanded="true" signature="1586:2052" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/PunkAveFileUploaderBundle.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="898">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Twig/FileExtension.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="898">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="157" column="48" selection-start="7675" selection-end="7675" vertical-scroll-proportion="-14.064516" vertical-offset="3018" max-vertical-offset="17556">
+          <folding>
+            <element signature="e#48#108#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/config/services.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="86" column="43" selection-start="3489" selection-end="3489" vertical-scroll-proportion="0.69783354" vertical-offset="1280" max-vertical-offset="2442">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Services/FileUploader.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="108" column="50" selection-start="4861" selection-end="4861" vertical-scroll-proportion="0.40163934" vertical-offset="2033" max-vertical-offset="2904">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2412" column="33" selection-start="99792" selection-end="99792" vertical-scroll-proportion="-13.354838" vertical-offset="52650" max-vertical-offset="53504">
+          <folding>
+            <element signature="e#26#66#0" expanded="true" />
+            <marker date="1414710471138" expanded="true" signature="4697:4758" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1414710471138" expanded="true" signature="5123:5178" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1414710471138" expanded="true" signature="5548:5609" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1414710471138" expanded="true" signature="11246:11361" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1414710471138" expanded="true" signature="11825:11963" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1414710471138" expanded="true" signature="44462:44919" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+            <marker date="1414710471138" expanded="true" signature="45261:45627" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1414710471138" expanded="true" signature="45297:45421" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1414710471138" expanded="true" signature="48338:48611" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1414710471138" expanded="true" signature="48353:48477" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1414710471138" expanded="true" signature="55096:55361" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1414710471138" expanded="true" signature="55111:55228" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1414710471138" expanded="true" signature="81171:81436" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1414710471138" expanded="true" signature="81186:81303" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1414710471138" expanded="true" signature="82413:82678" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1414710471138" expanded="true" signature="82428:82545" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1414710471138" expanded="true" signature="84385:84491" placeholder="SELECT date_..cancel_request..." />
+            <marker date="1414710471138" expanded="true" signature="85552:85658" placeholder="SELECT date_..cancel_request..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="176" column="17" selection-start="10271" selection-end="10271" vertical-scroll-proportion="-13.354838" vertical-offset="3458" max-vertical-offset="6930">
+        <state line="284" column="78" selection-start="16290" selection-end="16290" vertical-scroll-proportion="-10.5161295" vertical-offset="5834" max-vertical-offset="6820">
           <folding>
             <element signature="e#2390#2420#0" expanded="true" />
             <element signature="e#4847#4888#0" expanded="true" />
@@ -1904,48 +953,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2417" column="31" selection-start="99966" selection-end="99966" vertical-scroll-proportion="-21.161291" vertical-offset="52518" max-vertical-offset="53394">
-          <folding>
-            <element signature="e#26#66#0" expanded="true" />
-            <marker date="1414696844817" expanded="true" signature="4697:4758" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1414696844817" expanded="true" signature="5123:5178" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1414696844817" expanded="true" signature="5548:5609" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1414696844817" expanded="true" signature="11246:11361" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1414696844817" expanded="true" signature="11825:11963" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1414696844817" expanded="true" signature="44462:44919" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-            <marker date="1414696844817" expanded="true" signature="45261:45627" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1414696844817" expanded="true" signature="45297:45421" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1414696844817" expanded="true" signature="48338:48611" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1414696844817" expanded="true" signature="48353:48477" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1414696844817" expanded="true" signature="55096:55361" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1414696844817" expanded="true" signature="55111:55228" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1414696844817" expanded="true" signature="82412:82679" placeholder="..." />
-            <marker date="1414696844817" expanded="true" signature="82413:82678" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1414696844817" expanded="true" signature="82428:82545" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1414696844817" expanded="true" signature="85551:85659" placeholder="..." />
-            <marker date="1414696844817" expanded="true" signature="85552:85658" placeholder="SELECT date_..cancel_request..." />
-            <marker date="1414696844817" expanded="true" signature="98694:98702" placeholder="..." />
-            <marker date="1414696844817" expanded="true" signature="98848:98867" placeholder="..." />
-            <marker date="1414696844817" expanded="true" signature="100030:100036" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="14" selection-start="1140" selection-end="1140" vertical-scroll-proportion="0.55824685" vertical-offset="22" max-vertical-offset="1276">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="694">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
+    <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/BlueImp/UploadHandler.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="521" column="46" selection-start="30053" selection-end="30053" vertical-scroll-proportion="0.93851715" vertical-offset="10943" max-vertical-offset="17534">
-          <folding>
-            <element signature="e#165#227#0" expanded="true" />
-          </folding>
+        <state line="424" column="37" selection-start="19071" selection-end="19071" vertical-scroll-proportion="0.84307694" vertical-offset="8780" max-vertical-offset="11374">
+          <folding />
         </state>
       </provider>
     </entry>
