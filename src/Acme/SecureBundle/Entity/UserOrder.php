@@ -434,4 +434,8 @@ class UserOrder extends EntityRepository
     public function getDiffWork() {
         return $this->diffWork;
     }
+
+    public function getPdfFileName() {
+        return 'order_' . $this->num . '.pdf';
+    }
 }

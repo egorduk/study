@@ -155,6 +155,6 @@ genemu_form:
 #        enabled:    true
 #        binary:     /usr/local/bin/wkhtmltoimage
 #        options:    []
-white_october_tcpdf:
-    tcpdf:
-        k_tcpdf_external_config: false
+#white_october_tcpdf:
+#    tcpdf:
+#        k_tcpdf_external_config: false

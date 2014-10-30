@@ -15,6 +15,7 @@ use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\MemcachedCache;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderAdapter;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Finder\Iterator\SortableIterator;
@@ -23,6 +24,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\Query;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Symfony\Component\Security\Core\SecurityContext;
@@ -518,8 +520,6 @@ class AuthorController extends Controller
                     );
                 }
                 $clientFiles = Helper::getOrderFiles($order, 'client', $user);
-                $pdfObj = Helper::createPdfOrder($order);
-                $pdfObj->stream("myfile.pdf");
                 if ($codeStatusOrder == 'w') {
                     $dateExpire = $order->getDateExpire();
                     $diffWork = strtotime($dateExpire->format("d.m.Y H:i:s")) - time();
@@ -755,6 +755,37 @@ class AuthorController extends Controller
                 'AcmeSecureBundle:Author:settings.html.twig', array('formCreatePs' => $formCreatePsCloned->createView(), 'formMailOptions' => $formMailOptions->createView(), 'user' => $user, 'userPs' => $userPs, 'showWindow' => $showWindow)
             );
         }
+    }
+
+    /**
+     * Serves a file
+     */
+    public function downloadFileAction($type, $num, $filename = null)
+    {
+        $basePath = $_SERVER['DOCUMENT_ROOT'] . '/study/web/uploads/';
+        if ($type == 'pdf') {
+            $filePath = $basePath . 'pdf/' . $num . '/' . $filename;
+            $user = $this->getUser();
+            $order = Helper::getOrderByNumForAuthor($num, $user);
+            if ($order) {
+                Helper::createPdfOrder($order);
+            } else {
+                throw $this->createNotFoundException();
+            }
+        } elseif ($type == 'attachments') {
+            $filePath = $basePath . 'attachments/orders/' . $num . '/author/' . $filename;
+        }
+        if (!file_exists($filePath)) {
+            throw $this->createNotFoundException();
+        }
+        $response = new BinaryFileResponse($filePath);
+        $response->trustXSendfileTypeHeader();
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $filename,
+            iconv('UTF-8', 'ASCII//TRANSLIT', $filename)
+        );
+        return $response;
     }
 
 }

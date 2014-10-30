@@ -1727,6 +1727,12 @@ class Helper
         return $user;
     }
 
+    public static function getUserAvatarForPdf($user) {
+        $pathAvatar =  $_SERVER['DOCUMENT_ROOT'] . Helper::getFullPathToAvatar($user);
+        $userAvatar = "<img src='" . $pathAvatar . "'align='middle' alt='Аватар' width='110px' height='auto' class='thumbnail'>";
+        return $userAvatar;
+    }
+
 
     public static function getUserLinkProfile($order, $role, $container) {
         if ($role == "author") {
@@ -2378,12 +2384,38 @@ class Helper
     public static function createPdfOrder($order) {
         //$pdfObj = self::getContainer()->get("white_october.tcpdf")->create();
         $num = $order->getNum();
+        $theme = $order->getTheme();
+        $user = $order->getUser();
+        $userAvatar = self::getUserAvatarForPdf($user);
+        //var_dump($userAvatar);die;
         $pdfObj = self::getContainer()->get('slik_dompdf');
         $html =
             '<html><meta http-equiv="content-type" content="text/html; charset=utf-8" /><body>'.
-            '<h1>Заказ № ' . $num . '</h1>'.
+            '<h1>Заказ № ' . $num . '</h1>' .
+            '<p>Тема - ' . $theme . '</p>' .
+            '<p>Заказчик ' . $userAvatar . '<span>' . $user->getLogin() . '</span</p>' .
             '</body></html>';
         $pdfObj->getpdf($html);
-        return $pdfObj;
+        $canvas = $pdfObj->getCanvas();
+        $w = $canvas->get_width();
+        $h = $canvas->get_height();
+        $font = \Font_Metrics::get_font("helvetica", "normal");
+        $txtHeight = \Font_Metrics::get_font_height($font, 8);
+        $y = $h - 2 * $txtHeight - 24;
+        $color = array(0, 0, 0);
+        $canvas->line(16, $y, $w - 16, $y, $color, 1);
+        $canvas->page_text(16, $y, "Page: {PAGE_NUM} of {PAGE_COUNT}", $font, 8, $color);
+        $text = "Dompdf is awesome";
+        $width = \Font_Metrics::get_text_width($text, $font, 8);
+        $canvas->text($w - $width - 16, $y, $text, $font, 8);
+        $pdf = $pdfObj->output();
+        $basePath = $_SERVER['DOCUMENT_ROOT'] . '/study/web/uploads/pdf/' . $num;
+        if (!is_dir($basePath)) {
+            mkdir($basePath);
+        }
+        $filePath = $basePath .'/order_' . $num . '.pdf';
+        file_put_contents($filePath, $pdf);
+        $filePath = '/study/web/uploads/pdf/2/order_' . $num . '.pdf';
+        return $filePath;
     }
 }

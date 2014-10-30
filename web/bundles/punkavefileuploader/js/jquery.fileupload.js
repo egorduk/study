@@ -25,6 +25,7 @@
         factory(window.jQuery);
     }
 }(function ($) {
+    var a;
     'use strict';
 
     // The FileReader API is not actually used, but works as feature detection,
@@ -137,7 +138,48 @@
             // handlers using jQuery's Deferred callbacks:
             // data.submit().done(func).fail(func).always(func);
             add: function (e, data) {
-                data.submit();
+                var filesPreview = $("#files-preview"), ind = 0, label = ['B', 'KB', 'MB', 'GB'];
+                filesPreview.html('');
+                for (var i = 0; i < e.currentTarget.files.length; i++) {
+                    var size = e.currentTarget.files[i].size;
+                    while((size / 1024) > 1) {
+                        size /= 1024;
+                        ind++;
+                    }
+                    filesPreview.append("<p>" + e.currentTarget.files[i].name + " [" + Math.round(size*10)/10  + ' ' + label[ind] + "]" + "</p>");
+                    ind = 0;
+                }
+                a = e.timeStamp;
+                $("#block-btn-upload").show();
+                $("#btn-upload").click(function() {
+                    if (data != null && a == e.timeStamp) {
+                        data.submit().done(function(e) {
+                            //console.log(e);
+                            data = null;
+                            var checkCompletedOrder = $("#check-completed-order");
+                            if (checkCompletedOrder.length > 0 && checkCompletedOrder[0].checked) {
+                                $.ajax({
+                                    type: 'POST',
+                                    data: 'action=completeOrder' + '&checkCompletedOrder=' + checkCompletedOrder[0].checked,
+                                    success: function(response) {
+                                        //console.log(response);
+                                        if (response != null) {
+                                            var responseObject = window.JSON.parse(response);
+                                            if (responseObject.response == "valid") {
+                                                $("#block-status-order").html('<p>Статус заказа: ' + responseObject.statusOrder + '</p>');
+                                                $("#block-status-order").append('<p>На гарантии до: ' + responseObject.dateGuarantee + '</p>');
+                                                $("#block-diff-expire, #block-diff-work").html('');
+                                                checkCompletedOrder[0].checked = false;
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                            filesPreview.html('');
+                        });
+                        $("#block-btn-upload").hide();
+                    }
+                });
             },
 
             // Other callbacks:
