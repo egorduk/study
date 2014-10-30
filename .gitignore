@@ -3,3 +3,4 @@
 /app/cache/*
 
 .idea/
+/app/spool/*

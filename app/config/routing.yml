@@ -116,3 +116,9 @@ logout:
 secure_author_index:
   pattern:   /secure/author/index
   defaults:  { _controller: AcmeSecureBundle:Author:index }
+
+secure_author_download_file:
+  pattern:   /download/{type}/{num}/{filename}
+  defaults:  { _controller: AcmeSecureBundle:Author:downloadFile, filename: empty  }
+      # * @Route("", name="download_file", requirements={"filename": ".+"})
+

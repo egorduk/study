@@ -64,6 +64,7 @@
                 <div id="timer"></div>
             {% endif %}
             <p>Заказчик: <div id="block-client">{{ obj.client | raw }}</div></p>
+            <a href="{{ path('secure_author_download_file', {'type': 'pdf', 'num': order.num, 'filename': order.getpdffilename}) }}"><label class="btn btn-success"><span class="icon-download-outline">&nbspPDF</span></label></a>
         </div>
         <div class="col-md-5">
             <!--<div id="chatContainer">
@@ -283,7 +284,8 @@
             var fileUploader = new PunkAveFileUploader({
                 'uploadUrl': {{ path('secure_author_upload', { editId: order.num, action: 'order' }) | json_encode | raw }},
                 'thumbnailUrl': {{ ('/study/web/uploads/attachments/orders/' ~ order.num ~ '/thumbnails_author')| json_encode | raw }},
-                'viewUrl': {{ ('/study/web/uploads/attachments/orders/' ~ order.num ~ '/author')| json_encode | raw }},
+                //'viewUrl': {{ ('/study/web/uploads/attachments/orders/' ~ order.num ~ '/author')| json_encode | raw }},
+                'viewUrl': {{ path('secure_author_download_file', {'type': 'attachments', 'num': order.num}) | json_encode | raw }},
                 'el': '.file-uploader',
                 'existingFiles': {{ punkave_get_files('attachments/orders/' ~ order.num ~ '/author') | json_encode | raw }},
                 'delaySubmitWhileUploading': '.edit-form',

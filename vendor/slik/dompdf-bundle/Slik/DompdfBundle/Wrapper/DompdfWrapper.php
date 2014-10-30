@@ -29,9 +29,7 @@ class DompdfWrapper
 		else {
 			require_once dirname(__FILE__).'/../DomPDF/dompdf_config.inc.php';
 		}
-
 		$this->pdf = new \DOMPDF();
-
 		$this->pdf->set_paper(DOMPDF_DEFAULT_PAPER_SIZE);
 		$this->pdf->load_html($html);
 		$this->pdf->render();
@@ -52,5 +50,10 @@ class DompdfWrapper
 	public function output()
 	{
 		return $this->pdf->output();
+	}
+
+    public function getCanvas()
+	{
+		return $this->pdf->get_canvas();
 	}
 }
