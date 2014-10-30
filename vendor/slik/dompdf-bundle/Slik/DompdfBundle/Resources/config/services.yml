@@ -1,0 +1,7 @@
+parameters:
+#    slik_dompdf.example.class: LilaConcepts\SlikDompdfBundle\Example
+
+services:
+    slik_dompdf:
+        class: Slik\DompdfBundle\Wrapper\DompdfWrapper
+        arguments: []

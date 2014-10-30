@@ -519,7 +519,7 @@ class AuthorController extends Controller
                 }
                 $clientFiles = Helper::getOrderFiles($order, 'client', $user);
                 $pdfObj = Helper::createPdfOrder($order);
-                $pdfObj->output('test.pdf');
+                $pdfObj->stream("myfile.pdf");
                 if ($codeStatusOrder == 'w') {
                     $dateExpire = $order->getDateExpire();
                     $diffWork = strtotime($dateExpire->format("d.m.Y H:i:s")) - time();

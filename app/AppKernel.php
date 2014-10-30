@@ -22,7 +22,8 @@ class AppKernel extends Kernel
             //new Aequasi\Bundle\MemcachedBundle\AequasiMemcachedBundle(),
             //new winzou\CacheBundle\winzouCacheBundle(),
             new Maxmind\Bundle\GeoipBundle\MaxmindGeoipBundle(),
-            new WhiteOctober\TCPDFBundle\WhiteOctoberTCPDFBundle(),
+            //new WhiteOctober\TCPDFBundle\WhiteOctoberTCPDFBundle(),
+            new Slik\DompdfBundle\SlikDompdfBundle()
             //new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
         );
 

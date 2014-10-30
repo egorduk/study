@@ -2376,23 +2376,14 @@ class Helper
 
 
     public static function createPdfOrder($order) {
-        $pdfObj = self::getContainer()->get("white_october.tcpdf")->create();
-        //var_dump($pdfObj);die;
-        //$pdfObj->SetSubject('subject');
-        $pdfObj->SetTitle('Заказ № ' . $order->getNum());
-        //$pdfObj->SetAuthor('author');
-        //$pdfObj->SetCreator('creator');
+        //$pdfObj = self::getContainer()->get("white_october.tcpdf")->create();
         $num = $order->getNum();
-        $pdfObj->AddPage();
-        $pdfObj->setPrintHeader(false);
-        $pdfObj->setPrintFooter(false);
-        $pdfObj->SetMargins(20, 25, 25);
-        $html = '
-        <H1>Заказ № ' . $num . '</H1>
-        <img width="110px" height="auto" align="middle" class="thumbnail" alt="Аватар" src="/study/web/uploads/avatars/default.png">';
-        $html=iconv("WINDOWS-1251","UTF-8",$html);
-
-        $pdfObj->writeHTML($html, true, false, true, false, '');
+        $pdfObj = self::getContainer()->get('slik_dompdf');
+        $html =
+            '<html><meta http-equiv="content-type" content="text/html; charset=utf-8" /><body>'.
+            '<h1>Заказ № ' . $num . '</h1>'.
+            '</body></html>';
+        $pdfObj->getpdf($html);
         return $pdfObj;
     }
 }
