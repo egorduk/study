@@ -3,16 +3,14 @@
     {% block content %}
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
+        <link href="{{ asset('bundles/css/style_order.css') }}" rel="stylesheet" />
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.fmatter.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.fmatter.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/script_order.js') }}"></script>
         <!--<script type="text/javascript" src="{{ asset('bundles/js/highcharts/highcharts.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/highcharts/dark-blue.js') }}"></script>-->
         <style>
-            .alt-row {
-                background-color: #f3f3f3;
-                background-image: none;
-            }
             .grid-cell-num {
                 color: black;
                 font-size: 20px;
@@ -26,16 +24,16 @@
                 cursor: pointer;
             }
         </style>
-            {% if (mode == 'authorView' and user.isban == 0) %}
+            {% if (obj.mode == 'clientView' and user.isban == 0) %}
                 <div class="row">
                     <div  class="col-xs-5 col-xs-offset-4">
-                        <p>{{ avatar | raw }}</p>
+                        <p>{{ obj.clientAvatar | raw }}</p>
                         <p class="">{{ user.login }}</p>
                         <p>Роль: {{ user.userrole.name }}</p>
-                        <p>Дата регистрации в системе: {{ user.datereg.format("d.m.Y") }}</p>
+                        <p>Дата регистрации в системе: {{ user.datereg.format("d.m.Y H:i") }}</p>
                         <p>Страна: <img src='{{ asset('bundles/images/flags/') }}{{ user.userInfo.country.code }}.png' alt={{ user.userInfo.country.name }} title={{ user.userInfo.country.name }}></p>
-                        <p>Заказано работ: {{ countTotalOrders }}</p>
-                        <p>Отменено работ: {{ countCanceledOrders }}</p>
+                        <p>Заказано работ: {{ obj.countTotalOrders }}</p>
+                        <p>Отменено работ: {{ obj.countCanceledOrders }}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -147,9 +145,10 @@
             var initTableTotalOrders = function () {
                 var grid = $("#listTotalOrders");
                 grid.jqGrid({
-                    url: {{ path('secure_client_action', { mode: 'info_total_orders', id: user.clientidinfo }) | json_encode | raw }},
+                    url: {{ path('secure_author_view_client', { id: obj.clientId }) | json_encode | raw }},
                     datatype: 'json',
                     mtype: 'POST',
+                    postData: {mode : 'totalOrders'},
                     recordtext: "Просмотр работ {0} - {1}",
                     colNames:['','№ заказа', 'Предмет', 'Тип работы', 'Тема работы'],
                     colModel :[
@@ -162,8 +161,8 @@
                     pager: $('#pagerTotalOrders'),
                     rowNum: 10,
                     rowList: [15,25,35],
-                    sortname: 'num',
-                    sortorder: 'asc',
+                   // sortname: 'num',
+                   // sortorder: 'asc',
                     viewrecords: true,
                     hidegrid: false,
                     height: 'auto',
@@ -175,9 +174,10 @@
             var initTableAuthorCompletedTotalOrders = function () {
                 var grid = $("#listAuthorCompletedTotalOrders");
                 grid.jqGrid({
-                    url: {{ path('secure_client_action', { mode: 'info_author_completed_total_orders', id: user.clientidinfo }) | json_encode | raw }},
+                    url: {{ path('secure_author_view_client', { id: obj.clientId }) | json_encode | raw }},
                     datatype: 'json',
                     mtype: 'POST',
+                    postData: {mode : 'totalOrdersCompleted'},
                     recordtext: "Просмотр работ {0} - {1}",
                     colNames:['','№ заказа', 'Предмет', 'Тип работы', 'Тема работы', 'Выполнен', 'Стоимость', 'Оценка', 'Отзыв'],
                     colModel :[
@@ -188,14 +188,14 @@
                         {name:'theme',index:'theme',width:290,align:'center',resizable:false,editable:false,sortable:false},
                         {name:'date_complete',index:'date_complete',width:100,align:'center',resizable:false,editable:false,sortable:false},
                         {name:'price',index:'price',width:100,align:'center',resizable:false,editable:false,sortable:false,formatter:'currency',formatoptions:{defaultValue:'',thousandsSeparator: " ",decimalPlaces:0,suffix:" руб."}},
-                        {name:'degree',index:'degree',width:100,align:'center',resizable:false,editable:false,sortable:false},
-                        {name:'comment',index:'comment',width:200,align:'center',resizable:false,editable:false,sortable:false}
+                        {name:'client_degree',index:'client_degree',width:100,align:'center',resizable:false,editable:false,sortable:false},
+                        {name:'client_comment',index:'client_comment',width:200,align:'center',resizable:false,editable:false,sortable:false}
                     ],
                     pager: $('#pagerAuthorCompletedTotalOrders'),
                     rowNum: 10,
                     rowList: [15,25,35],
-                    sortname: 'num',
-                    sortorder: 'asc',
+                    //sortname: 'num',
+                    //sortorder: 'asc',
                     viewrecords: true,
                     hidegrid: false,
                     height: 'auto',
@@ -246,9 +246,9 @@
                 $("#diagram-total-orders-after").hide();
                 $("#diagram-total-orders-before").show();
             });*/
-            function customNum(cellvalue) {
+            /*function customNum(cellvalue) {
                 return ("<span class='grid-cell-num'>" + cellvalue + "</span>");
-            }
+            }*/
         })
         </script>
     {% endblock %}

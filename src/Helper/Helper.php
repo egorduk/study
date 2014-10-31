@@ -1271,7 +1271,8 @@ class Helper
             foreach($files as $file) {
                 $dir = dirname($_SERVER['SCRIPT_FILENAME']) . self::getAttachmentsUrl('client', $order->getNum()) . $file->getName();
                 if (file_exists($dir)) {
-                    $file->setUrl(Helper::getFullUrl() . self::getAttachmentsUrl('client', $order->getNum()) . $file->getName());
+                    $file->setUrl(self::getContainer()->get('router')->generate('secure_client_download_file', array('type' => 'attachments', 'num' => $order->getNum(), 'filename' => $file->getName())));
+                    //$file->setUrl(Helper::getFullUrl() . self::getAttachmentsUrl('client', $order->getNum()) . $file->getName());
                     $file->setThumbnailUrl(self::getThumbnailUrlFile($file->getName(), $order));
                     $arrayClientFiles[] = $file;
                 }
@@ -1745,7 +1746,7 @@ class Helper
                 //$authorAvatar = $user->getAvatar();
                 $authorId = $user->getId();
                 $pathAvatar = Helper::getFullPathToAvatar($user);
-                $url = $container->get('router')->generate('secure_author_action', array('mode' => 'info', 'id' => $authorId));
+                $url = $container->get('router')->generate('secure_client_view_author', array('id' => $authorId));
             } else {
                 return null;
             }
@@ -1753,7 +1754,7 @@ class Helper
             $login = $order->getUser()->getLogin();
             $pathAvatar = Helper::getFullPathToAvatar($order->getUser());
             $clientId = $order->getUser()->getId();
-            $url = $container->get('router')->generate('secure_client_action', array('mode' => 'info', 'id' => $clientId));
+            $url = $container->get('router')->generate('secure_author_view_client', array('id' => $clientId));
         }
         $link = "<img src='$pathAvatar' align='middle' alt='Аватар' width='110px' height='auto' class='thumbnail'><a href='$url' target='_blank' class='label label-primary'>$login</a>";
         return $link;

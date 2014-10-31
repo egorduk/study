@@ -5,6 +5,7 @@ namespace Acme\SecureBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\ExpressionLanguage\Parser;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Finder\Iterator\SortableIterator;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -16,6 +17,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 //use Symfony\Component\PropertyAccess\Exception\AccessException;
 //use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Util\StringUtils;
@@ -489,6 +491,38 @@ class ClientController extends Controller
                 'AcmeSecureBundle:Client:action_info.html.twig', array('mode' => 'clientView', 'user' => $user)
             );
         }*/
+    }
+
+
+    /**
+     * Serves a file
+     */
+    public function downloadFileAction($type, $num, $filename = null)
+    {
+        $basePath = $_SERVER['DOCUMENT_ROOT'] . '/study/web/uploads/';
+        if ($type == 'pdf') {
+            $filePath = $basePath . 'pdf/' . $num . '/' . $filename;
+            $user = $this->getUser();
+            $order = Helper::getOrderByNumForAuthor($num, $user);
+            if ($order) {
+                Helper::createPdfOrder($order);
+            } else {
+                throw $this->createNotFoundException();
+            }
+        } elseif ($type == 'attachments') {
+            $filePath = $basePath . 'attachments/orders/' . $num . '/client/' . $filename;
+        }
+        if (!file_exists($filePath)) {
+            throw $this->createNotFoundException();
+        }
+        $response = new BinaryFileResponse($filePath);
+        $response->trustXSendfileTypeHeader();
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $filename,
+            iconv('UTF-8', 'ASCII//TRANSLIT', $filename)
+        );
+        return $response;
     }
 
 

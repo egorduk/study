@@ -521,6 +521,7 @@ class AuthorController extends Controller
                     );
                 }
                 $clientFiles = Helper::getOrderFiles($order, 'client', $user);
+                //var_dump($clientFiles);die;
                 if ($codeStatusOrder == 'w') {
                     $dateExpire = $order->getDateExpire();
                     $diffWork = strtotime($dateExpire->format("d.m.Y H:i:s")) - time();
@@ -787,6 +788,92 @@ class AuthorController extends Controller
             iconv('UTF-8', 'ASCII//TRANSLIT', $filename)
         );
         return $response;
+    }
+
+    /**
+     * @Template()
+     * @return array
+     */
+    public function viewClientAction(Request $request, $id)
+    {
+        if (true === $this->get('security.context')->isGranted('ROLE_AUTHOR') && !$request->isXmlHttpRequest() && is_numeric($id)) {
+            $user = Helper::getUserById($id);
+            if ($user) {
+                $orders = Helper::getClientTotalOrders($user);
+                $countCanceledOrders = 0;
+                foreach($orders as $order) {
+                    if ($order->getStatusOrder()->getCode() == 'cl') {
+                        $countCanceledOrders++;
+                    }
+                }
+                //$user->setClientIdInfo($id);
+                //var_dump($user->getAvatar());die;
+                $pathAvatar = Helper::getFullPathToAvatar($user);
+                $clientAvatar = "<img src='$pathAvatar' align='middle' alt='client_avatar' width='110px' height='auto' class='thumbnail'>";
+                $obj = [];
+                $obj['countTotalOrders'] = count($orders);
+                $obj['countCanceledOrders'] = $countCanceledOrders;
+                $obj['clientAvatar'] = $clientAvatar;
+                $obj['mode'] = 'clientView';
+                $obj['clientId'] = $id;
+                return $this->render(
+                    'AcmeSecureBundle:Author:view_client.html.twig', array('user' => $user, 'obj' => $obj)
+                );
+            } else {}
+        } elseif ($request->isXmlHttpRequest() && true === $this->get('security.context')->isGranted('ROLE_AUTHOR') && is_numeric($id)) {
+            $mode = $request->request->get('mode');
+            //var_dump($mode);die;
+            if ($mode == 'totalOrders') {
+                $user = Helper::getUserById($id);
+                if ($user) {
+                    $response = new Response();
+                    $orders = Helper::getClientTotalOrders($user);
+                    foreach($orders as $index => $order) {
+                        $response->rows[$index]['id'] = $order->getId();
+                        $response->rows[$index]['cell'] = array(
+                            $order->getId(),
+                            $order->getNum(),
+                            $order->getSubjectOrder()->getChildName(),
+                            $order->getTypeOrder()->getName(),
+                            $order->getTheme()
+                        );
+                    }
+                    return new JsonResponse($response);
+                } else {}
+            } elseif ($mode == 'totalOrdersCompleted') {
+                $client = Helper::getUserById($id);
+                //var_dump($client);die;
+                if ($client) {
+                    $response = new Response();
+                    $author = $this->getUser();
+                    $orders = Helper::getAuthorTotalCompletedOrdersForClient($client, $author);
+                    //var_dump(count($orders));die;
+                    foreach($orders as $index => $order) {
+                        $response->rows[$index]['id'] = $order[0]->getNum();
+                        $response->rows[$index]['cell'] = array(
+                            $order[0]->getNum(),
+                            $order[0]->getNum(),
+                            $order[0]->getSubjectOrder()->getChildName(),
+                            $order[0]->getTypeOrder()->getName(),
+                            $order[0]->getTheme(),
+                            $order[0]->getDateComplete()->format("d.m.Y H:i"),
+                            $order['curr_sum'],
+                            $order[0]->getClientDegree(),
+                            $order[0]->getClientComment()
+                        );
+                    }
+                    return new JsonResponse($response);
+                } else {}
+            }
+        }
+        return NULL;
+
+        /*elseif ($mode == "info" && true === $this->get('security.context')->isGranted('ROLE_CLIENT')) {
+            $user = Helper::getUserById($id);
+            return $this->render(
+                'AcmeSecureBundle:Client:action_info.html.twig', array('mode' => 'clientView', 'user' => $user)
+            );
+        }*/
     }
 
 }
