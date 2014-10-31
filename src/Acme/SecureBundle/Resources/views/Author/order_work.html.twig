@@ -3,9 +3,9 @@
     {% block content %}
         <!--<link rel="stylesheet" href="{{ asset('bundles/js/bootstrap.min.js') }}" />-->
         <link href="{{ asset('bundles/css/select2.css') }}" rel="stylesheet" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/timer/jquery.countdown.css') }}" />
         <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-maxlength.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/select2.min.js') }}"></script>
-        <link rel="stylesheet" href="{{ asset('bundles/css/timer/jquery.countdown.css') }}" />
         <!--<link rel="stylesheet" href="{{ asset('bundles/css/chat/jScrollPane.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/chat/chat.css') }}" />
         <script type="text/javascript" src="{{ asset('bundles/js/chat/jquery.mousewheel.js') }}"></script>
@@ -41,6 +41,9 @@
             }
             .caption p {
                 clear: both;
+            }
+            .caption > img {
+                width: 60px;
             }
         </style>
         <div class="container">
@@ -146,7 +149,7 @@
             {% if obj.clientFiles | length > 0 %}
                 <div class="col-md-4">
                     <p>Файлы заказчика</p>
-                    {% for file in clientFiles %}
+                    {% for file in obj.clientFiles %}
                         <div class="">
                             <div class="caption thumbnail">
                                 <img src="{{ file.thumbnailurl }}" class="thumbnail-image" alt="thumbnail"/>

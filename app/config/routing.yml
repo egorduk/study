@@ -66,7 +66,11 @@ secure_client_action:
   pattern:   /secure/client/{id}/{mode}
   defaults:  { _controller: AcmeSecureBundle:Client:action }
 
-#--------------------------------------------------Author---------------------------------------------------#
+secure_client_download_file:
+  pattern:   /download/{type}/{num}/{filename}
+  defaults:  { _controller: AcmeSecureBundle:Client:downloadFile, filename: empty  }
+
+#------------------------------------------------------------------Author----------------------------------------------------------------#
 
 secure_author_index:
   pattern:   /secure/author/index
@@ -75,30 +79,6 @@ secure_author_index:
 author_reg:
   pattern:   /{type}/reg
   defaults:  { _controller: AcmeAuthBundle:Author:reg }
-
-secure_author_profile:
-  pattern:   /secure/author/profile/{type}
-  defaults:  { _controller: AcmeSecureBundle:Author:profile }
-
-secure_author_settings:
-  pattern:   /secure/author/settings/{type}
-  defaults:  { _controller: AcmeSecureBundle:Author:settings }
-
-secure_author_orders:
-  pattern:   /secure/author/orders/{type}
-  defaults:  { _controller: AcmeSecureBundle:Author:orders }
-
-secure_author_upload:
-  pattern:   /secure/author/upload
-  defaults:  { _controller: AcmeSecureBundle:Author:upload }
-
-secure_author_order:
-  pattern:   /secure/author/order/{num}
-  defaults:  { _controller: AcmeSecureBundle:Author:order }
-
-secure_author_action:
-  pattern:   /secure/author/action/{type}/{id}
-  defaults:  { _controller: AcmeSecureBundle:Author:action }
 
 #---------------AuthBundle----------------------------#
 
@@ -122,3 +102,30 @@ secure_author_download_file:
   defaults:  { _controller: AcmeSecureBundle:Author:downloadFile, filename: empty  }
       # * @Route("", name="download_file", requirements={"filename": ".+"})
 
+secure_author_profile:
+  pattern:   /secure/author/profile/{type}
+  defaults:  { _controller: AcmeSecureBundle:Author:profile }
+
+secure_author_settings:
+  pattern:   /secure/author/settings/{type}
+  defaults:  { _controller: AcmeSecureBundle:Author:settings }
+
+secure_author_orders:
+  pattern:   /secure/author/orders/{type}
+  defaults:  { _controller: AcmeSecureBundle:Author:orders }
+
+secure_author_upload:
+  pattern:   /secure/author/upload
+  defaults:  { _controller: AcmeSecureBundle:Author:upload }
+
+secure_author_order:
+  pattern:   /secure/author/order/{num}
+  defaults:  { _controller: AcmeSecureBundle:Author:order }
+
+#secure_author_action:
+#  pattern:   /secure/author/action/{type}/{id}
+#  defaults:  { _controller: AcmeSecureBundle:Author:action }
+
+secure_author_view_client:
+  pattern:   /secure/author/view/client/{id}
+  defaults:  { _controller: AcmeSecureBundle:Author:viewClient }
