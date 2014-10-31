@@ -5,17 +5,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="79828e02-5540-4157-bcbe-d9d8b8a4a7b1" name="Default" comment="sdfsfsdfs">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Services/FileUploader.php" afterPath="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Services/FileUploader.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Helper/Helper.php" afterPath="$PROJECT_DIR$/src/Helper/Helper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/BlueImp/UploadHandler.php" afterPath="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/BlueImp/UploadHandler.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/slik/dompdf-bundle/Slik/DompdfBundle/DomPDF/lib/fonts/log.htm" afterPath="$PROJECT_DIR$/vendor/slik/dompdf-bundle/Slik/DompdfBundle/DomPDF/lib/fonts/log.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/config/services.yml" afterPath="$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/config/services.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="79828e02-5540-4157-bcbe-d9d8b8a4a7b1" name="Default" comment="sdfsfsdfs" />
     <ignored path="study.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="web/uploads/avatars/Thumbs.db" />
@@ -74,7 +64,7 @@
       <file leaf-file-name="UploadHandler.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/BlueImp/UploadHandler.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="424" column="37" selection-start="19071" selection-end="19071" vertical-scroll-proportion="0.84307694" vertical-offset="8780" max-vertical-offset="11374">
+            <state line="432" column="16" selection-start="19372" selection-end="19372" vertical-scroll-proportion="0.84777516" vertical-offset="8780" max-vertical-offset="11374">
               <folding />
             </state>
           </provider>
@@ -485,11 +475,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22077923" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22077923" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -962,7 +952,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/BlueImp/UploadHandler.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="424" column="37" selection-start="19071" selection-end="19071" vertical-scroll-proportion="0.84307694" vertical-offset="8780" max-vertical-offset="11374">
+        <state line="432" column="16" selection-start="19372" selection-end="19372" vertical-scroll-proportion="0.84777516" vertical-offset="8780" max-vertical-offset="11374">
           <folding />
         </state>
       </provider>
