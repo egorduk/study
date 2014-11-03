@@ -1943,20 +1943,36 @@ class Helper
     }
 
 
-    public static function getClientTotalOrders($user) {
+    public static function getClientTotalOrders($user, $mode) {
         $em = self::getContainer()->get('doctrine')->getManager();
-        $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
-            ->innerJoin(self::$_tableStatusOrder, 'so', 'WITH', 'so = uo.status_order')
-            ->innerJoin(self::$_tableUser, 'u', 'WITH', 'uo.user = u')
-            ->andWhere('uo.user = :user')
-            ->andWhere('so.code IN(:code)')
-            ->andWhere('uo.is_show_client = 1')
-            ->andWhere('uo.is_show_author = 1')
-            ->setParameter('user', $user)
-            ->setParameter('code', array_values(array('w', 'e', 'co', 'g', 'cl')))
-            ->orderBy('uo.num', 'asc')
-            ->getQuery()
-            ->getResult();
+        if ($mode == 'totalOrders') {
+            $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
+                ->innerJoin(self::$_tableStatusOrder, 'so', 'WITH', 'so = uo.status_order')
+                ->innerJoin(self::$_tableUser, 'u', 'WITH', 'uo.user = u')
+                ->andWhere('uo.user = :user')
+                ->andWhere('so.code IN(:code)')
+                ->andWhere('uo.is_show_client = 1')
+                ->andWhere('uo.is_show_author = 1')
+                ->setParameter('user', $user)
+                ->setParameter('code', array_values(array('w', 'e', 'co', 'g', 'cl')))
+                ->orderBy('uo.num', 'asc')
+                ->getQuery()
+                ->getResult();
+        } elseif ($mode == 'totalTypeOrders') {
+            $orders = $em->getRepository(self::$_tableUserOrder)->createQueryBuilder('uo')
+                ->innerJoin(self::$_tableStatusOrder, 'so', 'WITH', 'so = uo.status_order')
+                ->innerJoin(self::$_tableUser, 'u', 'WITH', 'uo.user = u')
+                ->andWhere('uo.user = :user')
+                ->andWhere('so.code IN(:code)')
+                ->andWhere('uo.is_show_client = 1')
+                ->andWhere('uo.is_show_author = 1')
+                ->setParameter('user', $user)
+                ->setParameter('code', array_values(array('w', 'e', 'co', 'g', 'cl')))
+                ->orderBy('uo.num', 'asc')
+                //->groupBy('uo.type_order')
+                ->getQuery()
+                ->getResult();
+        }
         if ($orders) {
             return $orders;
         }
@@ -2423,5 +2439,25 @@ class Helper
 
     public static function getFileUrl($filename, $orderNum) {
         return self::getContainer()->get('router')->generate('secure_author_download_file', array('type' => 'attachments', 'num' => $orderNum, 'filename' => $filename));
+    }
+
+
+    public static function getClientTotalTypeOrdersForChart($arrayTypeOrders) {
+        if ($countTypeOrders = count($arrayTypeOrders)) {
+            $resultArray = [];
+            foreach($arrayTypeOrders as $typeOrder) {
+                if ($typeOrder == 'kontr') {
+                    $resultArray['kontr']++;
+                } elseif ($typeOrder == 'kurs') {
+                    $resultArray['kurs']++;
+                } elseif ($typeOrder == 'diplom') {
+                    $resultArray['diplom']++;
+                } else {
+                    $resultArray['other']++;
+                }
+            }
+            return $resultArray;
+        }
+        return null;
     }
 }

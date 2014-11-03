@@ -799,7 +799,7 @@ class AuthorController extends Controller
         if (true === $this->get('security.context')->isGranted('ROLE_AUTHOR') && !$request->isXmlHttpRequest() && is_numeric($id)) {
             $user = Helper::getUserById($id);
             if ($user) {
-                $orders = Helper::getClientTotalOrders($user);
+                $orders = Helper::getClientTotalOrders($user, 'totalOrders');
                 $countCanceledOrders = 0;
                 foreach($orders as $order) {
                     if ($order->getStatusOrder()->getCode() == 'cl') {
@@ -827,18 +827,22 @@ class AuthorController extends Controller
                 $user = Helper::getUserById($id);
                 if ($user) {
                     $response = new Response();
-                    $orders = Helper::getClientTotalOrders($user);
-                    foreach($orders as $index => $order) {
-                        $response->rows[$index]['id'] = $order->getId();
-                        $response->rows[$index]['cell'] = array(
-                            $order->getId(),
-                            $order->getNum(),
-                            $order->getSubjectOrder()->getChildName(),
-                            $order->getTypeOrder()->getName(),
-                            $order->getTheme()
-                        );
+                    $orders = Helper::getClientTotalOrders($user, $mode);
+                    if ($orders) {
+                        foreach($orders as $index => $order) {
+                            $response->rows[$index]['id'] = $order->getId();
+                            $response->rows[$index]['cell'] = array(
+                                $order->getId(),
+                                $order->getNum(),
+                                $order->getSubjectOrder()->getChildName(),
+                                $order->getTypeOrder()->getName(),
+                                $order->getTheme(),
+                                $order->getDateCreate()->format("d.m.Y H:i")
+                            );
+                        }
+                        return new JsonResponse($response);
                     }
-                    return new JsonResponse($response);
+                    return new JsonResponse(null);
                 } else {}
             } elseif ($mode == 'totalOrdersCompleted') {
                 $client = Helper::getUserById($id);
@@ -863,6 +867,21 @@ class AuthorController extends Controller
                         );
                     }
                     return new JsonResponse($response);
+                } else {}
+            } elseif ($mode == 'totalTypeOrders') {
+                $client = Helper::getUserById($id);
+                if ($client) {
+                    $orders = Helper::getClientTotalOrders($client, $mode);
+                    //var_dump(count($orders));die;
+                    if ($orders) {
+                        $arrayTypeOrders = [];
+                        foreach($orders as $index => $order) {
+                            $arrayTypeOrders[$index] = $order->getTypeOrder()->getCode();
+                        }
+                        $arrayTypeOrders = Helper::getClientTotalTypeOrdersForChart($arrayTypeOrders);
+                        return new Response(json_encode(array('response' => true, 'typeOrders' => $arrayTypeOrders)));
+                    }
+                    return new Response(json_encode(array('response' => false)));
                 } else {}
             }
         }
