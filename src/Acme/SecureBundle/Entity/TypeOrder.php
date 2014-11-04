@@ -3,8 +3,6 @@
 namespace Acme\SecureBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -26,33 +24,42 @@ class TypeOrder extends EntityRepository
     private $name;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $code;
+
+    /**
      * @ORM\OneToMany(targetEntity="UserOrder", mappedBy="type_order")
      **/
     private $link_type_order;
 
 
-    public function __construct(){
+    public function __construct() {
         $this->link_type_order = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    public function setName($name)
-    {
-        $this->name = $name;
+    public function setName($val) {
+        $this->name = $val;
     }
 
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
-    public function setId($id)
-    {
-        $this->id = $id;
+    public function setId($val) {
+        $this->id = $val;
+    }
+
+    public function setCode($val) {
+        $this->code = $val;
+    }
+
+    public function getCode() {
+        return $this->code;
     }
 
 }

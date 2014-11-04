@@ -1,13 +1,14 @@
 {% extends "AcmeSecureBundle::layout_author.html.twig" %}
 {% block title "Настройки аккаунта" %}
     {% block content %}
+        <link href="{{ asset('bundles/css/window.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/css/select2.css') }}" rel="stylesheet" />
+        <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-maxlength.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/select2.min.js') }}"></script>
         <div class="body">
             <style>
                 .table {
                     cursor: pointer;
-                }
-                .row label.required:after {
-                    content: "*";
                 }
                 #block-btn--change {
                     display: none;
@@ -45,10 +46,13 @@
                             <td>{{ ps.num }}</td>
                             <td>
                                 <div style='float:left' data-title='Изменить' onmouseover="$(this).tooltip('show')" data-toggle='tooltip' data-placement='left'>
-                                    <span data-id="{{ ps.id }}" class='icon-star edit-ps'></span>
+                                    <span data-id="{{ ps.id }}" class='icon-edit-3 edit-ps'></span>
                                 </div>
                                 <div style='float:left;margin-left:5px;' data-title='Удалить' onmouseover="$(this).tooltip('show')" data-toggle='tooltip' data-placement='left'>
-                                    <span data-id="{{ ps.id }}" class='icon-star delete-ps'></span>
+                                    <span data-id="{{ ps.id }}" class='icon-trash-1 delete-ps'></span>
+                                </div>
+                                <div style='float:left;margin-left:5px;' data-title='Вывести деньги' onmouseover="$(this).tooltip('show')" data-toggle='tooltip' data-placement='left'>
+                                    <span data-id="{{ ps.id }}" class='icon-money-2 output-ps'></span>
                                 </div>
                             </td>
                         </tr>
@@ -57,37 +61,66 @@
                 </table>
             </div>
             <div class="row">
-                {% form_theme formCreatePs "TwigBundle::layout.html.twig" %}
-                {{ form_start(formCreatePs) }}
-                {{ form_label(formCreatePs.fieldNum) }}
-                {{ form_errors(formCreatePs.fieldNum) }}
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
-                    {{ form_widget(formCreatePs.fieldNum) }}
-                </div>
-                {{ form_label(formCreatePs.fieldName) }}
-                {{ form_errors(formCreatePs.fieldName) }}
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
-                    {{ form_widget(formCreatePs.fieldName) }}
-                </div>
-                {{ form_label(formCreatePs.fieldType) }}
-                <div class="input-group">
-                    {{ form_widget(formCreatePs.fieldType) }}
-                </div>
-                </br>
-                <div class="input-group">
+                <div class="col-xs-4 col-xs-offset-4">
+                    {% form_theme formCreatePs "TwigBundle::layout.html.twig" %}
+                    {{ form_start(formCreatePs) }}
+                    {{ form_label(formCreatePs.fieldNum) }}
+                    {{ form_errors(formCreatePs.fieldNum) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
+                        {{ form_widget(formCreatePs.fieldNum) }}
+                    </div>
+                    {{ form_label(formCreatePs.fieldName) }}
+                    {{ form_errors(formCreatePs.fieldName) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
+                        {{ form_widget(formCreatePs.fieldName) }}
+                    </div>
+                    {{ form_label(formCreatePs.fieldType) }}
+                    <div class="input-group">
+                        {{ form_widget(formCreatePs.fieldType) }}
+                    </div>
+                    </br>
+                    <div class="input-group">
                     <span id="block-btn--change">
                         <label for="formCreatePs_change" class="btn btn-success"><span class="icon-trash-1">&nbspИзменить</span></label>
                         {{ form_widget(formCreatePs.change) }}
                     </span>
-                    <label for="formCreatePs_add" class="btn btn-success"><span class="icon-floppy"></span>&nbspДобавить</label>
-                    {{ form_widget(formCreatePs.add) }}
-                    <label for="formCreatePs_reset" class="btn btn-success"><span class="icon-trash-1">&nbspОчистить</span></label>
-                    {{ form_widget(formCreatePs.reset) }}
+                        <label for="formCreatePs_add" class="btn btn-success"><span class="icon-floppy"></span>&nbspДобавить</label>
+                        {{ form_widget(formCreatePs.add) }}
+                        <label for="formCreatePs_reset" class="btn btn-success"><span class="icon-trash-1">&nbspОчистить</span></label>
+                        {{ form_widget(formCreatePs.reset) }}
+                    </div>
+                    {{ form_end(formCreatePs) }}
                 </div>
-                {{ form_end(formCreatePs) }}
-               <!-- <a href="{{ path('secure_client_profile', {'type': 'edit'}) }}">Изменить данные</a>-->
+            </div>
+            <div class="row">
+                <div class="col-xs-4 col-xs-offset-4">
+                    {% form_theme formOutputPs "TwigBundle::layout.html.twig" %}
+                    {{ form_start(formOutputPs) }}
+                    {{ form_label(formOutputPs.fieldSum) }}
+                    {{ form_errors(formOutputPs.fieldSum) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
+                        {{ form_widget(formOutputPs.fieldSum) }}
+                    </div>
+                    {{ form_label(formOutputPs.fieldComment) }}
+                    {{ form_errors(formOutputPs.fieldComment) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
+                        {{ form_widget(formOutputPs.fieldComment) }}
+                    </div>
+                    {{ form_label(formOutputPs.fieldType) }}
+                    <div class="input-group">
+                        {{ form_widget(formOutputPs.fieldType) }}
+                    </div>
+                    </br>
+                    <div class="input-group">
+                        <label for="formOutputPs_output" class="btn btn-success"><span class="icon-floppy"></span>&nbspВывести</label>
+                        {{ form_widget(formOutputPs.output) }}
+                    </div>
+                    {{ form_end(formOutputPs) }}
+                </div>
             </div>
             <div class="row">
                 {% form_theme formMailOptions "TwigBundle::layout.html.twig" %}
@@ -114,6 +147,13 @@
                         formatResult: format,
                         formatSelection: format,
                         width: '170',
+                        escapeMarkup: function(m) { return m; }
+                    });
+                    $("#formOutputPs_fieldType").select2({
+                        minimumResultsForSearch: -1,
+                        //formatResult: format,
+                        //formatSelection: format,
+                        width: '200',
                         escapeMarkup: function(m) { return m; }
                     });
                     $("#formMailOptions_fieldOptions").select2({
@@ -144,14 +184,30 @@
                         var psId = $(this).attr('data-id');
                         $.ajax({
                             type: 'POST',
-                            data: 'psId=' + psId,
+                            data: 'psId=' + psId + '&mode=deletePs',
                             success: function(response) {
                                 var responseObject = window.JSON.parse(response);
-                                if (responseObject.response == "valid") {
+                                if (responseObject.response) {
                                     var trRemoved = $("#table-user-ps").find("tr[data-id='" + psId + "']").remove();
                                 }
                             }
                         });
+                    });
+                    $(".output-ps").click(function() {
+                        var psId = $(this).attr('data-id');
+                        $.ajax({
+                            type: 'POST',
+                            data: 'psId=' + psId + '&mode=outputPs',
+                            success: function(response) {
+                                var responseObject = window.JSON.parse(response);
+                                if (responseObject.response) {
+                                    var trRemoved = $("#table-user-ps").find("tr[data-id='" + psId + "']").remove();
+                                }
+                            }
+                        });
+                    });
+                    $("input[id^=formCreatePs_field], input[id^=formOutputPs_field]").maxlength({
+                        alwaysShow: true
                     });
                     function closeMessage(el) {
                         el.addClass('is-hidden');

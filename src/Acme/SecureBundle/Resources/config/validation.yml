@@ -68,6 +68,8 @@ Acme\SecureBundle\Entity\Author\CreatePsFormValidate:
           - NotBlank: { message: "Введите номер кошелька!" }
         fieldName:
           - Length: { max: 20, maxMessage: "Слишком много символов!!" }
+        #fieldType:
+        #  - NotBlank: { message: "Ошибка!" }
         #fieldHiddenPsId:
         #  - NotBlank: { message: "Ошибка!" }
 
@@ -82,3 +84,12 @@ Acme\SecureBundle\Entity\CancelRequestFormValidate:
 #          - NotBlank: { message: "Ошибка!" }
 #          - NotNull: ~
 #          - Valid: ~
+
+Acme\SecureBundle\Entity\Author\OutputPsFormValidate:
+    properties:
+        fieldSum:
+          - Length: { min: 6, max: 20, maxMessage: "Слишком много цифр!", minMessage: "Слишком мало цифр!" }
+          - Regex: { pattern: "/^[\d]+$/u", message: "Только цифры!" }
+          - NotBlank: { message: "Введите сумму!" }
+        fieldComment:
+          - Length: { max: 255, maxMessage: "Слишком много символов!" }

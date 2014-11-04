@@ -3,12 +3,13 @@
 namespace Acme\SecureBundle\Controller;
 
 use Acme\SecureBundle\Entity\Author\MailOptionsFormValidate;
+use Acme\SecureBundle\Entity\Author\OutputPsFormValidate;
 use Acme\SecureBundle\Entity\CancelRequestFormValidate;
-use Acme\SecureBundle\Form\Author\AuthorCreateMailOptionsForm;
 use Acme\SecureBundle\Form\Author\AuthorCreatePsForm;
 use Acme\SecureBundle\Entity\Author\CreatePsFormValidate;
 use Acme\SecureBundle\Entity\CancelRequest;
 use Acme\SecureBundle\Form\Author\AuthorMailOptionsForm;
+use Acme\SecureBundle\Form\Author\OutputPsForm;
 use Acme\SecureBundle\Form\CancelRequestForm;
 use Doctrine\Common\Cache\ApcCache;
 use Doctrine\Common\Cache\ArrayCache;
@@ -700,17 +701,29 @@ class AuthorController extends Controller
                 return new RedirectResponse($this->generateUrl('secure_author_index'));
             }*/
             $user = $this->getUser();
-            $showWindow = false;
-            if ($request->isXmlHttpRequest()) {
-                $psId = $request->request->get('psId');
-                $isUserPs = Helper::getUserPsByPsId($user, $psId);
-                $response = 'null';
-                if ($isUserPs) {
-                    $response = 'valid';
-                    Helper::deleteUserPs($psId);
+            $showWindow = $response = false;
+            if ($request->isXmlHttpRequest() && $mode = $request->request->get('mode')) {
+                if ($mode == 'deletePs') {
+                    $psId = $request->request->get('psId');
+                    $isUserPs = Helper::getUserPsByPsId($user, $psId);
+                    if ($isUserPs) {
+                        $response = true;
+                        Helper::deleteUserPs($psId);
+                    }
+                } elseif ($mode == 'outputPs') {
+                    $psId = $request->request->get('psId');
+                    $isUserPs = Helper::getUserPsByPsId($user, $psId);
+                    if ($isUserPs) {
+                        $response = true;
+                        //Helper::deleteUserPs($psId);
+                    }
                 }
                 return new Response(json_encode(array('response' => $response)));
             }
+            $outputPsValidate = new OutputPsFormValidate();
+            $formOutputPs = $this->createForm(new OutputPsForm(), $outputPsValidate);
+            $formOutputPs->handleRequest($request);
+
             $psValidate = new CreatePsFormValidate();
             $formCreatePs = $this->createForm(new AuthorCreatePsForm(), $psValidate);
             $formCreatePsCloned = clone $formCreatePs;
@@ -737,10 +750,10 @@ class AuthorController extends Controller
                             Helper::uploadAuthorFileInfo($user);
                         }*/
                         $showWindow = true;
-                    } else{
+                    } else {
                         $userPs = Helper::getUserPsByUser($user);
                         return $this->render(
-                            'AcmeSecureBundle:Author:settings.html.twig', array('formCreatePs' => $formCreatePs->createView(), 'user' => $user, 'userPs' => $userPs, 'showWindow' => $showWindow)
+                            'AcmeSecureBundle:Author:settings.html.twig', array('formCreatePs' => $formCreatePs->createView(), 'user' => $user, 'userPs' => $userPs, 'formMailOptions' => $formMailOptions->createView(), 'showWindow' => $showWindow)
                         );
                     };
                 } elseif ($formMailOptions->get('save')->isClicked()) {
@@ -749,12 +762,12 @@ class AuthorController extends Controller
                         //var_dump($postData);die;
                         $fieldOptions = $postData['fieldOptions'];
                         Helper::updateMailOptions($user, $fieldOptions);
-                    } else {}
+                    }
                 }
             }
             $userPs = Helper::getUserPsByUser($user);
             return $this->render(
-                'AcmeSecureBundle:Author:settings.html.twig', array('formCreatePs' => $formCreatePsCloned->createView(), 'formMailOptions' => $formMailOptions->createView(), 'user' => $user, 'userPs' => $userPs, 'showWindow' => $showWindow)
+                'AcmeSecureBundle:Author:settings.html.twig', array('formCreatePs' => $formCreatePsCloned->createView(), 'formOutputPs' => $formOutputPs->createView(), 'formMailOptions' => $formMailOptions->createView(), 'user' => $user, 'userPs' => $userPs, 'showWindow' => $showWindow)
             );
         }
     }
@@ -799,15 +812,15 @@ class AuthorController extends Controller
         if (true === $this->get('security.context')->isGranted('ROLE_AUTHOR') && !$request->isXmlHttpRequest() && is_numeric($id)) {
             $user = Helper::getUserById($id);
             if ($user) {
-                $orders = Helper::getClientTotalOrders($user);
+                $orders = Helper::getClientTotalOrders($user, 'totalOrders');
                 $countCanceledOrders = 0;
-                foreach($orders as $order) {
-                    if ($order->getStatusOrder()->getCode() == 'cl') {
-                        $countCanceledOrders++;
+                if ($orders) {
+                    foreach($orders as $order) {
+                        if ($order->getStatusOrder()->getCode() == 'cl') {
+                            $countCanceledOrders++;
+                        }
                     }
                 }
-                //$user->setClientIdInfo($id);
-                //var_dump($user->getAvatar());die;
                 $pathAvatar = Helper::getFullPathToAvatar($user);
                 $clientAvatar = "<img src='$pathAvatar' align='middle' alt='client_avatar' width='110px' height='auto' class='thumbnail'>";
                 $obj = [];
@@ -827,18 +840,22 @@ class AuthorController extends Controller
                 $user = Helper::getUserById($id);
                 if ($user) {
                     $response = new Response();
-                    $orders = Helper::getClientTotalOrders($user);
-                    foreach($orders as $index => $order) {
-                        $response->rows[$index]['id'] = $order->getId();
-                        $response->rows[$index]['cell'] = array(
-                            $order->getId(),
-                            $order->getNum(),
-                            $order->getSubjectOrder()->getChildName(),
-                            $order->getTypeOrder()->getName(),
-                            $order->getTheme()
-                        );
+                    $orders = Helper::getClientTotalOrders($user, $mode);
+                    if ($orders) {
+                        foreach($orders as $index => $order) {
+                            $response->rows[$index]['id'] = $order->getId();
+                            $response->rows[$index]['cell'] = array(
+                                $order->getId(),
+                                $order->getNum(),
+                                $order->getSubjectOrder()->getChildName(),
+                                $order->getTypeOrder()->getName(),
+                                $order->getTheme(),
+                                $order->getDateCreate()->format("d.m.Y H:i")
+                            );
+                        }
+                        return new JsonResponse($response);
                     }
-                    return new JsonResponse($response);
+                    return new JsonResponse(null);
                 } else {}
             } elseif ($mode == 'totalOrdersCompleted') {
                 $client = Helper::getUserById($id);
@@ -864,9 +881,24 @@ class AuthorController extends Controller
                     }
                     return new JsonResponse($response);
                 } else {}
+            } elseif ($mode == 'totalTypeOrders') {
+                $client = Helper::getUserById($id);
+                if ($client) {
+                    $orders = Helper::getClientTotalOrders($client, $mode);
+                    //var_dump(count($orders));die;
+                    if ($orders) {
+                        $arrayTypeOrders = [];
+                        foreach($orders as $index => $order) {
+                            $arrayTypeOrders[$index] = $order->getTypeOrder()->getCode();
+                        }
+                        $arrayTypeOrders = Helper::getClientTotalTypeOrdersForChart($arrayTypeOrders);
+                        return new Response(json_encode(array('response' => true, 'typeOrders' => $arrayTypeOrders)));
+                    }
+                    return new Response(json_encode(array('response' => false)));
+                } else {}
             }
         }
-        return NULL;
+        return null;
 
         /*elseif ($mode == "info" && true === $this->get('security.context')->isGranted('ROLE_CLIENT')) {
             $user = Helper::getUserById($id);

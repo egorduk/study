@@ -9,7 +9,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class AuthorCreatePsForm extends AbstractType
 {
-    private static $kernel;
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('fieldNum', 'text', array('label' => 'Номер кошелька', 'required' => true, 'attr' => array('class' => 'form-control', 'size' => 20, 'maxlength' => 20, 'placeholder' => 'Введите номер кошелька')))
             ->add('fieldName', 'text', array('label' => 'Название кошелька', 'required' => false, 'attr' => array('class' => 'form-control', 'size' => 20, 'maxlength' => 20, 'placeholder' => 'Введите название кошелька')))
@@ -18,6 +17,7 @@ class AuthorCreatePsForm extends AbstractType
                 'mapped' => false,
                 'required' => true,
                 'choices' => $this->buildChoices(),
+                'invalid_message' => 'Ошибка!'
                 //'expanded' => true
             ))
             ->add('fieldHiddenPsId', 'hidden', array('attr' => array('class' => 'hidden hidden-ps-id')))
