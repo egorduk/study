@@ -5,17 +5,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="79828e02-5540-4157-bcbe-d9d8b8a4a7b1" name="Default" comment="sdfsfsdfs">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/js/script_order.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Helper/Helper.php" afterPath="$PROJECT_DIR$/src/Helper/Helper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/slik/dompdf-bundle/Slik/DompdfBundle/DomPDF/lib/fonts/log.htm" afterPath="$PROJECT_DIR$/vendor/slik/dompdf-bundle/Slik/DompdfBundle/DomPDF/lib/fonts/log.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\OpenServer\domains\localhost\study\src\Acme\SecureBundle\Resources\views\Client\action_info.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/view_client.html.twig" />
-    </list>
+    <list default="true" id="79828e02-5540-4157-bcbe-d9d8b8a4a7b1" name="Default" comment="sdfsfsdfs" />
     <ignored path="study.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="web/uploads/avatars/Thumbs.db" />
@@ -41,7 +31,7 @@
       <file leaf-file-name="AuthorController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="863" column="21" selection-start="49103" selection-end="49103" vertical-scroll-proportion="1.0351682" vertical-offset="15343" max-vertical-offset="16460">
+            <state line="853" column="48" selection-start="48571" selection-end="48571" vertical-scroll-proportion="0.55659276" vertical-offset="15343" max-vertical-offset="16460">
               <folding>
                 <element signature="e#27096#29466#0" expanded="false" />
               </folding>
@@ -790,9 +780,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21945946" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21945946" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32864866" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1177,7 +1167,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="863" column="21" selection-start="49103" selection-end="49103" vertical-scroll-proportion="1.0351682" vertical-offset="15343" max-vertical-offset="16460">
+        <state line="853" column="48" selection-start="48571" selection-end="48571" vertical-scroll-proportion="0.55659276" vertical-offset="15343" max-vertical-offset="16460">
           <folding>
             <element signature="e#27096#29466#0" expanded="false" />
           </folding>
