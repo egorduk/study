@@ -801,13 +801,13 @@ class AuthorController extends Controller
             if ($user) {
                 $orders = Helper::getClientTotalOrders($user, 'totalOrders');
                 $countCanceledOrders = 0;
-                foreach($orders as $order) {
-                    if ($order->getStatusOrder()->getCode() == 'cl') {
-                        $countCanceledOrders++;
+                if ($orders) {
+                    foreach($orders as $order) {
+                        if ($order->getStatusOrder()->getCode() == 'cl') {
+                            $countCanceledOrders++;
+                        }
                     }
                 }
-                //$user->setClientIdInfo($id);
-                //var_dump($user->getAvatar());die;
                 $pathAvatar = Helper::getFullPathToAvatar($user);
                 $clientAvatar = "<img src='$pathAvatar' align='middle' alt='client_avatar' width='110px' height='auto' class='thumbnail'>";
                 $obj = [];

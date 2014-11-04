@@ -1976,7 +1976,7 @@ class Helper
         if ($orders) {
             return $orders;
         }
-        return false;
+        return null;
     }
 
 

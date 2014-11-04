@@ -86,7 +86,7 @@
                     data: 'mode=totalTypeOrders',
                     success: function(response) {
                         var responseObject = window.JSON.parse(response);
-                        console.log(responseObject);
+                        //console.log(responseObject);
                         if (responseObject.response) {
                             //console.log(responseObject.typeOrders.other);
                             Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function(color) {
@@ -161,7 +161,7 @@
                     datatype: 'json',
                     mtype: 'POST',
                     postData: {mode : 'totalOrders'},
-                    recordtext: "Просмотр работ {0} - {1}",
+                    recordtext: "Просмотр заказов {0} - {1}",
                     colNames:['','№ заказа', 'Предмет', 'Тип работы', 'Тема работы', 'Создан'],
                     colModel :[
                         {name:'id',index:'id',key:true,search:false,resize:false,hidden:true},
@@ -189,7 +189,7 @@
                     datatype: 'json',
                     mtype: 'POST',
                     postData: {mode : 'totalOrdersCompleted'},
-                    recordtext: "Просмотр работ {0} - {1}",
+                    recordtext: "Просмотр заказов {0} - {1}",
                     colNames:['','№ заказа', 'Предмет', 'Тип работы', 'Тема работы', 'Выполнен', 'Стоимость', 'Оценка', 'Отзыв'],
                     colModel :[
                         {name:'id',index:'id',key:true,search:false,resize:false,hidden:true},
