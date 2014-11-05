@@ -5,6 +5,7 @@
         <link href="{{ asset('bundles/css/select2.css') }}" rel="stylesheet" />
         <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-maxlength.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/select2.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/price-format.js') }}"></script>
         <div class="body">
             <style>
                 .table {
@@ -209,6 +210,15 @@
                     $("input[id^=formCreatePs_field], input[id^=formOutputPs_field]").maxlength({
                         alwaysShow: true
                     });
+                    $('#formOutputPs_fieldSum').priceFormat({
+                        prefix: '',
+                        centsSeparator: '',
+                        thousandsSeparator: ' ',
+                        centsLimit: 0,
+                        clearOnEmpty: true
+                    });
+
+
                     function closeMessage(el) {
                         el.addClass('is-hidden');
                     }
