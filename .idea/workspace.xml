@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="544aa3f9-6149-4d96-94a7-9d4361f88150" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Form/Author/OutputPsForm.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/Author/OutputPsFormValidate.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Form/Author/AuthorCreatePsForm.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Form/Author/AuthorCreatePsForm.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Helper/Helper.php" afterPath="$PROJECT_DIR$/src/Helper/Helper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/TypeOrder.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/TypeOrder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/slik/dompdf-bundle/Slik/DompdfBundle/DomPDF/lib/fonts/log.htm" afterPath="$PROJECT_DIR$/vendor/slik/dompdf-bundle/Slik/DompdfBundle/DomPDF/lib/fonts/log.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/settings.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/settings.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bundles/css/style_order.css" afterPath="$PROJECT_DIR$/web/bundles/css/style_order.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/config/validation.yml" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/config/validation.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/view_client.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/view_client.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="544aa3f9-6149-4d96-94a7-9d4361f88150" name="Default" comment="" />
     <ignored path="study.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
