@@ -10,8 +10,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 class OutputPsForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('fieldSum', 'text', array('label' => 'Сумма', 'required' => true, 'attr' => array('class' => 'form-control', 'size' => 20, 'maxlength' => 20, 'placeholder' => 'Введите сумму')))
-            ->add('fieldComment', 'text', array('label' => 'Комментарий', 'required' => false, 'attr' => array('class' => 'form-control', 'size' => 20, 'maxlength' => 20, 'placeholder' => 'Введите комментарий')))
+        $builder->add('fieldSum', 'text', array('label' => 'Сумма', 'required' => true, 'attr' => array('class' => 'form-control', 'size' => 20, 'maxlength' => 7, 'placeholder' => 'Введите сумму')))
+            ->add('fieldComment', 'text', array('label' => 'Комментарий', 'required' => false, 'attr' => array('class' => 'form-control', 'size' => 20, 'maxlength' => 50, 'placeholder' => 'Введите комментарий')))
             ->add('fieldType', 'choice', array(
                 'label' => 'Кошелек',
                 'mapped' => false,
@@ -27,14 +27,15 @@ class OutputPsForm extends AbstractType
         $container = Helper::getContainer();
         $choices = [];
         $userId = '2';
-        //$table2Repository = $container->get('doctrine')->getRepository('Acme\SecureBundle\Entity\TypePs');
         $em = $container->get('doctrine')->getManager();
-        $userPs = $em->getRepository('Acme\SecureBundle\Entity\UserPs')
-            ->findByUser($userId);
-        //$table2Objects = $table2Repository->findAll();
+        $userPs = $em->getRepository('Acme\SecureBundle\Entity\UserPs')->findByUser($userId);
         foreach ($userPs as $ps) {
-           // $choices[$table2Obj->getCode()] = $table2Obj->getName();
-            $choices[$ps->getId()] = $ps->getNum();
+            $name = $ps->getName();
+            $num = $ps->getNum();
+            $type = $ps->getType()->getCode();
+            $strName = $name . '|';
+            $strType = '|' . $type;
+            $choices[$ps->getId()] = (!empty($name) ? $strName : '') . $num . $strType;
         }
         return $choices;
     }

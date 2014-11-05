@@ -5,6 +5,7 @@
         <link href="{{ asset('bundles/css/select2.css') }}" rel="stylesheet" />
         <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-maxlength.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/select2.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/price-format.js') }}"></script>
         <div class="body">
             <style>
                 .table {
@@ -12,6 +13,12 @@
                 }
                 #block-btn--change {
                     display: none;
+                }
+                .bigdrop.select2-container .select2-results {
+                    max-height: 300px;
+                }
+                .bigdrop .select2-results {
+                    max-height: 300px;
                 }
             </style>
             {% if (showWindow) %}
@@ -140,7 +147,22 @@
             <script>
                 $(document).ready(function() {
                     function format(state) {
+                        console.log(state);
                         return "<img title='" + state.text + "' class='icon' src='{{ asset('bundles/images/ps/') }}" + state.id.toLowerCase() + ".png'/> " + state.text + "";
+                    }
+                    function repoFormatResult(repo) {
+                        var markup = '<div class="row-fluid">' +
+                                '<div class="span2"><img src="' + repo + '" /></div>' +
+                                '<div class="span10">' +
+                                '<div class="row-fluid">' +
+                                '<div class="span6"></div>' +
+                                '<div class="span3"><i class="fa fa-code-fork"></i></div>' +
+                                '<div class="span3"><i class="fa fa-star"></i></div>' +
+                                '</div></div></div>';
+                        return markup;
+                    }
+                    function repoFormatSelection(repo) {
+                        return repo.full_name;
                     }
                     $("#formCreatePs_fieldType").select2({
                         minimumResultsForSearch: -1,
@@ -151,9 +173,10 @@
                     });
                     $("#formOutputPs_fieldType").select2({
                         minimumResultsForSearch: -1,
-                        //formatResult: format,
-                        //formatSelection: format,
-                        width: '200',
+                        formatResult: repoFormatResult,
+                        formatSelection: format,
+                        width: 'element',
+                        dropdownCssClass: "bigdrop",
                         escapeMarkup: function(m) { return m; }
                     });
                     $("#formMailOptions_fieldOptions").select2({
@@ -209,6 +232,15 @@
                     $("input[id^=formCreatePs_field], input[id^=formOutputPs_field]").maxlength({
                         alwaysShow: true
                     });
+                    $('#formOutputPs_fieldSum').priceFormat({
+                        prefix: '',
+                        centsSeparator: '',
+                        thousandsSeparator: ' ',
+                        centsLimit: 0,
+                        clearOnEmpty: true
+                    });
+
+
                     function closeMessage(el) {
                         el.addClass('is-hidden');
                     }

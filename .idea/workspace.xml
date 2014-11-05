@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="544aa3f9-6149-4d96-94a7-9d4361f88150" name="Default" comment="" />
+    <list default="true" id="544aa3f9-6149-4d96-94a7-9d4361f88150" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/js/price-format.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Form/Author/OutputPsForm.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Form/Author/OutputPsForm.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/settings.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/settings.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/config/validation.yml" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/config/validation.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="study.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -32,11 +38,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OutputPsForm.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="OutputPsForm.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Form/Author/OutputPsForm.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="31" selection-start="1855" selection-end="1855" vertical-scroll-proportion="-26.896551" vertical-offset="0" max-vertical-offset="980">
+            <state line="37" column="86" selection-start="1754" selection-end="1754" vertical-scroll-proportion="0.8168028" vertical-offset="0" max-vertical-offset="1000">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.html.twig" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/settings.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="171" column="56" selection-start="9304" selection-end="9304" vertical-scroll-proportion="-25.689655" vertical-offset="2675" max-vertical-offset="5220">
+              <folding>
+                <element signature="e#2485#2503#0" expanded="true" />
+                <element signature="e#2785#2820#0" expanded="true" />
+                <element signature="e#3104#3139#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -61,19 +80,6 @@
                 <marker date="1415097579652" expanded="true" signature="81351:81616" placeholder="SELECT * FRO..user_id..." />
                 <marker date="1415097579652" expanded="true" signature="81366:81483" placeholder="SELECT b.use..user_bid..." />
                 <marker date="1415097579652" expanded="true" signature="85452:85558" placeholder="SELECT date_..cancel_request..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="settings.html.twig" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/settings.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="154" column="26" selection-start="8353" selection-end="8353" vertical-scroll-proportion="0.6612319" vertical-offset="2715" max-vertical-offset="4580">
-              <folding>
-                <element signature="e#2168#2186#0" expanded="true" />
-                <element signature="e#2468#2503#0" expanded="true" />
-                <element signature="e#2787#2822#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -116,8 +122,8 @@
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/config/validation.yml" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Form/Author/AuthorOutputPsForm.php" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" />
-        <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Form/Author/OutputPsForm.php" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/settings.html.twig" />
+        <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Form/Author/OutputPsForm.php" />
       </list>
     </option>
   </component>
@@ -546,9 +552,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32972974" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -666,13 +672,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Form/Author/OutputPsForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="31" selection-start="1855" selection-end="1855" vertical-scroll-proportion="-26.896551" vertical-offset="0" max-vertical-offset="980">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="723" column="55" selection-start="42035" selection-end="42035" vertical-scroll-proportion="25.344828" vertical-offset="14515" max-vertical-offset="17660">
@@ -682,12 +681,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/settings.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="154" column="26" selection-start="8353" selection-end="8353" vertical-scroll-proportion="0.6612319" vertical-offset="2715" max-vertical-offset="4580">
+        <state line="171" column="56" selection-start="9304" selection-end="9304" vertical-scroll-proportion="-25.689655" vertical-offset="2675" max-vertical-offset="5220">
           <folding>
-            <element signature="e#2168#2186#0" expanded="true" />
-            <element signature="e#2468#2503#0" expanded="true" />
-            <element signature="e#2787#2822#0" expanded="true" />
+            <element signature="e#2485#2503#0" expanded="true" />
+            <element signature="e#2785#2820#0" expanded="true" />
+            <element signature="e#3104#3139#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Entity/TypePs.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.4827586" vertical-offset="420" max-vertical-offset="1640">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Form/Author/OutputPsForm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="86" selection-start="1754" selection-end="1754" vertical-scroll-proportion="0.8168028" vertical-offset="0" max-vertical-offset="1000">
+          <folding />
         </state>
       </provider>
     </entry>
