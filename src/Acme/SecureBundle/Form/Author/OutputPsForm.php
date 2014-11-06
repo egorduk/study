@@ -32,10 +32,8 @@ class OutputPsForm extends AbstractType
         foreach ($userPs as $ps) {
             $name = $ps->getName();
             $num = $ps->getNum();
-            $type = $ps->getType()->getCode();
-            $strName = $name . '|';
-            $strType = '|' . $type;
-            $choices[$ps->getId()] = (!empty($name) ? $strName : '') . $num . $strType;
+            $type = $ps->getTypePs()->getCode();
+            $choices[$ps->getId()] = $name . '|' . $num . '|' . $type;
         }
         return $choices;
     }

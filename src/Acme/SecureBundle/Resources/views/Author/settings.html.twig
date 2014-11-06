@@ -147,17 +147,21 @@
             <script>
                 $(document).ready(function() {
                     function format(state) {
-                        console.log(state);
                         return "<img title='" + state.text + "' class='icon' src='{{ asset('bundles/images/ps/') }}" + state.id.toLowerCase() + ".png'/> " + state.text + "";
                     }
-                    function repoFormatResult(repo) {
+                    function repoFormat(state) {
+                        var arr = state.text.split('|');
+                        return arr[1];
+                    }
+                    function repoFormatResult(state) {
+                        var arr = state.text.split('|');
+                        console.log(arr);
                         var markup = '<div class="row-fluid">' +
-                                '<div class="span2"><img src="' + repo + '" /></div>' +
                                 '<div class="span10">' +
                                 '<div class="row-fluid">' +
-                                '<div class="span6"></div>' +
-                                '<div class="span3"><i class="fa fa-code-fork"></i></div>' +
-                                '<div class="span3"><i class="fa fa-star"></i></div>' +
+                                '<div class="span6">Номер:' + arr[1] + '</div>' +
+                                '<div class="span3">Название:' + arr[0] + '</div>' +
+                                '<div class="span3">Тип:<img src="{{ asset('bundles/images/ps/') }}' + arr[2] + '.png"/></div>' +
                                 '</div></div></div>';
                         return markup;
                     }
@@ -174,7 +178,7 @@
                     $("#formOutputPs_fieldType").select2({
                         minimumResultsForSearch: -1,
                         formatResult: repoFormatResult,
-                        formatSelection: format,
+                        formatSelection: repoFormat,
                         width: 'element',
                         dropdownCssClass: "bigdrop",
                         escapeMarkup: function(m) { return m; }
