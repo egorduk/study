@@ -8,9 +8,10 @@ class OutputPsFormValidate
     public $fieldSum;
     public $fieldType;
     public $fieldComment;
-    //public $fieldHiddenPsId;
+    public $user;
 
-    public function __construct() {
+    public function __construct($user) {
+        $this->user = $user;
     }
 
     public function getType() {
@@ -25,9 +26,9 @@ class OutputPsFormValidate
         return $this->fieldComment;
     }
 
-    /*public function getHiddenPsId() {
-        return $this->fieldHiddenPsId;
-    }*/
+    public function getUser() {
+        return $this->user;
+    }
 
     public function setType($val) {
         $this->fieldType = $val;
@@ -40,8 +41,4 @@ class OutputPsFormValidate
     public function setComment($val) {
         $this->fieldComment = $val;
     }
-
-    /*public function setHiddenPsId($val) {
-        $this->fieldHiddenPsId = $val;
-    }*/
 }

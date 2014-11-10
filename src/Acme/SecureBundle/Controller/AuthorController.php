@@ -720,10 +720,18 @@ class AuthorController extends Controller
                 }
                 return new Response(json_encode(array('response' => $response)));
             }
-            $outputPsValidate = new OutputPsFormValidate();
+            $outputPsValidate = new OutputPsFormValidate($user);
             $formOutputPs = $this->createForm(new OutputPsForm(), $outputPsValidate);
-            $formOutputPs->handleRequest($request);
-
+            if ($request->isXmlHttpRequest()) {
+                $formOutputPs->handleRequest($request);
+                $postData = $request->request->get('formOutputPs');
+                if ($formOutputPs->isValid()) {
+                    Helper::createMoneyOutput($user, $postData);
+                    return new Response(json_encode(array('response' => true)));
+                }
+                $arrayResponse = Helper::getFormErrors($formOutputPs);
+                return new Response(json_encode(array('form' => $arrayResponse)));
+            }
             $psValidate = new CreatePsFormValidate();
             $formCreatePs = $this->createForm(new AuthorCreatePsForm(), $psValidate);
             $formCreatePsCloned = clone $formCreatePs;

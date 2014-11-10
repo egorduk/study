@@ -5,6 +5,7 @@ namespace Helper;
 use Acme\SecureBundle\Entity\AuctionBid;
 use Acme\SecureBundle\Entity\CancelRequest;
 use Acme\SecureBundle\Entity\FavoriteOrder;
+use Acme\SecureBundle\Entity\MoneyOutput;
 use Acme\SecureBundle\Entity\OrderFile;
 use Acme\SecureBundle\Entity\SelectBid;
 use Acme\SecureBundle\Entity\StatusOrder;
@@ -2459,5 +2460,26 @@ class Helper
             return $resultArray;
         }
         return null;
+    }
+
+
+    public static function createMoneyOutput($user, $postData) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $outputSum = $postData['fieldSum'];
+        $userPsId = $postData['fieldType'];
+        $outputSum = str_replace(' ', '', $outputSum);
+        if ($user->getAccount() < $outputSum) {
+            return '';
+        }
+        if (is_numeric($userPsId) && $userPsId > 0) {
+            $userPs = $em->getRepository(self::$_tableUserPs)
+                ->findOneBy(array('user' => $user, 'id' => $userPsId));
+            $moneyOutput = new MoneyOutput();
+            $moneyOutput->setUserPs($user);
+            $em->flush;
+        }
+       // var_dump($userPs->getId());die;
+
+
     }
 }

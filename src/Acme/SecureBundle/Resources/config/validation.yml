@@ -89,7 +89,7 @@ Acme\SecureBundle\Entity\Author\OutputPsFormValidate:
     properties:
         fieldSum:
           - Length: { min: 3, max: 7, maxMessage: "Слишком большая сумма!", minMessage: "Сумма должна быть больше!" }
-          - Regex: { pattern: "/^[\d]+$/u", message: "Только цифры!" }
+          - Regex: { pattern: "/^[\d\s]+$/u", message: "Только цифры!" }
           - NotBlank: { message: "Введите сумму!" }
         fieldComment:
           - Length: { max: 50, maxMessage: "Слишком много символов!" }

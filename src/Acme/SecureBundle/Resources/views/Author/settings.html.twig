@@ -104,7 +104,7 @@
             <div class="row">
                 <div class="col-xs-4 col-xs-offset-4">
                     {% form_theme formOutputPs "TwigBundle::layout.html.twig" %}
-                    {{ form_start(formOutputPs) }}
+                    {{ form_start(formOutputPs, {'attr': {'id' : 'formOutputPs'}}) }}
                     {{ form_label(formOutputPs.fieldSum) }}
                     {{ form_errors(formOutputPs.fieldSum) }}
                     <div class="input-group">
@@ -179,6 +179,7 @@
                         minimumResultsForSearch: -1,
                         formatResult: repoFormatResult,
                         formatSelection: repoFormat,
+                        allowClear: true,
                         width: 'element',
                         dropdownCssClass: "bigdrop",
                         escapeMarkup: function(m) { return m; }
@@ -229,6 +230,24 @@
                                 var responseObject = window.JSON.parse(response);
                                 if (responseObject.response) {
                                     var trRemoved = $("#table-user-ps").find("tr[data-id='" + psId + "']").remove();
+                                }
+                            }
+                        });
+                    });
+                    $("#formOutputPs_output").click(function() {
+                        var formOutputPs = $("#formOutputPs");
+                        $.ajax({
+                            type: 'POST',
+                            data: formOutputPs.serialize(),
+                            success: function(response) {
+                                var responseObject = window.JSON.parse(response);
+                                $(".error, .block-error").remove();
+                                if (responseObject.response) {
+                                } else {
+                                    $.each(responseObject.form, function(index, value) {
+                                        var selector  = "#formOutputPs_" + index;
+                                        $(selector).parent().before("<p class='block-error'><span class='icon-warning error'>" + value + "</span></p>");
+                                    });
                                 }
                             }
                         });

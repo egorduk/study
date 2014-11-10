@@ -16,19 +16,18 @@ class OutputPsForm extends AbstractType
                 'label' => 'Кошелек',
                 'mapped' => false,
                 'required' => true,
-                'choices' => $this->buildChoices(),
+                'choices' => $this->buildChoices($options),
                 'invalid_message' => 'Ошибка!'
             ))
-            //->add('fieldHiddenPsId', 'hidden', array('attr' => array('class' => 'hidden hidden-ps-id')))
             ->add('output', 'button', array('attr' => array('class' => 'hidden')));
     }
 
-    protected function buildChoices() {
+    protected function buildChoices($options) {
         $container = Helper::getContainer();
         $choices = [];
-        $userId = '2';
+        $user = $options['data']->getUser();
         $em = $container->get('doctrine')->getManager();
-        $userPs = $em->getRepository('Acme\SecureBundle\Entity\UserPs')->findByUser($userId);
+        $userPs = $em->getRepository('Acme\SecureBundle\Entity\UserPs')->findByUser($user);
         foreach ($userPs as $ps) {
             $name = $ps->getName();
             $num = $ps->getNum();
