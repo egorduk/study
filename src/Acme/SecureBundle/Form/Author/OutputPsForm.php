@@ -9,6 +9,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class OutputPsForm extends AbstractType
 {
+    public $countUserPs = 0;
+
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('fieldSum', 'text', array('label' => 'Сумма', 'required' => true, 'attr' => array('class' => 'form-control', 'size' => 20, 'maxlength' => 7, 'placeholder' => 'Введите сумму')))
             ->add('fieldComment', 'text', array('label' => 'Комментарий', 'required' => false, 'attr' => array('class' => 'form-control', 'size' => 20, 'maxlength' => 50, 'placeholder' => 'Введите комментарий')))
@@ -28,6 +30,7 @@ class OutputPsForm extends AbstractType
         $user = $options['data']->getUser();
         $em = $container->get('doctrine')->getManager();
         $userPs = $em->getRepository('Acme\SecureBundle\Entity\UserPs')->findByUser($user);
+        $this->countUserPs = count($userPs);
         foreach ($userPs as $ps) {
             $name = $ps->getName();
             $num = $ps->getNum();
@@ -39,5 +42,9 @@ class OutputPsForm extends AbstractType
 
     public function getName() {
         return 'formOutputPs';
+    }
+
+    public function getCountUserPs() {
+        return $this->countUserPs;
     }
 }

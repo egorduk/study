@@ -129,3 +129,7 @@ secure_author_order:
 secure_author_view_client:
   pattern:   /secure/author/view/client/{id}
   defaults:  { _controller: AcmeSecureBundle:Author:viewClient }
+
+secure_author_output_money:
+  pattern:   /secure/author/output_money
+  defaults:  { _controller: AcmeSecureBundle:Author:outputMoney }

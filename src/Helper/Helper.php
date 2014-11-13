@@ -2467,19 +2467,24 @@ class Helper
         $em = self::getContainer()->get('doctrine')->getManager();
         $outputSum = $postData['fieldSum'];
         $userPsId = $postData['fieldType'];
+        $comment = $postData['fieldComment'];
         $outputSum = str_replace(' ', '', $outputSum);
         if ($user->getAccount() < $outputSum) {
-            return '';
+            return false;
         }
         if (is_numeric($userPsId) && $userPsId > 0) {
             $userPs = $em->getRepository(self::$_tableUserPs)
                 ->findOneBy(array('user' => $user, 'id' => $userPsId));
-            $moneyOutput = new MoneyOutput();
-            $moneyOutput->setUserPs($user);
-            $em->flush;
+            if ($userPs) {
+                $moneyOutput = new MoneyOutput();
+                $moneyOutput->setUserPs($userPs);
+                $moneyOutput->setSum($outputSum);
+                $moneyOutput->setComment($comment);
+                $em->persist($moneyOutput);
+                $em->flush();
+                return true;
+            }
+            return false;
         }
-       // var_dump($userPs->getId());die;
-
-
     }
 }
