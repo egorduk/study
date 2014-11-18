@@ -720,7 +720,6 @@ class AuthorController extends Controller
                 }
                 return new Response(json_encode(array('response' => $response)));
             }
-
             $psValidate = new CreatePsFormValidate();
             $formCreatePs = $this->createForm(new AuthorCreatePsForm(), $psValidate);
             $formCreatePsCloned = clone $formCreatePs;
@@ -911,13 +910,11 @@ class AuthorController extends Controller
      */
     public function outputMoneyAction(Request $request)
     {
-        $response = false;
         $user = $this->getUser();
         $outputPsValidate = new OutputPsFormValidate($user);
         $outputPsForm = new OutputPsForm();
         $formOutputPs = $this->createForm($outputPsForm, $outputPsValidate);
         $countUserPs = $outputPsForm->getCountUserPs();
-        //var_dump($countUserPs);die;
         if ($countUserPs) {
             if ($request->isXmlHttpRequest()) {
                 $formOutputPs->handleRequest($request);
@@ -933,9 +930,8 @@ class AuthorController extends Controller
                 'AcmeSecureBundle:Author:output_money.html.twig', array('formOutputPs' => $formOutputPs->createView(), 'user' => $user)
             );
         }
-        $link = $this->generateUrl('secure_author_settings', array('type' => 'view'));
         return $this->render(
-            'AcmeSecureBundle:Author:output_money.html.twig', array('formOutputPs' => null, 'link' => $link)
+            'AcmeSecureBundle:Author:output_money.html.twig', array('formOutputPs' => null, 'user' => $user)
         );
     }
 

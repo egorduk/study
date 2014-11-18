@@ -1,12 +1,10 @@
 {% extends "AcmeSecureBundle::layout_author.html.twig" %}
 {% block title "Вывод денег" %}
     {% block content %}
-        <link href="{{ asset('bundles/css/window.css') }}" rel="stylesheet" />
         <link href="{{ asset('bundles/css/select2.css') }}" rel="stylesheet" />
         <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-maxlength.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/select2.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/price-format.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/js/notice_window/notice_window.js') }}"></script>
         <div class="body">
             <style>
                 .bigdrop.select2-container .select2-results {
@@ -16,17 +14,7 @@
                     max-height: 300px;
                 }
             </style>
-            <div id="success-window" class="hidden">
-                <div class="Message Message--green" id="js-timer">
-                    <div class="Message-icon">
-                        <i class="fa fa-check"></i>
-                    </div>
-                    <div class="Message-body">
-                        <p align="center">Успешно!</p>
-                    </div>
-                    <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
-                </div>
-            </div>
+            {% include 'AcmeSecureBundle:Windows:success.html.twig' with {'message': 'Успешно!'} %}
             {% if (formOutputPs) %}
             <div class="row">
                 <div class="col-xs-4 col-xs-offset-4">
@@ -53,7 +41,7 @@
                     </br>
                     {{ form_widget(formOutputPs.output) }}
                     <div class="input-group">
-                        <label for="formOutputPs_output" class="btn btn-success"><span class="icon-floppy"></span>&nbspВывести</label>
+                        <label for="formOutputPs_output" class="btn btn-success"><span class=""></span>&nbspВывести</label>
                         {{ form_widget(formOutputPs.output) }}
                     </div>
                     {{ form_end(formOutputPs) }}
@@ -62,7 +50,7 @@
             {% else %}
                 <div id="block-notice">
                     <div class="input-group hidden" id="block-btn-add-ps">
-                        <a href="{{ link }}" class="btn btn-success btn-large"><i class="icon-plus"></i>&nbspСоздать</a>
+                        <a href="{{ path('secure_author_settings', {'type': 'view'}) }}" class="btn btn-success btn-large"><i class=""></i>&nbspСоздать</a>
                     </div>
                 </div>
             {% endif %}
@@ -93,6 +81,14 @@
                         dropdownCssClass: "bigdrop",
                         escapeMarkup: function(m) { return m; }
                     });
+                    {% if app.request.get('id') %}
+                        var psId = parseInt('{{ app.request.get('id') }}', 10);
+                        outputTypePs.find('option').each(function() {
+                            if (psId == $(this).val()) {
+                                outputTypePs.select2("val", psId);
+                            }
+                        });
+                    {% endif %}
                     if (outputTypePs.select2("val") > 0) {
                         $("#block-output-type-ps").removeClass("hidden");
                     } else {
@@ -138,18 +134,6 @@
                         centsLimit: 0,
                         clearOnEmpty: true
                     });
-                    /*function closeMessage(el) {
-                        $("#success-window").addClass('hidden');
-                    }
-                    $('.js-messageClose').on('click', function(e) {
-                        closeMessage();
-                    });
-                    function openMessage() {
-                        $("#success-window").removeClass('hidden');
-                        setTimeout(function() {
-                            closeMessage($('#js-timer'));
-                        }, 1500);
-                    }*/
                 });
             </script>
         </div>
