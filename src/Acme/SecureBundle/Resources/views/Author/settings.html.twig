@@ -2,28 +2,19 @@
 {% block title "Настройки аккаунта" %}
     {% block content %}
         {% spaceless %}
-        <link href="{{ asset('bundles/css/window.css') }}" rel="stylesheet" />
         <link href="{{ asset('bundles/css/select2.css') }}" rel="stylesheet" />
         <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-maxlength.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/select2.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/js/notice_window/notice_window.js') }}"></script>
         <div class="body">
             <style>
                 .table {
                     cursor: pointer;
                 }
+                .select2-container .select2-choice {
+                    line-height: 36px;
+                }
             </style>
-            <div id="success-window" class="hidden">
-                <div class="Message Message--green" id="js-timer">
-                    <div class="Message-icon">
-                        <i class="fa fa-check"></i>
-                    </div>
-                    <div class="Message-body">
-                        <p align="center">Ваши данные сохранены!</p>
-                    </div>
-                    <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
-                </div>
-            </div>
+            {% include 'AcmeSecureBundle:Windows:success.html.twig' with {'message': 'Ваши данные сохранены!'} %}
             <div class="row">
                 <p>Мои кошельки:</p>
                 <table class="table table-hover" id="table-user-ps">
@@ -108,7 +99,7 @@
                 $(document).ready(function() {
                     var btnChange = $("label[for=formCreatePs_change]");
                     {% if (showWindow) %}
-                    notice_window.openMessage($("#success-window"));
+                        notice_window.openMessage($("#success-window"));
                     {% endif %}
                     function format(state) {
                         return "<img title='" + state.text + "' class='icon' src='{{ asset('bundles/images/ps/') }}" + state.id.toLowerCase() + ".png'/> " + state.text + "";
@@ -117,7 +108,7 @@
                         minimumResultsForSearch: -1,
                         formatResult: format,
                         formatSelection: format,
-                        width: '170',
+                        width: '190',
                         escapeMarkup: function(m) { return m; }
                     });
                     $("#formMailOptions_fieldOptions").select2({

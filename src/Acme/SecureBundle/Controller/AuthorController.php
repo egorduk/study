@@ -544,16 +544,15 @@ class AuthorController extends Controller
                 $bidValidate = new BidFormValidate();
                 $showDialogConfirmSelection = Helper::getClientSelectedBid($user, $order);
                 $formBid = $this->createForm(new BidForm(), $bidValidate);
-                if (is_numeric($num) && $num > 0 && $request->isXmlHttpRequest() && isset($postDataFormBid)) {
+                if (Helper::isCorrectOrder($num) && $request->isXmlHttpRequest() && isset($postDataFormBid)) {
                     $formBid->handleRequest($request);
                     if ($formBid->isValid()) {
                         $postData = $request->request->get('formBid');
                         Helper::setAuthorBid($postData, $user, $order);
                         return new Response(json_encode(array('response' => 'valid')));
-                    } else {
-                        $arrayResponse = Helper::getFormErrors($formBid);
-                        return  new Response(json_encode(array('response' => $arrayResponse)));
                     }
+                    $arrayResponse = Helper::getFormErrors($formBid);
+                    return new Response(json_encode(array('response' => $arrayResponse)));
                 }
                 return $this->render(
                     'AcmeSecureBundle:Author:order_select.html.twig', array('formBid' => $formBid->createView(), 'files' => $filesOrder, 'order' => $order, 'client' => $clientLink, 'bids' => "", 'showDialogConfirmSelection' => $showDialogConfirmSelection)
@@ -562,34 +561,35 @@ class AuthorController extends Controller
         }
         elseif (Helper::isCorrectOrder($num) && $request->isXmlHttpRequest()) {
             //$cache = $this->get('winzou_cache.apc');
-            $order = Helper::getOrderByNumForAuthor($num, $user);
-            $user = $this->getUser();
-            //$lastId = $request->request->get('lastId');
-            $bids = Helper::getAllAuthorsBidsForSelectedOrder($user, $order);
-            $nd = $request->request->get('nd');
             $action = $request->request->get('action');
-            if (isset($nd)) {
-                $response = new Response();
-                foreach($bids as $index => $bid) {
-                    $dateBid =  $bid->getDateBid();
-                    $dateBid = $dateBid->format("d.m.Y") . "<br><span class='grid-cell-time'>" . $dateBid->format("H:i") . "</span>";
-                    $response->rows[$index]['id'] = $bid->getId();
-                    $response->rows[$index]['cell'] = array(
-                        $bid->getId(),
-                        $bid->getSum(),
-                        $bid->getDay(),
-                        $bid->getIsClientDate(),
-                        $dateBid,
-                        $bid->getComment(),
-                        ""
-                    );
-                }
-                return new JsonResponse($response);
-            }
             if (isset($action)) {
-                if ($action == 'deleteBid') {
+                $user = $this->getUser();
+                $order = Helper::getOrderByNumForAuthor($num, $user);
+                if ($action == 'getAuthorBids') {
+                    $response = new Response();
+                    $bids = Helper::getAllAuthorsBidsForSelectedOrder($user, $order);
+                    foreach($bids as $index => $bid) {
+                        $dateBid =  $bid->getDateBid();
+                        $dateBid = $dateBid->format("d.m.Y") . "<br><span class='grid-cell-time'>" . $dateBid->format("H:i") . "</span>";
+                        $response->rows[$index]['id'] = $bid->getId();
+                        $response->rows[$index]['cell'] = array(
+                            $bid->getId(),
+                            $bid->getSum(),
+                            $bid->getDay(),
+                            $bid->getIsClientDate(),
+                            $dateBid,
+                            $bid->getComment(),
+                            ""
+                        );
+                    }
+                    return new JsonResponse($response);
+                } elseif ($action == 'deleteBid') {
                     $bidId = $request->request->get('bidId');
                     $actionResponse = Helper::deleteSelectedAuthorBid($bidId, $user, $order);
+                    return new Response(json_encode(array('action' => $actionResponse)));
+                } elseif ($action == 'refreshBid') {
+                    $bidId = $request->request->get('bidId');
+                    $actionResponse = Helper::refreshSelectedAuthorBid($bidId, $user, $order);
                     return new Response(json_encode(array('action' => $actionResponse)));
                 } elseif ($action == 'confirmSelection' || $action == 'failSelection') {
                     $bidId = $request->request->get('bidId');

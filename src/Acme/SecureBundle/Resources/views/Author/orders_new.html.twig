@@ -39,7 +39,6 @@
                 #modal-window {
                     display: none;
                 }
-
                 .cell-author-last-bid {
                     color: green;
                     font-size: 20px !important;
@@ -121,6 +120,7 @@
                         url: {{ path('secure_author_orders', { type: 'new' }) | json_encode | raw }},
                         datatype: 'json',
                         mtype: 'POST',
+                        cache: true,
                         recordtext: "Просмотр заказов {0} - {1}",
                         colNames:['','№ заказа', 'Предмет', 'Тип работы', 'Тема работы', 'Задание', 'Выполнение до', 'Max ставка', 'Min ставка', 'Моя ставка', 'Создан', 'Действия', ''],
                         colModel :[
@@ -140,17 +140,17 @@
                                         "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' data-title='Поставить ставку' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='left'>" +
                                         "<span class='icon-hammer'></span></div></div>" +
                                         "<div class='favorite-order' style='margin-left:8px;'>" +
-                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' data-title='В избранные заказы' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='left'>" +
+                                        "<div style='float: left; margin-left: 5px; color: orange' data-title='В избранные заказы' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='left'>" +
                                         "<span class='icon-star-empty-2'></span></div></div>" +
                                         "<div class='unfavorite-order' style='margin-left:8px;'>" +
-                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' data-title='Из избранных заказов' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='left'>" +
+                                        "<div style='float: left; margin-left: 5px; color: orange' data-title='Из избранных заказов' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='left'>" +
                                         "<span class='icon-star'></span></div></div>";
                             }},
                             {name:'is_favorite_order',index:'is_favorite_order',key:false,search:false,hidden:true}
                         ],
                         pager: $('#pagerOrders'),
                         rowNum: 10,
-                        rowList: [15,25,35],
+                        rowList: [15, 25, 35],
                         sortname: 'date_create',
                         sortorder: 'desc',
                         viewrecords: true,
@@ -159,7 +159,7 @@
                         altRows: true,
                         //width:'1440',
                         //shrinkToFit:false,
-                        altclass:'alt-row',
+                        altclass: 'alt-row',
                         gridComplete: initMenu(),
                         loadComplete : function() {
                             function getRowId(e) {

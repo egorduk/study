@@ -838,6 +838,22 @@ class Helper
         return false;
     }
 
+    public static function refreshSelectedAuthorBid($bidId, $user, $order) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $userBid = $em->getRepository(self::$_tableUserBid)
+            ->findOneById($bidId);
+        if ($userBid) {
+            $oldBid = $em->getRepository(self::$_tableUserBid)
+                ->findOneBy(array('is_show_client' => 1));
+            $oldBid->setIsShowClient(0);
+            $userBid->setDateBid(new \DateTime());
+            $userBid->setIsShowClient(1);
+            $em->flush();
+            return true;
+        }
+        return false;
+    }
+
 
     public static function hideOrderFromAuthor($orderId, $user) {
         $em = self::getContainer()->get('doctrine')->getManager();
@@ -1302,7 +1318,7 @@ class Helper
     public static function getAllAuthorsBidsForSelectedOrder($user, $order) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $bids = $em->getRepository(self::$_tableUserBid)
-            ->findBy(array('user' => $user, 'user_order' => $order, 'is_show_author' => 1), array('id' => 'DESC'));
+            ->findBy(array('user' => $user, 'user_order' => $order, 'is_show_author' => 1), array('date_bid' => 'DESC'));
         return $bids;
     }
 
@@ -1327,6 +1343,7 @@ class Helper
     public static function setAuthorBid($postData, $user, $order) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $sum = $postData['fieldSum'];
+        $sum = str_replace(' ', '', $sum);
         $comment = $postData['fieldComment'];
         $userBid = new UserBid();
         $user = $em->merge($user);

@@ -15,7 +15,7 @@ class OutputPsForm extends AbstractType
         $builder->add('fieldSum', 'text', array('label' => 'Сумма', 'required' => true, 'attr' => array('class' => 'form-control', 'size' => 20, 'maxlength' => 7, 'placeholder' => 'Введите сумму')))
             ->add('fieldComment', 'text', array('label' => 'Комментарий', 'required' => false, 'attr' => array('class' => 'form-control', 'size' => 20, 'maxlength' => 50, 'placeholder' => 'Введите комментарий')))
             ->add('fieldType', 'choice', array(
-                'label' => 'Кошелек',
+                'label' => 'Номер кошелька',
                 'mapped' => false,
                 'required' => true,
                 'choices' => $this->buildChoices($options),
