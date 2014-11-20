@@ -59,7 +59,7 @@ Acme\SecureBundle\Entity\Author\BidFormValidate:
           #- NotBlank: { message: "Введите количество дней!" }
         fieldComment:
            #- Regex: { pattern: "/^[A-Za-zА-Яа-я\d]+$/", message: "Только буквы и цифры!" }
-           - Length: {max: 50, maxMessage: "Слишком много символов!" }
+           - Length: {max: 150, maxMessage: "Слишком много символов!" }
 
 Acme\SecureBundle\Entity\Author\CreatePsFormValidate:
     properties:

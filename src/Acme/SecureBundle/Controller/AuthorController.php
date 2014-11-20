@@ -544,6 +544,8 @@ class AuthorController extends Controller
                 $bidValidate = new BidFormValidate();
                 $showDialogConfirmSelection = Helper::getClientSelectedBid($user, $order);
                 $formBid = $this->createForm(new BidForm(), $bidValidate);
+                $clientFiles = Helper::getOrderFiles($order, 'client', $user);
+                //var_dump($clientFiles);die;
                 if (Helper::isCorrectOrder($num) && $request->isXmlHttpRequest() && isset($postDataFormBid)) {
                     $formBid->handleRequest($request);
                     if ($formBid->isValid()) {
@@ -554,8 +556,12 @@ class AuthorController extends Controller
                     $arrayResponse = Helper::getFormErrors($formBid);
                     return new Response(json_encode(array('response' => $arrayResponse)));
                 }
+                $obj = [];
+                $obj['client'] = $clientLink;
+                $obj['clientFiles'] = $clientFiles;
+                $obj['confirmSelection'] = $showDialogConfirmSelection;
                 return $this->render(
-                    'AcmeSecureBundle:Author:order_select.html.twig', array('formBid' => $formBid->createView(), 'files' => $filesOrder, 'order' => $order, 'client' => $clientLink, 'bids' => "", 'showDialogConfirmSelection' => $showDialogConfirmSelection)
+                    'AcmeSecureBundle:Author:order_select.html.twig', array('formBid' => $formBid->createView(), 'order' => $order, 'obj' => $obj/*, 'bids' => ""*/)
                 );
             }
         }
@@ -784,6 +790,7 @@ class AuthorController extends Controller
                 throw $this->createNotFoundException();
             }
         } elseif ($type == 'attachments') {
+
             $filePath = $basePath . 'attachments/orders/' . $num . '/author/' . $filename;
         }
         if (!file_exists($filePath)) {

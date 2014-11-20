@@ -1,6 +1,6 @@
 //(function($) {
     var notice_window = {
-        openMessage : function(el) {
+        openMessage : function(el, timer) {
             el.removeClass('hidden');
             $('.js-messageClose').on('click', function(e) {
                 notice_window.closeMessage(el);
@@ -8,7 +8,7 @@
             });
             setTimeout(function() {
                 notice_window.closeMessage(el);
-            }, 1500);
+            }, timer);
         },
         closeMessage : function(el) {
             el.addClass('hidden');

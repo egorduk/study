@@ -510,6 +510,7 @@ class ClientController extends Controller
                 throw $this->createNotFoundException();
             }
         } elseif ($type == 'attachments') {
+
             $filePath = $basePath . 'attachments/orders/' . $num . '/client/' . $filename;
         }
         if (!file_exists($filePath)) {

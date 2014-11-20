@@ -14,8 +14,8 @@
 
 .Message {
   display: table;
-  /*position: relative;*/
-    position: absolute;
+  position: relative;
+   /* position: absolute;*/
   margin: 40px auto 0;
   width: 500px;
   background-color: #0074d9;
@@ -60,7 +60,9 @@
 .Message-body {
   display: table-cell;
   vertical-align: middle;
-  padding: 30px 20px 30px 10px;
+  /*padding: 30px 20px 30px 10px;*/
+    padding-left: 10px;
+    padding-right: 20px;
 }
 .Message-body > p {
   line-height: 1.2;

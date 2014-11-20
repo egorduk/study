@@ -2,9 +2,11 @@
 {% block title "Вывод денег" %}
     {% block content %}
         <link href="{{ asset('bundles/css/select2.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/css/window.css') }}" rel="stylesheet" />
         <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-maxlength.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/select2.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/price-format.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/notice_window/notice_window.js') }}"></script>
         <div class="body">
             <style>
                 .bigdrop.select2-container .select2-results {
@@ -77,7 +79,7 @@
                         formatResult: repoFormatResult,
                         formatSelection: repoFormat,
                         allowClear: true,
-                        width: '240',
+                        width: '250',
                         dropdownCssClass: "bigdrop",
                         escapeMarkup: function(m) { return m; }
                     });

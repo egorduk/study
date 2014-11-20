@@ -3,22 +3,20 @@
     {% block content %}
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
+        <link href="{{ asset('bundles/css/window.css') }}" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset('bundles/css/style_order.css') }}" />
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.fmatter.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/script_order.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/price-format.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/notice_window/notice_window.js') }}"></script>
         <style>
             .thumbnail-image{
                 padding-top: 20px;
             }
             .label-primary {
                 background-color: #0088cc;
-            }
-            .block-file{
-                border: 1px solid #000000;
-                width: 300px;
             }
             .success {
                 color: green;
@@ -68,19 +66,25 @@
                     <p>Статус заказа: {{ order.statusorder.name }}</p>
                     <p>Дата создания: {{ order.datecreate.format("d.m.Y H:i") }}</p>
                     <p>Выполнение до: {{ order.dateexpire.format("d.m.Y H:i") }}</p>
-                    <p>Заказчик: <div id="block-author">{{ client | raw }}</div></p>
-                    <div>
-                        {% for file in files %}
-                            <div class="block-file">
-                                <p>Файл: {{ file.name }} </p>
-                                <p>Размер: {{ file.size }} </p>
-                                <p>Загружен: {{ file.dateupload.format("d.m.Y H:i") }} </p>
-                            </div>
-                        {% endfor %}
-                    </div>
+                    <p>Заказчик: <div id="block-author">{{ obj.client | raw }}</div></p>
+                    {% if obj.clientFiles | length > 0 %}
+                        <div class="col-md-4">
+                            <p>Файлы заказчика</p>
+                            {% for file in obj.clientFiles %}
+                                <div class="caption thumbnail block-file">
+                                    <a href="{{ file.url }}" target="download" class="download-file"><img src="{{ file.thumbnailurl }}" class="thumbnail-image" alt="thumbnail"/></a>
+                                    <span class="filename">{{ file.name }}</span>
+                                    <p class="">Размер:{{ file.size }}</p>
+                                    <p class="">Загружен:{{ file.dateupload.format("d.m.Y H:i:s") }}</p>
+                                    <a rel="tooltip" title="Скачать" data-title='Скачать' data-toggle='tooltip' data-placement='left' onmouseover="$(this).tooltip('show')" class="download thumbnail-action btn" target="download" href="{{ file.url }}"><i class="icon-download"></i></a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
+        {% include 'AcmeSecureBundle:Windows:success.html.twig' with {'message': 'Ставка поставлена!'} %}
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 {% form_theme formBid "TwigBundle::layout.html.twig" %}
@@ -174,47 +178,49 @@
                 altclass:'alt-row',
                 loadComplete : function() {
                     grid.find("tr").find("td").removeAttr('title');
-                    {% if (showDialogConfirmSelection) %}
-                        $("#dialog-message-confirm-selection").dialog({
-                            modal: true,
-                            resizable: false,
-                            height: 230,
-                            width: 410,
-                            dialogClass: 'class-dialog-confirm-selection',
-                            buttons: {
-                                "Согласен": function() {
-                                    var rowId = getFirstRowId();
-                                    $.ajax({
-                                        type: 'POST',
-                                        data: 'bidId=' + rowId + '&action=confirmSelection',
-                                        success: function(response) {
-                                            var responseObject = window.JSON.parse(response);
-                                            if (responseObject.action) {
-                                                $("#dialog-message-confirm-selection").dialog("close");
-                                                window.location.reload();
-                                            }
+                    {% if (obj.confirmSelection) %}
+                    $("#dialog-message-confirm-selection").dialog({
+                        modal: true,
+                        resizable: false,
+                        height: 230,
+                        width: 410,
+                        dialogClass: 'class-dialog-confirm-selection',
+                        buttons: {
+                            "Согласен": function() {
+                                var rowId = getFirstRowId();
+                                $.ajax({
+                                    type: 'POST',
+                                    data: 'bidId=' + rowId + '&action=confirmSelection',
+                                    success: function(response) {
+                                        var responseObject = window.JSON.parse(response);
+                                        if (responseObject.action) {
+                                            $("#dialog-message-confirm-selection").dialog("close");
+                                            window.location.reload();
                                         }
-                                    });
-                                },
-                                "Отказ": function() {
-                                    var rowId = getFirstRowId();
-                                    $.ajax({
-                                        type: 'POST',
-                                        data: 'bidId=' + rowId + '&action=failSelection',
-                                        success: function(response) {
-                                            var responseObject = window.JSON.parse(response);
-                                            if (responseObject.action) {
-                                                $("#dialog-message-confirm-selection").dialog("close");
-                                            }
-                                        }
-                                    });
-                                }
+                                    }
+                                });
                             },
-                            close: function() {
+                            "Отказ": function() {
+                                var rowId = getFirstRowId();
+                                $.ajax({
+                                    type: 'POST',
+                                    data: 'bidId=' + rowId + '&action=failSelection',
+                                    success: function(response) {
+                                        var responseObject = window.JSON.parse(response);
+                                        if (responseObject.action) {
+                                            $("#dialog-message-confirm-selection").dialog("close");
+                                        }
+                                    }
+                                });
                             }
-                        });
+                        },
+                        close: function() {
+                        }
+                    });
                     {% endif %}
-                    $("#listBids tr.ui-widget-content").eq(0).addClass('ui-state-active').find('.refresh-bid').addClass('hidden').find('.grid-cell-day').removeClass('grid-cell-day');
+                    var zeroTr = $("#listBids tr.ui-widget-content").eq(0);
+                    zeroTr.addClass('ui-state-active').find('.refresh-bid').addClass('hidden');
+                    zeroTr.find('.grid-cell-day').removeClass('grid-cell-day');
                     $(".refresh-bid").click(function(e) {
                         var rowId = getRowId(e);
                         if (rowId) {
@@ -248,7 +254,7 @@
                     });
                 }
             }).navGrid('#pagerBids',{view:false,search:false,del:false,add:false,edit:false,refresh:true},{},{},{},{},{});
-            var buttonBid = $("#formBid_bid"), bidInDate = $("#formBid_isClientDate"), bidDay = $("#formBid_fieldDay"), bidSum = $("#formBid_fieldSum"), fieldComment = $("#formBid_fieldComment");
+            var buttonBid = $("#formBid_bid"), bidInDate = $("#formBid_isClientDate"), bidDay = $("#formBid_fieldDay"), bidSum = $("#formBid_fieldSum"), bidComment = $("#formBid_fieldComment");
             buttonBid.click(function(e) {
                 var error = false;
                 if (!isCorrectPrice(bidSum.val())) {
@@ -276,10 +282,11 @@
                                 disabledButtonBid(true);
                                 clearFields();
                                 grid.trigger('reloadGrid');
-                                formBid.parent().before("<span class='success icon-ok-6'>&nbspСтавка поставлена!</span>");
+                                notice_window.openMessage($("#success-window"), 3000);
+                                /*formBid.parent().before("<span class='success icon-ok-6'>&nbspСтавка поставлена!</span>");
                                 setTimeout(function() {
                                     formBid.parent().prev().hide();
-                                }, 3000);
+                                }, 3000);*/
                             } else {
                                 $(".error").remove();
                                 $.each(responseObject.response, function(index, value) {
@@ -299,8 +306,16 @@
             bidInDate.change(function() {
                 if ($(this).prop("checked")) {
                     bidDay.removeClass('invalid').prop('disabled', true).tooltip('hide').val("");
+                    //console.log(bidSum.val().length);
+                    if (bidSum.val().length > 2) {
+                        disabledButtonBid(false);
+                    }
                 } else {
-                    bidDay.prop('disabled', false).val("");
+                    /*if (bidSum.val().length < 2) {
+                        disabledButtonBid(true);
+                    }*/
+                    disabledButtonBid(true);
+                    bidDay.val("");
                 }
             });
             if (bidSum.val() == "" || (bidDay.val() == "" && !bidInDate.prop("checked"))) {
@@ -309,7 +324,7 @@
                 disabledButtonBid(false);
             }
             bidSum.on('input', function() {
-                if ($(this).val() == "" || (bidDay.val() == "" && !bidInDate.prop("checked"))) {
+                if ($(this).val() == "" || (bidDay.val() == "" && !bidInDate.prop("checked")) || $(this).val().length < 3) {
                     disabledButtonBid(true);
                 } else {
                     disabledButtonBid(false);
@@ -333,17 +348,17 @@
             function clearFields() {
                 bidDay.val("").prop('disabled', false);
                 bidSum.val("");
-                fieldComment.val("");
+                bidComment.val("");
                 bidInDate.prop('checked', false);
                 buttonBid.prop('disabled', false);
             }
-            /*$('#formBid_fieldSum').priceFormat({
+            $('#formBid_fieldSum').priceFormat({
                 prefix: '',
                 centsSeparator: '',
                 thousandsSeparator: ' ',
                 centsLimit: 0,
                 clearOnEmpty: true
-            });*/
+            });
         });
         </script>
         </div>

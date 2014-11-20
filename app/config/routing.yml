@@ -68,7 +68,7 @@ secure_client_action:
 
 secure_client_download_file:
   pattern:   /download/{type}/{num}/{filename}
-  defaults:  { _controller: AcmeSecureBundle:Client:downloadFile, filename: empty  }
+  defaults:  { _controller: AcmeSecureBundle:Client:downloadFile, filename: empty }
 
 #------------------------------------------------------------------Author----------------------------------------------------------------#
 
