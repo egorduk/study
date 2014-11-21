@@ -560,6 +560,8 @@ class AuthorController extends Controller
                 $obj['client'] = $clientLink;
                 $obj['clientFiles'] = $clientFiles;
                 $obj['confirmSelection'] = $showDialogConfirmSelection;
+                $shortTask = Helper::getCutSentence($order->getTask(), 100, ' подробнее...');
+                $order->setShortTask($shortTask);
                 return $this->render(
                     'AcmeSecureBundle:Author:order_select.html.twig', array('formBid' => $formBid->createView(), 'order' => $order, 'obj' => $obj/*, 'bids' => ""*/)
                 );

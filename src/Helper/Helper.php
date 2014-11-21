@@ -758,16 +758,14 @@ class Helper
     }
 
 
-    public static function getCutSentence($sentence, $size) {
+    public static function getCutSentence($sentence, $size, $symbol = '...') {
         $sentence = mb_substr($sentence, 0, $size, "UTF-8");
         $pos = strrpos($sentence, ' ');
         if ($pos === false) {
-            $sentence = $sentence . '...';
+            $sentence = $sentence . $symbol;
+        } else {
+            $sentence = substr($sentence, 0, $pos) . $symbol;
         }
-        else {
-            $sentence = substr($sentence, 0, $pos) . '...';
-        }
-
         return $sentence;
     }
 

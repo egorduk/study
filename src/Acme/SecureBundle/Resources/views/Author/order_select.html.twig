@@ -3,14 +3,16 @@
     {% block content %}
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
-        <link href="{{ asset('bundles/css/window.css') }}" rel="stylesheet" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/window.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/popup/jquery.define.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/style_order.css') }}" />
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.fmatter.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/js/script_order.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/price-format.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/notice_window/notice_window.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/popup/jquery.define.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/script_order.js') }}"></script>
         <style>
             .thumbnail-image{
                 padding-top: 20px;
@@ -58,7 +60,7 @@
                     <p class="block-num">Номер заказа: {{ order.num }}</p>
                     <hr style="border:solid 1px black">
                     <p class="block-theme">Тема работы: {{ order.theme }}</p>
-                    <p>Задание: {{ order.task | raw }}</p>
+                    <p class="block-task">Задание: {{ order.shorttask | raw }}</p>
                     <p>Объем заказа: {{ order.countsheet }} стр.</p>
                     <p>Оригинальность заказа: {{ order.originality }}%</p>
                     <p>Предмет: {{ order.subjectorder.childname }}</p>
@@ -85,6 +87,7 @@
             </div>
         </div>
         {% include 'AcmeSecureBundle:Windows:success.html.twig' with {'message': 'Ставка поставлена!'} %}
+        {% include 'AcmeSecureBundle:Windows:error.html.twig' with {'message': 'Ошибка!'} %}
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 {% form_theme formBid "TwigBundle::layout.html.twig" %}
@@ -232,6 +235,8 @@
                                     if (responseObject.action) {
                                         grid.trigger('reloadGrid');
                                     }
+                                },
+                                error: function() {
                                 }
                             });
                         }
@@ -283,10 +288,6 @@
                                 clearFields();
                                 grid.trigger('reloadGrid');
                                 notice_window.openMessage($("#success-window"), 3000);
-                                /*formBid.parent().before("<span class='success icon-ok-6'>&nbspСтавка поставлена!</span>");
-                                setTimeout(function() {
-                                    formBid.parent().prev().hide();
-                                }, 3000);*/
                             } else {
                                 $(".error").remove();
                                 $.each(responseObject.response, function(index, value) {
@@ -294,28 +295,22 @@
                                     $(selector).parent().after("<p class='error'>" + value + "</p>");
                                 });
                             }
+                        },
+                        error: function() {
+                            notice_window.openMessage($("#error-window"), 3000);
                         }
                     });
                 }
             });
-            if (bidInDate.prop("checked")) {
-                bidDay.prop('disabled', true);
-            } else {
-                bidDay.prop('disabled', false);
-            }
             bidInDate.change(function() {
                 if ($(this).prop("checked")) {
                     bidDay.removeClass('invalid').prop('disabled', true).tooltip('hide').val("");
-                    //console.log(bidSum.val().length);
                     if (bidSum.val().length > 2) {
                         disabledButtonBid(false);
                     }
                 } else {
-                    /*if (bidSum.val().length < 2) {
-                        disabledButtonBid(true);
-                    }*/
+                    bidDay.prop('disabled', false).val("");
                     disabledButtonBid(true);
-                    bidDay.val("");
                 }
             });
             if (bidSum.val() == "" || (bidDay.val() == "" && !bidInDate.prop("checked"))) {
@@ -331,7 +326,7 @@
                 }
             });
             bidDay.on('input', function() {
-                if ($(this).val() == ""|| bidSum.val() == "") {
+                if ($(this).val() == "" || bidSum.val() == "" || bidSum.val().length < 3) {
                     disabledButtonBid(true);
                 } else {
                     disabledButtonBid(false);
@@ -358,6 +353,16 @@
                 thousandsSeparator: ' ',
                 centsLimit: 0,
                 clearOnEmpty: true
+            });
+            var fullTask = "{{ order.task | raw }}", task = [{
+                word: "подробнее...",
+                definition: fullTask
+            }];
+            $('.define').definitions({
+                term : task
+            });
+            $(".definition").click(function() {
+                $(".definition_tooltip").toggleClass('hidden');
             });
         });
         </script>

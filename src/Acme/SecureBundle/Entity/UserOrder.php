@@ -173,6 +173,7 @@ class UserOrder extends EntityRepository
     private $max_sum = null;
     private $diffExpire = 0;
     private $diffWork = 0;
+    private $shortTask;
 
     public function __construct($container, $action = null){
         $this->date_create = new \DateTime();
@@ -437,5 +438,13 @@ class UserOrder extends EntityRepository
 
     public function getPdfFileName() {
         return 'order_' . $this->num . '.pdf';
+    }
+
+    public function setShortTask($val) {
+        $this->shortTask = $val;
+    }
+
+    public function getShortTask() {
+        return $this->shortTask;
     }
 }
