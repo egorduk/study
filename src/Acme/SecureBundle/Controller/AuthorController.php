@@ -556,14 +556,16 @@ class AuthorController extends Controller
                     $arrayResponse = Helper::getFormErrors($formBid);
                     return new Response(json_encode(array('response' => $arrayResponse)));
                 }
+                $bids = Helper::getMaxMinOrderBids($order, $user);
                 $obj = [];
                 $obj['client'] = $clientLink;
                 $obj['clientFiles'] = $clientFiles;
                 $obj['confirmSelection'] = $showDialogConfirmSelection;
-                $shortTask = Helper::getCutSentence($order->getTask(), 100, ' подробнее...');
+                $obj['bids'] = $bids[0];
+                $shortTask = Helper::getCutSentence($order->getTask(), 200, ' подробнее...');
                 $order->setShortTask($shortTask);
                 return $this->render(
-                    'AcmeSecureBundle:Author:order_select.html.twig', array('formBid' => $formBid->createView(), 'order' => $order, 'obj' => $obj/*, 'bids' => ""*/)
+                    'AcmeSecureBundle:Author:order_select.html.twig', array('formBid' => $formBid->createView(), 'order' => $order, 'obj' => $obj)
                 );
             }
         }

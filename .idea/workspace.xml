@@ -2,12 +2,286 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="544aa3f9-6149-4d96-94a7-9d4361f88150" name="Default" comment="1&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/css/popup/jquery.define.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/js/popup/jquery.define.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/perf/lib/bigdecimal_GWT/BigDecTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/.npmignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/.npmignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/.npmignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/.npmignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/node_modules/string_decoder/.npmignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/bignumber.js/.npmignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/.npmignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/node_modules/string_decoder/.npmignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/require-all/.npmignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/.travis.yml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/bignumber.js/.travis.yml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/doc/API.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/bignumber.js/doc/API.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/Auth.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/Auth.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/perf/lib/bigdecimal_GWT/BigDecTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/perf/lib/bigdecimal_ICU4J/BigDecimal-all-last.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/perf/lib/bigdecimal_ICU4J/BigDecimal-all-last.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/sequences/ChangeUser.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/sequences/ChangeUser.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/Changes.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/Changes.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/packets/ClientAuthenticationPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/packets/ClientAuthenticationPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/packets/ComChangeUserPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/packets/ComChangeUserPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/packets/ComPingPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/packets/ComPingPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/packets/ComQueryPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/packets/ComQueryPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/packets/ComQuitPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/packets/ComQuitPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/packets/ComStatisticsPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/packets/ComStatisticsPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/Connection.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/Connection.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/ConnectionConfig.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/ConnectionConfig.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/packets/EmptyPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/packets/EmptyPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/packets/EofPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/packets/EofPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/packets/ErrorPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/packets/ErrorPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/packets/Field.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/packets/Field.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/packets/FieldPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/packets/FieldPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/HISTORY.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/sequences/Handshake.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/sequences/Handshake.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/packets/HandshakeInitializationPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/packets/HandshakeInitializationPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/perf/lib/bigdecimal_GWT/LICENCE.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/perf/lib/bigdecimal_ICU4J/LICENCE.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/LICENCE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/bignumber.js/LICENCE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/node_modules/inherits/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/node_modules/string_decoder/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/node_modules/inherits/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/node_modules/string_decoder/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/License" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/License" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/require-all/License" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/packets/LocalDataFilePacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/packets/LocalDataFilePacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/Makefile" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/packets/OkPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/packets/OkPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/packets/OldPasswordPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/packets/OldPasswordPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/PacketHeader.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/PacketHeader.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/PacketWriter.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/PacketWriter.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/Parser.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/Parser.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/sequences/Ping.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/sequences/Ping.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/Pool.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/Pool.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/PoolCluster.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/PoolCluster.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/PoolConfig.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/PoolConfig.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/PoolConnection.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/PoolConnection.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/Protocol.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/Protocol.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/sequences/Query.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/sequences/Query.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/sequences/Quit.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/sequences/Quit.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/node_modules/core-util-is/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/node_modules/inherits/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/node_modules/isarray/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/node_modules/string_decoder/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/bignumber.js/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/node_modules/core-util-is/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/node_modules/inherits/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/node_modules/isarray/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/node_modules/string_decoder/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/perf/README.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/Readme.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/Readme.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/require-all/Readme.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/require-all/Readme.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/ResultSet.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/ResultSet.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/packets/ResultSetHeaderPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/packets/ResultSetHeaderPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/packets/RowDataPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/packets/RowDataPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/packets/SSLRequestPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/sequences/Sequence.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/sequences/Sequence.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/SqlString.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/SqlString.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/sequences/Statistics.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/sequences/Statistics.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/packets/StatisticsPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/packets/StatisticsPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/packets/UseOldPasswordPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/packets/UseOldPasswordPacket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/lib/_stream_duplex.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/lib/_stream_duplex.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/lib/_stream_passthrough.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/lib/_stream_passthrough.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/lib/_stream_readable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/lib/_stream_readable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/lib/_stream_transform.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/lib/_stream_transform.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/lib/_stream_writable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/lib/_stream_writable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/abs.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/base-in.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/base-out.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/perf/lib/bigdecimal_GWT/bigdecimal.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/perf/bignumber-vs-bigdecimal.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/browser/bignumber-vs-number.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/bignumber.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/bignumber.js/bignumber.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/bignumber.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/bignumber.js/bignumber.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/perf/bigtime-OOM.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/perf/bigtime.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/perf/lib/bigdecimal_GWT/bugs.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/node_modules/isarray/build/build.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/node_modules/isarray/build/build.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/ceil.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/constants/charsets.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/constants/charsets.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/constants/client.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/constants/client.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/cmp.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/node_modules/isarray/component.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/node_modules/isarray/component.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/config.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/require-all/test/mydir/sub/config.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/require-all/test/mydir/sub/config.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/browser/console-errors.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/div.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/duplex.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/duplex.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/constants/errors.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/constants/errors.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/browser/every-test.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/every-test.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/example.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/constants/field_flags.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/constants/field_flags.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/float.patch" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/node_modules/core-util-is/float.patch" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/float.patch" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/node_modules/core-util-is/float.patch" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/floor.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/require-all/test/mydir/foo.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/require-all/test/mydir/foo.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/tool/generate-error-constants.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/require-all/test/mydir/hello.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/require-all/test/filterdir/sub/hello.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/require-all/test/mydir/hello.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/packets/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/sequences/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/node_modules/isarray/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/node_modules/string_decoder/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/require-all/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/packets/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/sequences/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/node_modules/isarray/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/node_modules/string_decoder/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/require-all/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/node_modules/inherits/inherits.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/node_modules/inherits/inherits.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/node_modules/inherits/inherits_browser.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/node_modules/inherits/inherits_browser.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/require-all/test/controllers/main-Controller.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/require-all/test/controllers/main-Controller.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/make.bat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/minus.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/mod.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/neg.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/require-all/test/mydir/sub/no.2js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/require-all/test/mydir/sub/no.2js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/require-all/test/controllers/notthis.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/require-all/test/controllers/notthis.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/require-all/test/controllers/other-Controller.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/require-all/test/controllers/other-Controller.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/others.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/node_modules/core-util-is/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/node_modules/inherits/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/node_modules/isarray/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/node_modules/string_decoder/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/require-all/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/bignumber.js/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/node_modules/core-util-is/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/node_modules/inherits/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/node_modules/isarray/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/node_modules/string_decoder/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/require-all/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/passthrough.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/passthrough.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/plus.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/pow.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/browser/quick-test.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/quick-test.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/readable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/readable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/require-all/test/filterdir/root.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/round.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/constants/server_status.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/constants/server_status.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/browser/single-test.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/sqrt.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/fixtures/ssl-profiles.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/node_modules/inherits/test.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/require-all/test/test.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/node_modules/inherits/test.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/require-all/test/test.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/times.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/toExponential.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/toFixed.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/toFraction.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/toPrecision.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/toString.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/transform.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/transform.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/lib/protocol/constants/types.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/lib/protocol/constants/types.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/node_modules/core-util-is/util.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/node_modules/core-util-is/lib/util.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/node_modules/core-util-is/util.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/node_modules/core-util-is/lib/util.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/utilities.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/bignumber.js/test/v8-LICENCE.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/readable-stream/writable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/readable-stream/writable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/node_modules/mysql/node_modules/require-all/test/mydir/sub/yes.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/mysql/node_modules/require-all/test/mydir/sub/yes.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Helper/Helper.php" afterPath="$PROJECT_DIR$/src/Helper/Helper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/UserOrder.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/UserOrder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Windows/error.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Windows/error.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_chat/server/appChat.js" afterPath="$PROJECT_DIR$/node_chat/server/appChat.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_chat/index.html" afterPath="$PROJECT_DIR$/node_chat/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bundles/css/popup/jquery.define.css" afterPath="$PROJECT_DIR$/web/bundles/css/popup/jquery.define.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bundles/js/popup/jquery.define.js" afterPath="$PROJECT_DIR$/web/bundles/js/popup/jquery.define.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_select.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_select.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -32,82 +306,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AuthorController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_chat/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="562" column="73" selection-start="32543" selection-end="32543" vertical-scroll-proportion="68.10345" vertical-offset="12535" max-vertical-offset="18380">
+            <state line="26" column="10" selection-start="875" selection-end="875" vertical-scroll-proportion="-7.9310346" vertical-offset="290" max-vertical-offset="1940">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="order_select.html.twig" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_select.html.twig">
+      <file leaf-file-name="appChat.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/node_chat/server/appChat.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="255" column="33" selection-start="14559" selection-end="14559" vertical-scroll-proportion="1.3327305" vertical-offset="4363" max-vertical-offset="7500">
-              <folding>
-                <element signature="e#2709#2739#0" expanded="true" />
-                <element signature="e#7259#7278#0" expanded="true" />
-                <marker date="1416587445233" expanded="true" signature="9414:9430" placeholder="..." />
-                <marker date="1416587445233" expanded="true" signature="9481:9508" placeholder="..." />
-                <marker date="1416587445233" expanded="true" signature="9778:9794" placeholder="..." />
-                <marker date="1416587445233" expanded="true" signature="9845:9872" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Helper.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="760" column="27" selection-start="30192" selection-end="30192" vertical-scroll-proportion="-9.827586" vertical-offset="14435" max-vertical-offset="49740">
-              <folding>
-                <marker date="1416574475057" expanded="true" signature="4739:4800" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1416574475057" expanded="true" signature="5165:5220" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1416574475057" expanded="true" signature="5590:5651" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1416574475057" expanded="true" signature="11288:11403" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1416574475057" expanded="true" signature="11867:12005" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1416574475057" expanded="true" signature="45125:45582" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-                <marker date="1416574475057" expanded="true" signature="45924:46290" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1416574475057" expanded="true" signature="45960:46084" placeholder="SELECT ub.us..user_bid..." />
-                <marker date="1416574475057" expanded="true" signature="49001:49274" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1416574475057" expanded="true" signature="49016:49140" placeholder="SELECT ub.us..user_bid..." />
-                <marker date="1416574475057" expanded="true" signature="55971:56236" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1416574475057" expanded="true" signature="55986:56103" placeholder="SELECT b.use..user_bid..." />
-                <marker date="1416574475057" expanded="true" signature="82063:82328" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1416574475057" expanded="true" signature="82078:82195" placeholder="SELECT b.use..user_bid..." />
-                <marker date="1416574475057" expanded="true" signature="86164:86270" placeholder="SELECT date_..cancel_request..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="style_order.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/bundles/css/style_order.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="12" selection-start="899" selection-end="899" vertical-scroll-proportion="0.0" vertical-offset="341" max-vertical-offset="1320">
+            <state line="85" column="40" selection-start="2487" selection-end="2487" vertical-scroll-proportion="0.4966443" vertical-offset="1404" max-vertical-offset="2300">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="orders_new.html.twig" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_new.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="122" column="36" selection-start="5984" selection-end="5984" vertical-scroll-proportion="-4.3448277" vertical-offset="2314" max-vertical-offset="8100">
-              <folding>
-                <marker date="1416404597394" expanded="false" signature="8505:8521" placeholder="..." />
-                <marker date="1416404597394" expanded="false" signature="8580:8607" placeholder="..." />
-                <marker date="1416404597394" expanded="true" signature="8925:8941" placeholder="..." />
-                <marker date="1416404597394" expanded="false" signature="9000:9044" placeholder="..." />
-                <marker date="1416404597394" expanded="false" signature="9340:9356" placeholder="..." />
-                <marker date="1416404597394" expanded="false" signature="9415:9459" placeholder="..." />
-                <marker date="1416404597394" expanded="false" signature="24715:24736" placeholder="..." />
-                <marker date="1416404597394" expanded="false" signature="24894:24915" placeholder="..." />
-                <marker date="1416404597394" expanded="false" signature="25081:25102" placeholder="..." />
-                <marker date="1416404597394" expanded="false" signature="25266:25287" placeholder="..." />
-                <marker date="1416404597394" expanded="false" signature="25452:25473" placeholder="..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -147,12 +359,14 @@
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Windows/success.html.twig" />
         <option value="$PROJECT_DIR$/web/bundles/css/window.css" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Windows/error.html.twig" />
-        <option value="$PROJECT_DIR$/src/Helper/Helper.php" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Entity/UserOrder.php" />
-        <option value="$PROJECT_DIR$/web/bundles/js/popup/jquery.define.js" />
         <option value="$PROJECT_DIR$/web/bundles/css/popup/jquery.define.css" />
+        <option value="$PROJECT_DIR$/web/bundles/js/popup/jquery.define.js" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" />
+        <option value="$PROJECT_DIR$/src/Helper/Helper.php" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_select.html.twig" />
+        <option value="$PROJECT_DIR$/node_chat/index.html" />
+        <option value="$PROJECT_DIR$/node_chat/server/appChat.js" />
       </list>
     </option>
   </component>
@@ -204,6 +418,86 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bundles" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bundles" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bundles" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="popup" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -511,6 +805,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="node_chat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node_chat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -616,22 +942,22 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32864866" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32756758" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.115015976" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16027689" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12619808" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.115015976" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.124068156" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -639,22 +965,22 @@
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32864866" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3279396" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16027689" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.115015976" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.124068156" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12619808" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -677,66 +1003,19 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../self_task_autoload_patterns/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="56" selection-start="442" selection-end="442" vertical-scroll-proportion="0.29885057" vertical-offset="0" max-vertical-offset="1360">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="901">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing_dev.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="901">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Controller/Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="178" column="20" selection-start="6015" selection-end="6015" vertical-scroll-proportion="0.34430084" vertical-offset="2887" max-vertical-offset="5260">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/bundles/js/bootstrap.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="38980">
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/bundles/js/price-format.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="886">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="886" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/bundles/js/select2.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="886">
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="886" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/bundles/js/bootstrap-maxlength.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="886">
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="886" />
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DHTML.js">
@@ -748,16 +1027,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="0" selection-start="1112" selection-end="1112" vertical-scroll-proportion="0.62068963" vertical-offset="0" max-vertical-offset="870">
-          <folding />
-        </state>
+        <state line="27" column="0" selection-start="1112" selection-end="1112" vertical-scroll-proportion="0.62068963" vertical-offset="0" max-vertical-offset="870" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_finish.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="870">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="870" />
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/phpstorm.jar!/resources/html5-schema/phrase.rnc">
@@ -770,17 +1045,13 @@
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/layout_form_error.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="0" selection-start="56" selection-end="383" vertical-scroll-proportion="-0.6896552" vertical-offset="0" max-vertical-offset="340">
-          <folding>
-            <marker date="1403265137779" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/layout_client.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3200">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3200" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Windows/warning.html.twig">
@@ -799,32 +1070,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Form/Author/OutputPsForm.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="47" selection-start="770" selection-end="770" vertical-scroll-proportion="0.32672113" vertical-offset="0" max-vertical-offset="1080">
-          <folding />
-        </state>
+        <state line="16" column="47" selection-start="770" selection-end="770" vertical-scroll-proportion="0.32672113" vertical-offset="0" max-vertical-offset="1080" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="23660">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="23660" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Entity/Author/BidFormValidate.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="20" selection-start="195" selection-end="195" vertical-scroll-proportion="0.27586207" vertical-offset="0" max-vertical-offset="1200">
-          <folding />
-        </state>
+        <state line="12" column="20" selection-start="195" selection-end="195" vertical-scroll-proportion="0.27586207" vertical-offset="0" max-vertical-offset="1200" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_bid.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="40" column="183" selection-start="3615" selection-end="3615" vertical-scroll-proportion="-17.275862" vertical-offset="299" max-vertical-offset="2540">
-          <folding>
-            <marker date="1413978887353" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1413978887353" expanded="false" signature="-1:-1" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -837,135 +1099,47 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/view_client.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="163" column="53" selection-start="9677" selection-end="9711" vertical-scroll-proportion="0.5834306" vertical-offset="2760" max-vertical-offset="5320">
-          <folding />
-        </state>
+        <state line="163" column="53" selection-start="9677" selection-end="9711" vertical-scroll-proportion="0.5834306" vertical-offset="2760" max-vertical-offset="5320" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Entity/UserBid.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="136" column="30" selection-start="2642" selection-end="2652" vertical-scroll-proportion="-8.620689" vertical-offset="2450" max-vertical-offset="4700">
-          <folding />
-        </state>
+        <state line="136" column="30" selection-start="2642" selection-end="2652" vertical-scroll-proportion="-8.620689" vertical-offset="2450" max-vertical-offset="4700" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/bundles/js/script_order.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="37" selection-start="1007" selection-end="1007" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="760">
-          <folding />
-        </state>
+        <state line="31" column="37" selection-start="1007" selection-end="1007" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="760" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/config/validation.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="29" selection-start="3847" selection-end="3847" vertical-scroll-proportion="0.44382647" vertical-offset="821" max-vertical-offset="2020">
-          <folding />
-        </state>
+        <state line="61" column="29" selection-start="3847" selection-end="3847" vertical-scroll-proportion="0.44382647" vertical-offset="821" max-vertical-offset="2020" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/bundles/css/style_order.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="12" selection-start="899" selection-end="899" vertical-scroll-proportion="0.0" vertical-offset="341" max-vertical-offset="1320">
+        <state line="57" column="12" selection-start="899" selection-end="899" vertical-scroll-proportion="0.8887653" vertical-offset="341" max-vertical-offset="1320">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="28" selection-start="1887" selection-end="1887" vertical-scroll-proportion="0.4682981" vertical-offset="939" max-vertical-offset="2800">
-          <folding />
-        </state>
+        <state line="68" column="28" selection-start="1887" selection-end="1887" vertical-scroll-proportion="0.4682981" vertical-offset="939" max-vertical-offset="2800" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/punkave/symfony2-file-uploader-bundle/PunkAve/FileUploaderBundle/Resources/views/Default/upload_file_template.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="30" column="0" selection-start="1775" selection-end="2034" vertical-scroll-proportion="0.71770334" vertical-offset="0" max-vertical-offset="836">
-          <folding>
-            <marker date="1414746939188" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1414746939188" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="95" selection-start="587" selection-end="587" vertical-scroll-proportion="28.275862" vertical-offset="960" max-vertical-offset="6080">
-          <folding>
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="/*...*/" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="/*...*/" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{&quot;placeholder&quot;: &quot;Оцените работу&quot;...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{&quot;alwaysShow&quot;: true...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{&quot;type&quot;: 'POST'...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{&quot;type&quot;: 'POST'...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{&quot;el&quot;: '.file-uploader'...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1416495577854" expanded="true" signature="-1:-1" placeholder="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -978,9 +1152,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="509" column="53" selection-start="24780" selection-end="24780" vertical-scroll-proportion="0.47257876" vertical-offset="9275" max-vertical-offset="10220">
-          <folding />
-        </state>
+        <state line="509" column="53" selection-start="24780" selection-end="24780" vertical-scroll-proportion="0.47257876" vertical-offset="9275" max-vertical-offset="10220" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Windows/success.html.twig">
@@ -992,40 +1164,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/bundles/css/window.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="25" selection-start="1260" selection-end="1260" vertical-scroll-proportion="0.94438267" vertical-offset="611" max-vertical-offset="2460">
-          <folding />
-        </state>
+        <state line="73" column="25" selection-start="1260" selection-end="1260" vertical-scroll-proportion="0.94438267" vertical-offset="611" max-vertical-offset="2460" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/bundles/js/notice_window/notice_window.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="8" selection-start="51" selection-end="51" vertical-scroll-proportion="0.044493884" vertical-offset="0" max-vertical-offset="899">
-          <folding />
-        </state>
+        <state line="2" column="8" selection-start="51" selection-end="51" vertical-scroll-proportion="0.044493884" vertical-offset="0" max-vertical-offset="899" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_chat/server/node_modules/mongodb/lib/mongodb/gridfs/chunk.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="208" column="16" selection-start="6876" selection-end="6876" vertical-scroll-proportion="0.33259177" vertical-offset="3861" max-vertical-offset="4760">
-          <folding />
-        </state>
+        <state line="208" column="16" selection-start="6876" selection-end="6876" vertical-scroll-proportion="0.33259177" vertical-offset="3861" max-vertical-offset="4760" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_new.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="122" column="36" selection-start="5984" selection-end="5984" vertical-scroll-proportion="-4.3448277" vertical-offset="2314" max-vertical-offset="8100">
+        <state line="122" column="36" selection-start="5984" selection-end="5984" vertical-scroll-proportion="0.1470245" vertical-offset="2314" max-vertical-offset="8100">
           <folding>
-            <marker date="1416404597394" expanded="false" signature="8505:8521" placeholder="..." />
-            <marker date="1416404597394" expanded="false" signature="8580:8607" placeholder="..." />
-            <marker date="1416404597394" expanded="true" signature="8925:8941" placeholder="..." />
-            <marker date="1416404597394" expanded="false" signature="9000:9044" placeholder="..." />
-            <marker date="1416404597394" expanded="false" signature="9340:9356" placeholder="..." />
-            <marker date="1416404597394" expanded="false" signature="9415:9459" placeholder="..." />
-            <marker date="1416404597394" expanded="false" signature="24715:24736" placeholder="..." />
-            <marker date="1416404597394" expanded="false" signature="24894:24915" placeholder="..." />
-            <marker date="1416404597394" expanded="false" signature="25081:25102" placeholder="..." />
-            <marker date="1416404597394" expanded="false" signature="25266:25287" placeholder="..." />
-            <marker date="1416404597394" expanded="false" signature="25452:25473" placeholder="..." />
+            <marker date="1416404597394" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1416404597394" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1416404597394" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1416404597394" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1416404597394" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1416404597394" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1416404597394" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1416404597394" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1416404597394" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1416404597394" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1416404597394" expanded="false" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -1039,51 +1205,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Form/Author/BidForm.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="49" selection-end="49" vertical-scroll-proportion="0.09334889" vertical-offset="0" max-vertical-offset="857">
-          <folding />
-        </state>
+        <state line="4" column="0" selection-start="49" selection-end="49" vertical-scroll-proportion="0.09334889" vertical-offset="0" max-vertical-offset="857" />
       </provider>
     </entry>
     <entry file="file://D:/Study/jQuery-Plugin-To-Create-Definition-Popups-Define/jQuery-Plugin-To-Create-Definition-Popups-Define/css/jquery.define.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1060">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1060" />
       </provider>
     </entry>
     <entry file="file://D:/Study/jQuery-Plugin-To-Create-Definition-Popups-Define/jQuery-Plugin-To-Create-Definition-Popups-Define/css/jquery.define.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1480">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1480" />
       </provider>
     </entry>
     <entry file="file://D:/Study/jQuery-Plugin-To-Create-Definition-Popups-Define/jQuery-Plugin-To-Create-Definition-Popups-Define/css/demo.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="0" selection-start="505" selection-end="505" vertical-scroll-proportion="-8.321468" vertical-offset="7961" max-vertical-offset="8860">
-          <folding />
-        </state>
+        <state line="24" column="0" selection-start="505" selection-end="505" vertical-scroll-proportion="-8.321468" vertical-offset="7961" max-vertical-offset="8860" />
       </provider>
     </entry>
     <entry file="file://D:/Study/jQuery-Plugin-To-Create-Definition-Popups-Define/jQuery-Plugin-To-Create-Definition-Popups-Define/js/jquery.define.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="17" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1040">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="17" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1040" />
       </provider>
     </entry>
     <entry file="file://D:/Study/jQuery-Plugin-To-Create-Definition-Popups-Define/jQuery-Plugin-To-Create-Definition-Popups-Define/js/demo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="1" selection-start="112" selection-end="277" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="500">
-          <folding />
-        </state>
+        <state line="8" column="1" selection-start="112" selection-end="277" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="500" />
       </provider>
     </entry>
     <entry file="file://D:/Study/jQuery-Plugin-To-Create-Definition-Popups-Define/jQuery-Plugin-To-Create-Definition-Popups-Define/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="0" selection-start="2059" selection-end="2673" vertical-scroll-proportion="-8.862069" vertical-offset="383" max-vertical-offset="1240">
-          <folding />
-        </state>
+        <state line="32" column="0" selection-start="2059" selection-end="2673" vertical-scroll-proportion="-8.862069" vertical-offset="383" max-vertical-offset="1240" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Windows/error.html.twig">
@@ -1093,68 +1245,104 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="760" column="27" selection-start="30192" selection-end="30192" vertical-scroll-proportion="-9.827586" vertical-offset="14435" max-vertical-offset="49740">
-          <folding>
-            <marker date="1416574475057" expanded="true" signature="4739:4800" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1416574475057" expanded="true" signature="5165:5220" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1416574475057" expanded="true" signature="5590:5651" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1416574475057" expanded="true" signature="11288:11403" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1416574475057" expanded="true" signature="11867:12005" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1416574475057" expanded="true" signature="45125:45582" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-            <marker date="1416574475057" expanded="true" signature="45924:46290" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1416574475057" expanded="true" signature="45960:46084" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1416574475057" expanded="true" signature="49001:49274" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1416574475057" expanded="true" signature="49016:49140" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1416574475057" expanded="true" signature="55971:56236" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1416574475057" expanded="true" signature="55986:56103" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1416574475057" expanded="true" signature="82063:82328" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1416574475057" expanded="true" signature="82078:82195" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1416574475057" expanded="true" signature="86164:86270" placeholder="SELECT date_..cancel_request..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Entity/UserOrder.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="444" column="5" selection-start="10216" selection-end="10216" vertical-scroll-proportion="0.83908045" vertical-offset="8070" max-vertical-offset="9020">
-          <folding />
-        </state>
+        <state line="444" column="5" selection-start="10216" selection-end="10216" vertical-scroll-proportion="0.83908045" vertical-offset="8070" max-vertical-offset="9020" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
+    <entry file="file://$PROJECT_DIR$/../hpv/wp-content/themes/hpv/functions.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="562" column="73" selection-start="32543" selection-end="32543" vertical-scroll-proportion="68.10345" vertical-offset="12535" max-vertical-offset="18380">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="9940">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/bundles/css/popup/jquery.define.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="46" selection-start="1128" selection-end="1128" vertical-scroll-proportion="0.4449388" vertical-offset="0" max-vertical-offset="1480">
+        <state line="28" column="11" selection-start="1389" selection-end="1389" vertical-scroll-proportion="0.6229144" vertical-offset="0" max-vertical-offset="1600">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/bundles/js/popup/jquery.define.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="107" selection-start="712" selection-end="730" vertical-scroll-proportion="0.3337041" vertical-offset="0" max-vertical-offset="899">
+        <state line="13" column="21" selection-start="521" selection-end="521" vertical-scroll-proportion="0.29345372" vertical-offset="0" max-vertical-offset="886">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="556" column="73" selection-start="32237" selection-end="32237" vertical-scroll-proportion="-16.448277" vertical-offset="9963" max-vertical-offset="18420">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2508" column="64" selection-start="103905" selection-end="103908" vertical-scroll-proportion="0.4865811" vertical-offset="49743" max-vertical-offset="50600">
+          <folding>
+            <element signature="e#26#66#0" expanded="true" />
+            <marker date="1417080171362" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1417080171362" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1417080171362" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1417080171362" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1417080171362" expanded="true" signature="-1:-1" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1417080171362" expanded="true" signature="-1:-1" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+            <marker date="1417080171362" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1417080171362" expanded="true" signature="-1:-1" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1417080171362" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1417080171362" expanded="true" signature="-1:-1" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1417080171362" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1417080171362" expanded="true" signature="-1:-1" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1417080171362" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1417080171362" expanded="true" signature="-1:-1" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1417080171362" expanded="true" signature="-1:-1" placeholder="SELECT date_..cancel_request..." />
+            <marker date="1417080171362" expanded="true" signature="-1:-1" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+            <marker date="1417080171362" expanded="true" signature="-1:-1" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_select.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="255" column="33" selection-start="14559" selection-end="14559" vertical-scroll-proportion="1.3327305" vertical-offset="4363" max-vertical-offset="7500">
+        <state line="90" column="20" selection-start="4843" selection-end="4843" vertical-scroll-proportion="0.3722287" vertical-offset="701" max-vertical-offset="6920">
           <folding>
-            <element signature="e#2709#2739#0" expanded="true" />
-            <element signature="e#7259#7278#0" expanded="true" />
-            <marker date="1416587445233" expanded="true" signature="9414:9430" placeholder="..." />
-            <marker date="1416587445233" expanded="true" signature="9481:9508" placeholder="..." />
-            <marker date="1416587445233" expanded="true" signature="9778:9794" placeholder="..." />
-            <marker date="1416587445233" expanded="true" signature="9845:9872" placeholder="..." />
+            <element signature="tag#style#0" expanded="false" />
+            <element signature="e#7684#7703#0" expanded="true" />
+            <marker date="1417081003657" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1417081003657" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1417081003657" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1417081003657" expanded="false" signature="-1:-1" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_chat/server/node_modules/socket.io/node_modules/socket.io-client/lib/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="9" selection-start="618" selection-end="618" vertical-scroll-proportion="0.33259177" vertical-offset="401" max-vertical-offset="1860">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_chat/server/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_chat/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="10" selection-start="875" selection-end="875" vertical-scroll-proportion="-7.9310346" vertical-offset="290" max-vertical-offset="1940">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_chat/server/appChat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="40" selection-start="2487" selection-end="2487" vertical-scroll-proportion="0.4966443" vertical-offset="1404" max-vertical-offset="2300">
+          <folding />
         </state>
       </provider>
     </entry>

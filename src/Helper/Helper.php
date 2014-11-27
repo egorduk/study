@@ -2502,4 +2502,23 @@ class Helper
             return false;
         }
     }
+
+
+    public static function getMaxMinOrderBids($order) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $query = $em->createQuery("SELECT MAX(ub.sum) AS max_sum, MIN(ub.sum) AS min_sum, COUNT(uo.id) AS cnt FROM AcmeSecureBundle:UserOrder AS uo
+                    JOIN AcmeSecureBundle:UserBid AS ub WITH ub.user_order = uo
+                    JOIN AcmeSecureBundle:StatusOrder AS so WITH uo.status_order = so
+                    WHERE uo.is_show_author = 1
+                    AND uo.id = :orderId
+                    AND uo.is_show_client = 1
+                    AND ub.is_show_author = 1
+                    AND ub.is_show_client = 1
+                    AND so.code IN(:statusCode)
+                    GROUP BY uo.id");
+        $query->setParameter('orderId', $order->getId());
+        $query->setParameter('statusCode', array_values(array('sa', 'ca')));
+        $bids = $query->getResult();
+        return $bids;
+    }
 }

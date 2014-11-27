@@ -56,19 +56,20 @@
         <div class="container">
         <div class="row">
             <div class="col-md-7">
-                <div id="blockAboutOrder">
-                    <p class="block-num">Номер заказа: {{ order.num }}</p>
-                    <hr style="border:solid 1px black">
-                    <p class="block-theme">Тема работы: {{ order.theme }}</p>
-                    <p class="block-task">Задание: {{ order.shorttask | raw }}</p>
-                    <p>Объем заказа: {{ order.countsheet }} стр.</p>
-                    <p>Оригинальность заказа: {{ order.originality }}%</p>
-                    <p>Предмет: {{ order.subjectorder.childname }}</p>
-                    <p>Тип заказа: {{ order.typeorder.name }}</p>
-                    <p>Статус заказа: {{ order.statusorder.name }}</p>
-                    <p>Дата создания: {{ order.datecreate.format("d.m.Y H:i") }}</p>
-                    <p>Выполнение до: {{ order.dateexpire.format("d.m.Y H:i") }}</p>
-                    <p>Заказчик: <div id="block-author">{{ obj.client | raw }}</div></p>
+                <div id="block-about-order">
+                    <ul>
+                        <li class="block-num">Номер заказа: {{ order.num }}</li>
+                        <li class="block-theme">Тема работы: {{ order.theme }}</li>
+                        <li class="block-task">Задание: {{ order.shorttask | raw }}</li>
+                        <li>Объем заказа: {{ order.countsheet }} стр.</li>
+                        <li>Оригинальность заказа: {{ order.originality }}%</li>
+                        <li>Предмет: {{ order.subjectorder.childname }}</li>
+                        <li>Тип заказа: {{ order.typeorder.name }}</li>
+                        <li>Статус заказа: {{ order.statusorder.name }}</li>
+                        <li>Дата создания: {{ order.datecreate.format("d.m.Y H:i") }}</li>
+                        <li>Выполнение до: {{ order.dateexpire.format("d.m.Y H:i") }}</li>
+                        <li>Заказчик: <div id="block-author">{{ obj.client | raw }}</div></li>
+                    </ul>
                     {% if obj.clientFiles | length > 0 %}
                         <div class="col-md-4">
                             <p>Файлы заказчика</p>
@@ -84,6 +85,15 @@
                         </div>
                     {% endif %}
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="block-about-bids">
+                <ul>
+                    <li>Ставок всего - {{ obj.bids['cnt'] }}</li>
+                    <li>Максимальная ставка - {{ obj.bids['max_sum'] }}</li>
+                    <li>Минимальная ставка - {{ obj.bids['min_sum'] }}</li>
+                </ul>
             </div>
         </div>
         {% include 'AcmeSecureBundle:Windows:success.html.twig' with {'message': 'Ставка поставлена!'} %}
@@ -354,12 +364,12 @@
                 centsLimit: 0,
                 clearOnEmpty: true
             });
-            var fullTask = "{{ order.task | raw }}", task = [{
+            var fullTask = '{{ order.task | raw }}', task = [{
                 word: "подробнее...",
                 definition: fullTask
             }];
             $('.define').definitions({
-                term : task
+                term: task
             });
             $(".definition").click(function() {
                 $(".definition_tooltip").toggleClass('hidden');

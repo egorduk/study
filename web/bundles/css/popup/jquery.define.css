@@ -9,7 +9,7 @@
     text-decoration: none;
 }
 
-.definition .definition_tooltip {
+.definition_tooltip {
     background-color: #F0F0F0;
     /*background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
     /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
@@ -24,7 +24,7 @@
     border-radius: .5em;
     margin-top: 15px;
     font-size: 16px;
-    font-style: italic;
+   /* font-style: italic;*/
     display: block;
     left: 50%;
     margin-left: -135px;
@@ -35,7 +35,7 @@
     z-index: 98;
 }
 
-.definition .definition_tooltip:before {
+.definition_tooltip:before {
     border: solid;
     /*border-color: #ededed transparent;*/
     border-color: #F0F0F0 transparent;
@@ -67,3 +67,9 @@
 /*.definition:hover .definition_tooltip {
     display: block;
 }*/
+
+#close-popup {
+    float: right;
+    margin-right: -15px;
+    margin-top: -15px;
+}
