@@ -54,12 +54,12 @@ mysqlUtilities.upgrade(connection);
 // Mix-in for Introspection Methods
 mysqlUtilities.introspection(connection);
 
-connection.queryHash(
+/*connection.queryHash(
     'SELECT * FROM webchat_message', [],
     function(err, result) {
         //console.dir({rows: result});
     }
-);
+);*/
 
 // Release connection
 //connection.end();
@@ -67,24 +67,30 @@ connection.queryHash(
 //io.sockets.in('User_4666').emit('response', {msg: 'HELLO', from: 'WORLD'});
 
 io.sockets.on('connection', function (client) {
+    var clientID = (client.id).toString();
+    client.join('room');
+    //console.log(ID);
     client.on('message', function (data) {
         try {
             //console.log(message.name);
             client.emit('message', data);
-            client.broadcast.emit('message', data);
+            //client.broadcast.emit('message', data);
+            client.to('room').emit('message', data);
             //var time = new Date().getTime();
             var date = new Date();
             // saves messages
             /*chatDB.insert({message: data.message, from: data.name, time: time}, {w:1}, function (err) {
                 if (err) {throw err}
             });*/
+            //var date_write = Date_toYMD(date);
+           // console.log(date.getTimezoneOffset());
             connection.insert('webchat_message', {
                 message: data.message,
                 date_write: date,
                 user_id: 1,
                 user_order_id: 6
             }, function(err, recordId) {
-                console.dir({insert:recordId});
+                console.dir({insert: recordId});
             });
         } catch (e) {
             console.log(e);
@@ -92,19 +98,44 @@ io.sockets.on('connection', function (client) {
         }
     });
 
-    client.on('join', function (data) {
-        client.join(data.name);
-        console.log(client.adapter);
+    client.on('disconnect', function () {
+        client.to('room').emit('disconnect user', clientID);
     });
 
-   /* client.on('log_connection', function (data) {
-        //console.log(client.id);
+    client.on('join', function (data) {
+        client.to('room').emit('join user', {name: data.name, userId: clientID});
+    });
+
+    client.on('log connection', function (data) {
+        //console.log(client.adapter);
         //chatDB.find().toArray(function(error, entries) {
-        chatDB.find({}).toArray(function(error, entries) {
+        /*chatDB.find({}).toArray(function(error, entries) {
             if (error) {throw error}
             client.emit('response', entries);
-        });
-    });*/
+        });*/
+        connection.queryHash(
+            'SELECT * FROM webchat_message',
+            function(error, rows) {
+               // console.dir({queryHash:row});
+                if (error) {throw error}
+                client.emit('response', rows);
+            }
+        );
+    });
+
+    /*function Date_toYMD(d) {
+        var year, month, day;
+        year = String(d.getFullYear());
+        month = String(d.getMonth() + 1);
+        if (month.length == 1) {
+            month = "0" + month;
+        }
+        day = String(d.getDate());
+        if (day.length == 1) {
+            day = "0" + day;
+        }
+        return year + "-" + month + "-" + day;
+    }*/
 
    // client.to('User_4666').emit('response', {message: 'HELLO', from: 'WORLD'});
 });
