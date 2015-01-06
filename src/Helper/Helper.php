@@ -2521,4 +2521,20 @@ class Helper
         $bids = $query->getResult();
         return $bids;
     }
+
+
+    public static function getAuthorByOrder($order) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $author = $em->getRepository(self::$_tableUserBid)->createQueryBuilder('ub')
+            ->innerJoin('ub.user_order', 'uo')
+            ->andWhere('uo = :order')
+            ->andWhere('uo.is_show_client = 1')
+            ->andWhere('uo.is_show_author = 1')
+            ->andWhere('ub.is_show_author = 1')
+            ->andWhere('ub.is_show_client = 1')
+            ->setParameter('order', $order)
+            ->getQuery()
+            ->getResult();
+        return $author;
+    }
 }

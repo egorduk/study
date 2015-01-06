@@ -558,10 +558,15 @@ class AuthorController extends Controller
                 }
                 $bids = Helper::getMaxMinOrderBids($order, $user);
                 $obj = [];
-                $obj['client'] = $clientLink;
+                $obj['clientLink'] = $clientLink;
                 $obj['clientFiles'] = $clientFiles;
                 $obj['confirmSelection'] = $showDialogConfirmSelection;
                 $obj['bids'] = $bids[0];
+                $obj['userLogin'] = $user->getLogin();
+                $obj['userId'] = $user->getId();
+                $obj['client']['login'] = $order->getUser()->getLogin();
+                //$obj['client']['status'] = $order->getUser()->getIsActive();
+                $obj['client']['status'] = 1;
                 $shortTask = Helper::getCutSentence($order->getTask(), 200, ' подробнее...');
                 $order->setShortTask($shortTask);
                 return $this->render(

@@ -34,19 +34,21 @@
         }
 
         var name = 'User_' + (Math.round(Math.random() * 10000));
-        //var name = "User_4666";
 
         var message_txt = $("#message_text");
         $('.chat .nick').text(name);
 
         socket.on('connecting', function () {
             msg_system('Соединение...');
+           // socket.emit("log connecting");
         });
+
+        //socket.set('nickname', name);
 
         socket.on('connect', function () {
             msg_system('Соединение установленно!');
             socket.emit("log connection", {name: name});
-            //socket.broadcast.emit('hi');
+            socket.emit('log connecting');
         });
 
         socket.on('message', function (data) {
@@ -56,25 +58,16 @@
 
         socket.on('join user', function (data) {
             setSidebarOnlineUser(data);
+            socket.emit('user online response');
         });
 
         socket.on('response', function (data) {
-            // console.log(data);
-            // var keys = [];
             var countRows = 0;
             for (var key in data) {
-                /*if (data.hasOwnProperty(key)) {
-                 keys.push(key);
-                 }*/
-                //console.log(data[key]);
                 countRows++;
                 msg(data[key].user_id, data[key].message, data[key].date_write);
             }
-            /*data.forEach(function (obj) {
-             msg(obj.from, obj.message);
-             });*/
             setSidebarCountRecords(countRows);
-            //msg_system("Count - " + countRows);
         });
 
         /*socket.on('disconnect', function () {
@@ -87,6 +80,12 @@
             //socket.emit('disconnect');
             //console.log(data);
              $("#online").find("p[data-value=" + data + "]").remove();
+        });
+
+        socket.on('test1', function (data) {
+            // msg_system("Server off");
+            //socket.emit('disconnect');
+            console.log(data);
         });
 
         socket.emit('join', {name: name});

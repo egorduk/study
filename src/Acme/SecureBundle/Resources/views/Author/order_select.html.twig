@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/window.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/popup/jquery.define.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/chat/main.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/style_order.css') }}" />
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
@@ -13,7 +14,11 @@
         <script type="text/javascript" src="{{ asset('bundles/js/notice_window/notice_window.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/popup/jquery.define.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/script_order.js') }}"></script>
+        <script src="http://localhost:8008/socket.io/socket.io.js" defer></script>
         <style>
+            .col-md-2 {
+                display: none;
+            }
             .thumbnail-image{
                 padding-top: 20px;
             }
@@ -54,7 +59,7 @@
             }
         </style>
         <div class="container">
-        <div class="row">
+        <!--<div class="row">
             <div class="col-md-7">
                 <div id="block-about-order">
                     <ul>
@@ -86,8 +91,8 @@
                     {% endif %}
                 </div>
             </div>
-        </div>
-        <div class="row">
+        </div>-->
+        <!--<div class="row">
             <div id="block-about-bids">
                 <ul>
                     <li>Ставок всего - {{ obj.bids['cnt'] }}</li>
@@ -95,10 +100,10 @@
                     <li>Минимальная ставка - {{ obj.bids['min_sum'] }}</li>
                 </ul>
             </div>
-        </div>
+        </div>-->
         {% include 'AcmeSecureBundle:Windows:success.html.twig' with {'message': 'Ставка поставлена!'} %}
         {% include 'AcmeSecureBundle:Windows:error.html.twig' with {'message': 'Ошибка!'} %}
-        <div class="row">
+        <!--<div class="row">
             <div class="col-md-4 col-md-offset-4">
                 {% form_theme formBid "TwigBundle::layout.html.twig" %}
                 {{ form_start(formBid, {'attr': {'id' : 'formBid'}}) }}
@@ -141,16 +146,177 @@
                     </p>
                 </div>
             </div>
-        </div>
-        <div class="col-md-offset-1">
+        </div>-->
+        <!--<div class="col-md-offset-1">
             <div>
                 <table id="listBids"></table>
                 <div id="pagerBids"></div>
                 {% include "AcmeSecureBundle:Secure:layout_context_menu.html.twig" %}
             </div>
+        </div>-->
+        <div class="demo">
+            <div class="chat">
+                <div class="messages" id="messages"></div>
+                <div class="panel">
+                    <span class="nick"></span>
+                    <input type="text" name="message_text" id="message_text">
+                    <button type="button" id="btn-send-msg" class="btn btn-primary disabled">Отправить</button>
+                </div>
+                <div id="sidebar">
+                    <div id="count-msg"></div>
+                    <div id="online">
+                        <p style="display: none" id="client-status">{{ obj.client.login }}</p>
+                    </div>
+                    <div id="in-chat" class="hidden">
+                        <p>В чате</p>
+                    </div>
+                </div>
+            </div>
         </div>
         <script>
         $(document).ready(function() {
+
+            var messages = $("#messages"),
+                    message_txt = $("#message_text"),
+                    userLogin = '{{ obj.userLogin }}',
+                    orderId = {{ order.id }},
+                    userId = {{ obj.userId }},
+                    clientStatus = {{ obj.client.status }},
+                    blockCountMsg = $("#count-msg"),
+                    btnSendMsg = $("#btn-send-msg"),
+                    inChat = $("#in-chat");
+
+            if (clientStatus) {
+                $("#client-status").toggle();
+            }
+
+            $('.chat .nick').text(userLogin);
+
+            try {
+                var socket = io.connect('http://localhost:8008');
+            } catch(e) {
+                systemMsg("Сервер выключен");
+                return;
+            }
+
+            /*socket.on('connecting', function() {
+                systemMsg('Соединение...');
+            });*/
+
+            socket.on("connect", function() {
+                messages.html('');
+                clearSidebarCountRecords();
+                //systemMsg('Соединение установленно!');
+                socket.emit("get all messages", {orderId: orderId});
+                socket.emit("join to room", {room: orderId, name: userLogin});
+                btnSendMsg.removeClass('disabled');
+            });
+
+            socket.on("disconnect", function() {
+                systemMsg("Отключен");
+                btnSendMsg.addClass('disabled');
+                inChat.addClass("hidden");
+                socket.emit("request disconnect user", {room: orderId, name: userLogin});
+                //clearSidebarCountRecords();
+            });
+
+            socket.on("response disconnect user", function() {
+                inChat.addClass("hidden");
+            });
+
+            socket.on("response get all messages", function(data) {
+                var countRows = 0;
+                for (var key in data) {
+                    countRows++;
+                    userMsg(data[key].user_login, data[key].message, data[key].date_write);
+                }
+                setSidebarCountRecords(countRows);
+            });
+
+            socket.on("show new message", function(data) {
+                //console.dir(data);
+                userMsg(data.user_login, data.message, data.date_write);
+                increaseCountMsg();
+                message_txt.focus();
+            });
+
+            socket.on("user in room", function() {
+                //console.dir(data);
+                //inChat.removeClass("hidden");
+                socket.emit("request view current online", {room: orderId});
+            });
+
+            socket.on("response view current online", function() {
+                inChat.removeClass("hidden");
+            });
+
+            socket.on("response user write", function() {
+                var m = '<div class="msg system">Печатает</div>';
+                //console.log(messages);
+                messages.append(m).scrollTop(messages[0].scrollHeight);
+                var countMessages = messages[0].childElementCount;
+                //console.log(messages[0].childNodes[countMessages-1]);
+                messages[0].childNodes[countMessages-1].remove();
+                decreaseCountMsg();
+
+                //messages.remove(m).scrollTop(messages[0].scrollHeight);
+            });
+
+
+
+            message_txt.on("input", function(e) {
+                socket.emit("request user write", {room: orderId});
+            });
+
+            function clearSidebarCountRecords() {
+                blockCountMsg.html('');
+            }
+
+            btnSendMsg.click(function () {
+                var text = $("#message_text").val();
+                if (text.length <= 0) {
+                    return;
+                }
+                message_txt.val("");
+                socket.emit("send message", {message: text, orderId: orderId, userId: userId});
+            });
+
+            function increaseCountMsg() {
+                var digCountMsg = $("#dig-count"), countMsg = digCountMsg.html();
+                countMsg++;
+                digCountMsg.html(countMsg);
+            }
+
+            function decreaseCountMsg() {
+                var digCountMsg = $("#dig-count"), countMsg = digCountMsg.html();
+                countMsg--;
+                digCountMsg.html(countMsg);
+            }
+
+            function systemMsg(message) {
+                var m = '<div class="msg system">' + safe(message) + '</div>';
+                messages.append(m).scrollTop(messages[0].scrollHeight);
+            }
+
+            function safe(str) {
+                return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            }
+
+            function userMsg(nick, message, date_write) {
+                var m = '<div class="msg">' +
+                        '<p class="user">' + (nick) + ':</p> ' +
+                        '<p class="message">' + safe(message) + '</p>' +
+                        '<p class="date">' + date_write + '</p>' +
+                        '</div>';
+                messages.append(m).scrollTop(messages[0].scrollHeight);
+            }
+
+            function setSidebarCountRecords(countRows) {
+                blockCountMsg.append('<span>Кол-во сообщений: <span id="dig-count">' + countRows + '</span></span>');
+            }
+
+
+
             document.title = "Просмотр заказа №" + {{ order.num }};
             $.fn.button.noConflict();
             var grid = $("#listBids");

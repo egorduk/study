@@ -422,6 +422,15 @@ class User implements UserInterface, \Serializable
         return $this->clientIdInfo;
     }
 
+    public function setIsActive($val) {
+        $this->is_active = $val;
+    }
+
+    public function getIsActive() {
+        return $this->is_active;
+    }
+
+
 
     /**
      * @see \Serializable::serialize()
