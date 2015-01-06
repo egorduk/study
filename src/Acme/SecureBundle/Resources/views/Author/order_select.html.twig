@@ -184,7 +184,8 @@
                     clientStatus = {{ obj.client.status }},
                     blockCountMsg = $("#count-msg"),
                     btnSendMsg = $("#btn-send-msg"),
-                    inChat = $("#in-chat");
+                    inChat = $("#in-chat"),
+                    flagIsWriting = 0;
 
             if (clientStatus) {
                 $("#client-status").toggle();
@@ -251,13 +252,27 @@
             });
 
             socket.on("response user write", function() {
-                var m = '<div class="msg system">Печатает</div>';
+                if (flagIsWriting == 0) {
+                    var m = '<div id="msg-writing" class="msg system">Печатает</div>';
+                    messages.append(m).scrollTop(messages[0].scrollHeight);
+                    flagIsWriting = 1;
+                    setTimeout(function() {
+                        //var countMessages = messages[0].childElementCount;
+                        //messages[0].childNodes[countMessages-1].remove();
+
+                        $("#msg-writing").fadeOut("slow", function() {
+                            $("#msg-writing").remove();
+                        });
+
+                        flagIsWriting = 0;
+                    }, 1000);
+                }
+                //flagIsWriting = 1;
+                //messages.append(m).scrollTop(messages[0].scrollHeight);
                 //console.log(messages);
-                messages.append(m).scrollTop(messages[0].scrollHeight);
-                var countMessages = messages[0].childElementCount;
                 //console.log(messages[0].childNodes[countMessages-1]);
-                messages[0].childNodes[countMessages-1].remove();
-                decreaseCountMsg();
+
+                //decreaseCountMsg();
 
                 //messages.remove(m).scrollTop(messages[0].scrollHeight);
             });
@@ -530,7 +545,7 @@
                 centsLimit: 0,
                 clearOnEmpty: true
             });
-            var fullTask = '{{ order.task | raw }}', task = [{
+            /*var fullTask = '{{ order.task | raw }}', task = [{
                 word: "подробнее...",
                 definition: fullTask
             }];
@@ -539,7 +554,7 @@
             });
             $(".definition").click(function() {
                 $(".definition_tooltip").toggleClass('hidden');
-            });
+            });*/
         });
         </script>
         </div>

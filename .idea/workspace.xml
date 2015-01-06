@@ -2,325 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="544aa3f9-6149-4d96-94a7-9d4361f88150" name="Default" comment="1&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/fixtures/.gitkeep" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/fixtures/logs/.gitkeep" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/binding.sdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/binding.suo" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/heapdiff.obj" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/init.obj" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/ipch/memwatch-a0b1a87c/memwatch-8da1f8cb.ipch" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/memwatch.exp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/memwatch.node" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/memwatch.obj" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/memwatch.pdb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/streams/test-rolling-file-stream" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/util.obj" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/vc100.pdb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/#wscript#" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/.bob.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/.jshintrc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/.jshintrc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/isstream/.jshintrc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/node_modules/string_decoder/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/isstream/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/pkginfo/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/stack-trace/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/isstream/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/streams/BaseRollingFileStream-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/streams/BaseRollingFileStream.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/CHANGELOG.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/CL.3676.read.1.tlog" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/CL.3676.write.1.tlog" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/CL.5920.read.1.tlog" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/CL.5920.write.1.tlog" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/CL.8536.read.1.tlog" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/CL.8536.write.1.tlog" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/CL.8908.read.1.tlog" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/CL.8908.write.1.tlog" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/CL.read.1.tlog" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/ChangeLog" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/streams/DateRollingFileStream-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/streams/DateRollingFileStream.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/async/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/node_modules/inherits/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/node_modules/string_decoder/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/semver/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/async/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/eyes/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/isstream/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/pkginfo/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/stack-trace/License" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/colors/MIT-LICENSE.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/eyes/Makefile" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/stack-trace/Makefile" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/async/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/node_modules/core-util-is/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/node_modules/inherits/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/node_modules/isarray/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/node_modules/string_decoder/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/semver/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/async/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/cycle/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/eyes/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/isstream/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/pkginfo/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/colors/ReadMe.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/stack-trace/Readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/streams/RollingFileStream.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/lib/_stream_duplex.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/lib/_stream_passthrough.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/lib/_stream_readable.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/lib/_stream_transform.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/lib/_stream_writable.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/fixtures/keys/agent2-cert.pem" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/fixtures/keys/agent2-key.pem" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/pkginfo/examples/all-properties.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/pkginfo/examples/array-argument.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/async/lib/async.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/async/lib/async.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/examples/basic_heapdiff.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/binding.gyp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/binding.sln" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/node_modules/isarray/build/build.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/categoryFilter-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/appenders/categoryFilter.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/cl.command.1.tlog" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/cl.write.1.tlog" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/lib/winston/config/cli-config.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/cli-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/appenders/clustered.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/clusteredAppender-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/colors/colors.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/lib/winston/common.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/async/component.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/node_modules/isarray/component.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/async/component.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/config.gypi" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/lib/winston/config.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/configuration-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/configureNoLevels-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/connect-logger-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/connect-logger.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/transports/console-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/appenders/console.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/lib/winston/transports/console.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/consoleAppender-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/container-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/lib/winston/container.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/examples/couchdb.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/examples/custom-levels.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/custom-timestamp-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/cycle/cycle.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/transports/daily-rotate-file-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/lib/winston/transports/daily-rotate-file.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/appenders/dateFile.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/dateFileAppender-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/date_format-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/date_format.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/debug-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/debug.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/fixtures/scripts/default-exceptions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/examples/do_nothing_server.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/pkginfo/docs/docco.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/duplex.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/examples/example-connect-logger.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/examples/example-socket.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/colors/example.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/examples/example.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/colors/example.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/exception-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/examples/exception.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/lib/winston/exception.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/fixtures/scripts/exit-on-error.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/eyes/test/eyes-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/eyes/lib/eyes.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/transports/file-maxfiles-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/transports/file-maxsize-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/transports/file-open-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/transports/file-stress-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/transports/file-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/appenders/file.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/lib/winston/transports/file.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/fileAppender-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/appenders/fileSync.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/fileSyncAppender-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/node_modules/core-util-is/float.patch" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/examples/flush-on-exit.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/foo.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/examples/fromreadme.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/appenders/gelf.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/gelfAppender-test.js.orig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/gelfAppender-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/global-log-level-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/src/heapdiff.cc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/src/heapdiff.hh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/helpers.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/stress/http-server.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/lib/winston/transports/http.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/include.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/streams/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/node_modules/isarray/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/node_modules/string_decoder/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/node_modules/inherits/inherits.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/node_modules/inherits/inherits_browser.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/src/init.cc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/isstream/isstream.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/.bob/lint/jshint.out" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/layouts-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/layouts.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/levels-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/levels.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/link.command.1.tlog" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/link.read.1.tlog" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/link.write.1.tlog" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/log-abspath-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/log-exception-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/fixtures/scripts/log-exceptions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/log-rewriter-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/examples/log-rolling.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/fixtures/scripts/log-string-exception.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/log4js.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/log4js.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/log4js.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/logLevelFilter-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/appenders/logLevelFilter.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/logger-levels-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/logger-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/logger-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/logger.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/lib/winston/logger.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/logging-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/examples/loggly-appender.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/appenders/loggly.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/logglyAppender-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/logstashUDP-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/examples/logstashUDP.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/appenders/logstashUDP.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/css/chat/main.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/examples/memory-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/transports/memory-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/lib/winston/transports/memory.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/src/memwatch.cc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/src/memwatch.hh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/memwatch.lastbuildstate" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/memwatch.node.intermediate.manifest" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/memwatch.vcxproj.filters" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/memwatch.vcxproj.user" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/memwatch.vcxproj" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/memwatch.write.1.tlog" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/examples/missing-log-dir.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/mt.command.1.tlog" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/mt.read.1.tlog" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/build/Release/obj/memwatch/mt.write.1.tlog" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/pkginfo/examples/multiple-properties.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/multiprocess-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/appenders/multiprocess.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/nolog-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/lib/winston/config/npm-config.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/pkginfo/examples/object-argument.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/async/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/node_modules/core-util-is/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/node_modules/inherits/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/node_modules/isarray/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/node_modules/string_decoder/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/semver/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/async/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/colors/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/cycle/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/eyes/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/isstream/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/pkginfo/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/pkginfo/examples/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/pkginfo/examples/subdir/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/stack-trace/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/passthrough.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/examples/patternLayout-tokens.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/pkginfo/test/pkginfo-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/pkginfo/docs/pkginfo.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/pkginfo/lib/pkginfo.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/src/platformcompat.hh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/examples/raw-mode.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/readable.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/reloadConfiguration-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/streams/rollingFileStream-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/.bin/semver.cmd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/semver/semver.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/.bin/semver" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/semver/bin/semver" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/setLevel-asymmetry-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/pkginfo/examples/single-property.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/examples/slightly_leaky.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/examples/smtp-appender.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/lib/appenders/smtp.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/smtpAppender-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/stack-trace/lib/stack-trace.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/lib/winston/config/syslog-config.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/pkginfo/examples/target-dir.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/streams/test-rolling-file-stream-write-less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/streams/test-rolling-file-stream-write-more.1" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/streams/test-rolling-file-stream-write-more" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/streams/test-rolling-stream-with-existing-files.11" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/streams/test-rolling-stream-with-existing-files.1" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/streams/test-rolling-stream-with-existing-files.20" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/streams/test-rolling-stream-with-existing-files.2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/streams/test-rolling-stream-with-existing-files.3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/streams/test-rolling-stream-with-existing-files.4" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/streams/test-rolling-stream-with-existing-files.5" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/streams/test-rolling-stream-with-existing-files" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/node_modules/inherits/test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/semver/test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/colors/test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/isstream/test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/tests.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/transform.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/lib/winston/transports/transport.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/transports/transport.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/lib/winston/transports.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/docs/transports.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/fixtures/scripts/unhandle-exceptions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/src/util.cc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/memwatch/src/util.hh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/node_modules/core-util-is/util.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/node_modules/core-util-is/lib/util.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/examples/webhook-post.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/transports/webhook-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/lib/winston/transports/webhook.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/colors/themes/winston-dark.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/node_modules/colors/themes/winston-light.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/test/winston-test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/winston/lib/winston.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/with-categoryFilter.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/with-dateFile.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/with-log-rolling.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/test/with-logLevelFilter.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/log4js/node_modules/readable-stream/writable.js" />
-      <change type="DELETED" beforePath="D:\OpenServer\domains\localhost\study\node_chat\server\npm-debug.log" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Helper/Helper.php" afterPath="$PROJECT_DIR$/src/Helper/Helper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php" afterPath="$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_chat/server/appChat.js" afterPath="$PROJECT_DIR$/node_chat/server/appChat.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_chat/index.html" afterPath="$PROJECT_DIR$/node_chat/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_select.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_select.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/security.yml" afterPath="$PROJECT_DIR$/app/config/security.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="study.iws" />
@@ -365,7 +47,7 @@
       <file leaf-file-name="order_select.html.twig" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="279" column="79" selection-start="13165" selection-end="13165" vertical-scroll-proportion="0.0" vertical-offset="5114" max-vertical-offset="11560">
+            <state line="279" column="24" selection-start="13110" selection-end="13165" vertical-scroll-proportion="-16.068966" vertical-offset="5114" max-vertical-offset="11560">
               <folding>
                 <marker date="1418379942311" expanded="false" signature="17164:17180" placeholder="..." />
                 <marker date="1418379942311" expanded="false" signature="17239:17266" placeholder="..." />
@@ -385,12 +67,13 @@
       <file leaf-file-name="order_select.html.twig" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_select.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="510" column="43" selection-start="25177" selection-end="25177" vertical-scroll-proportion="13.750449" vertical-offset="2541" max-vertical-offset="11020">
+            <state line="274" column="37" selection-start="13066" selection-end="13066" vertical-scroll-proportion="0.8370198" vertical-offset="3921" max-vertical-offset="10480">
               <folding>
-                <marker date="1418655197298" expanded="false" signature="16204:16220" placeholder="..." />
-                <marker date="1418655197298" expanded="false" signature="16271:16298" placeholder="..." />
-                <marker date="1418655197298" expanded="false" signature="16568:16584" placeholder="..." />
-                <marker date="1418655197298" expanded="false" signature="16635:16662" placeholder="..." />
+                <element signature="tag#style#0" expanded="false" />
+                <marker date="1420561426657" expanded="true" signature="16775:16791" placeholder="..." />
+                <marker date="1420561426657" expanded="true" signature="16842:16869" placeholder="..." />
+                <marker date="1420561426657" expanded="true" signature="17139:17155" placeholder="..." />
+                <marker date="1420561426657" expanded="true" signature="17206:17233" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -399,7 +82,7 @@
       <file leaf-file-name="appChat.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/node_chat/server/appChat.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="161" column="59" selection-start="5069" selection-end="5069" vertical-scroll-proportion="0.0" vertical-offset="2721" max-vertical-offset="4420">
+            <state line="89" column="20" selection-start="2317" selection-end="2317" vertical-scroll-proportion="0.0" vertical-offset="1320" max-vertical-offset="4420">
               <folding />
             </state>
           </provider>
@@ -533,6 +216,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -915,7 +599,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1015,17 +698,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3257821" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3257821" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1086262" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16027689" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1315229" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13258786" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -1057,9 +740,9 @@
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.115015976" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12619808" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1362,9 +1045,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/node_chat/server/appChat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="89" column="20" selection-start="2317" selection-end="2317" vertical-scroll-proportion="0.0" vertical-offset="1320" max-vertical-offset="4420">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="279" column="79" selection-start="13165" selection-end="13165" vertical-scroll-proportion="0.0" vertical-offset="5114" max-vertical-offset="11560">
+        <state line="279" column="24" selection-start="13110" selection-end="13165" vertical-scroll-proportion="-16.068966" vertical-offset="5114" max-vertical-offset="11560">
           <folding>
             <marker date="1418379942311" expanded="false" signature="17164:17180" placeholder="..." />
             <marker date="1418379942311" expanded="false" signature="17239:17266" placeholder="..." />
@@ -1380,21 +1070,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_chat/server/appChat.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="161" column="59" selection-start="5069" selection-end="5069" vertical-scroll-proportion="0.0" vertical-offset="2721" max-vertical-offset="4420">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_select.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="510" column="43" selection-start="25177" selection-end="25177" vertical-scroll-proportion="13.750449" vertical-offset="2541" max-vertical-offset="11020">
+        <state line="274" column="37" selection-start="13066" selection-end="13066" vertical-scroll-proportion="0.8370198" vertical-offset="3921" max-vertical-offset="10480">
           <folding>
-            <marker date="1418655197298" expanded="false" signature="16204:16220" placeholder="..." />
-            <marker date="1418655197298" expanded="false" signature="16271:16298" placeholder="..." />
-            <marker date="1418655197298" expanded="false" signature="16568:16584" placeholder="..." />
-            <marker date="1418655197298" expanded="false" signature="16635:16662" placeholder="..." />
+            <element signature="tag#style#0" expanded="false" />
+            <marker date="1420561426657" expanded="true" signature="16775:16791" placeholder="..." />
+            <marker date="1420561426657" expanded="true" signature="16842:16869" placeholder="..." />
+            <marker date="1420561426657" expanded="true" signature="17139:17155" placeholder="..." />
+            <marker date="1420561426657" expanded="true" signature="17206:17233" placeholder="..." />
           </folding>
         </state>
       </provider>
