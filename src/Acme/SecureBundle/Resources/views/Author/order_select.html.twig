@@ -253,30 +253,17 @@
 
             socket.on("response user write", function() {
                 if (flagIsWriting == 0) {
-                    var m = '<div id="msg-writing" class="msg system">Печатает</div>';
-                    messages.append(m).scrollTop(messages[0].scrollHeight);
+                    var msg = '<div id="msg-writing" class="msg system" style="padding:10px;"><p>Печатает...</p></div>';
+                    messages.append(msg).scrollTop(messages[0].scrollHeight);
                     flagIsWriting = 1;
                     setTimeout(function() {
-                        //var countMessages = messages[0].childElementCount;
-                        //messages[0].childNodes[countMessages-1].remove();
-
                         $("#msg-writing").fadeOut("slow", function() {
-                            $("#msg-writing").remove();
+                            $(this).remove();
+                            flagIsWriting = 0;
                         });
-
-                        flagIsWriting = 0;
                     }, 1000);
                 }
-                //flagIsWriting = 1;
-                //messages.append(m).scrollTop(messages[0].scrollHeight);
-                //console.log(messages);
-                //console.log(messages[0].childNodes[countMessages-1]);
-
-                //decreaseCountMsg();
-
-                //messages.remove(m).scrollTop(messages[0].scrollHeight);
             });
-
 
 
             message_txt.on("input", function(e) {
