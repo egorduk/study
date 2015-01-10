@@ -184,7 +184,7 @@
                     <div class="messages" id="messages"></div>
                     <div class="panel">
                         <span class="nick"></span>
-                        <input type="text" name="message_text" id="message_text">
+                        <textarea name="message_text" id="message_text"></textarea>
                         <button type="button" id="btn-send-msg" class="btn btn-primary disabled">Отправить</button>
                     </div>
                     <div id="sidebar">
@@ -195,6 +195,7 @@
                         <div id="in-chat" class="hidden">
                             <p>В чате</p>
                         </div>
+                        <div id="is-writing"></div>
                     </div>
                 </div>
             </div>
@@ -209,7 +210,8 @@
                             authorStatus = {{ obj.author.status }},
                             blockCountMsg = $("#count-msg"),
                             btnSendMsg = $("#btn-send-msg"),
-                            inChat = $("#in-chat");
+                            inChat = $("#in-chat"),
+                            flagIsWriting = 0;
 
                     if (authorStatus) {
                         $("#author-status").toggle();
@@ -228,29 +230,28 @@
                         systemMsg('Соединение...');
                     });*/
 
-                    socket.on("connect", function () {
+                    socket.on("connect", function() {
                         messages.html('');
                         clearSidebarCountRecords();
-                        //systemMsg('Соединение установленно!');
                         socket.emit("get all messages", {orderId: orderId});
                         socket.emit("join to room", {room: orderId, name: userLogin});
                         btnSendMsg.removeClass('disabled');
                     });
 
-                    socket.on("disconnect", function() {
-                        systemMsg("Отключен");
-                        btnSendMsg.addClass('disabled');
-                        inChat.addClass("hidden");
-                        socket.emit("request disconnect user", {room: orderId, name: userLogin});
-                    });
-
-                    socket.on("response disconnect user", function() {
-                        //clearSidebarCountRecords();
+                    socket.on("a", function() {
+                        //alert("disconnect = " + userLogin);
+                        //systemMsg("Отключен");
                         //btnSendMsg.addClass('disabled');
-                        inChat.addClass("hidden");
+                        //inChat.addClass("hidden");
+                        socket.emit("request test", {room: orderId, name: userLogin});
                     });
 
-                    socket.on("response get all messages", function (data) {
+                    socket.on("response disconnect user", function(data) {
+                        //inChat.addClass("hidden");
+                        console.log(data);
+                    });
+
+                    socket.on("response get all messages", function(data) {
                         var countRows = 0;
                         for (var key in data) {
                             countRows++;
@@ -259,13 +260,14 @@
                         setSidebarCountRecords(countRows);
                     });
 
-                    socket.on("show new message", function (data) {
+                    socket.on("show new message", function(data) {
+                        //console.dir(data);
                         userMsg(data.user_login, data.message, data.date_write);
                         increaseCountMsg();
                         message_txt.focus();
                     });
 
-                    socket.on("user in room", function(data) {
+                    socket.on("user in room", function() {
                         //console.dir(data);
                         inChat.removeClass("hidden");
                         socket.emit("request view current online", {room: orderId});
@@ -276,8 +278,19 @@
                     });
 
                     socket.on("response user write", function() {
-                        var m = '<div class="msg system">Печатает</div>';
-                        messages.append(m).scrollTop(messages[0].scrollHeight);
+                        if (flagIsWriting == 0) {
+                            var msg = '<div id="msg-writing" class="msg system" style="display: none"><p>Печатает...</p></div>';
+                            $("#is-writing").append(msg);
+                            $("#msg-writing").fadeIn("slow", function() {
+                                flagIsWriting = 1;
+                            });
+                            setTimeout(function() {
+                                $("#msg-writing").fadeOut("slow", function() {
+                                    $(this).remove();
+                                    flagIsWriting = 0;
+                                });
+                            }, 2000);
+                        }
                     });
 
 

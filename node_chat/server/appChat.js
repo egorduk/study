@@ -38,7 +38,7 @@ var connection = mysql.createConnection({
     database: 'study'
 });
 
-var arr = [];
+var arr = [], arr1 = [];
 
 connection.connect(function (err, db) {
     if (err) {throw err}
@@ -77,7 +77,7 @@ mysqlUtilities.introspection(connection);
 
 io.sockets.on('connection', function (client) {
     var clientID = (client.id).toString();
-    arr[clientID] = clientID;
+
 
    // client.join("room");
 
@@ -110,15 +110,31 @@ io.sockets.on('connection', function (client) {
 
     client.on("join to room", function(data) {
         var room = data.room;
-        console.log("Connected - " + data.name);
+        console.log("Connected - " + data.name + " to room - " + room);
+        arr[clientID] = data.name;
+        arr1[clientID] = room;
         client.join(room);
-        client.to(room).emit("user in room", {name: data.name, userId: clientID});
+        client.to(room).emit("user in room", {name: data.name});
     });
 
-    client.on("request disconnect user", function(data) {
-        var room = data.room;
+    /*client.on("close", function(data) {
+        //var room = data.room;
+        //console.log('closed');
+        console.dir(data);
         console.log("Disconnected - " + data.name);
-        client.to(room).emit("response disconnect user", {name: data.name});
+        //client.to(room).emit("response disconnect user", {name: data.name});
+    });*/
+
+    client.on("disconnect", function() {
+        var room = arr1[clientID];
+        var name = arr[clientID];
+        console.dir("Disconnected - " + name);
+        client.to(room).emit("response disconnect user", {name: name});
+    });
+
+    client.on("request test", function(data) {
+        console.dir(data);
+        console.log("Disconnected - " + data.name);
     });
 
     client.on("request view current online", function(data) {
