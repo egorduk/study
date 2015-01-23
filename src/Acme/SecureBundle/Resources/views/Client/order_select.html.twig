@@ -211,7 +211,10 @@
                             blockCountMsg = $("#count-msg"),
                             btnSendMsg = $("#btn-send-msg"),
                             inChat = $("#in-chat"),
-                            flagIsWriting = 0;
+                            flagIsWriting = 0,
+                            mode = false,
+                            patternCheckEmail = /([a-z0-9_-]+\.)*[a-z0-9_-]+(@|sobaka|_|собака)[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}/i,
+                            patternCheckPhone = /((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,16}/i;
 
                     if (authorStatus) {
                         $("#author-status").toggle();
@@ -238,18 +241,20 @@
                         btnSendMsg.removeClass('disabled');
                     });
 
-                    socket.on("a", function() {
-                        //alert("disconnect = " + userLogin);
-                        //systemMsg("Отключен");
-                        //btnSendMsg.addClass('disabled');
-                        //inChat.addClass("hidden");
-                        socket.emit("request test", {room: orderId, name: userLogin});
+                    socket.on("response disconnect user", function() {
+                        inChat.addClass("hidden");
+                        //disconnectUser();
                     });
 
-                    socket.on("response disconnect user", function(data) {
-                        //inChat.addClass("hidden");
-                        console.log(data);
+                    socket.on("disconnect", function() {
+                        disconnectUser();
                     });
+
+                    /*socket.on("response disconnect current user", function() {
+                        alert('client');
+                        console.log('dfdfdf');
+                        //disconnectUser();
+                    });*/
 
                     socket.on("response get all messages", function(data) {
                         var countRows = 0;
@@ -270,7 +275,7 @@
                     socket.on("user in room", function() {
                         //console.dir(data);
                         inChat.removeClass("hidden");
-                        socket.emit("request view current online", {room: orderId});
+                        socket.emit("request view current online");
                     });
 
                     socket.on("response view current online", function() {
@@ -294,22 +299,40 @@
                     });
 
 
+                    function disconnectUser() {
+                        systemMsg("Отключен");
+                        btnSendMsg.addClass('disabled');
+                        inChat.addClass("hidden");
+                    }
 
                     message_txt.on("input", function(e) {
-                        socket.emit("request user write", {room: orderId});
+                        socket.emit("request user write");
                     });
+
+                    message_txt.on("keydown", function(e) {
+                        if (e.keyCode === 13 && e.ctrlKey) {
+                            sendMessage();
+                        }
+                    });
+
+                    function sendMessage() {
+                        var text = $("#message_text").val();
+                        //var a = $("#message_text").val().replace(/<br>/gi,"\n");
+                        //a = a.replace(/<a href=>/gi,"\n");
+                        message_txt.val("");
+                        if (text.length <= 0 || $.trim(text) == '') {
+                            return;
+                        }
+                        mode = patternCheckEmail.test(text) || patternCheckPhone.test(text);
+                        socket.emit("send message", {message: text, userId: userId, mode: mode});
+                    }
 
                     function clearSidebarCountRecords() {
                         blockCountMsg.html('');
                     }
 
                     btnSendMsg.click(function () {
-                        var text = $("#message_text").val();
-                        if (text.length <= 0) {
-                            return;
-                        }
-                        message_txt.val("");
-                        socket.emit("send message", {message: text, orderId: orderId, userId: userId});
+                        sendMessage();
                     });
 
                     function increaseCountMsg() {
@@ -324,13 +347,23 @@
                     }
 
                     function safe(str) {
-                        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                        //return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                        //str.replace(/\r?\n/g, '<br>');
+                        //console.log($.trim(str));
+                        str = $.trim(str);
+                        str = filterStr(str);
+                        var a = str.replace(/\n|\r\n|\r/g, "<br>"), stringArray = a.split('<br>'), str1 = "";
+                        for (var i = 0; i < stringArray.length; i++) {
+                            var myString = stringArray[i];
+                            str1 += myString + "<br>";
+                        }
+                        return str1;
                     }
 
                     function userMsg(nick, message, date_write) {
                         var m = '<div class="msg">' +
-                                '<p class="user">' + (nick) + ':</p> ' +
-                                '<p class="message">' + safe(message) + '</p>' +
+                                '<p class="user">' + nick + ':</p> ' +
+                                '<div class="message">' + safe(message) + '</div>' +
                                 '<p class="date">' + date_write + '</p>' +
                                 '</div>';
                         messages.append(m).scrollTop(messages[0].scrollHeight);
@@ -338,6 +371,12 @@
 
                     function setSidebarCountRecords(countRows) {
                         blockCountMsg.append('<span>Кол-во сообщений: <span id="dig-count">' + countRows + '</span></span>');
+                    }
+
+                    function filterStr(str) {
+                        var r = str.replace(patternCheckEmail, "Warning");
+                        r = r.replace(patternCheckPhone, " Warning ");
+                        return r;
                     }
 
 

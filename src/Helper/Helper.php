@@ -2519,6 +2519,11 @@ class Helper
         $query->setParameter('orderId', $order->getId());
         $query->setParameter('statusCode', array_values(array('sa', 'ca')));
         $bids = $query->getResult();
+        if (!count($bids)) {
+            $bids[0]['cnt'] = 0;
+            $bids[0]['max_sum'] = 0;
+            $bids[0]['min_sum'] = 0;
+        }
         return $bids;
     }
 

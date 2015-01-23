@@ -1,0 +1,45 @@
+{% block table_cancel_request %}
+    {% spaceless %}
+        <span class="label label-primary">Решение будет принято до <span id="line-date-verdict" >{{ obj.dateVerdict }}</span></span>
+        <div>
+            <table class="table table-hover table-history-cancel-request" style="border: 1px solid #428BCA">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Комментарий</th>
+                    <th>Оценка</th>
+                    <th>Дата</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for request in obj.cancelRequests %}
+                    {% if request.creatorrole == 'Заказчик' %}
+                        <tr class="danger">
+                    {% elseif request.creatorrole == 'Система' %}
+                        <tr class="warning">
+                    {% else %}
+                        <tr>
+                    {% endif %}
+                    <td>
+                        {{ request.creatorrole }}
+                    </td>
+                    <td>
+                        {% if request.comment != "" %}
+                            {{ request.comment }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if request.istogetherapply == 0 %}
+                            {{ request.percent }}%
+                        {% else %}
+                            По обоюдному согласию с заказчиком.
+                        {% endif %}
+                    </td>
+                    <td>{{ request.datecreate.format("d.m.Y H:i") }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endspaceless %}
+{% endblock table_cancel_request %}

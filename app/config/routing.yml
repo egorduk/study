@@ -133,3 +133,10 @@ secure_author_view_client:
 secure_author_output_money:
   pattern:   /secure/author/output_money
   defaults:  { _controller: AcmeSecureBundle:Author:outputMoney }
+
+
+
+#------------------------------------------------------------------Admin----------------------------------------------------------------#
+admin_order:
+  pattern:   /secure/admin/order
+  defaults:  { _controller: AcmeAdminBundle:Admin:order }

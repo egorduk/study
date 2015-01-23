@@ -1,0 +1,121 @@
+{% extends "AcmeSecureBundle::layout_author.html.twig" %}
+{% block title "Избранные заказы" %}
+    {% block content %}
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.fmatter.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.contextMenu.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/script_posts.js') }}"></script>
+        <div class="row">
+            <div class="">
+                <table id="listOrders"></table>
+                <div id="pagerOrders"></div>
+                {% include "AcmeSecureBundle:Secure:layout_context_menu.html.twig" %}
+            </div>
+            <script>
+                $(document).ready(function() {
+                    $.fn.button.noConflict();
+                    var grid = $("#listOrders");
+                    grid.jqGrid({
+                        url: {{ path('secure_author_orders', { type: 'favorite' }) | json_encode | raw }},
+                        datatype: 'json',
+                        mtype: 'POST',
+                        caption: 'Таблица избранных заказов',
+                        recordtext: "Просмотр заказов {0} - {1}",
+                        colNames:['','№ заказа', 'Предмет', 'Тип работы', 'Тема работы', 'Задание', 'Выполнение до', 'Mоя ставка', 'В избранном', 'Действия'],
+                        colModel :[
+                            {name:'id',index:'id',key:true,search:false,resize:false,hidden:true},
+                            {name:'num',index:'num',width:120,align:'center',resizable:false,editable:false,searchrules:{"required":true, "number":true, "maxValue":13},searchoptions:{sopt:['eq','ne','bw','cn']},formatter:customNum},
+                            {name:'subject_order',index:'subject_order',width:170,align:'center',resizable:false, editable:false, searchoptions:{sopt:['eq','ne','bw','cn']}},
+                            {name:'type_order',index:'type_order',width:150,align:'center',resizable:false,editable:false,sortable:false,searchoptions:{sopt:['eq','ne','bw','cn']}},
+                            {name:'theme',index:'theme',width:350,align:'center',resizable:false,editable:false,sortable:false,searchoptions:{sopt:['eq','bw','cn']}},
+                            {name:'task',index:'task',width:350,align:'center',resizable:false, editable:false,sortable:false,searchoptions:{sopt:['eq','bw','cn']}},
+                            {name:'date_expire',index:'date_expire',width:150,align:'center',resizable:false,editable:false,sortable:false,search:false},
+                            {name:'author_last_bid',index:'author_last_bid',width:160,align:'center',resizable:false,editable:false,search:false,sortable:false,formatter:'currency',formatoptions:{defaultValue:'',thousandsSeparator: " ",decimalPlaces:0,suffix:" руб."}},
+                            {name:'date_bid',index:'date_bid',width:150,align:'center',resizable:false,editable:false,search:false,sortable:false},
+                            {name:'action',width:80,align:'center',sortable:false,resize:false,search:false,formatter:function() {
+                                return "<div class='unfavorite-order' style='margin-left:19px;'>" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' data-title='Убрать из избранных заказов' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='left'>" +
+                                        "<span class='icon-star'></span></div></div>";
+                            }}
+                        ],
+                        pager: $('#pagerOrders'),
+                        rowNum: 15,
+                        rowList: [15,25,35],
+                        viewrecords: true,
+                        hidegrid: false,
+                        height: 'auto',
+                        altRows: true,
+                        altclass:'alt-row',
+                        gridComplete: initMenu,
+                        loadComplete : function() {
+                            grid.find("tr").find("td").removeAttr('title');
+                            function getRowId(e) {
+                                var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'), rowId = $tr.attr('id');
+                                return rowId;
+                            }
+                            function getRow(a) {
+                                return a.parent().parent();
+                            }
+                            $(".unfavorite-order").click(function(e) {
+                                var rowId = getRowId(e), row = getRow($(this));
+                                if (rowId) {
+                                    $.ajax({
+                                        type: 'POST',
+                                        data: 'orderId=' + rowId + '&action=unfavoriteOrder',
+                                        success: function(response) {
+                                            var responseObject = window.JSON.parse(response);
+                                            if (responseObject.action) {
+                                                grid.trigger('reloadGrid');
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        },
+                        onCellSelect: function(rowid, iCol) {
+                            if (iCol != 9) {
+                                var num = $("tr.jqgrow#" + rowid).find('td').eq(1).find('span')[0].innerHTML, url = "{{ path("secure_author_order", {'num': 'num'}) }}";
+                                location.href = url.replace("num", num);
+                            }
+                        }
+                    }).navGrid('#pagerOrders',{view:false,search:false,del:false,add:false,edit:false,refresh:true},{},{},{},{},{}
+                    );
+                    function initMenu() {
+                        grid.contextMenu('contextMenu', {
+                            bindings: {
+                                'open-in-new-tab': function () {
+                                    var rowId = grid.getGridParam("selrow");
+                                    var num = $("tr.jqgrow#" + rowId).find('td').eq(1).find('span')[0].innerHTML, url = "{{ path("secure_author_order", {'num': 'num'}) }}";
+                                    url = url.replace("num", num);
+                                    window.open(url, "_blank");
+                                }
+                            },
+                            menuStyle: {
+                                backgroundColor: '#fcfdfd',
+                                border: '1px solid #a6c9e2',
+                                maxWidth: '600px', // to be sure
+                                width: '100%' // to have good width of the menu
+                            },
+                            itemHoverStyle: {
+                                border: '1px solid #79b7e7',
+                                color: '#1d5987',
+                                backgroundColor: '#d0e5f5'
+                            },
+                            onContextMenu: function (event, menu) {
+                                var rowId = $(event.target).parent("tr").attr("id");
+                                //var grid = $("#jqGrid");
+                                if (!rowId) {
+                                    return false; // no contex menu on rows having no "jqgrow" class
+                                }
+                                grid.setSelection(rowId);
+                                return true;
+                            }
+                        });
+                    }
+                });
+            </script>
+        </div>
+    {% endblock %}

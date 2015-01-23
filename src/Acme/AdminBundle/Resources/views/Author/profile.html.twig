@@ -1,0 +1,315 @@
+{% extends "AcmeSecureBundle::layout_author.html.twig" %}
+{% block title "Мой профиль" %}
+    {% block content %}
+        <link href="{{ asset('bundles/css/window.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/css/select2.css') }}" rel="stylesheet" />
+        <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-maxlength.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/select2.min.js') }}"></script>
+        <div class="container">
+        <style>
+            .reset-padding {
+                padding-left: 0;
+            }
+            .thumbnail-image{
+                padding-top: 20px;
+            }
+            /*#dialog-message-success-save {
+                display: none;
+            }
+            #dialog-message-success-save p .icon-ok-6 {
+                font-size: 45px;
+                color: green;
+            }
+            .dialog-text-message {
+                float: left;
+                margin-top: 15px;
+                margin-left: 25px;
+            }*/
+            .Message {
+                position: relative;
+            }
+            .Message-body {
+                font-size: 18px;
+            }
+            #help-popover {
+                cursor: pointer;
+            }
+            #formProfile_selectorAvatarOptions label.required:after {
+                content: "";
+            }
+            #formProfile_selectorAvatarOptions label.required {
+                font-weight: normal;
+                padding-left: 5px;
+                padding-right: 15px;
+                vertical-align: middle;
+            }
+        </style>
+        {% if (formProfile == null) %}
+            <div class="row">
+                <div  class="col-xs-5 col-xs-offset-4">
+                    <p>{{ user.avatar | raw }}</p>
+                    <p>Ваш ID: {{ user.id }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Ваш ник: {{ user.login }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Ваш Email: {{ user.email }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Ваш статус: {{ user.userrole.name }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Дата регистрации в системе: {{ user.datereg.format("d.m.Y H:i") }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Ваш Skype: {{ user.userInfo.skype }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Ваш Icq: {{ user.userInfo.icq }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Ваш номер мобильного телефона: {{ user.userInfo.mobilephone }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Ваш номер стационарного телефона: {{ user.userInfo.staticphone }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Ваша страна: <img src='{{ asset('bundles/images/flags/') }}{{ user.userInfo.country.code }}.png' alt={{ user.userInfo.country.name }} title={{ user.userInfo.country.name }}></p>
+                    <hr style="border:solid 1px black">
+                    <p>Ваше имя: {{ user.userInfo.username }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Ваша фамилия: {{ user.userInfo.surname }}</p>
+                    <hr style="border:solid 1px black">
+                    <p>Ваше отчество: {{ user.userInfo.lastname }}</p>
+                    <hr style="border:solid 1px black">
+                    {% if (user.isaccessorder == 1) %}
+                        <p>Доступ к заказам: <span class="icon-ok-circled-2" style="color: #008000"></span></p>
+                    {% else %}
+                        <p>Доступ к заказам: <span class="icon-cancel-circled-4" style="color: #FF0000"></span><span id="help-popover" class="icon-help-circled-3" data-container="body" data-trigger="click" data-placement="right"></span></p>
+                    {% endif %}
+                </div>
+            </div>
+        {% else %}
+            <div class="row">
+                {% if (showWindow) %}
+                    <div class="row">
+                        <div id="modal-window">
+                            <div id="success-window">
+                                <div class="Message Message--green" id="js-timer">
+                                    <div class="Message-icon">
+                                        <i class="fa fa-check"></i>
+                                    </div>
+                                    <div class="Message-body">
+                                        <p align="center">Данные сохранены!</p>
+                                    </div>
+                                    <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="row">
+                {% form_theme formProfile "TwigBundle::layout.html.twig" %}
+                <div class="col-xs-6 col-xs-offset-3">
+                    <p id="user-avatar">{{ user.avatar | raw }}</p>
+                    {{ form_start(formProfile) }}
+                    <div class="input-group form-group">
+                        <label for="btn-change-avatar" class="btn btn-success"><span class="icon-trash-1">&nbspИзменить</span></label>
+                        <input type="button" id="btn-change-avatar" class="hidden">
+                    </div>
+                    <div id="block-change-avatar" style="display: none">
+                        <div id="block-upload-avatar" style="display: none">
+                            {% include "PunkAveFileUploaderBundle:Default:upload_avatar_template.html.twig" %}
+                            <div class="input-group">
+                                <div class="file-uploader-avatar"></div>
+                            </div>
+                        </div>
+                        <div id="block-choose-man-avatar" style="display: none">
+                            <p><img src='/study/web/uploads/avatars/default_m.jpg' align='middle' alt='Мужской аватар' width='100px' height='auto' class='thumbnail'></p>
+                        </div>
+                        <div id="block-choose-woman-avatar" style="display: none">
+                            <p><img src='/study/web/uploads/avatars/default_w.jpg' align='middle' alt='Мужской аватар' width='100px' height='auto' class='thumbnail'></p>
+                        </div>
+                        {{ form_label(formProfile.selectorAvatarOptions) }}
+                        {{ form_errors(formProfile.selectorAvatarOptions) }}
+                        <div class="input-group">
+                            {{ form_widget(formProfile.selectorAvatarOptions) }}
+                        </div>
+                    </div>
+                    {{ form_label(formProfile.fieldUsername) }}
+                    {{ form_errors(formProfile.fieldUsername) }}
+                    <div class="input-group form-group">
+                        <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
+                        {{ form_widget(formProfile.fieldUsername) }}
+                    </div>
+                    {{ form_label(formProfile.fieldSurname) }}
+                    {{ form_errors(formProfile.fieldSurname) }}
+                    <div class="input-group form-group">
+                        <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
+                        {{ form_widget(formProfile.fieldSurname) }}
+                    </div>
+                    {{ form_label(formProfile.fieldLastname) }}
+                    {{ form_errors(formProfile.fieldLastname) }}
+                    <div class="input-group form-group">
+                        <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
+                        {{ form_widget(formProfile.fieldLastname) }}
+                    </div>
+                    {{ form_label(formProfile.fieldSkype) }}
+                    {{ form_errors(formProfile.fieldSkype) }}
+                    <div class="input-group form-group">
+                        <span class="input-group-addon"><i class="icon-skype-1"></i></span>
+                        {{ form_widget(formProfile.fieldSkype) }}
+                    </div>
+                    {{ form_label(formProfile.fieldIcq) }}
+                    {{ form_errors(formProfile.fieldIcq) }}
+                    <div class="input-group form-group">
+                        <span class="input-group-addon"><i class="icon-icq"></i></span>
+                        {{ form_widget(formProfile.fieldIcq) }}
+                    </div>
+                    {% block form_mobile_tel %}
+                        {{ form_label(formProfile.fieldMobilePhone) }}
+                        {{ form_errors(formProfile.fieldMobilePhone) }}
+                        {{ form_errors(formProfile.selectorCountry) }}
+                        <div class="row">
+                            <div class="form-group col-xs-2">
+                                <div class="input-group">
+                                    {{ form_widget(formProfile.selectorCountry) }}
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-10 reset-padding">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="icon-mobile-alt"></i></span>
+                                    {{ form_widget(formProfile.fieldMobilePhone) }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endblock %}
+                    {{ form_label(formProfile.fieldStaticPhone) }}
+                    {{ form_errors(formProfile.fieldStaticPhone) }}
+                    <div class="input-group form-group">
+                        <span class="input-group-addon"><i class="icon-phone-3"></i></span>
+                        {{ form_widget(formProfile.fieldStaticPhone) }}
+                    </div>
+                    {% if (user.isaccessorder == 0) %}
+                        <div class="input-group">
+                            <div class="file-uploader"></div>
+                        </div>
+                    {% endif %}
+                    <div class="input-group form-group">
+                        <label for="formProfile_save" class="btn btn-success"><span class="icon-floppy">&nbspСохранить</span></label>
+                        {{ form_widget(formProfile.save) }}
+                        <label for="formProfile_reset" class="btn btn-success"><span class="icon-trash-1">&nbspОчистить</span></label>
+                        {{ form_widget(formProfile.reset) }}
+                    </div>
+                    {{ form_end(formProfile) }}
+                </div>
+            </div>
+        {% endif %}
+        <script>
+            $(document).ready(function() {
+                //$.fn.button.noConflict();
+                var customAvatarOption = $("#formProfile_selectorAvatarOptions_2");
+                var manAvatarOption = $("#formProfile_selectorAvatarOptions_0");
+                var womanAvatarOption = $("#formProfile_selectorAvatarOptions_1");
+                if (customAvatarOption[0].checked) {
+                    $("#block-upload-avatar").show();
+                }
+                if (manAvatarOption[0].checked) {
+                    $("#block-choose-man-avatar").show();
+                }
+                if (womanAvatarOption[0].checked) {
+                    $("#block-choose-woman-avatar").show();
+                }
+                function format(state) {
+                    /*var a = state.text;
+                    var ind = a.indexOf('+');
+                    var code = a.substring(ind);*/
+                    return "<img title='" + state.text + "' class='flag' src='{{ asset('bundles/images/flags/') }}" + state.id.toLowerCase() + ".png'/>";
+                }
+                $("#formProfile_selectorCountry").select2({
+                    minimumResultsForSearch: -1,
+                    formatResult: format,
+                    formatSelection: format,
+                    escapeMarkup: function(m) { return m; }
+                });
+                {% if (user.isaccessorder == 0) %}
+                $("#help-popover").popover({
+                    html : true,
+                    content : function() {
+                        return "Для получения доступа к заказам требуется пройти <a href=''>процедуру подтверждения личности</a>";
+                    }
+                });
+                new PunkAveFileUploader({
+                    'uploadUrl': {{ path('secure_author_upload', { editId: user.id, action: 'profile' }) | json_encode | raw }},
+                    'viewUrl': {{ ('/study/web/uploads/author/' ~ user.id)| json_encode | raw }},
+                    'el': '.file-uploader',
+                    'existingFiles': {{ punkave_get_files('author/' ~ user.id) | json_encode | raw }},
+                    'delaySubmitWhileUploading': '.edit-form',
+                    'errorCallback': function(errorObj) {
+                        if (errorObj.error == 'maxNumberOfFiles') {
+                            alert("Maximum uploaded files exceeded!");
+                        }
+                    }
+                });
+                {% endif %}
+                {% if (showWindow) %}
+                function closeMessage(el) {
+                    el.addClass('is-hidden');
+                }
+                $('.js-messageClose').on('click', function(e) {
+                    closeMessage($(this).closest('.Message'));
+                });
+                setTimeout(function() {
+                    closeMessage($('#js-timer'));
+                }, 3000);
+                {% endif %}
+                var avatarFileUploader = new PunkAveFileUploader({
+                    'uploadUrl': {{ path('secure_author_upload', { editId: user.id, action: 'profile' }) | json_encode | raw }},
+                    'el': '.file-uploader-avatar',
+                    'delaySubmitWhileUploading': '.edit-form',
+                    'errorCallback': function(errorObj) {
+                        if (errorObj.error == 'maxNumberOfFiles') {
+                            alert("Maximum uploaded files exceeded!");
+                        } else if (errorObj.error == 'acceptFileTypes') {
+                            alert("Такой тип файла запрещен!");
+                        } else if (errorObj.error == 'minFileSize') {
+                            alert("Файл слишком маленький!");
+                        } else if (errorObj.error == 'maxFileSize') {
+                            alert("Файл слишком большой!");
+                        } else if (errorObj.error == 'incorrectImage') {
+                            alert("Файл с проблемой!");
+                        }
+                    }
+                });
+                $(".file-uploader-avatar").bind('fileuploaddone', function (e, data) {
+                    //window.location = location.href;
+                    //console.log(data.result[data.result.length-1]);
+                    var url = data.result[data.result.length-1].url;
+                    $("#user-avatar").find('img').attr('src', url);
+
+                });
+                manAvatarOption.click(function() {
+                    $("#block-upload-avatar").hide();
+                    $("#block-choose-man-avatar").show();
+                    $("#block-choose-woman-avatar").hide();
+                });
+                womanAvatarOption.click(function() {
+                    $("#block-upload-avatar").hide();
+                    $("#block-choose-woman-avatar").show();
+                    $("#block-choose-man-avatar").hide();
+                });
+                customAvatarOption.click(function() {
+                    $("#block-upload-avatar").show();
+                    $("#block-choose-man-avatar").hide();
+                    $("#block-choose-woman-avatar").hide();
+                });
+                $("#btn-change-avatar").click(function() {
+                    $("#block-change-avatar").toggle();
+                });
+               $("input[id^=formProfile_field]").maxlength({
+                   alwaysShow: true
+               });
+                /*$("#formProfile_fieldUsername, #formProfile_fieldSurname, #formProfile_fieldLastname").maxlength({
+                    alwaysShow: true
+                });*/
+            });
+        </script>
+        <script type="text/javascript" src="{{ asset('bundles/js/underscore.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/jquery.fileupload.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/jquery.iframe-transport.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/FileUploader.js') }}"></script>
+        </div>
+    {% endblock %}

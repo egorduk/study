@@ -1,0 +1,159 @@
+{% extends "AcmeSecureBundle::layout_author.html.twig" %}
+{% block title "Настройки аккаунта" %}
+    {% block content %}
+        {% spaceless %}
+        <link href="{{ asset('bundles/css/select2.css') }}" rel="stylesheet" />
+        <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-maxlength.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/select2.min.js') }}"></script>
+        <div class="body">
+            <style>
+                .table {
+                    cursor: pointer;
+                }
+                .select2-container .select2-choice {
+                    line-height: 36px;
+                }
+            </style>
+            {% include 'AcmeSecureBundle:Windows:success.html.twig' with {'message': 'Ваши данные сохранены!'} %}
+            <div class="row">
+                <p>Мои кошельки:</p>
+                <table class="table table-hover" id="table-user-ps">
+                    <thead>
+                    <tr>
+                        <th>Система</th>
+                        <th>Название кошелька</th>
+                        <th>Номер кошелька</th>
+                        <th>Действия</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for ps in userPs %}
+                        <tr class="danger" data-id="{{ ps.id }}">
+                            <td data-code="{{ ps.typeps.code }}">{{ ps.typeps.name }}</td>
+                            <td>{{ ps.name }}</td>
+                            <td>{{ ps.num }}</td>
+                            <td>
+                                <div style='float:left' data-title='Изменить' onmouseover="$(this).tooltip('show')" data-toggle='tooltip' data-placement='left'>
+                                    <span data-id="{{ ps.id }}" class='icon-edit-3 edit-ps'></span>
+                                </div>
+                                <div style='float:left;margin-left:5px;' data-title='Удалить' onmouseover="$(this).tooltip('show')" data-toggle='tooltip' data-placement='left'>
+                                    <span data-id="{{ ps.id }}" class='icon-trash-1 delete-ps'></span>
+                                </div>
+                                <div style='float:left;margin-left:5px;' data-title='Вывести деньги' onmouseover="$(this).tooltip('show')" data-toggle='tooltip' data-placement='left'>
+                                    <a href="{{ path('secure_author_output_money') }}?id={{ ps.id }}"><span class='icon-money-2 output-ps'></span></a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 col-xs-offset-4">
+                    {% form_theme formCreatePs "TwigBundle::layout.html.twig" %}
+                    {{ form_start(formCreatePs) }}
+                    {{ form_label(formCreatePs.fieldNum) }}
+                    {{ form_errors(formCreatePs.fieldNum) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
+                        {{ form_widget(formCreatePs.fieldNum) }}
+                    </div>
+                    {{ form_label(formCreatePs.fieldName) }}
+                    {{ form_errors(formCreatePs.fieldName) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
+                        {{ form_widget(formCreatePs.fieldName) }}
+                    </div>
+                    {{ form_label(formCreatePs.fieldType) }}
+                    <div class="input-group">
+                        {{ form_widget(formCreatePs.fieldType) }}
+                    </div>
+                    </br>
+                    <div class="input-group">
+                        <label for="formCreatePs_change" class="btn btn-success hidden"><span class="">&nbspИзменить</span></label>
+                        {{ form_widget(formCreatePs.change) }}
+                        <label for="formCreatePs_add" class="btn btn-success"><span class=""></span>&nbspДобавить</label>
+                        {{ form_widget(formCreatePs.add) }}
+                        <label for="formCreatePs_reset" class="btn btn-success"><span class="">&nbspОчистить</span></label>
+                        {{ form_widget(formCreatePs.reset) }}
+                    </div>
+                    {{ form_end(formCreatePs) }}
+                </div>
+            </div>
+            <div class="row">
+                {% form_theme formMailOptions "TwigBundle::layout.html.twig" %}
+                {{ form_start(formMailOptions) }}
+                {{ form_label(formMailOptions.fieldOptions) }}
+                {{ form_errors(formMailOptions.fieldOptions) }}
+                <div class="input-group">
+                    {{ form_widget(formMailOptions.fieldOptions) }}
+                </div>
+                <br>
+                <div class="input-group">
+                    <label for="formMailOptions_save" class="btn btn-success"><span class=""></span>&nbspСохранить</label>
+                    {{ form_widget(formMailOptions.save) }}
+                </div>
+                {{ form_end(formMailOptions) }}
+            </div>
+            <script>
+                $(document).ready(function() {
+                    var btnChange = $("label[for=formCreatePs_change]");
+                    {% if (showWindow) %}
+                        notice_window.openMessage($("#success-window"));
+                    {% endif %}
+                    function format(state) {
+                        return "<img title='" + state.text + "' class='icon' src='{{ asset('bundles/images/ps/') }}" + state.id.toLowerCase() + ".png'/> " + state.text + "";
+                    }
+                    $("#formCreatePs_fieldType").select2({
+                        minimumResultsForSearch: -1,
+                        formatResult: format,
+                        formatSelection: format,
+                        width: '190',
+                        escapeMarkup: function(m) { return m; }
+                    });
+                    $("#formMailOptions_fieldOptions").select2({
+                        placeholder: "Выберите",
+                        minimumResultsForSearch: -1,
+                        width: 'element',
+                        formatSearching: null,
+                        formatNoMatches: null
+                    }).on("select2-opening", function(e) {
+                        var countElements = $(this).select2("val");
+                        if (countElements.length >= 2) {
+                            e.preventDefault();
+                        }
+                    });
+                    $("#formCreatePs_reset").click(function() {
+                        $("#formCreatePs_fieldType").select2("val", "wm");
+                        btnChange.addClass('hidden');
+                    });
+                    $(".edit-ps").click(function() {
+                        var psId = $(this).attr('data-id'), row = $(this).parents('tr'), allTd = row.find('td');
+                        $("#formCreatePs_fieldNum").val(allTd.eq(2).text());
+                        $("#formCreatePs_fieldName").val(allTd.eq(1).text());
+                        var psCode = allTd.eq(0).attr('data-code');
+                        $("#formCreatePs_fieldType").select2("val", psCode);
+                        btnChange.removeClass('hidden');
+                        $(".hidden-ps-id").val(psId);
+                    });
+                    $(".delete-ps").click(function() {
+                        var psId = $(this).attr('data-id');
+                        $.ajax({
+                            type: 'POST',
+                            data: 'psId=' + psId + '&mode=deletePs',
+                            success: function(response) {
+                                var responseObject = window.JSON.parse(response);
+                                if (responseObject.response) {
+                                    var trRemoved = $("#table-user-ps").find("tr[data-id='" + psId + "']").remove();
+                                }
+                            }
+                        });
+                    });
+                    $("input[id^=formCreatePs_field]").maxlength({
+                        alwaysShow: true
+                    });
+                });
+            </script>
+        </div>
+            {% endspaceless %}
+    {% endblock %}

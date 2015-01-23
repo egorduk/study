@@ -1,27 +1,16 @@
-var PORT = 8008;
-
-var options = {
+var PORT = 8008,  options = {
    //'log level': 1
 };
-
-var express = require('express');
-var app = express();
-var http = require('http');
-var server = http.createServer(app);
-var io = require('socket.io').listen(server, options);
+var express = require('express'), app = express(), http = require('http'), server = http.createServer(app), io = require('socket.io').listen(server, options);
 server.listen(PORT);
-
 app.use('/static', express.static(__dirname + '/static'));
-
 app.get('/', function (req, res) {
-    res.sendfile(__dirname + '/index.html');
+    //res.sendfile(__dirname + '/index.html');
 });
 
 //var log4js = require('log4js');
 //var logger = log4js.getLogger();
 //var winston = require('winston');
-
-
 
 /*var MongoClient = require('mongodb').MongoClient, format = require('util').format, userListDB, chatDB;
 MongoClient.connect('mongodb://127.0.0.1:27017', function (err, db) {
@@ -30,15 +19,16 @@ MongoClient.connect('mongodb://127.0.0.1:27017', function (err, db) {
     chatDB = db.collection('chat');
 });*/
 
-var mysql = require('mysql'), mysqlUtilities = require('mysql-utilities');
-var connection = mysql.createConnection({
+var nodemailer = require('nodemailer'), userEmail = 'egorduk91@gmail.com', passEmail = 'rezistor';
+
+var mysql = require('mysql'), mysqlUtilities = require('mysql-utilities'), connection = mysql.createConnection({
     host:     'localhost',
     user:     'root',
     password: '',
     database: 'study'
 });
 
-var arr = [], arr1 = [];
+var arrName = [], arrRoom = [];
 
 connection.connect(function (err, db) {
     if (err) {throw err}
@@ -73,104 +63,109 @@ mysqlUtilities.introspection(connection);
 // Release connection
 //connection.end();
 
-//io.sockets.in('User_4666').emit('response', {msg: 'HELLO', from: 'WORLD'});
-
 io.sockets.on('connection', function (client) {
     var clientID = (client.id).toString();
 
-
-   // client.join("room");
-
     client.on("send message", function (data) {
         try {
-            var date = new Date(), room = data.orderId;
+            var date = new Date(), room = arrRoom[clientID], mode = data.mode, userId = data.userId;
+            console.dir(data);
             //var date_write = Date_toYMD(date);
            // console.log(date.getTimezoneOffset());
             connection.insert('webchat_message', {
                 message: data.message,
                 date_write: date,
-                user_id: data.userId,
-                user_order_id: data.orderId
-            }, function(err, recordId) {
+                user_id: userId,
+                user_order_id: room
+            }, function(error, recordId) {
+                if (error) {console.log(error)}
                 connection.queryRow(
-                    'SELECT login AS user_login FROM user WHERE id = ' + data.userId, function(error, row) {
+                    'SELECT login AS user_login FROM user WHERE id = ' + userId, function(error, row) {
                         if (error) {throw error}
-                        client.emit("show new message", {date_write: date, message: data.message, user_login: row.user_login});
-                        client.to(room).emit("show new message", {date_write: date, message: data.message, user_login: row.user_login});
-                       // client.broadcast.emit("show new message", {date_write: date, message: data.message, user_login: row.user_login});
+                        var userLogin = row.user_login, message = data.message;
+                        client.emit("show new message", {date_write: date, message: message, user_login: userLogin});
+                        client.to(room).emit("show new message", {date_write: date, message: message, user_login: userLogin});
+                        var transporter = nodemailer.createTransport({
+                            service: 'gmail',
+                            auth: {
+                                user: userEmail,
+                                pass: passEmail
+                            }
+                        }, function(error) {
+                            if (error) {console.log(error)}
+                        });
+                        if (mode) {
+                            connection.insert('ban_message', {
+                                message_id: recordId,
+                            }, function(error) {
+                                if (error) {console.log(error)}
+                            });
+                            transporter.sendMail({
+                                from: 'Test email <egorduk91@gmail.com>',
+                                address: userEmail,
+                                to: 'a_1300@mail.ru',
+                                subject: 'Warning message',
+                                text: 'Warning message detected! Message ID - ' + recordId
+                                //html: '<i>html</i>'
+                            }, function(error, info){
+                                if (error) {
+                                    console.log(error);
+                                } else {
+                                    console.log('Message sent: ' + info.response);
+                                }
+                            });
+                        } else {
+                            transporter.sendMail({
+                                from: 'Test email <egorduk91@gmail.com>',
+                                address: userEmail,
+                                to: 'a_1300@mail.ru',
+                                subject: 'New message',
+                                text: 'New message! User login - ' + userLogin + ', message - ' + message
+                                //html: '<i>html</i>'
+                            }, function(error, info){
+                                if (error) {
+                                    console.log(error);
+                                } else {
+                                    console.log('Message sent: ' + info.response);
+                                }
+                            });
+                        }
                     }
                 );
                 console.dir({insert: recordId});
             });
-        } catch (e) {
-            console.log(e);
+        } catch (error) {
+            console.log(error);
             client.disconnect();
         }
     });
 
     client.on("join to room", function(data) {
-        var room = data.room;
-        console.log("Connected - " + data.name + " to room - " + room);
-        arr[clientID] = data.name;
-        arr1[clientID] = room;
-        client.join(room);
-        client.to(room).emit("user in room", {name: data.name});
+        arrName[clientID] = data.name;
+        arrRoom[clientID] = data.room;
+        console.log("Connected - " + data.name + " to room - " + data.room);
+        client.join(data.room);
+        client.to(data.room).emit("user in room", {name: data.name});
     });
-
-    /*client.on("close", function(data) {
-        //var room = data.room;
-        //console.log('closed');
-        console.dir(data);
-        console.log("Disconnected - " + data.name);
-        //client.to(room).emit("response disconnect user", {name: data.name});
-    });*/
 
     client.on("disconnect", function() {
-        var room = arr1[clientID];
-        var name = arr[clientID];
+        var room = arrRoom[clientID], name = arrName[clientID];
         console.dir("Disconnected - " + name);
-        client.to(room).emit("response disconnect user", {name: name});
+        client.to(room).emit("response disconnect user");
+        delete arrRoom[clientID];
+        delete arrName[clientID];
+       // client.leave(room); //Rooms are left automatically upon disconnection.
     });
 
-    client.on("request test", function(data) {
-        console.dir(data);
-        console.log("Disconnected - " + data.name);
-    });
-
-    client.on("request view current online", function(data) {
-        var room = data.room;
+    client.on("request view current online", function() {
+        var room = arrRoom[clientID];
         client.to(room).emit("response view current online");
     });
 
-    client.on("request user write", function(data) {
-        var room = data.room;
+    client.on("request user write", function() {
+        var room = arrRoom[clientID];
         client.to(room).emit("response user write");
     });
-
-    /*client.on("join", function (data) {
-       // arrId[i] = clientID;
-        //i++;
-
-        //for (var s in io.sockets.sockets) {
-            /*socket.get('nickname', function(nickname) {
-                console.log(nickname);
-            });*/
-            //console.log(s);
-        //}
-
-        //arrId[clientID] = client;
-        //console.log(io.sockets.clients());
-
-       // console.log(io.of('/').connected);
-
-        //var clients = findClientsSocket('room') ;
-        //console.log(clients);
-
-        //io.sockets.sockets['nickname'] = data.name;
-        //console.log(io.sockets.sockets[data.name]);
-
-      //  client.to('room').emit('join user', {name: data.name, userId: clientID});
-    //});
 
     client.on("get all messages", function (data) {
         connection.queryHash(
@@ -186,15 +181,6 @@ io.sockets.on('connection', function (client) {
         );
     });
 
-    /*client.on('log connecting', function () {
-        //client.emit('test', arrId);
-        //console.log(arrId);
-    });*/
-
-    /*client.on('user online response', function () {
-        client.to('room').emit('test1', clientID);
-    });*/
-
     /*function Date_toYMD(d) {
         var year, month, day;
         year = String(d.getFullYear());
@@ -208,25 +194,6 @@ io.sockets.on('connection', function (client) {
         }
         return year + "-" + month + "-" + day;
     }*/
-
-    function findClientsSocket(roomId, namespace) {
-        var res = []
-            , ns = io.of(namespace ||"/");    // the default namespace is "/"
-
-        if (ns) {
-            for (var id in ns.connected) {
-                if(roomId) {
-                    var index = ns.connected[id].rooms.indexOf(roomId) ;
-                    if(index !== -1) {
-                        res.push(ns.connected[id]);
-                    }
-                } else {
-                    res.push(ns.connected[id]);
-                }
-            }
-        }
-        return res;
-    }
 
    // client.to('User_4666').emit('response', {message: 'HELLO', from: 'WORLD'});
 });

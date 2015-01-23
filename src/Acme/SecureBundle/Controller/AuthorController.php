@@ -562,6 +562,7 @@ class AuthorController extends Controller
                 $obj['clientFiles'] = $clientFiles;
                 $obj['confirmSelection'] = $showDialogConfirmSelection;
                 $obj['bids'] = $bids[0];
+                //var_dump($bids[0]);die;
                 $obj['userLogin'] = $user->getLogin();
                 $obj['userId'] = $user->getId();
                 $obj['client']['login'] = $order->getUser()->getLogin();

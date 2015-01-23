@@ -1,0 +1,299 @@
+{% extends "AcmeSecureBundle::layout_author.html.twig" %}
+{% block title "Просмотр заказа" %}
+    {% block content %}
+        <!--<link rel="stylesheet" href="{{ asset('bundles/js/bootstrap.min.js') }}" />-->
+        <link href="{{ asset('bundles/css/select2.css') }}" rel="stylesheet" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/timer/jquery.countdown.css') }}" />
+        <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-maxlength.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/select2.min.js') }}"></script>
+        <!--<link rel="stylesheet" href="{{ asset('bundles/css/chat/jScrollPane.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/chat/chat.css') }}" />
+        <script type="text/javascript" src="{{ asset('bundles/js/chat/jquery.mousewheel.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/chat/jScrollPane.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/chat/chat.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/chat/fancywebsocket.js') }}"></script>-->
+        <script type="text/javascript" src="{{ asset('bundles/js/timer/jquery.plugin.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/timer/jquery.countdown.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/timer/jquery.countdown-ru.js') }}"></script>
+        <style>
+            #block-create-cancel-request .label {
+                font-size: 18px;
+                cursor: pointer;
+            }
+            #timer {
+                height: 45px;
+                /*width: 210px;*/
+            }
+            .timer-red {
+                color: red;
+            }
+            .download-file {
+                float: left;
+                padding: 12px;
+                padding-bottom: 0;
+            }
+        </style>
+        <div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <p class="block-num">Номер заказа: {{ order.num }}</p>
+            <hr style="border:solid 1px black">
+            <p class="block-theme">Тема работы: {{ order.theme }}</p>
+            <p>Задание: {{ order.task | raw }}</p>
+            <p>Объем работы: {{ order.countsheet }} стр.</p>
+            <p>Оригинальность работы: {{ order.originality }}%</p>
+            <p>Предмет: {{ order.subjectorder.childname }}</p>
+            <p>Тип работы: {{ order.typeorder.name }}</p>
+            <p>Дата создания: {{ order.datecreate.format("d.m.Y H:i") }}</p>
+            <p id="block-status-order">Статус заказа: {{ order.statusorder.name }}</p>
+            {% if order.statusorder.code == 'g' %}
+                <p id="block-date-guarantee">На гарантии до: {{ order.dateguarantee.format("d.m.Y H:i") }}</p>
+            {% endif %}
+            <p id="block-date-expire">Выполнение до: {{ order.dateexpire.format("d.m.Y H:i") }}</p>
+            {% if order.statusorder.code == 'e' or order.statusorder.code == 'w' %}
+                <div id="timer"></div>
+            {% endif %}
+            <p>Заказчик: <div id="block-client">{{ obj.client | raw }}</div></p>
+            <a href="{{ path('secure_author_download_file', {'type': 'pdf', 'num': order.num, 'filename': order.getpdffilename}) }}"><label class="btn btn-success"><span class="icon-download-outline">&nbspPDF</span></label></a>
+        </div>
+        <div class="col-md-5">
+            <!--<div id="chatContainer">
+                <div id="chatTopBar" class="rounded"></div>
+                <div id="chatLineHolder"></div>
+                <div id="chatUsers" class="rounded"></div>
+                <div id="chatBottomBar" class="rounded">
+                    <div class="tip"></div>
+                    <form id="submitForm" method="post" action="">
+                        <textarea id="chatText" name="chatText" class="rounded form-control" ></textarea>
+                        <input type="button" id="btn-send-msg" class="blueButton btn btn-primary" value="Отправить" />
+                    </form>
+                </div>
+            </div>-->
+        </div>
+    </div>
+    {% if (order.statusorder.code == 'w' or order.statusorder.code == 'g' or order.statusorder.code == 'e') %}
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4" id="block-create-cancel-request">
+                <div class="row">
+                    <span id="create-cancel-request-before" class='label label-primary'>Сформировать отказ от выполнения<span class="icon-down-fat" style="padding-top:5px;padding-left:5px;"></span></span>
+                </div>
+                </br>
+                <div id="block-form-cancel-request" style="display: none">
+                    {% form_theme formCancelRequest "TwigBundle::layout.html.twig" %}
+                    {{ form_start(formCancelRequest, {'attr': {'id' : 'formCancelRequest'}}) }}
+                    {{ form_label(formCancelRequest.fieldComment) }}
+                    {{ form_errors(formCancelRequest.fieldComment) }}
+                    <div class="input-group form-group">
+                        <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
+                        {{ form_widget(formCancelRequest.fieldComment) }}
+                    </div>
+                    {{ form_label(formCancelRequest.fieldPercent) }}
+                    {{ form_errors(formCancelRequest.fieldPercent) }}
+                    <div class="input-group form-group">
+                        {{ form_widget(formCancelRequest.fieldPercent) }}
+                    </div>
+                    {{ form_label(formCancelRequest.fieldIsTogetherApply) }}
+                    {{ form_errors(formCancelRequest.fieldIsTogetherApply) }}
+                    <div class="input-group form-group">
+                        {{ form_widget(formCancelRequest.fieldIsTogetherApply) }}
+                    </div>
+                    <div class="input-group form-group">
+                        <label for="formCancelRequest_create" class="btn btn-success"><span class="icon-pencil-6">&nbspСоздать</span></label>
+                        {{ form_widget(formCancelRequest.create) }}
+                        {% if (obj.cancelRequests | length) > 0 and obj.cancelRequests|first.creator == user.id %}
+                            <label for="formCancelRequest_cancel" class="btn btn-success"><span class="icon-cancel-circled-4">&nbspОтменить заявку</span></label>
+                            <button class="hidden" id="formCancelRequest_cancel" type="button"></button>
+                        {% endif %}
+                    </div>
+                    {{ form_end(formCancelRequest) }}
+                </div>
+                </br>
+                <div class="row">
+                    <span style="display: none" id="create-cancel-request-after" class='label label-primary'>Сформировать отказ от выполнения<span class="icon-up-fat" style="padding-top:5px;padding-left:5px;"></span></span>
+                </div>
+            </div>
+        </div>
+            <div class="row" id="block-history-cancel-request" style="display: none; padding-top: 20px">
+                <div class="col-md-8 col-md-offset-2">
+                    {% include "AcmeSecureBundle:Secure:layout_table_cancel_request.html.twig" %}
+                </div>
+            </div>
+        <div class="row">
+            {% include "PunkAveFileUploaderBundle:Default:upload_file_template.html.twig" %}
+            <div class="col-md-8" id="block-completed-order">
+                <form class="form-horizontal" name="form-completed-order" id="form-completed-order" enctype="multipart/form-data">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="check-completed-order" id="check-completed-order">Заказ выполнен
+                        </label>
+                    </div>
+                    <div class="input-group">
+                        <p>Мои файлы</p>
+                        <div class="file-uploader"></div>
+                    </div>
+                </form>
+            </div>
+            {% if obj.clientFiles | length > 0 %}
+                <div class="col-md-4">
+                    <p>Файлы заказчика</p>
+                    {% for file in obj.clientFiles %}
+                        <div class="">
+                            <div class="caption thumbnail">
+                                <img src="{{ file.thumbnailurl }}" class="thumbnail-image" alt="thumbnail"/>
+                                <span class="filename">{{ file.name }}</span>
+                                <p class="">Размер:{{ file.size }}</p>
+                                <p class="">Загружен:{{ file.dateupload.format("d.m.Y H:i") }}</p>
+                                <a rel="tooltip" title="Скачать" class="download thumbnail-action btn" target="download" href="{{ file.url }}"><i class="icon-download"></i></a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+    <script>
+        $(document).ready(function() {
+            document.title = "Просмотр заказа № " + {{ order.num }};
+            if ('{{ order.statusorder.code }}' == 'w') {
+                var seconds = '{{ order.diffwork }}';
+                $('#timer').countdown({until: + seconds, description: 'Осталось на выполнение'}, $.countdown.regionalOptions['ru']);
+            } else if ('{{ order.statusorder.code }}' == 'e') {
+                var seconds = '{{ order.diffexpire }}';
+                $('#timer').countdown({since: -seconds, description: 'Просрочен на'/*, onTick: addTimerClass*/}, $.countdown.regionalOptions['ru']).addClass('timer-red');
+            }
+            /*function addTimerClass(periods) {
+                if ($.countdown.periodsToSeconds(periods) === 5) {
+                    $(this).addClass('highlight');
+                }
+            }*/
+            if ({{ obj.cancelRequests | length }} > 0) {
+                $("#block-history-cancel-request").show();
+            }
+            //$.fn.button.noConflict();
+            var selectPercent = $("#formCancelRequest_fieldPercent"), checkTogetherApply = $("#formCancelRequest_fieldIsTogetherApply"), comment = $("#formCancelRequest_fieldComment");
+            selectPercent.select2({
+                placeholder: "Оцените работу",
+                allowClear: true,
+                width: 200,
+                minimumResultsForSearch: -1
+            }).on("select2-selecting", function(e) {
+                if (e.val != "") {
+                    $(this).removeClass('invalid-selector');
+                }
+            });
+            if (checkTogetherApply[0].checked) {
+                selectPercent.select2("readonly", true);
+            }
+            comment.maxlength({
+                alwaysShow: true
+            });
+            $("#create-cancel-request-before").click(function() {
+                $("#block-form-cancel-request").show();
+                $("#create-cancel-request-after").show();
+                $("#create-cancel-request-before").hide();
+            });
+            $("#create-cancel-request-after").click(function() {
+                $("#block-form-cancel-request").hide();
+                $("#create-cancel-request-after").hide();
+                $("#create-cancel-request-before").show();
+            });
+            checkTogetherApply.click(function() {
+                if (selectPercent[0].readOnly) {
+                    selectPercent.select2("readonly", false);
+                } else {
+                    selectPercent.select2("readonly", true);
+                }
+            });
+            $("#formCancelRequest_cancel").live('click', function() {
+                var formCancelRequest = $("#formCancelRequest");
+                $.ajax({
+                    type: 'POST',
+                    data: formCancelRequest.serialize() + '&action=removeCancelRequest',
+                    success: function(response) {
+                        var responseObject = window.JSON.parse(response);
+                        if (responseObject.response == "valid") {
+                            $("#block-history-cancel-request").hide();
+                            $("#block-history-cancel-request tbody tr").empty();
+                            $("#line-date-verdict").empty();
+                            $("button#formCancelRequest_cancel").remove();
+                            $("label[for='formCancelRequest_cancel']").remove();
+                            $("#block-form-cancel-request").toggle();
+                            $("#create-cancel-request-before").toggle();
+                            $("#create-cancel-request-after").toggle();
+                        }
+                    }
+                });
+            });
+            $("#formCancelRequest_create").click(function() {
+                if (selectPercent.val() == "" && !selectPercent[0].readOnly && !checkTogetherApply[0].checked) {
+                    selectPercent.addClass("invalid-selector");
+                    return;
+                }
+                if (checkTogetherApply[0].checked) {
+                    selectPercent.removeClass("invalid-selector");
+                }
+                var formCancelRequest = $("#formCancelRequest");
+                $.ajax({
+                    type: 'POST',
+                    data: formCancelRequest.serialize() + '&action=createCancelRequest',
+                    success: function(response) {
+                        var responseObject = window.JSON.parse(response);
+                        $(".error, .block-error").remove();
+                        if (responseObject.response == "valid") {
+                            selectPercent.select2("readonly", false);
+                            selectPercent.select2("val", "");
+                            checkTogetherApply[0].checked = false;
+                            comment.val('');
+                            $("#block-history-cancel-request").show();
+                            var authorComment = responseObject.obj.comment,
+                                    percent = responseObject.obj.percent,
+                                    dateCreate = responseObject.obj.dateCreate,
+                                    dateVerdict = responseObject.obj.dateVerdict,
+                                    lineDateVerdict = $("#line-date-verdict");
+                            if (lineDateVerdict.html() == "") {
+                                lineDateVerdict.append(dateVerdict);
+                            }
+                            $(".table-history-cancel-request tbody").append("<tr><td>Автор</td><td>" + authorComment + "</td><td>" + percent + "</td><td>" + dateCreate + "</td></tr>");
+                            //console.log($("button#formCancelRequest_cancel"));
+                            if ($("button#formCancelRequest_cancel").length == 0) {
+                                var btnRemoveCancelRequest = responseObject.btnRemoveCancelRequest;
+                                $("button#formCancelRequest_create").after(btnRemoveCancelRequest);
+                            }
+                            $("#block-form-cancel-request").toggle();
+                            $("#create-cancel-request-before").toggle();
+                            $("#create-cancel-request-after").toggle();
+                        } else {
+                            $.each(responseObject.response, function(index, value) {
+                                var selector  = "#formCancelRequest_" + index;
+                                $(selector).parent().before("<p class='block-error'><span class='icon-warning error'>" + value + "</span></p>");
+                            });
+                        }
+                    }
+                });
+            });
+            var fileUploader = new PunkAveFileUploader({
+                'uploadUrl': {{ path('secure_author_upload', { editId: order.num, action: 'order' }) | json_encode | raw }},
+                'thumbnailUrl': {{ ('/study/web/uploads/attachments/orders/' ~ order.num ~ '/thumbnails_author')| json_encode | raw }},
+                'viewUrl': {{ path('secure_author_download_file', {'type': 'attachments', 'num': order.num}) | json_encode | raw }},
+                'el': '.file-uploader',
+                'existingFiles': {{ punkave_get_files('attachments/orders/' ~ order.num ~ '/author') | json_encode | raw }},
+                'delaySubmitWhileUploading': '.edit-form',
+                'errorCallback': function(errorObj) {
+                    if (errorObj.error == 'maxNumberOfFiles') {
+                        alert("Maximum uploaded files exceeded!");
+                    } else if (errorObj.error == 'acceptFileTypes') {
+                        alert("Такой файл запрещен!");
+                    } else if (errorObj.error == 'minFileSize') {
+                        alert("Файл слишком маленький!");
+                    } else if (errorObj.error == 'maxFileSize') {
+                        alert("Файл слишком большой!");
+                    }
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript" src="{{ asset('bundles/js/underscore.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/jquery.fileupload.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/jquery.iframe-transport.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/punkavefileuploader/js/FileUploader.js') }}"></script>
+    {% endblock %}

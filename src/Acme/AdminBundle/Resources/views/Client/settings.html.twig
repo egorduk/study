@@ -1,0 +1,82 @@
+{% extends "AcmeSecureBundle::layout_client.html.twig" %}
+
+{% block title "Client profile" %}
+
+    {% block content %}
+        <div class="body">
+            {% if (formProfile == null) %}
+                <div class="row">
+                    <p>Ваш ID: {{ user.id }}</p>
+                    <p>Ваш ник: {{ user.login }}</p>
+                    <p>Ваш Email: {{ user.email }}</p>
+                    <p>Ваш статус: Заказчик</p>
+                    <p>Дата регистрации в системе: {{ user.datereg.format("d.m.Y") }}</p>
+                    <p>Ваш Skype: {{ userInfo.skype }}</p>
+                    <p>Ваш Icq: {{ userInfo.icq }}</p>
+                    <p>Ваш номер мобильного телефона: {{ userInfo.mobilephone }}</p>
+                    <p>Ваш номер стационарного телефона: {{ userInfo.staticphone }}</p>
+                    <p>Ваша страна: <img src='{{ asset('bundles/images/flags/') }}{{ userInfo.country.code }}.png' alt={{ userInfo.country.name }} title={{ userInfo.country.name }}></p>
+                    <p>Ваше имя: {{ userInfo.username }}</p>
+                    <p>Ваша фамилия: {{ userInfo.surname }}</p>
+                    <p>Ваше отчество: {{ userInfo.lastname }}</p>
+                </div>
+                <div class="row">
+                    <a href="{{ path('secure_client_profile', {'type': 'edit'}) }}">Изменить данные</a>
+                </div>
+            {% else %}
+            {% if (showWindow) %}
+            <div id="success-window">
+                <div class="Message Message--green" id="js-timer">
+                    <div class="Message-icon">
+                        <i class="fa fa-check"></i>
+                    </div>
+                    <div class="Message-body">
+                        <p align="center">Ваши данные сохранены!</p>
+                    </div>
+                    <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            {% endif %}
+            <div class="row">
+                {{ form_start(formProfile) }}
+                    {{ form_errors(formProfile) }}
+                        {{ form_row(formProfile.fieldUsername) }}
+                        {{ form_row(formProfile.fieldSurname) }}
+                        {{ form_row(formProfile.fieldLastname) }}
+                        {{ form_row(formProfile.fieldSkype) }}
+                        {{ form_row(formProfile.fieldIcq) }}
+                        {{ form_row(formProfile.fieldMobilePhone) }}
+                        {{ form_row(formProfile.fieldStaticPhone) }}
+                        {{ form_row(formProfile.selectorCountry) }}
+                {{ form_end(formProfile) }}
+                <a href="{{ path('secure_client_profile', {'type': 'view'}) }}">К профилю</a>
+            </div>
+            {% endif %}
+            <script>
+                $(document).ready(function() {
+                    function format(state) {
+                        return "<img title='" + state.text + "' class='flag' src='{{ asset('bundles/images/flags/') }}" + state.id.toLowerCase() + ".png'/>";
+                    }
+
+                    $("#formProfile_selectorCountry").select2({
+                        minimumResultsForSearch: -1,
+                        formatResult: format,
+                        formatSelection: format,
+                        escapeMarkup: function(m) { return m; }
+                    });
+
+                    function closeMessage(el) {
+                        el.addClass('is-hidden');
+                    }
+
+                    $('.js-messageClose').on('click', function(e) {
+                        closeMessage($(this).closest('.Message'));
+                    });
+
+                    setTimeout(function() {
+                        closeMessage($('#js-timer'));
+                    }, 1500);
+                });
+            </script>
+        </div>
+    {% endblock %}

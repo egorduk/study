@@ -1,0 +1,135 @@
+{% extends "AcmeSecureBundle::layout_client.html.twig" %}
+{% block title "Профиль заказчика" %}
+    {% block content %}
+        <style>
+            .Message {
+                position: relative;
+            }
+            .Message-body {
+                font-size: 18px;
+            }
+        </style>
+            {% if (formProfile == null) %}
+                <div class="row">
+                    <div  class="col-xs-5 col-xs-offset-4">
+                        <p>Ваш ID: {{ user.id }}</p>
+                        <p>Ник: {{ user.login }}</p>
+                        <p>Email: {{ user.email }}</p>
+                        <p>Роль: {{ user.role.name }}</p>
+                        <p>Дата регистрации в системе: {{ user.datereg.format("d.m.Y") }}</p>
+                        <p>Skype: {{ userInfo.skype }}</p>
+                        <p>Icq: {{ userInfo.icq }}</p>
+                        <p>Номер мобильного телефона: {{ userInfo.mobilephone }}</p>
+                        <p>Номер стационарного телефона: {{ userInfo.staticphone }}</p>
+                        <p>Страна: <img src='{{ asset('bundles/images/flags/') }}{{ userInfo.country.code }}.png' alt={{ userInfo.country.name }} title={{ userInfo.country.name }}></p>
+                        <p>Имя: {{ userInfo.username }}</p>
+                        <p>Фамилия: {{ userInfo.surname }}</p>
+                        <p>Отчество: {{ userInfo.lastname }}</p>
+                    </div>
+                </div>
+            {% else %}
+            {% form_theme formProfile "TwigBundle::layout.html.twig" %}
+                <div class="row">
+                {% if (showWindow) %}
+                    <div class="row">
+                        <div id="modal-window">
+                            <div id="success-window">
+                                <div class="Message Message--green" id="js-timer">
+                                    <div class="Message-icon">
+                                        <i class="fa fa-check"></i>
+                                    </div>
+                                    <div class="Message-body">
+                                        <p align="center">Данные сохранены!</p>
+                                    </div>
+                                    <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                </div>
+            <div class="row">
+                <div class="col-xs-4 col-xs-offset-4">
+                    {{ form_start(formProfile) }}
+                    {{ form_label(formProfile.fieldUsername) }}
+                    {{ form_errors(formProfile.fieldUsername) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
+                        {{ form_widget(formProfile.fieldUsername) }}
+                    </div>
+                    {{ form_label(formProfile.fieldSurname) }}
+                    {{ form_errors(formProfile.fieldSurname) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
+                        {{ form_widget(formProfile.fieldSurname) }}
+                    </div>
+                    {{ form_label(formProfile.fieldLastname) }}
+                    {{ form_errors(formProfile.fieldLastname) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
+                        {{ form_widget(formProfile.fieldLastname) }}
+                    </div>
+                    {{ form_label(formProfile.fieldSkype) }}
+                    {{ form_errors(formProfile.fieldSkype) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-skype-1"></i></span>
+                        {{ form_widget(formProfile.fieldSkype) }}
+                    </div>
+                    {{ form_label(formProfile.fieldIcq) }}
+                    {{ form_errors(formProfile.fieldIcq) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-icq"></i></span>
+                        {{ form_widget(formProfile.fieldIcq) }}
+                    </div>
+                    {{ form_label(formProfile.fieldMobilePhone) }}
+                    {{ form_errors(formProfile.fieldMobilePhone) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-mobile-alt"></i></span>
+                        {{ form_widget(formProfile.fieldMobilePhone) }}
+                    </div>
+                    {{ form_label(formProfile.fieldStaticPhone) }}
+                    {{ form_errors(formProfile.fieldStaticPhone) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-phone-3"></i></span>
+                        {{ form_widget(formProfile.fieldStaticPhone) }}
+                    </div>
+                    {{ form_label(formProfile.selectorCountry) }}
+                    <div class="input-group">
+                        {{ form_widget(formProfile.selectorCountry) }}
+                    </div>
+                    </br>
+                    <div class="input-group">
+                        <label for="formProfile_save" class="btn btn-success"><span class="icon-floppy">&nbspСохранить</span></label>
+                        {{ form_widget(formProfile.save) }}
+                        <label for="formProfile_reset" class="btn btn-success"><span class="icon-trash-1">&nbspОчистить</span></label>
+                        {{ form_widget(formProfile.reset) }}
+                    </div>
+                    {{ form_end(formProfile) }}
+                </div>
+            </div>
+            {% endif %}
+            <script>
+                $(document).ready(function() {
+                    function format(state) {
+                        return "<img title='" + state.text + "' class='flag' src='{{ asset('bundles/images/flags/') }}" + state.id.toLowerCase() + ".png'/>";
+                    }
+                    $("#formProfile_selectorCountry").select2({
+                        minimumResultsForSearch: -1,
+                        formatResult: format,
+                        formatSelection: format,
+                        escapeMarkup: function(m) { return m; }
+                    });
+                    {% if (showWindow) %}
+                        function closeMessage(el) {
+                            el.addClass('is-hidden');
+                        }
+                        $('.js-messageClose').on('click', function(e) {
+                            closeMessage($(this).closest('.Message'));
+                        });
+                        setTimeout(function() {
+                            closeMessage($('#js-timer'));
+                        }, 3000);
+                    {% endif %}
+                });
+            </script>
+    {% endblock %}
