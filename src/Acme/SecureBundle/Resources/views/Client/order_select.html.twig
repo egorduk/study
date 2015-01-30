@@ -208,6 +208,7 @@
                             orderId = {{ order.id }},
                             userId = {{ obj.userId }},
                             authorStatus = {{ obj.author.status }},
+                            authorLogin = '{{ obj.author.login }}',
                             blockCountMsg = $("#count-msg"),
                             btnSendMsg = $("#btn-send-msg"),
                             inChat = $("#in-chat"),
@@ -225,7 +226,7 @@
                     try {
                         var socket = io.connect('http://localhost:8008');
                     } catch(e) {
-                        systemMsg("Сервер выключен");
+                        systemMsg("Server off");
                         return;
                     }
 
@@ -237,7 +238,7 @@
                         messages.html('');
                         clearSidebarCountRecords();
                         socket.emit("get all messages", {orderId: orderId});
-                        socket.emit("join to room", {room: orderId, name: userLogin});
+                        socket.emit("join to room", {room: orderId, name: userLogin, authorLogin: authorLogin});
                         btnSendMsg.removeClass('disabled');
                     });
 

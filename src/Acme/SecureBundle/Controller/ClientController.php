@@ -397,6 +397,8 @@ class ClientController extends Controller
             //$obj['author']['status'] = $order->getUser()->getIsActive();
             $obj['author']['login'] = 'author';
             $obj['author']['status'] = 1;
+            //$session = $request->getSession();
+            //$session->set('author_email_' . $order->getId(), 'a_1300@mail.ru');
             return $this->render(
                 'AcmeSecureBundle:Client:order_select.html.twig', array('order' => $order, 'files' => $filesOrder, 'folder' => $folder, 'obj' => $obj)
             );

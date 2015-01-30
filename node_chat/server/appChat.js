@@ -1,12 +1,23 @@
 var PORT = 8008,  options = {
    //'log level': 1
 };
-var express = require('express'), app = express(), http = require('http'), server = http.createServer(app), io = require('socket.io').listen(server, options);
+var express = require('express'),
+    http = require('http'),
+    path = require('path'),
+    connect = require('connect'),
+    //cookie = require('cookie'),
+    //cookieParser = require('cookie-parser'),
+    morgan = require('morgan');
+    bodyParser = require('body-parser');
+    methodOverride = require('method-override');
+    app = express(),
+    server = http.createServer(app),
+    io = require('socket.io').listen(server, options);
 server.listen(PORT);
-app.use('/static', express.static(__dirname + '/static'));
+/*app.use('/static', express.static(__dirname + '/static'));
 app.get('/', function (req, res) {
     //res.sendfile(__dirname + '/index.html');
-});
+});*/
 
 //var log4js = require('log4js');
 //var logger = log4js.getLogger();
@@ -53,6 +64,8 @@ mysqlUtilities.upgrade(connection);
 // Mix-in for Introspection Methods
 mysqlUtilities.introspection(connection);
 
+https://www.npmjs.com/package/socket.io-handshake
+
 /*connection.queryHash(
     'SELECT * FROM webchat_message', [],
     function(err, result) {
@@ -63,8 +76,70 @@ mysqlUtilities.introspection(connection);
 // Release connection
 //connection.end();
 
-io.sockets.on('connection', function (client) {
+
+/*var sessionStore = new session.MemoryStore();
+var COOKIE_SECRET = 'secret';
+var COOKIE_NAME = 'sid';
+//app.set('views', __dirname + '/views');
+//app.set('view engine', 'ejs');
+app.use(cookieParser(COOKIE_SECRET));
+app.use(session({
+    name: COOKIE_NAME,
+    store: sessionStore,
+    secret: COOKIE_SECRET,
+    saveUninitialized: true,
+    resave: true,
+    cookie: {
+        path: '/',
+        httpOnly: true,
+        secure: false,
+        maxAge: null
+    }
+}));*/
+
+/*var //cookieParser = express.cookieParser('your secret sauce')
+    sessionStore = new connect.session.Memo;
+app.configure(function () {
+    //app.set('views', path.resolve('views'));
+    //app.set('view engine', 'jade');
+    app.use(express.bodyParser());
+    app.use(express.methodOverride());
+   // app.use(cookieParser);
+    app.use(session({ resave: true, saveUninitialized: true,
+        secret: 'uwotm8' }));
+    //app.use(app.router);
+});
+
+var SessionSockets = require('session.socket.io')
+    , sessionSockets = new SessionSockets(io, sessionStore, cookieParser);
+
+*/
+
+var socketSessions = require('socket.io-handshake');
+io.use( socketSessions() );
+var session = require('express-session');
+var sessionStore = new session.MemoryStore();
+var cookieParser = require('cookie-parser');
+var socketHandshake = require('socket.io-handshake');
+var io = require('socket.io')(8008);
+io.use(socketHandshake({store: sessionStore, key:'sid', secret:'secret', parser:cookieParser()}));
+io.on('connection', function (sock) {
+    if (!sock.handshake.session.name) {
+        sock.emit('get name');
+    }
+    sock.on('set nama', function (name) {
+        sock.handhsake.session.name = name;
+        sock.handshake.session.save();
+    });
+});
+
+
+/*io.sockets.on('connection', function (client) {
     var clientID = (client.id).toString();
+
+    client.handhsake.session.name = 'yo';
+    client.handshake.session.save();
+    console.dir(client.handhsake.session.name);
 
     client.on("send message", function (data) {
         try {
@@ -140,9 +215,12 @@ io.sockets.on('connection', function (client) {
         }
     });
 
-    client.on("join to room", function(data) {
+    client.on("join to room", function(data, handshakeData, accept) {
         arrName[clientID] = data.name;
         arrRoom[clientID] = data.room;
+
+
+
         console.log("Connected - " + data.name + " to room - " + data.room);
         client.join(data.room);
         client.to(data.room).emit("user in room", {name: data.name});
@@ -196,4 +274,34 @@ io.sockets.on('connection', function (client) {
     }*/
 
    // client.to('User_4666').emit('response', {message: 'HELLO', from: 'WORLD'});
-});
+//});
+
+/*io.use(function(socket, next) {
+    try {
+        var data = socket.handshake || socket.request;
+        if (! data.headers.cookie) {
+            return next(new Error('Missing cookie headers'));
+        }
+        console.log('cookie header ( %s )', JSON.stringify(data.headers.cookie));
+        var cookies = cookie.parse(data.headers.cookie);
+        console.log('cookies parsed ( %s )', JSON.stringify(cookies));
+        if (! cookies[COOKIE_NAME]) {
+            return next(new Error('Missing cookie ' + COOKIE_NAME));
+        }
+        var sid = cookieParser.signedCookie(cookies[COOKIE_NAME], COOKIE_SECRET);
+        if (! sid) {
+            return next(new Error('Cookie signature is not valid'));
+        }
+        console.log('session ID ( %s )', sid);
+        data.sid = sid;
+        sessionStore.get(sid, function(err, session) {
+            if (err) return next(err);
+            if (! session) return next(new Error('session not found'));
+            data.session = session;
+            next();
+        });
+    } catch (err) {
+        console.error(err.stack);
+        next(new Error('Internal server error'));
+    }
+});*/
