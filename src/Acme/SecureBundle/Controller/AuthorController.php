@@ -544,52 +544,68 @@ class AuthorController extends Controller
                 $bidValidate = new BidFormValidate();
                 $showDialogConfirmSelection = Helper::getClientSelectedBid($user, $order);
                 $formBid = $this->createForm(new BidForm(), $bidValidate);
-                if (is_numeric($num) && $num > 0 && $request->isXmlHttpRequest() && isset($postDataFormBid)) {
+                $clientFiles = Helper::getOrderFiles($order, 'client', $user);
+                //var_dump($clientFiles);die;
+                if (Helper::isCorrectOrder($num) && $request->isXmlHttpRequest() && isset($postDataFormBid)) {
                     $formBid->handleRequest($request);
                     if ($formBid->isValid()) {
                         $postData = $request->request->get('formBid');
                         Helper::setAuthorBid($postData, $user, $order);
                         return new Response(json_encode(array('response' => 'valid')));
-                    } else {
-                        $arrayResponse = Helper::getFormErrors($formBid);
-                        return  new Response(json_encode(array('response' => $arrayResponse)));
                     }
+                    $arrayResponse = Helper::getFormErrors($formBid);
+                    return new Response(json_encode(array('response' => $arrayResponse)));
                 }
+                $bids = Helper::getMaxMinOrderBids($order, $user);
+                $obj = [];
+                $obj['clientLink'] = $clientLink;
+                $obj['clientFiles'] = $clientFiles;
+                $obj['confirmSelection'] = $showDialogConfirmSelection;
+                $obj['bids'] = $bids[0];
+                //var_dump($bids[0]);die;
+                $obj['userLogin'] = $user->getLogin();
+                $obj['userId'] = $user->getId();
+                $obj['client']['login'] = $order->getUser()->getLogin();
+                //$obj['client']['status'] = $order->getUser()->getIsActive();
+                $obj['client']['status'] = 1;
+                $shortTask = Helper::getCutSentence($order->getTask(), 200, ' подробнее...');
+                $order->setShortTask($shortTask);
                 return $this->render(
-                    'AcmeSecureBundle:Author:order_select.html.twig', array('formBid' => $formBid->createView(), 'files' => $filesOrder, 'order' => $order, 'client' => $clientLink, 'bids' => "", 'showDialogConfirmSelection' => $showDialogConfirmSelection)
+                    'AcmeSecureBundle:Author:order_select.html.twig', array('formBid' => $formBid->createView(), 'order' => $order, 'obj' => $obj)
                 );
             }
         }
         elseif (Helper::isCorrectOrder($num) && $request->isXmlHttpRequest()) {
             //$cache = $this->get('winzou_cache.apc');
-            $order = Helper::getOrderByNumForAuthor($num, $user);
-            $user = $this->getUser();
-            //$lastId = $request->request->get('lastId');
-            $bids = Helper::getAllAuthorsBidsForSelectedOrder($user, $order);
-            $nd = $request->request->get('nd');
             $action = $request->request->get('action');
-            if (isset($nd)) {
-                $response = new Response();
-                foreach($bids as $index => $bid) {
-                    $dateBid =  $bid->getDateBid();
-                    $dateBid = $dateBid->format("d.m.Y") . "<br><span class='grid-cell-time'>" . $dateBid->format("H:i") . "</span>";
-                    $response->rows[$index]['id'] = $bid->getId();
-                    $response->rows[$index]['cell'] = array(
-                        $bid->getId(),
-                        $bid->getSum(),
-                        $bid->getDay(),
-                        $bid->getIsClientDate(),
-                        $dateBid,
-                        $bid->getComment(),
-                        ""
-                    );
-                }
-                return new JsonResponse($response);
-            }
             if (isset($action)) {
-                if ($action == 'deleteBid') {
+                $user = $this->getUser();
+                $order = Helper::getOrderByNumForAuthor($num, $user);
+                if ($action == 'getAuthorBids') {
+                    $response = new Response();
+                    $bids = Helper::getAllAuthorsBidsForSelectedOrder($user, $order);
+                    foreach($bids as $index => $bid) {
+                        $dateBid =  $bid->getDateBid();
+                        $dateBid = $dateBid->format("d.m.Y") . "<br><span class='grid-cell-time'>" . $dateBid->format("H:i") . "</span>";
+                        $response->rows[$index]['id'] = $bid->getId();
+                        $response->rows[$index]['cell'] = array(
+                            $bid->getId(),
+                            $bid->getSum(),
+                            $bid->getDay(),
+                            $bid->getIsClientDate(),
+                            $dateBid,
+                            $bid->getComment(),
+                            ""
+                        );
+                    }
+                    return new JsonResponse($response);
+                } elseif ($action == 'deleteBid') {
                     $bidId = $request->request->get('bidId');
                     $actionResponse = Helper::deleteSelectedAuthorBid($bidId, $user, $order);
+                    return new Response(json_encode(array('action' => $actionResponse)));
+                } elseif ($action == 'refreshBid') {
+                    $bidId = $request->request->get('bidId');
+                    $actionResponse = Helper::refreshSelectedAuthorBid($bidId, $user, $order);
                     return new Response(json_encode(array('action' => $actionResponse)));
                 } elseif ($action == 'confirmSelection' || $action == 'failSelection') {
                     $bidId = $request->request->get('bidId');
@@ -720,10 +736,6 @@ class AuthorController extends Controller
                 }
                 return new Response(json_encode(array('response' => $response)));
             }
-            $outputPsValidate = new OutputPsFormValidate();
-            $formOutputPs = $this->createForm(new OutputPsForm(), $outputPsValidate);
-            $formOutputPs->handleRequest($request);
-
             $psValidate = new CreatePsFormValidate();
             $formCreatePs = $this->createForm(new AuthorCreatePsForm(), $psValidate);
             $formCreatePsCloned = clone $formCreatePs;
@@ -767,7 +779,7 @@ class AuthorController extends Controller
             }
             $userPs = Helper::getUserPsByUser($user);
             return $this->render(
-                'AcmeSecureBundle:Author:settings.html.twig', array('formCreatePs' => $formCreatePsCloned->createView(), 'formOutputPs' => $formOutputPs->createView(), 'formMailOptions' => $formMailOptions->createView(), 'user' => $user, 'userPs' => $userPs, 'showWindow' => $showWindow)
+                'AcmeSecureBundle:Author:settings.html.twig', array('formCreatePs' => $formCreatePsCloned->createView(), 'formMailOptions' => $formMailOptions->createView(), 'user' => $user, 'userPs' => $userPs, 'showWindow' => $showWindow)
             );
         }
     }
@@ -788,6 +800,7 @@ class AuthorController extends Controller
                 throw $this->createNotFoundException();
             }
         } elseif ($type == 'attachments') {
+
             $filePath = $basePath . 'attachments/orders/' . $num . '/author/' . $filename;
         }
         if (!file_exists($filePath)) {
@@ -906,6 +919,37 @@ class AuthorController extends Controller
                 'AcmeSecureBundle:Client:action_info.html.twig', array('mode' => 'clientView', 'user' => $user)
             );
         }*/
+    }
+
+    /**
+     * @Template()
+     * @return array
+     */
+    public function outputMoneyAction(Request $request)
+    {
+        $user = $this->getUser();
+        $outputPsValidate = new OutputPsFormValidate($user);
+        $outputPsForm = new OutputPsForm();
+        $formOutputPs = $this->createForm($outputPsForm, $outputPsValidate);
+        $countUserPs = $outputPsForm->getCountUserPs();
+        if ($countUserPs) {
+            if ($request->isXmlHttpRequest()) {
+                $formOutputPs->handleRequest($request);
+                $postData = $request->request->get('formOutputPs');
+                if ($formOutputPs->isValid()) {
+                    $response = Helper::createMoneyOutput($user, $postData);
+                    return new Response(json_encode(array('response' => $response)));
+                }
+                $arrayResponse = Helper::getFormErrors($formOutputPs);
+                return new Response(json_encode(array('formError' => $arrayResponse)));
+            }
+            return $this->render(
+                'AcmeSecureBundle:Author:output_money.html.twig', array('formOutputPs' => $formOutputPs->createView(), 'user' => $user)
+            );
+        }
+        return $this->render(
+            'AcmeSecureBundle:Author:output_money.html.twig', array('formOutputPs' => null, 'user' => $user)
+        );
     }
 
 }

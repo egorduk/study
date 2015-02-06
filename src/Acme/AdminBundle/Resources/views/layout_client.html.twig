@@ -1,0 +1,154 @@
+{% extends "TwigBundle::layout.html.twig" %}
+{% block head %}
+    {% block stylesheets %}
+        <link href="{{ asset('bundles/css/bootstrap.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/css/bootstrap-theme.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/css/window.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/css/select2.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/css/fontello.css') }}" rel="stylesheet" charset="UTF-8"/>
+    {% endblock %}
+    {% block javascripts %}
+        <!--<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>-->
+        <script type="text/javascript" src="{{ asset('bundles/js/jquery-2.1.0.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jquery-ui-1.10.4.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jquery-migrate-1.0.0.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/bootstrap.js') }}"></script>
+        <script src="{{ asset('bundles/js/tinymce/tiny_mce.js') }}"></script>
+        <script src="{{ asset('bundles/js/select2.min.js') }}"></script>
+    {% endblock %}
+{% endblock %}
+{% block title '' %}
+{% block header %}
+    <div class="row">
+        <div class="col-md-12" style="height:50px">
+            <p align="center"></p>
+        </div>
+    </div>
+{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-2">
+            <style>
+                #leftMenu .accordion-group {
+                    margin-bottom: 0px;
+                    border:0px;
+                    -webkit-border-radius: 0px;
+                    -moz-border-radius: 0px;
+                    border-radius: 0px;
+                }
+                #leftMenu .accordion-heading {
+                    height: 34px;
+                    border-top: 1px solid #717171; /* inner stroke */
+                    border-bottom: 1px solid #5A5A5A; /* inner stroke */
+                    background-color: #353535; /* layer fill content */
+                    background-image: -moz-linear-gradient(90deg, #595b59 0%, #616161 100%); /* gradient overlay */
+                    background-image: -o-linear-gradient(90deg, #595b59 0%, #616161 100%); /* gradient overlay */
+                    background-image: -webkit-linear-gradient(90deg, #595b59 0%, #616161 100%); /* gradient overlay */
+                    background-image: linear-gradient(90deg, #595b59 0%, #616161 100%); /* gradient overlay */
+                    list-style-type:none;
+                }
+                #leftMenu .accordion-heading  a{
+                    color: #cbcbcb; /* text color */
+                    text-shadow: 0 1px 0 #3b3b3b; /* drop shadow */
+                    text-decoration:none;
+                    font-weight:bold;
+                }
+                #leftMenu .accordion-heading  a:hover{
+                    color:#ccc
+                }
+                #leftMenu .accordion-heading .active {
+                    width: 182px;
+                    height: 34px;
+                    border: 1px solid #5b5b5b; /* inner stroke */
+                    background-color: #353535; /* layer fill content */
+                    background-image: -moz-linear-gradient(90deg, #4b4b4b 0%, #555 100%); /* gradient overlay */
+                    background-image: -o-linear-gradient(90deg, #4b4b4b 0%, #555 100%); /* gradient overlay */
+                    background-image: -webkit-linear-gradient(90deg, #4b4b4b 0%, #555 100%); /* gradient overlay */
+                    background-image: linear-gradient(90deg, #4b4b4b 0%, #555 100%); /* gradient overlay */
+                }
+                .col-md-2 {
+                    width: 9.6%;
+                }
+            </style>
+            <div class="accordion" id="leftMenu">
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" href="{{ path('secure_client_index') }}">
+                            <i class="icon-home"></i> Домой
+                        </a>
+                    </div>
+                </div>
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseTwo">
+                            <i class="icon-user-6"></i> Профиль
+                        </a>
+                    </div>
+                    <div id="collapseTwo" class="accordion-body collapse" style="height: 0px; ">
+                        <div class="accordion-inner">
+                            <ul>
+                                <li>
+                                    <a class="accordion-toggle" href="{{ path('secure_client_profile', {'type': 'view'}) }}">Просмотр</a>
+                                </li>
+                                <li>
+                                    <a class="accordion-toggle" href="{{ path('secure_client_profile', {'type': 'edit'}) }}">Изменение
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseThree">
+                            <i class="icon-docs"></i> Заказы
+                        </a>
+                    </div>
+                    <div id="collapseThree" class="accordion-body collapse" style="height: 0px; ">
+                        <div class="accordion-inner">
+                            <ul>
+                                <li>
+                                    <a class="accordion-toggle" href="{{ path('secure_client_orders', {'type': 'view'}) }}">Созданные заказы</a>
+                                </li>
+                                <li>
+                                    <a class="accordion-toggle" href="{{ path('secure_client_orders', {'type': 'create'}) }}">Создать новый заказ</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle"href="{{ path('secure_client_settings', {'type': 'view'}) }}">
+                            <i class="icon-cog"></i> Настройки
+                        </a>
+                    </div>
+                </div>
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" href="{{ path('logout') }}">
+                            <i class="icon-logout-1"></i> Выход
+                        </a>
+                    </div>
+                </div>
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" href="">
+                            <i class="icon-help"></i> Помощь
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}
+    <div class="row">
+        <div class="col-md-12" style="height:100px">
+            <p align="center"></p>
+        </div>
+    </div>
+{% endblock %}

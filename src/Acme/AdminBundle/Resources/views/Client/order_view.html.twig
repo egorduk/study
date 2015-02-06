@@ -1,0 +1,423 @@
+{% extends "AcmeSecureBundle::layout_client.html.twig" %}
+{% block title "Просмотр созданных заказов" %}
+    {% block content %}
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/datepicker.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/datepicker3.css') }}" />
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.fmatter.js') }}"></script>
+        <div class="">
+            <style type="text/css">
+                .alt-row {
+                    background-color: #f3f3f3;
+                    background-image: none;
+                }
+                #help-popover {
+                    cursor: pointer;
+                }
+                .popover {
+                    max-width: none;
+                }
+                .ui-jqgrid .ui-jqgrid-htable th div {
+                    height: 21px;
+                }
+                .grid-cell-time {
+                    color: blue;
+                }
+                .show-order, #dialog-configure-order {
+                    display: none;
+                }
+                .label-primary {
+                    background-color: #0088cc;
+                }
+                #ui-id-1 {
+                    color: blue;
+                }
+                .input-group-addon {
+                    cursor: pointer;
+                }
+                .icon-warning {
+                    color: red;
+                    font-size: 20px;
+                    padding-right: 10px;
+                }
+                .bootstrap-focus {
+                    border: 1px solid #66AFE9 !important;
+                    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+                    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+                    z-index: 2;
+                }
+                .bootstrap-blur {
+                    border-color: #CCCCCC;
+                    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+                }
+                .bootstrap-error {
+                    border-color: #E9322D!important;
+                    box-shadow: 0 0 6px #E9322D!important;
+                }
+                .grid-cell-author-response {
+                    color: green;
+                    font-size: 20px;
+                }
+                .grid-cell-num {
+                    color: black;
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+                input.text {
+                    margin-bottom:15px;
+                    width:100%;
+                    padding: .4em;
+                }
+                fieldset {
+                    padding:0;
+                    border:0;
+                    margin-top:15px;
+                }
+                textarea {
+                    display: none;
+                }
+            </style>
+            <div class="">
+                <table id="listOrders"></table>
+                <div id="pagerOrders"></div>
+                <div id="dialog-configure-order" title="Управление заказом">
+                    <p class="validateTips"></p>
+                    <form>
+                        <fieldset>
+                            <label for="task">Задание</label>
+                            <textarea name="task" id="task"></textarea>
+                            <label for="new_date_expire">Выполнение до</label>
+                            <div class="input-group">
+                                <input type="text" name="new_date_expire" id="new_date_expire" required placeholder="Выберите дату..." value="" class="form-control">
+                                <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <script>
+                    $(document).ready(function() {
+                        $.fn.button.noConflict();
+                        var grid = $("#listOrders");
+                        grid.jqGrid({
+                            url: {{ path('secure_client_orders', { type: 'view' }) | json_encode | raw }},
+                            datatype: 'json',
+                            mtype: 'POST',
+                            recordtext: "Просмотр заказов {0} - {1}",
+                            colNames:['','№ заказа','Тип работы', 'Тема работы', 'Предмет', 'Задание', 'Статус', 'Выполнение до', 'Ставки', 'Дата создания', 'Действия',''],
+                            colModel :[
+                                {name:'id',index:'id',key:true,search:false,hidden:true},
+                                {name:'num',index:'num',width:100,align:'center',resizable:false,editable:false,searchoptions:{sopt:['eq','ne','bw','cn']},formatter:customNum},
+                                {name:'type_order',index:'type_order',width:150,align:'center',resizable:false,editable:false, searchoptions:{sopt:['eq','ne','bw','cn']}},
+                                {name:'theme',index:'theme',width:350,align:'center',resizable:false,editable:false, searchoptions:{sopt:['eq','bw','cn']}},
+                                {name:'subject',index:'subject',width:170,align:'center',resizable:false, editable:false, searchoptions:{sopt:['eq','ne','bw','cn']}},
+                                {name:'task',index:'task',width:250,align:'center',resizable:false, editable:false, searchoptions:{sopt:['eq','bw','cn']}},
+                                {name:'status_order',index:'status_order',width:160,align:'center',resizable:false,editable:false,search:false},
+                                {name:'date_expire',index:'date_expire',width:160,align:'center',resizable:false,editable:false,search:false},
+                                {name:'response_author',index:'response_author',width:90,align:'center',resizable:false,editable:false,search:false,sortable:false},
+                                {name:'date_create',index:'date_create',width:160,align:'center',resizable:false,editable:false,search:false},
+                                {name:'action',width:110,align:'center',sortable:false,search:false,resize:false,formatter:function() {
+                                    return "<div class='delete-order' style='margin-left:8px;'>" +
+                                            "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Удалить заказ' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                            "<span class='icon-trash-1'></span></div></div>" +
+                                            "<div class='hide-order' style='margin-left:8px;'>" +
+                                            "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Скрыть заказ от авторов' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                            "<span class='icon-eye-off'></span></div></div>" +
+                                            "<div class='show-order' style='margin-left:8px;'>" +
+                                            "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Показать заказ авторам' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                            "<span class='icon-eye'></span></div></div>" +
+                                            "<div class='configure-order' style='margin-left:8px;'>" +
+                                            "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Изменить задание/срок' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                            "<span class='icon-cogs'></span></div></div>";
+                                }},
+                                {name:'is_show_author',index:'is_show_author',key:true,search:false,hidden:true}
+                            ],
+                            pager: $('#pagerOrders'),
+                            rowNum: 20,
+                            rowList: [20,50],
+                            viewrecords: true,
+                            hidegrid: false,
+                            caption: 'Таблица созданных заказов',
+                            height: '650',
+                            altRows: true,
+                            altclass:'alt-row',
+                            loadComplete : function() {
+                                function getRowId(e) {
+                                    var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'), rowId = $tr.attr('id');
+                                    return rowId;
+                                }
+                                function getRow(a) {
+                                    return a.parent().parent();
+                                }
+                                function actionHideOrder(a, type) {
+                                    var blockShowOrder = a.find(".show-order"), blockHideOrder = a.find(".hide-order");
+                                    if (type == "show") {
+                                        blockShowOrder.hide();
+                                        blockHideOrder.show();
+                                    } else {
+                                        blockShowOrder.show();
+                                        blockHideOrder.hide();
+                                    }
+                                }
+                                $(".delete-order").click(function(e) {
+                                    var rowId = getRowId(e);
+                                    if (rowId) {
+                                        $.ajax({
+                                            url: 'delete',
+                                            type: 'POST',
+                                            data: 'orderId=' + rowId,
+                                            success: function(response) {
+                                                var resposeObject = window.JSON.parse(response);
+                                                if (resposeObject.action) {
+                                                   //grid.trigger('reloadGrid');
+                                                    grid.delRowData(rowId);
+                                                }
+                                            }
+                                        });
+                                    }
+                                });
+                                $(".hide-order").click(function(e) {
+                                    var rowId = getRowId(e);
+                                    var row = getRow($(this));
+                                    if (rowId) {
+                                        $.ajax({
+                                            url: 'hide',
+                                            type: 'POST',
+                                            data: 'orderId=' + rowId,
+                                            success: function(response) {
+                                                var resposeObject = window.JSON.parse(response);
+                                                if (resposeObject.action) {
+                                                    //grid.trigger('reloadGrid');
+                                                    grid.setCell(rowId,'status_order',"Скрытый");
+                                                    actionHideOrder(row, "hide");
+                                                }
+                                            }
+                                        });
+                                    }
+                                });
+                                $(".show-order").click(function(e) {
+                                    var rowId = getRowId(e);
+                                    var row = getRow($(this));
+                                    if (rowId) {
+                                        $.ajax({
+                                            url: 'show',
+                                            type: 'POST',
+                                            data: 'orderId=' + rowId,
+                                            success: function(response) {
+                                                var resposeObject = window.JSON.parse(response);
+                                                if (resposeObject.action) {
+                                                    grid.trigger('reloadGrid');
+                                                    actionHideOrder(row, "show");
+                                                }
+                                            }
+                                        });
+                                    }
+                                });
+                                $(".configure-order").click(function(e) {
+                                    var rowId = getRowId(e);
+                                    var newDateExpire = $("#new_date_expire");
+                                    if (rowId) {
+                                        tinyMCE.init({
+                                            mode : "textareas",
+                                            width : 250,
+                                            height : 250,
+                                            language : 'ru',
+                                            plugins : "preview",
+                                            theme : "advanced",
+                                            theme_advanced_buttons1 : "bold,italic,underline,strikethrough,removeformat,formatselect,forecolor,backcolor,link,unlink,undo,redo,preview,justifyleft,justifycenter,justifyright,bullist,numlist,pastetext",
+                                            theme_advanced_buttons2 : "",
+                                            theme_advanced_buttons3 : "",
+                                            theme_advanced_toolbar_align : "left",
+                                            relative_urls : false,
+                                            setup : function(ed) {
+                                                ed.onInit.add(function(ed) {
+                                                    var mceLayout = $(".mceLayout");
+                                                    mceLayout.css("border-radius", "2px");
+                                                    mceLayout.css("border", "1px solid #CCCCCC");
+                                                    ed.getDoc().addEventListener("click", function(){
+                                                        setBootstrapStyle();
+                                                        tinyMCE.activeEditor.focus();
+                                                        newDateExpire.removeClass('bootstrap-focus')
+                                                    });
+                                                    ed.getDoc().addEventListener("blur", function(){
+                                                        setDefaultStyleMce();
+                                                    }, false);
+                                                    tinyMCE.activeEditor.focus();
+                                                    setBootstrapStyle();
+                                                });
+                                                ed.onClick.add(function(ed,e) {
+                                                    newDateExpire.datepicker('hide');
+                                                });
+                                            }
+                                        });
+                                        $("#dialog-configure-order").dialog({
+                                            resizable: false,
+                                            autoclose: false,
+                                            height: 530,
+                                            width: 510,
+                                            modal: true,
+                                            buttons: {
+                                                "Сохранить": function() {
+                                                    var mceLayout = $(".mceLayout");
+                                                    var tinyText = getTinyTrimText();
+                                                    if (tinyText.length <= 0) {
+                                                        mceLayout.addClass('bootstrap-error');
+                                                        return false;
+                                                    } else {
+                                                        var newTask = getTinyTextContent();
+                                                        var newDateExpire = $("#new_date_expire").val();
+                                                        $.ajax({
+                                                            url: 'save_config',
+                                                            type: 'POST',
+                                                            data: 'orderId=' + rowId + '&newDateExpire=' + newDateExpire + '&newTask=' + newTask,
+                                                            success: function(response) {
+                                                                var responseObject = window.JSON.parse(response);
+                                                                if (responseObject.action == "true") {
+                                                                    mceLayout.removeClass('bootstrap-error');
+                                                                    $("#dialog-configure-order").dialog("close");
+                                                                    grid.trigger('reloadGrid');
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+                                                },
+                                                "Отмена": function() {
+                                                    $(this).dialog("close");
+                                                }
+                                            },
+                                            close: function() {
+                                                var tm = tinyMCE.get(0);
+                                                tm.setContent("");
+                                                newDateExpire.removeClass('bootstrap-focus');
+                                                $(".mceLayout").removeClass('bootstrap-error');
+                                            }
+                                        });
+                                        $.ajax({
+                                            url: 'load_config',
+                                            type: 'POST',
+                                            data: 'orderId=' + rowId,
+                                            success: function(response) {
+                                                var responseObject = window.JSON.parse(response);
+                                                if (responseObject.action == "true") {
+                                                    var tm = tinyMCE.get(0);
+                                                    tm.setContent(responseObject.task);
+                                                    newDateExpire.datepicker('update', responseObject.dateExpire);
+                                                    var today = new Date();
+                                                    var dd = today.getDate() + 1;
+                                                    var mm = today.getMonth() + 1;
+                                                    var yyyy = today.getFullYear();
+                                                    if(dd < 10) {
+                                                        dd = '0' + dd
+                                                    }
+                                                    if(mm < 10) {
+                                                        mm = '0' + mm
+                                                    }
+                                                    var currentDate = dd + '/' + mm + '/' + yyyy;
+                                                    newDateExpire.datepicker('setStartDate', currentDate);
+                                                    $("#dialog-configure-order").dialog();
+                                                    var range = tinyMCE.DOM.createRng();
+                                                    var newNode = tm.dom.select("p")[0];
+                                                    range.setStart(newNode, 0);
+                                                    range.setEnd(newNode, 1);
+                                                    tm.selection.setRng(range);
+                                                    tm.selection.collapse(false);
+                                                }
+                                            }
+                                        });
+                                        newDateExpire.datepicker({
+                                            todayHighlight: true,
+                                            format: "dd/mm/yyyy",
+                                            autoclose: true,
+                                            language: 'ru',
+                                            todayBtn: true
+                                        });
+                                    }
+                                });
+                                //$(".ui-widget-content td").removeAttr('title');
+                                var grids = grid.getDataIDs();
+                                var gridsLength = grids.length;
+                                for (var i = 0; i < gridsLength; i++) {
+                                    var selectedRowOrder = $("tr.jqgrow#" + grids[i]);
+                                    var blockShowOrder = selectedRowOrder.find(".show-order"), blockHideOrder = selectedRowOrder.find(".hide-order");
+                                    if (Number(grid.getCell(grids[i], "is_show_author"))) {
+                                        blockShowOrder.hide();
+                                        blockHideOrder.show();
+                                    } else {
+                                        blockHideOrder.hide();
+                                        blockShowOrder.show();
+                                    }
+                                }
+                            },
+                            onCellSelect: function(rowid, iCol) {
+                                if (iCol != 10) {
+                                    //var rowData = grid.getRowData(rowid);
+                                    //var num = rowData['num'];
+                                    num = $("tr.jqgrow#" + rowid).find('td').eq(1).attr('title');
+                                    var url = "{{ path("secure_client_order", {'num': 'num'}) }}";
+                                    location.href = url.replace("num", num);
+                                }
+                            }
+                        }).navGrid('#pagerOrders',{view:false,search:true,del:false,add:false,edit:false,refresh:true,searchtext:'Поиск',refreshtext:'Обновить'},
+                                {},{},{},{closeOnEscape:true, multipleSearch:false, closeAfterSearch:true},{}
+                        );
+                        grid.setCaption('Таблица новых заказов ' + '<span id="help-popover" class="icon-help-circled" data-container="body" data-trigger="click" data-placement="bottom"></span>');
+                        var task = $("#task"), newDateExpire = $("#new_date_expire");
+                        function getTinyTrimText() {
+                            var tm = tinyMCE.get(0);
+                            var tinyText = $(tm.getBody()).text();
+                            tinyText = tinyText.trim();
+                            return tinyText;
+                        }
+                        function getTinyTextContent() {
+                            var tm = tinyMCE.get(0);
+                            var tinyTextContent = tm.getContent();
+                            return tinyTextContent;
+                        }
+                        function setBootstrapStyle() {
+                            $(".mceLayout").addClass('bootstrap-focus');
+                        }
+                        function setDefaultStyleMce() {
+                            $(".mceLayout").removeClass('bootstrap-focus');
+                        }
+                        newDateExpire.on("click", function() {
+                            $(this).addClass('bootstrap-focus');
+                            $(this).datepicker('show');
+                        });
+                        function customNum(cellvalue) {
+                            return ("<span class='grid-cell-num'>" + cellvalue + "</span>");
+                        }
+                        $(".input-group-addon").click(function(e){
+                            newDateExpire.datepicker('show');
+                            newDateExpire.addClass('bootstrap-focus');
+                            $(".mceLayout").removeClass('bootstrap-focus');
+                            /*var tm = tinyMCE.get(0);
+                            var controlManager = tm.controlManager;
+                            var elements = controlManager.controls;
+                            console.log(tm);
+                            tm.theme.toolbarGroup.disabled = 1;
+                            $.each(elements, function(element) {
+                                controlManager.setActive(element, false);
+                            });*/
+                        });
+                        $(".ui-jqgrid-titlebar").live('mouseenter', function() {
+                            $("#help-popover").popover({
+                                html : true,
+                                content : function() {
+                                    return "Для поиска нажмите на <div style=\"display: inline-block\"><span class=\"ui-icon ui-icon-search\"></span></div></br>" +
+                                            "Для сброса результата поиска нажмите на <div style=\"display: inline-block\"><span class=\"ui-icon ui-icon-arrowreturnthick-1-w\"></span></div></br>" +
+                                            "Для обновления таблицы нажмите на <div style=\"display: inline-block\"><span class=\"ui-icon ui-icon-refresh\"></span></div></br>" +
+                                            "Для удаления заказа нажмите на <div style=\"display: inline-block\"><span class=\"icon-trash-1\"></span></div></br>" +
+                                            "Для скрытия заказа от исполнителей нажмите на <div style=\"display: inline-block\"><span class=\"icon-eye-off\"></span></div></br>" +
+                                            "Для изменения задания/срока нажмите на <div style=\"display: inline-block\"><span class=\"icon-cogs\"></span></div>";
+                                }
+                            });
+                        });
+                    });
+                </script>
+            </div>
+            <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-datepicker.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/locales/bootstrap-datepicker.ru.js') }}"></script>
+        </div>
+    {% endblock %}

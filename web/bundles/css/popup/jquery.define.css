@@ -1,0 +1,75 @@
+.definition {
+    display: inline;
+    position: relative;
+    border-bottom: 1px solid red;
+    cursor: help;
+}
+
+.definition:hover {
+    text-decoration: none;
+}
+
+.definition_tooltip {
+    background-color: #F0F0F0;
+    /*background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+    /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+    /*background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+    /*background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+    /*background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+    /*background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2ffffff', endColorstr='#f2ededed',GradientType=0 ); /* IE6-9 */
+    -webkit-box-shadow: 2px 2px 2px 2px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    2px 2px 2px 2px rgba(50, 50, 50, 0.75);
+    box-shadow:         2px 2px 2px 2px rgba(50, 50, 50, 0.75);
+    border-radius: .5em;
+    margin-top: 15px;
+    font-size: 16px;
+   /* font-style: italic;*/
+    display: block;
+    left: 50%;
+    margin-left: -135px;
+    padding: 20px;
+    width: 600px;
+    max-width: 600px;
+    position: absolute;
+    z-index: 98;
+}
+
+.definition_tooltip:before {
+    border: solid;
+    /*border-color: #ededed transparent;*/
+    border-color: #F0F0F0 transparent;
+    border-width: 20px;
+    border-top-width: 0;
+    border-bottom-width: 10px;
+    border-top-style:none;
+    top: -10px;
+    content: "";
+    display: block;
+    left: 25%;
+    margin-left: -20px;
+    position: absolute;
+    z-index: 99;
+}
+/*.definition .definition_tooltip:after {
+    border: solid;
+    border-color: #ededed transparent;
+    border-color: rgba(50,50,50,1) transparent;
+    border-width: 11px 22px 0 22px;
+    top: 100%;
+    content: "";
+    display: block;
+    left: 50%;
+    margin-left: -24px;
+    position: absolute;
+}*/
+
+/*.definition:hover .definition_tooltip {
+    display: block;
+}*/
+
+#close-popup {
+    float: right;
+    margin-right: -15px;
+    margin-top: -15px;
+}

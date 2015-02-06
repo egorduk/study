@@ -1,0 +1,35 @@
+{% extends "AcmeSecureBundle::layout_author.html.twig" %}
+{% block title "Просмотр заказа" %}
+    {% block content %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <p class="block-num">Номер заказа: {{ order.num }}</p>
+                    <hr style="border:solid 1px black">
+                    <p class="block-theme">Тема работы: {{ order.theme }}</p>
+                    <p>Задание: {{ order.task | raw }}</p>
+                    <p>Объем работы: {{ order.countsheet }} стр.</p>
+                    <p>Оригинальность работы: {{ order.originality }}%</p>
+                    <p>Предмет: {{ order.subjectorder.childname }}</p>
+                    <p>Тип работы: {{ order.typeorder.name }}</p>
+                    <p id="block-status-order">Статус заказа: {{ order.statusorder.name }}</p>
+                    <p>Дата создания: {{ order.datecreate.format("d.m.Y H:i") }}</p>
+                    <p id="block-date-expire">Выполнение до: {{ order.dateexpire.format("d.m.Y H:i") }}</p>
+                    <p>Заказчик: <div id="block-client">{{ client | raw }}</div></p>
+                </div>
+            </div>
+            {% if order.clientcomment != '' and order.clientdegree != '' %}
+                <div class="row">
+                    <div id="block-client-response">
+                        <p>Комментарий: {{ order.clientcomment }}</p>
+                        <p>Оценка: {{ order.clientdegree }}</p>
+                    </div>
+                </div>
+            {% endif %}
+        <script>
+            $(document).ready(function() {
+                document.title = "Просмотр заказа № " + {{ order.num }};
+                //$.fn.button.noConflict();
+            });
+        </script>
+    {% endblock %}

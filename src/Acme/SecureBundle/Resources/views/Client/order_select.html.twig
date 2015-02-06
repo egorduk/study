@@ -3,13 +3,14 @@
     {% block content %}
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/chat/main.css') }}" />
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.fmatter.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.fmatter.js') }}"></script>
+        <script src="http://localhost:8008/socket.io/socket.io.js" defer></script>
         <style>
-            .alt-row {
-                background-color: #f3f3f3;
-                background-image: none;
+            .col-md-2 {
+                display: none;
             }
             .grid-cell-time {
                 color: blue;
@@ -88,7 +89,7 @@
             }
         </style>
         <div class="container">
-            <div class="row">
+            <!--<div class="row">
                 <div id="modal-window-success-auction">
                     <div id="success-window">
                         <div class="Message Message--green" id="js-timer">
@@ -177,9 +178,210 @@
                 </div>
             </div>
             <table id="listBids"></table>
-            <div id="pagerBids"></div>
+            <div id="pagerBids"></div>-->
+            <div class="demo">
+                <div class="chat">
+                    <div class="messages" id="messages"></div>
+                    <div class="panel">
+                        <span class="nick"></span>
+                        <textarea name="message_text" id="message_text"></textarea>
+                        <button type="button" id="btn-send-msg" class="btn btn-primary disabled">Отправить</button>
+                    </div>
+                    <div id="sidebar">
+                        <div id="count-msg"></div>
+                        <div id="online">
+                            <p style="display: none" id="author-status">{{ obj.author.login }}</p>
+                        </div>
+                        <div id="in-chat" class="hidden">
+                            <p>В чате</p>
+                        </div>
+                        <div id="is-writing"></div>
+                    </div>
+                </div>
+            </div>
             <script>
                 $(document).ready(function() {
+
+                    var messages = $("#messages"),
+                            message_txt = $("#message_text"),
+                            userLogin = '{{ obj.userLogin }}',
+                            orderId = {{ order.id }},
+                            userId = {{ obj.userId }},
+                            authorStatus = {{ obj.author.status }},
+                            authorLogin = '{{ obj.author.login }}',
+                            blockCountMsg = $("#count-msg"),
+                            btnSendMsg = $("#btn-send-msg"),
+                            inChat = $("#in-chat"),
+                            flagIsWriting = 0,
+                            mode = false,
+                            patternCheckEmail = /([a-z0-9_-]+\.)*[a-z0-9_-]+(@|sobaka|_|собака)[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}/i,
+                            patternCheckPhone = /((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,16}/i;
+
+                    if (authorStatus) {
+                        $("#author-status").toggle();
+                    }
+
+                    $('.chat .nick').text(userLogin);
+
+                    try {
+                        var socket = io.connect('http://localhost:8008');
+                    } catch(e) {
+                        systemMsg("Server off");
+                        return;
+                    }
+
+                    /*socket.on('connecting', function () {
+                        systemMsg('Соединение...');
+                    });*/
+
+                    socket.on("connect", function() {
+                        messages.html('');
+                        clearSidebarCountRecords();
+                        socket.emit("get all messages", {orderId: orderId});
+                        socket.emit("join to room", {room: orderId, name: userLogin, authorLogin: authorLogin});
+                        btnSendMsg.removeClass('disabled');
+                    });
+
+                    socket.on("response disconnect user", function() {
+                        inChat.addClass("hidden");
+                        //disconnectUser();
+                    });
+
+                    socket.on("disconnect", function() {
+                        disconnectUser();
+                    });
+
+                    /*socket.on("response disconnect current user", function() {
+                        alert('client');
+                        console.log('dfdfdf');
+                        //disconnectUser();
+                    });*/
+
+                    socket.on("response get all messages", function(data) {
+                        var countRows = 0;
+                        for (var key in data) {
+                            countRows++;
+                            userMsg(data[key].user_login, data[key].message, data[key].date_write);
+                        }
+                        setSidebarCountRecords(countRows);
+                    });
+
+                    socket.on("show new message", function(data) {
+                        //console.dir(data);
+                        userMsg(data.user_login, data.message, data.date_write);
+                        increaseCountMsg();
+                        message_txt.focus();
+                    });
+
+                    socket.on("user in room", function() {
+                        //console.dir(data);
+                        inChat.removeClass("hidden");
+                        socket.emit("request view current online");
+                    });
+
+                    socket.on("response view current online", function() {
+                        inChat.removeClass("hidden");
+                    });
+
+                    socket.on("response user write", function() {
+                        if (flagIsWriting == 0) {
+                            var msg = '<div id="msg-writing" class="msg system" style="display: none"><p>Печатает...</p></div>';
+                            $("#is-writing").append(msg);
+                            $("#msg-writing").fadeIn("slow", function() {
+                                flagIsWriting = 1;
+                            });
+                            setTimeout(function() {
+                                $("#msg-writing").fadeOut("slow", function() {
+                                    $(this).remove();
+                                    flagIsWriting = 0;
+                                });
+                            }, 2000);
+                        }
+                    });
+
+
+                    function disconnectUser() {
+                        systemMsg("Отключен");
+                        btnSendMsg.addClass('disabled');
+                        inChat.addClass("hidden");
+                    }
+
+                    message_txt.on("input", function(e) {
+                        socket.emit("request user write");
+                    });
+
+                    message_txt.on("keydown", function(e) {
+                        if (e.keyCode === 13 && e.ctrlKey) {
+                            sendMessage();
+                        }
+                    });
+
+                    function sendMessage() {
+                        var text = $("#message_text").val();
+                        //var a = $("#message_text").val().replace(/<br>/gi,"\n");
+                        //a = a.replace(/<a href=>/gi,"\n");
+                        message_txt.val("");
+                        if (text.length <= 0 || $.trim(text) == '') {
+                            return;
+                        }
+                        mode = patternCheckEmail.test(text) || patternCheckPhone.test(text);
+                        socket.emit("send message", {message: text, userId: userId, mode: mode});
+                    }
+
+                    function clearSidebarCountRecords() {
+                        blockCountMsg.html('');
+                    }
+
+                    btnSendMsg.click(function () {
+                        sendMessage();
+                    });
+
+                    function increaseCountMsg() {
+                        var digCountMsg = $("#dig-count"), countMsg = digCountMsg.html();
+                        countMsg++;
+                        digCountMsg.html(countMsg);
+                    }
+
+                    function systemMsg(message) {
+                        var m = '<div class="msg system">' + safe(message) + '</div>';
+                        messages.append(m).scrollTop(messages[0].scrollHeight);
+                    }
+
+                    function safe(str) {
+                        //return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                        //str.replace(/\r?\n/g, '<br>');
+                        //console.log($.trim(str));
+                        str = $.trim(str);
+                        str = filterStr(str);
+                        var a = str.replace(/\n|\r\n|\r/g, "<br>"), stringArray = a.split('<br>'), str1 = "";
+                        for (var i = 0; i < stringArray.length; i++) {
+                            var myString = stringArray[i];
+                            str1 += myString + "<br>";
+                        }
+                        return str1;
+                    }
+
+                    function userMsg(nick, message, date_write) {
+                        var m = '<div class="msg">' +
+                                '<p class="user">' + nick + ':</p> ' +
+                                '<div class="message">' + safe(message) + '</div>' +
+                                '<p class="date">' + date_write + '</p>' +
+                                '</div>';
+                        messages.append(m).scrollTop(messages[0].scrollHeight);
+                    }
+
+                    function setSidebarCountRecords(countRows) {
+                        blockCountMsg.append('<span>Кол-во сообщений: <span id="dig-count">' + countRows + '</span></span>');
+                    }
+
+                    function filterStr(str) {
+                        var r = str.replace(patternCheckEmail, "Warning");
+                        r = r.replace(patternCheckPhone, " Warning ");
+                        return r;
+                    }
+
+
+
                     document.title = "Просмотр заказа №" + {{ order.num }};
                     $.fn.button.noConflict();
                     var grid  = $("#listBids");

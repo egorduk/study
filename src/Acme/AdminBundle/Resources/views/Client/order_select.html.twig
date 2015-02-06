@@ -1,0 +1,624 @@
+{% extends "AcmeSecureBundle::layout_client.html.twig" %}
+{% block title "Просмотр заказа" %}
+    {% block content %}
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/chat/main.css') }}" />
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.fmatter.js') }}"></script>
+        <script src="http://localhost:8008/socket.io/socket.io.js" defer></script>
+        <style>
+            .col-md-2 {
+                display: none;
+            }
+            .grid-cell-time {
+                color: blue;
+            }
+            .ui-jqgrid .ui-jqgrid-htable th div {
+                height: 21px;
+            }
+            .label-primary {
+                background-color: #0088cc;
+            }
+            .thumbnail {
+                margin-bottom: 7px;
+            }
+            .ui-widget-content a, .ui-widget-content .ui-state-highlight a, .ui-widget-content .ui-state-hover a {
+                color: white;
+            }
+            #dialog-message-select-bid p .icon-hammer, #dialog-message-success-auction p .icon-hammer {
+                font-size: 45px;
+                color: green;
+            }
+            #dialog-message-select-bid, #dialog-message-error, .cancel-bid, #dialog-message-auction-bid, #dialog-message-success-auction  {
+                display: none;
+            }
+            .state-selected:hover, .state-selected {
+                color: white;
+                border: 1px solid green;
+                background: green;
+            }
+            #dialog-message-error p .icon-warning {
+                font-size: 45px;
+                color: orange;
+            }
+            #ui-id-2 {
+                color: orange;
+            }
+            #ui-id-1, .class-dialog-success-auction #ui-id-2 {
+                color: green;
+            }
+            .grid-cell-day {
+                color: blue;
+                font-size: 20px;
+            }
+            .grid-cell-comment {
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                font-style: italic;
+            }
+            .bootstrap-error {
+                border-color: #E9322D!important;
+                box-shadow: 0 0 6px #E9322D!important;
+            }
+            .block-theme {
+                font-size: 18px;
+            }
+            .block-num {
+                font-size: 20px;
+                color: green;
+            }
+            hr {
+                margin: 3px;
+            }
+            .ui-jqgrid tr.jqgrow td {
+                font-size: 18px !important;
+            }
+            .Message {
+                position: relative;
+            }*
+             .Message-body {
+                 font-size: 18px;
+             }
+            #modal-window-success-auction, #window-error-cancel-bid {
+                display: none;
+            }
+            .block-file{
+                border: 1px solid #000000;
+                width: 300px;
+            }
+        </style>
+        <div class="container">
+            <!--<div class="row">
+                <div id="modal-window-success-auction">
+                    <div id="success-window">
+                        <div class="Message Message--green" id="js-timer">
+                            <div class="Message-icon">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="Message-body">
+                                <p align="center">Торг предложен!</p>
+                            </div>
+                            <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div id="window-error-cancel-bid">
+                    <div id="success-window">
+                        <div class="Message Message--red" id="js-timer">
+                            <div class="Message-icon">
+                                <i class="icon-cancel-6"></i>
+                            </div>
+                            <div class="Message-body">
+                                <p align="center">Автор уже принял ставку!</p>
+                            </div>
+                            <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                    <div id="blockAboutOrder" style="margin-bottom: 40px">
+                        <p class="block-num">Номер заказа: {{ order.num }}</p>
+                        <hr style="border:solid 1px black">
+                        <p class="block-theme">Тема работы: {{ order.theme }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Задание: {{ order.task | raw }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Объем работы: {{ order.countsheet }} стр.</p>
+                        <hr style="border:solid 1px black">
+                        <p>Оригинальность работы: {{ order.originality }}%</p>
+                        <hr style="border:solid 1px black">
+                        <p>Предмет: {{ order.subjectorder.childname }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Тип работы: {{ order.typeorder.name }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Статус заказа: {{ order.statusorder.name }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Дата создания заказа: {{ order.datecreate.format("d.m.Y H:i") }}</p>
+                        <hr style="border:solid 1px black">
+                        <p>Выполнение заказа до: {{ order.dateexpire.format("d.m.Y H:i") }}</p>
+                        <hr style="border:solid 1px black">
+                        <div>
+                            {% for file in files %}
+                                <div class="block-file">
+                                    <p>Файл: {{ file.name }} </p>
+                                    <p>Размер: {{ file.size }} </p>
+                                    <p>Загружен: {{ file.dateupload.format("d.m.Y H:i") }} </p>
+                                    <p><a href="{{ folder }}{{ file.name }}">Ссылка<a/></p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="dialog-message-select-bid" title="Выбор ставки">
+                <p>
+                    <span class="icon-hammer" style="float:left; margin:0 7px 50px 0;"></span>
+                    Вы уверены, что согласны с выбранной ставкой исполнителя?
+                </p>
+            </div>
+            <div id="dialog-message-error" title="Уведомление">
+                <p>
+                    <span class="icon-warning" style="float:left; margin:0 7px 50px 0;"></span>
+                    Заказ удален, обновите таблицу со ставками либо страницу!
+                </p>
+            </div>
+            <div id="dialog-message-auction-bid" title="Предложить торг">
+                <label for="auction-price">Предложить цену</label>
+                <div class="input-group">
+                    <input type="text" name="auction-price" id="auction-price" required placeholder="Введите цену..." class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="6">
+                    <span class="input-group-addon"><i class="icon-rouble"></i></span>
+                </div>
+                <label for="auction-day">Предложить дней на выполнение</label>
+                <div class="input-group">
+                    <input type="text" name="auction-day" id="auction-day" required placeholder="Введите количество дней..." class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="3">
+                    <span class="input-group-addon"><i class="icon-clock-5"></i></span>
+                </div>
+            </div>
+            <table id="listBids"></table>
+            <div id="pagerBids"></div>-->
+            <div class="demo">
+                <div class="chat">
+                    <div class="messages" id="messages"></div>
+                    <div class="panel">
+                        <span class="nick"></span>
+                        <textarea name="message_text" id="message_text"></textarea>
+                        <button type="button" id="btn-send-msg" class="btn btn-primary disabled">Отправить</button>
+                    </div>
+                    <div id="sidebar">
+                        <div id="count-msg"></div>
+                        <div id="online">
+                            <p style="display: none" id="author-status">{{ obj.author.login }}</p>
+                        </div>
+                        <div id="in-chat" class="hidden">
+                            <p>В чате</p>
+                        </div>
+                        <div id="is-writing"></div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                $(document).ready(function() {
+
+                    var messages = $("#messages"),
+                            message_txt = $("#message_text"),
+                            userLogin = '{{ obj.userLogin }}',
+                            orderId = {{ order.id }},
+                            userId = {{ obj.userId }},
+                            authorStatus = {{ obj.author.status }},
+                            blockCountMsg = $("#count-msg"),
+                            btnSendMsg = $("#btn-send-msg"),
+                            inChat = $("#in-chat"),
+                            flagIsWriting = 0;
+
+                    if (authorStatus) {
+                        $("#author-status").toggle();
+                    }
+
+                    $('.chat .nick').text(userLogin);
+
+                    try {
+                        var socket = io.connect('http://localhost:8008');
+                    } catch(e) {
+                        systemMsg("Сервер выключен");
+                        return;
+                    }
+
+                    /*socket.on('connecting', function () {
+                        systemMsg('Соединение...');
+                    });*/
+
+                    socket.on("connect", function() {
+                        messages.html('');
+                        clearSidebarCountRecords();
+                        socket.emit("get all messages", {orderId: orderId});
+                        socket.emit("join to room", {room: orderId, name: userLogin});
+                        btnSendMsg.removeClass('disabled');
+                    });
+
+                    socket.on("response disconnect user", function() {
+                        inChat.addClass("hidden");
+                        //disconnectUser();
+                    });
+
+                    socket.on("disconnect", function() {
+                        disconnectUser();
+                    });
+
+                    /*socket.on("response disconnect current user", function() {
+                        alert('client');
+                        console.log('dfdfdf');
+                        //disconnectUser();
+                    });*/
+
+                    socket.on("response get all messages", function(data) {
+                        var countRows = 0;
+                        for (var key in data) {
+                            countRows++;
+                            userMsg(data[key].user_login, data[key].message, data[key].date_write);
+                        }
+                        setSidebarCountRecords(countRows);
+                    });
+
+                    socket.on("show new message", function(data) {
+                        //console.dir(data);
+                        userMsg(data.user_login, data.message, data.date_write);
+                        increaseCountMsg();
+                        message_txt.focus();
+                    });
+
+                    socket.on("user in room", function() {
+                        //console.dir(data);
+                        inChat.removeClass("hidden");
+                        socket.emit("request view current online");
+                    });
+
+                    socket.on("response view current online", function() {
+                        inChat.removeClass("hidden");
+                    });
+
+                    socket.on("response user write", function() {
+                        if (flagIsWriting == 0) {
+                            var msg = '<div id="msg-writing" class="msg system" style="display: none"><p>Печатает...</p></div>';
+                            $("#is-writing").append(msg);
+                            $("#msg-writing").fadeIn("slow", function() {
+                                flagIsWriting = 1;
+                            });
+                            setTimeout(function() {
+                                $("#msg-writing").fadeOut("slow", function() {
+                                    $(this).remove();
+                                    flagIsWriting = 0;
+                                });
+                            }, 2000);
+                        }
+                    });
+
+
+                    function disconnectUser() {
+                        systemMsg("Отключен");
+                        btnSendMsg.addClass('disabled');
+                        inChat.addClass("hidden");
+                    }
+
+                    message_txt.on("input", function(e) {
+                        socket.emit("request user write");
+                    });
+
+                    message_txt.on("keydown", function(e) {
+                        if (e.keyCode === 13 && e.ctrlKey) {
+                            sendMessage();
+                        }
+                    });
+
+                    function sendMessage() {
+                        var text = $("#message_text").val();
+                        //var a = $("#message_text").val().replace(/<br>/gi,"\n");
+                        //a = a.replace(/<a href=>/gi,"\n");
+                        if (text.length <= 0 || $.trim(text) == '') {
+                            return;
+                        }
+                        message_txt.val("");
+                        var pattern = /\S+[@|sobaka|_|собака]\S{2,6}\.\S{2,6}/gi;
+                        if (pattern.test(text)) {
+                            alert("piy");
+                        }
+                        socket.emit("send message", {message: text, userId: userId});
+                    }
+
+                    function clearSidebarCountRecords() {
+                        blockCountMsg.html('');
+                    }
+
+                    btnSendMsg.click(function () {
+                        sendMessage();
+                    });
+
+                    function increaseCountMsg() {
+                        var digCountMsg = $("#dig-count"), countMsg = digCountMsg.html();
+                        countMsg++;
+                        digCountMsg.html(countMsg);
+                    }
+
+                    function systemMsg(message) {
+                        var m = '<div class="msg system">' + safe(message) + '</div>';
+                        messages.append(m).scrollTop(messages[0].scrollHeight);
+                    }
+
+                    function safe(str) {
+                        //return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                        //str.replace(/\r?\n/g, '<br>');
+                        //console.log($.trim(str));
+                        str = $.trim(str);
+                        str = filterStr(str);
+                        var a = str.replace(/\n|\r\n|\r/g, "<br>"), stringArray = a.split('<br>'), str1 = "";
+                        for (var i = 0; i < stringArray.length; i++) {
+                            var myString = stringArray[i];
+                            str1 += myString + "<br>";
+                        }
+                        return str1;
+                    }
+
+                    function userMsg(nick, message, date_write) {
+                        var m = '<div class="msg">' +
+                                '<p class="user">' + nick + ':</p> ' +
+                                '<div class="message">' + safe(message) + '</div>' +
+                                '<p class="date">' + date_write + '</p>' +
+                                '</div>';
+                        messages.append(m).scrollTop(messages[0].scrollHeight);
+                    }
+
+                    function setSidebarCountRecords(countRows) {
+                        blockCountMsg.append('<span>Кол-во сообщений: <span id="dig-count">' + countRows + '</span></span>');
+                    }
+
+                    function filterStr(str) {
+                        var r = str.replace(/\S+[@|sobaka|_|собака]\S{2,6}\.\S{2,6}/gi, "Warning");
+                        return r;
+                    }
+
+
+
+                    document.title = "Просмотр заказа №" + {{ order.num }};
+                    $.fn.button.noConflict();
+                    var grid  = $("#listBids");
+                    grid.jqGrid({
+                        url: {{ path('secure_client_order', { num: order.num }) | json_encode | raw }},
+                        datatype: 'json',
+                        mtype: 'POST',
+                        rownumbers: true,
+                        gridview: true,
+                        rownumWidth: 40,
+                        recordtext: "Просмотр ставок {0} - {1}",
+                        colNames:['','Автор','Сумма','Дней на выполнение','В срок заказчика','Комментарий','Дата ставки','Действия', ''],
+                        colModel :[
+                            {name:'id',index:'id',hidden:true},
+                            {name:'author',index:'author',width:120,align:'center',resizable:false,editable:false,sortable:false},
+                            {name:'sum',index:'sum',width:150,align:'center',resizable:false,editable:false,formatter:'currency',formatoptions:{thousandsSeparator: " ",decimalPlaces:0,suffix:" руб."}},
+                            {name:'day',index:'day',width:170,align:'center',resizable:false,editable:false,formatter:customDay},
+                            {name:'is_client_date',index:'is_client_date',width:150,align:'center',resizable:false,editable:false,formatter:statusDate,sortable:false},
+                            {name:'comment',index:'comment',width:250,align:'center',resizable:false,editable:false,sortable:false},
+                            {name:'date_bid',index:'date_bid',width:150,align:'center',resizable:false,editable:false,sortable:false},
+                            {name:'action',index:'action',width:150,align:'center',sortable:false,resize:false,formatter:function() {
+                                return "<div class='cancel-bid' style='margin-left:8px;'>" +
+                                        "<div style='float:left;margin-left:8px;' class='ui-pg-div ui-inline-del' title='Отменить' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<span class='icon-cancel-6'></span></div></div>" +
+                                        "<div class='confirm-bid' style='margin-left:8px;'>" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Принять ставку автора' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<span class='icon-ok-5'></span></div></div>" +
+                                        "<div class='hide-bid' style='margin-left:8px;'>" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Скрыть ставку автора' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<span class='icon-eye'></span></div></div>" +
+                                        "<div class='auction-bid' style='margin-left:8px;'>" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Предложить торг автору' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<span class='icon-hammer'></span></div></div>" +
+                                        "<div class='open-chat' style='margin-left:8px;'>" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Открыть чат с автором' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<span class='icon-chat-5'></span></div></div>";
+                            }},
+                            {name:'is_author_select',index:'is_author_select',hidden:true}
+                        ],
+                        pager: $('#pagerBids'),
+                        rowNum: 15,
+                        rowList: [15,25,35],
+                        viewrecords: true,
+                        hidegrid: false,
+                        caption: 'Таблица ставок авторов',
+                        height: '500',
+                        emptyrecords: "Нету ставок авторов",
+                        altRows: true,
+                        altclass:'alt-row',
+                        loadComplete : function(data) {
+                            var confirmBid = $(".confirm-bid");
+                            $(".cancel-bid").click(function(e) {
+                                var rowId = getRowId(e);
+                                var row = getRow($(this));
+                                $.ajax({
+                                    type: 'POST',
+                                    data: 'bidId=' + rowId + '&action=cancelBid',
+                                    success: function(response) {
+                                        var responseObject = window.JSON.parse(response);
+                                        if (responseObject.action) {
+                                            actionCancelBid(row, "hide");
+                                            $("tr.jqgrow#" + rowId).removeClass("state-selected");
+                                            confirmBid.show();
+                                        }
+                                        else {
+                                            $("#window-error-cancel-bid").css({'display':'block'});
+                                            setTimeout(function() {
+                                                closeMessage($('#window-error-cancel-bid'));
+                                            }, 2000);
+                                        }
+                                    }
+                                });
+                            });
+                            $(".hide-bid").click(function(e) {
+                                var rowId = getRowId(e);
+                                $.ajax({
+                                    type: 'POST',
+                                    data: 'bidId=' + rowId + '&action=hideBid',
+                                    success: function(response) {
+                                        var resposeObject = window.JSON.parse(response);
+                                        if (resposeObject.action) {
+                                            grid.delRowData(rowId);
+                                        }
+                                    }
+                                });
+                            });
+                            $(".auction-bid").click(function(e) {
+                                var rowId = getRowId(e);
+                                if (rowId) {
+                                    var auctionPrice = $("#auction-price");
+                                    var auctionDay = $("#auction-day");
+                                    $("#dialog-message-auction-bid").dialog({
+                                        modal: true,
+                                        resizable: false,
+                                        height: 280,
+                                        width: 400,
+                                        buttons: {
+                                            "Предложить": function() {
+                                                var error = false;
+                                                auctionDay.removeClass('bootstrap-error');
+                                                auctionPrice.removeClass('bootstrap-error');
+                                                if (!isNormalInteger(auctionPrice.val())) {
+                                                    error = true;
+                                                    auctionPrice.addClass('bootstrap-error').tooltip('show');
+                                                } else {
+                                                    auctionPrice.removeClass('bootstrap-error').tooltip('hide');
+                                                }
+                                                if (!isNormalInteger(auctionDay.val())) {
+                                                    error = true;
+                                                    auctionDay.addClass('bootstrap-error').tooltip('show');
+                                                } else {
+                                                    auctionDay.removeClass('bootstrap-error').tooltip('hide');
+                                                }
+                                                if (!error) {
+                                                    $.ajax({
+                                                        type: 'POST',
+                                                        data: 'bidId=' + rowId + '&auctionPrice=' + auctionPrice.val() + '&auctionDay=' + auctionDay.val() + '&action=auctionBid',
+                                                        success: function(response) {
+                                                            var responseObject = window.JSON.parse(response);
+                                                            if (responseObject.action) {
+                                                                $("#dialog-message-auction-bid").dialog('close');
+                                                                $("#modal-window-success-auction").css({'display':'block'});
+                                                                setTimeout(function() {
+                                                                    closeMessage($('#modal-window-success-auction'));
+                                                                }, 2000);
+                                                            }
+                                                        }
+                                                    });
+                                                }
+                                            },
+                                            "Отмена": function() {
+                                                $(this).dialog("close");
+                                            }
+                                        },
+                                        close: function() {
+                                            auctionDay.val("").removeClass('bootstrap-error');
+                                            auctionPrice.val("").removeClass('bootstrap-error');
+                                        }
+                                    });
+                                }
+                            });
+                            confirmBid.click(function(e) {
+                                var rowId = getRowId(e);
+                                var row = getRow($(this));
+                                if (rowId) {
+                                    $("#dialog-message-select-bid").dialog({
+                                        modal: true,
+                                        resizable: false,
+                                        height: 260,
+                                        width: 370,
+                                        buttons: {
+                                            Ok: function() {
+                                                $.ajax({
+                                                    type: 'POST',
+                                                    data: 'bidId=' + rowId + '&action=selectBid',
+                                                    success: function(response) {
+                                                        var responseObject = window.JSON.parse(response);
+                                                        if (responseObject.action) {
+                                                            actionCancelBid(row, "show");
+                                                            $("tr.jqgrow#" + rowId).addClass("state-selected");
+                                                            confirmBid.hide();
+                                                        }
+                                                        else {
+                                                        }
+                                                    }
+                                                });
+                                                $(this).dialog("close");
+                                            },
+                                            Cancel: function() {
+                                                $(this).dialog("close");
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                            var grids = grid.getDataIDs();
+                            var gridsLength = grids.length;
+                            for (var i = 0; i < gridsLength; i++) {
+                                if (grid.getCell(grids[i], "is_author_select") == 1) {
+                                    var selectedRowBid = $("tr.jqgrow#" + grids[i]);
+                                    selectedRowBid.addClass("state-selected");
+                                    var blockAuctionBid = selectedRowBid.find(".auction-bid"),
+                                            blockCancelBid = selectedRowBid.find(".cancel-bid"),
+                                            blockConfirmBid = selectedRowBid.find(".confirm-bid");
+                                    blockConfirmBid.hide();
+                                    blockAuctionBid.hide();
+                                    blockCancelBid.show();
+                                    confirmBid.hide();
+                                    break;
+                                }
+                            }
+                        }
+                    }).navGrid('#pagerBids',{view:false, search:false, del:false, add:false, edit:false, refresh:true, refreshtext:'Обновить'},
+                            {},{},{},{},{}
+                    );
+                    function getRowId(e) {
+                        var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'), rowId = $tr.attr('id');
+                        return rowId;
+                    }
+                    function getRow(a) {
+                        return a.parent().parent();
+                    }
+                    function actionCancelBid(a, type) {
+                        var blockAuctionBid = a.find(".auction-bid"),
+                                blockCancelBid = a.find(".cancel-bid"),
+                                blockConfirmBid = a.find(".confirm-bid");
+                        if (type == "show") {
+                            blockConfirmBid.hide();
+                            blockAuctionBid.hide();
+                            blockCancelBid.show();
+                        }
+                        else {
+                            blockConfirmBid.show();
+                            blockAuctionBid.show();
+                            blockCancelBid.hide();
+                        }
+                    }
+                    function statusDate(cellvalue) {
+                        if (cellvalue == "1") {
+                            return ("<span class='icon-check-1'></span>");
+                        }
+                        return ("<span class='icon-minus-1'></span>");
+                    }
+                    function customDay(cellvalue) {
+                        if (cellvalue != 0) {
+                            return ("<span class='grid-cell-day'>" + cellvalue + "</span>");
+                        }
+                        return ("");
+                    }
+                    function isNormalInteger(str) {
+                        return /^\+?([1-9]\d*)$/.test(str);
+                    }
+                    function closeMessage(el) {
+                        el.addClass('is-hidden').css({'display':'none'});
+                    }
+                    $('.js-messageClose').on('click', function(e) {
+                        closeMessage($(this).closest('.Message'));
+                    });
+                });
+            </script>
+        </div>
+    {% endblock %}

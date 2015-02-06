@@ -5,6 +5,7 @@ namespace Helper;
 use Acme\SecureBundle\Entity\AuctionBid;
 use Acme\SecureBundle\Entity\CancelRequest;
 use Acme\SecureBundle\Entity\FavoriteOrder;
+use Acme\SecureBundle\Entity\MoneyOutput;
 use Acme\SecureBundle\Entity\OrderFile;
 use Acme\SecureBundle\Entity\SelectBid;
 use Acme\SecureBundle\Entity\StatusOrder;
@@ -757,16 +758,14 @@ class Helper
     }
 
 
-    public static function getCutSentence($sentence, $size) {
+    public static function getCutSentence($sentence, $size, $symbol = '...') {
         $sentence = mb_substr($sentence, 0, $size, "UTF-8");
         $pos = strrpos($sentence, ' ');
         if ($pos === false) {
-            $sentence = $sentence . '...';
+            $sentence = $sentence . $symbol;
+        } else {
+            $sentence = substr($sentence, 0, $pos) . $symbol;
         }
-        else {
-            $sentence = substr($sentence, 0, $pos) . '...';
-        }
-
         return $sentence;
     }
 
@@ -831,6 +830,22 @@ class Helper
                 $bid = $nearBid[0];
                 $bid->setIsShowClient(1);
             }
+            $em->flush();
+            return true;
+        }
+        return false;
+    }
+
+    public static function refreshSelectedAuthorBid($bidId, $user, $order) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $userBid = $em->getRepository(self::$_tableUserBid)
+            ->findOneById($bidId);
+        if ($userBid) {
+            $oldBid = $em->getRepository(self::$_tableUserBid)
+                ->findOneBy(array('is_show_client' => 1));
+            $oldBid->setIsShowClient(0);
+            $userBid->setDateBid(new \DateTime());
+            $userBid->setIsShowClient(1);
             $em->flush();
             return true;
         }
@@ -1301,7 +1316,7 @@ class Helper
     public static function getAllAuthorsBidsForSelectedOrder($user, $order) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $bids = $em->getRepository(self::$_tableUserBid)
-            ->findBy(array('user' => $user, 'user_order' => $order, 'is_show_author' => 1), array('id' => 'DESC'));
+            ->findBy(array('user' => $user, 'user_order' => $order, 'is_show_author' => 1), array('date_bid' => 'DESC'));
         return $bids;
     }
 
@@ -1326,6 +1341,7 @@ class Helper
     public static function setAuthorBid($postData, $user, $order) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $sum = $postData['fieldSum'];
+        $sum = str_replace(' ', '', $sum);
         $comment = $postData['fieldComment'];
         $userBid = new UserBid();
         $user = $em->merge($user);
@@ -2459,5 +2475,71 @@ class Helper
             return $resultArray;
         }
         return null;
+    }
+
+
+    public static function createMoneyOutput($user, $postData) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $outputSum = $postData['fieldSum'];
+        $userPsId = $postData['fieldType'];
+        $comment = $postData['fieldComment'];
+        $outputSum = str_replace(' ', '', $outputSum);
+        if ($user->getAccount() < $outputSum) {
+            return false;
+        }
+        if (is_numeric($userPsId) && $userPsId > 0) {
+            $userPs = $em->getRepository(self::$_tableUserPs)
+                ->findOneBy(array('user' => $user, 'id' => $userPsId));
+            if ($userPs) {
+                $moneyOutput = new MoneyOutput();
+                $moneyOutput->setUserPs($userPs);
+                $moneyOutput->setSum($outputSum);
+                $moneyOutput->setComment($comment);
+                $em->persist($moneyOutput);
+                $em->flush();
+                return true;
+            }
+            return false;
+        }
+    }
+
+
+    public static function getMaxMinOrderBids($order) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $query = $em->createQuery("SELECT MAX(ub.sum) AS max_sum, MIN(ub.sum) AS min_sum, COUNT(uo.id) AS cnt FROM AcmeSecureBundle:UserOrder AS uo
+                    JOIN AcmeSecureBundle:UserBid AS ub WITH ub.user_order = uo
+                    JOIN AcmeSecureBundle:StatusOrder AS so WITH uo.status_order = so
+                    WHERE uo.is_show_author = 1
+                    AND uo.id = :orderId
+                    AND uo.is_show_client = 1
+                    AND ub.is_show_author = 1
+                    AND ub.is_show_client = 1
+                    AND so.code IN(:statusCode)
+                    GROUP BY uo.id");
+        $query->setParameter('orderId', $order->getId());
+        $query->setParameter('statusCode', array_values(array('sa', 'ca')));
+        $bids = $query->getResult();
+        if (!count($bids)) {
+            $bids[0]['cnt'] = 0;
+            $bids[0]['max_sum'] = 0;
+            $bids[0]['min_sum'] = 0;
+        }
+        return $bids;
+    }
+
+
+    public static function getAuthorByOrder($order) {
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $author = $em->getRepository(self::$_tableUserBid)->createQueryBuilder('ub')
+            ->innerJoin('ub.user_order', 'uo')
+            ->andWhere('uo = :order')
+            ->andWhere('uo.is_show_client = 1')
+            ->andWhere('uo.is_show_author = 1')
+            ->andWhere('ub.is_show_author = 1')
+            ->andWhere('ub.is_show_client = 1')
+            ->setParameter('order', $order)
+            ->getQuery()
+            ->getResult();
+        return $author;
     }
 }

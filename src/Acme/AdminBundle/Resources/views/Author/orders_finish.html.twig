@@ -1,0 +1,132 @@
+{% extends "AcmeSecureBundle::layout_author.html.twig" %}
+{% block title "Выполненные заказы" %}
+    {% block content %}
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.fmatter.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.contextMenu.js') }}"></script>
+        <style type="text/css">
+            /*.alt-row {
+                background: #f3f3f3 none;
+            }*/
+            .ui-jqgrid .ui-jqgrid-htable th div {
+                height: 21px;
+            }
+            #pagerOrders {
+                height: 30px;
+            }
+            .grid-cell-num {
+                color: black;
+                font-size: 20px;
+                font-weight: bold;
+            }
+            .is-delay {
+
+            }
+            .icon-emo-angry {
+                color: red;
+            }
+        </style>
+        <div>
+        <div class="row">
+            <table id="listOrders"></table>
+            <div id="pagerOrders"></div>
+            <div class="contextMenu" id="contextMenu" style="display:none">
+                <ul>
+                    <li id="open-in-new-tab">
+                        <span style="font-size:100%">Открыть в новой вкладке</span>
+                        {% include "AcmeSecureBundle:Secure:layout_context_menu.html.twig" %}
+                    </li>
+                </ul>
+            </div>
+            <script>
+                $(document).ready(function() {
+                    $.fn.button.noConflict();
+                    var grid = $("#listOrders");
+                    grid.jqGrid({
+                        url: {{ path('secure_author_orders', { type: 'finish' }) | json_encode | raw }},
+                        datatype: 'json',
+                        mtype: 'POST',
+                        recordtext: "Просмотр заказов {0} - {1}",
+                        colNames:['','№ заказа', 'Предмет', 'Тип работы', 'Тема работы', 'Задание', 'Выполнен', 'Просрочен', 'Оценка', 'Комментарий'],
+                        colModel :[
+                            {name:'id',index:'id',key:true,search:false,resize:false,hidden:true,sortable:false},
+                            {name:'num',index:'num',width:100,align:'center',resizable:false,editable:false,search:false,formatter:customNum,sortable:false},
+                            {name:'subject_order',index:'subject_order',width:160,align:'center',resizable:false, editable:false,search:false,sortable:false},
+                            {name:'type_order',index:'type_order',width:150,align:'center',resizable:false,editable:false,search:false,sortable:false},
+                            {name:'theme',index:'theme',width:290,align:'center',resizable:false,editable:false,search:false,sortable:false},
+                            {name:'task',index:'task',width:280,align:'center',resizable:false,editable:false,search:false,sortable:false},
+                            {name:'date_completed',index:'date_completed',width:160,align:'center',resizable:false,editable:false,search:false,sortable:false},
+                            {name:'is_delay',index:'date_create',width:100,align:'center',resizable:false,editable:false,search:false,sortable:false},
+                            {name:'client_degree',index:'client_degree',width:120,align:'center',resizable:false,editable:false,search:false,sortable:false},
+                            {name:'client_comment',index:'client_comment',width:160,align:'center',resizable:false,editable:false,search:false,sortable:false}
+                        ],
+                        pager: $('#pagerOrders'),
+                        rowNum: 10,
+                        rowList: [15, 25, 35],
+                        viewrecords: true,
+                        hidegrid: false,
+                        height: 'auto',
+                        altRows: true,
+                        altclass:'alt-row',
+                        gridComplete: initMenu,
+                        loadComplete : function() {
+                            grid.find("tr").find("td").removeAttr('title');
+                            var grids = grid.getDataIDs();
+                            $.each(grids, function(key, value) {
+                                if (value == 1) {
+                                    grid.setCell(grids[key], 7, ' ', 'icon-emo-angry');
+                                } else {
+                                    grid.setCell(grids[key], 7, ' ');
+                                }
+                            });
+                        },
+                        onCellSelect: function(rowid) {
+                            var num = $("tr.jqgrow#" + rowid).find('td').eq(1).find('span')[0].innerHTML, url = "{{ path("secure_author_order", {'num': 'num'}) }}";
+                            location.href = url.replace("num", num);
+                        }
+                    }).navGrid('#pagerOrders',{view:false,search:false,del:false,add:false,edit:false,refresh:true},
+                            {},{},{},{},{}
+                    );
+                    grid.setCaption('Таблица выполненных заказов');
+                    function initMenu() {
+                        grid.contextMenu('contextMenu', {
+                            bindings: {
+                                'open-in-new-tab': function () {
+                                    var rowId = grid.getGridParam("selrow");
+                                    var num = $("tr.jqgrow#" + rowId).find('td').eq(1).find('span')[0].innerHTML, url = "{{ path("secure_author_order", {'num': 'num'}) }}";
+                                    //location.href = url.replace("num", num);
+                                    url = url.replace("num", num);
+                                    window.open(url, "_blank");
+                                }
+                            },
+                            menuStyle: {
+                                backgroundColor: '#fcfdfd',
+                                border: '1px solid #a6c9e2',
+                                maxWidth: '600px',
+                                width: '100%'
+                            },
+                            itemHoverStyle: {
+                                border: '1px solid #79b7e7',
+                                color: '#1d5987',
+                                backgroundColor: '#d0e5f5'
+                            },
+                            onContextMenu: function (event, menu) {
+                                var rowId = $(event.target).parent("tr").attr("id");
+                                if (!rowId) {
+                                    return false;
+                                }
+                                grid.setSelection(rowId);
+                                return true;
+                            }
+                        });
+                    }
+                    /*function customNum(cellvalue) {
+                        return ("<span class='grid-cell-num'>" + cellvalue + "</span>");
+                    }*/
+                });
+            </script>
+        </div>
+    {% endblock %}

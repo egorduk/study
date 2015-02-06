@@ -288,11 +288,13 @@ class ClientController extends Controller
     public function orderAction(Request $request, $num)
     {
         if (is_numeric($num)) {
-            $userId = $this->get('security.context')->getToken()->getUser();
-            //$userId = 1;
-            $user = Helper::getUserById($userId);
+            //$userId = $this->get('security.context')->getToken()->getUser();
+            //$user = Helper::getUserById($userId);
+            $user = $this->getUser();
+            //var_dump($user);
             $order = Helper::getOrderByNumForClient($num, $user);
-            $filesOrder = Helper::getFilesForOrder($order);
+           // $filesOrder = Helper::getFilesForOrder($order);
+            $filesOrder = '';
             $folder = 'http://localhost/study/web/uploads/attachments/' . $order->getFilesFolder() . '/originals/';
             $authorLink = Helper::getUserLinkProfile($order, "author", $this->container);
             if (!$order) {
@@ -386,8 +388,19 @@ class ClientController extends Controller
                     }
                 }
             }
+            //$author = Helper::getAuthorByOrder($order);
+            //var_dump($author[0]->getId());
+            $obj = [];
+            $obj['userLogin'] = $user->getLogin();
+            $obj['userId'] = $user->getId();
+            //$obj['author']['login'] = $order->getUser()->getLogin();
+            //$obj['author']['status'] = $order->getUser()->getIsActive();
+            $obj['author']['login'] = 'author';
+            $obj['author']['status'] = 1;
+            //$session = $request->getSession();
+            //$session->set('author_email_' . $order->getId(), 'a_1300@mail.ru');
             return $this->render(
-                'AcmeSecureBundle:Client:order_select.html.twig', array('order' => $order, 'files' => $filesOrder, 'folder' => $folder)
+                'AcmeSecureBundle:Client:order_select.html.twig', array('order' => $order, 'files' => $filesOrder, 'folder' => $folder, 'obj' => $obj)
             );
         }
         else {
@@ -510,6 +523,7 @@ class ClientController extends Controller
                 throw $this->createNotFoundException();
             }
         } elseif ($type == 'attachments') {
+
             $filePath = $basePath . 'attachments/orders/' . $num . '/client/' . $filename;
         }
         if (!file_exists($filePath)) {

@@ -1,0 +1,142 @@
+{% extends "AcmeSecureBundle::layout_author.html.twig" %}
+{% block title "Вывод денег" %}
+    {% block content %}
+        <link href="{{ asset('bundles/css/select2.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/css/window.css') }}" rel="stylesheet" />
+        <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-maxlength.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/select2.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/price-format.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/notice_window/notice_window.js') }}"></script>
+        <div class="body">
+            <style>
+                .bigdrop.select2-container .select2-results {
+                    max-height: 300px;
+                }
+                .bigdrop .select2-results {
+                    max-height: 300px;
+                }
+            </style>
+            {% include 'AcmeSecureBundle:Windows:success.html.twig' with {'message': 'Успешно!'} %}
+            {% if (formOutputPs) %}
+            <div class="row">
+                <div class="col-xs-4 col-xs-offset-4">
+                    {% form_theme formOutputPs "TwigBundle::layout.html.twig" %}
+                    {{ form_start(formOutputPs, {'attr': {'id' : 'formOutputPs'}}) }}
+                    {{ form_label(formOutputPs.fieldSum) }}
+                    {{ form_errors(formOutputPs.fieldSum) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
+                        {{ form_widget(formOutputPs.fieldSum) }}
+                    </div>
+                    {{ form_label(formOutputPs.fieldComment) }}
+                    {{ form_errors(formOutputPs.fieldComment) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-fontsize-1"></i></span>
+                        {{ form_widget(formOutputPs.fieldComment) }}
+                    </div>
+                    <div id="block-output-type-ps" class="hidden">
+                        {{ form_label(formOutputPs.fieldType) }}
+                        <div class="input-group">
+                            {{ form_widget(formOutputPs.fieldType) }}
+                        </div>
+                    </div>
+                    </br>
+                    {{ form_widget(formOutputPs.output) }}
+                    <div class="input-group">
+                        <label for="formOutputPs_output" class="btn btn-success"><span class=""></span>&nbspВывести</label>
+                        {{ form_widget(formOutputPs.output) }}
+                    </div>
+                    {{ form_end(formOutputPs) }}
+                </div>
+            </div>
+            {% else %}
+                <div id="block-notice">
+                    <div class="input-group hidden" id="block-btn-add-ps">
+                        <a href="{{ path('secure_author_settings', {'type': 'view'}) }}" class="btn btn-success btn-large"><i class=""></i>&nbspСоздать</a>
+                    </div>
+                </div>
+            {% endif %}
+            <script>
+                $(document).ready(function() {
+                    var outputTypePs = $("#formOutputPs_fieldType");
+                    function repoFormat(state) {
+                        var arr = state.text.split('|');
+                        return arr[1];
+                    }
+                    function repoFormatResult(state) {
+                        var arr = state.text.split('|');
+                        var markup = '<div class="row-fluid">' +
+                                '<div class="span10">' +
+                                '<div class="row-fluid">' +
+                                '<div class="span6">Номер:' + arr[1] + '</div>' +
+                                '<div class="span3">Название:' + arr[0] + '</div>' +
+                                '<div class="span3">Тип:<img src="{{ asset('bundles/images/ps/') }}' + arr[2] + '.png"/></div>' +
+                                '</div></div></div>';
+                        return markup;
+                    }
+                    outputTypePs.select2({
+                        minimumResultsForSearch: -1,
+                        formatResult: repoFormatResult,
+                        formatSelection: repoFormat,
+                        allowClear: true,
+                        width: '250',
+                        dropdownCssClass: "bigdrop",
+                        escapeMarkup: function(m) { return m; }
+                    });
+                    {% if app.request.get('id') %}
+                        var psId = parseInt('{{ app.request.get('id') }}', 10);
+                        outputTypePs.find('option').each(function() {
+                            if (psId == $(this).val()) {
+                                outputTypePs.select2("val", psId);
+                            }
+                        });
+                    {% endif %}
+                    if (outputTypePs.select2("val") > 0) {
+                        $("#block-output-type-ps").removeClass("hidden");
+                    } else {
+                        $("#block-btn-add-ps").removeClass("hidden");
+                    }
+                    $("#formOutputPs_output").click(function() {
+                        var sum = $("#formOutputPs_fieldSum"), comment = $("#formOutputPs_fieldComment"), userAccount = {{ user.account }};
+                        sum.removeClass("invalid-selector");
+                        if (sum.val() == "" || userAccount < sum.val().replace(" ", "") || sum.val().length < 3) {
+                            sum.addClass("invalid-selector");
+                            return;
+                        }
+                        var formOutputPs = $("#formOutputPs");
+                        $.ajax({
+                            type: 'POST',
+                            data: formOutputPs.serialize(),
+                            success: function(response) {
+                                var responseObject = window.JSON.parse(response);
+                                $(".error, .block-error").remove();
+                                if (responseObject.response) {
+                                    notice_window.openMessage($("#success-window"));
+                                    $("#formOutputPs_fieldType").select2("val", 1);
+                                    sum.val('');
+                                    comment.val('');
+                                } else {
+                                    if (responseObject.formError) {
+                                        $.each(responseObject.formError, function(index, value) {
+                                            var selector  = "#formOutputPs_" + index;
+                                            $(selector).parent().before("<p class='block-error'><span class='icon-warning error'>" + value + "</span></p>");
+                                        });
+                                    }
+                                }
+                            }
+                        });
+                    });
+                    $("input[id^=formOutputPs_field]").maxlength({
+                        alwaysShow: true
+                    });
+                    $('#formOutputPs_fieldSum').priceFormat({
+                        prefix: '',
+                        centsSeparator: '',
+                        thousandsSeparator: ' ',
+                        centsLimit: 0,
+                        clearOnEmpty: true
+                    });
+                });
+            </script>
+        </div>
+    {% endblock %}

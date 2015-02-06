@@ -19,7 +19,7 @@
 .error {
     color: red;
 }
-.invalid-selector {
+.invalid {
     border-color: #E9322D!important;
     box-shadow: 0 0 5px #E9322D!important;
     border-radius: 5px;
@@ -31,4 +31,31 @@ textarea {
     color: black;
     font-size: 20px;
     font-weight: bold;
+}
+.grid-cell-day {
+    color: green;
+    font-size: 22px;
+}
+.grid-cell-comment {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: italic;
+}
+.reset-margin-bottom{
+    margin-bottom: 0;
+}
+.reset-margin-left{
+    padding-left: 0;
+}
+.caption > img {
+    width: 60px;
+}
+.caption p {
+    clear: both;
+}
+.thumbnail > a > img {
+    width: 60px;
+}
+.block-file {
+    border: 1px solid #000000;
+    width: 300px;
 }

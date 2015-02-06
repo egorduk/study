@@ -1,0 +1,261 @@
+{% extends "AcmeSecureBundle::layout_author.html.twig" %}
+{% block title "Профиль заказчика" %}
+    {% block content %}
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/style_order.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/style_order.css') }}" />
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.fmatter.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/script_order.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/highcharts/highcharts.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/highcharts/dark-blue.js') }}"></script>
+        <style>
+            .label-total-orders {
+                font-size: 18px;
+                cursor: pointer;
+            }
+        </style>
+            {% if (obj.mode == 'clientView' and user.isban == 0) %}
+                <div class="row">
+                    <div  class="col-xs-5 col-xs-offset-4">
+                        <p>{{ obj.clientAvatar | raw }}</p>
+                        <p class="">{{ user.login }}</p>
+                        <p>Роль: {{ user.userrole.name }}</p>
+                        <p>Дата регистрации в системе: {{ user.datereg.format("d.m.Y H:i") }}</p>
+                        <p>Страна: <img src='{{ asset('bundles/images/flags/') }}{{ user.userInfo.country.code }}.png' alt={{ user.userInfo.country.name }} title={{ user.userInfo.country.name }}></p>
+                        <p>Заказано работ: {{ obj.countTotalOrders }}</p>
+                        <p>Отменено работ: {{ obj.countCanceledOrders }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <span id="client-total-orders-before" class='label label-primary label-total-orders'>Заказанные работы<span class="icon-down-fat" style="padding-top:5px;padding-left:5px;"></span></span>
+                </div>
+                </br>
+                <div class="row">
+                    <div id="list-total-orders" style="display: none">
+                        <table id="listTotalOrders"></table>
+                        <div id="pagerTotalOrders"></div>
+                    </div>
+                </div>
+                </br>
+                <div class="row">
+                    <span style="display: none" id="client-total-orders-after" class='label label-primary label-total-orders'>Заказанные работы<span class="icon-up-fat" style="padding-top:5px;padding-left:5px;"></span></span>
+                </div>
+                </br>
+                <div class="row">
+                    <span id="author-completed-total-orders-before" class='label label-primary label-total-orders'>Мои выполненные работы<span class="icon-down-fat" style="padding-top:5px;padding-left:5px;"></span></span>
+                </div>
+                </br>
+                <div class="row">
+                    <div id="list-author-completed-total-orders" style="display: none">
+                        <table id="listAuthorCompletedTotalOrders"></table>
+                        <div id="pagerAuthorCompletedTotalOrders"></div>
+                    </div>
+                </div>
+                </br>
+                <div class="row">
+                    <span style="display: none" id="author-completed-total-orders-after" class='label label-primary label-total-orders'>Мои выполненные работы<span class="icon-up-fat" style="padding-top:5px;padding-left:5px;"></span></span>
+                </div>
+                <div class="row">
+                    <span id="diagram-total-orders-before" class='label label-primary label-total-orders'>Статистика по заказам<span class="icon-down-fat" style="padding-top:5px;padding-left:5px;"></span></span>
+                </div>
+                </br>
+                <div class="row">
+                    <div style="display: none" id="containerDiagramTotalOrders"></div>
+                </div>
+                </br>
+                <div class="row">
+                    <span style="display: none" id="diagram-total-orders-after" class='label label-primary label-total-orders'>Статистика по заказам<span class="icon-up-fat" style="padding-top:5px;padding-left:5px;"></span></span>
+                </div>
+            {% elseif (user.isban) %}
+            <div class="row">
+                <div class="col-xs-4 col-xs-offset-4">
+                    Banned
+                </div>
+            </div>
+            {% endif %}
+        <script>
+        $(document).ready(function() {
+            var flagInitTotalOrders = 0, flagInitAuthorCompletedTotalOrders = 0, flagInitDiagramTotalOrders = 0;
+            $.fn.button.noConflict();
+            var initDiagramTotalOrders = function () {
+                $.ajax({
+                    type: 'POST',
+                    data: 'mode=totalTypeOrders',
+                    success: function(response) {
+                        var responseObject = window.JSON.parse(response);
+                        //console.log(responseObject);
+                        if (responseObject.response) {
+                            //console.log(responseObject.typeOrders.other);
+                            Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function(color) {
+                                return {
+                                    radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+                                    stops: [
+                                        [0, color],
+                                        [1, Highcharts.Color(color).brighten(-0.3).get('rgb')]
+                                    ]
+                                };
+                            });
+                            $('#containerDiagramTotalOrders').highcharts({
+                                chart: {
+                                    plotBackgroundColor: null,
+                                    plotBorderWidth: null,
+                                    plotShadow: false,
+                                    type: 'pie'
+                                },
+                                title: {
+                                    text: 'Статистика по типу заказанных работ'
+                                },
+                                credits: {
+                                    enabled: false
+                                },
+                                tooltip: {
+                                    pointFormat: 'Выполнено: <b>{point.y} [{point.percentage:.0f}%]</b>'
+                                },
+                                plotOptions: {
+                                    pie: {
+                                        //allowPointSelect: true,
+                                        //cursor: 'pointer',
+                                        dataLabels: {
+                                            //enabled: false
+                                            enabled: true,
+                                            //format: '<b>{point.name}</b>: {point.percentage:.0f} %',
+                                            format: '<b>{point.name}: {point.y} [{point.percentage:.0f}%]</b>',
+                                            style: {
+                                                color: /*(Highcharts.theme && Highcharts.theme.contrastTextColor) || */'white'
+                                            }
+                                        },
+                                        showInLegend: true
+                                    }
+                                },
+                                series: [{
+                                    data: [{
+                                        name: 'Дипломы',
+                                        y: responseObject.typeOrders.diplom ? responseObject.typeOrders.diplom : 0
+                                    },{
+                                        name: 'Курсовые',
+                                        y: responseObject.typeOrders.kurs ? responseObject.typeOrders.kurs : 0
+                                    },{
+                                        name: 'Контрольные',
+                                        y: responseObject.typeOrders.kontr ? responseObject.typeOrders.kontr : 0,
+                                        color: '#BA55D3'
+                                    },{
+                                        name: 'Иное (отчеты, эссе, практики и т.д.)',
+                                        y: responseObject.typeOrders.other ? responseObject.typeOrders.other : 0,
+                                        color: '#4169E1'
+                                    }]
+                                }]
+                            });
+                        } else {
+                            $('#containerDiagramTotalOrders').append('<p>Нету заказов</p>');
+                        }
+                    }
+                });
+
+            };
+            var initTableTotalOrders = function () {
+                var grid = $("#listTotalOrders");
+                grid.jqGrid({
+                    url: {{ path('secure_author_view_client', { id: obj.clientId }) | json_encode | raw }},
+                    datatype: 'json',
+                    mtype: 'POST',
+                    postData: {mode : 'totalOrders'},
+                    recordtext: "Просмотр заказов {0} - {1}",
+                    colNames:['','№ заказа', 'Предмет', 'Тип работы', 'Тема работы', 'Создан'],
+                    colModel :[
+                        {name:'id',index:'id',key:true,search:false,resize:false,hidden:true},
+                        {name:'num',index:'num',width:100,align:'center',resizable:false,editable:false,sortable:false,formatter:customNum},
+                        {name:'subject_order',index:'subject_order',width:160,align:'center',resizable:false,editable:false,sortable:false},
+                        {name:'type_order',index:'type_order',width:150,align:'center',resizable:false,editable:false,sortable:false},
+                        {name:'theme',index:'theme',width:290,align:'center',resizable:false,editable:false,sortable:false},
+                        {name:'date_create',index:'date_create',width:150,align:'center',resizable:false,editable:false,sortable:false}
+                    ],
+                    pager: $('#pagerTotalOrders'),
+                    rowNum: 10,
+                    rowList: [15,25,35],
+                    viewrecords: true,
+                    hidegrid: false,
+                    height: 'auto',
+                    altRows: true,
+                    altclass:'alt-row'
+                }).navGrid('#pagerTotalOrders',{view:false,search:false,del:false,add:false,edit:false,refresh:true},{},{},{},{},{});
+                grid.setCaption('Таблица заказанных работ');
+            };
+            var initTableAuthorCompletedTotalOrders = function () {
+                var grid = $("#listAuthorCompletedTotalOrders");
+                grid.jqGrid({
+                    url: {{ path('secure_author_view_client', { id: obj.clientId }) | json_encode | raw }},
+                    datatype: 'json',
+                    mtype: 'POST',
+                    postData: {mode : 'totalOrdersCompleted'},
+                    recordtext: "Просмотр заказов {0} - {1}",
+                    colNames:['','№ заказа', 'Предмет', 'Тип работы', 'Тема работы', 'Выполнен', 'Стоимость', 'Оценка', 'Отзыв'],
+                    colModel :[
+                        {name:'id',index:'id',key:true,search:false,resize:false,hidden:true},
+                        {name:'num',index:'num',width:100,align:'center',resizable:false,editable:false,sortable:false,formatter:customNum},
+                        {name:'subject_order',index:'subject_order',width:160,align:'center',resizable:false,editable:false,sortable:false},
+                        {name:'type_order',index:'type_order',width:150,align:'center',resizable:false,editable:false,sortable:false},
+                        {name:'theme',index:'theme',width:290,align:'center',resizable:false,editable:false,sortable:false},
+                        {name:'date_complete',index:'date_complete',width:100,align:'center',resizable:false,editable:false,sortable:false},
+                        {name:'price',index:'price',width:100,align:'center',resizable:false,editable:false,sortable:false,formatter:'currency',formatoptions:{defaultValue:'',thousandsSeparator: " ",decimalPlaces:0,suffix:" руб."}},
+                        {name:'client_degree',index:'client_degree',width:100,align:'center',resizable:false,editable:false,sortable:false},
+                        {name:'client_comment',index:'client_comment',width:200,align:'center',resizable:false,editable:false,sortable:false}
+                    ],
+                    pager: $('#pagerAuthorCompletedTotalOrders'),
+                    rowNum: 10,
+                    rowList: [15,25,35],
+                    viewrecords: true,
+                    hidegrid: false,
+                    height: 'auto',
+                    altRows: true,
+                    altclass:'alt-row'
+                }).navGrid('#pagerAuthorCompletedTotalOrders',{view:false,search:false,del:false,add:false,edit:false,refresh:true},{},{},{},{},{});
+                grid.setCaption('Таблица выполненных работ для заказчика');
+            };
+            $("#client-total-orders-before").click(function() {
+                $("#list-total-orders").toggle();
+                if (!flagInitTotalOrders) {
+                    initTableTotalOrders();
+                    flagInitTotalOrders++;
+                }
+                $("#client-total-orders-after").toggle();
+                $("#client-total-orders-before").toggle();
+            });
+            $("#client-total-orders-after").click(function() {
+                $("#list-total-orders").toggle();
+                $("#client-total-orders-after").toggle();
+                $("#client-total-orders-before").toggle();
+            });
+            $("#author-completed-total-orders-before").click(function() {
+                $("#list-author-completed-total-orders").toggle();
+                if (!flagInitAuthorCompletedTotalOrders) {
+                    initTableAuthorCompletedTotalOrders();
+                    flagInitAuthorCompletedTotalOrders++;
+                }
+                $("#author-completed-total-orders-after").toggle();
+                $("#author-completed-total-orders-before").toggle();
+            });
+            $("#author-completed-total-orders-after").click(function() {
+                $("#list-author-completed-total-orders").toggle();
+                $("#author-completed-total-orders-after").toggle();
+                $("#author-completed-total-orders-before").toggle();
+            });
+            $("#diagram-total-orders-before").click(function() {
+                $("#containerDiagramTotalOrders").toggle();
+                if (!flagInitDiagramTotalOrders) {
+                    initDiagramTotalOrders();
+                    flagInitDiagramTotalOrders++;
+                }
+                $("#diagram-total-orders-after").toggle();
+                $("#diagram-total-orders-before").toggle();
+            });
+            $("#diagram-total-orders-after").click(function() {
+                $("#containerDiagramTotalOrders").toggle();
+                $("#diagram-total-orders-after").toggle();
+                $("#diagram-total-orders-before").toggle();
+            });
+        })
+        </script>
+    {% endblock %}
