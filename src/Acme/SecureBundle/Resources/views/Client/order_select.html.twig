@@ -7,6 +7,8 @@
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.fmatter.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/sound/ion.sound.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/sound/jquery.ion.sound.min.js') }}"></script>
         <script src="http://localhost:8008/socket.io/socket.io.js" defer></script>
         <style>
             .col-md-2 {
@@ -325,7 +327,7 @@
                             return;
                         }
                         mode = patternCheckEmail.test(text) || patternCheckPhone.test(text);
-                        socket.emit("send message", {message: text, userId: userId, mode: mode});
+                        socket.emit("send message", {message: text, userId: userId, mode: mode, responseLogin: authorLogin});
                     }
 
                     function clearSidebarCountRecords() {
@@ -333,7 +335,8 @@
                     }
 
                     btnSendMsg.click(function () {
-                        sendMessage();
+                        //sendMessage();
+                        $.ionSound.play("beer_can_opening");
                     });
 
                     function increaseCountMsg() {
@@ -379,6 +382,7 @@
                         r = r.replace(patternCheckPhone, " Warning ");
                         return r;
                     }
+
 
 
 
