@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="{{ asset('bundles/css/popup/jquery.define.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/chat/main.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/style_order.css') }}" />
+        <script type="text/javascript" src="{{ asset('bundles/js/jquery.cookie.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.fmatter.js') }}"></script>
@@ -14,6 +15,8 @@
         <script type="text/javascript" src="{{ asset('bundles/js/notice_window/notice_window.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/popup/jquery.define.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/script_order.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/sound/ion.sound.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-maxlength.min.js') }}"></script>
         <script src="http://localhost:8008/socket.io/socket.io.js" defer></script>
         <style>
             .col-md-2 {
@@ -56,6 +59,14 @@
             #help-popover {
                 cursor: pointer;
                 color: #0088CC;
+            }
+            #volume-on, #volume-off {
+                cursor: pointer;
+                color: green;
+                display: none;
+            }
+            #volume-off {
+                color: red;
             }
         </style>
         <div class="container">
@@ -171,6 +182,8 @@
                         <p>В чате</p>
                     </div>
                     <div id="is-writing"></div>
+                    <span class='icon-volume-1' id="volume-on"></span>
+                    <span class='icon-volume-off-4' id="volume-off"></span>
                 </div>
             </div>
         </div>
@@ -180,13 +193,28 @@
             var messages = $("#messages"),
                     message_txt = $("#message_text"),
                     userLogin = '{{ obj.userLogin }}',
+                    clientLogin = '{{ obj.client.login }}',
                     orderId = {{ order.id }},
                     userId = {{ obj.userId }},
                     clientStatus = {{ obj.client.status }},
                     blockCountMsg = $("#count-msg"),
                     btnSendMsg = $("#btn-send-msg"),
                     inChat = $("#in-chat"),
-                    flagIsWriting = 0;
+                    volumeOn = $("#volume-on"),
+                    volumeOff = $("#volume-off"),
+                    flagIsWriting = 0,
+                    mode = false;
+
+            ion.sound({
+                sounds: [
+                    {name: "button_tiny"}
+                ],
+                path: "{{ asset('bundles/js/sound/sounds/') }}",
+                preload: true,
+                volume: 1.0
+            });
+
+            setViewButton();
 
             if (clientStatus) {
                 $("#client-status").toggle();
@@ -200,6 +228,16 @@
                 systemMsg("Сервер выключен");
                 return;
             }
+
+            volumeOn.on("click", function() {
+                $.cookie('volume_msg', '0');
+                setViewButton();
+            });
+
+            volumeOff.on("click", function() {
+                $.cookie('volume_msg', '1');
+                setViewButton();
+            });
 
             /*socket.on('connecting', function() {
                 systemMsg('Соединение...');
@@ -233,6 +271,9 @@
 
             socket.on("show new message", function(data) {
                 //console.dir(data);
+                if ($.cookie('volume_msg') == 1 && data.user_login != userLogin) {
+                    ion.sound.play("button_tiny");
+                }
                 userMsg(data.user_login, data.message, data.date_write);
                 increaseCountMsg();
                 message_txt.focus();
@@ -265,6 +306,17 @@
             });
 
 
+            function setViewButton() {
+                var volumeMsg = $.cookie('volume_msg');
+                console.log(volumeMsg);
+                if (volumeMsg == 1) {
+                    volumeOff.hide();
+                    volumeOn.show();
+                } else {
+                    volumeOn.hide();
+                    volumeOff.show();
+                }
+            }
 
             function disconnectUser() {
                 systemMsg("Отключен");
@@ -296,7 +348,7 @@
                     return;
                 }
                 message_txt.val("");
-                socket.emit("send message", {message: text, userId: userId});
+                socket.emit("send message", {message: text, writerLogin: userLogin, userId: userId, mode: mode, responseLogin: clientLogin});
             }
 
             function increaseCountMsg() {

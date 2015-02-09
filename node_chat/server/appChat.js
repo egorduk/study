@@ -4,6 +4,7 @@ var PORT = 8008,  options = {
 var express = require('express'),
     http = require('http'),
     path = require('path'),
+    dateFormat = require('dateformat'),
     app = express(),
     server = http.createServer(app),
     io = require('socket.io').listen(server, options);
@@ -69,12 +70,23 @@ mysqlUtilities.introspection(connection);
 // Release connection
 //connection.end();
 
+
+
+var validator = require('validator');
+
 io.sockets.on('connection', function (client) {
     var clientID = (client.id).toString();
 
     client.on("send message", function (data) {
         try {
-            var date = new Date(), room = arrRoom[clientID], mode = data.mode, userId = data.userId, responseLogin = data.responseLogin, fullDate = getFullDate(date);
+            var date = new Date(),
+                room = arrRoom[clientID],
+                mode = data.mode,
+                userId = data.userId,
+                responseLogin = data.responseLogin,
+                fullDate = getFullDate(date),
+                writerLogin = data.writerLogin,
+                message = data.message;
             console.dir(data);
             connection.insert('webchat_message', {
                 message: data.message,
@@ -83,10 +95,10 @@ io.sockets.on('connection', function (client) {
                 user_order_id: room
             }, function(error, recordId) {
                 if (error) {console.log(error)}
-                connection.queryRow(
-                    'SELECT login AS user_login FROM user WHERE id = ' + userId, function(error, row) {
-                        if (error) {throw error}
-                        var writerLogin = row.user_login, message = data.message;
+               // connection.queryRow(
+                    //'SELECT login AS user_login FROM user WHERE id = ' + userId, function(error, row) {
+                       // if (error) {throw error}
+                        //var writerLogin = row.user_login, message = data.message;
                         client.emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin});
                         client.to(room).emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin});
                         var transporter = nodemailer.createTransport({
@@ -142,8 +154,8 @@ io.sockets.on('connection', function (client) {
                                 }
                             )
                         }
-                    }
-                );
+                   // }
+               // );
                 console.dir({insert: recordId});
             });
         } catch (e) {
@@ -179,9 +191,72 @@ io.sockets.on('connection', function (client) {
         client.to(room).emit("response user write");
     });
 
+    client.on("request confirm work", function(data) {
+        var orderId = data.orderId,
+            dateConfirm = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss"),
+            comment = data.comment,
+            degree = data.degree;
+        if (validator.isLength(comment, 0, 100) && validator.isInt(degree) && (degree <= 5 || degree >= 1)) {
+            connection.select('status_order', 'id AS status_id', {code: 'g'}, '', function(error, row) {
+                if (error) {throw error}
+                var statusId = row[0].status_id;
+                connection.update('user_order', {date_confirm: dateConfirm,
+                    status_order_id: statusId,
+                    client_comment: comment,
+                    client_degree: degree}, {id: orderId}, function(error) {
+                    if (error) {throw error}
+                    createSystemMsg(orderId, 'confirm-work');
+                });
+            });
+        } else {
+            console.dir('Error - ' + data);
+        }
+    });
+
+    function createSystemMsg(orderId, type) {
+        var fullDate = getFullDate(new Date()),
+            date_msg = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss"),
+            system = "Система";
+        if (type == 'confirm-work') {
+            var message = "System msg - confirm work";
+            connection.insert('webchat_message', {
+                message: message,
+                date_write: date_msg,
+                user_id: 17,
+                user_order_id: orderId
+            }, function(error) {
+                if (error) {console.log(error)}
+                client.to(orderId).emit("show system message", {login: system, date_msg: fullDate, message: message});
+                client.emit("show system message", {login: system, date_msg: fullDate, message: message});
+            });
+        } else {}
+    }
+
+    /*client.on("request system msg", function(data) {
+        var orderId = data.orderId,
+            room = arrRoom[clientID],
+            type = data.type,
+            date_msg = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss"),
+            fullDate = getFullDate(new Date());
+        if (type == 'confirm-work') {
+            var message = "test system msg";
+            connection.insert('webchat_message', {
+                message: message,
+                date_write: date_msg,
+                user_id: 17,
+                user_order_id: room
+            }, function(error) {
+                if (error) {console.log(error)}
+                client.to(room).emit("show system message", {date_msg: fullDate, message: message});
+                client.emit("show system message", {date_msg: fullDate, message: message});
+            });
+
+        } else {}
+    });*/
+
     client.on("get all messages", function (data) {
         connection.queryHash(
-            'SELECT wm.id, message, DATE_FORMAT(date_write,"%d.%m.%Y %T") AS date_write, login AS user_login FROM webchat_message AS wm INNER JOIN user ON wm.user_id = user.id' +
+            'SELECT wm.id, message, DATE_FORMAT(date_write,"%d.%m.%Y %T") AS date_write, login AS user_login, u.id AS user_id FROM webchat_message AS wm INNER JOIN user AS u ON wm.user_id = u.id' +
                 ' WHERE wm.user_order_id = ' + data.orderId,
             function(error, rows) {
                 //console.dir(rows);
@@ -191,6 +266,7 @@ io.sockets.on('connection', function (client) {
             }
         );
     });
+});
 
     function getFullDate(d) {
         var year, month, day, min, sec, hour;

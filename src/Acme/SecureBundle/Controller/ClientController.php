@@ -288,48 +288,60 @@ class ClientController extends Controller
     public function orderAction(Request $request, $num)
     {
         if (is_numeric($num)) {
-            //$userId = $this->get('security.context')->getToken()->getUser();
-            //$user = Helper::getUserById($userId);
             $user = $this->getUser();
-            //var_dump($user);
             $order = Helper::getOrderByNumForClient($num, $user);
-           // $filesOrder = Helper::getFilesForOrder($order);
-            $filesOrder = '';
-            $folder = 'http://localhost/study/web/uploads/attachments/' . $order->getFilesFolder() . '/originals/';
-            $authorLink = Helper::getUserLinkProfile($order, "author", $this->container);
-            if (!$order) {
-                return new RedirectResponse($this->generateUrl('secure_client_orders',array('type' => 'view')));
-            }
-            $statusOrder = $order->getStatusOrder()->getCode();
-            if ($statusOrder == 'w') {
-                if ($request->isXmlHttpRequest()) {
-                    $action = $request->request->get('action');
-                    $lastId = $request->request->get('lastId');
-                    if ($action == 'getChats') {
-                        $messages = Helper::getChatMessages($user, $order, $lastId);
-                        $arr = [];
-                        foreach($messages as $index => $msg) {
-                            $arr[$index]['id'] = $msg->getId();
-                            $arr[$index]['msg'] = $msg->getMessage();
-                            $arr[$index]['login'] = $msg->getUser()->getLogin();
-                            $arr[$index]['date'] = $msg->getDateWrite()->format("d.m.Y");
-                            $arr[$index]['time'] = $msg->getDateWrite()->format("H:i:s");
-                            $arr[$index]['role'] = $user->getRole()->getId();
-                            $arr[$index]['role_sender'] = $msg->getUser()->getRole()->getId();
-                        }
-                        return new Response(json_encode(array('messages' => $arr)));
-                    }
-                    elseif ($action == 'sendMessage') {
-                        $message = $request->request->get('text');
-                        $insertId = Helper::addNewWebchatMessage($user, $order, $message);
-                        return new Response(json_encode(array('insertID' => $insertId)));
-                    }
+            if (!$request->isXmlHttpRequest()) {
+                // $filesOrder = Helper::getFilesForOrder($order);
+                //$filesOrder = '';
+                //$folder = 'http://localhost/study/web/uploads/attachments/' . $order->getFilesFolder() . '/originals/';
+                //$authorLink = Helper::getUserLinkProfile($order, "author", $this->container);
+                if (!$order) {
+                    return new RedirectResponse($this->generateUrl('secure_client_orders',array('type' => 'view')));
                 }
-                return $this->render(
-                    'AcmeSecureBundle:Client:order_work.html.twig', array('files' => $filesOrder, 'order' => $order, 'author' => $authorLink)
-                );
-            }
-            if ($request->isXmlHttpRequest()) {
+                $codeStatusOrder = $order->getStatusOrder()->getCode();
+                if ($codeStatusOrder == 'w') {
+                    if ($request->isXmlHttpRequest()) {
+                        $action = $request->request->get('action');
+                        $lastId = $request->request->get('lastId');
+                        if ($action == 'getChats') {
+                            $messages = Helper::getChatMessages($user, $order, $lastId);
+                            $arr = [];
+                            foreach($messages as $index => $msg) {
+                                $arr[$index]['id'] = $msg->getId();
+                                $arr[$index]['msg'] = $msg->getMessage();
+                                $arr[$index]['login'] = $msg->getUser()->getLogin();
+                                $arr[$index]['date'] = $msg->getDateWrite()->format("d.m.Y");
+                                $arr[$index]['time'] = $msg->getDateWrite()->format("H:i:s");
+                                $arr[$index]['role'] = $user->getRole()->getId();
+                                $arr[$index]['role_sender'] = $msg->getUser()->getRole()->getId();
+                            }
+                            return new Response(json_encode(array('messages' => $arr)));
+                        }
+                        elseif ($action == 'sendMessage') {
+                            $message = $request->request->get('text');
+                            $insertId = Helper::addNewWebchatMessage($user, $order, $message);
+                            return new Response(json_encode(array('insertID' => $insertId)));
+                        }
+                    }
+                    return $this->render(
+                        'AcmeSecureBundle:Client:order_work.html.twig', array('files' => $filesOrder, 'order' => $order, 'author' => $authorLink)
+                    );
+                } elseif ($codeStatusOrder == 'sa') {
+                    $obj = [];
+                    $obj['userLogin'] = $user->getLogin();
+                    $obj['userId'] = $user->getId();
+                    //$obj['author']['login'] = $order->getUser()->getLogin();
+                    //$obj['author']['status'] = $order->getUser()->getIsActive();
+                    $obj['author']['login'] = 'author';
+                    $obj['author']['status'] = 1;
+                    $obj['order'] = $order;
+                    $obj['files'] = $filesOrder;
+                    $obj['folder'] = $folder;
+                    return $this->render(
+                        'AcmeSecureBundle:Client:order_select.html.twig', array('obj' => $obj)
+                    );
+                }
+            } elseif ($request->isXmlHttpRequest()) {
                 $nd = $request->request->get('nd');
                 $action = $request->request->get('action');
                 if (isset($nd)) {
@@ -339,8 +351,8 @@ class ClientController extends Controller
                         $fileName = $bid['avatar'];
                         $userLogin = $bid['login'];
                         $userId = $bid['uid'];
-                        $pathAvatar = Helper::getFullPathToAvatar($fileName);
-                        $urlClient = $this->generateUrl('secure_client_action', array('type' => 'view_client_profile', 'id' => $userId));
+                        $pathAvatar = Helper::getFullPathToAvatar(null, $userId);
+                        //$urlClient = $this->generateUrl('secure_client_action', array('type' => 'view_client_profile', 'id' => $userId));
                         $author = "<img src='$pathAvatar' align='middle' alt='$fileName' width='110px' height='auto' class='thumbnail'><a href='$urlClient' class='label label-primary'>$userLogin</a>";
                         $dateBid =  new \DateTime($bid['date_bid']);
                         $dateBid = $dateBid->format("d.m.Y") . "<br><span class='grid-cell-time'>" . $dateBid->format("H:i") . "</span>";
@@ -356,29 +368,26 @@ class ClientController extends Controller
                             $dateBid,
                             "",
                             $bid['is_select_client'],
+                            $bid['uid']
                         );
                     }
                     return new JsonResponse($response);
-                }
-                elseif (isset($action)) {
+                } elseif (isset($action)) {
                     if ($action == 'selectBid') {
                         $bidId = $request->request->get('bidId');
                         $actionResponse = Helper::selectAuthorBid($user, $bidId, $order, $this->container);
                         return new Response(json_encode(array('action' => $actionResponse)));
-                    }
-                    elseif ($action == 'cancelBid') {
+                    } elseif ($action == 'cancelBid') {
                         $bidId = $request->request->get('bidId');
                         $actionResponse = Helper::cancelSelectedAuthorBid($bidId, $order);
                         return new Response(json_encode(array('action' => $actionResponse)));
-                    }
-                    elseif ($action == 'auctionBid') {
+                    } elseif ($action == 'auctionBid') {
                         $bidId = $request->request->get('bidId');
                         $auctionPrice = $request->request->get('auctionPrice');
                         $auctionDay = $request->request->get('auctionDay');
                         $actionResponse = Helper::createAuctionByAuthorBid($bidId, $order, $auctionPrice, $auctionDay, $this->container);
                         return new Response(json_encode(array('action' => $actionResponse)));
-                    }
-                    elseif ($action == 'hideBid') {
+                    } elseif ($action == 'hideBid') {
                         $bidId = $request->request->get('bidId');
                         $isHide = Helper::hideBidForClient($bidId);
                         if ($isHide) {
@@ -389,21 +398,7 @@ class ClientController extends Controller
                 }
             }
             //$author = Helper::getAuthorByOrder($order);
-            //var_dump($author[0]->getId());
-            $obj = [];
-            $obj['userLogin'] = $user->getLogin();
-            $obj['userId'] = $user->getId();
-            //$obj['author']['login'] = $order->getUser()->getLogin();
-            //$obj['author']['status'] = $order->getUser()->getIsActive();
-            $obj['author']['login'] = 'author';
-            $obj['author']['status'] = 1;
-            //$session = $request->getSession();
-            //$session->set('author_email_' . $order->getId(), 'a_1300@mail.ru');
-            return $this->render(
-                'AcmeSecureBundle:Client:order_select.html.twig', array('order' => $order, 'files' => $filesOrder, 'folder' => $folder, 'obj' => $obj)
-            );
-        }
-        else {
+        } else {
             return new RedirectResponse($this->generateUrl('secure_client_orders',array('type' => 'view')));
         }
     }

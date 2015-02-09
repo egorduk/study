@@ -51,6 +51,8 @@ class Helper
     private static $_tableMailOption = 'AcmeSecureBundle:MailOption';
     //private static $kernel;
 
+    private static $_avatarFolder = '/study/web/uploads/avatars/';
+
     public function __construct() {
     }
 
@@ -1325,7 +1327,8 @@ class Helper
         $em = self::getContainer()->get('doctrine')->getManager();
         $id = $order->getId();
         $stmt = $em->getConnection()
-            ->prepare("SELECT * FROM (SELECT b.user_id AS uid,b.*,u.avatar,u.login FROM user_bid AS b JOIN user_order AS uo ON b.user_order_id = uo.id JOIN `user` AS u ON b.user_id = u.id WHERE b.user_order_id = '$id' AND b.is_show_author = '1' ORDER BY b.date_bid DESC) AS t GROUP BY uid");
+        //id,sum,day,comment,date_bid,is_client_date,user_id,avatar,login
+            ->prepare("SELECT * FROM (SELECT b.user_id uid,b.*,u.avatar,u.login FROM user_bid b JOIN user_order uo ON b.user_order_id = uo.id JOIN `user` u ON b.user_id = u.id WHERE b.user_order_id = $id AND b.is_show_author = 1 AND b.is_show_client = 1 ORDER BY b.date_bid DESC) AS t GROUP BY uid ORDER BY t.sum ASC");
         $stmt->execute();
         $bids = $stmt->fetchAll();
         //var_dump($bids); die;
@@ -1382,13 +1385,18 @@ class Helper
     }
 
 
-    public static function getFullPathToAvatar($user) {
+    //public static function getFullPathToAvatar($user = null, $fileName = null, $userId = null) {
+    public static function getFullPathToAvatar($user = null, $userId = null) {
+        if (!$user && $userId) {
+            $user = self::getUserById($userId);
+        }
         $fileName = $user->getAvatar();
+        $userRole = $user->getUserRole()->getCode();
         if ($fileName == 'default_m.jpg' || $fileName == 'default_w.jpg' || $fileName == 'default.png') {
-            return '/study/web/uploads/avatars/' . $fileName;
+            return self::$_avatarFolder . $fileName;
         } else {
             $userId = $user->getId();
-            return '/study/web/uploads/avatars/author/' . $userId . '/' . $fileName;
+            return self::$_avatarFolder . $userRole . '/' . $userId . '/' . $fileName;
         }
     }
 

@@ -4,11 +4,14 @@
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/chat/main.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/modal_window/jquery.alert.css') }}" />
+        <script type="text/javascript" src="{{ asset('bundles/js/jquery.cookie.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/i18n/grid.locale-ru.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/jqgrid/jquery.jqGrid.fmatter.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/js/sound/ion.sound.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/js/sound/jquery.ion.sound.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/sound/ion.sound.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/modal_window/jquery.alert.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-maxlength.min.js') }}"></script>
         <script src="http://localhost:8008/socket.io/socket.io.js" defer></script>
         <style>
             .col-md-2 {
@@ -89,6 +92,24 @@
                 border: 1px solid #000000;
                 width: 300px;
             }
+            #volume-on, #volume-off {
+                cursor: pointer;
+                color: green;
+                display: none;
+            }
+            #volume-off {
+                color: red;
+            }
+            .system {
+                background-color: lemonchiffon;
+            }
+            textarea {
+                resize: none;
+                overflow: auto;
+            }
+            .modal-dialog {
+                width: 400px !important;
+            }
         </style>
         <div class="container">
             <!--<div class="row">
@@ -122,28 +143,28 @@
             <div class="row">
                 <div class="col-md-7">
                     <div id="blockAboutOrder" style="margin-bottom: 40px">
-                        <p class="block-num">Номер заказа: {{ order.num }}</p>
+                        <p class="block-num">Номер заказа: {{ obj.order.num }}</p>
                         <hr style="border:solid 1px black">
-                        <p class="block-theme">Тема работы: {{ order.theme }}</p>
+                        <p class="block-theme">Тема работы: {{ obj.order.theme }}</p>
                         <hr style="border:solid 1px black">
-                        <p>Задание: {{ order.task | raw }}</p>
+                        <p>Задание: {{ obj.order.task | raw }}</p>
                         <hr style="border:solid 1px black">
-                        <p>Объем работы: {{ order.countsheet }} стр.</p>
+                        <p>Объем работы: {{ obj.order.countsheet }} стр.</p>
                         <hr style="border:solid 1px black">
-                        <p>Оригинальность работы: {{ order.originality }}%</p>
+                        <p>Оригинальность работы: {{ obj.order.originality }}%</p>
                         <hr style="border:solid 1px black">
-                        <p>Предмет: {{ order.subjectorder.childname }}</p>
+                        <p>Предмет: {{ obj.order.subjectorder.childname }}</p>
                         <hr style="border:solid 1px black">
-                        <p>Тип работы: {{ order.typeorder.name }}</p>
+                        <p>Тип работы: {{ obj.order.typeorder.name }}</p>
                         <hr style="border:solid 1px black">
-                        <p>Статус заказа: {{ order.statusorder.name }}</p>
+                        <p>Статус заказа: {{ obj.order.statusorder.name }}</p>
                         <hr style="border:solid 1px black">
-                        <p>Дата создания заказа: {{ order.datecreate.format("d.m.Y H:i") }}</p>
+                        <p>Дата создания заказа: {{ obj.order.datecreate.format("d.m.Y H:i") }}</p>
                         <hr style="border:solid 1px black">
-                        <p>Выполнение заказа до: {{ order.dateexpire.format("d.m.Y H:i") }}</p>
+                        <p>Выполнение заказа до: {{ obj.order.dateexpire.format("d.m.Y H:i") }}</p>
                         <hr style="border:solid 1px black">
                         <div>
-                            {% for file in files %}
+                            {% for file in obj.files %}
                                 <div class="block-file">
                                     <p>Файл: {{ file.name }} </p>
                                     <p>Размер: {{ file.size }} </p>
@@ -178,9 +199,9 @@
                     <input type="text" name="auction-day" id="auction-day" required placeholder="Введите количество дней..." class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="3">
                     <span class="input-group-addon"><i class="icon-clock-5"></i></span>
                 </div>
-            </div>
+            </div>-->
             <table id="listBids"></table>
-            <div id="pagerBids"></div>-->
+            <div id="pagerBids"></div>
             <div class="demo">
                 <div class="chat">
                     <div class="messages" id="messages"></div>
@@ -198,50 +219,127 @@
                             <p>В чате</p>
                         </div>
                         <div id="is-writing"></div>
+                        <span class='icon-volume-1' id="volume-on"></span>
+                        <span class='icon-volume-off-4' id="volume-off"></span>
                     </div>
                 </div>
             </div>
+            <div id="block-action">
+                <button type="button" class="btn btn-primary btn-lg disabled" id="btn-confirm-work" data-toggle="modal" data-target="#modal-confirm-work">Принять работу</button>
+            </div>
+            <div class="modal fade" id="modal-confirm-work" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="modal-label">Принять работу</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group" id="comment">
+                                <label for="comment-text">Комментарий:</label>
+                                <textarea id="comment-text" class="form-control" maxlength="100" name="comment-text" rows="3" cols="52"></textarea>
+                            </div>
+                            <div class="form-group" id="degree">
+                                <label>Оценка:</label>
+                                <div id="degree-dig">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="degree" id="" value="1"> 1
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="degree" id="" value="2"> 2
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="degree" id="" value="3"> 3
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="degree" id="" value="4"> 4
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="degree" id="" checked value="5"> 5
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="btn-action-confirm-work" data-dismiss="modal">Принять</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <script>
                 $(document).ready(function() {
-
                     var messages = $("#messages"),
                             message_txt = $("#message_text"),
                             userLogin = '{{ obj.userLogin }}',
-                            orderId = {{ order.id }},
+                            orderId = {{ obj.order.id }},
                             userId = {{ obj.userId }},
                             authorStatus = {{ obj.author.status }},
                             authorLogin = '{{ obj.author.login }}',
                             blockCountMsg = $("#count-msg"),
                             btnSendMsg = $("#btn-send-msg"),
+                            btnActionConfirmWork = $("#btn-action-confirm-work"),
+                            btnConfirmWork = $("#btn-confirm-work"),
                             inChat = $("#in-chat"),
+                            volumeOn = $("#volume-on"),
+                            volumeOff = $("#volume-off"),
                             flagIsWriting = 0,
                             mode = false,
                             patternCheckEmail = /([a-z0-9_-]+\.)*[a-z0-9_-]+(@|sobaka|_|собака)[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}/i,
                             patternCheckPhone = /((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,16}/i;
 
+                    try {
+                        var socket = io.connect('http://localhost:8008');
+                    } catch(e) {
+                        systemMsg('system', "Server off");
+                        //return;
+                    }
+
+                    btnConfirmWork.removeClass('disabled');
+
+                    $("#comment-text").maxlength({
+                        alwaysShow: true
+                    });
+
+                    $('.chat .nick').text(userLogin);
+
+                    ion.sound({
+                        sounds: [
+                            {name: "button_tiny"}
+                        ],
+                        path: "{{ asset('bundles/js/sound/sounds/') }}",
+                        preload: true,
+                        volume: 1.0
+                    });
+
+                    setViewButton();
+
                     if (authorStatus) {
                         $("#author-status").toggle();
                     }
 
-                    $('.chat .nick').text(userLogin);
+                    volumeOn.on("click", function() {
+                        $.cookie('volume_msg', '0');
+                        setViewButton();
+                    });
 
-                    try {
-                        var socket = io.connect('http://localhost:8008');
-                    } catch(e) {
-                        systemMsg("Server off");
-                        return;
-                    }
+                    volumeOff.on("click", function() {
+                        $.cookie('volume_msg', '1');
+                        setViewButton();
+                    });
 
                     /*socket.on('connecting', function () {
                         systemMsg('Соединение...');
                     });*/
 
-                    socket.on("connect", function() {
+                    /*socket.on("connect", function() {
                         messages.html('');
                         clearSidebarCountRecords();
                         socket.emit("get all messages", {orderId: orderId});
                         socket.emit("join to room", {room: orderId, name: userLogin, authorLogin: authorLogin});
                         btnSendMsg.removeClass('disabled');
+                        btnConfirmWork.removeClass('disabled');
                     });
 
                     socket.on("response disconnect user", function() {
@@ -253,23 +351,24 @@
                         disconnectUser();
                     });
 
-                    /*socket.on("response disconnect current user", function() {
-                        alert('client');
-                        console.log('dfdfdf');
-                        //disconnectUser();
-                    });*/
-
                     socket.on("response get all messages", function(data) {
                         var countRows = 0;
                         for (var key in data) {
-                            countRows++;
-                            userMsg(data[key].user_login, data[key].message, data[key].date_write);
+                            if (data[key].user_id != 17) {
+                                userMsg(data[key].user_login, data[key].message, data[key].date_write);
+                                countRows++;
+                            } else {
+                                systemMsg(data[key].user_login, data[key].message, data[key].date_write);
+                            }
                         }
                         setSidebarCountRecords(countRows);
                     });
 
                     socket.on("show new message", function(data) {
                         //console.dir(data);
+                        if ($.cookie('volume_msg') == 1 && data.user_login != userLogin) {
+                            ion.sound.play("button_tiny");
+                        }
                         userMsg(data.user_login, data.message, data.date_write);
                         increaseCountMsg();
                         message_txt.focus();
@@ -301,10 +400,44 @@
                         }
                     });
 
+                    socket.on("show system message", function(data) {
+                        if ($.cookie('volume_msg') == 1) {
+                            ion.sound.play("button_tiny");
+                        }
+                        systemMsg(data.login, data.message, data.date_msg);
+                    });*/
+
+                    btnSendMsg.on("click", function() {
+                        sendMessage();
+                    });
+
+                    btnActionConfirmWork.on("click", function(e) {
+                        /*e.preventDefault();
+                        jConfirm('Can you confirm this?', 'Confirmation Dialog', function(action) {
+                            //jAlert('Confirmed: ' + action, 'Confirmation Results');
+                            if (action) {
+
+                            }
+                        });*/
+                        var comment = $("#comment-text").val(), degree = $('input[name=degree]:checked').val();
+                        socket.emit("request confirm work", {orderId: orderId, comment: comment, degree: degree});
+                    });
+
+                    function setViewButton() {
+                        var volumeMsg = $.cookie('volume_msg');
+                        if (volumeMsg == 1) {
+                            volumeOff.hide();
+                            volumeOn.show();
+                        } else {
+                            volumeOn.hide();
+                            volumeOff.show();
+                        }
+                    }
 
                     function disconnectUser() {
-                        systemMsg("Отключен");
+                        //systemMsg('system', "Отключен");
                         btnSendMsg.addClass('disabled');
+                        btnConfirmWork.addClass('disabled');
                         inChat.addClass("hidden");
                     }
 
@@ -327,17 +460,12 @@
                             return;
                         }
                         mode = patternCheckEmail.test(text) || patternCheckPhone.test(text);
-                        socket.emit("send message", {message: text, userId: userId, mode: mode, responseLogin: authorLogin});
+                        socket.emit("send message", {message: text, writerLogin: userLogin, userId: userId, mode: mode, responseLogin: authorLogin});
                     }
 
                     function clearSidebarCountRecords() {
                         blockCountMsg.html('');
                     }
-
-                    btnSendMsg.click(function () {
-                        //sendMessage();
-                        $.ionSound.play("beer_can_opening");
-                    });
 
                     function increaseCountMsg() {
                         var digCountMsg = $("#dig-count"), countMsg = digCountMsg.html();
@@ -345,8 +473,15 @@
                         digCountMsg.html(countMsg);
                     }
 
-                    function systemMsg(message) {
-                        var m = '<div class="msg system">' + safe(message) + '</div>';
+                    function systemMsg(login, message, date_msg) {
+                        if (!date_msg) {
+                            date_msg = '';
+                        }
+                        var m = '<div class="msg system">' +
+                                '<p class="user">' + login + ':</p> ' +
+                                '<div class="message">' + safe(message) + '</div>' +
+                                '<p class="date">' + date_msg + '</p>' +
+                                '</div>';
                         messages.append(m).scrollTop(messages[0].scrollHeight);
                     }
 
@@ -383,21 +518,18 @@
                         return r;
                     }
 
-
-
-
-                    document.title = "Просмотр заказа №" + {{ order.num }};
+                    //document.title = "Просмотр заказа №" + {{ obj.order.num }};
                     $.fn.button.noConflict();
                     var grid  = $("#listBids");
                     grid.jqGrid({
-                        url: {{ path('secure_client_order', { num: order.num }) | json_encode | raw }},
+                        url: {{ path('secure_client_order', { num: obj.order.num }) | json_encode | raw }},
                         datatype: 'json',
                         mtype: 'POST',
                         rownumbers: true,
                         gridview: true,
                         rownumWidth: 40,
                         recordtext: "Просмотр ставок {0} - {1}",
-                        colNames:['','Автор','Сумма','Дней на выполнение','В срок заказчика','Комментарий','Дата ставки','Действия', ''],
+                        colNames:['','Автор','Сумма','Дней на выполнение','В срок заказчика','Комментарий','Дата ставки','Действия','',''],
                         colModel :[
                             {name:'id',index:'id',hidden:true},
                             {name:'author',index:'author',width:120,align:'center',resizable:false,editable:false,sortable:false},
@@ -408,22 +540,23 @@
                             {name:'date_bid',index:'date_bid',width:150,align:'center',resizable:false,editable:false,sortable:false},
                             {name:'action',index:'action',width:150,align:'center',sortable:false,resize:false,formatter:function() {
                                 return "<div class='cancel-bid' style='margin-left:8px;'>" +
-                                        "<div style='float:left;margin-left:8px;' class='ui-pg-div ui-inline-del' title='Отменить' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<div style='float:left;margin-left:8px;' class='ui-pg-div ui-inline-del' title='Отменить' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='top'>" +
                                         "<span class='icon-cancel-6'></span></div></div>" +
                                         "<div class='confirm-bid' style='margin-left:8px;'>" +
-                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Принять ставку автора' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Принять ставку автора' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='top'>" +
                                         "<span class='icon-ok-5'></span></div></div>" +
                                         "<div class='hide-bid' style='margin-left:8px;'>" +
-                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Скрыть ставку автора' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Скрыть ставку автора' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='top'>" +
                                         "<span class='icon-eye'></span></div></div>" +
                                         "<div class='auction-bid' style='margin-left:8px;'>" +
-                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Предложить торг автору' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Предложить торг автору' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='top'>" +
                                         "<span class='icon-hammer'></span></div></div>" +
                                         "<div class='open-chat' style='margin-left:8px;'>" +
-                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Открыть чат с автором' onmouseover=\"$(this).addClass('ui-state-hover');\" onmouseout=\"$(this).removeClass('ui-state-hover');\">" +
+                                        "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Открыть чат с автором' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='top'>" +
                                         "<span class='icon-chat-5'></span></div></div>";
                             }},
-                            {name:'is_author_select',index:'is_author_select',hidden:true}
+                            {name:'is_author_select',index:'is_author_select',hidden:true},
+                            {name:'author_id',index:'author_id',hidden:true}
                         ],
                         pager: $('#pagerBids'),
                         rowNum: 15,
@@ -432,14 +565,14 @@
                         hidegrid: false,
                         caption: 'Таблица ставок авторов',
                         height: '500',
-                        emptyrecords: "Нету ставок авторов",
+                        emptyrecords: "Нет ставок авторов",
                         altRows: true,
                         altclass:'alt-row',
                         loadComplete : function(data) {
+                            grid.find("tr").find("td").removeAttr('title');
                             var confirmBid = $(".confirm-bid");
                             $(".cancel-bid").click(function(e) {
-                                var rowId = getRowId(e);
-                                var row = getRow($(this));
+                                var rowId = getRowId(e), row = getRow($(this));
                                 $.ajax({
                                     type: 'POST',
                                     data: 'bidId=' + rowId + '&action=cancelBid',
@@ -449,8 +582,7 @@
                                             actionCancelBid(row, "hide");
                                             $("tr.jqgrow#" + rowId).removeClass("state-selected");
                                             confirmBid.show();
-                                        }
-                                        else {
+                                        } else {
                                             $("#window-error-cancel-bid").css({'display':'block'});
                                             setTimeout(function() {
                                                 closeMessage($('#window-error-cancel-bid'));
@@ -472,11 +604,15 @@
                                     }
                                 });
                             });
+                            $(".open-chat").on('click', function(e) {
+                                var rowId = getRowId(e), row = getRow($(this)), userId = row.find('td:last')[0].innerHTML;
+                                //console.log(rowId);
+
+                            });
                             $(".auction-bid").click(function(e) {
                                 var rowId = getRowId(e);
                                 if (rowId) {
-                                    var auctionPrice = $("#auction-price");
-                                    var auctionDay = $("#auction-day");
+                                    var auctionPrice = $("#auction-price"), auctionDay = $("#auction-day");
                                     $("#dialog-message-auction-bid").dialog({
                                         modal: true,
                                         resizable: false,
@@ -528,8 +664,7 @@
                                 }
                             });
                             confirmBid.click(function(e) {
-                                var rowId = getRowId(e);
-                                var row = getRow($(this));
+                                var rowId = getRowId(e), row = getRow($(this));
                                 if (rowId) {
                                     $("#dialog-message-select-bid").dialog({
                                         modal: true,
@@ -561,8 +696,7 @@
                                     });
                                 }
                             });
-                            var grids = grid.getDataIDs();
-                            var gridsLength = grids.length;
+                            var grids = grid.getDataIDs(), gridsLength = grids.length;
                             for (var i = 0; i < gridsLength; i++) {
                                 if (grid.getCell(grids[i], "is_author_select") == 1) {
                                     var selectedRowBid = $("tr.jqgrow#" + grids[i]);
@@ -578,8 +712,7 @@
                                 }
                             }
                         }
-                    }).navGrid('#pagerBids',{view:false, search:false, del:false, add:false, edit:false, refresh:true, refreshtext:'Обновить'},
-                            {},{},{},{},{}
+                    }).navGrid('#pagerBids',{view:false,search:false,del:false,add:false,edit:false,refresh:true,refreshtext:'Обновить'},{},{},{},{},{}
                     );
                     function getRowId(e) {
                         var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'), rowId = $tr.attr('id');
@@ -596,8 +729,7 @@
                             blockConfirmBid.hide();
                             blockAuctionBid.hide();
                             blockCancelBid.show();
-                        }
-                        else {
+                        } else {
                             blockConfirmBid.show();
                             blockAuctionBid.show();
                             blockCancelBid.hide();
