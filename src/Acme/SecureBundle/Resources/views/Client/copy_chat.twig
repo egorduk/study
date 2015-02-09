@@ -273,7 +273,8 @@
                     var messages = $("#messages"),
                             message_txt = $("#message_text"),
                             userLogin = '{{ obj.userLogin }}',
-                            orderId = {{ obj.order.id }},
+                            //orderId = {{ obj.order.id }},
+                            orderId = '',
                             userId = {{ obj.userId }},
                             authorStatus = {{ obj.author.status }},
                             //authorLogin = '{{ obj.author.login }}',
@@ -287,7 +288,6 @@
                             volumeOff = $("#volume-off"),
                             flagIsWriting = 0,
                             mode = false,
-                            flagOpenChat = 0,
                             patternCheckEmail = /([a-z0-9_-]+\.)*[a-z0-9_-]+(@|sobaka|_|собака)[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}/i,
                             patternCheckPhone = /((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,16}/i;
 
@@ -436,7 +436,7 @@
                     }
 
                     function disconnectUser() {
-                        systemMsg('system', "Отключен");
+                        //systemMsg('system', "Отключен");
                         btnSendMsg.addClass('disabled');
                         btnConfirmWork.addClass('disabled');
                         inChat.addClass("hidden");
@@ -607,67 +607,24 @@
                             });
                             $(".open-chat").on('click', function(e) {
                                 var rowId = getRowId(e), row = getRow($(this));
-                                var authorId = row.find('td:last')[0].innerHTML;
-                                console.log(authorId);
-                                console.log(flagOpenChat);
+                                authorLogin = row.find('td:last')[0].innerHTML;
+                                orderId = ;
+                                console.log(socket);
 
-                                //socket.emit('forceDisconnect');
-
-
-
-                                if (flagOpenChat == 1) {
-                                    //socket.disconnect();
-
-                                    //disconnectUser();
-                                    flagOpenChat = 0;
-                                    //socket = null;
+                                try {
+                                    var socket = io.connect('http://localhost:8008');
+                                } catch(e) {
+                                    systemMsg('system', "Server off");
+                                    return;
                                 }
-                                //if (flagOpenChat == 0)
-                                if (socket != null) {
-                                    socket.disconnect();
-                                    //socket.emit('forceDisconnect');
-                                    socket = null;
-                                } else
-                                 {
-
-                                    try {
-
-                                        var socket = io.connect('http://localhost:8008', { 'auto connect':false, 'forceNew':true/*, 'multiplex':false*/});
-                                        socket.on("connect", function() {
-                                            messages.html('');
-                                            clearSidebarCountRecords();
-                                            socket.emit("get all messages", {orderId: orderId, authorId: authorId, userId: userId});
-                                            socket.emit("join to room", {room: orderId, name: userLogin});
-                                            btnSendMsg.removeClass('disabled');
-                                            btnConfirmWork.removeClass('disabled');
-                                        });
-                                        socket.on("response get all messages", function(data) {
-                                            var countRows = 0;
-                                            for (var key in data) {
-                                                if (data[key].user_id != 17) {
-                                                    userMsg(data[key].user_login, data[key].message, data[key].date_write);
-                                                    countRows++;
-                                                } else {
-                                                    systemMsg(data[key].user_login, data[key].message, data[key].date_write);
-                                                }
-                                            }
-                                            setSidebarCountRecords(countRows);
-                                        });
-                                        //console.log(socket);
-                                    } catch(e) {
-                                        systemMsg('system', "Server off");
-                                        return;
-                                    }
-                                    //console.log(socket);
-
-                                    socket.on("disconnect", function() {
-                                        disconnectUser();
-                                    });
-                                    //flagOpenChat = 1;
-                                }
-
-
-
+                                socket.on("connect", function() {
+                                    messages.html('');
+                                    clearSidebarCountRecords();
+                                    socket.emit("get all messages", {orderId: orderId});
+                                    socket.emit("join to room", {room: orderId, name: userLogin, authorLogin: authorLogin});
+                                    btnSendMsg.removeClass('disabled');
+                                    btnConfirmWork.removeClass('disabled');
+                                });
                             });
                             $(".auction-bid").click(function(e) {
                                 var rowId = getRowId(e);

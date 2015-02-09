@@ -77,6 +77,10 @@ var validator = require('validator');
 io.sockets.on('connection', function (client) {
     var clientID = (client.id).toString();
 
+    client.on('forceDisconnect', function() {
+        client.disconnect();
+    });
+
     client.on("send message", function (data) {
         try {
             var date = new Date(),
@@ -164,7 +168,7 @@ io.sockets.on('connection', function (client) {
         }
     });
 
-    client.on("join to room", function(data, handshakeData, accept) {
+    client.on("join to room", function(data) {
         arrName[clientID] = data.name;
         arrRoom[clientID] = data.room;
         console.log("Connected - " + data.name + " to room - " + data.room);
@@ -255,9 +259,12 @@ io.sockets.on('connection', function (client) {
     });*/
 
     client.on("get all messages", function (data) {
+        var orderId = data.orderId, channel = data.authorId + '_' + data.userId;
+        console.log(channel);
+        console.log(data);
         connection.queryHash(
             'SELECT wm.id, message, DATE_FORMAT(date_write,"%d.%m.%Y %T") AS date_write, login AS user_login, u.id AS user_id FROM webchat_message AS wm INNER JOIN user AS u ON wm.user_id = u.id' +
-                ' WHERE wm.user_order_id = ' + data.orderId,
+                ' WHERE wm.user_order_id = ' + orderId + ' AND channel = "' + channel + '"',
             function(error, rows) {
                 //console.dir(rows);
                // console.dir({queryHash:row});

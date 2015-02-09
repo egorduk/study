@@ -368,6 +368,7 @@ class ClientController extends Controller
                             $dateBid,
                             "",
                             $bid['is_select_client'],
+                            //$userLogin
                             $bid['uid']
                         );
                     }
