@@ -1,288 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig" line="476" mnemonic="1" />
+    <bookmark url="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig" line="477" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="544aa3f9-6149-4d96-94a7-9d4361f88150" name="Default" comment="1&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/static/Thumbs.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/images/icons/Thumbs.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/images/modal_window/Thumbs.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/docs/public/fonts/aller-bold.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/docs/public/fonts/aller-bold.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/docs/public/fonts/aller-bold.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/docs/public/fonts/aller-light.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/docs/public/fonts/aller-light.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/docs/public/fonts/aller-light.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/favicon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/images/modal_window/help.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/images/modal_window/important.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/images/modal_window/info.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/docs/public/fonts/novecento-bold.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/docs/public/fonts/novecento-bold.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/docs/public/fonts/novecento-bold.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/images/modal_window/title.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/object.assign/node_modules/object-keys/.editorconfig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/.editorconfig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/object.assign/node_modules/object-keys/.eslintrc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/.jscs.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/object.assign/node_modules/object-keys/.jscs.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/qs/.jshintignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/node_modules/validator/.jshintrc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/qs/.jshintrc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validator/.jshintrc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/node_modules/validator/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/formidable/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/object.assign/node_modules/object-keys/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/qs/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/indexof/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validator/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/minimist/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/node_modules/validator/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/async/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/formidable/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/object.assign/node_modules/object-keys/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/qs/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validator/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/CHANGELOG.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/is/CHANGELOG.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/object.assign/CHANGELOG.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/object.assign/node_modules/object-keys/CHANGELOG.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/qs/CHANGELOG.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/CNAME" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/qs/CONTRIBUTING.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/CONTRIBUTING.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/Gruntfile.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/is/LICENSE.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/LICENSE.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/minimist/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/node_modules/validator/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/async/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/formidable/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/object.assign/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/object.assign/node_modules/object-keys/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/qs/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validator/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/Makefile" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/node_modules/validator/Makefile" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/is/Makefile" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/qs/Makefile" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/indexof/Makefile" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validator/Makefile" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/node_modules/validator/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/async/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/is/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/object.assign/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/object.assign/node_modules/object-keys/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/qs/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validator/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/RELEASING.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/Readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/formidable/Readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/indexof/Readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/minimist/test/all_bool.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/test/helpers/app.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/async/lib/async.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/test/basic.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/test/bodyOnly.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/minimist/test/bool.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/node_modules/validator/bower.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/bower.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validator/bower.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/object.assign/dist/browser.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/bin/cli.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/indent-string/cli.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/repeating/cli.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/node_modules/validator/test/client-side.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validator/test/client-side.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/example/complex.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/async/component.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/is/component.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/indexof/component.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/minimist/test/dash.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/.bin/dateformat.cmd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/lib/dateformat.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/.bin/dateformat" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/specs/validators/datetime-spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/minimist/test/default_bool.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/docs/docco.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/minimist/test/dotted.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/specs/validators/email-spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/test/helpers/example.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/specs/validators/exclusion-spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/node_modules/validator/test/exports.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validator/test/exports.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/lib/express_validator.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/lib/fields.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/formidable/lib/file.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/specs/validators/format-spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/lib/forms.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/specs/helpers.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/lib/htmlEscape.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/specs/validators/inclusion-spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/formidable/lib/incoming_form.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/.bin/indent-string.cmd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/.bin/indent-string" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/get-stdin/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/camelcase-keys/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/camelcase-keys/node_modules/camelcase/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/camelcase-keys/node_modules/map-obj/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/indent-string/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/get-stdin/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/repeating/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/repeating/node_modules/is-finite/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/repeating/node_modules/meow/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/minimist/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/object-assign/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/formidable/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/formidable/lib/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/is/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/is/test/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/object.assign/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/object.assign/node_modules/object-keys/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/object.assign/test/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/qs/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/qs/lib/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/indexof/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/js/sound/ion.sound.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/object.assign/node_modules/object-keys/isArguments.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/specs/vendor/jasmine-promise.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/css/modal_window/jquery.alert.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/js/modal_window/jquery.alert.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/bundles/js/jquery.cookie.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/example/json-template.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/formidable/lib/json_parser.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/specs/validators/length-spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/repeating/node_modules/meow/license" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/minimist/test/long.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/test/mapped.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/specs/vendor/moment.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/formidable/lib/multipart_parser.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/test/nested.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/docs/public/stylesheets/normalize.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/minimist/test/num.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/specs/validators/numericality-spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/formidable/lib/octet_parser.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/test/optional.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/get-stdin/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/camelcase-keys/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/camelcase-keys/node_modules/camelcase/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/camelcase-keys/node_modules/map-obj/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/indent-string/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/get-stdin/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/repeating/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/repeating/node_modules/is-finite/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/repeating/node_modules/meow/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/minimist/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/object-assign/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/node_modules/validator/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/async/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/formidable/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/is/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/object.assign/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/object.assign/node_modules/object-keys/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/qs/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/indexof/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validator/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/example/page.jsont" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/test/paramsOnly.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/minimist/example/parse.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/minimist/test/parse.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/qs/lib/parse.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/qs/test/parse.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/minimist/test/parse_modified.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/specs/validators/presence-spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/specs/vendor/promise-0.1.1.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/specs/vendor/q.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/test/queryOnly.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/formidable/lib/querystring_parser.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/minimist/readme.markdown" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/get-stdin/readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/camelcase-keys/readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/camelcase-keys/node_modules/camelcase/readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/camelcase-keys/node_modules/map-obj/readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/indent-string/readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/get-stdin/readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/repeating/readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/repeating/node_modules/is-finite/readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/repeating/node_modules/meow/readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/object-assign/readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/test/regex.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/lib/render.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/.bin/repeating.cmd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/.bin/repeating" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/test/helpers/req.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/specs/vendor/rsvp-latest.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/node_modules/validator/test/sanitizers.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validator/test/sanitizers.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/minimist/test/short.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/example/simple.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/minimist/test/stop_early.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/qs/lib/stringify.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/qs/test/stringify.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/lib/tag.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/test-browser.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/test/test-fields.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/test/test-form.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/test/test-forms.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/test/test-render.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/test/test-tag.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/test/test-validators.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/test/test-widgets.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/test/test_dayofweek.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/test/test_formats.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/test/test_isoutcdatetime.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/test/weekofyear/test_weekofyear.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/test/weekofyear/test_weekofyear.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/minimist/test/unknown.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/node_modules/qs/lib/utils.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/specs/validate-async-spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/specs/validate-helpers-spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/specs/validate-spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/docs/validate.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/validate.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/validate.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/validate.min.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/node_modules/validator/validator.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validator/validator.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/node_modules/validator/validator.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validator/validator.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/express-validator/node_modules/validator/test/validators.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/lib/validators.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validator/test/validators.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/specs/vendor/when.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/dateformat/node_modules/meow/node_modules/minimist/test/whitespace.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/forms/lib/widgets.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_chat/server/node_modules/validate.js/specs/vendor/xdate.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/copy_chat.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Helper/Helper.php" afterPath="$PROJECT_DIR$/src/Helper/Helper.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_chat/server/appChat.js" afterPath="$PROJECT_DIR$/node_chat/server/appChat.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_select.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_select.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="study.iws" />
@@ -309,7 +35,7 @@
       <file leaf-file-name="AuthorController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="542" column="49" selection-start="31247" selection-end="31282" vertical-scroll-proportion="-4.967742" vertical-offset="11022" max-vertical-offset="20394">
+            <state line="542" column="49" selection-start="31247" selection-end="31282" vertical-scroll-proportion="-0.0" vertical-offset="10840" max-vertical-offset="19220">
               <folding />
             </state>
           </provider>
@@ -318,15 +44,8 @@
       <file leaf-file-name="order_select.html.twig" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_select.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="409" column="105" selection-start="18736" selection-end="18819" vertical-scroll-proportion="-9.806452" vertical-offset="7594" max-vertical-offset="12562">
-              <folding>
-                <element signature="tag#style#0" expanded="false" />
-                <marker date="1423425879859" expanded="false" signature="13610:13623" placeholder="..." />
-                <marker date="1423425879859" expanded="false" signature="18609:18625" placeholder="..." />
-                <marker date="1423425879859" expanded="false" signature="18676:18703" placeholder="..." />
-                <marker date="1423425879859" expanded="false" signature="18973:18989" placeholder="..." />
-                <marker date="1423425879859" expanded="false" signature="19040:19067" placeholder="..." />
-              </folding>
+            <state line="409" column="105" selection-start="18736" selection-end="18819" vertical-scroll-proportion="0.0" vertical-offset="8180" max-vertical-offset="12420">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -334,10 +53,8 @@
       <file leaf-file-name="ClientController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="365" column="51" selection-start="18397" selection-end="18397" vertical-scroll-proportion="-16.870968" vertical-offset="5835" max-vertical-offset="10296">
-              <folding>
-                <element signature="e#13613#20363#0" expanded="false" />
-              </folding>
+            <state line="371" column="28" selection-start="18629" selection-end="18629" vertical-scroll-proportion="-11.896552" vertical-offset="6575" max-vertical-offset="10400">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -345,45 +62,20 @@
       <file leaf-file-name="order_select.html.twig" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="601" column="54" selection-start="31813" selection-end="31813" vertical-scroll-proportion="13.397849" vertical-offset="5746" max-vertical-offset="16874">
+            <state line="634" column="111" selection-start="33315" selection-end="33315" vertical-scroll-proportion="0.94483984" vertical-offset="8469" max-vertical-offset="12860">
               <folding>
-                <element signature="e#10370#10391#0" expanded="true" />
-                <marker date="1423447308299" expanded="true" signature="27091:27107" placeholder="..." />
-                <marker date="1423447308299" expanded="true" signature="27166:27193" placeholder="..." />
-                <marker date="1423447308299" expanded="true" signature="27496:27512" placeholder="..." />
-                <marker date="1423447308299" expanded="true" signature="27571:27598" placeholder="..." />
-                <marker date="1423447308299" expanded="true" signature="27907:27923" placeholder="..." />
-                <marker date="1423447308299" expanded="true" signature="27982:28009" placeholder="..." />
-                <marker date="1423447308299" expanded="true" signature="28319:28335" placeholder="..." />
-                <marker date="1423447308299" expanded="true" signature="28394:28421" placeholder="..." />
-                <marker date="1423447308299" expanded="true" signature="28734:28750" placeholder="..." />
-                <marker date="1423447308299" expanded="true" signature="28809:28836" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Helper.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1330" column="278" selection-start="56368" selection-end="56368" vertical-scroll-proportion="-9.806452" vertical-offset="28428" max-vertical-offset="55770">
-              <folding>
-                <marker date="1423443747916" expanded="true" signature="4807:4868" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1423443747916" expanded="true" signature="5233:5288" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1423443747916" expanded="true" signature="5658:5719" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1423443747916" expanded="true" signature="11356:11471" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1423443747916" expanded="true" signature="11935:12073" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1423443747916" expanded="true" signature="45193:45650" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-                <marker date="1423443747916" expanded="true" signature="45992:46358" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1423443747916" expanded="true" signature="46028:46152" placeholder="SELECT ub.us..user_bid..." />
-                <marker date="1423443747916" expanded="true" signature="49069:49342" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1423443747916" expanded="true" signature="49084:49208" placeholder="SELECT ub.us..user_bid..." />
-                <marker date="1423443747916" expanded="true" signature="56113:56406" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1423443747916" expanded="true" signature="56128:56236" placeholder="SELECT b.use..user_bid..." />
-                <marker date="1423443747916" expanded="true" signature="82492:82757" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1423443747916" expanded="true" signature="82507:82624" placeholder="SELECT b.use..user_bid..." />
-                <marker date="1423443747916" expanded="true" signature="86593:86699" placeholder="SELECT date_..cancel_request..." />
-                <marker date="1423443747916" expanded="true" signature="104308:104896" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+                <element signature="tag#style#0" expanded="false" />
+                <element signature="e#4422#9678#0" expanded="false" />
+                <marker date="1423503884643" expanded="false" signature="27184:27200" placeholder="..." />
+                <marker date="1423503884643" expanded="false" signature="27259:27286" placeholder="..." />
+                <marker date="1423503884643" expanded="false" signature="27589:27605" placeholder="..." />
+                <marker date="1423503884643" expanded="false" signature="27664:27691" placeholder="..." />
+                <marker date="1423503884643" expanded="false" signature="28000:28016" placeholder="..." />
+                <marker date="1423503884643" expanded="false" signature="28075:28102" placeholder="..." />
+                <marker date="1423503884643" expanded="false" signature="28412:28428" placeholder="..." />
+                <marker date="1423503884643" expanded="false" signature="28487:28514" placeholder="..." />
+                <marker date="1423503884643" expanded="false" signature="28827:28843" placeholder="..." />
+                <marker date="1423503884643" expanded="false" signature="28902:28929" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -392,7 +84,18 @@
       <file leaf-file-name="appChat.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/node_chat/server/appChat.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="218" column="29" selection-start="8727" selection-end="8727" vertical-scroll-proportion="0.0" vertical-offset="4347" max-vertical-offset="6666">
+            <state line="79" column="45" selection-start="2155" selection-end="2155" vertical-scroll-proportion="0.0" vertical-offset="1334" max-vertical-offset="4500">
+              <folding>
+                <element signature="e#2240#6587#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Helper.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1330" column="278" selection-start="56368" selection-end="56368" vertical-scroll-proportion="0.0" vertical-offset="26600" max-vertical-offset="51180">
               <folding />
             </state>
           </provider>
@@ -453,9 +156,9 @@
         <option value="$PROJECT_DIR$/web/bundles/css/modal_window/jquery.alert.css" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_select.html.twig" />
-        <option value="$PROJECT_DIR$/node_chat/server/appChat.js" />
         <option value="$PROJECT_DIR$/src/Helper/Helper.php" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php" />
+        <option value="$PROJECT_DIR$/node_chat/server/appChat.js" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig" />
       </list>
     </option>
@@ -625,6 +328,40 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="study" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Acme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SecureBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Author" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -743,7 +480,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../stansberry" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="269" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
@@ -770,11 +507,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\OpenServer\domains\localhost\study\src\Acme\SecureBundle\Resources\views\Client" />
       <recent name="D:\OpenServer\domains\localhost\study\node_chat\server" />
       <recent name="D:\OpenServer\domains\localhost\study\src\Acme\AdminBundle" />
       <recent name="D:\OpenServer\domains\localhost\study\src\Acme\AdminBundle\Controller" />
       <recent name="D:\OpenServer\domains\localhost\study\src\Acme\AdminBundle\Resources" />
-      <recent name="D:\OpenServer\domains\localhost\study\web\bundles\css\chat" />
     </key>
   </component>
   <component name="RunManager">
@@ -840,26 +577,26 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32034633" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3189189" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937366" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.10543131" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16027689" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15069222" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32864866" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.10543131" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14909478" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32864866" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937366" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -882,9 +619,9 @@
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.10543131" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14909478" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -908,11 +645,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Acme/AdminBundle/Resources/config/validation.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2020" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/bundles/js/tinymce/plugins/bbcode/editor_plugin.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="502" selection-start="502" selection-end="502" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="560" />
@@ -1013,11 +745,6 @@
         <state line="44" column="0" selection-start="924" selection-end="924" vertical-scroll-proportion="0.33295456" vertical-offset="467" max-vertical-offset="11500" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_chat/server/node_modules/socket.io-session-middleware/example/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="188" selection-end="188" vertical-scroll-proportion="0.20022246" vertical-offset="0" max-vertical-offset="1000" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_chat/server/appChat1.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="32" column="18" selection-start="770" selection-end="770" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="760" />
@@ -1033,11 +760,6 @@
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_bid.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="41" column="41" selection-start="3703" selection-end="3737" vertical-scroll-proportion="0.4479042" vertical-offset="528" max-vertical-offset="2794" />
-      </provider>
-    </entry>
-    <entry file="file://D:/Project/ion.sound.example/ion.sound.example/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="11" selection-start="829" selection-end="916" vertical-scroll-proportion="0.9113924" vertical-offset="132" max-vertical-offset="1210" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/bundles/js/jquery.cookie.js">
@@ -1094,162 +816,141 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/node_chat/server/node_modules/forms/example/page.jsont">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.4570447" vertical-offset="848" max-vertical-offset="1430">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.4570447" vertical-offset="848" max-vertical-offset="1430" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_chat/server/node_modules/forms/example/simple.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="39" selection-start="1292" selection-end="1292" vertical-scroll-proportion="0.9777778" vertical-offset="0" max-vertical-offset="1496">
-          <folding />
-        </state>
+        <state line="40" column="39" selection-start="1292" selection-end="1292" vertical-scroll-proportion="0.9777778" vertical-offset="0" max-vertical-offset="1496" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_chat/server/node_modules/mysql-utilities/utilities.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="232" column="19" selection-start="7262" selection-end="7262" vertical-scroll-proportion="0.0" vertical-offset="3885" max-vertical-offset="10934">
-          <folding />
-        </state>
+        <state line="232" column="19" selection-start="7262" selection-end="7262" vertical-scroll-proportion="0.0" vertical-offset="3885" max-vertical-offset="10934" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_work.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2728">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2728" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_chat/server/node_modules/validator/validator.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="320" column="19" selection-start="11644" selection-end="11649" vertical-scroll-proportion="-11.44" vertical-offset="6292" max-vertical-offset="12166">
-          <folding />
-        </state>
+        <state line="320" column="19" selection-start="11644" selection-end="11649" vertical-scroll-proportion="-11.44" vertical-offset="6292" max-vertical-offset="12166" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="542" column="49" selection-start="31247" selection-end="31282" vertical-scroll-proportion="-4.967742" vertical-offset="11022" max-vertical-offset="20394">
+        <state line="542" column="49" selection-start="31247" selection-end="31282" vertical-scroll-proportion="0.0" vertical-offset="10840" max-vertical-offset="19220">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="134" column="44" selection-start="2671" selection-end="2675" vertical-scroll-proportion="-5.0" vertical-offset="2470" max-vertical-offset="10032">
-          <folding />
-        </state>
+        <state line="134" column="44" selection-start="2671" selection-end="2675" vertical-scroll-proportion="-5.0" vertical-offset="2470" max-vertical-offset="10032" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/AuthBundle/Entity/UserRole.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.77623993" vertical-offset="673" max-vertical-offset="1540">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.77623993" vertical-offset="673" max-vertical-offset="1540" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1330" column="278" selection-start="56368" selection-end="56368" vertical-scroll-proportion="-9.806452" vertical-offset="28428" max-vertical-offset="55770">
-          <folding>
-            <marker date="1423443747916" expanded="true" signature="4807:4868" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1423443747916" expanded="true" signature="5233:5288" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1423443747916" expanded="true" signature="5658:5719" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1423443747916" expanded="true" signature="11356:11471" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1423443747916" expanded="true" signature="11935:12073" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1423443747916" expanded="true" signature="45193:45650" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-            <marker date="1423443747916" expanded="true" signature="45992:46358" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1423443747916" expanded="true" signature="46028:46152" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1423443747916" expanded="true" signature="49069:49342" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1423443747916" expanded="true" signature="49084:49208" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1423443747916" expanded="true" signature="56113:56406" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1423443747916" expanded="true" signature="56128:56236" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1423443747916" expanded="true" signature="82492:82757" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1423443747916" expanded="true" signature="82507:82624" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1423443747916" expanded="true" signature="86593:86699" placeholder="SELECT date_..cancel_request..." />
-            <marker date="1423443747916" expanded="true" signature="104308:104896" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_chat/server/appChat.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="218" column="29" selection-start="8727" selection-end="8727" vertical-scroll-proportion="0.0" vertical-offset="4347" max-vertical-offset="6666">
+        <state line="1330" column="278" selection-start="56368" selection-end="56368" vertical-scroll-proportion="0.0" vertical-offset="26600" max-vertical-offset="51180">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_select.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="409" column="105" selection-start="18736" selection-end="18819" vertical-scroll-proportion="-9.806452" vertical-offset="7594" max-vertical-offset="12562">
+        <state line="409" column="105" selection-start="18736" selection-end="18819" vertical-scroll-proportion="0.0" vertical-offset="8180" max-vertical-offset="12420">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="0" selection-start="384" selection-end="491" vertical-scroll-proportion="-1.9625293" vertical-offset="1808" max-vertical-offset="6688" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_favorite.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="73" column="39" selection-start="5181" selection-end="5778" vertical-scroll-proportion="0.47189695" vertical-offset="1203" max-vertical-offset="2772" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_new.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="171" column="25" selection-start="10881" selection-end="10931" vertical-scroll-proportion="0.46018735" vertical-offset="3369" max-vertical-offset="8910">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_chat/server/node_modules/socket.io-session-middleware/example/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="4" selection-start="184" selection-end="184" vertical-scroll-proportion="0.06562848" vertical-offset="101" max-vertical-offset="1000">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_chat1/server/node_modules/socket.io/node_modules/socket.io-client/lib/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="77" column="13" selection-start="1338" selection-end="1338" vertical-scroll-proportion="1.7130145" vertical-offset="0" max-vertical-offset="1860">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/copy_chat.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="15680">
           <folding>
-            <element signature="tag#style#0" expanded="false" />
-            <marker date="1423425879859" expanded="false" signature="13610:13623" placeholder="..." />
-            <marker date="1423425879859" expanded="false" signature="18609:18625" placeholder="..." />
-            <marker date="1423425879859" expanded="false" signature="18676:18703" placeholder="..." />
-            <marker date="1423425879859" expanded="false" signature="18973:18989" placeholder="..." />
-            <marker date="1423425879859" expanded="false" signature="19040:19067" placeholder="..." />
+            <marker date="1423486178774" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1423486178774" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1423486178774" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1423486178774" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1423486178774" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1423486178774" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1423486178774" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1423486178774" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1423486178774" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1423486178774" expanded="false" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="365" column="51" selection-start="18397" selection-end="18397" vertical-scroll-proportion="-16.870968" vertical-offset="5835" max-vertical-offset="10296">
-          <folding>
-            <element signature="e#13613#20363#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_work.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="384" selection-end="491" vertical-scroll-proportion="-1.9625293" vertical-offset="1808" max-vertical-offset="6688">
+        <state line="371" column="28" selection-start="18629" selection-end="18629" vertical-scroll-proportion="-11.896552" vertical-offset="6575" max-vertical-offset="10400">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_favorite.html.twig">
+    <entry file="file://$PROJECT_DIR$/node_chat/server/appChat.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="39" selection-start="5181" selection-end="5778" vertical-scroll-proportion="0.47189695" vertical-offset="1203" max-vertical-offset="2772">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/orders_new.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="171" column="25" selection-start="10881" selection-end="10931" vertical-scroll-proportion="0.46018735" vertical-offset="3369" max-vertical-offset="8910">
+        <state line="79" column="45" selection-start="2155" selection-end="2155" vertical-scroll-proportion="0.0" vertical-offset="1334" max-vertical-offset="4500">
           <folding>
-            <marker date="1422810078975" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1422810078975" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1422810078975" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1422810078975" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1422810078975" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1422810078975" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1422810078975" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1422810078975" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1422810078975" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1422810078975" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1422810078975" expanded="false" signature="-1:-1" placeholder="..." />
+            <element signature="e#2240#6587#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="601" column="54" selection-start="31813" selection-end="31813" vertical-scroll-proportion="13.397849" vertical-offset="5746" max-vertical-offset="16874">
+        <state line="634" column="111" selection-start="33315" selection-end="33315" vertical-scroll-proportion="0.94483984" vertical-offset="8469" max-vertical-offset="12860">
           <folding>
-            <element signature="e#10370#10391#0" expanded="true" />
-            <marker date="1423447308299" expanded="true" signature="27091:27107" placeholder="..." />
-            <marker date="1423447308299" expanded="true" signature="27166:27193" placeholder="..." />
-            <marker date="1423447308299" expanded="true" signature="27496:27512" placeholder="..." />
-            <marker date="1423447308299" expanded="true" signature="27571:27598" placeholder="..." />
-            <marker date="1423447308299" expanded="true" signature="27907:27923" placeholder="..." />
-            <marker date="1423447308299" expanded="true" signature="27982:28009" placeholder="..." />
-            <marker date="1423447308299" expanded="true" signature="28319:28335" placeholder="..." />
-            <marker date="1423447308299" expanded="true" signature="28394:28421" placeholder="..." />
-            <marker date="1423447308299" expanded="true" signature="28734:28750" placeholder="..." />
-            <marker date="1423447308299" expanded="true" signature="28809:28836" placeholder="..." />
+            <element signature="tag#style#0" expanded="false" />
+            <element signature="e#4422#9678#0" expanded="false" />
+            <marker date="1423503884643" expanded="false" signature="27184:27200" placeholder="..." />
+            <marker date="1423503884643" expanded="false" signature="27259:27286" placeholder="..." />
+            <marker date="1423503884643" expanded="false" signature="27589:27605" placeholder="..." />
+            <marker date="1423503884643" expanded="false" signature="27664:27691" placeholder="..." />
+            <marker date="1423503884643" expanded="false" signature="28000:28016" placeholder="..." />
+            <marker date="1423503884643" expanded="false" signature="28075:28102" placeholder="..." />
+            <marker date="1423503884643" expanded="false" signature="28412:28428" placeholder="..." />
+            <marker date="1423503884643" expanded="false" signature="28487:28514" placeholder="..." />
+            <marker date="1423503884643" expanded="false" signature="28827:28843" placeholder="..." />
+            <marker date="1423503884643" expanded="false" signature="28902:28929" placeholder="..." />
           </folding>
         </state>
       </provider>
