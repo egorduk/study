@@ -287,6 +287,7 @@
                             volumeOff = $("#volume-off"),
                             flagIsWriting = 0,
                             mode = false,
+                            countOpenChat = 0,
                             flagOpenChat = 0,
                             patternCheckEmail = /([a-z0-9_-]+\.)*[a-z0-9_-]+(@|sobaka|_|собака)[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}/i,
                             patternCheckPhone = /((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,16}/i;
@@ -625,6 +626,7 @@
                                 //if (flagOpenChat == 0)
                                 if (socket != null) {
                                     socket.disconnect();
+                                    //socket.reconnect();
                                     //socket.emit('forceDisconnect');
                                     socket = null;
                                 } else
@@ -632,7 +634,7 @@
 
                                     try {
 
-                                        var socket = io.connect('http://localhost:8008', { 'auto connect':false, 'forceNew':true/*, 'multiplex':false*/});
+                                        var socket = io.connect('http://localhost:8008', { 'auto connect':false, /*'forceNew':true, */'reconnect':false/*, 'multiplex':false*/});
                                         socket.on("connect", function() {
                                             messages.html('');
                                             clearSidebarCountRecords();
