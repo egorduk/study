@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig" line="598" mnemonic="1" />
+    <bookmark url="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig" line="599" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="544aa3f9-6149-4d96-94a7-9d4361f88150" name="Default" comment="1&#10;">
@@ -67,22 +67,22 @@
       <file leaf-file-name="order_select.html.twig" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="316" column="77" selection-start="16525" selection-end="16525" vertical-scroll-proportion="2.7992833" vertical-offset="2200" max-vertical-offset="16368">
+            <state line="209" column="12" selection-start="10392" selection-end="10392" vertical-scroll-proportion="0.43369177" vertical-offset="2068" max-vertical-offset="16390">
               <folding>
                 <element signature="tag#style#0" expanded="false" />
-                <element signature="e#11071#11092#0" expanded="true" />
+                <element signature="e#11084#11105#0" expanded="true" />
                 <element signature="tag#div#2;tag#div#0" expanded="false" />
                 <element signature="tag#div#4;tag#div#0" expanded="false" />
-                <marker date="1423869256776" expanded="true" signature="30703:30719" placeholder="..." />
-                <marker date="1423869256776" expanded="true" signature="30778:30805" placeholder="..." />
-                <marker date="1423869256776" expanded="true" signature="31108:31124" placeholder="..." />
-                <marker date="1423869256776" expanded="true" signature="31183:31210" placeholder="..." />
-                <marker date="1423869256776" expanded="true" signature="31519:31535" placeholder="..." />
-                <marker date="1423869256776" expanded="true" signature="31594:31621" placeholder="..." />
-                <marker date="1423869256776" expanded="true" signature="31931:31947" placeholder="..." />
-                <marker date="1423869256776" expanded="true" signature="32006:32033" placeholder="..." />
-                <marker date="1423869256776" expanded="true" signature="32346:32362" placeholder="..." />
-                <marker date="1423869256776" expanded="true" signature="32421:32448" placeholder="..." />
+                <marker date="1423869348114" expanded="true" signature="30716:30732" placeholder="..." />
+                <marker date="1423869348114" expanded="true" signature="30791:30818" placeholder="..." />
+                <marker date="1423869348114" expanded="true" signature="31121:31137" placeholder="..." />
+                <marker date="1423869348114" expanded="true" signature="31196:31223" placeholder="..." />
+                <marker date="1423869348114" expanded="true" signature="31532:31548" placeholder="..." />
+                <marker date="1423869348114" expanded="true" signature="31607:31634" placeholder="..." />
+                <marker date="1423869348114" expanded="true" signature="31944:31960" placeholder="..." />
+                <marker date="1423869348114" expanded="true" signature="32019:32046" placeholder="..." />
+                <marker date="1423869348114" expanded="true" signature="32359:32375" placeholder="..." />
+                <marker date="1423869348114" expanded="true" signature="32434:32461" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -566,9 +566,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32034633" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32034633" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937366" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -969,22 +969,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="316" column="77" selection-start="16525" selection-end="16525" vertical-scroll-proportion="2.7992833" vertical-offset="2200" max-vertical-offset="16368">
+        <state line="209" column="12" selection-start="10392" selection-end="10392" vertical-scroll-proportion="0.43369177" vertical-offset="2068" max-vertical-offset="16390">
           <folding>
             <element signature="tag#style#0" expanded="false" />
-            <element signature="e#11071#11092#0" expanded="true" />
+            <element signature="e#11084#11105#0" expanded="true" />
             <element signature="tag#div#2;tag#div#0" expanded="false" />
             <element signature="tag#div#4;tag#div#0" expanded="false" />
-            <marker date="1423869256776" expanded="true" signature="30703:30719" placeholder="..." />
-            <marker date="1423869256776" expanded="true" signature="30778:30805" placeholder="..." />
-            <marker date="1423869256776" expanded="true" signature="31108:31124" placeholder="..." />
-            <marker date="1423869256776" expanded="true" signature="31183:31210" placeholder="..." />
-            <marker date="1423869256776" expanded="true" signature="31519:31535" placeholder="..." />
-            <marker date="1423869256776" expanded="true" signature="31594:31621" placeholder="..." />
-            <marker date="1423869256776" expanded="true" signature="31931:31947" placeholder="..." />
-            <marker date="1423869256776" expanded="true" signature="32006:32033" placeholder="..." />
-            <marker date="1423869256776" expanded="true" signature="32346:32362" placeholder="..." />
-            <marker date="1423869256776" expanded="true" signature="32421:32448" placeholder="..." />
+            <marker date="1423869348114" expanded="true" signature="30716:30732" placeholder="..." />
+            <marker date="1423869348114" expanded="true" signature="30791:30818" placeholder="..." />
+            <marker date="1423869348114" expanded="true" signature="31121:31137" placeholder="..." />
+            <marker date="1423869348114" expanded="true" signature="31196:31223" placeholder="..." />
+            <marker date="1423869348114" expanded="true" signature="31532:31548" placeholder="..." />
+            <marker date="1423869348114" expanded="true" signature="31607:31634" placeholder="..." />
+            <marker date="1423869348114" expanded="true" signature="31944:31960" placeholder="..." />
+            <marker date="1423869348114" expanded="true" signature="32019:32046" placeholder="..." />
+            <marker date="1423869348114" expanded="true" signature="32359:32375" placeholder="..." />
+            <marker date="1423869348114" expanded="true" signature="32434:32461" placeholder="..." />
           </folding>
         </state>
       </provider>
