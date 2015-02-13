@@ -78,7 +78,8 @@ io.sockets.on('connection', function (client) {
     var clientID = (client.id).toString();
 
     client.on('forceDisconnect', function() {
-        client.disconnect();
+        //client.disconnect();
+        //client.socket.reconnect();
     });
 
     client.on("send message", function (data) {
