@@ -12,6 +12,7 @@
         <script type="text/javascript" src="{{ asset('bundles/js/sound/ion.sound.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/modal_window/jquery.alert.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-maxlength.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/price-format.js') }}"></script>
         <script src="http://localhost:8008/socket.io/socket.io.js" defer></script>
         <style>
             .col-md-2 {
@@ -194,20 +195,19 @@
                     <span class="icon-warning" style="float:left; margin:0 7px 50px 0;"></span>
                     Заказ удален, обновите таблицу со ставками либо страницу!
                 </p>
-            </div>
+            </div>-->
             <div id="dialog-message-auction-bid" title="Предложить торг">
                 <label for="auction-price">Предложить цену</label>
                 <div class="input-group">
-                    <input type="text" name="auction-price" id="auction-price" required placeholder="Введите цену..." class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="6">
+                    <input type="text" name="auction-price" id="auction-price" required placeholder="Введите цену" class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="7">
                     <span class="input-group-addon"><i class="icon-rouble"></i></span>
                 </div>
                 <label for="auction-day">Предложить дней на выполнение</label>
                 <div class="input-group">
-                    <input type="text" name="auction-day" id="auction-day" required placeholder="Введите количество дней..." class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="3">
+                    <input type="text" name="auction-day" id="auction-day" required placeholder="Введите количество дней" class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="3">
                     <span class="input-group-addon"><i class="icon-clock-5"></i></span>
                 </div>
-            </div>-->
-            
+            </div>
             <table id="listBids"></table>
             <div id="pagerBids"></div>
             <div class="demo">
@@ -309,6 +309,7 @@
                             flagIsWriting = 0,
                             mode = false,
                             countOpenChat = 0,
+                            socket = null,
                             flagOpenChat = 0,
                             patternCheckEmail = /([a-z0-9_-]+\.)*[a-z0-9_-]+(@|sobaka|_|собака)[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}/i,
                             patternCheckPhone = /((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,16}/i;
@@ -695,7 +696,7 @@
 
                                     try {
 
-                                        var socket = io.connect('http://localhost:8008', { 'auto connect':false, /*'forceNew':true, */'reconnect':false/*, 'multiplex':false*/});
+                                        socket = io.connect('http://localhost:8008', { 'auto connect':false, /*'forceNew':true, */'reconnect':false/*, 'multiplex':false*/});
                                         socket.on("connect", function() {
                                             messages.html('');
                                             clearSidebarCountRecords();
@@ -736,6 +737,13 @@
                                 var rowId = getRowId(e);
                                 if (rowId) {
                                     var auctionPrice = $("#auction-price"), auctionDay = $("#auction-day");
+                                    auctionPrice.priceFormat({
+                                        prefix: '',
+                                        centsSeparator: '',
+                                        thousandsSeparator: ' ',
+                                        centsLimit: 0,
+                                        clearOnEmpty: true
+                                    });
                                     $("#dialog-message-auction-bid").dialog({
                                         modal: true,
                                         resizable: false,
@@ -759,7 +767,8 @@
                                                     auctionDay.removeClass('bootstrap-error').tooltip('hide');
                                                 }
                                                 if (!error) {
-                                                    $.ajax({
+                                                    socket.emit("request client bid", {orderId: orderId, userId: userId, day: auctionDay.val(), price: auctionPrice.val()});
+                                                    /*$.ajax({
                                                         type: 'POST',
                                                         data: 'bidId=' + rowId + '&auctionPrice=' + auctionPrice.val() + '&auctionDay=' + auctionDay.val() + '&action=auctionBid',
                                                         success: function(response) {
@@ -772,7 +781,8 @@
                                                                 }, 2000);
                                                             }
                                                         }
-                                                    });
+                                                    });*/
+
                                                 }
                                             },
                                             "Отмена": function() {
@@ -871,7 +881,8 @@
                         return ("");
                     }
                     function isNormalInteger(str) {
-                        return /^\+?([1-9]\d*)$/.test(str);
+                        str = str.replace(/\s/g, "");
+                        return /^[1-9]\d*$/.test(str);
                     }
                     function closeMessage(el) {
                         el.addClass('is-hidden').css({'display':'none'});

@@ -218,6 +218,17 @@ io.sockets.on('connection', function (client) {
         }
     });
 
+    client.on("request client bid", function(data) {
+       // console.dir(data);
+        var day = data.day,
+            price = data.replace(/\s/g, ""),
+            userId = data.userId,
+            orderId = data.orderId;
+        if (validator.isLength(price, 2, 6) && validator.isInt(price) && validator.isInt(day) && validator.isLength(day, 1, 3) && (day > 0 || day < 999)) {
+
+        }
+    });
+
     function createSystemMsg(orderId, type) {
         var fullDate = getFullDate(new Date()),
             date_msg = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss"),
