@@ -12,6 +12,7 @@
         <script type="text/javascript" src="{{ asset('bundles/js/sound/ion.sound.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/modal_window/jquery.alert.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-maxlength.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/price-format.js') }}"></script>
         <script src="http://localhost:8008/socket.io/socket.io.js" defer></script>
         <style>
             .col-md-2 {
@@ -110,6 +111,13 @@
             .modal-dialog {
                 width: 400px !important;
             }
+            .ui-tabs-vertical { width: 55em; }
+            .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
+            .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+            .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+            .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
+            .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
+            #tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
         </style>
         <div class="container">
             <!--<div class="row">
@@ -191,15 +199,15 @@
             <div id="dialog-message-auction-bid" title="Предложить торг">
                 <label for="auction-price">Предложить цену</label>
                 <div class="input-group">
-                    <input type="text" name="auction-price" id="auction-price" required placeholder="Введите цену..." class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="6">
+                    <input type="text" name="auction-price" id="auction-price" required placeholder="Введите цену" class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="7">
                     <span class="input-group-addon"><i class="icon-rouble"></i></span>
                 </div>
                 <label for="auction-day">Предложить дней на выполнение</label>
                 <div class="input-group">
-                    <input type="text" name="auction-day" id="auction-day" required placeholder="Введите количество дней..." class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="3">
+                    <input type="text" name="auction-day" id="auction-day" required placeholder="Введите количество дней" class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="3">
                     <span class="input-group-addon"><i class="icon-clock-5"></i></span>
                 </div>
-            </div>-->
+            </div>
             <table id="listBids"></table>
             <div id="pagerBids"></div>
             <div class="demo">
@@ -226,6 +234,19 @@
             </div>
             <div id="block-action">
                 <button type="button" class="btn btn-primary btn-lg disabled" id="btn-confirm-work" data-toggle="modal" data-target="#modal-confirm-work">Принять работу</button>
+            </div>
+            <button id="add_tab">Add Tab</button>
+            <div id="tabs">
+                <ul>
+                    <li>
+                        <a href="#tabs-1">Nunc tincidunt</a>
+                        <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span>
+                    </li>
+                </ul>
+                <div id="tabs-1">
+                    <h2>Content heading 1</h2>
+                    <p>1</p>
+                </div>
             </div>
             <div class="modal fade" id="modal-confirm-work" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
                 <div class="modal-dialog">
@@ -288,10 +309,49 @@
                             flagIsWriting = 0,
                             mode = false,
                             countOpenChat = 0,
-                            arrOpenChat = [],
                             flagOpenChat = 0,
                             patternCheckEmail = /([a-z0-9_-]+\.)*[a-z0-9_-]+(@|sobaka|_|собака)[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}/i,
                             patternCheckPhone = /((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,16}/i;
+
+                    var tabTitle = $( "#tab_title" ),
+                            tabContent = $( "#tab_content" ),
+                            tabTemplate = "<li><a href='#{href}'>#{label}</a><span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span></li>",
+                            tabCounter = 2,
+                            tabs = $("#tabs");
+                    tabs.tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
+                    tabs.find( ".ui-tabs-nav" ).sortable({
+                        axis: "y",
+                        stop: function() {
+                            tabs.tabs( "refresh" );
+                        }
+                    });
+                    $("#tabs li").removeClass("ui-corner-top").addClass("ui-corner-left");
+                    tabs.delegate( "span.ui-icon-close", "click", function() {
+                        var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
+                        $( "#" + panelId ).remove();
+                        tabs.tabs( "refresh" );
+                    });
+                    tabs.bind( "keyup", function( event ) {
+                        if ( event.altKey && event.keyCode === $.ui.keyCode.BACKSPACE ) {
+                            var panelId = tabs.find( ".ui-tabs-active" ).remove().attr( "aria-controls" );
+                            $( "#" + panelId ).remove();
+                            tabs.tabs( "refresh" );
+                        }
+                    });
+                    function addTab() {
+                        var label = tabTitle.val() || "Tab " + tabCounter,
+                                id = "tabs-" + tabCounter,
+                                li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) ),
+                                tabContentHtml = tabContent.val() || "Tab " + tabCounter + " content.";
+                        tabs.find( ".ui-tabs-nav" ).append( li );
+                        tabs.append( "<div id='" + id + "'><p>" + tabContentHtml + "</p></div>" );
+                        tabs.tabs( "refresh" );
+                        tabCounter++;
+                    }
+                    $("#add_tab").button().click(function() {
+                        addTab();
+                    });
+
 
                     /*try {
                         var socket = io.connect('http://localhost:8008');
@@ -662,10 +722,82 @@
                                     }
                                 });
                             });
+                            $(".open-chat").on('click', function(e) {
+                                var rowId = getRowId(e), row = getRow($(this));
+                                var authorId = row.find('td:last')[0].innerHTML;
+                                console.log(authorId);
+                                console.log(flagOpenChat);
+
+                                //socket.emit('forceDisconnect');
+
+
+
+                                if (flagOpenChat == 1) {
+                                    //socket.disconnect();
+
+                                    //disconnectUser();
+                                    flagOpenChat = 0;
+                                    //socket = null;
+                                }
+                                //if (flagOpenChat == 0)
+                                if (socket != null) {
+                                    socket.disconnect();
+                                    //socket.reconnect();
+                                    //socket.emit('forceDisconnect');
+                                    socket = null;
+                                } else
+                                 {
+
+                                    try {
+
+                                        var socket = io.connect('http://localhost:8008', { 'auto connect':false, /*'forceNew':true, */'reconnect':false/*, 'multiplex':false*/});
+                                        socket.on("connect", function() {
+                                            messages.html('');
+                                            clearSidebarCountRecords();
+                                            socket.emit("get all messages", {orderId: orderId, authorId: authorId, userId: userId});
+                                            socket.emit("join to room", {room: orderId, name: userLogin});
+                                            btnSendMsg.removeClass('disabled');
+                                            btnConfirmWork.removeClass('disabled');
+                                        });
+                                        socket.on("response get all messages", function(data) {
+                                            var countRows = 0;
+                                            for (var key in data) {
+                                                if (data[key].user_id != 17) {
+                                                    userMsg(data[key].user_login, data[key].message, data[key].date_write);
+                                                    countRows++;
+                                                } else {
+                                                    systemMsg(data[key].user_login, data[key].message, data[key].date_write);
+                                                }
+                                            }
+                                            setSidebarCountRecords(countRows);
+                                        });
+                                        //console.log(socket);
+                                    } catch(e) {
+                                        systemMsg('system', "Server off");
+                                        return;
+                                    }
+                                    //console.log(socket);
+
+                                    socket.on("disconnect", function() {
+                                        disconnectUser();
+                                    });
+                                    //flagOpenChat = 1;
+                                }
+
+
+
+                            });
                             $(".auction-bid").click(function(e) {
                                 var rowId = getRowId(e);
                                 if (rowId) {
                                     var auctionPrice = $("#auction-price"), auctionDay = $("#auction-day");
+                                    auctionPrice.priceFormat({
+                                        prefix: '',
+                                        centsSeparator: '',
+                                        thousandsSeparator: ' ',
+                                        centsLimit: 0,
+                                        clearOnEmpty: true
+                                    });
                                     $("#dialog-message-auction-bid").dialog({
                                         modal: true,
                                         resizable: false,
@@ -801,7 +933,8 @@
                         return ("");
                     }
                     function isNormalInteger(str) {
-                        return /^\+?([1-9]\d*)$/.test(str);
+                        str = str.replace(/\s/g, "");
+                        return /^[1-9]\d*$/.test(str);
                     }
                     function closeMessage(el) {
                         el.addClass('is-hidden').css({'display':'none'});
