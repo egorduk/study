@@ -288,6 +288,7 @@
                             flagIsWriting = 0,
                             mode = false,
                             countOpenChat = 0,
+                            arrOpenChat = [],
                             flagOpenChat = 0,
                             patternCheckEmail = /([a-z0-9_-]+\.)*[a-z0-9_-]+(@|sobaka|_|собака)[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}/i,
                             patternCheckPhone = /((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,16}/i;
@@ -573,6 +574,61 @@
                         loadComplete : function(data) {
                             grid.find("tr").find("td").removeAttr('title');
                             var confirmBid = $(".confirm-bid");
+                            $(".open-chat").on('click', function(e) {
+                                var rowId = getRowId(e), row = getRow($(this));
+                                var authorId = row.find('td:last')[0].innerHTML;
+                                console.log(authorId);
+                                var channel = authorId + '_' + userId;
+                                console.log(channel);
+
+                                //socket.emit('forceDisconnect');
+                                //if (flagOpenChat == 0)
+                                /*if (socket != null) {
+                                 socket.disconnect();
+                                 //socket.reconnect();
+                                 //socket.emit('forceDisconnect');
+                                 socket = null;
+                                 } */
+                                //else
+                                {
+                                    try {
+                                        arrOpenChat[channel] = io.connect('http://localhost:8008', { 'auto connect':false, 'forceNew':true/*, 'reconnect':false/*, 'multiplex':false*/});
+                                       // arrOpenChat[channel] = socket;
+                                    } catch(e) {
+                                        systemMsg('system', "Server off " + e);
+                                        return;
+                                    }
+                                    console.log(arrOpenChat);
+                                    arrOpenChat[channel].on("connect", function() {
+                                       // messages.html('');
+                                      //  clearSidebarCountRecords();
+                                        //arrOpenChat[channel].emit("get all messages", {orderId: orderId, authorId: authorId, userId: userId});
+                                        arrOpenChat[channel].emit("join to room", {room: channel, clientLogin: userLogin, authorLogin: authorLogin});
+                                       // btnSendMsg.removeClass('disabled');
+                                      //  btnConfirmWork.removeClass('disabled');
+                                    });
+                                    arrOpenChat[channel].on("response get all messages", function(data) {
+                                        var countRows = 0;
+                                        for (var key in data) {
+                                            if (data[key].user_id != 17) {
+                                                userMsg(data[key].user_login, data[key].message, data[key].date_write);
+                                                countRows++;
+                                            } else {
+                                                systemMsg(data[key].user_login, data[key].message, data[key].date_write);
+                                            }
+                                        }
+                                        setSidebarCountRecords(countRows);
+                                    });
+                                    //console.log(socket);
+
+                                    //console.log(socket);
+
+                                    arrOpenChat[channel].on("disconnect", function() {
+                                        disconnectUser();
+                                    });
+                                    //flagOpenChat = 1;
+                                }
+                            });
                             $(".cancel-bid").click(function(e) {
                                 var rowId = getRowId(e), row = getRow($(this));
                                 $.ajax({
@@ -605,71 +661,6 @@
                                         }
                                     }
                                 });
-                            });
-                            $(".open-chat").on('click', function(e) {
-                                var rowId = getRowId(e), row = getRow($(this));
-                                var authorId = row.find('td:last')[0].innerHTML;
-                                console.log(authorId);
-                                console.log(flagOpenChat);
-
-                                //socket.emit('forceDisconnect');
-
-
-
-                                if (flagOpenChat == 1) {
-                                    //socket.disconnect();
-
-                                    //disconnectUser();
-                                    flagOpenChat = 0;
-                                    //socket = null;
-                                }
-                                //if (flagOpenChat == 0)
-                                if (socket != null) {
-                                    socket.disconnect();
-                                    //socket.reconnect();
-                                    //socket.emit('forceDisconnect');
-                                    socket = null;
-                                } else
-                                 {
-
-                                    try {
-
-                                        var socket = io.connect('http://localhost:8008', { 'auto connect':false, /*'forceNew':true, */'reconnect':false/*, 'multiplex':false*/});
-                                        socket.on("connect", function() {
-                                            messages.html('');
-                                            clearSidebarCountRecords();
-                                            socket.emit("get all messages", {orderId: orderId, authorId: authorId, userId: userId});
-                                            socket.emit("join to room", {room: orderId, name: userLogin});
-                                            btnSendMsg.removeClass('disabled');
-                                            btnConfirmWork.removeClass('disabled');
-                                        });
-                                        socket.on("response get all messages", function(data) {
-                                            var countRows = 0;
-                                            for (var key in data) {
-                                                if (data[key].user_id != 17) {
-                                                    userMsg(data[key].user_login, data[key].message, data[key].date_write);
-                                                    countRows++;
-                                                } else {
-                                                    systemMsg(data[key].user_login, data[key].message, data[key].date_write);
-                                                }
-                                            }
-                                            setSidebarCountRecords(countRows);
-                                        });
-                                        //console.log(socket);
-                                    } catch(e) {
-                                        systemMsg('system', "Server off");
-                                        return;
-                                    }
-                                    //console.log(socket);
-
-                                    socket.on("disconnect", function() {
-                                        disconnectUser();
-                                    });
-                                    //flagOpenChat = 1;
-                                }
-
-
-
                             });
                             $(".auction-bid").click(function(e) {
                                 var rowId = getRowId(e);

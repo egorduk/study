@@ -170,11 +170,11 @@ io.sockets.on('connection', function (client) {
     });
 
     client.on("join to room", function(data) {
-        arrName[clientID] = data.clientLogin;
+        arrName[clientID] = data.name;
         arrRoom[clientID] = data.room;
+        console.log("Connected - " + data.name + " to room - " + data.room);
         client.join(data.room);
-        console.log("Connected - " + data.clientLogin + " to room - " + data.room);
-        //client.to(data.room).emit("user in room", {name: data.name});
+        client.to(data.room).emit("user in room", {name: data.name});
     });
 
     client.on("disconnect", function() {
