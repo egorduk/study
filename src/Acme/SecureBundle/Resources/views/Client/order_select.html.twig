@@ -207,10 +207,10 @@
                     <input type="text" name="auction-day" id="auction-day" required placeholder="Введите количество дней" class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="3">
                     <span class="input-group-addon"><i class="icon-clock-5"></i></span>
                 </div>
-            </div>
+            </div>-->
             <table id="listBids"></table>
             <div id="pagerBids"></div>
-            <div class="demo">
+            <!--<div class="demo">
                 <div class="chat">
                     <div class="messages" id="messages"></div>
                     <div class="panel">
@@ -234,21 +234,41 @@
             </div>
             <div id="block-action">
                 <button type="button" class="btn btn-primary btn-lg disabled" id="btn-confirm-work" data-toggle="modal" data-target="#modal-confirm-work">Принять работу</button>
-            </div>
+            </div>-->
             <button id="add_tab">Add Tab</button>
             <div id="tabs">
                 <ul>
-                    <li>
+                    <!--<li>
                         <a href="#tabs-1">Nunc tincidunt</a>
                         <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span>
-                    </li>
+                    </li>-->
                 </ul>
-                <div id="tabs-1">
-                    <h2>Content heading 1</h2>
-                    <p>1</p>
-                </div>
+                <!--<div id="tabs-1">
+                    <div class="block-chat demo">
+                        <div class="chat">
+                            <div class="messages" id="messages"></div>
+                            <div class="panel">
+                                <span class="nick"></span>
+                                <textarea name="message_text" id="message_text"></textarea>
+                                <button type="button" id="btn-send-msg" class="btn btn-primary disabled">Отправить</button>
+                            </div>
+                            <div id="sidebar">
+                                <div id="count-msg"></div>
+                                <div id="online">
+                                    <p style="display: none" id="author-status">{{ obj.author.login }}</p>
+                                </div>
+                                <div id="in-chat" class="hidden">
+                                    <p>В чате</p>
+                                </div>
+                                <div id="is-writing"></div>
+                                <span class='icon-volume-1' id="volume-on"></span>
+                                <span class='icon-volume-off-4' id="volume-off"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
             </div>
-            <div class="modal fade" id="modal-confirm-work" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+            <!--<div class="modal fade" id="modal-confirm-work" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -287,11 +307,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
             <script>
                 $(document).ready(function() {
-                    var messages = $("#messages"),
+                    var /*messages = $("#messages"),*/
                             message_txt = $("#message_text"),
                             userLogin = '{{ obj.userLogin }}',
                             orderId = {{ obj.order.id }},
@@ -310,6 +330,7 @@
                             mode = false,
                             countOpenChat = 0,
                             flagOpenChat = 0,
+                            arrOpenChat = [],
                             patternCheckEmail = /([a-z0-9_-]+\.)*[a-z0-9_-]+(@|sobaka|_|собака)[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}/i,
                             patternCheckPhone = /((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,16}/i;
 
@@ -338,14 +359,22 @@
                             tabs.tabs( "refresh" );
                         }
                     });
-                    function addTab() {
-                        var label = tabTitle.val() || "Tab " + tabCounter,
-                                id = "tabs-" + tabCounter,
-                                li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) ),
-                                tabContentHtml = tabContent.val() || "Tab " + tabCounter + " content.";
-                        tabs.find( ".ui-tabs-nav" ).append( li );
-                        tabs.append( "<div id='" + id + "'><p>" + tabContentHtml + "</p></div>" );
-                        tabs.tabs( "refresh" );
+                    function addTab(a, b) {
+                        var label/* = tabTitle.val() || "Tab " + tabCounter*/, id, li/*, tabContentHtml = tabContent.val() || "Tab " + tabCounter + " content."*/;
+                        if (a == null) {
+                            id = "tabs-" + tabCounter;
+                        } else {
+                            id = a;
+                        }
+                        if (b != null) {
+                            label = b;
+                        }
+                        li = $(tabTemplate.replace(/#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label)),
+                        tabs.find(".ui-tabs-nav").append(li);
+                        tabs.append("<div id='" + id + "'><div class='block-chat demo'><div class='chat'><div class='messages' id='messages'></div><div class='panel'><span class='nick'></span><textarea name='message_text' id='message_text'></textarea><button type='button' id='btn-send-msg' class='btn btn-primary disabled'>Send</button></div></div>");
+                        //tabs.append( "<div id='" + id + "'><p>" + tabContentHtml + "</p></div>" );
+                        //tabs.append("<div class='block-chat demo'><div class='chat'><div class='messages' id='messages'></div><div class='panel'><span class='nick'></span><textarea name='message_text' id='message_text'></textarea><button type='button' id='btn-send-msg' class='btn btn-primary disabled'></button></div>");
+                        tabs.tabs("refresh");
                         tabCounter++;
                     }
                     $("#add_tab").button().click(function() {
@@ -562,13 +591,15 @@
                         return str1;
                     }
 
-                    function userMsg(nick, message, date_write) {
+                    function userMsg(nick, message, date_write, channel) {
                         var m = '<div class="msg">' +
                                 '<p class="user">' + nick + ':</p> ' +
                                 '<div class="message">' + safe(message) + '</div>' +
                                 '<p class="date">' + date_write + '</p>' +
                                 '</div>';
-                        messages.append(m).scrollTop(messages[0].scrollHeight);
+                        //messages.append(m).scrollTop(messages[0].scrollHeight);
+                        var a = $("#" + channel + " #messages");
+                        a.append(m).scrollTop(a[0].scrollHeight);
                     }
 
                     function setSidebarCountRecords(countRows) {
@@ -637,10 +668,10 @@
                             $(".open-chat").on('click', function(e) {
                                 var rowId = getRowId(e), row = getRow($(this));
                                 var authorId = row.find('td:last')[0].innerHTML;
-                                console.log(authorId);
+                                var authorLogin = row.find('td').eq(2).find('a')[0].innerHTML;
+                                //console.log(authorLogin);
                                 var channel = authorId + '_' + userId;
                                 console.log(channel);
-
                                 //socket.emit('forceDisconnect');
                                 //if (flagOpenChat == 0)
                                 /*if (socket != null) {
@@ -652,26 +683,36 @@
                                 //else
                                 {
                                     try {
-                                        arrOpenChat[channel] = io.connect('http://localhost:8008', { 'auto connect':false, 'forceNew':true/*, 'reconnect':false/*, 'multiplex':false*/});
+                                        if (typeof arrOpenChat ==='object' && arrOpenChat instanceof Array) {
+                                            //if (!arrOpenChat.length) {
+                                            console.log(arrOpenChat);
+                                            console.log(arrOpenChat.indexOf(channel));
+                                                if (arrOpenChat.indexOf(channel) == -1) {
+                                                    arrOpenChat[channel] = io.connect('http://localhost:8008', { /*'auto connect':false, */'forceNew':true/*, 'reconnect':false/*, 'multiplex':false*/});
+                                                } else {
+                                                    return;
+                                                }
+                                        }
                                        // arrOpenChat[channel] = socket;
                                     } catch(e) {
                                         systemMsg('system', "Server off " + e);
                                         return;
                                     }
-                                    console.log(arrOpenChat);
+
                                     arrOpenChat[channel].on("connect", function() {
                                        // messages.html('');
                                       //  clearSidebarCountRecords();
-                                        //arrOpenChat[channel].emit("get all messages", {orderId: orderId, authorId: authorId, userId: userId});
+                                        arrOpenChat[channel].emit("get all messages", {orderId: orderId, authorId: authorId, userId: userId});
                                         arrOpenChat[channel].emit("join to room", {room: channel, clientLogin: userLogin, authorLogin: authorLogin});
                                        // btnSendMsg.removeClass('disabled');
                                       //  btnConfirmWork.removeClass('disabled');
                                     });
                                     arrOpenChat[channel].on("response get all messages", function(data) {
                                         var countRows = 0;
+                                        addTab(channel, authorLogin);
                                         for (var key in data) {
                                             if (data[key].user_id != 17) {
-                                                userMsg(data[key].user_login, data[key].message, data[key].date_write);
+                                                userMsg(data[key].user_login, data[key].message, data[key].date_write, channel);
                                                 countRows++;
                                             } else {
                                                 systemMsg(data[key].user_login, data[key].message, data[key].date_write);
@@ -721,71 +762,6 @@
                                         }
                                     }
                                 });
-                            });
-                            $(".open-chat").on('click', function(e) {
-                                var rowId = getRowId(e), row = getRow($(this));
-                                var authorId = row.find('td:last')[0].innerHTML;
-                                console.log(authorId);
-                                console.log(flagOpenChat);
-
-                                //socket.emit('forceDisconnect');
-
-
-
-                                if (flagOpenChat == 1) {
-                                    //socket.disconnect();
-
-                                    //disconnectUser();
-                                    flagOpenChat = 0;
-                                    //socket = null;
-                                }
-                                //if (flagOpenChat == 0)
-                                if (socket != null) {
-                                    socket.disconnect();
-                                    //socket.reconnect();
-                                    //socket.emit('forceDisconnect');
-                                    socket = null;
-                                } else
-                                 {
-
-                                    try {
-
-                                        var socket = io.connect('http://localhost:8008', { 'auto connect':false, /*'forceNew':true, */'reconnect':false/*, 'multiplex':false*/});
-                                        socket.on("connect", function() {
-                                            messages.html('');
-                                            clearSidebarCountRecords();
-                                            socket.emit("get all messages", {orderId: orderId, authorId: authorId, userId: userId});
-                                            socket.emit("join to room", {room: orderId, name: userLogin});
-                                            btnSendMsg.removeClass('disabled');
-                                            btnConfirmWork.removeClass('disabled');
-                                        });
-                                        socket.on("response get all messages", function(data) {
-                                            var countRows = 0;
-                                            for (var key in data) {
-                                                if (data[key].user_id != 17) {
-                                                    userMsg(data[key].user_login, data[key].message, data[key].date_write);
-                                                    countRows++;
-                                                } else {
-                                                    systemMsg(data[key].user_login, data[key].message, data[key].date_write);
-                                                }
-                                            }
-                                            setSidebarCountRecords(countRows);
-                                        });
-                                        //console.log(socket);
-                                    } catch(e) {
-                                        systemMsg('system', "Server off");
-                                        return;
-                                    }
-                                    //console.log(socket);
-
-                                    socket.on("disconnect", function() {
-                                        disconnectUser();
-                                    });
-                                    //flagOpenChat = 1;
-                                }
-
-
-
                             });
                             $(".auction-bid").click(function(e) {
                                 var rowId = getRowId(e);
