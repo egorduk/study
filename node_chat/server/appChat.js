@@ -179,7 +179,7 @@ io.sockets.on('connection', function (client) {
 
     client.on("disconnect", function() {
         var room = arrRoom[clientID], name = arrName[clientID];
-        console.dir("Disconnected - " + name);
+        console.dir("Disconnected - " + name + " from room " + room);
         client.to(room).emit("response disconnect user");
         delete arrRoom[clientID];
         delete arrName[clientID];

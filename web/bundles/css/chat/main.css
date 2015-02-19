@@ -1,4 +1,4 @@
-.demo {
+.block-chat {
     width: 600px;
     margin: 20px auto;
     padding: 10px;
@@ -7,7 +7,7 @@
     font-size: 13px;
 }
 
-.chat .messages{
+.chat-wrap .messages {
     height: 300px;
     border: 1px solid #d4d4d4;
     overflow-y: scroll;
@@ -15,19 +15,19 @@
     padding: 5px;
 }
 
-.chat .messages .user{
+.chat-wrap .messages .user {
     color: #B22222;
 }
 
-.chat .message{
+.chat-wrap .message {
     width: 70%;
 }
 
-.chat .panel{
+.chat-wrap #panel {
     margin-top: 8px;
 }
 
-#message_text{
+#message_text {
     width: 60%;
     display: inline-block;
     margin-left: 8px;
