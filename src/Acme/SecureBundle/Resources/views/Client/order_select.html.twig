@@ -364,15 +364,7 @@
                         }
                     });
                     function addTab(a, b) {
-                        var label/* = tabTitle.val() || "Tab " + tabCounter*/, id, li/*, tabContentHtml = tabContent.val() || "Tab " + tabCounter + " content."*/;
-                        if (a == null) {
-                            id = "tabs-" + tabCounter;
-                        } else {
-                            id = a;
-                        }
-                        if (b != null) {
-                            label = b;
-                        }
+                        var label = b, id = a, li;
                         li = $(tabTemplate.replace(/#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label));
                         tabs.find(".ui-tabs-nav").append(li);
                         tabs.append("<div id='" + id + "'>" +
@@ -392,6 +384,7 @@
                                 "<span class='icon-volume-1' id='volume-on'></span>" +
                                 "<span class='icon-volume-off-4' id='volume-off'></span></div></div>");
                         tabs.tabs("refresh");
+                        tabs.tabs('option', 'active', -1);
                         tabCounter++;
                     }
 
@@ -557,6 +550,24 @@
                         return r;
                     }
 
+                    function selectCurrentTab(a) {
+                        tabs.tabs('option', 'active', getIndexById(a));
+                    }
+
+                    function getIndexById(a) {
+                        var index = -1, i = 0, tbH = tabs.find("li a"), lntb = tbH.length;
+                        if (lntb > 0) {
+                            for (i = 0; i < lntb; i++) {
+                                o = tbH[i];
+                                if (o.href.search(a) > 0) {
+                                    index = i;
+                                }
+                            }
+                        }
+                        return index;
+                    }
+
+
                     //document.title = "Просмотр заказа №" + {{ obj.order.num }};
                     $.fn.button.noConflict();
                     var grid  = $("#listBids");
@@ -623,6 +634,7 @@
                                         arrUsedChat[channel] = channel;
                                         arrOpenChat[channel] = io.connect('http://localhost:8008', { /*'auto connect':false, */'forceNew':true/*, 'reconnect':false/*, 'multiplex':false*/});
                                     } else {
+                                        selectCurrentTab(channel);
                                         return;
                                     }
                                 } catch(e) {
