@@ -85,17 +85,18 @@ io.sockets.on('connection', function (client) {
     client.on("send message", function (data) {
         try {
             var date = new Date(),
-                room = arrRoom[clientID],
+                room = data.orderId,
                 mode = data.mode,
                 userId = data.userId,
                 responseLogin = data.responseLogin,
                 fullDate = getFullDate(date),
                 writerLogin = data.writerLogin,
+                channel = data.channel,
                 message = data.message;
             console.dir(data);
             connection.insert('webchat_message', {
-                message: data.message,
-               // date_write: date,
+                message: message,
+                channel: channel,
                 user_id: userId,
                 user_order_id: room
             }, function(error, recordId) {
@@ -105,7 +106,7 @@ io.sockets.on('connection', function (client) {
                        // if (error) {throw error}
                         //var writerLogin = row.user_login, message = data.message;
                         client.emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin});
-                        client.to(room).emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin});
+                        //client.to(room).emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin});
                         var transporter = nodemailer.createTransport({
                             service: 'gmail',
                             auth: {
@@ -138,11 +139,11 @@ io.sockets.on('connection', function (client) {
                             });
                         } else {
                             // Send new email to other user
-                            connection.queryRow(
+                            /*connection.queryRow(
                                 'SELECT email AS user_email FROM user WHERE login = "' + responseLogin + '"', function(error, row) {
                                     if (error) {throw error}
                                     console.dir(row);
-                                    /*transporter.sendMail({
+                                    transporter.sendMail({
                                         from: 'Test email <egorduk91@gmail.com>',
                                         address: userEmail,
                                         to: row.user_email,
@@ -155,9 +156,9 @@ io.sockets.on('connection', function (client) {
                                         } else {
                                             console.log('Message sent: ' + info.response);
                                         }
-                                    });*/
+                                    });
                                 }
-                            )
+                            )*/
                         }
                    // }
                // );
