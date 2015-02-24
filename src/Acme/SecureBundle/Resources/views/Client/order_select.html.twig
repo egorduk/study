@@ -320,8 +320,8 @@
                             btnActionConfirmWork = $("#btn-action-confirm-work"),
                             btnConfirmWork = $("#btn-confirm-work"),
                             inChat = $("#in-chat"),
-                            volumeOn = $("#volume-on"),
-                            volumeOff = $("#volume-off"),
+                            //volumeOn = $("#volume-on"),
+                            //volumeOff = $("#volume-off"),
                             flagIsWriting = 0,
                             mode = false,
                             channel,
@@ -333,8 +333,7 @@
                             patternCheckEmail = /([a-z0-9_-]+\.)*[a-z0-9_-]+(@|sobaka|_|собака)[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}/i,
                             patternCheckPhone = /((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,16}/i;
 
-                    var tabTitle = $( "#tab_title" ),
-                            tabContent = $( "#tab_content" ),
+                    var  tabContent = $( "#tab_content" ),
                             tabTemplate = "<li><a href='#{href}'>#{label}</a><span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span></li>",
                             tabs = $("#tabs");
                     tabs.tabs({
@@ -382,21 +381,20 @@
                                 "<div id='sidebar'><div class='count-msg'></div>" +
                                 "<div id='online'>" +
                                 "<p style='display: none' id='author-status'>{{ obj.author.login }}</p></div>" +
-                                "<div id='in-chat' class='hidden'>" +
+                                "<div class='in-chat' class='hidden'>" +
                                 "<p>В чате</p></div>" +
                                 "<div class='is-writing'></div>" +
-                                "<span class='icon-volume-1' id='volume-on'></span>" +
-                                "<span class='icon-volume-off-4' id='volume-off'></span></div></div>");
+                                "<span class='icon-volume-1 volume-on'></span>" +
+                                "<span class='icon-volume-off-4 volume-off'></span></div></div>");
                         tabs.tabs("refresh");
                         tabs.tabs('option', 'active', -1);
 
                     }
-
                     btnConfirmWork.removeClass('disabled');
                     $("#comment-text").maxlength({
                         alwaysShow: true
                     });
-                    $('.chat .nick').text(userLogin);
+                    $('.chat-wrap .nick').text(userLogin);
                     ion.sound({
                         sounds: [
                             {name: "button_tiny"}
@@ -409,14 +407,6 @@
                     if (authorStatus) {
                         $("#author-status").toggle();
                     }
-                    volumeOn.on("click", function() {
-                        $.cookie('volume_msg', '0');
-                        setViewButton();
-                    });
-                    volumeOff.on("click", function() {
-                        $.cookie('volume_msg', '1');
-                        setViewButton();
-                    });
 
                     /*socket.on('connecting', function () {
                         systemMsg('Соединение...');
@@ -565,6 +555,11 @@
                         return index;
                     }
 
+                    function setFocusOnMessageField () {
+                        currTab.find(".message-text").focus();
+                    }
+
+
 
                     //document.title = "Просмотр заказа №" + {{ obj.order.num }};
                     $.fn.button.noConflict();
@@ -649,6 +644,14 @@
                                     currTab.find(".btn-send-msg").removeClass('disabled').on("click", function() {
                                         sendMessage();
                                     });
+                                    currTab.find(".volume-on").on("click", function() {
+                                        $.cookie('volume_msg', '0');
+                                        //setViewButton();
+                                    });
+                                    currTab.find(".volume-off").on("click", function() {
+                                        $.cookie('volume_msg', '1');
+                                        //setViewButton();
+                                    });
                                     //  btnConfirmWork.removeClass('disabled');
                                 });
                                 arrOpenChat[channel].on("response get all messages", function(data) {
@@ -696,7 +699,7 @@
                                     }
                                     userMsg(data.user_login, data.message, data.date_write);
                                     increaseCountMsg();
-                                    //message_txt.focus();
+                                    setFocusOnMessageField();
                                 });
                             });
                             $(".cancel-bid").click(function(e) {
