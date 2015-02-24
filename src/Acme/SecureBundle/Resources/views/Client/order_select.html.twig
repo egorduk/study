@@ -93,12 +93,12 @@
                 border: 1px solid #000000;
                 width: 300px;
             }
-            #volume-on, #volume-off {
+            .volume-on, .volume-off {
                 cursor: pointer;
                 color: green;
                 display: none;
             }
-            #volume-off {
+            .volume-off {
                 color: red;
             }
             .system {
@@ -340,6 +340,7 @@
                         activate: function(e, ui) {
                             channel = ui.newPanel.attr('id');
                             currTab = tabs.find("#" + channel);
+                            setFocusOnMessageField();
                         }
                     }).addClass("ui-tabs-vertical ui-helper-clearfix");
                     tabs.find(".ui-tabs-nav").sortable({
@@ -388,7 +389,6 @@
                                 "<span class='icon-volume-off-4 volume-off'></span></div></div>");
                         tabs.tabs("refresh");
                         tabs.tabs('option', 'active', -1);
-
                     }
                     btnConfirmWork.removeClass('disabled');
                     $("#comment-text").maxlength({
@@ -403,7 +403,6 @@
                         preload: true,
                         volume: 1.0
                     });
-                    setViewButton();
                     if (authorStatus) {
                         $("#author-status").toggle();
                     }
@@ -421,12 +420,7 @@
                     socket.on("disconnect", function() {
                         disconnectUser();
                     });
-                    socket.on("show system message", function(data) {
-                        if ($.cookie('volume_msg') == 1) {
-                            ion.sound.play("button_tiny");
-                        }
-                        systemMsg(data.login, data.message, data.date_msg);
-                    });*/
+                   */
 
 
                     btnActionConfirmWork.on("click", function(e) {
@@ -437,17 +431,17 @@
                             }
                         });*/
                         var comment = $("#comment-text").val(), degree = $('input[name=degree]:checked').val();
-                        socket.emit("request confirm work", {orderId: orderId, comment: comment, degree: degree});
+                        arrOpenChat[channel].emit("request confirm work", {orderId: orderId, comment: comment, degree: degree});
                     });
 
-                    function setViewButton() {
+                    function setVolumeControlButton() {
                         var volumeMsg = $.cookie('volume_msg');
                         if (volumeMsg == 1) {
-                            volumeOff.hide();
-                            volumeOn.show();
+                            tabs.find(".volume-off").hide();
+                            tabs.find(".volume-on").show();
                         } else {
-                            volumeOn.hide();
-                            volumeOff.show();
+                            tabs.find(".volume-on").hide();
+                            tabs.find(".volume-off").show();
                         }
                     }
 
@@ -462,15 +456,10 @@
                     /*message_txt.on("input", function(e) {
                         socket.emit("request user write");
                     });
-
-                    message_txt.on("keydown", function(e) {
-                        if (e.keyCode === 13 && e.ctrlKey) {
-                            sendMessage();
-                        }
-                    });*/
+                    */
 
                     function sendMessage() {
-                        var message_txt = currTab.find(".message-text"), text = message_txt.val();
+                        var message_txt = currTab.find(".chat-wrap .message-text"), text = message_txt.val();
                         //var a = $("#message_text").val().replace(/<br>/gi,"\n");
                         //a = a.replace(/<a href=>/gi,"\n");
                         message_txt.val("");
@@ -481,26 +470,14 @@
                         arrOpenChat[channel].emit("send message", {message: text, writerLogin: userLogin, userId: userId, mode: mode, responseLogin: authorLogin, orderId: orderId, channel: channel});
                     }
 
-                    function clearSidebarCountRecords() {
+                    /*function clearSidebarCountRecords() {
                         blockCountMsg.html('');
-                    }
+                    }*/
 
                     function increaseCountMsg() {
                         var digCountMsg = currTab.find(".dig-count"), countMsg = digCountMsg.html();
                         countMsg++;
                         digCountMsg.html(countMsg);
-                    }
-
-                    function systemMsg(login, message, date_msg) {
-                        /*if (!date_msg) {
-                            date_msg = '';
-                        }
-                        var m = '<div class="msg system">' +
-                                '<p class="user">' + login + ':</p> ' +
-                                '<div class="message">' + safe(message) + '</div>' +
-                                '<p class="date">' + date_msg + '</p>' +
-                                '</div>';
-                        messages.append(m).scrollTop(messages[0].scrollHeight);*/
                     }
 
                     function safe(str) {
@@ -522,6 +499,19 @@
                                 '<p class="user">' + nick + ':</p> ' +
                                 '<div class="message">' + safe(message) + '</div>' +
                                 '<p class="date">' + date_write + '</p>' +
+                                '</div>';
+                        var messages = currTab.find(".chat-wrap .messages-wrap");
+                        messages.append(m).scrollTop(messages[0].scrollHeight);
+                    }
+
+                    function systemMsg(login, message, date_msg) {
+                        if (!date_msg) {
+                            date_msg = '';
+                        }
+                        var m = '<div class="msg system">' +
+                                '<p class="user">' + login + ':</p> ' +
+                                '<div class="message">' + safe(message) + '</div>' +
+                                '<p class="date">' + date_msg + '</p>' +
                                 '</div>';
                         var messages = currTab.find(".chat-wrap .messages-wrap");
                         messages.append(m).scrollTop(messages[0].scrollHeight);
@@ -558,7 +548,6 @@
                     function setFocusOnMessageField () {
                         currTab.find(".message-text").focus();
                     }
-
 
 
                     //document.title = "Просмотр заказа №" + {{ obj.order.num }};
@@ -628,7 +617,6 @@
                                         arrOpenChat[channel] = io.connect('http://localhost:8008', { /*'auto connect':false, */'forceNew':true/*, 'reconnect':false/*, 'multiplex':false*/});
                                     } else {
                                         selectCurrentTab();
-                                        //continue;
                                     }
                                 } catch(e) {
                                     //systemMsg('system', "Server off " + e);
@@ -641,16 +629,23 @@
                                     arrOpenChat[channel].emit("join to room", {room: channel, clientLogin: userLogin, authorLogin: authorLogin});
                                     addTab(channel, authorLogin);
                                     currTab = tabs.find("#" + channel);
-                                    currTab.find(".btn-send-msg").removeClass('disabled').on("click", function() {
+                                    currTab.find(".chat-wrap .btn-send-msg").removeClass('disabled').on("click", function() {
                                         sendMessage();
                                     });
-                                    currTab.find(".volume-on").on("click", function() {
+                                    setVolumeControlButton();
+                                    currTab.find(".chat-wrap .volume-on").on("click", function() {
                                         $.cookie('volume_msg', '0');
-                                        //setViewButton();
+                                        setVolumeControlButton();
                                     });
-                                    currTab.find(".volume-off").on("click", function() {
+                                    currTab.find(".chat-wrap .volume-off").on("click", function() {
                                         $.cookie('volume_msg', '1');
-                                        //setViewButton();
+                                        setVolumeControlButton();
+                                    });
+                                    setFocusOnMessageField();
+                                    currTab.find(".chat-wrap .message-text").on("keydown", function(e) {
+                                        if (e.keyCode === 13 && e.ctrlKey) {
+                                            sendMessage();
+                                        }
                                     });
                                     //  btnConfirmWork.removeClass('disabled');
                                 });
@@ -674,13 +669,13 @@
                                 });
                                 arrOpenChat[channel].on("response user write", function() {
                                     if (flagIsWriting == 0) {
-                                        var msg = '<div id="msg-writing" class="msg system" style="display: none"><p>Печатает...</p></div>';
-                                        $("#is-writing").append(msg);
-                                        $("#msg-writing").fadeIn("slow", function() {
+                                        var msg = '<div class="msg system msg-writing" style="display: none"><p>Печатает...</p></div>';
+                                        $(".chat-wrap .is-writing").append(msg);
+                                        $(".chat-wrap .msg-writing").fadeIn("slow", function() {
                                             flagIsWriting = 1;
                                         });
                                         setTimeout(function() {
-                                            $("#msg-writing").fadeOut("slow", function() {
+                                            $(".chat-wrap .msg-writing").fadeOut("slow", function() {
                                                 $(this).remove();
                                                 flagIsWriting = 0;
                                             });
@@ -700,6 +695,12 @@
                                     userMsg(data.user_login, data.message, data.date_write);
                                     increaseCountMsg();
                                     setFocusOnMessageField();
+                                });
+                                arrOpenChat[channel].on("show system message", function(data) {
+                                    if ($.cookie('volume_msg') == 1) {
+                                        ion.sound.play("button_tiny");
+                                    }
+                                    systemMsg(data.login, data.message, data.date_msg);
                                 });
                             });
                             $(".cancel-bid").click(function(e) {
