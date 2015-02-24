@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="544aa3f9-6149-4d96-94a7-9d4361f88150" name="Default" comment="1&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_chat/server/appChat.js" afterPath="$PROJECT_DIR$/node_chat/server/appChat.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bundles/css/chat/main.css" afterPath="$PROJECT_DIR$/web/bundles/css/chat/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="544aa3f9-6149-4d96-94a7-9d4361f88150" name="Default" comment="1&#10;" />
     <ignored path="study.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -58,7 +53,7 @@
       <file leaf-file-name="order_select.html.twig" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="338" column="28" selection-start="17916" selection-end="17916" vertical-scroll-proportion="-1.0549065" vertical-offset="6051" max-vertical-offset="17468">
+            <state line="412" column="17" selection-start="21932" selection-end="21932" vertical-scroll-proportion="0.84696263" vertical-offset="6051" max-vertical-offset="17468">
               <folding>
                 <element signature="tag#style#0" expanded="false" />
                 <marker date="1424737118255" expanded="false" signature="31067:31083" placeholder="..." />
@@ -652,7 +647,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31857452" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -992,7 +987,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="338" column="28" selection-start="17916" selection-end="17916" vertical-scroll-proportion="-1.0549065" vertical-offset="6051" max-vertical-offset="17468">
+        <state line="412" column="17" selection-start="21932" selection-end="21932" vertical-scroll-proportion="0.84696263" vertical-offset="6051" max-vertical-offset="17468">
           <folding>
             <element signature="tag#style#0" expanded="false" />
             <marker date="1424737118255" expanded="false" signature="31067:31083" placeholder="..." />
