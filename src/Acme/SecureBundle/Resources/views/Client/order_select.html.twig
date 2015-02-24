@@ -311,14 +311,12 @@
             <script>
                 $(document).ready(function() {
                     var /*messages = $("#messages"),*/
-                            message_txt = $("#message_text"),
                             userLogin = '{{ obj.userLogin }}',
                             orderId = {{ obj.order.id }},
                             userId = {{ obj.userId }},
                             authorStatus = {{ obj.author.status }},
                             //authorLogin = '{{ obj.author.login }}',
                             authorLogin = '',
-                            btnSendMsg = $("#btn-send-msg"),
                             btnActionConfirmWork = $("#btn-action-confirm-work"),
                             btnConfirmWork = $("#btn-confirm-work"),
                             inChat = $("#in-chat"),
@@ -326,6 +324,8 @@
                             volumeOff = $("#volume-off"),
                             flagIsWriting = 0,
                             mode = false,
+                            channel,
+                            currTab,
                             countOpenChat = 0,
                             flagOpenChat = 0,
                             arrOpenChat = [],
@@ -336,17 +336,21 @@
                     var tabTitle = $( "#tab_title" ),
                             tabContent = $( "#tab_content" ),
                             tabTemplate = "<li><a href='#{href}'>#{label}</a><span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span></li>",
-                            tabCounter = 2,
                             tabs = $("#tabs");
-                    tabs.tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
-                    tabs.find( ".ui-tabs-nav" ).sortable({
+                    tabs.tabs({
+                        activate: function(e, ui) {
+                            channel = ui.newPanel.attr('id');
+                            currTab = tabs.find("#" + channel);
+                        }
+                    }).addClass("ui-tabs-vertical ui-helper-clearfix");
+                    tabs.find(".ui-tabs-nav").sortable({
                         axis: "y",
                         stop: function() {
-                            tabs.tabs( "refresh" );
+                            tabs.tabs("refresh");
                         }
                     });
                     $("#tabs li").removeClass("ui-corner-top").addClass("ui-corner-left");
-                    tabs.delegate( "span.ui-icon-close", "click", function() {
+                    tabs.delegate("span.ui-icon-close", "click", function() {
                         var panelId = $(this).closest("li").remove().attr("aria-controls");
                         $("#" + panelId).remove();
                         disconnectUser(panelId);
@@ -356,43 +360,36 @@
                         delete arrOpenChat[panelId];
                         tabs.tabs("refresh");
                     });
-                    tabs.bind("keyup", function(event) {
+                    /*tabs.bind("keyup", function(event) {
                         if (event.altKey && event.keyCode === $.ui.keyCode.BACKSPACE) {
                             var panelId = tabs.find(".ui-tabs-active").remove().attr("aria-controls");
                             $("#" + panelId).remove();
                             tabs.tabs("refresh");
                         }
-                    });
+                    });*/
                     function addTab(a, b) {
-                        var label/* = tabTitle.val() || "Tab " + tabCounter*/, id, li/*, tabContentHtml = tabContent.val() || "Tab " + tabCounter + " content."*/;
-                        if (a == null) {
-                            id = "tabs-" + tabCounter;
-                        } else {
-                            id = a;
-                        }
-                        if (b != null) {
-                            label = b;
-                        }
+                        var label = b, id = a, li;
                         li = $(tabTemplate.replace(/#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label));
                         tabs.find(".ui-tabs-nav").append(li);
                         tabs.append("<div id='" + id + "'>" +
                                 "<div class='block-chat'>" +
                                 "<div class='chat-wrap'>" +
-                                "<div class='messages' id='messages'></div>" +
+                                "<div class='messages-wrap'></div>" +
                                 "<div id='panel'>" +
                                 "<span class='nick'></span>" +
-                                "<textarea name='message_text' id='message_text'></textarea>" +
-                                "<button type='button' id='btn-send-msg' class='btn btn-primary disabled'>Send</button></div>" +
-                                "<div id='sidebar'><div id='count-msg'></div>" +
+                                "<textarea name='message-text' class='message-text'></textarea>" +
+                                "<button type='button' class='btn-send-msg btn btn-primary disabled'>Send</button></div>" +
+                                "<div id='sidebar'><div class='count-msg'></div>" +
                                 "<div id='online'>" +
                                 "<p style='display: none' id='author-status'>{{ obj.author.login }}</p></div>" +
                                 "<div id='in-chat' class='hidden'>" +
                                 "<p>В чате</p></div>" +
-                                "<div id='is-writing'></div>" +
+                                "<div class='is-writing'></div>" +
                                 "<span class='icon-volume-1' id='volume-on'></span>" +
                                 "<span class='icon-volume-off-4' id='volume-off'></span></div></div>");
                         tabs.tabs("refresh");
-                        tabCounter++;
+                        tabs.tabs('option', 'active', -1);
+
                     }
 
                     btnConfirmWork.removeClass('disabled');
@@ -441,9 +438,6 @@
                         systemMsg(data.login, data.message, data.date_msg);
                     });*/
 
-                    btnSendMsg.on("click", function() {
-                        sendMessage();
-                    });
 
                     btnActionConfirmWork.on("click", function(e) {
                         /*e.preventDefault();
@@ -467,16 +461,15 @@
                         }
                     }
 
-                    function disconnectUser(a) {
+                    function disconnectUser() {
                         //systemMsg('system', "Отключен");
-                        var currTab = $("#tabs #" + a);
-                        var blockCountMsg = currTab.find(".chat-wrap #sidebar #count-msg");
-                        btnSendMsg.addClass('disabled');
+                        var blockCountMsg = currTab.find(".chat-wrap .count-msg");
+                        //btnSendMsg.addClass('disabled');
                         //btnConfirmWork.addClass('disabled');
                         inChat.addClass("hidden");
                     }
 
-                    message_txt.on("input", function(e) {
+                    /*message_txt.on("input", function(e) {
                         socket.emit("request user write");
                     });
 
@@ -484,10 +477,10 @@
                         if (e.keyCode === 13 && e.ctrlKey) {
                             sendMessage();
                         }
-                    });
+                    });*/
 
                     function sendMessage() {
-                        var text = $("#message_text").val();
+                        var message_txt = currTab.find(".message-text"), text = message_txt.val();
                         //var a = $("#message_text").val().replace(/<br>/gi,"\n");
                         //a = a.replace(/<a href=>/gi,"\n");
                         message_txt.val("");
@@ -495,7 +488,7 @@
                             return;
                         }
                         mode = patternCheckEmail.test(text) || patternCheckPhone.test(text);
-                        socket.emit("send message", {message: text, writerLogin: userLogin, userId: userId, mode: mode, responseLogin: authorLogin});
+                        arrOpenChat[channel].emit("send message", {message: text, writerLogin: userLogin, userId: userId, mode: mode, responseLogin: authorLogin, orderId: orderId, channel: channel});
                     }
 
                     function clearSidebarCountRecords() {
@@ -503,7 +496,7 @@
                     }
 
                     function increaseCountMsg() {
-                        var digCountMsg = $("#dig-count"), countMsg = digCountMsg.html();
+                        var digCountMsg = currTab.find(".dig-count"), countMsg = digCountMsg.html();
                         countMsg++;
                         digCountMsg.html(countMsg);
                     }
@@ -534,21 +527,19 @@
                         return str1;
                     }
 
-                    function userMsg(nick, message, date_write, channel) {
+                    function userMsg(nick, message, date_write) {
                         var m = '<div class="msg">' +
                                 '<p class="user">' + nick + ':</p> ' +
                                 '<div class="message">' + safe(message) + '</div>' +
                                 '<p class="date">' + date_write + '</p>' +
                                 '</div>';
-                        //messages.append(m).scrollTop(messages[0].scrollHeight);
-                        var a = $("#" + channel + " #messages");
-                        a.append(m).scrollTop(a[0].scrollHeight);
+                        var messages = currTab.find(".chat-wrap .messages-wrap");
+                        messages.append(m).scrollTop(messages[0].scrollHeight);
                     }
 
-                    function setSidebarCountRecords(a, b) {
-                        var currTab = $("#tabs #" + b);
-                        var blockCountMsg = currTab.find(".chat-wrap #sidebar #count-msg");
-                        blockCountMsg.append('<span>Кол-во сообщений: <span id="dig-count">' + a + '</span></span>');
+                    function setSidebarCountRecords(a) {
+                        var blockCountMsg = currTab.find(".chat-wrap .count-msg");
+                        blockCountMsg.append('<span>Кол-во сообщений: <span class="dig-count">' + a + '</span></span>');
                     }
 
                     function filterStr(str) {
@@ -556,6 +547,24 @@
                         r = r.replace(patternCheckPhone, " Warning ");
                         return r;
                     }
+
+                    function selectCurrentTab() {
+                        tabs.tabs('option', 'active', getIndexById(channel));
+                    }
+
+                    function getIndexById(a) {
+                        var index = -1, i = 0, tbH = tabs.find("li a"), lntb = tbH.length;
+                        if (lntb > 0) {
+                            for (i = 0; i < lntb; i++) {
+                                o = tbH[i];
+                                if (o.href.search(a) > 0) {
+                                    index = i;
+                                }
+                            }
+                        }
+                        return index;
+                    }
+
 
                     //document.title = "Просмотр заказа №" + {{ obj.order.num }};
                     $.fn.button.noConflict();
@@ -615,7 +624,7 @@
                                 var authorId = row.find('td:last')[0].innerHTML;
                                 var authorLogin = row.find('td').eq(2).find('a')[0].innerHTML;
                                 //console.log(authorLogin);
-                                var channel = authorId + '_' + userId;
+                                channel = authorId + '_' + userId;
                                 console.log(channel);
                                 try {
                                     console.log(arrUsedChat);
@@ -623,7 +632,8 @@
                                         arrUsedChat[channel] = channel;
                                         arrOpenChat[channel] = io.connect('http://localhost:8008', { /*'auto connect':false, */'forceNew':true/*, 'reconnect':false/*, 'multiplex':false*/});
                                     } else {
-                                        return;
+                                        selectCurrentTab();
+                                        //continue;
                                     }
                                 } catch(e) {
                                     //systemMsg('system', "Server off " + e);
@@ -635,21 +645,23 @@
                                     arrOpenChat[channel].emit("get all messages", {orderId: orderId, authorId: authorId, userId: userId});
                                     arrOpenChat[channel].emit("join to room", {room: channel, clientLogin: userLogin, authorLogin: authorLogin});
                                     addTab(channel, authorLogin);
-                                    var currTab = $("#tabs #" + channel);
-                                    currTab.find(".chat-wrap #panel #btn-send-msg").removeClass('disabled');
+                                    currTab = tabs.find("#" + channel);
+                                    currTab.find(".btn-send-msg").removeClass('disabled').on("click", function() {
+                                        sendMessage();
+                                    });
                                     //  btnConfirmWork.removeClass('disabled');
                                 });
                                 arrOpenChat[channel].on("response get all messages", function(data) {
                                     var countRows = 0;
                                     for (var key in data) {
                                         if (data[key].user_id != 17) {
-                                            userMsg(data[key].user_login, data[key].message, data[key].date_write, channel);
+                                            userMsg(data[key].user_login, data[key].message, data[key].date_write);
                                             countRows++;
                                         } else {
                                             systemMsg(data[key].user_login, data[key].message, data[key].date_write);
                                         }
                                     }
-                                    setSidebarCountRecords(countRows, channel);
+                                    setSidebarCountRecords(countRows);
                                 });
                                 /*arrOpenChat[channel].on("disconnect", function() {
                                     disconnectUser();
@@ -684,7 +696,7 @@
                                     }
                                     userMsg(data.user_login, data.message, data.date_write);
                                     increaseCountMsg();
-                                    message_txt.focus();
+                                    //message_txt.focus();
                                 });
                             });
                             $(".cancel-bid").click(function(e) {
