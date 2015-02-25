@@ -93,12 +93,12 @@
                 border: 1px solid #000000;
                 width: 300px;
             }
-            #volume-on, #volume-off {
+            .volume-on, .volume-off {
                 cursor: pointer;
                 color: green;
                 display: none;
             }
-            #volume-off {
+            .volume-off {
                 color: red;
             }
             .system {
@@ -310,8 +310,7 @@
 
             <script>
                 $(document).ready(function() {
-                    var /*messages = $("#messages"),*/
-                            userLogin = '{{ obj.userLogin }}',
+                    var userLogin = '{{ obj.userLogin }}',
                             orderId = {{ obj.order.id }},
                             userId = {{ obj.userId }},
                             authorStatus = {{ obj.author.status }},
@@ -319,9 +318,6 @@
                             authorLogin = '',
                             btnActionConfirmWork = $("#btn-action-confirm-work"),
                             btnConfirmWork = $("#btn-confirm-work"),
-                            inChat = $("#in-chat"),
-                            //volumeOn = $("#volume-on"),
-                            //volumeOff = $("#volume-off"),
                             flagIsWriting = 0,
                             mode = false,
                             channel,
@@ -340,6 +336,7 @@
                         activate: function(e, ui) {
                             channel = ui.newPanel.attr('id');
                             currTab = tabs.find("#" + channel);
+                            setFocusOnMessageField();
                         }
                     }).addClass("ui-tabs-vertical ui-helper-clearfix");
                     tabs.find(".ui-tabs-nav").sortable({
@@ -388,7 +385,6 @@
                                 "<span class='icon-volume-off-4 volume-off'></span></div></div>");
                         tabs.tabs("refresh");
                         tabs.tabs('option', 'active', -1);
-
                     }
                     btnConfirmWork.removeClass('disabled');
                     $("#comment-text").maxlength({
@@ -403,7 +399,6 @@
                         preload: true,
                         volume: 1.0
                     });
-                    setViewButton();
                     if (authorStatus) {
                         $("#author-status").toggle();
                     }
@@ -411,23 +406,6 @@
                     /*socket.on('connecting', function () {
                         systemMsg('Соединение...');
                     });*/
-
-                    /*
-                    socket.on("response disconnect user", function() {
-                        inChat.addClass("hidden");
-                        //disconnectUser();
-                    });
-
-                    socket.on("disconnect", function() {
-                        disconnectUser();
-                    });
-                    socket.on("show system message", function(data) {
-                        if ($.cookie('volume_msg') == 1) {
-                            ion.sound.play("button_tiny");
-                        }
-                        systemMsg(data.login, data.message, data.date_msg);
-                    });*/
-
 
                     btnActionConfirmWork.on("click", function(e) {
                         /*e.preventDefault();
@@ -437,40 +415,30 @@
                             }
                         });*/
                         var comment = $("#comment-text").val(), degree = $('input[name=degree]:checked').val();
-                        socket.emit("request confirm work", {orderId: orderId, comment: comment, degree: degree});
+                        arrOpenChat[channel].emit("request confirm work", {orderId: orderId, comment: comment, degree: degree});
                     });
 
-                    function setViewButton() {
+                    function setVolumeControlButton() {
                         var volumeMsg = $.cookie('volume_msg');
                         if (volumeMsg == 1) {
-                            volumeOff.hide();
-                            volumeOn.show();
+                            tabs.find(".volume-off").hide();
+                            tabs.find(".volume-on").show();
                         } else {
-                            volumeOn.hide();
-                            volumeOff.show();
+                            tabs.find(".volume-on").hide();
+                            tabs.find(".volume-off").show();
                         }
                     }
 
                     function disconnectUser() {
-                        //systemMsg('system', "Отключен");
-                        var blockCountMsg = currTab.find(".chat-wrap .count-msg");
-                        //btnSendMsg.addClass('disabled');
+                        systemMsg('system', "Отключен");
+                        //var blockCountMsg = currTab.find(".chat-wrap .count-msg");
+                        currTab.find(".chat-wrap .btn-send-msg").addClass('disabled');
                         //btnConfirmWork.addClass('disabled');
-                        inChat.addClass("hidden");
+                        //inChat.addClass("hidden");
                     }
 
-                    /*message_txt.on("input", function(e) {
-                        socket.emit("request user write");
-                    });
-
-                    message_txt.on("keydown", function(e) {
-                        if (e.keyCode === 13 && e.ctrlKey) {
-                            sendMessage();
-                        }
-                    });*/
-
                     function sendMessage() {
-                        var message_txt = currTab.find(".message-text"), text = message_txt.val();
+                        var message_txt = currTab.find(".chat-wrap .message-text"), text = message_txt.val();
                         //var a = $("#message_text").val().replace(/<br>/gi,"\n");
                         //a = a.replace(/<a href=>/gi,"\n");
                         message_txt.val("");
@@ -481,26 +449,14 @@
                         arrOpenChat[channel].emit("send message", {message: text, writerLogin: userLogin, userId: userId, mode: mode, responseLogin: authorLogin, orderId: orderId, channel: channel});
                     }
 
-                    function clearSidebarCountRecords() {
+                    /*function clearSidebarCountRecords() {
                         blockCountMsg.html('');
-                    }
+                    }*/
 
                     function increaseCountMsg() {
                         var digCountMsg = currTab.find(".dig-count"), countMsg = digCountMsg.html();
                         countMsg++;
                         digCountMsg.html(countMsg);
-                    }
-
-                    function systemMsg(login, message, date_msg) {
-                        /*if (!date_msg) {
-                            date_msg = '';
-                        }
-                        var m = '<div class="msg system">' +
-                                '<p class="user">' + login + ':</p> ' +
-                                '<div class="message">' + safe(message) + '</div>' +
-                                '<p class="date">' + date_msg + '</p>' +
-                                '</div>';
-                        messages.append(m).scrollTop(messages[0].scrollHeight);*/
                     }
 
                     function safe(str) {
@@ -522,6 +478,19 @@
                                 '<p class="user">' + nick + ':</p> ' +
                                 '<div class="message">' + safe(message) + '</div>' +
                                 '<p class="date">' + date_write + '</p>' +
+                                '</div>';
+                        var messages = currTab.find(".chat-wrap .messages-wrap");
+                        messages.append(m).scrollTop(messages[0].scrollHeight);
+                    }
+
+                    function systemMsg(login, message, date_msg) {
+                        if (!date_msg) {
+                            date_msg = '';
+                        }
+                        var m = '<div class="msg system">' +
+                                '<p class="user">' + login + ':</p> ' +
+                                '<div class="message">' + safe(message) + '</div>' +
+                                '<p class="date">' + date_msg + '</p>' +
                                 '</div>';
                         var messages = currTab.find(".chat-wrap .messages-wrap");
                         messages.append(m).scrollTop(messages[0].scrollHeight);
@@ -559,6 +528,10 @@
                         currTab.find(".message-text").focus();
                     }
 
+                    function getChannel(row) {
+                        var authorId = row.find('td:last')[0].innerHTML;
+                        return authorId + '_' + userId;
+                    }
 
 
                     //document.title = "Просмотр заказа №" + {{ obj.order.num }};
@@ -615,25 +588,26 @@
                             grid.find("tr").find("td").removeAttr('title');
                             var confirmBid = $(".confirm-bid");
                             $(".open-chat").on('click', function(e) {
-                                var rowId = getRowId(e), row = getRow($(this));
-                                var authorId = row.find('td:last')[0].innerHTML;
-                                var authorLogin = row.find('td').eq(2).find('a')[0].innerHTML;
+                                var /*rowId = getRowId(e),*/
+                                        row = getRow($(this)),
+                                        authorId = row.find('td:last')[0].innerHTML,
+                                        authorLogin = row.find('td').eq(2).find('a')[0].innerHTML;
                                 //console.log(authorLogin);
                                 channel = authorId + '_' + userId;
                                 console.log(channel);
                                 try {
-                                    console.log(arrUsedChat);
+                                   // console.log(arrUsedChat);
                                     if (arrUsedChat[channel] != channel) {
                                         arrUsedChat[channel] = channel;
                                         arrOpenChat[channel] = io.connect('http://localhost:8008', { /*'auto connect':false, */'forceNew':true/*, 'reconnect':false/*, 'multiplex':false*/});
                                     } else {
                                         selectCurrentTab();
-                                        //continue;
                                     }
                                 } catch(e) {
                                     //systemMsg('system', "Server off " + e);
                                     return;
                                 }
+                                console.log(arrOpenChat);
                                 arrOpenChat[channel].on("connect", function() {
                                     // messages.html('');
                                     //  clearSidebarCountRecords();
@@ -641,16 +615,25 @@
                                     arrOpenChat[channel].emit("join to room", {room: channel, clientLogin: userLogin, authorLogin: authorLogin});
                                     addTab(channel, authorLogin);
                                     currTab = tabs.find("#" + channel);
-                                    currTab.find(".btn-send-msg").removeClass('disabled').on("click", function() {
+                                    currTab.find(".chat-wrap .btn-send-msg").removeClass('disabled').on("click", function() {
                                         sendMessage();
                                     });
-                                    currTab.find(".volume-on").on("click", function() {
+                                    setVolumeControlButton();
+                                    currTab.find(".chat-wrap .volume-on").on("click", function() {
                                         $.cookie('volume_msg', '0');
-                                        //setViewButton();
+                                        setVolumeControlButton();
                                     });
-                                    currTab.find(".volume-off").on("click", function() {
+                                    currTab.find(".chat-wrap .volume-off").on("click", function() {
                                         $.cookie('volume_msg', '1');
-                                        //setViewButton();
+                                        setVolumeControlButton();
+                                    });
+                                    setFocusOnMessageField();
+                                    currTab.find(".chat-wrap .message-text").on("keydown", function(e) {
+                                        if (e.keyCode === 13 && e.ctrlKey) {
+                                            sendMessage();
+                                        }
+                                    }).on("input", function(e) {
+                                        arrOpenChat[channel].emit("request user write");
                                     });
                                     //  btnConfirmWork.removeClass('disabled');
                                 });
@@ -666,21 +649,21 @@
                                     }
                                     setSidebarCountRecords(countRows);
                                 });
-                                /*arrOpenChat[channel].on("disconnect", function() {
+                                arrOpenChat[channel].on("disconnect", function() {
                                     disconnectUser();
-                                });*/
+                                });
                                 arrOpenChat[channel].on("response view current online", function() {
-                                    inChat.removeClass("hidden");
+                                    currTab.find(".chat-wrap .in-chat").removeClass("hidden");
                                 });
                                 arrOpenChat[channel].on("response user write", function() {
                                     if (flagIsWriting == 0) {
-                                        var msg = '<div id="msg-writing" class="msg system" style="display: none"><p>Печатает...</p></div>';
-                                        $("#is-writing").append(msg);
-                                        $("#msg-writing").fadeIn("slow", function() {
+                                        var msg = '<div class="msg system msg-writing" style="display: none"><p>Печатает...</p></div>';
+                                        $(".chat-wrap .is-writing").append(msg);
+                                        $(".chat-wrap .msg-writing").fadeIn("slow", function() {
                                             flagIsWriting = 1;
                                         });
                                         setTimeout(function() {
-                                            $("#msg-writing").fadeOut("slow", function() {
+                                            $(".chat-wrap .msg-writing").fadeOut("slow", function() {
                                                 $(this).remove();
                                                 flagIsWriting = 0;
                                             });
@@ -689,7 +672,7 @@
                                 });
                                 arrOpenChat[channel].on("user in room", function() {
                                     //console.dir(data);
-                                    inChat.removeClass("hidden");
+                                    currTab.find(".chat-wrap .in-chat").removeClass("hidden");
                                     arrOpenChat[channel].emit("request view current online");
                                 });
                                 arrOpenChat[channel].on("show new message", function(data) {
@@ -700,6 +683,16 @@
                                     userMsg(data.user_login, data.message, data.date_write);
                                     increaseCountMsg();
                                     setFocusOnMessageField();
+                                });
+                                arrOpenChat[channel].on("show system message", function(data) {
+                                    if ($.cookie('volume_msg') == 1) {
+                                        ion.sound.play("button_tiny");
+                                    }
+                                    systemMsg(data.login, data.message, data.date_msg);
+                                });
+                                arrOpenChat[channel].on("response disconnect user", function() {
+                                    currTab.find(".chat-wrap .in-chat").addClass("hidden");
+                                    //disconnectUser();
                                 });
                             });
                             $(".cancel-bid").click(function(e) {
@@ -723,8 +716,25 @@
                                 });
                             });
                             $(".hide-bid").click(function(e) {
-                                var rowId = getRowId(e);
-                                $.ajax({
+                                var rowId = getRowId(e),
+                                        row = getRow($(this)),
+                                        ch = getChannel(row);
+                                //console.log(ch);
+                                if (arrUsedChat[ch] != ch) {
+                                    channel = ch;
+                                    try {
+                                        arrUsedChat[channel] = channel;
+                                        arrOpenChat[channel] = io.connect('http://localhost:8008', { 'forceNew': true});
+                                    } catch(e) {
+                                        return;
+                                    }
+                                    arrOpenChat[channel].on("connect", function() {
+                                        arrOpenChat[channel].emit("join to room", {room: channel, clientLogin: userLogin, authorLogin: authorLogin});
+                                    })
+                                } else {
+
+                                }
+                                /*$.ajax({
                                     type: 'POST',
                                     data: 'bidId=' + rowId + '&action=hideBid',
                                     success: function(response) {
@@ -733,7 +743,7 @@
                                             grid.delRowData(rowId);
                                         }
                                     }
-                                });
+                                });*/
                             });
                             $(".auction-bid").click(function(e) {
                                 var rowId = getRowId(e);
