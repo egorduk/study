@@ -1407,7 +1407,7 @@ class Helper
      * @param $container
      * @return bool
      */
-    public static function selectAuthorBid($user, $bidId, $order, $container) {
+    /*public static function selectAuthorBid($user, $bidId, $order, $container) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $bid = $em->getRepository(self::$_tableUserBid)
             ->findOneById($bidId);
@@ -1427,7 +1427,7 @@ class Helper
             return true;
         }
         return false;
-    }
+    }*/
 
 
     public static function sendMail($email, $subject, $body, $container) {

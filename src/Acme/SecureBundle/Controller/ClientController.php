@@ -374,7 +374,7 @@ class ClientController extends Controller
                     }
                     return new JsonResponse($response);
                 } elseif (isset($action)) {
-                    if ($action == 'selectBid') {
+                    /*if ($action == 'selectBid') {
                         $bidId = $request->request->get('bidId');
                         $actionResponse = Helper::selectAuthorBid($user, $bidId, $order, $this->container);
                         return new Response(json_encode(array('action' => $actionResponse)));
@@ -382,20 +382,20 @@ class ClientController extends Controller
                         $bidId = $request->request->get('bidId');
                         $actionResponse = Helper::cancelSelectedAuthorBid($bidId, $order);
                         return new Response(json_encode(array('action' => $actionResponse)));
-                    } elseif ($action == 'auctionBid') {
+                    } else*/if ($action == 'auctionBid') {
                         $bidId = $request->request->get('bidId');
                         $auctionPrice = $request->request->get('auctionPrice');
                         $auctionDay = $request->request->get('auctionDay');
                         $actionResponse = Helper::createAuctionByAuthorBid($bidId, $order, $auctionPrice, $auctionDay, $this->container);
                         return new Response(json_encode(array('action' => $actionResponse)));
-                    } elseif ($action == 'hideBid') {
+                    } /*elseif ($action == 'hideBid') {
                         $bidId = $request->request->get('bidId');
                         $isHide = Helper::hideBidForClient($bidId);
                         if ($isHide) {
                             return new Response(json_encode(array('action' => true)));
                         }
                         return  new Response(json_encode(array('action' => false)));
-                    }
+                    }*/
                 }
             }
             //$author = Helper::getAuthorByOrder($order);

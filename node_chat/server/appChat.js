@@ -26,7 +26,10 @@ MongoClient.connect('mongodb://127.0.0.1:27017', function (err, db) {
     chatDB = db.collection('chat');
 });*/
 
-var nodemailer = require('nodemailer'), userEmail = 'egorduk91@gmail.com', passEmail = 'rezistor';
+var transporter,
+    nodemailer = require('nodemailer'),
+    userEmail = 'egorduk91@gmail.com',
+    passEmail = 'rezistor';
 
 var mysql = require('mysql'), mysqlUtilities = require('mysql-utilities'), connection = mysql.createConnection({
     host:     'localhost',
@@ -107,15 +110,6 @@ io.sockets.on('connection', function (client) {
                         //var writerLogin = row.user_login, message = data.message;
                         client.emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin});
                         //client.to(room).emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin});
-                        var transporter = nodemailer.createTransport({
-                            service: 'gmail',
-                            auth: {
-                                user: userEmail,
-                                pass: passEmail
-                            }
-                        }, function(error) {
-                            if (error) {console.log(error)}
-                        });
                         if (mode) {
                             // Send about denied rules
                             connection.insert('ban_message', {
@@ -175,6 +169,16 @@ io.sockets.on('connection', function (client) {
         arrRoom[clientID] = data.room;
         client.join(data.room);
         console.log("Connected - " + data.clientLogin + " to room - " + data.room);
+        /*Init variable for send mailing*/
+        transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: userEmail,
+                pass: passEmail
+            }
+        }, function(error) {
+            if (error) {console.log(error)}
+        });
         //client.to(data.room).emit("user in room", {name: data.name});
     });
 
@@ -230,25 +234,6 @@ io.sockets.on('connection', function (client) {
         }
     });
 
-    function createSystemMsg(orderId, type) {
-        var fullDate = getFullDate(new Date()),
-            date_msg = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss"),
-            system = "Система";
-        if (type == 'confirm-work') {
-            var message = "System msg - confirm work";
-            connection.insert('webchat_message', {
-                message: message,
-                date_write: date_msg,
-                user_id: 17,
-                user_order_id: orderId
-            }, function(error) {
-                if (error) {console.log(error)}
-                client.to(orderId).emit("show system message", {login: system, date_msg: fullDate, message: message});
-                client.emit("show system message", {login: system, date_msg: fullDate, message: message});
-            });
-        } else {}
-    }
-
     /*client.on("request system msg", function(data) {
         var orderId = data.orderId,
             room = arrRoom[clientID],
@@ -286,33 +271,107 @@ io.sockets.on('connection', function (client) {
             }
         );
     });
-});
 
-    function getFullDate(d) {
-        var year, month, day, min, sec, hour;
-        year = String(d.getFullYear());
-        month = String(d.getMonth() + 1);
-        day = String(d.getDate());
-        min = String(d.getMinutes());
-        hour = String(d.getHours());
-        sec = String(d.getSeconds());
-        if (sec.length == 1) {
-            sec = "0" + sec;
+    client.on("request hide bid", function (data) {
+        var orderId = data.bidId;
+       /* connection.update('user_bid', {is_show_author: 0}, {id: orderId}, function(error) {
+            if (error) {throw error}*/
+            client.emit('response hide bid');
+        /*});*/
+    });
+
+    client.on("request confirm author bid", function (data) {
+        var bidId = data.bidId, orderId = data.orderId;
+        connection.select('status_order', 'id AS status_id', {code: 'ca'}, '', function(error, row) {
+            if (error) {throw error}
+            var statusId = row[0].status_id;
+            connection.update('user_bid', {is_select_client: 1}, {id: bidId}, function(error) {
+                if (error) {throw error}
+                connection.update('user_order', {status_order_id: statusId}, {id: orderId}, function(error) {
+                    if (error) {throw error}
+                    client.emit('response confirm author bid');
+                    sendMail('confirm_author_bid', data);
+                });
+            });
+        });
+    });
+
+
+
+    function sendMail(type, data) {
+        var from, to, subject, text, html;
+        if (type == "confirm_author_bid") {
+            connection.select('user', 'email', {login: data.responseLogin}, '', function(error, row) {
+                if (error) {throw error}
+                //to = row[0].email;
+            });
+            from = 'Test email <egorduk91@gmail.com>';
+            to = 'a_1300@mail.ru';
+            subject = 'Ваша ставка принята';
+            text = 'Text of message';
+        } else if (type == "") {
+
         }
-        if (min.length == 1) {
-            min = "0" + min;
-        }
-        if (hour.length == 1) {
-            hour = "0" + hour;
-        }
-        if (month.length == 1) {
-            month = "0" + month;
-        }
-        if (day.length == 1) {
-            day = "0" + day;
-        }
-        return day + "." + month + "." + year + ' ' + hour + ':' + min + ':' + sec;
+        transporter.sendMail({
+            from: from,
+            address: userEmail,
+            to: to,
+            subject: subject,
+            text: text
+            //html: '<i>html</i>'
+        }, function(error, info){
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Message sent: ' + info.response);
+            }
+        });
     }
 
+    function createSystemMsg(orderId, type) {
+        var fullDate = getFullDate(new Date()),
+            date_msg = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss"),
+            system = "Система";
+        if (type == 'confirm-work') {
+            var message = "System msg - confirm work";
+            connection.insert('webchat_message', {
+                message: message,
+                date_write: date_msg,
+                user_id: 17,
+                user_order_id: orderId
+            }, function(error) {
+                if (error) {console.log(error)}
+                client.to(orderId).emit("show system message", {login: system, date_msg: fullDate, message: message});
+                client.emit("show system message", {login: system, date_msg: fullDate, message: message});
+            });
+        } else {}
+    }
+});
+
+function getFullDate(d) {
+    var year, month, day, min, sec, hour;
+    year = String(d.getFullYear());
+    month = String(d.getMonth() + 1);
+    day = String(d.getDate());
+    min = String(d.getMinutes());
+    hour = String(d.getHours());
+    sec = String(d.getSeconds());
+    if (sec.length == 1) {
+        sec = "0" + sec;
+    }
+    if (min.length == 1) {
+        min = "0" + min;
+    }
+    if (hour.length == 1) {
+        hour = "0" + hour;
+    }
+    if (month.length == 1) {
+        month = "0" + month;
+    }
+    if (day.length == 1) {
+        day = "0" + day;
+    }
+    return day + "." + month + "." + year + ' ' + hour + ':' + min + ':' + sec;
+}
    // client.to('User_4666').emit('response', {message: 'HELLO', from: 'WORLD'});
 //});
