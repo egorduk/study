@@ -285,16 +285,35 @@ io.sockets.on('connection', function (client) {
         connection.select('status_order', 'id AS status_id', {code: 'ca'}, '', function(error, row) {
             if (error) {throw error}
             var statusId = row[0].status_id;
+           // connection.update('user_bid', {is_select_client: 1}, {id: bidId}, function(error) {
+                if (error) {throw error}
+               // connection.update('user_order', {status_order_id: statusId}, {id: orderId}, function(error) {
+                    if (error) {throw error}
+                    client.emit('response confirm author bid');
+                    createSystemMsg({orderId: orderId, type: 'confirm_author_bid', channel: data.channel});
+                    sendMail('confirm_author_bid', data);
+               // });
+            //});
+        });
+    });
+
+    client.on("request cancel bid", function (data) {
+        var bidId = data.bidId, orderId = data.orderId;
+        connection.select('status_order', 'id AS status_id', {code: 'ca'}, '', function(error, row) {
+            if (error) {throw error}
+            var statusId = row[0].status_id;
             connection.update('user_bid', {is_select_client: 1}, {id: bidId}, function(error) {
                 if (error) {throw error}
                 connection.update('user_order', {status_order_id: statusId}, {id: orderId}, function(error) {
                     if (error) {throw error}
-                    client.emit('response confirm author bid');
-                    sendMail('confirm_author_bid', data);
+                    client.emit('response cancel bid');
+                    createSystemMsg({orderId: orderId, type: 'cancel_author_bid'});
+                    sendMail('cancel_author_bid', data);
                 });
             });
         });
     });
+
 
 
 
@@ -304,6 +323,10 @@ io.sockets.on('connection', function (client) {
             connection.select('user', 'email', {login: data.responseLogin}, '', function(error, row) {
                 if (error) {throw error}
                 //to = row[0].email;
+                connection.select('user_order', 'theme, num', {id: data.orderId}, '', function(error, row) {
+                    if (error) {throw error}
+                    console.log(row[0]);
+                });
             });
             from = 'Test email <egorduk91@gmail.com>';
             to = 'a_1300@mail.ru';
@@ -328,23 +351,30 @@ io.sockets.on('connection', function (client) {
         });
     }
 
-    function createSystemMsg(orderId, type) {
+    function createSystemMsg(data) {
         var fullDate = getFullDate(new Date()),
             date_msg = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss"),
-            system = "Система";
+            system = "Система",
+            message,
+            type = data.type,
+            orderId = data.orderId,
+            channel = data.channel;
         if (type == 'confirm-work') {
-            var message = "System msg - confirm work";
-            connection.insert('webchat_message', {
-                message: message,
-                date_write: date_msg,
-                user_id: 17,
-                user_order_id: orderId
-            }, function(error) {
-                if (error) {console.log(error)}
-                client.to(orderId).emit("show system message", {login: system, date_msg: fullDate, message: message});
-                client.emit("show system message", {login: system, date_msg: fullDate, message: message});
-            });
-        } else {}
+            message = "System msg - confirm work";
+        } else if (type == 'confirm_author_bid') {
+            message = "System msg - confirm author bid";
+        }
+        connection.insert('webchat_message', {
+            message: message,
+            date_write: date_msg,
+            user_id: 17,
+            user_order_id: orderId,
+            channel: channel
+        }, function(error) {
+            if (error) {throw(error)}
+            client.to(channel).emit("show system message", {login: system, date_msg: fullDate, message: message});
+            client.emit("show system message", {login: system, date_msg: fullDate, message: message});
+        });
     }
 });
 

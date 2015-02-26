@@ -631,7 +631,7 @@
                                     //disconnectUser();
                                 });
                             });
-                            $(".cancel-bid").click(function(e) {
+                            $(".cancel-bid").on('click', function(e) {
                                 var rowId = getRowId(e), row = getRow($(this));
                                 if (rowId) {
                                     var ch = getChannel(row);
@@ -645,21 +645,20 @@
                                         }
                                         arrOpenChat[channel].on("connect", function() {
                                             this.emit("join to room", {room: channel, clientLogin: userLogin, authorLogin: authorLogin});
-                                            this.emit("request hide bid", {bidId: rowId});
-                                        }).on("response hide bid", function() {
-                                            grid.delRowData(rowId);
-                                            this.disconnect();
-                                            delete arrUsedChat[channel];
-                                        });
-                                    } else {
-                                        arrOpenChat[channel].emit("request hide bid", {bidId: rowId}).on("response hide bid", function() {
-                                            grid.delRowData(rowId);
+                                            this.emit("request cancel bid", {bidId: rowId});
+                                        }).on("response cancel bid", function() {
+                                            actionCancelBid(row, "hide");
+                                            $("tr.jqgrow#" + rowId).removeClass("state-selected");
+                                            confirmBid.show();
                                             this.disconnect();
                                             delete arrUsedChat[channel];
                                             delete arrOpenChat[channel];
-                                            tabs.find("li[aria-controls='" + channel + "']").remove();
-                                            currTab.remove();
-                                            tabs.tabs("refresh");
+                                        });
+                                    } else {
+                                        arrOpenChat[channel].emit("request cancel bid", {bidId: rowId}).on("response cancel bid", function() {
+                                            actionCancelBid(row, "hide");
+                                            $("tr.jqgrow#" + rowId).removeClass("state-selected");
+                                            confirmBid.show();
                                         });
                                     }
                                 }
@@ -681,7 +680,7 @@
                                     }
                                 });*/
                             });
-                            $(".hide-bid").click(function(e) {
+                            $(".hide-bid").on('click', function(e) {
                                 var rowId = getRowId(e), row = getRow($(this));
                                 //console.log(ch);
                                 if (rowId) {
@@ -716,7 +715,7 @@
                                     }
                                 }
                             });
-                            $(".auction-bid").click(function(e) {
+                            $(".auction-bid").on('click', function(e) {
                                 var rowId = getRowId(e);
                                 if (rowId) {
                                     var auctionPrice = $("#auction-price"), auctionDay = $("#auction-day");
@@ -777,7 +776,7 @@
                                     });
                                 }
                             });
-                            confirmBid.click(function(e) {
+                            confirmBid.on('click', function(e) {
                                 var rowId = getRowId(e), row = getRow($(this));
                                 if (rowId) {
                                     e.preventDefault();
@@ -795,15 +794,19 @@
                                                 }
                                                 arrOpenChat[channel].on("connect", function() {
                                                     this.emit("join to room", {room: channel, clientLogin: userLogin});
-                                                    this.emit("request confirm author bid", {bidId: rowId, orderId: orderId, responseLogin: authorLogin});
+                                                    this.emit("request confirm author bid", {bidId: rowId, orderId: orderId, responseLogin: authorLogin, channel: channel});
                                                 }).on("response confirm author bid", function() {
                                                     actionCancelBid(row, "show");
                                                     $("tr.jqgrow#" + rowId).addClass("state-selected");
+                                                    /*something doing - open current chat or redirect*/
                                                 });
                                             } else {
-                                                arrOpenChat[channel].emit("request confirm author bid", {bidId: rowId});
-                                                arrOpenChat[channel].on("response confirm author bid", function() {
-                                                });
+                                                arrOpenChat[channel].emit("request confirm author bid", {bidId: rowId, orderId: orderId, responseLogin: authorLogin, channel: channel})
+                                                    .on("response confirm author bid", function() {
+                                                        actionCancelBid(row, "show");
+                                                        $("tr.jqgrow#" + rowId).addClass("state-selected");
+                                                        /*something doing - open current chat or redirect*/
+                                                    });
                                             }
                                         }
                                     });

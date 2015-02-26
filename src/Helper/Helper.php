@@ -1455,7 +1455,7 @@ class Helper
      * @param $bidId
      * @return bool
      */
-    public static function cancelSelectedAuthorBid($bidId, $order) {
+    /*public static function cancelSelectedAuthorBid($bidId, $order) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $bid = $em->getRepository(self::$_tableUserBid)
             ->findOneBy(array('id' => $bidId, 'is_show_client' => 1, 'is_confirm_author' => 0, 'is_select_client' => 1));
@@ -1468,7 +1468,7 @@ class Helper
             return true;
         }
         return false;
-    }
+    }*/
 
 
     public static function getCountBidsForEveryOrder($user) {
