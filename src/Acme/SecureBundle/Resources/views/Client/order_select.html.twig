@@ -634,33 +634,40 @@
                             $(".cancel-bid").on('click', function(e) {
                                 var rowId = getRowId(e), row = getRow($(this));
                                 if (rowId) {
-                                    var ch = getChannel(row);
-                                    if (arrUsedChat[ch] != ch) {
-                                        channel = ch;
-                                        try {
-                                            arrUsedChat[channel] = channel;
-                                            arrOpenChat[channel] = io.connect('http://localhost:8008', { forceNew: true});
-                                        } catch(e) {
-                                            return;
+                                    e.preventDefault();
+                                    jConfirm('Can you cancel confirmed bid?', 'Confirmation Dialog', function (action) {
+                                        if (action) {
+                                            var ch = getChannel(row);
+                                            if (arrUsedChat[ch] != ch) {
+                                                channel = ch;
+                                                try {
+                                                    arrUsedChat[channel] = channel;
+                                                    arrOpenChat[channel] = io.connect('http://localhost:8008', { forceNew: true});
+                                                } catch(e) {
+                                                    return;
+                                                }
+                                                arrOpenChat[channel].on("connect", function() {
+                                                    this.emit("join to room", {room: channel, clientLogin: userLogin, authorLogin: authorLogin})
+                                                            .emit("request cancel author bid", {bidId: rowId, orderId: orderId, responseLogin: authorLogin, channel: channel});
+                                                }).on("response cancel author bid", function() {
+                                                    actionCancelBid(row, "hide");
+                                                    $("tr.jqgrow#" + rowId).removeClass("state-selected");
+                                                    confirmBid.show();
+                                                    this.disconnect();
+                                                    delete arrUsedChat[channel];
+                                                    delete arrOpenChat[channel];
+                                                });
+                                            } else {
+                                                //this.disconnect();
+                                                arrOpenChat[channel].emit("request cancel author bid", {bidId: rowId, orderId: orderId, responseLogin: authorLogin, channel: channel})
+                                                        .on("response cancel author bid", function() {
+                                                            actionCancelBid(row, "hide");
+                                                            $("tr.jqgrow#" + rowId).removeClass("state-selected");
+                                                            confirmBid.show();
+                                                        });
+                                            }
                                         }
-                                        arrOpenChat[channel].on("connect", function() {
-                                            this.emit("join to room", {room: channel, clientLogin: userLogin, authorLogin: authorLogin});
-                                            this.emit("request cancel bid", {bidId: rowId});
-                                        }).on("response cancel bid", function() {
-                                            actionCancelBid(row, "hide");
-                                            $("tr.jqgrow#" + rowId).removeClass("state-selected");
-                                            confirmBid.show();
-                                            this.disconnect();
-                                            delete arrUsedChat[channel];
-                                            delete arrOpenChat[channel];
-                                        });
-                                    } else {
-                                        arrOpenChat[channel].emit("request cancel bid", {bidId: rowId}).on("response cancel bid", function() {
-                                            actionCancelBid(row, "hide");
-                                            $("tr.jqgrow#" + rowId).removeClass("state-selected");
-                                            confirmBid.show();
-                                        });
-                                    }
+                                    });
                                 }
                                 /*$.ajax({
                                     type: 'POST',
@@ -798,6 +805,9 @@
                                                 }).on("response confirm author bid", function() {
                                                     actionCancelBid(row, "show");
                                                     $("tr.jqgrow#" + rowId).addClass("state-selected");
+                                                    this.disconnect();
+                                                    delete arrOpenChat[channel];
+                                                    delete arrUsedChat[channel];
                                                     /*something doing - open current chat or redirect*/
                                                 });
                                             } else {

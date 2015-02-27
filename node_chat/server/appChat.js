@@ -285,30 +285,30 @@ io.sockets.on('connection', function (client) {
         connection.select('status_order', 'id AS status_id', {code: 'ca'}, '', function(error, row) {
             if (error) {throw error}
             var statusId = row[0].status_id;
-           // connection.update('user_bid', {is_select_client: 1}, {id: bidId}, function(error) {
-                if (error) {throw error}
-               // connection.update('user_order', {status_order_id: statusId}, {id: orderId}, function(error) {
-                    if (error) {throw error}
-                    client.emit('response confirm author bid');
-                    createSystemMsg({orderId: orderId, type: 'confirm_author_bid', channel: data.channel});
-                    sendMail('confirm_author_bid', data);
-               // });
-            //});
-        });
-    });
-
-    client.on("request cancel bid", function (data) {
-        var bidId = data.bidId, orderId = data.orderId;
-        connection.select('status_order', 'id AS status_id', {code: 'ca'}, '', function(error, row) {
-            if (error) {throw error}
-            var statusId = row[0].status_id;
             connection.update('user_bid', {is_select_client: 1}, {id: bidId}, function(error) {
                 if (error) {throw error}
                 connection.update('user_order', {status_order_id: statusId}, {id: orderId}, function(error) {
                     if (error) {throw error}
-                    client.emit('response cancel bid');
-                    createSystemMsg({orderId: orderId, type: 'cancel_author_bid'});
-                    sendMail('cancel_author_bid', data);
+                    client.emit('response confirm author bid');
+                    createSystemMsg({orderId: orderId, type: 'confirm_author_bid', channel: data.channel});
+                    //sendMail('confirm_author_bid', data);
+                });
+            });
+        });
+    });
+
+    client.on("request cancel author bid", function (data) {
+        var bidId = data.bidId, orderId = data.orderId;
+        connection.select('status_order', 'id AS status_id', {code: 'sa'}, '', function(error, row) {
+            if (error) {throw error}
+            var statusId = row[0].status_id;
+            connection.update('user_bid', {is_select_client: 0}, {id: bidId}, function(error) {
+                if (error) {throw error}
+                connection.update('user_order', {status_order_id: statusId}, {id: orderId}, function(error) {
+                    if (error) {throw error}
+                    client.emit('response cancel author bid');
+                    createSystemMsg({orderId: orderId, type: 'cancel_author_bid', channel: data.channel});
+                    //sendMail('cancel_author_bid', data);
                 });
             });
         });
@@ -332,8 +332,19 @@ io.sockets.on('connection', function (client) {
             to = 'a_1300@mail.ru';
             subject = 'Ваша ставка принята';
             text = 'Text of message';
-        } else if (type == "") {
-
+        } else if (type == "cancel_author_bid") {
+            connection.select('user', 'email', {login: data.responseLogin}, '', function(error, row) {
+                if (error) {throw error}
+                //to = row[0].email;
+                connection.select('user_order', 'theme, num', {id: data.orderId}, '', function(error, row) {
+                    if (error) {throw error}
+                    console.log(row[0]);
+                });
+            });
+            from = 'Test email <egorduk91@gmail.com>';
+            to = 'a_1300@mail.ru';
+            subject = 'Ваша ставка отклонена';
+            text = 'Text of message';
         }
         transporter.sendMail({
             from: from,
@@ -363,6 +374,8 @@ io.sockets.on('connection', function (client) {
             message = "System msg - confirm work";
         } else if (type == 'confirm_author_bid') {
             message = "System msg - confirm author bid";
+        } else if (type == 'cancel_author_bid') {
+            message = "System msg - cancel author bid";
         }
         connection.insert('webchat_message', {
             message: message,
