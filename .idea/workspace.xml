@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="544aa3f9-6149-4d96-94a7-9d4361f88150" name="Default" comment="1&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="study.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -55,7 +55,7 @@
       <file leaf-file-name="order_select.html.twig" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="726" column="113" selection-start="42244" selection-end="42244" vertical-scroll-proportion="0.43676814" vertical-offset="10099" max-vertical-offset="14542">
+            <state line="719" column="62" selection-start="41792" selection-end="41792" vertical-scroll-proportion="0.25644028" vertical-offset="10099" max-vertical-offset="14542">
               <folding>
                 <element signature="tag#style#0" expanded="false" />
                 <element signature="e#5220#10470#0" expanded="false" />
@@ -997,7 +997,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="726" column="113" selection-start="42244" selection-end="42244" vertical-scroll-proportion="0.43676814" vertical-offset="10099" max-vertical-offset="14542">
+        <state line="719" column="62" selection-start="41792" selection-end="41792" vertical-scroll-proportion="0.25644028" vertical-offset="10099" max-vertical-offset="14542">
           <folding>
             <element signature="tag#style#0" expanded="false" />
             <element signature="e#5220#10470#0" expanded="false" />
