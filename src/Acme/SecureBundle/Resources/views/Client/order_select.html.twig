@@ -40,11 +40,6 @@
             #dialog-message-select-bid, #dialog-message-error, .cancel-bid, #dialog-message-auction-bid, #dialog-message-success-auction  {
                 display: none;
             }
-            .state-selected:hover, .state-selected {
-                color: white;
-                border: 1px solid green;
-                background: green;
-            }
             #dialog-message-error p .icon-warning {
                 font-size: 45px;
                 color: orange;
@@ -118,6 +113,8 @@
             .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
             .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
             #tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
+            .state-selected:hover, .state-selected { color: white; background: green; border: 1px solid green; }
+            .state-selected .grid-cell-day, .state-selected .grid-cell-time { color: white; }
         </style>
         <div class="container">
             <!--<div class="row">
@@ -183,8 +180,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div id="dialog-message-select-bid" title="Выбор ставки">
+            </div>-->
+            <!--<div id="dialog-message-select-bid" title="Выбор ставки">
                 <p>
                     <span class="icon-hammer" style="float:left; margin:0 7px 50px 0;"></span>
                     Вы уверены, что согласны с выбранной ставкой исполнителя?
@@ -195,8 +192,8 @@
                     <span class="icon-warning" style="float:left; margin:0 7px 50px 0;"></span>
                     Заказ удален, обновите таблицу со ставками либо страницу!
                 </p>
-            </div>
-            <div id="dialog-message-auction-bid" title="Предложить торг">
+            </div>-->
+            <!--<div id="dialog-message-auction-bid" title="Предложить торг">
                 <label for="auction-price">Предложить цену</label>
                 <div class="input-group">
                     <input type="text" name="auction-price" id="auction-price" required placeholder="Введите цену" class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="7">
@@ -210,62 +207,9 @@
             </div>-->
             <table id="listBids"></table>
             <div id="pagerBids"></div>
-            <!--<div class="demo">
-                <div class="chat">
-                    <div class="messages" id="messages"></div>
-                    <div class="panel">
-                        <span class="nick"></span>
-                        <textarea name="message_text" id="message_text"></textarea>
-                        <button type="button" id="btn-send-msg" class="btn btn-primary disabled">Отправить</button>
-                    </div>
-                    <div id="sidebar">
-                        <div id="count-msg"></div>
-                        <div id="online">
-                            <p style="display: none" id="author-status">{{ obj.author.login }}</p>
-                        </div>
-                        <div id="in-chat" class="hidden">
-                            <p>В чате</p>
-                        </div>
-                        <div id="is-writing"></div>
-                        <span class='icon-volume-1' id="volume-on"></span>
-                        <span class='icon-volume-off-4' id="volume-off"></span>
-                    </div>
-                </div>
-            </div>
-            <div id="block-action">
-                <button type="button" class="btn btn-primary btn-lg disabled" id="btn-confirm-work" data-toggle="modal" data-target="#modal-confirm-work">Принять работу</button>
-            </div>-->
             <div id="tabs">
                 <ul>
-                    <!--<li>
-                        <a href="#tabs-1">Nunc tincidunt</a>
-                        <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span>
-                    </li>-->
                 </ul>
-                <!--<div id="tabs-1">
-                    <div class="block-chat demo">
-                        <div class="chat">
-                            <div class="messages" id="messages"></div>
-                            <div class="panel">
-                                <span class="nick"></span>
-                                <textarea name="message_text" id="message_text"></textarea>
-                                <button type="button" id="btn-send-msg" class="btn btn-primary disabled">Отправить</button>
-                            </div>
-                            <div id="sidebar">
-                                <div id="count-msg"></div>
-                                <div id="online">
-                                    <p style="display: none" id="author-status">{{ obj.author.login }}</p>
-                                </div>
-                                <div id="in-chat" class="hidden">
-                                    <p>В чате</p>
-                                </div>
-                                <div id="is-writing"></div>
-                                <span class='icon-volume-1' id="volume-on"></span>
-                                <span class='icon-volume-off-4' id="volume-off"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
             </div>
             <!--<div class="modal fade" id="modal-confirm-work" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
                 <div class="modal-dialog">
@@ -315,7 +259,7 @@
                             userId = {{ obj.userId }},
                             authorStatus = {{ obj.author.status }},
                             //authorLogin = '{{ obj.author.login }}',
-                            authorLogin = '',
+                            authorLogin,
                             btnActionConfirmWork = $("#btn-action-confirm-work"),
                             btnConfirmWork = $("#btn-confirm-work"),
                             flagIsWriting = 0,
@@ -345,7 +289,7 @@
                             tabs.tabs("refresh");
                         }
                     });
-                    $("#tabs li").removeClass("ui-corner-top").addClass("ui-corner-left");
+                    tabs.find("li").removeClass("ui-corner-top").addClass("ui-corner-left");
                     tabs.delegate("span.ui-icon-close", "click", function() {
                         var panelId = $(this).closest("li").remove().attr("aria-controls");
                         $("#" + panelId).remove();
@@ -556,7 +500,7 @@
                             {name:'date_bid',index:'date_bid',width:150,align:'center',resizable:false,editable:false,sortable:false},
                             {name:'action',index:'action',width:150,align:'center',sortable:false,resize:false,formatter:function() {
                                 return "<div class='cancel-bid' style='margin-left:8px;'>" +
-                                        "<div style='float:left;margin-left:8px;' class='ui-pg-div ui-inline-del' title='Отменить' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='top'>" +
+                                        "<div style='float:left;margin-left:8px;' class='ui-pg-div ui-inline-del' title='Отменить выбранную ставку' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='top'>" +
                                         "<span class='icon-cancel-6'></span></div></div>" +
                                         "<div class='confirm-bid' style='margin-left:8px;'>" +
                                         "<div style='float:left;margin-left:5px;' class='ui-pg-div ui-inline-del' title='Принять ставку автора' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='top'>" +
@@ -636,8 +580,7 @@
                                         arrOpenChat[channel].emit("request user write");
                                     });
                                     //  btnConfirmWork.removeClass('disabled');
-                                });
-                                arrOpenChat[channel].on("response get all messages", function(data) {
+                                }).on("response get all messages", function(data) {
                                     var countRows = 0;
                                     for (var key in data) {
                                         if (data[key].user_id != 17) {
@@ -648,14 +591,11 @@
                                         }
                                     }
                                     setSidebarCountRecords(countRows);
-                                });
-                                arrOpenChat[channel].on("disconnect", function() {
-                                    disconnectUser();
-                                });
-                                arrOpenChat[channel].on("response view current online", function() {
+                                }).on("disconnect", function() {
+                                    //disconnectUser();
+                                }).on("response view current online", function() {
                                     currTab.find(".chat-wrap .in-chat").removeClass("hidden");
-                                });
-                                arrOpenChat[channel].on("response user write", function() {
+                                }).on("response user write", function() {
                                     if (flagIsWriting == 0) {
                                         var msg = '<div class="msg system msg-writing" style="display: none"><p>Печатает...</p></div>';
                                         $(".chat-wrap .is-writing").append(msg);
@@ -669,13 +609,11 @@
                                             });
                                         }, 2000);
                                     }
-                                });
-                                arrOpenChat[channel].on("user in room", function() {
+                                }).on("user in room", function() {
                                     //console.dir(data);
                                     currTab.find(".chat-wrap .in-chat").removeClass("hidden");
                                     arrOpenChat[channel].emit("request view current online");
-                                });
-                                arrOpenChat[channel].on("show new message", function(data) {
+                                }).on("show new message", function(data) {
                                     //console.dir(data);
                                     if ($.cookie('volume_msg') == 1 && data.user_login != userLogin) {
                                         ion.sound.play("button_tiny");
@@ -683,21 +621,55 @@
                                     userMsg(data.user_login, data.message, data.date_write);
                                     increaseCountMsg();
                                     setFocusOnMessageField();
-                                });
-                                arrOpenChat[channel].on("show system message", function(data) {
+                                }).on("show system message", function(data) {
                                     if ($.cookie('volume_msg') == 1) {
                                         ion.sound.play("button_tiny");
                                     }
                                     systemMsg(data.login, data.message, data.date_msg);
-                                });
-                                arrOpenChat[channel].on("response disconnect user", function() {
+                                }).on("response disconnect user", function() {
                                     currTab.find(".chat-wrap .in-chat").addClass("hidden");
                                     //disconnectUser();
                                 });
                             });
-                            $(".cancel-bid").click(function(e) {
+                            $(".cancel-bid").on('click', function(e) {
                                 var rowId = getRowId(e), row = getRow($(this));
-                                $.ajax({
+                                if (rowId) {
+                                    e.preventDefault();
+                                    jConfirm('Can you cancel confirmed bid?', 'Confirmation Dialog', function (action) {
+                                        if (action) {
+                                            var ch = getChannel(row);
+                                            if (arrUsedChat[ch] != ch) {
+                                                channel = ch;
+                                                try {
+                                                    arrUsedChat[channel] = channel;
+                                                    arrOpenChat[channel] = io.connect('http://localhost:8008', { forceNew: true});
+                                                } catch(e) {
+                                                    return;
+                                                }
+                                                arrOpenChat[channel].on("connect", function() {
+                                                    this.emit("join to room", {room: channel, clientLogin: userLogin, authorLogin: authorLogin})
+                                                            .emit("request cancel author bid", {bidId: rowId, orderId: orderId, responseLogin: authorLogin, channel: channel});
+                                                }).on("response cancel author bid", function() {
+                                                    actionCancelBid(row, "hide");
+                                                    $("tr.jqgrow#" + rowId).removeClass("state-selected");
+                                                    confirmBid.show();
+                                                    this.disconnect();
+                                                    delete arrUsedChat[channel];
+                                                    delete arrOpenChat[channel];
+                                                });
+                                            } else {
+                                                //this.disconnect();
+                                                arrOpenChat[channel].emit("request cancel author bid", {bidId: rowId, orderId: orderId, responseLogin: authorLogin, channel: channel})
+                                                        .on("response cancel author bid", function() {
+                                                            actionCancelBid(row, "hide");
+                                                            $("tr.jqgrow#" + rowId).removeClass("state-selected");
+                                                            confirmBid.show();
+                                                        });
+                                            }
+                                        }
+                                    });
+                                }
+                                /*$.ajax({
                                     type: 'POST',
                                     data: 'bidId=' + rowId + '&action=cancelBid',
                                     success: function(response) {
@@ -713,39 +685,44 @@
                                             }, 2000);
                                         }
                                     }
-                                });
-                            });
-                            $(".hide-bid").click(function(e) {
-                                var rowId = getRowId(e),
-                                        row = getRow($(this)),
-                                        ch = getChannel(row);
-                                //console.log(ch);
-                                if (arrUsedChat[ch] != ch) {
-                                    channel = ch;
-                                    try {
-                                        arrUsedChat[channel] = channel;
-                                        arrOpenChat[channel] = io.connect('http://localhost:8008', { 'forceNew': true});
-                                    } catch(e) {
-                                        return;
-                                    }
-                                    arrOpenChat[channel].on("connect", function() {
-                                        arrOpenChat[channel].emit("join to room", {room: channel, clientLogin: userLogin, authorLogin: authorLogin});
-                                    })
-                                } else {
-
-                                }
-                                /*$.ajax({
-                                    type: 'POST',
-                                    data: 'bidId=' + rowId + '&action=hideBid',
-                                    success: function(response) {
-                                        var resposeObject = window.JSON.parse(response);
-                                        if (resposeObject.action) {
-                                            grid.delRowData(rowId);
-                                        }
-                                    }
                                 });*/
                             });
-                            $(".auction-bid").click(function(e) {
+                            $(".hide-bid").on('click', function(e) {
+                                var rowId = getRowId(e), row = getRow($(this));
+                                //console.log(ch);
+                                if (rowId) {
+                                    var ch = getChannel(row);
+                                    if (arrUsedChat[ch] != ch) {
+                                        channel = ch;
+                                        try {
+                                            arrUsedChat[channel] = channel;
+                                            arrOpenChat[channel] = io.connect('http://localhost:8008', { forceNew: true});
+                                        } catch(e) {
+                                            return;
+                                        }
+                                        arrOpenChat[channel].on("connect", function() {
+                                            this.emit("join to room", {room: channel, clientLogin: userLogin, authorLogin: authorLogin});
+                                            this.emit("request hide bid", {bidId: rowId});
+                                        }).on("response hide bid", function() {
+                                            grid.delRowData(rowId);
+                                            this.disconnect();
+                                            delete arrUsedChat[channel];
+                                        });
+                                    } else {
+                                        arrOpenChat[channel].emit("request hide bid", {bidId: rowId});
+                                        arrOpenChat[channel].on("response hide bid", function() {
+                                            grid.delRowData(rowId);
+                                            this.disconnect();
+                                            delete arrUsedChat[channel];
+                                            delete arrOpenChat[channel];
+                                            tabs.find("li[aria-controls='" + channel + "']").remove();
+                                            currTab.remove();
+                                            tabs.tabs("refresh");
+                                        });
+                                    }
+                                }
+                            });
+                            $(".auction-bid").on('click', function(e) {
                                 var rowId = getRowId(e);
                                 if (rowId) {
                                     var auctionPrice = $("#auction-price"), auctionDay = $("#auction-day");
@@ -806,10 +783,44 @@
                                     });
                                 }
                             });
-                            confirmBid.click(function(e) {
+                            confirmBid.on('click', function(e) {
                                 var rowId = getRowId(e), row = getRow($(this));
                                 if (rowId) {
-                                    $("#dialog-message-select-bid").dialog({
+                                    e.preventDefault();
+                                    jConfirm('Can you confirm this bid?', 'Confirmation Dialog', function (action) {
+                                        //jAlert('Confirmed: ' + action, 'Confirmation Results');
+                                        if (action) {
+                                            var ch = getChannel(row), authorLogin = row.find('td').eq(2).find('a')[0].innerHTML;
+                                            if (arrUsedChat[ch] != ch) {
+                                                channel = ch;
+                                                try {
+                                                    arrUsedChat[channel] = channel;
+                                                    arrOpenChat[channel] = io.connect('http://localhost:8008', { forceNew: true});
+                                                } catch(e) {
+                                                    return;
+                                                }
+                                                arrOpenChat[channel].on("connect", function() {
+                                                    this.emit("join to room", {room: channel, clientLogin: userLogin});
+                                                    this.emit("request confirm author bid", {bidId: rowId, orderId: orderId, responseLogin: authorLogin, channel: channel});
+                                                }).on("response confirm author bid", function() {
+                                                    actionCancelBid(row, "show");
+                                                    $("tr.jqgrow#" + rowId).addClass("state-selected");
+                                                    this.disconnect();
+                                                    delete arrOpenChat[channel];
+                                                    delete arrUsedChat[channel];
+                                                    /*something doing - open current chat or redirect*/
+                                                });
+                                            } else {
+                                                arrOpenChat[channel].emit("request confirm author bid", {bidId: rowId, orderId: orderId, responseLogin: authorLogin, channel: channel})
+                                                    .on("response confirm author bid", function() {
+                                                        actionCancelBid(row, "show");
+                                                        $("tr.jqgrow#" + rowId).addClass("state-selected");
+                                                        /*something doing - open current chat or redirect*/
+                                                    });
+                                            }
+                                        }
+                                    });
+                                    /*$("#dialog-message-select-bid").dialog({
                                         modal: true,
                                         resizable: false,
                                         height: 260,
@@ -836,7 +847,7 @@
                                                 $(this).dialog("close");
                                             }
                                         }
-                                    });
+                                    });*/
                                 }
                             });
                             var grids = grid.getDataIDs(), gridsLength = grids.length;
