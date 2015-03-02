@@ -388,7 +388,7 @@ class ClientController extends Controller
                         $auctionDay = $request->request->get('auctionDay');
                         $actionResponse = Helper::createAuctionByAuthorBid($bidId, $order, $auctionPrice, $auctionDay, $this->container);
                         return new Response(json_encode(array('action' => $actionResponse)));
-                    } /*elseif ($action == 'hideBid') {
+                    }/* elseif ($action == 'hideBid') {
                         $bidId = $request->request->get('bidId');
                         $isHide = Helper::hideBidForClient($bidId);
                         if ($isHide) {
