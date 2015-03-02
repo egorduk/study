@@ -115,6 +115,7 @@
             #tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
             .state-selected:hover, .state-selected { color: white; background: green; border: 1px solid green; }
             .state-selected .grid-cell-day, .state-selected .grid-cell-time { color: white; }
+            .chat-wrap .new { background-color: orange; }
         </style>
         <div class="container">
             <!--<div class="row">
@@ -193,18 +194,36 @@
                     Заказ удален, обновите таблицу со ставками либо страницу!
                 </p>
             </div>-->
-            <!--<div id="dialog-message-auction-bid" title="Предложить торг">
-                <label for="auction-price">Предложить цену</label>
-                <div class="input-group">
-                    <input type="text" name="auction-price" id="auction-price" required placeholder="Введите цену" class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="7">
-                    <span class="input-group-addon"><i class="icon-rouble"></i></span>
+            <div class="modal fade" id="modal-auction-bid" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="modal-label">Предложить торг</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group" id="comment">
+                                <label for="comment-text">Предложить цену:</label>
+                                <div class="input-group">
+                                    <input type="text" name="auction-price" id="auction-price" required placeholder="Введите цену" class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Введите числа" data-title="Только числа!" maxlength="7">
+                                    <span class="input-group-addon"><i class="icon-rouble"></i></span>
+                                </div>
+                            </div>
+                            <div class="form-group" id="degree">
+                                <label>Предложить дней на выполнение:</label>
+                                <div class="input-group">
+                                    <input type="text" name="auction-day" id="auction-day" required placeholder="Введите количество дней" class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Введите числа" data-title="Только числа!" maxlength="3">
+                                    <span class="input-group-addon"><i class="icon-clock-5"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="btn-auction-bid-confirm">Предложить</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                        </div>
+                    </div>
                 </div>
-                <label for="auction-day">Предложить дней на выполнение</label>
-                <div class="input-group">
-                    <input type="text" name="auction-day" id="auction-day" required placeholder="Введите количество дней" class="form-control" data-toggle="tooltip" data-placement="top" data-trigger="manual" title="Только числа!" maxlength="3">
-                    <span class="input-group-addon"><i class="icon-clock-5"></i></span>
-                </div>
-            </div>-->
+            </div>
             <table id="listBids"></table>
             <div id="pagerBids"></div>
             <div id="tabs">
@@ -266,6 +285,7 @@
                             mode = false,
                             channel,
                             currTab,
+                            isNewMessage = 0,
                             countOpenChat = 0,
                             flagOpenChat = 0,
                             arrOpenChat = [],
@@ -295,7 +315,6 @@
                         $("#" + panelId).remove();
                         disconnectUser(panelId);
                         arrOpenChat[panelId].disconnect();
-                        //arrOpenChat[panelId].reconnect();
                         delete arrUsedChat[panelId];
                         delete arrOpenChat[panelId];
                         tabs.tabs("refresh");
@@ -317,7 +336,7 @@
                                 "<div class='messages-wrap'></div>" +
                                 "<div id='panel'>" +
                                 "<span class='nick'></span>" +
-                                "<textarea name='message-text' class='message-text'></textarea>" +
+                                "<textarea class='message-text'></textarea>" +
                                 "<button type='button' class='btn-send-msg btn btn-primary disabled'>Send</button></div>" +
                                 "<div id='sidebar'><div class='count-msg'></div>" +
                                 "<div id='online'>" +
@@ -330,10 +349,10 @@
                         tabs.tabs("refresh");
                         tabs.tabs('option', 'active', -1);
                     }
-                    btnConfirmWork.removeClass('disabled');
+                    /*btnConfirmWork.removeClass('disabled');
                     $("#comment-text").maxlength({
                         alwaysShow: true
-                    });
+                    });*/
                     $('.chat-wrap .nick').text(userLogin);
                     ion.sound({
                         sounds: [
@@ -351,16 +370,16 @@
                         systemMsg('Соединение...');
                     });*/
 
-                    btnActionConfirmWork.on("click", function(e) {
-                        /*e.preventDefault();
+                    /*btnActionConfirmWork.on("click", function(e) {
+                        e.preventDefault();
                         jConfirm('Can you confirm this?', 'Confirmation Dialog', function(action) {
                             //jAlert('Confirmed: ' + action, 'Confirmation Results');
                             if (action) {
                             }
-                        });*/
+                        });
                         var comment = $("#comment-text").val(), degree = $('input[name=degree]:checked').val();
                         arrOpenChat[channel].emit("request confirm work", {orderId: orderId, comment: comment, degree: degree});
-                    });
+                    });*/
 
                     function setVolumeControlButton() {
                         var volumeMsg = $.cookie('volume_msg');
@@ -417,11 +436,11 @@
                         return str1;
                     }
 
-                    function userMsg(nick, message, date_write) {
+                    function userMsg(login, message, date_write) {
                         var m = '<div class="msg">' +
-                                '<p class="user">' + nick + ':</p> ' +
-                                '<div class="message">' + safe(message) + '</div>' +
-                                '<p class="date">' + date_write + '</p>' +
+                                    '<p class="user">' + login + ':</p> ' +
+                                        '<div class="message">' + safe(message) + '</div>' +
+                                    '<p class="date">' + date_write + '</p>' +
                                 '</div>';
                         var messages = currTab.find(".chat-wrap .messages-wrap");
                         messages.append(m).scrollTop(messages[0].scrollHeight);
@@ -432,9 +451,9 @@
                             date_msg = '';
                         }
                         var m = '<div class="msg system">' +
-                                '<p class="user">' + login + ':</p> ' +
-                                '<div class="message">' + safe(message) + '</div>' +
-                                '<p class="date">' + date_msg + '</p>' +
+                                    '<p class="user">' + login + ':</p> ' +
+                                        '<div class="message">' + safe(message) + '</div>' +
+                                    '<p class="date">' + date_msg + '</p>' +
                                 '</div>';
                         var messages = currTab.find(".chat-wrap .messages-wrap");
                         messages.append(m).scrollTop(messages[0].scrollHeight);
@@ -469,13 +488,14 @@
                     }
 
                     function setFocusOnMessageField () {
-                        currTab.find(".message-text").focus();
+                        currTab.find(".chat-wrap .message-text").focus();
                     }
 
                     function getChannel(row) {
                         var authorId = row.find('td:last')[0].innerHTML;
                         return authorId + '_' + userId;
                     }
+
 
 
                     //document.title = "Просмотр заказа №" + {{ obj.order.num }};
@@ -555,14 +575,15 @@
                                 arrOpenChat[channel].on("connect", function() {
                                     // messages.html('');
                                     //  clearSidebarCountRecords();
-                                    arrOpenChat[channel].emit("get all messages", {orderId: orderId, authorId: authorId, userId: userId});
-                                    arrOpenChat[channel].emit("join to room", {room: channel, clientLogin: userLogin, authorLogin: authorLogin});
+                                    this.emit("get all messages", {orderId: orderId, authorId: authorId, userId: userId})
+                                            .emit("join to room", {room: channel, clientLogin: userLogin, authorLogin: authorLogin});
                                     addTab(channel, authorLogin);
                                     currTab = tabs.find("#" + channel);
                                     currTab.find(".chat-wrap .btn-send-msg").removeClass('disabled').on("click", function() {
                                         sendMessage();
                                     });
                                     setVolumeControlButton();
+                                    setFocusOnMessageField();
                                     currTab.find(".chat-wrap .volume-on").on("click", function() {
                                         $.cookie('volume_msg', '0');
                                         setVolumeControlButton();
@@ -571,17 +592,20 @@
                                         $.cookie('volume_msg', '1');
                                         setVolumeControlButton();
                                     });
-                                    setFocusOnMessageField();
+                                    //console.log(currTab.find(".chat-wrap .message-text"));
                                     currTab.find(".chat-wrap .message-text").on("keydown", function(e) {
                                         if (e.keyCode === 13 && e.ctrlKey) {
                                             sendMessage();
                                         }
                                     }).on("input", function(e) {
                                         arrOpenChat[channel].emit("request user write");
-                                    });
+                                    })/*.on("focusin", function(e) {
+                                        alert('yo');
+                                    })*/;
                                     //  btnConfirmWork.removeClass('disabled');
                                 }).on("response get all messages", function(data) {
                                     var countRows = 0;
+                                    //console.log(data);
                                     for (var key in data) {
                                         if (data[key].user_id != 17) {
                                             userMsg(data[key].user_login, data[key].message, data[key].date_write);
@@ -591,6 +615,7 @@
                                         }
                                     }
                                     setSidebarCountRecords(countRows);
+                                    setFocusOnMessageField();
                                 }).on("disconnect", function() {
                                     //disconnectUser();
                                 }).on("response view current online", function() {
@@ -620,7 +645,7 @@
                                     }
                                     userMsg(data.user_login, data.message, data.date_write);
                                     increaseCountMsg();
-                                    setFocusOnMessageField();
+                                    //setFocusOnMessageField();
                                 }).on("show system message", function(data) {
                                     if ($.cookie('volume_msg') == 1) {
                                         ion.sound.play("button_tiny");
@@ -669,23 +694,6 @@
                                         }
                                     });
                                 }
-                                /*$.ajax({
-                                    type: 'POST',
-                                    data: 'bidId=' + rowId + '&action=cancelBid',
-                                    success: function(response) {
-                                        var responseObject = window.JSON.parse(response);
-                                        if (responseObject.action) {
-                                            actionCancelBid(row, "hide");
-                                            $("tr.jqgrow#" + rowId).removeClass("state-selected");
-                                            confirmBid.show();
-                                        } else {
-                                            $("#window-error-cancel-bid").css({'display':'block'});
-                                            setTimeout(function() {
-                                                closeMessage($('#window-error-cancel-bid'));
-                                            }, 2000);
-                                        }
-                                    }
-                                });*/
                             });
                             $(".hide-bid").on('click', function(e) {
                                 var rowId = getRowId(e), row = getRow($(this));
@@ -725,60 +733,47 @@
                             $(".auction-bid").on('click', function(e) {
                                 var rowId = getRowId(e);
                                 if (rowId) {
-                                    var auctionPrice = $("#auction-price"), auctionDay = $("#auction-day");
-                                    auctionPrice.priceFormat({
+                                    var auctionPrice = $("#auction-price"),
+                                            auctionDay = $("#auction-day"),
+                                            btnAuctionBidConfirm = $("#btn-auction-bid-confirm"),
+                                            modalAuctionBid = $('#modal-auction-bid');
+                                    modalAuctionBid.modal().on('hidden.bs.modal', function () {
+                                        auctionDay.val("").removeClass('bootstrap-error').tooltip('hide');
+                                        auctionPrice.val("").removeClass('bootstrap-error').tooltip('hide');
+                                    });
+                                    auctionPrice.maxlength({
+                                        alwaysShow: true
+                                    }).priceFormat({
                                         prefix: '',
                                         centsSeparator: '',
                                         thousandsSeparator: ' ',
                                         centsLimit: 0,
                                         clearOnEmpty: true
                                     });
-                                    $("#dialog-message-auction-bid").dialog({
-                                        modal: true,
-                                        resizable: false,
-                                        height: 280,
-                                        width: 400,
-                                        buttons: {
-                                            "Предложить": function() {
-                                                var error = false;
-                                                auctionDay.removeClass('bootstrap-error');
-                                                auctionPrice.removeClass('bootstrap-error');
-                                                if (!isNormalInteger(auctionPrice.val())) {
-                                                    error = true;
-                                                    auctionPrice.addClass('bootstrap-error').tooltip('show');
-                                                } else {
-                                                    auctionPrice.removeClass('bootstrap-error').tooltip('hide');
-                                                }
-                                                if (!isNormalInteger(auctionDay.val())) {
-                                                    error = true;
-                                                    auctionDay.addClass('bootstrap-error').tooltip('show');
-                                                } else {
-                                                    auctionDay.removeClass('bootstrap-error').tooltip('hide');
-                                                }
-                                                if (!error) {
-                                                    $.ajax({
-                                                        type: 'POST',
-                                                        data: 'bidId=' + rowId + '&auctionPrice=' + auctionPrice.val() + '&auctionDay=' + auctionDay.val() + '&action=auctionBid',
-                                                        success: function(response) {
-                                                            var responseObject = window.JSON.parse(response);
-                                                            if (responseObject.action) {
-                                                                $("#dialog-message-auction-bid").dialog('close');
-                                                                $("#modal-window-success-auction").css({'display':'block'});
-                                                                setTimeout(function() {
-                                                                    closeMessage($('#modal-window-success-auction'));
-                                                                }, 2000);
-                                                            }
-                                                        }
+                                    auctionDay.maxlength({
+                                        alwaysShow: true
+                                    });
+                                    btnAuctionBidConfirm.on('click', function() {
+                                        var error = false;
+                                        auctionDay.removeClass('bootstrap-error');
+                                        auctionPrice.removeClass('bootstrap-error');
+                                        if (!isNormalInteger(auctionPrice.val())) {
+                                            error = true;
+                                            auctionPrice.addClass('bootstrap-error').tooltip('show');
+                                        } else {
+                                            auctionPrice.removeClass('bootstrap-error').tooltip('hide');
+                                        }
+                                        if (!isNormalInteger(auctionDay.val())) {
+                                            error = true;
+                                            auctionDay.addClass('bootstrap-error').tooltip('show');
+                                        } else {
+                                            auctionDay.removeClass('bootstrap-error').tooltip('hide');
+                                        }
+                                        if (!error) {
+                                            arrOpenChat[channel].emit("request auction bid", {bidId: rowId, price: auctionPrice.val(), day: auctionDay.val()})
+                                                    .on("response auction bid", function() {
+                                                        modalAuctionBid.modal('hide');
                                                     });
-                                                }
-                                            },
-                                            "Отмена": function() {
-                                                $(this).dialog("close");
-                                            }
-                                        },
-                                        close: function() {
-                                            auctionDay.val("").removeClass('bootstrap-error');
-                                            auctionPrice.val("").removeClass('bootstrap-error');
                                         }
                                     });
                                 }
@@ -820,34 +815,6 @@
                                             }
                                         }
                                     });
-                                    /*$("#dialog-message-select-bid").dialog({
-                                        modal: true,
-                                        resizable: false,
-                                        height: 260,
-                                        width: 370,
-                                        buttons: {
-                                            Ok: function() {
-                                                $.ajax({
-                                                    type: 'POST',
-                                                    data: 'bidId=' + rowId + '&action=selectBid',
-                                                    success: function(response) {
-                                                        var responseObject = window.JSON.parse(response);
-                                                        if (responseObject.action) {
-                                                            actionCancelBid(row, "show");
-                                                            $("tr.jqgrow#" + rowId).addClass("state-selected");
-                                                            confirmBid.hide();
-                                                        }
-                                                        else {
-                                                        }
-                                                    }
-                                                });
-                                                $(this).dialog("close");
-                                            },
-                                            Cancel: function() {
-                                                $(this).dialog("close");
-                                            }
-                                        }
-                                    });*/
                                 }
                             });
                             var grids = grid.getDataIDs(), gridsLength = grids.length;
@@ -869,7 +836,9 @@
                     }).navGrid('#pagerBids',{view:false,search:false,del:false,add:false,edit:false,refresh:true,refreshtext:'Обновить'},{},{},{},{},{}
                     );
                     function getRowId(e) {
-                        var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'), rowId = $tr.attr('id');
+                        var $td = $(e.target).closest('td'),
+                                $tr = $td.closest('tr.jqgrow'),
+                                rowId = $tr.attr('id');
                         return rowId;
                     }
                     function getRow(a) {
@@ -905,12 +874,12 @@
                         str = str.replace(/\s/g, "");
                         return /^[1-9]\d*$/.test(str);
                     }
-                    function closeMessage(el) {
+                    /*function closeMessage(el) {
                         el.addClass('is-hidden').css({'display':'none'});
                     }
                     $('.js-messageClose').on('click', function(e) {
                         closeMessage($(this).closest('.Message'));
-                    });
+                    });*/
                 });
             </script>
         </div>

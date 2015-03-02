@@ -234,50 +234,33 @@ io.sockets.on('connection', function (client) {
         }
     });
 
-    /*client.on("request system msg", function(data) {
-        var orderId = data.orderId,
-            room = arrRoom[clientID],
-            type = data.type,
-            date_msg = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss"),
-            fullDate = getFullDate(new Date());
-        if (type == 'confirm-work') {
-            var message = "test system msg";
-            connection.insert('webchat_message', {
-                message: message,
-                date_write: date_msg,
-                user_id: 17,
-                user_order_id: room
-            }, function(error) {
-                if (error) {console.log(error)}
-                client.to(room).emit("show system message", {date_msg: fullDate, message: message});
-                client.emit("show system message", {date_msg: fullDate, message: message});
-            });
-
-        } else {}
-    });*/
-
     client.on("get all messages", function (data) {
-        var orderId = data.orderId, channel = data.authorId + '_' + data.userId;
-        console.log(channel);
+        var orderId = data.orderId,
+            userId = data.userId,
+            channel = data.authorId + '_' + userId;
+        //console.log(channel);
         console.log(data);
         connection.queryHash(
-            'SELECT wm.id, message, DATE_FORMAT(date_write,"%d.%m.%Y %T") AS date_write, login AS user_login, u.id AS user_id FROM webchat_message AS wm INNER JOIN user AS u ON wm.user_id = u.id' +
+            'SELECT wm.id, message, DATE_FORMAT(date_write,"%d.%m.%Y %T") AS date_write, login AS user_login, u.id AS user_id FROM webchat_message wm INNER JOIN user u ON wm.user_id = u.id' +
                 ' WHERE wm.user_order_id = ' + orderId + ' AND channel = "' + channel + '"',
             function(error, rows) {
                 //console.dir(rows);
-               // console.dir({queryHash:row});
+                // console.dir({queryHash:row});
                 if (error) {throw error}
                 client.emit('response get all messages', rows);
+                connection.update('webchat_message', {is_read: 1}, {user_order_id: orderId, user_id: userId, is_read: 0, channel: channel}, function(error) {
+                    if (error) {throw error}
+                });
             }
         );
     });
 
     client.on("request hide bid", function (data) {
         var orderId = data.bidId;
-       /* connection.update('user_bid', {is_show_author: 0}, {id: orderId}, function(error) {
-            if (error) {throw error}*/
+        connection.update('user_bid', {is_show_author: 0}, {id: orderId}, function(error) {
+            if (error) {throw error}
             client.emit('response hide bid');
-        /*});*/
+        });
     });
 
     client.on("request confirm author bid", function (data) {
