@@ -80,11 +80,6 @@ var validator = require('validator');
 io.sockets.on('connection', function (client) {
     var clientID = (client.id).toString();
 
-    client.on('forceDisconnect', function() {
-        //client.disconnect();
-        //client.socket.reconnect();
-    });
-
     client.on("send message", function (data) {
         try {
             var date = new Date(),
@@ -297,7 +292,22 @@ io.sockets.on('connection', function (client) {
         });
     });
 
-
+    client.on("request auction bid", function (data) {
+        var orderId = data.orderId,
+            price = data.price.replace(/\s/g, ""),
+            day = data.day;
+        if (validator.isLength(price, 2, 7) && validator.isLength(day, 1, 3) && validator.isInt(price) && validator.isInt(day)) {
+            connection.insert('auction_bid', {
+                price: price,
+                day: day,
+                date_auction: dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss"),
+                user_id: ,
+                user_order_id: orderId
+            }, function(error) {
+                if (error) {throw error}
+            });
+        }
+    });
 
 
     function sendMail(type, data) {

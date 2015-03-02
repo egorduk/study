@@ -731,9 +731,10 @@
                                 }
                             });
                             $(".auction-bid").on('click', function(e) {
-                                var rowId = getRowId(e);
+                                var rowId = getRowId(e), row = getRow($(this));
                                 if (rowId) {
-                                    var auctionPrice = $("#auction-price"),
+                                    var ch = getChannel(row),
+                                            auctionPrice = $("#auction-price"),
                                             auctionDay = $("#auction-day"),
                                             btnAuctionBidConfirm = $("#btn-auction-bid-confirm"),
                                             modalAuctionBid = $('#modal-auction-bid');
@@ -770,10 +771,29 @@
                                             auctionDay.removeClass('bootstrap-error').tooltip('hide');
                                         }
                                         if (!error) {
-                                            arrOpenChat[channel].emit("request auction bid", {bidId: rowId, price: auctionPrice.val(), day: auctionDay.val()})
-                                                    .on("response auction bid", function() {
-                                                        modalAuctionBid.modal('hide');
-                                                    });
+                                            if (arrUsedChat[ch] != ch) {
+                                                channel = ch;
+                                                try {
+                                                    arrUsedChat[channel] = channel;
+                                                    arrOpenChat[channel] = io.connect('http://localhost:8008', { forceNew: true});
+                                                } catch(e) {
+                                                    return;
+                                                }
+                                                arrOpenChat[channel].on("connect", function() {
+                                                    this.emit("join to room", {room: channel, clientLogin: userLogin, authorLogin: authorLogin})
+                                                            .emit("request auction bid", {orderId: orderId, price: auctionPrice.val(), day: auctionDay.val(), authorLogin: authorLogin});
+                                                }).on("response auction bid", function() {
+                                                    this.disconnect();
+                                                    delete arrUsedChat[channel];
+                                                    delete arrOpenChat[channel];
+                                                    modalAuctionBid.modal('hide');
+                                                });
+                                            } else {
+                                                arrOpenChat[channel].emit("request auction bid", {orderId: orderId, price: auctionPrice.val(), day: auctionDay.val(), authorLogin: authorLogin})
+                                                        .on("response auction bid", function() {
+                                                            modalAuctionBid.modal('hide');
+                                                        });
+                                            }
                                         }
                                     });
                                 }
