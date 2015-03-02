@@ -72,8 +72,8 @@ assetic:
         #yui_css:
         #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
     assets:
-            jquery_and_script:
-                inputs:
+        jquery_and_script:
+            inputs:
 
 # Doctrine Configuration
 doctrine:
