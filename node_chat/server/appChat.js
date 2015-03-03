@@ -285,6 +285,7 @@ io.sockets.on('connection', function (client) {
                 connection.update('user_order', {status_order_id: statusId}, {id: orderId}, function(error) {
                     if (error) {throw error}
                     client.emit('response cancel author bid');
+                    client.to(channel).emit('response cancel author bid');
                     createSystemMsg({orderId: orderId, type: 'cancel_author_bid', channel: data.channel});
                     //sendMail('cancel_author_bid', data);
                 });
@@ -295,23 +296,43 @@ io.sockets.on('connection', function (client) {
     client.on("request auction bid", function (data) {
         var orderId = data.orderId,
             price = data.price.replace(/\s/g, ""),
-            day = data.day;
-        if (validator.isLength(price, 2, 7) && validator.isLength(day, 1, 3) && validator.isInt(price) && validator.isInt(day)) {
-            connection.insert('auction_bid', {
-                price: price,
-                day: day,
-                date_auction: dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss"),
-                user_id: ,
-                user_order_id: orderId
-            }, function(error) {
+            day = data.day,
+            authorLogin = data.authorLogin,
+            channel = data.channel,
+            errorMessage = 'Error',
+            errorField = '';
+        if (validator.isLength(price, 3, 7) && validator.isLength(day, 1, 3) && validator.isInt(price) && validator.isInt(day)) {
+            connection.select('user', 'id, email', {login: authorLogin}, '', function(error, row) {
                 if (error) {throw error}
+                var authorId = row[0].id;
+                data.email = row[0].email;
+                connection.insert('auction_bid', {
+                    price: price,
+                    day: day,
+                    date_auction: dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss"),
+                    user_id: authorId,
+                    user_order_id: orderId
+                }, function(error) {
+                    if (error) {throw error}
+                    client.emit('response auction bid');
+                    client.to(channel).emit('response auction bid');
+                    //createSystemMsg({orderId: orderId, type: 'create_auction_bid', channel: channel});
+                    //sendMail('create_auction_bid', data);
+                });
             });
+        } else if (validator.isLength(price, 0, 2) || !validator.isInt(price)) {
+            errorMessage = 'Минимум 100 руб.';
+            errorField = 'price';
+        } else if (validator.isLength(day, 0) || !validator.isInt(day)) {
+            errorMessage = 'Минимум 1 дн.';
+            errorField = 'day';
         }
+        client.emit('response auction bid', {errorMessage: errorMessage, errorField: errorField});
     });
 
 
     function sendMail(type, data) {
-        var from, to, subject, text, html;
+        var  from = 'Test email <egorduk91@gmail.com>', to, subject, text, html;
         if (type == "confirm_author_bid") {
             connection.select('user', 'email', {login: data.responseLogin}, '', function(error, row) {
                 if (error) {throw error}
@@ -321,7 +342,6 @@ io.sockets.on('connection', function (client) {
                     console.log(row[0]);
                 });
             });
-            from = 'Test email <egorduk91@gmail.com>';
             to = 'a_1300@mail.ru';
             subject = 'Ваша ставка принята';
             text = 'Text of message';
@@ -334,9 +354,17 @@ io.sockets.on('connection', function (client) {
                     console.log(row[0]);
                 });
             });
-            from = 'Test email <egorduk91@gmail.com>';
             to = 'a_1300@mail.ru';
             subject = 'Ваша ставка отклонена';
+            text = 'Text of message';
+        } else if (type == "create_auction_bid") {
+            to = data.email;
+            connection.select('user_order', 'theme, num', {id: data.orderId}, '', function(error, row) {
+                if (error) {throw error}
+                console.log(row[0]);
+            });
+            to = 'a_1300@mail.ru';
+            subject = 'Заказчик предлагает свои условия';
             text = 'Text of message';
         }
         transporter.sendMail({
@@ -369,6 +397,8 @@ io.sockets.on('connection', function (client) {
             message = "System msg - confirm author bid";
         } else if (type == 'cancel_author_bid') {
             message = "System msg - cancel author bid";
+        } else if (type == 'create_auction_bid') {
+            message = "System msg - create auction bid";
         }
         connection.insert('webchat_message', {
             message: message,

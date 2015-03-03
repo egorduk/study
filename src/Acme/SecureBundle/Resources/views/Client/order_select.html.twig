@@ -492,8 +492,11 @@
                     }
 
                     function getChannel(row) {
-                        var authorId = row.find('td:last')[0].innerHTML;
-                        return authorId + '_' + userId;
+                        return row.find('td:last')[0].innerHTML + '_' + userId;
+                    }
+
+                    function getAuthorLogin(row) {
+                        return row.find('td').eq(2).find('a')[0].innerHTML;
                     }
 
 
@@ -554,8 +557,8 @@
                             $(".open-chat").on('click', function(e) {
                                 var /*rowId = getRowId(e),*/
                                         row = getRow($(this)),
-                                        authorId = row.find('td:last')[0].innerHTML,
-                                        authorLogin = row.find('td').eq(2).find('a')[0].innerHTML;
+                                        authorId = row.find('td:last')[0].innerHTML;
+                                authorLogin = getAuthorLogin();
                                 //console.log(authorLogin);
                                 channel = authorId + '_' + userId;
                                 console.log(channel);
@@ -592,16 +595,13 @@
                                         $.cookie('volume_msg', '1');
                                         setVolumeControlButton();
                                     });
-                                    //console.log(currTab.find(".chat-wrap .message-text"));
                                     currTab.find(".chat-wrap .message-text").on("keydown", function(e) {
                                         if (e.keyCode === 13 && e.ctrlKey) {
                                             sendMessage();
                                         }
                                     }).on("input", function(e) {
                                         arrOpenChat[channel].emit("request user write");
-                                    })/*.on("focusin", function(e) {
-                                        alert('yo');
-                                    })*/;
+                                    });
                                     //  btnConfirmWork.removeClass('disabled');
                                 }).on("response get all messages", function(data) {
                                     var countRows = 0;
@@ -736,11 +736,12 @@
                                     var ch = getChannel(row),
                                             auctionPrice = $("#auction-price"),
                                             auctionDay = $("#auction-day"),
-                                            btnAuctionBidConfirm = $("#btn-auction-bid-confirm"),
+                                            btnAuctionBidConfirm = $("#btn-auction-bid-confirm").attr('disabled','disabled'),
                                             modalAuctionBid = $('#modal-auction-bid');
                                     modalAuctionBid.modal().on('hidden.bs.modal', function () {
                                         auctionDay.val("").removeClass('bootstrap-error').tooltip('hide');
                                         auctionPrice.val("").removeClass('bootstrap-error').tooltip('hide');
+                                        btnAuctionBidConfirm.attr('disabled','disabled');
                                     });
                                     auctionPrice.maxlength({
                                         alwaysShow: true
@@ -750,9 +751,21 @@
                                         thousandsSeparator: ' ',
                                         centsLimit: 0,
                                         clearOnEmpty: true
+                                    }).on('input', function() {
+                                        if (replaceSpaces($(this).val()) >= 100 && replaceSpaces(auctionDay.val()) >= 1) {
+                                            btnAuctionBidConfirm.removeAttr('disabled');
+                                        } else {
+                                            btnAuctionBidConfirm.attr('disabled','disabled');
+                                        }
                                     });
                                     auctionDay.maxlength({
                                         alwaysShow: true
+                                    }).on('input', function() {
+                                        if (replaceSpaces(auctionPrice.val()) >= 100 && replaceSpaces($(this).val()) >= 1) {
+                                            btnAuctionBidConfirm.removeAttr('disabled');
+                                        } else {
+                                            btnAuctionBidConfirm.attr('disabled','disabled');
+                                        }
                                     });
                                     btnAuctionBidConfirm.on('click', function() {
                                         var error = false;
@@ -780,19 +793,38 @@
                                                     return;
                                                 }
                                                 arrOpenChat[channel].on("connect", function() {
+                                                    authorLogin = getAuthorLogin(row);
                                                     this.emit("join to room", {room: channel, clientLogin: userLogin, authorLogin: authorLogin})
-                                                            .emit("request auction bid", {orderId: orderId, price: auctionPrice.val(), day: auctionDay.val(), authorLogin: authorLogin});
-                                                }).on("response auction bid", function() {
-                                                    this.disconnect();
-                                                    delete arrUsedChat[channel];
-                                                    delete arrOpenChat[channel];
-                                                    modalAuctionBid.modal('hide');
+                                                            .emit("request auction bid", {orderId: orderId, price: auctionPrice.val(), day: auctionDay.val(), authorLogin: authorLogin, channel: channel});
+                                                }).on("response auction bid", function(data) {
+                                                    if (data != '') {
+                                                        handlerError(data);
+                                                    } else {
+                                                        this.disconnect();
+                                                        delete arrUsedChat[channel];
+                                                        delete arrOpenChat[channel];
+                                                        modalAuctionBid.modal('hide');
+                                                    }
                                                 });
                                             } else {
-                                                arrOpenChat[channel].emit("request auction bid", {orderId: orderId, price: auctionPrice.val(), day: auctionDay.val(), authorLogin: authorLogin})
-                                                        .on("response auction bid", function() {
-                                                            modalAuctionBid.modal('hide');
+                                                arrOpenChat[channel].emit("request auction bid", {orderId: orderId, price: auctionPrice.val(), day: auctionDay.val(), authorLogin: authorLogin, channel: channel})
+                                                        .on("response auction bid", function(data) {
+                                                            if (data != '') {
+                                                                handlerError(data);
+                                                            } else {
+                                                                modalAuctionBid.modal('hide');
+                                                            }
                                                         });
+                                            }
+                                        }
+                                        function handlerError(data) {
+                                            console.log(data);
+                                            if (data.errorField == 'price') {
+                                                auctionPrice.addClass('bootstrap-error').attr('data-original-title', data.errorMessage).tooltip('show');
+                                            } else if (data.errorField == 'day') {
+                                                auctionDay.addClass('bootstrap-error').attr('data-original-title', data.errorMessage).tooltip('show');
+                                            } else {
+                                                jAlert(data.errorMessage, data.errorMessage);
                                             }
                                         }
                                     });
@@ -891,8 +923,11 @@
                         return ("");
                     }
                     function isNormalInteger(str) {
-                        str = str.replace(/\s/g, "");
+                        str = replaceSpaces(str);
                         return /^[1-9]\d*$/.test(str);
+                    }
+                    function replaceSpaces (a) {
+                        return a.replace(/\s/g, "");
                     }
                     /*function closeMessage(el) {
                         el.addClass('is-hidden').css({'display':'none'});
