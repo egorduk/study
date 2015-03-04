@@ -1,10 +1,23 @@
 {% extends "AcmeSecureBundle::layout_client.html.twig" %}
     {% block title "Домашняя страница заказчика" %}
     {% block content %}
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/chat/main.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/css/modal_window/jquery.alert.css') }}" />
+        <script type="text/javascript" src="{{ asset('bundles/js/jquery.cookie.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/sound/ion.sound.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/modal_window/jquery.alert.js') }}"></script>
+        <script src="http://localhost:8008/socket.io/socket.io.js" defer></script>
+        <style>
+            #leftMenu {
+                display: none;
+            }
+        </style>
         <div class="container">
             <div class="row">
-                <div class="col-xs-4">
-                    <div id="">{{ avatar | raw }}</div>
+                <!--<div class="col-xs-4">
+                    <div id="">{{ user.avatar | raw }}</div>
                     <p>{{ user.login }}</p>
                     <hr style="border:solid 1px black">
                     <p>Ваш ID - {{ user.id }}</p>
@@ -16,7 +29,32 @@
                     <p>Вход в систему - {{ whenLogin }}</p>
                     <hr style="border:solid 1px black">
                     <p>Осталось в системе - {{ remainingTime }}</p>
+                </div>-->
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+
                 </div>
             </div>
         </div>
+        <script>
+            $(document).ready(function() {
+                var userLogin = '{{ user.login }}', userId = {{ user.id }};
+                try {
+                    var socket = io.connect('http://localhost:8008', { 'forceNew': true });
+                } catch(e) {
+                    //systemMsg('system', "Server off " + e);
+                    return;
+                }
+                socket.on("connect", function() {
+                    this.emit("join to channel messages", { channel: userId, userLogin: userLogin })
+                            .emit("request get new messages from db")
+                            .on("response get new message from db", function(data) {
+                                console.dir(data);
+                            }).on("response get new message from client", function(data) {
+                                console.dir(data);
+                            });
+                })
+            })
+        </script>
     {% endblock %}

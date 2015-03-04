@@ -491,14 +491,25 @@
                         currTab.find(".chat-wrap .message-text").focus();
                     }
 
-                    function getChannel(row) {
-                        return row.find('td:last')[0].innerHTML + '_' + userId;
+                    function getChannel(a) {
+                        return a.find('td:last')[0].innerHTML + '_' + userId;
                     }
 
-                    function getAuthorLogin(row) {
-                        return row.find('td').eq(2).find('a')[0].innerHTML;
+                    function getAuthorLogin(a) {
+                        return a.find('td').eq(2).find('a')[0].innerHTML;
                     }
 
+                    function closeCurrTab() {
+                        tabs.find("li[aria-controls='" + channel + "']").remove();
+                        currTab.remove();
+                        tabs.tabs("refresh");
+                    }
+
+                    function disconnectChannel(a) {
+                        a.disconnect();
+                        delete arrUsedChat[channel];
+                        delete arrOpenChat[channel];
+                    }
 
 
                     //document.title = "Просмотр заказа №" + {{ obj.order.num }};
@@ -555,106 +566,104 @@
                             grid.find("tr").find("td").removeAttr('title');
                             var confirmBid = $(".confirm-bid");
                             $(".open-chat").on('click', function(e) {
-                                var /*rowId = getRowId(e),*/
-                                        row = getRow($(this)),
-                                        authorId = row.find('td:last')[0].innerHTML;
-                                authorLogin = getAuthorLogin();
-                                //console.log(authorLogin);
-                                channel = authorId + '_' + userId;
-                                console.log(channel);
-                                try {
-                                   // console.log(arrUsedChat);
-                                    if (arrUsedChat[channel] != channel) {
-                                        arrUsedChat[channel] = channel;
-                                        arrOpenChat[channel] = io.connect('http://localhost:8008', { /*'auto connect':false, */'forceNew':true/*, 'reconnect':false/*, 'multiplex':false*/});
-                                    } else {
-                                        selectCurrentTab();
-                                    }
-                                } catch(e) {
-                                    //systemMsg('system', "Server off " + e);
-                                    return;
-                                }
-                                console.log(arrOpenChat);
-                                arrOpenChat[channel].on("connect", function() {
-                                    // messages.html('');
-                                    //  clearSidebarCountRecords();
-                                    this.emit("get all messages", {orderId: orderId, authorId: authorId, userId: userId})
-                                            .emit("join to room", {room: channel, clientLogin: userLogin, authorLogin: authorLogin});
-                                    addTab(channel, authorLogin);
-                                    currTab = tabs.find("#" + channel);
-                                    currTab.find(".chat-wrap .btn-send-msg").removeClass('disabled').on("click", function() {
-                                        sendMessage();
-                                    });
-                                    setVolumeControlButton();
-                                    setFocusOnMessageField();
-                                    currTab.find(".chat-wrap .volume-on").on("click", function() {
-                                        $.cookie('volume_msg', '0');
-                                        setVolumeControlButton();
-                                    });
-                                    currTab.find(".chat-wrap .volume-off").on("click", function() {
-                                        $.cookie('volume_msg', '1');
-                                        setVolumeControlButton();
-                                    });
-                                    currTab.find(".chat-wrap .message-text").on("keydown", function(e) {
-                                        if (e.keyCode === 13 && e.ctrlKey) {
-                                            sendMessage();
-                                        }
-                                    }).on("input", function(e) {
-                                        arrOpenChat[channel].emit("request user write");
-                                    });
-                                    //  btnConfirmWork.removeClass('disabled');
-                                }).on("response get all messages", function(data) {
-                                    var countRows = 0;
-                                    //console.log(data);
-                                    for (var key in data) {
-                                        if (data[key].user_id != 17) {
-                                            userMsg(data[key].user_login, data[key].message, data[key].date_write);
-                                            countRows++;
+                                var row = getRow($(this));
+                                if (row && getRowId(e)) {
+                                    authorLogin = getAuthorLogin(row);
+                                    channel = getChannel(row);
+                                    try {
+                                        // console.log(arrUsedChat);
+                                        if (arrUsedChat[channel] != channel) {
+                                            arrUsedChat[channel] = channel;
+                                            arrOpenChat[channel] = io.connect('http://localhost:8008', { /*'auto connect':false, */'forceNew':true/*, 'reconnect':false/*, 'multiplex':false*/});
                                         } else {
-                                            systemMsg(data[key].user_login, data[key].message, data[key].date_write);
+                                            selectCurrentTab();
                                         }
+                                    } catch(e) {
+                                        //systemMsg('system', "Server off " + e);
+                                        return;
                                     }
-                                    setSidebarCountRecords(countRows);
-                                    setFocusOnMessageField();
-                                }).on("disconnect", function() {
-                                    //disconnectUser();
-                                }).on("response view current online", function() {
-                                    currTab.find(".chat-wrap .in-chat").removeClass("hidden");
-                                }).on("response user write", function() {
-                                    if (flagIsWriting == 0) {
-                                        var msg = '<div class="msg system msg-writing" style="display: none"><p>Печатает...</p></div>';
-                                        $(".chat-wrap .is-writing").append(msg);
-                                        $(".chat-wrap .msg-writing").fadeIn("slow", function() {
-                                            flagIsWriting = 1;
+                                    console.log(arrOpenChat);
+                                    arrOpenChat[channel].on("connect", function() {
+                                        // messages.html('');
+                                        //  clearSidebarCountRecords();
+                                        this.emit("join to channel order", {channel: channel, userLogin: userLogin, authorLogin: authorLogin})
+                                                .emit("get all messages", {orderId: orderId, clientLogin: userLogin, authorLogin: authorLogin});
+                                        addTab(channel, authorLogin);
+                                        currTab = tabs.find("#" + channel);
+                                        currTab.find(".chat-wrap .btn-send-msg").removeClass('disabled').on("click", function() {
+                                            sendMessage();
                                         });
-                                        setTimeout(function() {
-                                            $(".chat-wrap .msg-writing").fadeOut("slow", function() {
-                                                $(this).remove();
-                                                flagIsWriting = 0;
+                                        setVolumeControlButton();
+                                        setFocusOnMessageField();
+                                        currTab.find(".chat-wrap .volume-on").on("click", function() {
+                                            $.cookie('volume_msg', '0');
+                                            setVolumeControlButton();
+                                        });
+                                        currTab.find(".chat-wrap .volume-off").on("click", function() {
+                                            $.cookie('volume_msg', '1');
+                                            setVolumeControlButton();
+                                        });
+                                        currTab.find(".chat-wrap .message-text").on("keydown", function(e) {
+                                            if (e.keyCode === 13 && e.ctrlKey) {
+                                                sendMessage();
+                                            }
+                                        }).on("input", function(e) {
+                                            arrOpenChat[channel].emit("request user write");
+                                        });
+                                        //  btnConfirmWork.removeClass('disabled');
+                                    }).on("response get all messages", function(data) {
+                                        var countRows = 0;
+                                        //console.log(data);
+                                        for (var key in data) {
+                                            if (data[key].user_id != 17) {
+                                                userMsg(data[key].user_login, data[key].message, data[key].date_write);
+                                                countRows++;
+                                            } else {
+                                                systemMsg(data[key].user_login, data[key].message, data[key].date_write);
+                                            }
+                                        }
+                                        setSidebarCountRecords(countRows);
+                                        setFocusOnMessageField();
+                                    }).on("disconnect", function() {
+                                        //disconnectUser();
+                                    }).on("response view current online", function() {
+                                        currTab.find(".chat-wrap .in-chat").removeClass("hidden");
+                                    }).on("response user write", function() {
+                                        if (flagIsWriting == 0) {
+                                            var msg = '<div class="msg system msg-writing" style="display: none"><p>Печатает...</p></div>';
+                                            $(".chat-wrap .is-writing").append(msg);
+                                            $(".chat-wrap .msg-writing").fadeIn("slow", function() {
+                                                flagIsWriting = 1;
                                             });
-                                        }, 2000);
-                                    }
-                                }).on("user in room", function() {
-                                    //console.dir(data);
-                                    currTab.find(".chat-wrap .in-chat").removeClass("hidden");
-                                    arrOpenChat[channel].emit("request view current online");
-                                }).on("show new message", function(data) {
-                                    //console.dir(data);
-                                    if ($.cookie('volume_msg') == 1 && data.user_login != userLogin) {
-                                        ion.sound.play("button_tiny");
-                                    }
-                                    userMsg(data.user_login, data.message, data.date_write);
-                                    increaseCountMsg();
-                                    //setFocusOnMessageField();
-                                }).on("show system message", function(data) {
-                                    if ($.cookie('volume_msg') == 1) {
-                                        ion.sound.play("button_tiny");
-                                    }
-                                    systemMsg(data.login, data.message, data.date_msg);
-                                }).on("response disconnect user", function() {
-                                    currTab.find(".chat-wrap .in-chat").addClass("hidden");
-                                    //disconnectUser();
-                                });
+                                            setTimeout(function() {
+                                                $(".chat-wrap .msg-writing").fadeOut("slow", function() {
+                                                    $(this).remove();
+                                                    flagIsWriting = 0;
+                                                });
+                                            }, 2000);
+                                        }
+                                    }).on("user in room", function() {
+                                        //console.dir(data);
+                                        currTab.find(".chat-wrap .in-chat").removeClass("hidden");
+                                        arrOpenChat[channel].emit("request view current online");
+                                    }).on("show new message", function(data) {
+                                        //console.dir(data);
+                                        if ($.cookie('volume_msg') == 1 && data.user_login != userLogin) {
+                                            ion.sound.play("button_tiny");
+                                        }
+                                        userMsg(data.user_login, data.message, data.date_write);
+                                        increaseCountMsg();
+                                        //setFocusOnMessageField();
+                                    }).on("show system message", function(data) {
+                                        if ($.cookie('volume_msg') == 1) {
+                                            ion.sound.play("button_tiny");
+                                        }
+                                        systemMsg(data.login, data.message, data.date_msg);
+                                    }).on("response disconnect user", function() {
+                                        currTab.find(".chat-wrap .in-chat").addClass("hidden");
+                                        //disconnectUser();
+                                    });
+                                }
                             });
                             $(".cancel-bid").on('click', function(e) {
                                 var rowId = getRowId(e), row = getRow($(this));
@@ -672,15 +681,13 @@
                                                     return;
                                                 }
                                                 arrOpenChat[channel].on("connect", function() {
-                                                    this.emit("join to room", {room: channel, clientLogin: userLogin, authorLogin: authorLogin})
+                                                    this.emit("join to channel order", {room: channel, clientLogin: userLogin, authorLogin: authorLogin})
                                                             .emit("request cancel author bid", {bidId: rowId, orderId: orderId, responseLogin: authorLogin, channel: channel});
                                                 }).on("response cancel author bid", function() {
                                                     actionCancelBid(row, "hide");
                                                     $("tr.jqgrow#" + rowId).removeClass("state-selected");
                                                     confirmBid.show();
-                                                    this.disconnect();
-                                                    delete arrUsedChat[channel];
-                                                    delete arrOpenChat[channel];
+                                                    disconnectChannel(this);
                                                 });
                                             } else {
                                                 //this.disconnect();
@@ -697,42 +704,40 @@
                             });
                             $(".hide-bid").on('click', function(e) {
                                 var rowId = getRowId(e), row = getRow($(this));
-                                //console.log(ch);
-                                if (rowId) {
-                                    var ch = getChannel(row);
-                                    if (arrUsedChat[ch] != ch) {
-                                        channel = ch;
-                                        try {
-                                            arrUsedChat[channel] = channel;
-                                            arrOpenChat[channel] = io.connect('http://localhost:8008', { forceNew: true});
-                                        } catch(e) {
-                                            return;
+                                if (rowId && row) {
+                                    jConfirm('Can you hide this bid?', 'Confirmation Dialog', function (action) {
+                                        if (action) {
+                                            var ch = getChannel(row), data = { bidId: rowId, orderId: orderId };
+                                            if (arrUsedChat[ch] != ch) {
+                                                channel = ch;
+                                                try {
+                                                    arrUsedChat[channel] = channel;
+                                                    arrOpenChat[channel] = io.connect('http://localhost:8008', { forceNew: true});
+                                                } catch(e) {
+                                                    return;
+                                                }
+                                                arrOpenChat[channel].on("connect", function() {
+                                                    this.emit("join to channel order", {channel: channel, userLogin: userLogin, authorLogin: authorLogin})
+                                                            .emit("request hide bid", data);
+                                                }).on("response hide bid", function() {
+                                                    grid.delRowData(rowId);
+                                                    disconnectChannel(this);
+                                                });
+                                            } else {
+                                                arrOpenChat[channel].emit("request hide bid", data)
+                                                        .on("response hide bid", function() {
+                                                            grid.delRowData(rowId);
+                                                            disconnectChannel(this);
+                                                            closeCurrTab();
+                                                        });
+                                            }
                                         }
-                                        arrOpenChat[channel].on("connect", function() {
-                                            this.emit("join to room", {room: channel, clientLogin: userLogin, authorLogin: authorLogin});
-                                            this.emit("request hide bid", {bidId: rowId});
-                                        }).on("response hide bid", function() {
-                                            grid.delRowData(rowId);
-                                            this.disconnect();
-                                            delete arrUsedChat[channel];
-                                        });
-                                    } else {
-                                        arrOpenChat[channel].emit("request hide bid", {bidId: rowId});
-                                        arrOpenChat[channel].on("response hide bid", function() {
-                                            grid.delRowData(rowId);
-                                            this.disconnect();
-                                            delete arrUsedChat[channel];
-                                            delete arrOpenChat[channel];
-                                            tabs.find("li[aria-controls='" + channel + "']").remove();
-                                            currTab.remove();
-                                            tabs.tabs("refresh");
-                                        });
-                                    }
+                                    })
                                 }
                             });
                             $(".auction-bid").on('click', function(e) {
                                 var rowId = getRowId(e), row = getRow($(this));
-                                if (rowId) {
+                                if (getRowId(e) && row) {
                                     var ch = getChannel(row),
                                             auctionPrice = $("#auction-price"),
                                             auctionDay = $("#auction-day"),
@@ -752,6 +757,7 @@
                                         centsLimit: 0,
                                         clearOnEmpty: true
                                     }).on('input', function() {
+                                        /*here used variables from server*/
                                         if (replaceSpaces($(this).val()) >= 100 && replaceSpaces(auctionDay.val()) >= 1) {
                                             btnAuctionBidConfirm.removeAttr('disabled');
                                         } else {
@@ -784,6 +790,7 @@
                                             auctionDay.removeClass('bootstrap-error').tooltip('hide');
                                         }
                                         if (!error) {
+                                            var data = { orderId: orderId, price: auctionPrice.val(), day: auctionDay.val(), authorLogin: authorLogin };
                                             if (arrUsedChat[ch] != ch) {
                                                 channel = ch;
                                                 try {
@@ -793,31 +800,21 @@
                                                     return;
                                                 }
                                                 arrOpenChat[channel].on("connect", function() {
-                                                    authorLogin = getAuthorLogin(row);
-                                                    this.emit("join to room", {room: channel, clientLogin: userLogin, authorLogin: authorLogin})
-                                                            .emit("request auction bid", {orderId: orderId, price: auctionPrice.val(), day: auctionDay.val(), authorLogin: authorLogin, channel: channel});
-                                                }).on("response auction bid", function(data) {
-                                                    if (data != '') {
-                                                        handlerError(data);
-                                                    } else {
-                                                        this.disconnect();
-                                                        delete arrUsedChat[channel];
-                                                        delete arrOpenChat[channel];
-                                                        modalAuctionBid.modal('hide');
-                                                    }
+                                                    data.authorLogin = getAuthorLogin(row);
+                                                    this.emit("join to channel order", {room: channel, clientLogin: userLogin, authorLogin: authorLogin})
+                                                            .emit("request auction bid", data);
+                                                }).on("response auction bid", function() {
+                                                    disconnectChannel(this);
+                                                    modalAuctionBid.modal('hide');
                                                 });
                                             } else {
-                                                arrOpenChat[channel].emit("request auction bid", {orderId: orderId, price: auctionPrice.val(), day: auctionDay.val(), authorLogin: authorLogin, channel: channel})
-                                                        .on("response auction bid", function(data) {
-                                                            if (data != '') {
-                                                                handlerError(data);
-                                                            } else {
-                                                                modalAuctionBid.modal('hide');
-                                                            }
+                                                arrOpenChat[channel].emit("request auction bid", data)
+                                                        .on("response auction bid", function() {
+                                                            modalAuctionBid.modal('hide');
                                                         });
                                             }
                                         }
-                                        function handlerError(data) {
+                                        /*function handlerError(data) {
                                             console.log(data);
                                             if (data.errorField == 'price') {
                                                 auctionPrice.addClass('bootstrap-error').attr('data-original-title', data.errorMessage).tooltip('show');
@@ -826,13 +823,13 @@
                                             } else {
                                                 jAlert(data.errorMessage, data.errorMessage);
                                             }
-                                        }
+                                        }*/
                                     });
                                 }
                             });
                             confirmBid.on('click', function(e) {
                                 var rowId = getRowId(e), row = getRow($(this));
-                                if (rowId) {
+                                if (rowId && row) {
                                     e.preventDefault();
                                     jConfirm('Can you confirm this bid?', 'Confirmation Dialog', function (action) {
                                         //jAlert('Confirmed: ' + action, 'Confirmation Results');
@@ -847,14 +844,12 @@
                                                     return;
                                                 }
                                                 arrOpenChat[channel].on("connect", function() {
-                                                    this.emit("join to room", {room: channel, clientLogin: userLogin});
-                                                    this.emit("request confirm author bid", {bidId: rowId, orderId: orderId, responseLogin: authorLogin, channel: channel});
+                                                    this.emit("join to channel order", {room: channel, clientLogin: userLogin})
+                                                            .emit("request confirm author bid", {bidId: rowId, orderId: orderId, responseLogin: authorLogin, channel: channel});
                                                 }).on("response confirm author bid", function() {
                                                     actionCancelBid(row, "show");
                                                     $("tr.jqgrow#" + rowId).addClass("state-selected");
-                                                    this.disconnect();
-                                                    delete arrOpenChat[channel];
-                                                    delete arrUsedChat[channel];
+                                                    disconnectChannel(this);
                                                     /*something doing - open current chat or redirect*/
                                                 });
                                             } else {
@@ -873,13 +868,9 @@
                             for (var i = 0; i < gridsLength; i++) {
                                 if (grid.getCell(grids[i], "is_author_select") == 1) {
                                     var selectedRowBid = $("tr.jqgrow#" + grids[i]);
-                                    selectedRowBid.addClass("state-selected");
-                                    var blockAuctionBid = selectedRowBid.find(".auction-bid"),
-                                            blockCancelBid = selectedRowBid.find(".cancel-bid"),
-                                            blockConfirmBid = selectedRowBid.find(".confirm-bid");
-                                    blockConfirmBid.hide();
-                                    blockAuctionBid.hide();
-                                    blockCancelBid.show();
+                                    selectedRowBid.addClass("state-selected").find(".auction-bid").toggle();
+                                    selectedRowBid.find(".cancel-bid").toggle();
+                                    selectedRowBid.find(".confirm-bid").toggle();
                                     confirmBid.hide();
                                     break;
                                 }
@@ -889,9 +880,8 @@
                     );
                     function getRowId(e) {
                         var $td = $(e.target).closest('td'),
-                                $tr = $td.closest('tr.jqgrow'),
-                                rowId = $tr.attr('id');
-                        return rowId;
+                                $tr = $td.closest('tr.jqgrow');
+                        return $tr.attr('id');
                     }
                     function getRow(a) {
                         return a.parent().parent();

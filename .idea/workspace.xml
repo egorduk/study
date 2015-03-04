@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b457e0f6-959f-42f7-b55c-fad5bac8232a" name="Default" comment="1&#10;">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Helper/Helper.php" afterPath="$PROJECT_DIR$/src/Helper/Helper.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_chat/server/appChat.js" afterPath="$PROJECT_DIR$/node_chat/server/appChat.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/index.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/index.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -27,44 +30,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="order_select.html.twig" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="order_select.html.twig" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="758" column="41" selection-start="45993" selection-end="45993" vertical-scroll-proportion="0.2765461" vertical-offset="14923" max-vertical-offset="18920">
+            <state line="275" column="58" selection-start="14798" selection-end="14833" vertical-scroll-proportion="-8.931034" vertical-offset="5241" max-vertical-offset="18720">
               <folding>
-                <marker date="1425403761715" expanded="true" signature="28581:28597" placeholder="..." />
-                <marker date="1425403761715" expanded="true" signature="28656:28683" placeholder="..." />
-                <marker date="1425403761715" expanded="true" signature="29003:29019" placeholder="..." />
-                <marker date="1425403761715" expanded="true" signature="29078:29105" placeholder="..." />
-                <marker date="1425403761715" expanded="true" signature="29414:29430" placeholder="..." />
-                <marker date="1425403761715" expanded="true" signature="29489:29516" placeholder="..." />
-                <marker date="1425403761715" expanded="true" signature="29826:29842" placeholder="..." />
-                <marker date="1425403761715" expanded="true" signature="29901:29928" placeholder="..." />
-                <marker date="1425403761715" expanded="true" signature="30241:30257" placeholder="..." />
-                <marker date="1425403761715" expanded="true" signature="30316:30343" placeholder="..." />
-                <marker date="1425403761715" expanded="true" signature="36286:36299" placeholder="..." />
+                <marker date="1425491131509" expanded="true" signature="29033:29049" placeholder="..." />
+                <marker date="1425491131509" expanded="true" signature="29108:29135" placeholder="..." />
+                <marker date="1425491131509" expanded="true" signature="29455:29471" placeholder="..." />
+                <marker date="1425491131509" expanded="true" signature="29530:29557" placeholder="..." />
+                <marker date="1425491131509" expanded="true" signature="29866:29882" placeholder="..." />
+                <marker date="1425491131509" expanded="true" signature="29941:29968" placeholder="..." />
+                <marker date="1425491131509" expanded="true" signature="30278:30294" placeholder="..." />
+                <marker date="1425491131509" expanded="true" signature="30353:30380" placeholder="..." />
+                <marker date="1425491131509" expanded="true" signature="30693:30709" placeholder="..." />
+                <marker date="1425491131509" expanded="true" signature="30768:30795" placeholder="..." />
+                <marker date="1425491131509" expanded="true" signature="36804:36817" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="appChat.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node_chat/server/appChat.js">
+      <file leaf-file-name="socket.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_chat/server/node_modules/socket.io/lib/socket.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="316" column="41" selection-start="13124" selection-end="13124" vertical-scroll-proportion="0.0" vertical-offset="2001" max-vertical-offset="5140">
-              <folding>
-                <element signature="e#2181#6145#0" expanded="false" />
-                <element signature="e#6194#6782#0" expanded="false" />
-                <element signature="e#6825#7173#0" expanded="false" />
-                <element signature="e#7233#7340#0" expanded="false" />
-                <element signature="e#7391#7489#0" expanded="false" />
-                <element signature="e#7546#8496#0" expanded="false" />
-                <element signature="e#8551#8897#0" expanded="false" />
-                <element signature="e#8951#9929#0" expanded="false" />
-                <element signature="e#9983#10211#0" expanded="false" />
-                <element signature="e#10275#11094#0" expanded="false" />
-                <element signature="e#11157#12048#0" expanded="false" />
-              </folding>
+            <state line="254" column="3" selection-start="4924" selection-end="4924" vertical-scroll-proportion="0.0" vertical-offset="4561" max-vertical-offset="8700">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -72,7 +63,29 @@
       <file leaf-file-name="ClientController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="384" column="58" selection-start="19475" selection-end="19475" vertical-scroll-proportion="17.241379" vertical-offset="7680" max-vertical-offset="10400">
+            <state line="57" column="101" selection-start="2691" selection-end="2691" vertical-scroll-proportion="-22.068966" vertical-offset="0" max-vertical-offset="10420">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="appChat.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/node_chat/server/appChat.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="275" column="67" selection-start="11247" selection-end="11247" vertical-scroll-proportion="0.6139955" vertical-offset="4376" max-vertical-offset="9320">
+              <folding>
+                <element signature="e#7942#8058#0" expanded="false" />
+                <element signature="e#8109#8216#0" expanded="false" />
+                <element signature="e#9678#10881#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html.twig" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/index.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="50" column="67" selection-start="2558" selection-end="2590" vertical-scroll-proportion="-21.034483" vertical-offset="390" max-vertical-offset="1320">
               <folding />
             </state>
           </provider>
@@ -81,24 +94,24 @@
       <file leaf-file-name="Helper.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1470" column="7" selection-start="61704" selection-end="61704" vertical-scroll-proportion="0.0" vertical-offset="29400" max-vertical-offset="51180">
+            <state line="1517" column="6" selection-start="63311" selection-end="64547" vertical-scroll-proportion="-9.827586" vertical-offset="29575" max-vertical-offset="50700">
               <folding>
-                <marker date="1424943975787" expanded="true" signature="4807:4868" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1424943975787" expanded="true" signature="5233:5288" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1424943975787" expanded="true" signature="5658:5719" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1424943975787" expanded="true" signature="11356:11471" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1424943975787" expanded="true" signature="11935:12073" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-                <marker date="1424943975787" expanded="true" signature="45193:45650" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-                <marker date="1424943975787" expanded="true" signature="45992:46358" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1424943975787" expanded="true" signature="46028:46152" placeholder="SELECT ub.us..user_bid..." />
-                <marker date="1424943975787" expanded="true" signature="49069:49342" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1424943975787" expanded="true" signature="49084:49208" placeholder="SELECT ub.us..user_bid..." />
-                <marker date="1424943975787" expanded="true" signature="56113:56406" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1424943975787" expanded="true" signature="56128:56236" placeholder="SELECT b.use..user_bid..." />
-                <marker date="1424943975787" expanded="true" signature="82500:82765" placeholder="SELECT * FRO..user_id..." />
-                <marker date="1424943975787" expanded="true" signature="82515:82632" placeholder="SELECT b.use..user_bid..." />
-                <marker date="1424943975787" expanded="true" signature="86601:86707" placeholder="SELECT date_..cancel_request..." />
-                <marker date="1424943975787" expanded="true" signature="104316:104904" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+                <marker date="1425477415394" expanded="true" signature="4807:4868" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1425477415394" expanded="true" signature="5233:5288" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1425477415394" expanded="true" signature="5658:5719" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1425477415394" expanded="true" signature="11356:11471" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1425477415394" expanded="true" signature="11935:12073" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+                <marker date="1425477415394" expanded="true" signature="45193:45650" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+                <marker date="1425477415394" expanded="true" signature="45992:46358" placeholder="SELECT * FRO..user_id..." />
+                <marker date="1425477415394" expanded="true" signature="46028:46152" placeholder="SELECT ub.us..user_bid..." />
+                <marker date="1425477415394" expanded="true" signature="49069:49342" placeholder="SELECT * FRO..user_id..." />
+                <marker date="1425477415394" expanded="true" signature="49084:49208" placeholder="SELECT ub.us..user_bid..." />
+                <marker date="1425477415394" expanded="true" signature="56113:56406" placeholder="SELECT * FRO..user_id..." />
+                <marker date="1425477415394" expanded="true" signature="56128:56236" placeholder="SELECT b.use..user_bid..." />
+                <marker date="1425477415394" expanded="true" signature="82504:82769" placeholder="SELECT * FRO..user_id..." />
+                <marker date="1425477415394" expanded="true" signature="82519:82636" placeholder="SELECT b.use..user_bid..." />
+                <marker date="1425477415394" expanded="true" signature="86605:86711" placeholder="SELECT date_..cancel_request..." />
+                <marker date="1425477415394" expanded="true" signature="104320:104908" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
               </folding>
             </state>
           </provider>
@@ -118,12 +131,13 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php" />
-        <option value="$PROJECT_DIR$/src/Helper/Helper.php" />
         <option value="$PROJECT_DIR$/app/config/config_dev.yml" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
-        <option value="$PROJECT_DIR$/node_chat/server/appChat.js" />
+        <option value="$PROJECT_DIR$/src/Helper/Helper.php" />
+        <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php" />
         <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig" />
+        <option value="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/index.html.twig" />
+        <option value="$PROJECT_DIR$/node_chat/server/appChat.js" />
       </list>
     </option>
   </component>
@@ -395,8 +409,37 @@
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
     <property name="LayoutCode.rearrangeEntriesTwig" value="false" />
     <property name="FullScreen" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="268" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="297" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="298" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="972" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="290" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="289" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="291" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="965" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RunManager">
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
     <list size="0" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
@@ -461,7 +504,7 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -487,7 +530,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="5" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -495,17 +538,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="792" column="59" selection-start="48284" selection-end="48284" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="18240">
           <folding>
-            <marker date="1425403761715" expanded="true" signature="28581:28597" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="28656:28683" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="29003:29019" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="29078:29105" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="29414:29430" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="29489:29516" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="29826:29842" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="29901:29928" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="30241:30257" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="30316:30343" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="36286:36299" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="29033:29049" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="29108:29135" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="29455:29471" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="29530:29557" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="29866:29882" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="29941:29968" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="30278:30294" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="30353:30380" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="30693:30709" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="30768:30795" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="36804:36817" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -514,17 +557,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="287" column="70" selection-start="11325" selection-end="11325" vertical-scroll-proportion="0.0" vertical-offset="4320" max-vertical-offset="4320">
           <folding>
-            <element signature="e#2181#6145#0" expanded="false" />
-            <element signature="e#6194#6782#0" expanded="false" />
-            <element signature="e#6825#7173#0" expanded="false" />
-            <element signature="e#7233#7340#0" expanded="false" />
-            <element signature="e#7391#7489#0" expanded="false" />
-            <element signature="e#7546#8496#0" expanded="false" />
-            <element signature="e#8551#8897#0" expanded="false" />
-            <element signature="e#8951#9929#0" expanded="false" />
-            <element signature="e#9983#10211#0" expanded="false" />
-            <element signature="e#10275#11094#0" expanded="false" />
-            <element signature="e#11157#12048#0" expanded="false" />
+            <element signature="e#7942#8058#0" expanded="false" />
+            <element signature="e#8109#8216#0" expanded="false" />
+            <element signature="e#9678#10881#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -540,22 +575,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="1470" column="7" selection-start="61704" selection-end="61704" vertical-scroll-proportion="0.0" vertical-offset="29400" max-vertical-offset="51180">
           <folding>
-            <marker date="1424943975787" expanded="true" signature="4807:4868" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1424943975787" expanded="true" signature="5233:5288" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1424943975787" expanded="true" signature="5658:5719" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1424943975787" expanded="true" signature="11356:11471" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1424943975787" expanded="true" signature="11935:12073" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1424943975787" expanded="true" signature="45193:45650" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-            <marker date="1424943975787" expanded="true" signature="45992:46358" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1424943975787" expanded="true" signature="46028:46152" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1424943975787" expanded="true" signature="49069:49342" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1424943975787" expanded="true" signature="49084:49208" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1424943975787" expanded="true" signature="56113:56406" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1424943975787" expanded="true" signature="56128:56236" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1424943975787" expanded="true" signature="82500:82765" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1424943975787" expanded="true" signature="82515:82632" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1424943975787" expanded="true" signature="86601:86707" placeholder="SELECT date_..cancel_request..." />
-            <marker date="1424943975787" expanded="true" signature="104316:104904" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+            <marker date="1425477415394" expanded="true" signature="4807:4868" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1425477415394" expanded="true" signature="5233:5288" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1425477415394" expanded="true" signature="5658:5719" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1425477415394" expanded="true" signature="11356:11471" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1425477415394" expanded="true" signature="11935:12073" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1425477415394" expanded="true" signature="45193:45650" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+            <marker date="1425477415394" expanded="true" signature="45992:46358" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1425477415394" expanded="true" signature="46028:46152" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1425477415394" expanded="true" signature="49069:49342" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1425477415394" expanded="true" signature="49084:49208" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1425477415394" expanded="true" signature="56113:56406" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1425477415394" expanded="true" signature="56128:56236" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1425477415394" expanded="true" signature="82504:82769" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1425477415394" expanded="true" signature="82519:82636" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1425477415394" expanded="true" signature="86605:86711" placeholder="SELECT date_..cancel_request..." />
+            <marker date="1425477415394" expanded="true" signature="104320:104908" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
           </folding>
         </state>
       </provider>
@@ -564,17 +599,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="648" column="62" selection-start="38161" selection-end="38161" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="18160">
           <folding>
-            <marker date="1425403761715" expanded="true" signature="28581:28597" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="28656:28683" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="29003:29019" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="29078:29105" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="29414:29430" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="29489:29516" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="29826:29842" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="29901:29928" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="30241:30257" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="30316:30343" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="36286:36299" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="29033:29049" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="29108:29135" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="29455:29471" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="29530:29557" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="29866:29882" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="29941:29968" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="30278:30294" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="30353:30380" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="30693:30709" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="30768:30795" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="36804:36817" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -583,17 +618,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="297" column="0" selection-start="11725" selection-end="11725" vertical-scroll-proportion="0.0" vertical-offset="5080" max-vertical-offset="5080">
           <folding>
-            <element signature="e#2181#6145#0" expanded="false" />
-            <element signature="e#6194#6782#0" expanded="false" />
-            <element signature="e#6825#7173#0" expanded="false" />
-            <element signature="e#7233#7340#0" expanded="false" />
-            <element signature="e#7391#7489#0" expanded="false" />
-            <element signature="e#7546#8496#0" expanded="false" />
-            <element signature="e#8551#8897#0" expanded="false" />
-            <element signature="e#8951#9929#0" expanded="false" />
-            <element signature="e#9983#10211#0" expanded="false" />
-            <element signature="e#10275#11094#0" expanded="false" />
-            <element signature="e#11157#12048#0" expanded="false" />
+            <element signature="e#7942#8058#0" expanded="false" />
+            <element signature="e#8109#8216#0" expanded="false" />
+            <element signature="e#9678#10881#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -609,22 +636,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="1470" column="7" selection-start="61704" selection-end="61704" vertical-scroll-proportion="0.0" vertical-offset="29400" max-vertical-offset="51180">
           <folding>
-            <marker date="1424943975787" expanded="true" signature="4807:4868" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1424943975787" expanded="true" signature="5233:5288" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1424943975787" expanded="true" signature="5658:5719" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1424943975787" expanded="true" signature="11356:11471" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1424943975787" expanded="true" signature="11935:12073" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1424943975787" expanded="true" signature="45193:45650" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-            <marker date="1424943975787" expanded="true" signature="45992:46358" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1424943975787" expanded="true" signature="46028:46152" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1424943975787" expanded="true" signature="49069:49342" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1424943975787" expanded="true" signature="49084:49208" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1424943975787" expanded="true" signature="56113:56406" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1424943975787" expanded="true" signature="56128:56236" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1424943975787" expanded="true" signature="82500:82765" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1424943975787" expanded="true" signature="82515:82632" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1424943975787" expanded="true" signature="86601:86707" placeholder="SELECT date_..cancel_request..." />
-            <marker date="1424943975787" expanded="true" signature="104316:104904" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+            <marker date="1425477415394" expanded="true" signature="4807:4868" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1425477415394" expanded="true" signature="5233:5288" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1425477415394" expanded="true" signature="5658:5719" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1425477415394" expanded="true" signature="11356:11471" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1425477415394" expanded="true" signature="11935:12073" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1425477415394" expanded="true" signature="45193:45650" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+            <marker date="1425477415394" expanded="true" signature="45992:46358" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1425477415394" expanded="true" signature="46028:46152" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1425477415394" expanded="true" signature="49069:49342" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1425477415394" expanded="true" signature="49084:49208" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1425477415394" expanded="true" signature="56113:56406" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1425477415394" expanded="true" signature="56128:56236" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1425477415394" expanded="true" signature="82504:82769" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1425477415394" expanded="true" signature="82519:82636" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1425477415394" expanded="true" signature="86605:86711" placeholder="SELECT date_..cancel_request..." />
+            <marker date="1425477415394" expanded="true" signature="104320:104908" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
           </folding>
         </state>
       </provider>
@@ -632,37 +659,6 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="5" selection-start="39" selection-end="39" vertical-scroll-proportion="0.1112347" vertical-offset="0" max-vertical-offset="899" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1470" column="7" selection-start="61704" selection-end="61704" vertical-scroll-proportion="0.0" vertical-offset="29400" max-vertical-offset="51180">
-          <folding>
-            <marker date="1424943975787" expanded="true" signature="4807:4868" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1424943975787" expanded="true" signature="5233:5288" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1424943975787" expanded="true" signature="5658:5719" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1424943975787" expanded="true" signature="11356:11471" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1424943975787" expanded="true" signature="11935:12073" placeholder="SELECT u.id ..AcmeAuthBundle..." />
-            <marker date="1424943975787" expanded="true" signature="45193:45650" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-            <marker date="1424943975787" expanded="true" signature="45992:46358" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1424943975787" expanded="true" signature="46028:46152" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1424943975787" expanded="true" signature="49069:49342" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1424943975787" expanded="true" signature="49084:49208" placeholder="SELECT ub.us..user_bid..." />
-            <marker date="1424943975787" expanded="true" signature="56113:56406" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1424943975787" expanded="true" signature="56128:56236" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1424943975787" expanded="true" signature="82500:82765" placeholder="SELECT * FRO..user_id..." />
-            <marker date="1424943975787" expanded="true" signature="82515:82632" placeholder="SELECT b.use..user_bid..." />
-            <marker date="1424943975787" expanded="true" signature="86601:86707" placeholder="SELECT date_..cancel_request..." />
-            <marker date="1424943975787" expanded="true" signature="104316:104904" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="384" column="58" selection-start="19475" selection-end="19475" vertical-scroll-proportion="17.241379" vertical-offset="7680" max-vertical-offset="10400">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/bundles/js/modal_window/jquery.alert.js">
@@ -702,25 +698,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_chat/server/appChat.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="316" column="41" selection-start="13124" selection-end="13124" vertical-scroll-proportion="0.0" vertical-offset="2001" max-vertical-offset="5140">
-          <folding>
-            <element signature="e#2181#6145#0" expanded="false" />
-            <element signature="e#6194#6782#0" expanded="false" />
-            <element signature="e#6825#7173#0" expanded="false" />
-            <element signature="e#7233#7340#0" expanded="false" />
-            <element signature="e#7391#7489#0" expanded="false" />
-            <element signature="e#7546#8496#0" expanded="false" />
-            <element signature="e#8551#8897#0" expanded="false" />
-            <element signature="e#8951#9929#0" expanded="false" />
-            <element signature="e#9983#10211#0" expanded="false" />
-            <element signature="e#10275#11094#0" expanded="false" />
-            <element signature="e#11157#12048#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="64" column="0" selection-start="895" selection-end="895" vertical-scroll-proportion="0.33259177" vertical-offset="981" max-vertical-offset="18740">
@@ -735,21 +712,102 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Helper/Helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1517" column="6" selection-start="63311" selection-end="64547" vertical-scroll-proportion="-9.827586" vertical-offset="29575" max-vertical-offset="50700">
+          <folding>
+            <marker date="1425477415394" expanded="true" signature="4807:4868" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1425477415394" expanded="true" signature="5233:5288" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1425477415394" expanded="true" signature="5658:5719" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1425477415394" expanded="true" signature="11356:11471" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1425477415394" expanded="true" signature="11935:12073" placeholder="SELECT u.id ..AcmeAuthBundle..." />
+            <marker date="1425477415394" expanded="true" signature="45193:45650" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+            <marker date="1425477415394" expanded="true" signature="45992:46358" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1425477415394" expanded="true" signature="46028:46152" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1425477415394" expanded="true" signature="49069:49342" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1425477415394" expanded="true" signature="49084:49208" placeholder="SELECT ub.us..user_bid..." />
+            <marker date="1425477415394" expanded="true" signature="56113:56406" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1425477415394" expanded="true" signature="56128:56236" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1425477415394" expanded="true" signature="82504:82769" placeholder="SELECT * FRO..user_id..." />
+            <marker date="1425477415394" expanded="true" signature="82519:82636" placeholder="SELECT b.use..user_bid..." />
+            <marker date="1425477415394" expanded="true" signature="86605:86711" placeholder="SELECT date_..cancel_request..." />
+            <marker date="1425477415394" expanded="true" signature="104320:104908" placeholder="SELECT MAX(u..AcmeSecureBundle..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/AuthorController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="8" selection-start="2568" selection-end="2605" vertical-scroll-proportion="0.56009334" vertical-offset="0" max-vertical-offset="18540">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Controller/ClientController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="101" selection-start="2691" selection-end="2691" vertical-scroll-proportion="-22.068966" vertical-offset="0" max-vertical-offset="10420">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_chat/server/node_modules/socket.io/lib/socket.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="254" column="3" selection-start="4924" selection-end="4924" vertical-scroll-proportion="0.0" vertical-offset="4561" max-vertical-offset="8700">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/copy_chat.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="294" column="73" selection-start="15150" selection-end="15200" vertical-scroll-proportion="-0.5324519" vertical-offset="6323" max-vertical-offset="15680">
+          <folding>
+            <marker date="1423486178774" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1423486178774" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1423486178774" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1423486178774" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1423486178774" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1423486178774" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1423486178774" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1423486178774" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1423486178774" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1423486178774" expanded="false" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="758" column="41" selection-start="45993" selection-end="45993" vertical-scroll-proportion="0.2765461" vertical-offset="14923" max-vertical-offset="18920">
+        <state line="275" column="58" selection-start="14798" selection-end="14833" vertical-scroll-proportion="-8.931034" vertical-offset="5241" max-vertical-offset="18720">
           <folding>
-            <marker date="1425403761715" expanded="true" signature="28581:28597" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="28656:28683" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="29003:29019" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="29078:29105" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="29414:29430" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="29489:29516" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="29826:29842" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="29901:29928" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="30241:30257" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="30316:30343" placeholder="..." />
-            <marker date="1425403761715" expanded="true" signature="36286:36299" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="29033:29049" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="29108:29135" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="29455:29471" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="29530:29557" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="29866:29882" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="29941:29968" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="30278:30294" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="30353:30380" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="30693:30709" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="30768:30795" placeholder="..." />
+            <marker date="1425491131509" expanded="true" signature="36804:36817" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="67" selection-start="2558" selection-end="2590" vertical-scroll-proportion="-21.034483" vertical-offset="390" max-vertical-offset="1320">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_chat/server/appChat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="275" column="67" selection-start="11247" selection-end="11247" vertical-scroll-proportion="0.6139955" vertical-offset="4376" max-vertical-offset="9320">
+          <folding>
+            <element signature="e#7942#8058#0" expanded="false" />
+            <element signature="e#8109#8216#0" expanded="false" />
+            <element signature="e#9678#10881#0" expanded="false" />
           </folding>
         </state>
       </provider>

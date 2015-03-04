@@ -53,8 +53,9 @@ class ClientController extends Controller
         $sessionRemaining = Helper::getDateFromTimestamp($sessionRemaining, "i:s");
         $userLogin = $user->getLogin();
         $userRole = $user->getUserRole()->getName();
-        $avatar = Helper::getUserAvatar($user);
-        return array('user' => $user, 'whenLogin' => $whenLogin, 'remainingTime' => $sessionRemaining, 'avatar' => $avatar);
+        //$avatar = Helper::getUserAvatar($user);
+        $user = Helper::getUserAvatar($user);
+        return array('user' => $user, 'whenLogin' => $whenLogin, 'remainingTime' => $sessionRemaining);
     }
 
 
@@ -382,13 +383,13 @@ class ClientController extends Controller
                         $bidId = $request->request->get('bidId');
                         $actionResponse = Helper::cancelSelectedAuthorBid($bidId, $order);
                         return new Response(json_encode(array('action' => $actionResponse)));
-                    } else*/if ($action == 'auctionBid') {
+                    } elseif ($action == 'auctionBid') {
                         $bidId = $request->request->get('bidId');
                         $auctionPrice = $request->request->get('auctionPrice');
                         $auctionDay = $request->request->get('auctionDay');
                         $actionResponse = Helper::createAuctionByAuthorBid($bidId, $order, $auctionPrice, $auctionDay, $this->container);
                         return new Response(json_encode(array('action' => $actionResponse)));
-                    }/* elseif ($action == 'hideBid') {
+                    } elseif ($action == 'hideBid') {
                         $bidId = $request->request->get('bidId');
                         $isHide = Helper::hideBidForClient($bidId);
                         if ($isHide) {

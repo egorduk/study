@@ -1515,7 +1515,7 @@ class Helper
      * @param $auctionDay
      * @return bool
      */
-    public static function createAuctionByAuthorBid($bidId, $order, $auctionPrice, $auctionDay, $container) {
+    /*public static function createAuctionByAuthorBid($bidId, $order, $auctionPrice, $auctionDay, $container) {
         $em = self::getContainer()->get('doctrine')->getManager();
         $bid = $em->getRepository(self::$_tableUserBid)
             ->findOneById($bidId);
@@ -1538,7 +1538,7 @@ class Helper
             return true;
         }
         return false;
-    }
+    }*/
 
     public static function authorConfirmSelection($order, $user, $bidId, $mode, $container) {
         if ($mode == null) {

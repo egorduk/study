@@ -38,7 +38,7 @@ var mysql = require('mysql'), mysqlUtilities = require('mysql-utilities'), conne
     database: 'study'
 });
 
-var arrName = [], arrRoom = [];
+var arrLogin = [], arrChannel = [];
 
 connection.connect(function (err, db) {
     if (err) {throw err}
@@ -159,11 +159,12 @@ io.sockets.on('connection', function (client) {
         }
     });
 
-    client.on("join to room", function(data) {
-        arrName[clientID] = data.clientLogin;
-        arrRoom[clientID] = data.room;
-        client.join(data.room);
-        console.log("Connected - " + data.clientLogin + " to room - " + data.room);
+    client.on("join to channel order", function(data) {
+        var channel = data.channel;
+        arrLogin[clientID] = data.userLogin;
+        arrChannel[clientID] = channel;
+        client.join(channel);
+        console.log("Connected - " + arrLogin[clientID] + " to channel order - " + channel);
         /*Init variable for send mailing*/
         transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -172,28 +173,42 @@ io.sockets.on('connection', function (client) {
                 pass: passEmail
             }
         }, function(error) {
-            if (error) {console.log(error)}
+            if (error) {throw error}
         });
+        var typeConnection = data.type;
+        if (typeConnection == 'client_index') {
+        } else if (typeConnection == 'client_select_author') {
+            var params = { 'min-price': 100, 'max-price': 999999, 'max-day': 999, 'min-day': 1 };
+            client.emit("response set params", {data: params});
+        }
         //client.to(data.room).emit("user in room", {name: data.name});
     });
 
+    client.on("join to channel messages", function(data) {
+        var channel = data.channel;
+        arrLogin[clientID] = data.userLogin;
+        arrChannel[clientID] = channel;
+        client.join(channel);
+        console.log("Connected - " + arrLogin[clientID] + " to channel messages - " + channel);
+    });
+
     client.on("disconnect", function() {
-        var room = arrRoom[clientID], name = arrName[clientID];
-        console.dir("Disconnected - " + name + " from room " + room);
-        client.to(room).emit("response disconnect user");
-        delete arrRoom[clientID];
-        delete arrName[clientID];
+        var channel = arrChannel[clientID], login = arrLogin[clientID];
+        console.dir("Disconnected - " + login + " from channel " + channel);
+        client.to(channel).emit("response disconnect user");
+        delete arrChannel[clientID];
+        delete arrLogin[clientID];
        // client.leave(room); //Rooms are left automatically upon disconnection.
     });
 
     client.on("request view current online", function() {
-        var room = arrRoom[clientID];
-        client.to(room).emit("response view current online");
+        var channel = arrChannel[clientID];
+        client.to(channel).emit("response view current online");
     });
 
     client.on("request user write", function() {
-        var room = arrRoom[clientID];
-        client.to(room).emit("response user write");
+        var channel = arrChannel[clientID];
+        client.to(channel).emit("response user write");
     });
 
     client.on("request confirm work", function(data) {
@@ -231,9 +246,9 @@ io.sockets.on('connection', function (client) {
 
     client.on("get all messages", function (data) {
         var orderId = data.orderId,
-            userId = data.userId,
-            channel = data.authorId + '_' + userId;
-        //console.log(channel);
+            userLogin = data.clientLogin,
+            channel = arrChannel[clientID];
+        console.log("Now - " + channel);
         console.log(data);
         connection.queryHash(
             'SELECT wm.id, message, DATE_FORMAT(date_write,"%d.%m.%Y %T") AS date_write, login AS user_login, u.id AS user_id FROM webchat_message wm INNER JOIN user u ON wm.user_id = u.id' +
@@ -243,18 +258,49 @@ io.sockets.on('connection', function (client) {
                 // console.dir({queryHash:row});
                 if (error) {throw error}
                 client.emit('response get all messages', rows);
-                connection.update('webchat_message', {is_read: 1}, {user_order_id: orderId, user_id: userId, is_read: 0, channel: channel}, function(error) {
+                connection.select('user', 'id', {login: userLogin}, '', function(error, row) {
                     if (error) {throw error}
+                    var userId = row[0].id;
+                    connection.update('webchat_message', {is_read: 1}, {user_order_id: orderId, user_id: userId, is_read: 0, channel: channel}, function(error) {
+                        if (error) {throw error}
+                    });
                 });
             }
         );
     });
 
+    client.on("request get new messages from db", function () {
+        var userId = arrChannel[clientID], channel = userId;
+        connection.select('webchat_message', 'message', {is_read: 0, user_id: userId, channel: channel}, '', function(error, rows) {
+            if (error) {throw error}
+            client.emit('response get new messages from db', rows);
+        });
+        /*connection.queryHash(
+            'SELECT wm.id, message, DATE_FORMAT(date_write,"%d.%m.%Y %T") AS date_write, login AS user_login, u.id AS user_id FROM webchat_message wm INNER JOIN user u ON wm.user_id = u.id' +
+                ' WHERE wm.user_order_id = ' + orderId + ' AND channel = "' + channel + '"',
+            function(error, rows) {
+                //console.dir(rows);
+                // console.dir({queryHash:row});
+                if (error) {throw error}
+                client.emit('response get all messages', rows);
+                connection.select('user', 'id', {login: userLogin}, '', function(error, row) {
+                    if (error) {throw error}
+                    var userId = row[0].id;
+                    connection.update('webchat_message', {is_read: 1}, {user_order_id: orderId, user_id: userId, is_read: 0, channel: channel}, function(error) {
+                        if (error) {throw error}
+                    });
+                });
+            }
+        );*/
+    });
+
     client.on("request hide bid", function (data) {
-        var orderId = data.bidId;
-        connection.update('user_bid', {is_show_author: 0}, {id: orderId}, function(error) {
+        var orderId = data.orderId, bidId = data.bidId;
+        connection.update('user_bid', {is_show_client: 0}, {id: bidId, user_order_id: orderId, is_show_client: 1}, function(error) {
             if (error) {throw error}
             client.emit('response hide bid');
+            var channel = arrChannel[clientID];
+            createSystemMsg({orderId: orderId, type: 'hide_author_bid', channel: channel});
         });
     });
 
@@ -285,7 +331,7 @@ io.sockets.on('connection', function (client) {
                 connection.update('user_order', {status_order_id: statusId}, {id: orderId}, function(error) {
                     if (error) {throw error}
                     client.emit('response cancel author bid');
-                    client.to(channel).emit('response cancel author bid');
+                    //client.to(channel).emit('response cancel author bid');
                     createSystemMsg({orderId: orderId, type: 'cancel_author_bid', channel: data.channel});
                     //sendMail('cancel_author_bid', data);
                 });
@@ -294,13 +340,12 @@ io.sockets.on('connection', function (client) {
     });
 
     client.on("request auction bid", function (data) {
+        console.log(data);
         var orderId = data.orderId,
             price = data.price.replace(/\s/g, ""),
             day = data.day,
             authorLogin = data.authorLogin,
-            channel = data.channel,
-            errorMessage = 'Error',
-            errorField = '';
+            channel = arrChannel[clientID];
         if (validator.isLength(price, 3, 7) && validator.isLength(day, 1, 3) && validator.isInt(price) && validator.isInt(day)) {
             connection.select('user', 'id, email', {login: authorLogin}, '', function(error, row) {
                 if (error) {throw error}
@@ -309,25 +354,25 @@ io.sockets.on('connection', function (client) {
                 connection.insert('auction_bid', {
                     price: price,
                     day: day,
-                    date_auction: dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss"),
+                    //date_auction: dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss"),
                     user_id: authorId,
                     user_order_id: orderId
                 }, function(error) {
                     if (error) {throw error}
                     client.emit('response auction bid');
                     client.to(channel).emit('response auction bid');
-                    //createSystemMsg({orderId: orderId, type: 'create_auction_bid', channel: channel});
+                    createSystemMsg({orderId: orderId, type: 'create_auction_bid', channel: channel});
                     //sendMail('create_auction_bid', data);
                 });
             });
-        } else if (validator.isLength(price, 0, 2) || !validator.isInt(price)) {
+        } /*else if (validator.isLength(price, 0, 2) || !validator.isInt(price)) {
             errorMessage = 'Минимум 100 руб.';
             errorField = 'price';
         } else if (validator.isLength(day, 0) || !validator.isInt(day)) {
             errorMessage = 'Минимум 1 дн.';
             errorField = 'day';
         }
-        client.emit('response auction bid', {errorMessage: errorMessage, errorField: errorField});
+        client.emit('response auction bid', {errorMessage: errorMessage, errorField: errorField});*/
     });
 
 
@@ -399,6 +444,8 @@ io.sockets.on('connection', function (client) {
             message = "System msg - cancel author bid";
         } else if (type == 'create_auction_bid') {
             message = "System msg - create auction bid";
+        } else if (type == 'hide_author_bid') {
+            message = "System msg - hide author bid";
         }
         connection.insert('webchat_message', {
             message: message,
