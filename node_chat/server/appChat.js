@@ -91,7 +91,7 @@ io.sockets.on('connection', function (client) {
                 writerLogin = data.writerLogin,
                 channel = data.channel,
                 message = data.message;
-            console.dir(data);
+            //console.dir(data);
             connection.insert('webchat_message', {
                 message: message,
                 channel: channel,
@@ -103,9 +103,13 @@ io.sockets.on('connection', function (client) {
                     //'SELECT login AS user_login FROM user WHERE id = ' + userId, function(error, row) {
                        // if (error) {throw error}
                         //var writerLogin = row.user_login, message = data.message;
-                        client.emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin})
-                            .to(channel).emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin})
-                            .to('1').emit("response get new messages from client", {date_write: fullDate, message: message, user_login: writerLogin});
+                        client.emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin});
+                            //.to(channel).emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin});
+                            //.to(1).emit("response get new message from client", {date_write: fullDate, message: message, user_login: writerLogin});
+                        //client.leave(channel);
+                        //client.join(1);
+                        client.to('10_1').emit("response get new message from client", {dateWrite: fullDate, message: message, userLogin: writerLogin, userId: userId, messageId: recordId, orderNum: 28});
+                        //client.to(channel).emit("test");
                         if (mode) {
                             // Send about denied rules
                             connection.insert('ban_message', {
@@ -279,8 +283,8 @@ io.sockets.on('connection', function (client) {
                 ' INNER JOIN user_order uo ON wm.user_order_id = uo.id' +
                 ' WHERE wm.is_read = 0 AND channel REGEXP "_' + userId + '$"', function(error, rows) {
                 if (error) {throw error}
-                console.dir(rows);
-                client.emit('response get new messages from db', rows);
+                //console.dir(rows);
+                client.emit("response get new messages from db", rows);
             });
     });
 
