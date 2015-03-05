@@ -61,7 +61,7 @@
       <file leaf-file-name="index.html.twig" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="102" column="75" selection-start="5598" selection-end="5598" vertical-scroll-proportion="0.6401869" vertical-offset="1190" max-vertical-offset="2112">
+            <state line="96" column="0" selection-start="5206" selection-end="5206" vertical-scroll-proportion="0.48598132" vertical-offset="1190" max-vertical-offset="2112">
               <folding>
                 <element signature="tag#style#0" expanded="false" />
               </folding>
@@ -539,7 +539,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1932" height="1056" extended-state="0" />
+    <frame x="-8" y="-8" width="1932" height="1056" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32721382" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -788,7 +788,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="75" selection-start="5598" selection-end="5598" vertical-scroll-proportion="0.6401869" vertical-offset="1190" max-vertical-offset="2112">
+        <state line="96" column="0" selection-start="5206" selection-end="5206" vertical-scroll-proportion="0.48598132" vertical-offset="1190" max-vertical-offset="2112">
           <folding>
             <element signature="tag#style#0" expanded="false" />
           </folding>
