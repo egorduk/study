@@ -203,8 +203,7 @@
                     volumeOn = $("#volume-on"),
                     volumeOff = $("#volume-off"),
                     flagIsWriting = 0,
-                    mode = false,
-                    channel = '10_1';
+                    mode = false;
 
             ion.sound({
                 sounds: [
@@ -247,6 +246,7 @@
             socket.on("connect", function() {
                 messages.html('');
                 clearSidebarCountRecords();
+                var channel = '10_1';
                 //systemMsg('Соединение установленно!');
                 //socket.emit("get all messages", {orderId: orderId});
                 socket.emit("join to channel order", {channel: channel, userLogin: userLogin, clientLogin: clientLogin});
@@ -326,7 +326,7 @@
             }
 
             message_txt.on("input", function(e) {
-                //socket.emit("request user write");
+                socket.emit("request user write");
             });
 
             message_txt.on("keydown", function(e) {
@@ -349,7 +349,7 @@
                     return;
                 }
                 message_txt.val("");
-                socket.emit("send message", {message: text, writerLogin: userLogin, userId: userId, mode: mode, responseLogin: clientLogin, channel: channel, orderId: orderId});
+                socket.emit("send message", {message: text, writerLogin: userLogin, userId: userId, mode: mode, responseLogin: clientLogin});
             }
 
             function increaseCountMsg() {

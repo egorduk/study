@@ -3,7 +3,6 @@
     {% block content %}
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/custom-theme1/jquery-ui-1.10.3.custom.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/jqgrid/ui.jqgrid.css') }}" />
-        <link rel="stylesheet" href="{{ asset('bundles/css/chat/main.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/modal_window/jquery.alert.css') }}" />
         <script type="text/javascript" src="{{ asset('bundles/js/jquery.cookie.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/sound/ion.sound.js') }}"></script>
@@ -66,45 +65,72 @@
                     return;
                 }
                 socket.on("connect", function() {
-                    var messages = $("#messages-wrap");
+                    var messages = $("#messages-wrap"),
+                            countRows = 0,
+                            message;
                     this.emit("join to channel messages", { channel: userId, userLogin: userLogin })
                             .emit("request get new messages from db")
                             .on("response get new messages from db", function(data) {
-                                var countRows = 0,
-                                        newMessage;
+                                var newMessage;
                                 for (var key in data) {
                                     if (data[key].userId != 17) {
-                                        newMessage = '<div class="message-wrap message-user" data-id="' + data[key].messageId + '">' +
-                                                '<p class="user">' + data[key].userLogin + ':</p> ' +
-                                                '<div class="message-text">' + safe(data[key].message) + '</div>' +
-                                                '<p class="date">' + data[key].dateWrite + '</p>' +
-                                                '<p class="message-close"><span class="close">&times;</span></p>' +
-                                                '</div>';
-
+                                        newMessage = generateUserMessage(data[key]);
                                     } else {
-                                        newMessage = '<div class="message-wrap message-system" data-id="' + data[key].messageId + '">' +
-                                                '<p class="user">' + data[key].userLogin + ':</p> ' +
-                                                '<div class="message-text">' + safe(data[key].message) + '</div>' +
-                                                '<p class="date">' + data[key].dateWrite + '</p>' +
-                                                '<p class="message-close"><span class="close">&times;</span></p>' +
-                                                '</div>';
+                                        newMessage = generateSystemMessage(data[key]);
                                     }
                                     messages.append(newMessage).scrollTop(messages[0].scrollHeight);
                                     countRows++;
                                 }
-                                console.log(data);
-                                closeMessage = messages.find(".message-close");
-
+                                $("#count-messages").remove();
+                                messages.before('<p id="count-messages">Count: ' + countRows + '</p>');
                             }).on("response get new messages from client", function(data) {
-                                console.log(data);
+                                var newMessage;
+                                for (var key in data) {
+                                    if (data[key].userId != 17) {
+                                        newMessage = generateUserMessage(data[key]);
+                                    } else {
+                                        newMessage = generateSystemMessage(data[key]);
+                                    }
+                                    messages.append(newMessage).scrollTop(messages[0].scrollHeight);
+                                    countRows++;
+                                }
+                                $("#count-messages").remove();
+                                messages.before('<p id="count-messages">Count: ' + countRows + '</p>');
+                            }).on("response read message", function() {
+                                countRows--;
+                                $("#count-messages").remove();
+                                messages.before('<p id="count-messages">Count: ' + countRows + '</p>');
+                                message.fadeOut();
                             });
-                    //var closeMessage = $(".message-close");
-                    messages.on('click', '.message-close .close', function(e){
-                        console.log($(this).parent().parent().attr('data-id'));
-
+                    messages.on('click', '.message-close .close', function(e) {
+                        message = $(this).parent().parent();
+                        var messageId = message.attr('data-id');
+                        socket.emit("request read message", {messageId: messageId});
                     });
 
-                    function safe(m) {
+                    function cutSentence(a) {
+                        return a.replace(/^(.{50}[^\s]*).*/, "$1") + '...';
+                    }
+
+                    function generateUserMessage(a) {
+                        var m = '<div class="message-wrap message-user" data-id="' + a.messageId + '">' +
+                                '<p class="order-num"><a href="../client/order/' + a.orderNum + '">Заказ № ' + a.orderNum + '</a></p> ' +
+                                '<p class="user">' + a.userLogin + ':</p> ' +
+                                '<div class="message-text">' + cutSentence(a.message) + '</div>' +
+                                '<p class="date">' + a.dateWrite + '</p>' +
+                                '<p class="message-close"><span class="close">&times;</span></p>' +
+                                '</div>';
+                        return m;
+                    }
+
+                    function generateSystemMessage(a) {
+                        var m = '<div class="message-wrap message-system" data-id="' + a.messageId + '">' +
+                                '<p class="order-num"><a href="../client/order/' + a.orderNum + '">Заказ № ' + a.orderNum + '</a></p> ' +
+                                '<p class="user">' + a.userLogin + ':</p> ' +
+                                '<div class="message-text">' + (a.message) + '</div>' +
+                                '<p class="date">' + a.dateWrite + '</p>' +
+                                '<p class="message-close"><span class="close">&times;</span></p>' +
+                                '</div>';
                         return m;
                     }
                 })

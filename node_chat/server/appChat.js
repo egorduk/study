@@ -83,7 +83,7 @@ io.sockets.on('connection', function (client) {
     client.on("send message", function (data) {
         try {
             var date = new Date(),
-                room = data.orderId,
+                orderId = data.orderId,
                 mode = data.mode,
                 userId = data.userId,
                 responseLogin = data.responseLogin,
@@ -96,23 +96,24 @@ io.sockets.on('connection', function (client) {
                 message: message,
                 channel: channel,
                 user_id: userId,
-                user_order_id: room
+                user_order_id: orderId
             }, function(error, recordId) {
-                if (error) {console.log(error)}
+                if (error) {throw(error)}
                // connection.queryRow(
                     //'SELECT login AS user_login FROM user WHERE id = ' + userId, function(error, row) {
                        // if (error) {throw error}
                         //var writerLogin = row.user_login, message = data.message;
-                        client.emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin});
-                        //client.to(room).emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin});
+                        client.emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin})
+                            .to(channel).emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin})
+                            .to('1').emit("response get new messages from client", {date_write: fullDate, message: message, user_login: writerLogin});
                         if (mode) {
                             // Send about denied rules
                             connection.insert('ban_message', {
                                 message_id: recordId
                             }, function(error) {
-                                if (error) {console.log(error)}
+                                if (error) {throw(error)}
                             });
-                            transporter.sendMail({
+                            /*transporter.sendMail({
                                 from: 'Test email <egorduk91@gmail.com>',
                                 address: userEmail,
                                 to: 'a_1300@mail.ru',
@@ -125,7 +126,7 @@ io.sockets.on('connection', function (client) {
                                 } else {
                                     console.log('Message sent: ' + info.response);
                                 }
-                            });
+                            });*/
                         } else {
                             // Send new email to other user
                             /*connection.queryRow(
@@ -151,7 +152,7 @@ io.sockets.on('connection', function (client) {
                         }
                    // }
                // );
-                console.dir({insert: recordId});
+                console.dir({insertedID: recordId});
             });
         } catch (e) {
             console.log(e);
@@ -270,32 +271,26 @@ io.sockets.on('connection', function (client) {
     });
 
     client.on("request get new messages from db", function () {
-        var userId = arrChannel[clientID], channel = userId;
+        var userId = arrChannel[clientID];
         //connection.select('webchat_message', 'message, user_order_id AS orderId, date_write, user_id', {is_read: 0, user_id: userId, channel: channel}, '', function(error, rows) {
         connection.queryHash(
-            'SELECT wm.id AS messageId, message, DATE_FORMAT(date_write,"%d.%m.%Y %T") AS dateWrite, login AS userLogin, wm.user_id AS userId FROM webchat_message wm INNER JOIN user u ON user_id = u.id' +
-                ' WHERE wm.is_read = 0 AND channel = "' + channel + '"', function(error, rows) {
+            'SELECT wm.id AS messageId, uo.num AS orderNum, message, DATE_FORMAT(date_write,"%d.%m.%Y %T") AS dateWrite, login AS userLogin, wm.user_id AS userId FROM webchat_message wm' +
+                ' INNER JOIN user u ON user_id = u.id' +
+                ' INNER JOIN user_order uo ON wm.user_order_id = uo.id' +
+                ' WHERE wm.is_read = 0 AND channel REGEXP "_' + userId + '$"', function(error, rows) {
                 if (error) {throw error}
                 console.dir(rows);
                 client.emit('response get new messages from db', rows);
             });
-        /*connection.queryHash(
-            'SELECT wm.id, message, DATE_FORMAT(date_write,"%d.%m.%Y %T") AS date_write, login AS user_login, u.id AS user_id FROM webchat_message wm INNER JOIN user u ON wm.user_id = u.id' +
-                ' WHERE wm.user_order_id = ' + orderId + ' AND channel = "' + channel + '"',
-            function(error, rows) {
-                //console.dir(rows);
-                // console.dir({queryHash:row});
-                if (error) {throw error}
-                client.emit('response get all messages', rows);
-                connection.select('user', 'id', {login: userLogin}, '', function(error, row) {
-                    if (error) {throw error}
-                    var userId = row[0].id;
-                    connection.update('webchat_message', {is_read: 1}, {user_order_id: orderId, user_id: userId, is_read: 0, channel: channel}, function(error) {
-                        if (error) {throw error}
-                    });
-                });
-            }
-        );*/
+    });
+
+    client.on("request read message", function (data) {
+        var messageId = data.messageId;
+        connection.update('webchat_message', {is_read: 1}, {id: messageId}, function(error) {
+            if (error) {throw error}
+            console.log('server');
+            client.emit("response read message");
+        });
     });
 
     client.on("request hide bid", function (data) {
