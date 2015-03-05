@@ -271,10 +271,14 @@ io.sockets.on('connection', function (client) {
 
     client.on("request get new messages from db", function () {
         var userId = arrChannel[clientID], channel = userId;
-        connection.select('webchat_message', 'message', {is_read: 0, user_id: userId, channel: channel}, '', function(error, rows) {
-            if (error) {throw error}
-            client.emit('response get new messages from db', rows);
-        });
+        //connection.select('webchat_message', 'message, user_order_id AS orderId, date_write, user_id', {is_read: 0, user_id: userId, channel: channel}, '', function(error, rows) {
+        connection.queryHash(
+            'SELECT wm.id AS messageId, message, DATE_FORMAT(date_write,"%d.%m.%Y %T") AS dateWrite, login AS userLogin, wm.user_id AS userId FROM webchat_message wm INNER JOIN user u ON user_id = u.id' +
+                ' WHERE wm.is_read = 0 AND channel = "' + channel + '"', function(error, rows) {
+                if (error) {throw error}
+                console.dir(rows);
+                client.emit('response get new messages from db', rows);
+            });
         /*connection.queryHash(
             'SELECT wm.id, message, DATE_FORMAT(date_write,"%d.%m.%Y %T") AS date_write, login AS user_login, u.id AS user_id FROM webchat_message wm INNER JOIN user u ON wm.user_id = u.id' +
                 ' WHERE wm.user_order_id = ' + orderId + ' AND channel = "' + channel + '"',

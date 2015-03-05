@@ -10,8 +10,27 @@
         <script type="text/javascript" src="{{ asset('bundles/js/modal_window/jquery.alert.js') }}"></script>
         <script src="http://localhost:8008/socket.io/socket.io.js" defer></script>
         <style>
+            .close {
+                opacity: 1;
+            }
             #leftMenu {
                 display: none;
+            }
+            #messages-wrap {
+                width: 300px;
+                border: 1px solid #000000;
+            }
+            #messages-wrap .message-wrap {
+                border: 1px solid #000000;
+            }
+            #messages-wrap .message-user {
+                color: green;
+            }
+            #messages-wrap .message-system {
+                color: red;
+            }
+            #messages-wrap .message-close {
+                height: 20px;
             }
         </style>
         <div class="container">
@@ -32,8 +51,8 @@
                 </div>-->
             </div>
             <div class="row">
-                <div class="col-xs-4">
-
+                <div class="col-xs-2">
+                    <div id="messages-wrap"></div>
                 </div>
             </div>
         </div>
@@ -47,13 +66,47 @@
                     return;
                 }
                 socket.on("connect", function() {
+                    var messages = $("#messages-wrap");
                     this.emit("join to channel messages", { channel: userId, userLogin: userLogin })
                             .emit("request get new messages from db")
-                            .on("response get new message from db", function(data) {
-                                console.dir(data);
-                            }).on("response get new message from client", function(data) {
-                                console.dir(data);
+                            .on("response get new messages from db", function(data) {
+                                var countRows = 0,
+                                        newMessage;
+                                for (var key in data) {
+                                    if (data[key].userId != 17) {
+                                        newMessage = '<div class="message-wrap message-user" data-id="' + data[key].messageId + '">' +
+                                                '<p class="user">' + data[key].userLogin + ':</p> ' +
+                                                '<div class="message-text">' + safe(data[key].message) + '</div>' +
+                                                '<p class="date">' + data[key].dateWrite + '</p>' +
+                                                '<p class="message-close"><span class="close">&times;</span></p>' +
+                                                '</div>';
+
+                                    } else {
+                                        newMessage = '<div class="message-wrap message-system" data-id="' + data[key].messageId + '">' +
+                                                '<p class="user">' + data[key].userLogin + ':</p> ' +
+                                                '<div class="message-text">' + safe(data[key].message) + '</div>' +
+                                                '<p class="date">' + data[key].dateWrite + '</p>' +
+                                                '<p class="message-close"><span class="close">&times;</span></p>' +
+                                                '</div>';
+                                    }
+                                    messages.append(newMessage).scrollTop(messages[0].scrollHeight);
+                                    countRows++;
+                                }
+                                console.log(data);
+                                closeMessage = messages.find(".message-close");
+
+                            }).on("response get new messages from client", function(data) {
+                                console.log(data);
                             });
+                    //var closeMessage = $(".message-close");
+                    messages.on('click', '.message-close .close', function(e){
+                        console.log($(this).parent().parent().attr('data-id'));
+
+                    });
+
+                    function safe(m) {
+                        return m;
+                    }
                 })
             })
         </script>
