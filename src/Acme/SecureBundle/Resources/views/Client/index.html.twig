@@ -67,7 +67,7 @@
                 var messages = $("#messages-wrap"), countRows = 0;
                 socket.on("connect", function() {
                     var message;
-                    this.emit("join to channel messages", { channel: '10_1', userLogin: userLogin })
+                    this.emit("join to channel messages", { channel: userId, userLogin: userLogin })
                             .emit("request get new messages from db")
                             .on("response get new messages from db", function(data) {
                                 var newMessage;
@@ -94,9 +94,8 @@
                         socket.emit("request read message", {messageId: messageId});
                     });
 
-                });
-                socket.on("response get new message from client", function(data) {
-                    console.log(data);
+                }).on("response get new message from client", function(data) {
+                    //console.log(data);
                     var newMessage;
                     if (data.userId != 17) {
                         newMessage = generateUserMessage(data);
