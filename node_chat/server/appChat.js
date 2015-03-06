@@ -84,6 +84,7 @@ io.sockets.on('connection', function (client) {
         try {
             var date = new Date(),
                 orderId = data.orderId,
+                orderNum = data.orderNum,
                 mode = data.mode,
                 userId = data.userId,
                 responseLogin = data.responseLogin,
@@ -103,7 +104,7 @@ io.sockets.on('connection', function (client) {
                     .to(channel).emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin});
                 connection.select('user', 'id', {login: responseLogin}, '', function(error, row) {
                     if (error) {throw error}
-                    client.to(row[0].id).emit("response get new message from client", {dateWrite: fullDate, message: message, userLogin: writerLogin, userId: userId, messageId: recordId, orderNum: 28});
+                    client.to(row[0].id).emit("response get new message from client", {dateWrite: fullDate, message: message, userLogin: writerLogin, userId: userId, messageId: recordId, orderNum: orderNum});
                 });
                 if (mode) {
                     // Send about denied rules
@@ -181,7 +182,7 @@ io.sockets.on('connection', function (client) {
             var params = { 'min-price': 100, 'max-price': 999999, 'max-day': 999, 'min-day': 1 };
             client.emit("response set params", {data: params});
         }
-        //client.to(data.room).emit("user in room", {name: data.name});
+        client.to(channel).emit("request set online status");
     });
 
     client.on("join to channel messages", function(data) {

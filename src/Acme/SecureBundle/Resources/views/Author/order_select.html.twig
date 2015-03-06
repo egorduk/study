@@ -194,7 +194,9 @@
                     message_txt = $("#message_text"),
                     userLogin = '{{ obj.userLogin }}',
                     clientLogin = '{{ obj.client.login }}',
+                    clientId = '{{ obj.client.id }}',
                     orderId = {{ order.id }},
+                    orderNum = {{ order.num }},
                     userId = {{ obj.userId }},
                     clientStatus = {{ obj.client.status }},
                     blockCountMsg = $("#count-msg"),
@@ -204,7 +206,7 @@
                     volumeOff = $("#volume-off"),
                     flagIsWriting = 0,
                     mode = false,
-                    channel = '10_1';
+                    channel;
 
             ion.sound({
                 sounds: [
@@ -249,6 +251,7 @@
                 clearSidebarCountRecords();
                 //systemMsg('Соединение установленно!');
                 //socket.emit("get all messages", {orderId: orderId});
+                channel = getChannel();
                 socket.emit("join to channel order", {channel: channel, userLogin: userLogin, clientLogin: clientLogin});
                 btnSendMsg.removeClass('disabled');
             });
@@ -349,7 +352,7 @@
                     return;
                 }
                 message_txt.val("");
-                socket.emit("send message", {message: text, writerLogin: userLogin, userId: userId, mode: mode, responseLogin: clientLogin, channel: channel, orderId: orderId});
+                socket.emit("send message", {message: text, writerLogin: userLogin, userId: userId, mode: mode, responseLogin: clientLogin, channel: channel, orderId: orderId, orderNum: orderNum});
             }
 
             function increaseCountMsg() {
@@ -384,6 +387,10 @@
 
             function setSidebarCountRecords(countRows) {
                 blockCountMsg.append('<span>Кол-во сообщений: <span id="dig-count">' + countRows + '</span></span>');
+            }
+
+            function getChannel() {
+                return  userId + '_' + clientId;
             }
 
 

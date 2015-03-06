@@ -568,6 +568,7 @@ class AuthorController extends Controller
                 $obj['client']['login'] = $order->getUser()->getLogin();
                 //$obj['client']['status'] = $order->getUser()->getIsActive();
                 $obj['client']['status'] = 1;
+                $obj['client']['id'] = 1;
                 $shortTask = Helper::getCutSentence($order->getTask(), 200, ' подробнее...');
                 $order->setShortTask($shortTask);
                 return $this->render(
