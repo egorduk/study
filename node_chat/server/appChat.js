@@ -1,5 +1,5 @@
 var PORT = 8008,  options = {
-   //'log level': 1
+    //'log level': 1
 };
 var express = require('express'),
     http = require('http'),
@@ -11,20 +11,20 @@ var express = require('express'),
 
 server.listen(PORT);
 /*app.use('/static', express.static(__dirname + '/static'));
-app.get('/', function (req, res) {
-    //res.sendfile(__dirname + '/index.html');
-});*/
+ app.get('/', function (req, res) {
+ //res.sendfile(__dirname + '/index.html');
+ });*/
 
 //var log4js = require('log4js');
 //var logger = log4js.getLogger();
 //var winston = require('winston');
 
 /*var MongoClient = require('mongodb').MongoClient, format = require('util').format, userListDB, chatDB;
-MongoClient.connect('mongodb://127.0.0.1:27017', function (err, db) {
-    if (err) {throw err}
-    userListDB = db.collection('users');
-    chatDB = db.collection('chat');
-});*/
+ MongoClient.connect('mongodb://127.0.0.1:27017', function (err, db) {
+ if (err) {throw err}
+ userListDB = db.collection('users');
+ chatDB = db.collection('chat');
+ });*/
 
 var transporter,
     nodemailer = require('nodemailer'),
@@ -43,19 +43,19 @@ var arrLogin = [], arrChannel = [];
 connection.connect(function (err, db) {
     if (err) {throw err}
     /*if (err) {
-        var error = new Error('something broke');
-        console.error( error.stack );
-    }*/
-   // userListDB = db.collection('users');
-   // chatDB = db.collection('chat');
+     var error = new Error('something broke');
+     console.error( error.stack );
+     }*/
+    // userListDB = db.collection('users');
+    // chatDB = db.collection('chat');
 });
 
 /*connection.queryRow(
-    'SELECT * FROM user where LanguageId=?', [3],
-    function(err, row) {
-        console.dir({queryRow:row});
-    }
-);*/
+ 'SELECT * FROM user where LanguageId=?', [3],
+ function(err, row) {
+ console.dir({queryRow:row});
+ }
+ );*/
 
 // Mix-in for Data Access Methods and SQL Autogenerating Methods
 mysqlUtilities.upgrade(connection);
@@ -64,11 +64,11 @@ mysqlUtilities.upgrade(connection);
 mysqlUtilities.introspection(connection);
 
 /*connection.queryHash(
-    'SELECT * FROM webchat_message', [],
-    function(err, result) {
-        //console.dir({rows: result});
-    }
-);*/
+ 'SELECT * FROM webchat_message', [],
+ function(err, result) {
+ //console.dir({rows: result});
+ }
+ );*/
 
 // Release connection
 //connection.end();
@@ -99,59 +99,58 @@ io.sockets.on('connection', function (client) {
                 user_order_id: orderId
             }, function(error, recordId) {
                 if (error) {throw(error)}
-               // connection.queryRow(
-                    //'SELECT login AS user_login FROM user WHERE id = ' + userId, function(error, row) {
-                       // if (error) {throw error}
-                        //var writerLogin = row.user_login, message = data.message;
-                        client.emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin})
-                            .to(channel).emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin})
-                            .to('1').emit("response get new messages from client", {date_write: fullDate, message: message, user_login: writerLogin});
-                        if (mode) {
-                            // Send about denied rules
-                            connection.insert('ban_message', {
-                                message_id: recordId
-                            }, function(error) {
-                                if (error) {throw(error)}
-                            });
-                            /*transporter.sendMail({
-                                from: 'Test email <egorduk91@gmail.com>',
-                                address: userEmail,
-                                to: 'a_1300@mail.ru',
-                                subject: 'Warning message',
-                                text: 'Warning message detected! Message ID - ' + recordId
-                                //html: '<i>html</i>'
-                            }, function(error, info){
-                                if (error) {
-                                    console.log(error);
-                                } else {
-                                    console.log('Message sent: ' + info.response);
-                                }
-                            });*/
-                        } else {
-                            // Send new email to other user
-                            /*connection.queryRow(
-                                'SELECT email AS user_email FROM user WHERE login = "' + responseLogin + '"', function(error, row) {
-                                    if (error) {throw error}
-                                    console.dir(row);
-                                    transporter.sendMail({
-                                        from: 'Test email <egorduk91@gmail.com>',
-                                        address: userEmail,
-                                        to: row.user_email,
-                                        subject: 'New message',
-                                        text: 'New message! User login - ' + writerLogin + ', message - ' + message
-                                        //html: '<i>html</i>'
-                                    }, function(error, info){
-                                        if (error) {
-                                            console.log(error);
-                                        } else {
-                                            console.log('Message sent: ' + info.response);
-                                        }
-                                    });
-                                }
-                            )*/
-                        }
-                   // }
-               // );
+                client.emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin})
+                    .to(channel).emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin});
+                connection.select('user', 'id', {login: responseLogin}, '', function(error, row) {
+                    if (error) {throw error}
+                    client.to(row[0].id).emit("response get new message from client", {dateWrite: fullDate, message: message, userLogin: writerLogin, userId: userId, messageId: recordId, orderNum: 28});
+                });
+                if (mode) {
+                    // Send about denied rules
+                    connection.insert('ban_message', {
+                        message_id: recordId
+                    }, function(error) {
+                        if (error) {throw(error)}
+                    });
+                    /*transporter.sendMail({
+                     from: 'Test email <egorduk91@gmail.com>',
+                     address: userEmail,
+                     to: 'a_1300@mail.ru',
+                     subject: 'Warning message',
+                     text: 'Warning message detected! Message ID - ' + recordId
+                     //html: '<i>html</i>'
+                     }, function(error, info){
+                     if (error) {
+                     console.log(error);
+                     } else {
+                     console.log('Message sent: ' + info.response);
+                     }
+                     });*/
+                } else {
+                    // Send new email to other user
+                    /*connection.queryRow(
+                     'SELECT email AS user_email FROM user WHERE login = "' + responseLogin + '"', function(error, row) {
+                     if (error) {throw error}
+                     console.dir(row);
+                     transporter.sendMail({
+                     from: 'Test email <egorduk91@gmail.com>',
+                     address: userEmail,
+                     to: row.user_email,
+                     subject: 'New message',
+                     text: 'New message! User login - ' + writerLogin + ', message - ' + message
+                     //html: '<i>html</i>'
+                     }, function(error, info){
+                     if (error) {
+                     console.log(error);
+                     } else {
+                     console.log('Message sent: ' + info.response);
+                     }
+                     });
+                     }
+                     )*/
+                }
+                // }
+                // );
                 console.dir({insertedID: recordId});
             });
         } catch (e) {
@@ -199,7 +198,7 @@ io.sockets.on('connection', function (client) {
         client.to(channel).emit("response disconnect user");
         delete arrChannel[clientID];
         delete arrLogin[clientID];
-       // client.leave(room); //Rooms are left automatically upon disconnection.
+        // client.leave(room); //Rooms are left automatically upon disconnection.
     });
 
     client.on("request view current online", function() {
@@ -235,7 +234,7 @@ io.sockets.on('connection', function (client) {
     });
 
     client.on("request client bid", function(data) {
-       // console.dir(data);
+        // console.dir(data);
         var day = data.day,
             price = data.replace(/\s/g, ""),
             userId = data.userId,
@@ -279,8 +278,8 @@ io.sockets.on('connection', function (client) {
                 ' INNER JOIN user_order uo ON wm.user_order_id = uo.id' +
                 ' WHERE wm.is_read = 0 AND channel REGEXP "_' + userId + '$"', function(error, rows) {
                 if (error) {throw error}
-                console.dir(rows);
-                client.emit('response get new messages from db', rows);
+                //console.dir(rows);
+                client.emit("response get new messages from db", rows);
             });
     });
 
@@ -288,7 +287,6 @@ io.sockets.on('connection', function (client) {
         var messageId = data.messageId;
         connection.update('webchat_message', {is_read: 1}, {id: messageId}, function(error) {
             if (error) {throw error}
-            console.log('server');
             client.emit("response read message");
         });
     });
@@ -365,13 +363,13 @@ io.sockets.on('connection', function (client) {
                 });
             });
         } /*else if (validator.isLength(price, 0, 2) || !validator.isInt(price)) {
-            errorMessage = 'Минимум 100 руб.';
-            errorField = 'price';
-        } else if (validator.isLength(day, 0) || !validator.isInt(day)) {
-            errorMessage = 'Минимум 1 дн.';
-            errorField = 'day';
-        }
-        client.emit('response auction bid', {errorMessage: errorMessage, errorField: errorField});*/
+         errorMessage = 'Минимум 100 руб.';
+         errorField = 'price';
+         } else if (validator.isLength(day, 0) || !validator.isInt(day)) {
+         errorMessage = 'Минимум 1 дн.';
+         errorField = 'day';
+         }
+         client.emit('response auction bid', {errorMessage: errorMessage, errorField: errorField});*/
     });
 
 
@@ -485,5 +483,5 @@ function getFullDate(d) {
     }
     return day + "." + month + "." + year + ' ' + hour + ':' + min + ':' + sec;
 }
-   // client.to('User_4666').emit('response', {message: 'HELLO', from: 'WORLD'});
+// client.to('User_4666').emit('response', {message: 'HELLO', from: 'WORLD'});
 //});

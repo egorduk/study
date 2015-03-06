@@ -64,26 +64,12 @@
                     //systemMsg('system', "Server off " + e);
                     return;
                 }
+                var messages = $("#messages-wrap"), countRows = 0;
                 socket.on("connect", function() {
-                    var messages = $("#messages-wrap"),
-                            countRows = 0,
-                            message;
+                    var message;
                     this.emit("join to channel messages", { channel: userId, userLogin: userLogin })
                             .emit("request get new messages from db")
                             .on("response get new messages from db", function(data) {
-                                var newMessage;
-                                for (var key in data) {
-                                    if (data[key].userId != 17) {
-                                        newMessage = generateUserMessage(data[key]);
-                                    } else {
-                                        newMessage = generateSystemMessage(data[key]);
-                                    }
-                                    messages.append(newMessage).scrollTop(messages[0].scrollHeight);
-                                    countRows++;
-                                }
-                                $("#count-messages").remove();
-                                messages.before('<p id="count-messages">Count: ' + countRows + '</p>');
-                            }).on("response get new messages from client", function(data) {
                                 var newMessage;
                                 for (var key in data) {
                                     if (data[key].userId != 17) {
@@ -108,32 +94,45 @@
                         socket.emit("request read message", {messageId: messageId});
                     });
 
-                    function cutSentence(a) {
-                        return a.replace(/^(.{50}[^\s]*).*/, "$1") + '...';
+                }).on("response get new message from client", function(data) {
+                    //console.log(data);
+                    var newMessage;
+                    if (data.userId != 17) {
+                        newMessage = generateUserMessage(data);
+                    } else {
+                        newMessage = generateSystemMessage(data);
                     }
+                    messages.append(newMessage).scrollTop(messages[0].scrollHeight);
+                    countRows++;
+                    $("#count-messages").remove();
+                    messages.before('<p id="count-messages">Count: ' + countRows + '</p>');
+                });
 
-                    function generateUserMessage(a) {
-                        var m = '<div class="message-wrap message-user" data-id="' + a.messageId + '">' +
-                                '<p class="order-num"><a href="../client/order/' + a.orderNum + '">Заказ № ' + a.orderNum + '</a></p> ' +
-                                '<p class="user">' + a.userLogin + ':</p> ' +
-                                '<div class="message-text">' + cutSentence(a.message) + '</div>' +
-                                '<p class="date">' + a.dateWrite + '</p>' +
-                                '<p class="message-close"><span class="close">&times;</span></p>' +
-                                '</div>';
-                        return m;
-                    }
+                function cutSentence(a) {
+                    return a.replace(/^(.{50}[^\s]*).*/, "$1") + '...';
+                }
 
-                    function generateSystemMessage(a) {
-                        var m = '<div class="message-wrap message-system" data-id="' + a.messageId + '">' +
-                                '<p class="order-num"><a href="../client/order/' + a.orderNum + '">Заказ № ' + a.orderNum + '</a></p> ' +
-                                '<p class="user">' + a.userLogin + ':</p> ' +
-                                '<div class="message-text">' + (a.message) + '</div>' +
-                                '<p class="date">' + a.dateWrite + '</p>' +
-                                '<p class="message-close"><span class="close">&times;</span></p>' +
-                                '</div>';
-                        return m;
-                    }
-                })
+                function generateUserMessage(a) {
+                    var m = '<div class="message-wrap message-user" data-id="' + a.messageId + '">' +
+                            '<p class="order-num"><a href="../client/order/' + a.orderNum + '">Заказ № ' + a.orderNum + '</a></p> ' +
+                            '<p class="user">' + a.userLogin + ':</p> ' +
+                            '<div class="message-text">' + cutSentence(a.message) + '</div>' +
+                            '<p class="date">' + a.dateWrite + '</p>' +
+                            '<p class="message-close"><span class="close">&times;</span></p>' +
+                            '</div>';
+                    return m;
+                }
+
+                function generateSystemMessage(a) {
+                    var m = '<div class="message-wrap message-system" data-id="' + a.messageId + '">' +
+                            '<p class="order-num"><a href="../client/order/' + a.orderNum + '">Заказ № ' + a.orderNum + '</a></p> ' +
+                            '<p class="user">' + a.userLogin + ':</p> ' +
+                            '<div class="message-text">' + (a.message) + '</div>' +
+                            '<p class="date">' + a.dateWrite + '</p>' +
+                            '<p class="message-close"><span class="close">&times;</span></p>' +
+                            '</div>';
+                    return m;
+                }
             })
         </script>
     {% endblock %}
