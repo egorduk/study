@@ -70,7 +70,7 @@
             }
         </style>
         <div class="container">
-        <!--<div class="row">
+        {#<div class="row">
             <div class="col-md-7">
                 <div id="block-about-order">
                     <ul>
@@ -102,7 +102,7 @@
                     {% endif %}
                 </div>
             </div>
-        </div>-->
+        </div>#}
         <!--<div class="row">
             <div id="block-about-bids">
                 <ul>
@@ -114,7 +114,7 @@
         </div>-->
         {% include 'AcmeSecureBundle:Windows:success.html.twig' with {'message': 'Ставка поставлена!'} %}
         {% include 'AcmeSecureBundle:Windows:error.html.twig' with {'message': 'Ошибка!'} %}
-        <!--<div class="row">
+       {# <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 {% form_theme formBid "TwigBundle::layout.html.twig" %}
                 {{ form_start(formBid, {'attr': {'id' : 'formBid'}}) }}
@@ -150,21 +150,47 @@
                     </div>
                 </div>
                 {{ form_end(formBid) }}
-                <div id="dialog-message-confirm-selection" title="Подтверждение выполнения заказа">
+                &#123;&#35;<div id="dialog-message-confirm-selection" title="Подтверждение выполнения заказа">
                     <p>
                         <span class="icon-help-3" style="float:left;"></span>
                         Вы согласны успешно и в срок выполнить данный заказ?
                     </p>
-                </div>
+                </div>&#35;&#125;
             </div>
-        </div>-->
-        <!--<div class="col-md-offset-1">
+        </div>#}
+        <div class="col-md-offset-1">
             <div>
                 <table id="listBids"></table>
                 <div id="pagerBids"></div>
                 {% include "AcmeSecureBundle:Secure:layout_context_menu.html.twig" %}
             </div>
-        </div>-->
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="modal fade " id="modal-confirm-client-bid" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="modal-label">Принять ставку заказчика</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label id="client-bid-price">Цена: </label>
+                                </div>
+                                <div class="form-group">
+                                    <label id="client-bid-day">Дней: </label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="btn-confirm-client-bid-confirm">Принять</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Отказать</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="demo">
             <div class="chat">
                 <div class="messages" id="messages"></div>
@@ -194,7 +220,9 @@
                     message_txt = $("#message_text"),
                     userLogin = '{{ obj.userLogin }}',
                     clientLogin = '{{ obj.client.login }}',
+                    clientId = '{{ obj.client.id }}',
                     orderId = {{ order.id }},
+                    orderNum = {{ order.num }},
                     userId = {{ obj.userId }},
                     clientStatus = {{ obj.client.status }},
                     blockCountMsg = $("#count-msg"),
@@ -204,7 +232,12 @@
                     volumeOff = $("#volume-off"),
                     flagIsWriting = 0,
                     mode = false,
-                    channel = '10_1';
+                    modalConfirmClientBid = $('#modal-confirm-client-bid'),
+                    channel;
+
+            /*modalConfirmClientBid.modal().on('hidden.bs.modal', function () {
+
+            });*/
 
             ion.sound({
                 sounds: [
@@ -249,8 +282,16 @@
                 clearSidebarCountRecords();
                 //systemMsg('Соединение установленно!');
                 //socket.emit("get all messages", {orderId: orderId});
-                socket.emit("join to channel order", {channel: channel, userLogin: userLogin, clientLogin: clientLogin});
+                channel = getChannel();
+                this.emit("join to channel order", {channel: channel, userLogin: userLogin, clientLogin: clientLogin});
                 btnSendMsg.removeClass('disabled');
+            }).on("response auction bid", function(data) {
+                var price = data.price, day = data.day, bidId = data.bidId;
+                modalConfirmClientBid.find("#client-bid-price").append('<span id="price">' + price + ' руб.' + '</span>');
+                modalConfirmClientBid.find("#client-bid-day").append('<span id="day">' + day + ' дн.' + '</span>');
+                modalConfirmClientBid.attr("data-id", bidId);
+                modalConfirmClientBid.modal('show');
+                //console.log(data);
             });
 
             socket.on("response disconnect user", function() {
@@ -349,7 +390,7 @@
                     return;
                 }
                 message_txt.val("");
-                socket.emit("send message", {message: text, writerLogin: userLogin, userId: userId, mode: mode, responseLogin: clientLogin, channel: channel, orderId: orderId});
+                socket.emit("send message", {message: text, writerLogin: userLogin, userId: userId, mode: mode, responseLogin: clientLogin, channel: channel, orderId: orderId, orderNum: orderNum});
             }
 
             function increaseCountMsg() {
@@ -386,9 +427,11 @@
                 blockCountMsg.append('<span>Кол-во сообщений: <span id="dig-count">' + countRows + '</span></span>');
             }
 
+            function getChannel() {
+                return  userId + '_' + clientId;
+            }
 
-
-            document.title = "Просмотр заказа №" + {{ order.num }};
+            //document.title = "Просмотр заказа №" + {{ order.num }};
             $.fn.button.noConflict();
             var grid = $("#listBids");
             grid.jqGrid({
@@ -408,11 +451,11 @@
                     {name:'comment',index:'comment',width:220,align:'center',resizable:false,editable:false,sortable:false,formatter: customComment},
                     {name:'action',width:100,align:'center',sortable:false,resize:false,formatter:function() {
                         return "<div class='refresh-bid' style='margin-left:8px;'>" +
-                                "<div style='float:left;margin-left:5px;' data-title='Установить заново' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='left'>" +
+                                "<div style='float:left;margin-left:5px;' data-title='Установить заново' title='Установить заново' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='left'>" +
                                 "<span class='icon-arrows-cw'></span></div></div>" +
-                                "<div class='delete-bid' style='margin-left:8px;'>" +
-                                "<div style='float:left;margin-left:5px;' data-title='Удалить ставку' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='left'>" +
-                                "<span class='icon-trash-1'></span></div></div>";
+                                "<div class='cancel-bid' style='margin-left:8px;'>" +
+                                "<div style='float:left;margin-left:5px;' data-title='Отменить ставку' title='Отменить ставку' onmouseover=\"$(this).tooltip('show')\" data-toggle='tooltip' data-placement='left'>" +
+                                "<span class='icon-cancel-6'></span></div></div>";
                     }}
                 ],
                 rowNum: 100,
@@ -429,7 +472,8 @@
                 loadComplete : function() {
                     grid.find("tr").find("td").removeAttr('title');
                     {% if (obj.confirmSelection) %}
-                    $("#dialog-message-confirm-selection").dialog({
+                    //modalConfirmClientBid.modal('show');
+                    /*$("#dialog-message-confirm-selection").dialog({
                         modal: true,
                         resizable: false,
                         height: 230,
@@ -466,7 +510,7 @@
                         },
                         close: function() {
                         }
-                    });
+                    });*/
                     {% endif %}
                     var zeroTr = $("#listBids tr.ui-widget-content").eq(0);
                     zeroTr.addClass('ui-state-active').find('.refresh-bid').addClass('hidden');
@@ -488,7 +532,7 @@
                             });
                         }
                     });
-                    $(".delete-bid").click(function(e) {
+                    $(".cancel-bid").click(function(e) {
                         var rowId = getRowId(e);
                         if (rowId) {
                             $.ajax({

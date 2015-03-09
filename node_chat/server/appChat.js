@@ -1,4 +1,4 @@
-var PORT = 8008,  options = {
+var PORT = 8008, options = {
     //'log level': 1
 };
 var express = require('express'),
@@ -84,6 +84,7 @@ io.sockets.on('connection', function (client) {
         try {
             var date = new Date(),
                 orderId = data.orderId,
+                orderNum = data.orderNum,
                 mode = data.mode,
                 userId = data.userId,
                 responseLogin = data.responseLogin,
@@ -103,7 +104,7 @@ io.sockets.on('connection', function (client) {
                     .to(channel).emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin});
                 connection.select('user', 'id', {login: responseLogin}, '', function(error, row) {
                     if (error) {throw error}
-                    client.to(row[0].id).emit("response get new message from client", {dateWrite: fullDate, message: message, userLogin: writerLogin, userId: userId, messageId: recordId, orderNum: 28});
+                    client.to(row[0].id).emit("response get new message from client", {dateWrite: fullDate, message: message, userLogin: writerLogin, userId: userId, messageId: recordId, orderNum: orderNum});
                 });
                 if (mode) {
                     // Send about denied rules
@@ -178,10 +179,9 @@ io.sockets.on('connection', function (client) {
         var typeConnection = data.type;
         if (typeConnection == 'client_index') {
         } else if (typeConnection == 'client_select_author') {
-            var params = { 'min-price': 100, 'max-price': 999999, 'max-day': 999, 'min-day': 1 };
-            client.emit("response set params", {data: params});
+           /* var params = { 'min-price': 100, 'max-price': 999999, 'max-day': 999, 'min-day': 1 };
+            client.emit("response set params", {data: params});*/
         }
-        //client.to(data.room).emit("user in room", {name: data.name});
     });
 
     client.on("join to channel messages", function(data) {
@@ -190,6 +190,10 @@ io.sockets.on('connection', function (client) {
         arrChannel[clientID] = channel;
         client.join(channel);
         console.log("Connected - " + arrLogin[clientID] + " to channel messages - " + channel);
+        connection.update('user', {is_active: 1}, {login: data.userLogin, is_active: 0}, function(error) {
+            if (error) {throw error}
+            //client.to(channel).emit("request set online status");
+        });
     });
 
     client.on("disconnect", function() {
@@ -354,10 +358,10 @@ io.sockets.on('connection', function (client) {
                     //date_auction: dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss"),
                     user_id: authorId,
                     user_order_id: orderId
-                }, function(error) {
+                }, function(error, insertedId) {
                     if (error) {throw error}
                     client.emit('response auction bid');
-                    client.to(channel).emit('response auction bid');
+                    client.to(channel).emit('response auction bid', {price: data.price, day: day, bidId: insertedId});
                     createSystemMsg({orderId: orderId, type: 'create_auction_bid', channel: channel});
                     //sendMail('create_auction_bid', data);
                 });

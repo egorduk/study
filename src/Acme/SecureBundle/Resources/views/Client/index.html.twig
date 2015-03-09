@@ -7,7 +7,7 @@
         <script type="text/javascript" src="{{ asset('bundles/js/jquery.cookie.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/sound/ion.sound.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/modal_window/jquery.alert.js') }}"></script>
-        <script src="http://localhost:8008/socket.io/socket.io.js" defer></script>
+        <script src="http://localhost:8009/socket.io/socket.io.js" defer></script>
         <style>
             .close {
                 opacity: 1;
@@ -57,16 +57,17 @@
         </div>
         <script>
             $(document).ready(function() {
-                var userLogin = '{{ user.login }}', userId = {{ user.id }};
+                var userLogin = '{{ user.login }}',
+                        userId = {{ user.id }},
+                        message;
                 try {
-                    var socket = io.connect('http://localhost:8008', { 'forceNew': true });
+                    var socket = io.connect('http://localhost:8009', { 'forceNew': true });
                 } catch(e) {
                     //systemMsg('system', "Server off " + e);
                     return;
                 }
                 var messages = $("#messages-wrap"), countRows = 0;
                 socket.on("connect", function() {
-                    var message;
                     this.emit("join to channel messages", { channel: userId, userLogin: userLogin })
                             .emit("request get new messages from db")
                             .on("response get new messages from db", function(data) {
@@ -82,18 +83,7 @@
                                 }
                                 $("#count-messages").remove();
                                 messages.before('<p id="count-messages">Count: ' + countRows + '</p>');
-                            }).on("response read message", function() {
-                                countRows--;
-                                $("#count-messages").remove();
-                                messages.before('<p id="count-messages">Count: ' + countRows + '</p>');
-                                message.fadeOut();
                             });
-                    messages.on('click', '.message-close .close', function(e) {
-                        message = $(this).parent().parent();
-                        var messageId = message.attr('data-id');
-                        socket.emit("request read message", {messageId: messageId});
-                    });
-
                 }).on("response get new message from client", function(data) {
                     //console.log(data);
                     var newMessage;
@@ -106,6 +96,17 @@
                     countRows++;
                     $("#count-messages").remove();
                     messages.before('<p id="count-messages">Count: ' + countRows + '</p>');
+                }).on("response read message", function() {
+                    countRows--;
+                    $("#count-messages").remove();
+                    messages.before('<p id="count-messages">Count: ' + countRows + '</p>');
+                    message.fadeOut();
+                });
+
+                messages.on('click', '.message-close .close', function(e) {
+                    message = $(this).parent().parent();
+                    var messageId = message.attr('data-id');
+                    socket.emit("request read message", {messageId: messageId});
                 });
 
                 function cutSentence(a) {
