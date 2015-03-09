@@ -75,15 +75,6 @@
             .ui-jqgrid tr.jqgrow td {
                 font-size: 18px !important;
             }
-            .Message {
-                position: relative;
-            }*
-             .Message-body {
-                 font-size: 18px;
-             }
-            #modal-window-success-auction, #window-error-cancel-bid {
-                display: none;
-            }
             .block-file{
                 border: 1px solid #000000;
                 width: 300px;
@@ -103,9 +94,7 @@
                 resize: none;
                 overflow: auto;
             }
-            .modal-dialog {
-                width: 400px !important;
-            }
+            .modal-dialog { width: 400px !important; }
             .ui-tabs-vertical { width: 55em; }
             .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
             .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
@@ -736,7 +725,7 @@
                                 }
                             });
                             $(".auction-bid").on('click', function(e) {
-                                var rowId = getRowId(e), row = getRow($(this));
+                                var row = getRow($(this));
                                 if (getRowId(e) && row) {
                                     var ch = getChannel(row),
                                             auctionPrice = $("#auction-price"),
@@ -801,7 +790,7 @@
                                                 }
                                                 arrOpenChat[channel].on("connect", function() {
                                                     data.authorLogin = getAuthorLogin(row);
-                                                    this.emit("join to channel order", {room: channel, clientLogin: userLogin, authorLogin: authorLogin})
+                                                    this.emit("join to channel order", {channel: channel, clientLogin: userLogin, authorLogin: authorLogin})
                                                             .emit("request auction bid", data);
                                                 }).on("response auction bid", function() {
                                                     disconnectChannel(this);

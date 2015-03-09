@@ -7,7 +7,7 @@
         <script type="text/javascript" src="{{ asset('bundles/js/jquery.cookie.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/sound/ion.sound.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/modal_window/jquery.alert.js') }}"></script>
-        <script src="http://localhost:8008/socket.io/socket.io.js" defer></script>
+        <script src="http://localhost:8009/socket.io/socket.io.js" defer></script>
         <style>
             .close {
                 opacity: 1;
@@ -61,7 +61,7 @@
                         userId = {{ user.id }},
                         message;
                 try {
-                    var socket = io.connect('http://localhost:8008', { 'forceNew': true });
+                    var socket = io.connect('http://localhost:8009', { 'forceNew': true });
                 } catch(e) {
                     //systemMsg('system', "Server off " + e);
                     return;
