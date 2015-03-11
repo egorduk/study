@@ -79,6 +79,7 @@ var validator = require('validator');
 
 io.sockets.on('connection', function (client) {
     var clientID = (client.id).toString();
+    //console.log(clientID);
 
     client.on("send message", function (data) {
         try {
@@ -185,14 +186,19 @@ io.sockets.on('connection', function (client) {
     });
 
     client.on("join to channel messages", function(data) {
-        var channel = data.channel;
-        arrLogin[clientID] = data.userLogin;
-        arrChannel[clientID] = channel;
-        client.join(channel);
-        console.log("Connected - " + arrLogin[clientID] + " to channel messages - " + channel);
-        connection.update('user', {is_active: 1}, {login: data.userLogin, is_active: 0}, function(error) {
-            if (error) {throw error}
-            //client.to(channel).emit("request set online status");
+        checkCredential({userId: data.channel, hashCmp: data.hash}, function(a) {
+            console.log(a);
+            if (a == 1) {
+                var channel = data.channel;
+                arrLogin[clientID] = data.userLogin;
+                arrChannel[clientID] = channel;
+                client.join(channel);
+                console.log("Connected - " + arrLogin[clientID] + " to channel messages - " + channel);
+                connection.update('user', {is_active: 1}, {login: data.userLogin, is_active: 0}, function(error) {
+                    if (error) {throw error}
+                    //client.to(channel).emit("request set online status");
+                });
+            }
         });
     });
 
@@ -376,6 +382,22 @@ io.sockets.on('connection', function (client) {
          client.emit('response auction bid', {errorMessage: errorMessage, errorField: errorField});*/
     });
 
+
+    function checkCredential(data, callback) {
+        var hashCmp = data.hashCmp, userId = data.userId, a;
+        connection.select('user', 'hash_cmp', {id: userId, hash_cmp: hashCmp}, '', function(error, row) {
+            if (error) {throw error}
+            a = row.length;
+            //console.dir(row);
+            //console.dir(a);
+            if (a == 1) {
+                callback(1);
+            } else {
+                callback(0);
+            }
+        });
+
+    }
 
     function sendMail(type, data) {
         var  from = 'Test email <egorduk91@gmail.com>', to, subject, text, html;

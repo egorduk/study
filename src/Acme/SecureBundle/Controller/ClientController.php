@@ -55,7 +55,10 @@ class ClientController extends Controller
         $userRole = $user->getUserRole()->getName();
         //$avatar = Helper::getUserAvatar($user);
         $user = Helper::getUserAvatar($user);
-        return array('user' => $user, 'whenLogin' => $whenLogin, 'remainingTime' => $sessionRemaining);
+        //var_dump($user->getHashCompare());
+        $obj = [];
+        $obj['hashCmp'] = $user->getHashCompare();
+        return array('user' => $user, 'whenLogin' => $whenLogin, 'remainingTime' => $sessionRemaining, 'obj' => $obj);
     }
 
 
@@ -331,6 +334,7 @@ class ClientController extends Controller
                     $obj = [];
                     $obj['userLogin'] = $user->getLogin();
                     $obj['userId'] = $user->getId();
+                    $obj['hashCmp'] = $user->getHashCompare();
                     //$obj['author']['login'] = $order->getUser()->getLogin();
                     //$obj['author']['status'] = $order->getUser()->getIsActive();
                     $obj['author']['login'] = 'author';

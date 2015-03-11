@@ -74,6 +74,11 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string")
      */
+    protected $hash_cmp;
+
+    /**
+     * @ORM\Column(type="string")
+     */
     protected $avatar;
 
     /**
@@ -238,6 +243,14 @@ class User implements UserInterface, \Serializable
     public function setHash($hash)
     {
         $this->hash_code = $hash;
+    }
+
+    public function getHashCompare() {
+        return $this->hash_cmp;
+    }
+
+    public function setHashCompare($val) {
+        $this->hash_cmp = $val;
     }
 
     public function getIsBan()
