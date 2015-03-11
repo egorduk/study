@@ -60,7 +60,7 @@
             $(document).ready(function() {
                 var userLogin = '{{ user.login }}',
                         userId = {{ user.id }},
-                        hashCmp = '{{ obj.hashCmp }}',
+                        token = '{{ obj.token }}',
                         message;
                 try {
                     var socket = io.connect('http://localhost:8008', { 'forceNew': true });
@@ -70,7 +70,7 @@
                 }
                 var messages = $("#messages-wrap"), countRows = 0;
                 socket.on("connect", function() {
-                    this.emit("join to channel messages", { channel: userId, userLogin: userLogin, hash: hashCmp })
+                    this.emit("join to channel messages", { channel: userId, userLogin: userLogin, token: token })
                             .emit("request get new messages from db")
                             .on("response get new messages from db", function(data) {
                                 var newMessage;

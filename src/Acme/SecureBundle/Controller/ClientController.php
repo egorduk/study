@@ -57,7 +57,7 @@ class ClientController extends Controller
         $user = Helper::getUserAvatar($user);
         //var_dump($user->getHashCompare());
         $obj = [];
-        $obj['hashCmp'] = $user->getHashCompare();
+        $obj['token'] = $user->getToken();
         return array('user' => $user, 'whenLogin' => $whenLogin, 'remainingTime' => $sessionRemaining, 'obj' => $obj);
     }
 
