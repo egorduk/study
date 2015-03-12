@@ -81,6 +81,49 @@ io.sockets.on('connection', function (client) {
     var clientID = (client.id).toString();
     //console.log(clientID);
 
+    client.on("join to channel order", function(data) {
+        var channel = data.channel;
+        arrLogin[clientID] = data.userLogin;
+        arrChannel[clientID] = channel;
+        client.join(channel);
+        console.log("Connected - " + arrLogin[clientID] + " to channel order - " + channel);
+        /*Init variable for send mailing*/
+        transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: userEmail,
+                pass: passEmail
+            }
+        }, function(error) {
+            if (error) {throw error}
+        });
+        var typeConnection = data.type;
+        if (typeConnection == 'client_index') {
+        } else if (typeConnection == 'client_select_author') {
+            /* var params = { 'min-price': 100, 'max-price': 999999, 'max-day': 999, 'min-day': 1 };
+             client.emit("response set params", {data: params});*/
+        }
+    });
+
+    client.on("join to channel messages", function(data) {
+        checkCredential({userId: data.channel, token: data.token}, function(a) {
+            console.log(a);
+            if (a) {
+                var channel = data.channel;
+                arrLogin[clientID] = data.userLogin;
+                arrChannel[clientID] = channel;
+                client.join(channel);
+                console.log("Connected - " + arrLogin[clientID] + " to channel messages - " + channel);
+                connection.update('user', {is_active: 1}, {login: data.userLogin, is_active: 0}, function(error) {
+                    if (error) {throw error}
+                    //client.to(channel).emit("request set online status");
+                });
+            } else {
+                createErrorLog({userId: data.channel, channel: data.channel, token: data.token, type: 'join_channel_messages'});
+            }
+        });
+    });
+
     client.on("send message", function (data) {
         try {
             var date = new Date(),
@@ -159,48 +202,7 @@ io.sockets.on('connection', function (client) {
             console.log(e);
             client.disconnect();
         }
-    });
-
-    client.on("join to channel order", function(data) {
-        var channel = data.channel;
-        arrLogin[clientID] = data.userLogin;
-        arrChannel[clientID] = channel;
-        client.join(channel);
-        console.log("Connected - " + arrLogin[clientID] + " to channel order - " + channel);
-        /*Init variable for send mailing*/
-        transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: userEmail,
-                pass: passEmail
-            }
-        }, function(error) {
-            if (error) {throw error}
-        });
-        var typeConnection = data.type;
-        if (typeConnection == 'client_index') {
-        } else if (typeConnection == 'client_select_author') {
-           /* var params = { 'min-price': 100, 'max-price': 999999, 'max-day': 999, 'min-day': 1 };
-            client.emit("response set params", {data: params});*/
-        }
-    });
-
-    client.on("join to channel messages", function(data) {
-        checkCredential({userId: data.channel, hashCmp: data.hash}, function(a) {
-            console.log(a);
-            if (a == 1) {
-                var channel = data.channel;
-                arrLogin[clientID] = data.userLogin;
-                arrChannel[clientID] = channel;
-                client.join(channel);
-                console.log("Connected - " + arrLogin[clientID] + " to channel messages - " + channel);
-                connection.update('user', {is_active: 1}, {login: data.userLogin, is_active: 0}, function(error) {
-                    if (error) {throw error}
-                    //client.to(channel).emit("request set online status");
-                });
-            }
-        });
-    });
+    })
 
     client.on("disconnect", function() {
         var channel = arrChannel[clientID], login = arrLogin[clientID];
@@ -384,13 +386,10 @@ io.sockets.on('connection', function (client) {
 
 
     function checkCredential(data, callback) {
-        var hashCmp = data.hashCmp, userId = data.userId, a;
-        connection.select('user', 'hash_cmp', {id: userId, hash_cmp: hashCmp}, '', function(error, row) {
+        var token = data.token, userId = data.userId;
+        connection.select('user', 'token', {id: userId, token: token}, '', function(error, row) {
             if (error) {throw error}
-            a = row.length;
-            //console.dir(row);
-            //console.dir(a);
-            if (a == 1) {
+            if (row.length) {
                 callback(1);
             } else {
                 callback(0);
@@ -481,6 +480,18 @@ io.sockets.on('connection', function (client) {
             client.to(channel).emit("show system message", {login: system, date_msg: fullDate, message: message});
             client.emit("show system message", {login: system, date_msg: fullDate, message: message});
         });
+    }
+
+    function createErrorLog(data) {
+        console.dir(data);
+        connection.insert('error_log', {
+            content: data.type,
+            user_id: data.userId,
+            token: data.token,
+            channel: data.channel
+        }, function(error) {
+            if (error) {throw(error)}
+        })
     }
 });
 

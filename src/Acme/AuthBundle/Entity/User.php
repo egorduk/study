@@ -74,7 +74,7 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string")
      */
-    protected $hash_cmp;
+    protected $token;
 
     /**
      * @ORM\Column(type="string")
@@ -245,12 +245,12 @@ class User implements UserInterface, \Serializable
         $this->hash_code = $hash;
     }
 
-    public function getHashCompare() {
-        return $this->hash_cmp;
+    public function getToken() {
+        return $this->token;
     }
 
-    public function setHashCompare($val) {
-        $this->hash_cmp = $val;
+    public function setToken($val) {
+        $this->token = $val;
     }
 
     public function getIsBan()
