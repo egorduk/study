@@ -17,6 +17,8 @@
         <script type="text/javascript" src="{{ asset('bundles/js/script_order.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/sound/ion.sound.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-maxlength.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/script_jqgrid.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/script_socket_helper.js') }}"></script>
         <script src="http://localhost:8008/socket.io/socket.io.js" defer></script>
         <style>
             .col-md-2 {
@@ -158,13 +160,13 @@
                 </div>&#35;&#125;
             </div>
         </div>#}
-        <div class="col-md-offset-1">
+        {#<div class="col-md-offset-1">
             <div>
                 <table id="listBids"></table>
                 <div id="pagerBids"></div>
                 {% include "AcmeSecureBundle:Secure:layout_context_menu.html.twig" %}
             </div>
-        </div>
+        </div>#}
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <div class="modal fade " id="modal-confirm-client-bid" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
@@ -233,7 +235,9 @@
                     flagIsWriting = 0,
                     mode = false,
                     modalConfirmClientBid = $('#modal-confirm-client-bid'),
-                    channel;
+                    channel,
+                    socketHelper,
+                    serverHost = 'http://localhost:8008';
 
             /*modalConfirmClientBid.modal().on('hidden.bs.modal', function () {
 
@@ -257,7 +261,7 @@
             $('.chat .nick').text(userLogin);
 
             try {
-                var socket = io.connect('http://localhost:8008');
+                var socket = io.connect(serverHost);
             } catch(e) {
                 systemMsg("Сервер выключен");
                 return;
@@ -282,8 +286,9 @@
                 clearSidebarCountRecords();
                 //systemMsg('Соединение установленно!');
                 //socket.emit("get all messages", {orderId: orderId});
-                channel = getChannel();
-                this.emit("join to channel order", {channel: channel, userLogin: userLogin, clientLogin: clientLogin});
+                var channel = getChannel();
+                socketHelper = new SocketHelper({channel: channel, authorLogin: userLogin, clientLogin: clientLogin});
+                this.emit("join to channel order", socketHelper.join_to_channel_order_params);
                 btnSendMsg.removeClass('disabled');
             }).on("response auction bid", function(data) {
                 var price = data.price, day = data.day, bidId = data.bidId;
@@ -292,26 +297,18 @@
                 modalConfirmClientBid.attr("data-id", bidId);
                 modalConfirmClientBid.modal('show');
                 //console.log(data);
-            });
-
-            socket.on("response disconnect user", function() {
+            }).on("response disconnect user", function() {
                 inChat.addClass("hidden");
-            });
-
-            socket.on("disconnect", function() {
-                disconnectUser();
-            });
-
-            socket.on("response get all messages", function(data) {
+            }).on("disconnect", function() {
+                //disconnectUser();
+            }).on("response get all messages", function(data) {
                 var countRows = 0;
                 for (var key in data) {
                     countRows++;
                     userMsg(data[key].user_login, data[key].message, data[key].date_write);
                 }
                 setSidebarCountRecords(countRows);
-            });
-
-            socket.on("show new message", function(data) {
+            }).on("show new message", function(data) {
                 //console.dir(data);
                 if ($.cookie('volume_msg') == 1 && data.user_login != userLogin) {
                     ion.sound.play("button_tiny");
@@ -319,19 +316,13 @@
                 userMsg(data.user_login, data.message, data.date_write);
                 increaseCountMsg();
                 message_txt.focus();
-            });
-
-            socket.on("user in room", function() {
+            }).on("user in room", function() {
                 //console.dir(data);
                 inChat.removeClass("hidden");
                 socket.emit("request view current online");
-            });
-
-            socket.on("response view current online", function() {
+            }).on("response view current online", function() {
                 inChat.removeClass("hidden");
-            });
-
-            socket.on("response user write", function() {
+            }).on("response user write", function() {
                 if (flagIsWriting == 0) {
                     var msg = '<div id="msg-writing" class="msg system" style="display: none"><p>Печатает...</p></div>';
                     $("#is-writing").append(msg);

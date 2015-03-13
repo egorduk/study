@@ -106,7 +106,7 @@ io.sockets.on('connection', function (client) {
     });
 
     client.on("join to channel messages", function(data) {
-        checkCredential({userId: data.channel, token: data.token}, function(a) {
+        checkCredentials({userId: data.channel, token: data.token}, function(a) {
             console.log(a);
             if (a) {
                 var channel = data.channel;
@@ -124,84 +124,81 @@ io.sockets.on('connection', function (client) {
         });
     });
 
-    client.on("send message", function (data) {
-        try {
-            var date = new Date(),
-                orderId = data.orderId,
-                orderNum = data.orderNum,
-                mode = data.mode,
-                userId = data.userId,
-                responseLogin = data.responseLogin,
-                fullDate = getFullDate(date),
-                writerLogin = data.writerLogin,
-                channel = data.channel,
-                message = data.message;
-            console.dir(data);
-            connection.insert('webchat_message', {
-                message: message,
-                channel: channel,
-                user_id: userId,
-                user_order_id: orderId
-            }, function(error, recordId) {
-                if (error) {throw(error)}
-                client.emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin})
-                    .to(channel).emit("show new message", {date_write: fullDate, message: message, user_login: writerLogin});
-                connection.select('user', 'id', {login: responseLogin}, '', function(error, row) {
-                    if (error) {throw error}
-                    client.to(row[0].id).emit("response get new message from client", {dateWrite: fullDate, message: message, userLogin: writerLogin, userId: userId, messageId: recordId, orderNum: orderNum});
+    client.on("create new message", function (data) {
+        var date = new Date(),
+            orderId = data.orderId,
+           // orderNum = data.orderNum,
+            mode = data.mode,
+            userId = data.userId,
+            responseLogin = data.responseLogin,
+            fullDate = getFullDate(date),
+            writerLogin = data.writerLogin,
+            //channel = data.channel,
+            channel = arrChannel[clientID],
+            messageText = data.messageText;
+        console.dir(data);
+        connection.insert('webchat_message', {
+            message: messageText,
+            channel: channel,
+            user_id: userId,
+            user_order_id: orderId
+        }, function(error, recordId) {
+            if (error) {throw(error)}
+            client.emit("show new message", {date_write: fullDate, messageText: messageText, user_login: writerLogin})
+                .to(channel).emit("show new message", {date_write: fullDate, messageText: messageText, user_login: writerLogin});
+           /* connection.select('user', 'id', {login: responseLogin}, '', function(error, row) {
+                if (error) {throw error}
+                client.to(row[0].id).emit("response get new message from client", {dateWrite: fullDate, messageText: messageText, userLogin: writerLogin, userId: userId, messageId: recordId, orderNum: orderNum});
+            });*/
+            if (mode) {
+                // Send about denied rules
+                connection.insert('ban_message', {
+                    message_id: recordId
+                }, function(error) {
+                    if (error) {throw(error)}
                 });
-                if (mode) {
-                    // Send about denied rules
-                    connection.insert('ban_message', {
-                        message_id: recordId
-                    }, function(error) {
-                        if (error) {throw(error)}
-                    });
-                    /*transporter.sendMail({
-                     from: 'Test email <egorduk91@gmail.com>',
-                     address: userEmail,
-                     to: 'a_1300@mail.ru',
-                     subject: 'Warning message',
-                     text: 'Warning message detected! Message ID - ' + recordId
-                     //html: '<i>html</i>'
-                     }, function(error, info){
-                     if (error) {
-                     console.log(error);
-                     } else {
-                     console.log('Message sent: ' + info.response);
-                     }
-                     });*/
-                } else {
-                    // Send new email to other user
-                    /*connection.queryRow(
-                     'SELECT email AS user_email FROM user WHERE login = "' + responseLogin + '"', function(error, row) {
-                     if (error) {throw error}
-                     console.dir(row);
-                     transporter.sendMail({
-                     from: 'Test email <egorduk91@gmail.com>',
-                     address: userEmail,
-                     to: row.user_email,
-                     subject: 'New message',
-                     text: 'New message! User login - ' + writerLogin + ', message - ' + message
-                     //html: '<i>html</i>'
-                     }, function(error, info){
-                     if (error) {
-                     console.log(error);
-                     } else {
-                     console.log('Message sent: ' + info.response);
-                     }
-                     });
-                     }
-                     )*/
-                }
-                // }
-                // );
-                console.dir({insertedID: recordId});
-            });
-        } catch (e) {
-            console.log(e);
-            client.disconnect();
-        }
+                /*transporter.sendMail({
+                 from: 'Test email <egorduk91@gmail.com>',
+                 address: userEmail,
+                 to: 'a_1300@mail.ru',
+                 subject: 'Warning message',
+                 text: 'Warning message detected! Message ID - ' + recordId
+                 //html: '<i>html</i>'
+                 }, function(error, info){
+                 if (error) {
+                 console.log(error);
+                 } else {
+                 console.log('Message sent: ' + info.response);
+                 }
+                 });*/
+            } else {
+                // Send new email to other user
+                /*connection.queryRow(
+                 'SELECT email AS user_email FROM user WHERE login = "' + responseLogin + '"', function(error, row) {
+                 if (error) {throw error}
+                 console.dir(row);
+                 transporter.sendMail({
+                 from: 'Test email <egorduk91@gmail.com>',
+                 address: userEmail,
+                 to: row.user_email,
+                 subject: 'New message',
+                 text: 'New message! User login - ' + writerLogin + ', message - ' + message
+                 //html: '<i>html</i>'
+                 }, function(error, info){
+                 if (error) {
+                 console.log(error);
+                 } else {
+                 console.log('Message sent: ' + info.response);
+                 }
+                 });
+                 }
+                 )*/
+            }
+            // }
+            // );
+            console.dir({insertedID: recordId});
+        });
+        //client.disconnect();
     })
 
     client.on("disconnect", function() {
@@ -385,7 +382,7 @@ io.sockets.on('connection', function (client) {
     });
 
 
-    function checkCredential(data, callback) {
+    function checkCredentials(data, callback) {
         var token = data.token, userId = data.userId;
         connection.select('user', 'token', {id: userId, token: token}, '', function(error, row) {
             if (error) {throw error}
