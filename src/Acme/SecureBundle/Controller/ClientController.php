@@ -334,7 +334,7 @@ class ClientController extends Controller
                     $obj = [];
                     $obj['userLogin'] = $user->getLogin();
                     $obj['userId'] = $user->getId();
-                    $obj['hashCmp'] = $user->getHashCompare();
+                    $obj['token'] = $user->getToken();
                     //$obj['author']['login'] = $order->getUser()->getLogin();
                     //$obj['author']['status'] = $order->getUser()->getIsActive();
                     $obj['author']['login'] = 'author';
