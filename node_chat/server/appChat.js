@@ -296,11 +296,17 @@ io.sockets.on('connection', function (client) {
     });
 
     client.on("request read message", function (data) {
-        var messageId = data.messageId;
-        connection.update('webchat_message', {is_read: 1}, {id: messageId}, function(error) {
+        var messageId = data.messageId, userId = arrChannel[clientID];
+        connection.select('webchat_message', 'id', {user_id: userId, id: messageId, is_read: 0}, '', function(error, row) {
             if (error) {throw error}
-            client.emit("response read message");
-        });
+            if (row.length) {
+                connection.update('webchat_message', {is_read: 1}, {id: messageId}, function(error) {
+                    if (error) {throw error}
+                    console.log('Read message - ' + messageId);
+                    client.emit("response read message");
+                })
+            }
+        })
     });
 
     client.on("request hide bid", function (data) {
