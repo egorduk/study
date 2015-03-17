@@ -10,8 +10,11 @@ var jqgridHelper = {
     getRow : function(a) {
         return a.parent().parent();
     },
-    getChannel : function(a, userId) {
-        return a.find('td:last')[0].innerHTML + '_' + userId;
+    getChannel : function(a, b, type) {
+        if (type == 'none-jqgrid') {
+            return a + '_' + b;
+        }
+        return a.find('td:last')[0].innerHTML + '_' + b;
     },
     getAuthorLogin : function(a) {
         return a.find('td').eq(2).find('a')[0].innerHTML;

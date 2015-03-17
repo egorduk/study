@@ -31,3 +31,13 @@ function customDate(cellvalue) {
 function isCorrectPrice(el) {
     return /^\+?([\d\s]+)$/.test(el);
 }
+
+function checkIsEmail(a) {
+    var patternCheckEmail = /([a-z0-9_-]+\.)*[a-z0-9_-]+(@|sobaka|_|собака)[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}/i;
+    return patternCheckEmail.test(a);
+}
+
+function checkIsPhone(a) {
+    var patternCheckPhone = /((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,16}/i;
+    return patternCheckPhone.test(a);
+}

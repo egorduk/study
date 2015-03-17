@@ -193,33 +193,36 @@
                 </div>
             </div>
         </div>
-        <div class="demo">
-            <div class="chat">
-                <div class="messages" id="messages"></div>
-                <div class="panel">
-                    <span class="nick"></span>
-                    <textarea name="message_text" id="message_text"></textarea>
-                    <button type="button" id="btn-send-msg" class="btn btn-primary disabled">Отправить</button>
-                </div>
-                <div id="sidebar">
-                    <div id="count-msg"></div>
-                    <div id="online">
-                        <p style="display: none" id="client-status">{{ obj.client.login }}</p>
+            <div class="row">
+                <div class="block-chat">
+                    <div class="chat-wrap">
+                        <div class='messages-wrap'></div>
+                        <div id="panel">
+                            <span class="nick"></span>
+                            <textarea class="message-text"></textarea>
+                            <button type='button' class='btn-send-msg btn btn-primary disabled'>Send</button>
+                        </div>
                     </div>
-                    <div id="in-chat" class="hidden">
-                        <p>В чате</p>
+                    <div id="sidebar">
+                        <div id="count-msg"></div>
+                        <div id="online">
+                            <p style="display: none" id="client-status">{{ obj.client.login }}</p>
+                        </div>
+                        <div id="in-chat" class="hidden">
+                            <p>В чате</p>
+                        </div>
+                        <div class="is-writing"></div>
+                        <span class='icon-volume-1' id="volume-on"></span>
+                        <span class='icon-volume-off-4' id="volume-off"></span>
                     </div>
-                    <div id="is-writing"></div>
-                    <span class='icon-volume-1' id="volume-on"></span>
-                    <span class='icon-volume-off-4' id="volume-off"></span>
                 </div>
             </div>
         </div>
         <script>
         $(document).ready(function() {
 
-            var messages = $("#messages"),
-                    message_txt = $("#message_text"),
+            var messages = $(".messages-wrap"),
+                    message_txt = $(".message-text"),
                     userLogin = '{{ obj.userLogin }}',
                     clientLogin = '{{ obj.client.login }}',
                     clientId = '{{ obj.client.id }}',
@@ -228,7 +231,7 @@
                     userId = {{ obj.userId }},
                     clientStatus = {{ obj.client.status }},
                     blockCountMsg = $("#count-msg"),
-                    btnSendMsg = $("#btn-send-msg"),
+                    btnSendMsg = $(".btn-send-msg"),
                     inChat = $("#in-chat"),
                     volumeOn = $("#volume-on"),
                     volumeOff = $("#volume-off"),
@@ -263,7 +266,8 @@
             try {
                 var socket = io.connect(serverHost);
             } catch(e) {
-                systemMsg("Сервер выключен");
+                //systemMsg("Сервер выключен");
+                console.log('Error connecting');
                 return;
             }
 
@@ -271,7 +275,6 @@
                 $.cookie('volume_msg', '0');
                 setViewButton();
             });
-
             volumeOff.on("click", function() {
                 $.cookie('volume_msg', '1');
                 setViewButton();
@@ -286,9 +289,11 @@
                 clearSidebarCountRecords();
                 //systemMsg('Соединение установленно!');
                 //socket.emit("get all messages", {orderId: orderId});
-                var channel = getChannel();
-                socketHelper = new SocketHelper({channel: channel, authorLogin: userLogin, clientLogin: clientLogin});
-                this.emit("join to channel order", socketHelper.join_to_channel_order_params);
+                var channel = jqgridHelper.getChannel(userId, clientId, 'none-jqgrid');
+                socketHelper = new SocketHelper({channel: channel, authorLogin: userLogin, clientLogin: clientLogin, userLogin: userLogin, orderId: orderId, userId: userId});
+                console.log(socketHelper);
+                this.emit("join to channel order", socketHelper.join_to_channel_order_params)
+                        .emit("get all messages", socketHelper.get_all_messages_params);
                 btnSendMsg.removeClass('disabled');
             }).on("response auction bid", function(data) {
                 var price = data.price, day = data.day, bidId = data.bidId;
@@ -298,22 +303,21 @@
                 modalConfirmClientBid.modal('show');
                 //console.log(data);
             }).on("response disconnect user", function() {
-                inChat.addClass("hidden");
+                //inChat.addClass("hidden");
             }).on("disconnect", function() {
-                //disconnectUser();
+                disconnectUser();
             }).on("response get all messages", function(data) {
                 var countRows = 0;
                 for (var key in data) {
                     countRows++;
-                    userMsg(data[key].user_login, data[key].message, data[key].date_write);
+                    userMsg(data[key].userLogin, data[key].messageText, data[key].dateWrite);
                 }
                 setSidebarCountRecords(countRows);
             }).on("show new message", function(data) {
-                //console.dir(data);
-                if ($.cookie('volume_msg') == 1 && data.user_login != userLogin) {
+                if ($.cookie('volume_msg') == 1 && data.userLogin != userLogin) {
                     ion.sound.play("button_tiny");
                 }
-                userMsg(data.user_login, data.message, data.date_write);
+                userMsg(data.userLogin, data.messageText, data.dateWrite);
                 increaseCountMsg();
                 message_txt.focus();
             }).on("user in room", function() {
@@ -354,7 +358,7 @@
             function disconnectUser() {
                 systemMsg("Отключен");
                 btnSendMsg.addClass('disabled');
-                inChat.addClass("hidden");
+                //inChat.addClass("hidden");
             }
 
             message_txt.on("input", function(e) {
@@ -376,12 +380,13 @@
             });
 
             function sendMessage() {
-                var text = $("#message_text").val();
-                if (text.length <= 0) {
+                var messageText = $(".message-text"), text = messageText.val();
+                messageText.val("");
+                if (text.length <= 0 || $.trim(text) == '') {
                     return;
                 }
-                message_txt.val("");
-                socket.emit("send message", {message: text, writerLogin: userLogin, userId: userId, mode: mode, responseLogin: clientLogin, channel: channel, orderId: orderId, orderNum: orderNum});
+                socketHelper.addParams({messageText: text, mode: checkIsEmail(text) || checkIsPhone(text), orderNum: orderNum});
+                socket.emit("create new message", socketHelper.create_new_message_params);
             }
 
             function increaseCountMsg() {
@@ -402,14 +407,14 @@
             }
 
             function safe(str) {
-                return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+               // return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
             }
 
-            function userMsg(nick, message, date_write) {
+            function userMsg(login, message, dateWrite) {
                 var m = '<div class="msg">' +
-                        '<p class="user">' + (nick) + ':</p> ' +
-                        '<p class="message">' + safe(message) + '</p>' +
-                        '<p class="date">' + date_write + '</p>' +
+                        '<p class="user">' + login + ':</p> ' +
+                        '<div class="message">' + (message) + '</div>' +
+                        '<p class="date">' + dateWrite + '</p>' +
                         '</div>';
                 messages.append(m).scrollTop(messages[0].scrollHeight);
             }

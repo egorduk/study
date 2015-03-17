@@ -405,7 +405,7 @@
                         socketHelper.addParams({messageText: text, mode: patternCheckEmail.test(text) || patternCheckPhone.test(text), orderNum: orderNum});
                         //socketHelper.messageText = text;
                         //socketHelper.mode = patternCheckEmail.test(text) || patternCheckPhone.test(text);
-                        console.log(socketHelper);
+                        //console.log(socketHelper);
                         arrOpenChat[socketHelper.channel].emit("create new message", socketHelper.create_new_message_params);
                     }
 
@@ -433,11 +433,11 @@
                         return str1;
                     }
 
-                    function userMsg(login, message, date_write) {
+                    function userMsg(login, message, dateWrite) {
                         var m = '<div class="msg">' +
                                     '<p class="user">' + login + ':</p> ' +
                                         '<div class="message">' + safe(message) + '</div>' +
-                                    '<p class="date">' + date_write + '</p>' +
+                                    '<p class="date">' + dateWrite + '</p>' +
                                 '</div>';
                         var messages = currTab.find(".chat-wrap .messages-wrap");
                         messages.append(m).scrollTop(messages[0].scrollHeight);
@@ -558,7 +558,7 @@
                                 var row = jqgridHelper.getRow($(this));
                                 if (row && jqgridHelper.getRowId(e)) {
                                     var authorLogin = jqgridHelper.getAuthorLogin(row),
-                                            channel = jqgridHelper.getChannel(row, userId);
+                                            channel = jqgridHelper.getChannel(row, userId, 'jqgrid');
                                     try {
                                         if (arrUsedChat[channel] != channel) {
                                             arrUsedChat[channel] = channel;
@@ -571,7 +571,7 @@
                                         return;
                                     }
                                     console.log(arrOpenChat);
-                                    socketHelper = new SocketHelper({channel: channel, authorLogin: authorLogin, clientLogin: userLogin, orderId: orderId, userId: userId});
+                                    socketHelper = new SocketHelper({channel: channel, authorLogin: authorLogin, clientLogin: userLogin, userLogin: userLogin, orderId: orderId, userId: userId});
                                     console.log(socketHelper);
                                     arrOpenChat[channel].on("connect", function() {
                                         // messages.html('');
@@ -605,17 +605,17 @@
                                         var countRows = 0;
                                         //console.log(data);
                                         for (var key in data) {
-                                            if (data[key].user_id != 17) {
-                                                userMsg(data[key].user_login, data[key].message, data[key].date_write);
+                                            if (data[key].userId != 17) {
+                                                userMsg(data[key].userLogin, data[key].messageText, data[key].dateWrite);
                                             } else {
-                                                systemMsg(data[key].user_login, data[key].message, data[key].date_write);
+                                                systemMsg(data[key].userLogin, data[key].messageText, data[key].dateWrite);
                                             }
                                             countRows++;
                                         }
                                         setSidebarCountRecords(countRows);
                                         setFocusOnMessageField();
                                     }).on("disconnect", function() {
-                                        //disconnectUser();
+                                        disconnectUser();
                                     }).on("response view current online", function() {
                                         currTab.find(".chat-wrap .in-chat").removeClass("hidden");
                                     }).on("response user write", function() {
@@ -638,10 +638,10 @@
                                         arrOpenChat[channel].emit("request view current online");
                                     }).on("show new message", function(data) {
                                         //console.dir(data);
-                                        if ($.cookie('volume_msg') == 1 && data.user_login != userLogin) {
+                                        if ($.cookie('volume_msg') == 1 && data.userLogin != userLogin) {
                                             ion.sound.play("button_tiny");
                                         }
-                                        userMsg(data.user_login, data.message, data.date_write);
+                                        userMsg(data.userLogin, data.messageText, data.dateWrite);
                                         increaseCountMsg();
                                         //setFocusOnMessageField();
                                     }).on("show system message", function(data) {
