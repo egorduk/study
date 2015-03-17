@@ -86,10 +86,6 @@
                                 $("#count-messages").remove();
                                 messages.before('<p id="count-messages">Count: ' + countRows + '</p>');
                             })
-                            /*.on("test", function(data) {
-                                console.log(data);
-                                $.cookie('test', data.data);
-                            })*/;
                 }).on("response get new message from client", function(data) {
                     //console.log(data);
                     var newMessage;

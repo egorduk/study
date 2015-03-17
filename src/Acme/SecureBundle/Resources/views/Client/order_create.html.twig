@@ -1,6 +1,8 @@
 {% extends "AcmeSecureBundle::layout_client.html.twig" %}
 {% block title "Создать новый заказ" %}
     {% block content %}
+        <script type="text/javascript" src="{{ asset('bundles/js/datetimepicker/moment.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/js/datetimepicker/bootstrap-datetimepicker.js') }}"></script>
         <link rel="stylesheet" href="{{ asset('bundles/css/datepicker.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/css/datepicker3.css') }}" />
         {% include "PunkAveFileUploaderBundle:Default:templates.html.twig" %}
@@ -343,8 +345,8 @@
                     }
                 });
             </script>
-            <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-datepicker.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('bundles/js/locales/bootstrap-datepicker.ru.js') }}"></script>
+{#            <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-datepicker.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/locales/bootstrap-datepicker.ru.js') }}"></script>#}
             <script type="text/javascript" src="{{ asset('bundles/js/select2.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/js/sorting_select2.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/js/underscore.js') }}"></script>

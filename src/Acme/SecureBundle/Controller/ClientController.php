@@ -121,11 +121,8 @@ class ClientController extends Controller
     public function ordersAction(Request $request, $type)
     {
         if ($type == "view" || $type == "create" || $type == "delete" || $type == "hide" || $type == "configure" || $type == "show") {
-            $userId = $this->get('security.context')->getToken()->getUser();
-           // $userId = 1;
-            $user = Helper::getUserById($userId);
+            $user = $this->getUser();
         }
-
         if ($type == "create") {
             $createOrderValidate = new CreateOrderFormValidate();
             $formOrder = $this->createForm(new CreateOrderForm(), $createOrderValidate);
@@ -153,7 +150,7 @@ class ClientController extends Controller
                 }
             }
             return $this->render(
-                'AcmeSecureBundle:Client:order_add.html.twig', array('formOrder' => $formOrder->createView(), 'showWindow' => $showWindow, 'folderFiles' => $folderFiles)
+                'AcmeSecureBundle:Client:order_create.html.twig', array('formOrder' => $formOrder->createView(), 'showWindow' => $showWindow, 'folderFiles' => $folderFiles)
             );
         }
         elseif ($type == "view") {
