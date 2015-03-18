@@ -5,7 +5,8 @@ function SocketHelper(data) {
     this.userId = data.userId;
     this.clientLogin = data.clientLogin;
     this.authorLogin = data.authorLogin;
-    this.join_to_channel_order_params  = {channel: this.channel, clientLogin: this.clientLogin, authorLogin: this.authorLogin};
+    this.userLogin = data.userLogin;
+    this.join_to_channel_order_params  = {channel: this.channel, clientLogin: this.clientLogin, authorLogin: this.authorLogin, userLogin: this.userLogin};
     this.get_all_messages_params = {orderId: this.orderId, clientLogin: this.clientLogin, authorLogin: this.authorLogin};
 
     this.addParams =  function (data) {

@@ -82,6 +82,7 @@ io.sockets.on('connection', function (client) {
     //console.log(clientID);
 
     client.on("join to channel order", function(data) {
+        console.dir(data);
         var channel = data.channel;
         arrLogin[clientID] = data.userLogin;
         arrChannel[clientID] = channel;
@@ -144,8 +145,9 @@ io.sockets.on('connection', function (client) {
             user_order_id: orderId
         }, function(error, recordId) {
             if (error) {throw(error)}
-            client.emit("show new message", {date_write: fullDate, messageText: messageText, user_login: writerLogin})
-                .to(channel).emit("show new message", {date_write: fullDate, messageText: messageText, user_login: writerLogin});
+            var data = { dateWrite: fullDate, messageText: messageText, userLogin: writerLogin };
+            client.emit("show new message", data)
+                .to(channel).emit("show new message", data);
            /* connection.select('user', 'id', {login: responseLogin}, '', function(error, row) {
                 if (error) {throw error}
                 client.to(row[0].id).emit("response get new message from client", {dateWrite: fullDate, messageText: messageText, userLogin: writerLogin, userId: userId, messageId: recordId, orderNum: orderNum});
@@ -257,10 +259,10 @@ io.sockets.on('connection', function (client) {
         var orderId = data.orderId,
             userLogin = data.clientLogin,
             channel = arrChannel[clientID];
-        console.log("Now - " + channel);
-        console.log(data);
+        console.log("Now channel - " + channel);
+        //console.log(data);
         connection.queryHash(
-            'SELECT wm.id, message, DATE_FORMAT(date_write,"%d.%m.%Y %T") AS date_write, login AS user_login, u.id AS user_id FROM webchat_message wm INNER JOIN user u ON wm.user_id = u.id' +
+            'SELECT wm.id, message AS messageText, DATE_FORMAT(date_write,"%d.%m.%Y %T") AS dateWrite, login AS userLogin, u.id AS userId FROM webchat_message wm INNER JOIN user u ON wm.user_id = u.id' +
                 ' WHERE wm.user_order_id = ' + orderId + ' AND channel = "' + channel + '"',
             function(error, rows) {
                 //console.dir(rows);
