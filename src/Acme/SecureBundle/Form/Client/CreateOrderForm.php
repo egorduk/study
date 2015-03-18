@@ -16,7 +16,7 @@ class CreateOrderForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('fieldTheme', 'text', array('label'=>'Тема задания', 'required' => true, 'attr' => array('class' => 'form-control', 'title' => 'Введите тему задания', 'size' => 30, 'maxlength' => 50, 'placeholder' => 'Введите название темы...')))
-                ->add('fieldTask', 'genemu_tinymce', array('label'=>'Описание задания', 'required' => false, 'attr' => array('class' => 'form-control')))
+                ->add('fieldTask', 'genemu_tinymce', array('label'=>'Описание задания', 'required' => false, 'attr' => array('class' => 'form-control', 'placeholder' => 'test')))
                 ->add('fieldDateExpire', 'text', array('label'=>'Выполнение до', 'required' => true, 'attr' => array('class' => 'form-control', 'readonly' => false, 'title' => 'Выберите дату выполнения задания', 'size' => 10, 'maxlength' => 20, 'placeholder' => 'Нажмите сюда...')))
                 ->add('fieldOriginality', 'text', array('label'=>'Процент оригинальности', 'required' => false, 'attr' => array('class' => 'form-control', 'title' => 'Укажите процент оригинальности', 'maxlength' => 3, 'placeholder' => 'Введите процент оригинальности...')))
                 ->add('fieldCountSheet', 'text', array('label'=>'Количесто страниц', 'required' => false, 'attr' => array('class' => 'form-control', 'title' => 'Укажите объем задания', 'maxlength' => 3, 'placeholder' => 'Введите число страниц...')))

@@ -2,9 +2,10 @@
 {% block title "Создать новый заказ" %}
     {% block content %}
         <script type="text/javascript" src="{{ asset('bundles/js/datetimepicker/moment.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/js/datetimepicker/bootstrap-datetimepicker.js') }}"></script>
-        <link rel="stylesheet" href="{{ asset('bundles/css/datepicker.css') }}" />
-        <link rel="stylesheet" href="{{ asset('bundles/css/datepicker3.css') }}" />
+        <script type="text/javascript" src="{{ asset('bundles/js/datetimepicker/locale/ru.js') }}"></script>
+{#        <script type="text/javascript" src="{{ asset('bundles/js/tinymce/plugins/placeholder/plugin.js') }}"></script>#}
+        <script type="text/javascript" src="{{ asset('bundles/js/datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
+        <link rel="stylesheet" href="{{ asset('bundles/css/datetimepicker/bootstrap-datetimepicker.min.css') }}" />
         {% include "PunkAveFileUploaderBundle:Default:templates.html.twig" %}
         <style>
             .invalid{
@@ -108,7 +109,6 @@
             </div>
             <script>
                 $(document).ready(function() {
-                    var placeholder = "Placeholder";
                     var maxLength = 255;
 
                    //$(function() {
@@ -135,12 +135,11 @@
 
                     tinyMCE.init({
                         mode : 'textareas',
-                        //document_base_url: "http://localhost/study/web/app_dev.php/",   //url
                         width : 500,
                         height : 300,
                         language : 'ru',
-                        plugins : "preview",
                         theme : "advanced",
+                        plugins: "preview",
                         //max_chars : "10",
                         //max_chars_indicator : "lengthBox",
                         theme_advanced_buttons1 : "bold,italic,underline,strikethrough,removeformat,formatselect,forecolor,backcolor,link,unlink,undo,redo,preview,justifyleft,justifycenter,justifyright,bullist,numlist,pastetext",
@@ -149,18 +148,19 @@
                         theme_advanced_toolbar_align : "left",
                         relative_urls : false,
 
+
                         setup : function(ed) {
                             ed.onInit.add(function(ed) {
-                                ed.setContent(placeholder);
+                                //ed.setContent(placeholder);
                                 $(".mceLayout").css("border-radius", "2px");
                                 $(".mceLayout").css("border", "1px solid #CCCCCC");
                                 $("#formCreateOrder_fieldTask").blur();
                                 //var doc = ed.getDoc();
                                 tinyMCE.dom.Event.add(ed.getDoc(), 'blur', function(e) {
                                     var tinyText = getTinyTrimText();
-                                    if (tinyText == placeholder || tinyText == "") {
-                                        ed.setContent(placeholder);
-                                    }
+                                   /* if (tinyText == placeholder || tinyText == "") {
+                                        //ed.setContent(placeholder);
+                                    }*/
                                     $(".mceLayout").css("border-color", "#CCCCCC");
                                     $(".mceLayout").css("box-shadow", "");
                                     $(".mceLayout").css("transition", "border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s");
@@ -175,9 +175,9 @@
                                     return false;
                                 }
                                 setBootstrapStyle();
-                                if (tinyText.indexOf(placeholder) >= 0) {
+                                /*if (tinyText.indexOf(placeholder) >= 0) {
                                     ed.setContent("");
-                                }
+                                }*/
                             });
 
                             /*ed.onChange.add(function(ed, e) {
@@ -185,9 +185,9 @@
 
                             ed.onClick.add(function(ed,e) {
                                 var tinyText = getTinyTrimText();
-                                if (tinyText == placeholder) {
+                               /* if (tinyText == placeholder) {
                                     ed.setContent("");
-                                }
+                                }*/
                                 setBootstrapStyle();
                             });
 
@@ -217,17 +217,22 @@
                         $(".mceLayout").css("z-index", "2");
                     }
 
-                    $('#formCreateOrder_fieldDateExpire').datepicker({
-                       // daysOfWeekDisabled: "1",
-                       // calendarWeeks: true,
-                        todayHighlight: true,
-                        format: "dd/mm/yyyy",
-                        autoclose: true,
-                        startDate: '1d',
-                        language: 'ru',
-                        todayBtn: true
+                    var fieldDateExpire = $('#formCreateOrder_fieldDateExpire');
+
+                    fieldDateExpire.datetimepicker({
+                        icons: {
+                            time: "fa fa-clock-o",
+                            date: "fa fa-calendar",
+                            up: "fa fa-arrow-up",
+                            down: "fa fa-arrow-down",
+                            previous: 'glyphicon glyphicon-chevron-left',
+                            next: 'glyphicon glyphicon-chevron-right',
+                            today: 'glyphicon glyphicon-screenshot',
+                        },
+                        locale: 'ru',
+                        minDate: moment()
                     });
-                    var today = new Date();
+                   /* var today = new Date();
                     var dd = today.getDate() + 1;
                     var mm = today.getMonth() + 1;
                     var yyyy = today.getFullYear();
@@ -237,8 +242,8 @@
                     if(mm < 10) {
                         mm = '0' + mm
                     }
-                    var currentDate = dd + '/' + mm + '/' + yyyy;
-                    $('#formCreateOrder_fieldDateExpire').datepicker('setStartDate', currentDate);
+                    var currentDate = dd + '/' + mm + '/' + yyyy;*/
+                    //$('#formCreateOrder_fieldDateExpire').datepicker('setStartDate', currentDate);
                     /*.on('changeDate', function(ev) {
                         if (ev.viewMode == "days"){
                             $('.datepicker').hide();
@@ -248,7 +253,7 @@
                     //$(".datepicker").css("width","225px");
 
                     $(".input-group-addon:eq(1)").click(function(e){
-                        $("#formCreateOrder_fieldDateExpire").datepicker('show');
+                        fieldDateExpire.datetimepicker('show');
                     });
 
                     $("#formCreateOrder_selectorSubject").select2({
@@ -325,7 +330,7 @@
                         a.popover('hide');
                     }
 
-                    if (!sessionStorage.getItem("Page2Visited")) {
+                  /*  if (!sessionStorage.getItem("Page2Visited")) {
                         {% if (showWindow) %}
                             function closeMessage(el) {
                                 el.addClass('is-hidden');
@@ -342,7 +347,7 @@
                     else {
                         sessionStorage.removeItem("Page2Visited");
                         $("#modal-window").hide();
-                    }
+                    }*/
                 });
             </script>
 {#            <script type="text/javascript" src="{{ asset('bundles/js/bootstrap-datepicker.js') }}"></script>
