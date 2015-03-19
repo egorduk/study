@@ -557,8 +557,7 @@
                             $(".open-chat").on('click', function(e) {
                                 var row = jqgridHelper.getRow($(this));
                                 if (row && jqgridHelper.getRowId(e)) {
-                                    var authorLogin = jqgridHelper.getAuthorLogin(row),
-                                            channel = jqgridHelper.getChannel(row, userId, 'jqgrid');
+                                    var authorLogin = jqgridHelper.getAuthorLogin(row), channel = orderId;
                                     try {
                                         if (arrUsedChat[channel] != channel) {
                                             arrUsedChat[channel] = channel;
@@ -570,16 +569,17 @@
                                         console.log('Error connecting');
                                         return;
                                     }
-                                    console.log(arrOpenChat);
-                                    socketHelper = new SocketHelper({channel: channel, authorLogin: authorLogin, clientLogin: userLogin, userLogin: userLogin, orderId: orderId, userId: userId});
+                                    //console.log(arrOpenChat);
+                                    socketHelper = new SocketHelper({ channel: channel, authorLogin: authorLogin, clientLogin: userLogin, userLogin: userLogin, orderId: orderId, userId: userId });
                                     console.log(socketHelper);
                                     arrOpenChat[channel].on("connect", function() {
                                         // messages.html('');
                                         //  clearSidebarCountRecords();
                                         this.emit("join to channel order", socketHelper.join_to_channel_order_params)
-                                                .emit("get all messages", socketHelper.get_all_messages_params);
-                                        addTab(channel, authorLogin);
-                                        currTab = tabs.find("#" + channel);
+                                                .emit("join to channel self")
+                                                .emit("request get all messages");
+                                        addTab(authorLogin, authorLogin);
+                                        currTab = tabs.find("#" + authorLogin);
                                         currTab.find(".chat-wrap .btn-send-msg").removeClass('disabled').on("click", function() {
                                             sendMessage();
                                         });
@@ -605,10 +605,10 @@
                                         var countRows = 0;
                                         //console.log(data);
                                         for (var key in data) {
-                                            if (data[key].userId != 17) {
-                                                userMsg(data[key].userLogin, data[key].messageText, data[key].dateWrite);
+                                            if (data[key].writerId != 17) {
+                                                userMsg(data[key].writerLogin, data[key].messageText, data[key].dateWrite);
                                             } else {
-                                                systemMsg(data[key].userLogin, data[key].messageText, data[key].dateWrite);
+                                                systemMsg(data[key].writerLogin, data[key].messageText, data[key].dateWrite);
                                             }
                                             countRows++;
                                         }
