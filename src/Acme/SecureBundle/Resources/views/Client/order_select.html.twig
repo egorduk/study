@@ -407,7 +407,7 @@
                 //socketHelper.messageText = text;
                 //socketHelper.mode = patternCheckEmail.test(text) || patternCheckPhone.test(text);
                 //console.log(socketHelper);
-                arrOpenChat[socketHelper.channel].emit("create new message", socketHelper.create_new_message_params);
+                socket.emit("create new message", socketHelper.create_new_message_params_client);
             }
 
             function clearSidebarCountRecords() {

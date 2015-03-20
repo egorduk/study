@@ -134,22 +134,22 @@ io.sockets.on('connection', function (client) {
     });
 
     client.on("create new message", function (data) {
-        var date = new Date(),
-            orderId = data.orderId,
+        var orderId = data.orderId,
            // orderNum = data.orderNum,
             mode = data.mode,
-            userId = data.userId,
+            userId = arrUserId[clientID],
             responseLogin = data.responseLogin,
-            fullDate = getFullDate(date),
-            writerLogin = data.writerLogin,
+            responseId = data.responseId,
+            fullDate = getFullDate(new Date()),
+            writerLogin = arrLogin[clientID],
             //channel = data.channel,
-            channel = arrChannel[clientID],
+            channel = arrOrderChannel[clientID],
             messageText = data.messageText;
         console.dir(data);
         connection.insert('webchat_message', {
             message: messageText,
-            channel: channel,
-            user_id: userId,
+            response_id: responseId,
+            writer_id: userId,
             user_order_id: orderId
         }, function(error, recordId) {
             if (error) {throw(error)}
@@ -216,7 +216,6 @@ io.sockets.on('connection', function (client) {
             userId = arrUserId[clientID],
             authorId = data.authorId;
         //console.log("Now channel - " + channel);
-        console.log("1");
         connection.queryHash(
             'SELECT wm.id, wm.message AS messageText, DATE_FORMAT(date_write,"%d.%m.%Y %T") AS dateWrite, u.login AS writerLogin, u.id AS writerId FROM webchat_message wm' +
                 ' INNER JOIN user u ON wm.writer_id = u.id' +

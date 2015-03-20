@@ -16,7 +16,7 @@ function SocketHelper(data) {
         this.mode = data.mode;
         this.messageText = data.messageText;
         this.orderNum = data.orderNum;
-        this.create_new_message_params = { messageText: this.messageText, writerLogin: this.userLogin, userId: this.userId, mode: this.mode, responseLogin: this.authorLogin, orderId: this.orderId };
+        this.create_new_message_params_client = { messageText: this.messageText, writerLogin: this.userLogin, responseId: this.authorId, mode: this.mode, responseLogin: this.authorLogin, orderId: this.orderId };
     };
 
 
