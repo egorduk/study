@@ -85,7 +85,7 @@ io.sockets.on('connection', function (client) {
         console.dir(data);
         var channel = data.channel;
         arrLogin[clientID] = data.userLogin;
-        arrChannel[clientID] = channel;
+        //arrChannel[clientID] = channel;
         arrOrderChannel[clientID] = channel;
         arrUserId[clientID] = data.userId;
         client.join(channel);
@@ -209,7 +209,30 @@ io.sockets.on('connection', function (client) {
             console.dir({insertedID: recordId});
         });
         //client.disconnect();
-    })
+    });
+
+    client.on("request get all messages", function (data) {
+        var orderId = arrOrderChannel[clientID],
+            userId = arrUserId[clientID],
+            authorId = data.authorId;
+        //console.log("Now channel - " + channel);
+        console.log("1");
+        connection.queryHash(
+            'SELECT wm.id, wm.message AS messageText, DATE_FORMAT(date_write,"%d.%m.%Y %T") AS dateWrite, u.login AS writerLogin, u.id AS writerId FROM webchat_message wm' +
+                ' INNER JOIN user u ON wm.writer_id = u.id' +
+                ' INNER JOIN user u1 ON wm.response_id = u1.id' +
+                ' WHERE wm.user_order_id = ' + orderId + ' AND (wm.writer_id = ' + authorId + ' OR wm.response_id = ' + authorId + ')' +
+                ' AND (wm.writer_id = ' + userId + ' OR wm.response_id = ' + userId + ')',
+            function(error, rows) {
+                //console.dir(rows);
+                if (error) {throw error}
+                client.emit('response get all messages', rows);
+               /* connection.update('webchat_message', { is_read: 1 }, { user_order_id: orderId, response_id: userId, is_read: 0 }, function(error) {
+                    if (error) {throw error}
+                });*/
+            }
+        );
+    });
 
     client.on("disconnect", function() {
         var channel = arrChannel[clientID], login = arrLogin[clientID];
@@ -261,30 +284,6 @@ io.sockets.on('connection', function (client) {
         if (validator.isLength(price, 2, 6) && validator.isInt(price) && validator.isInt(day) && validator.isLength(day, 1, 3) && (day > 0 || day < 999)) {
 
         }
-    });
-
-    client.on("request get all messages", function (data) {
-        var orderId = arrOrderChannel[clientID],
-            userId = arrUserId[clientID];
-        //console.log("Now channel - " + channel);
-        connection.queryHash(
-            'SELECT wm.id, wm.message AS messageText, DATE_FORMAT(date_write,"%d.%m.%Y %T") AS dateWrite, u.login AS writerLogin, u.id AS writerId FROM webchat_message wm' +
-                ' INNER JOIN user u ON wm.writer_id = u.id' +
-                ' INNER JOIN user u1 ON wm.response_id = u1.id' +
-                ' WHERE wm.user_order_id = ' + orderId + ' AND (wm.writer_id = ' + userId + ' OR wm.response_id = ' + userId + ')',
-            function(error, rows) {
-                //console.dir(rows);
-                if (error) {throw error}
-                client.emit('response get all messages', rows);
-                //connection.select('user', 'id', {login: userLogin}, '', function(error, row) {
-                    /*if (error) {throw error}
-                    var userId = row[0].id;*/
-                    connection.update('webchat_message', { is_read: 1 }, { user_order_id: orderId, response_id: userId, is_read: 0 }, function(error) {
-                        if (error) {throw error}
-                    });
-                //});
-            }
-        );
     });
 
     client.on("request get new messages from db", function () {
