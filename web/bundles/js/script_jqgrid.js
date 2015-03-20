@@ -18,5 +18,8 @@ var jqgridHelper = {
     },
     getAuthorLogin : function(a) {
         return a.find('td').eq(2).find('a')[0].innerHTML;
+    },
+    getAuthorId : function(a) {
+        return a.find('td:last')[0].innerHTML;
     }
 };
