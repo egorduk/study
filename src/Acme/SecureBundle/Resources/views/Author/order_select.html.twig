@@ -238,7 +238,7 @@
                     flagIsWriting = 0,
                     mode = false,
                     modalConfirmClientBid = $('#modal-confirm-client-bid'),
-                    channel,
+                    //channel,
                     socketHelper,
                     serverHost = 'http://localhost:8008';
 
@@ -289,11 +289,12 @@
                 clearSidebarCountRecords();
                 //systemMsg('Соединение установленно!');
                 //socket.emit("get all messages", {orderId: orderId});
-                var channel = jqgridHelper.getChannel(userId, clientId, 'none-jqgrid');
-                socketHelper = new SocketHelper({channel: channel, authorLogin: userLogin, clientLogin: clientLogin, userLogin: userLogin, orderId: orderId, userId: userId});
+                //var channel = jqgridHelper.getChannel(userId, clientId, 'none-jqgrid');
+                var channel = orderId;
+                socketHelper = new SocketHelper({channel: channel, authorLogin: userLogin, clientLogin: clientLogin, userLogin: userLogin, userId: userId, clientId: clientId});
                 console.log(socketHelper);
                 this.emit("join to channel order", socketHelper.join_to_channel_order_params)
-                        .emit("get all messages", socketHelper.get_all_messages_params);
+                        .emit("request get all messages", socketHelper.get_all_messages_params_author);
                 btnSendMsg.removeClass('disabled');
             }).on("response auction bid", function(data) {
                 var price = data.price, day = data.day, bidId = data.bidId;
@@ -386,7 +387,7 @@
                     return;
                 }
                 socketHelper.addParams({messageText: text, mode: checkIsEmail(text) || checkIsPhone(text), orderNum: orderNum});
-                socket.emit("create new message", socketHelper.create_new_message_params);
+                socket.emit("create new message", socketHelper.create_new_message_params_author);
             }
 
             function increaseCountMsg() {

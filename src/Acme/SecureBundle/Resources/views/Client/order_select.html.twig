@@ -284,9 +284,7 @@
                     arrOpenChat = [],
                     arrUsedChat = [],
                     socketHelper,
-                    serverHost = 'http://localhost:8008',
-                    patternCheckEmail = /([a-z0-9_-]+\.)*[a-z0-9_-]+(@|sobaka|_|собака)[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}/i,
-                    patternCheckPhone = /((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,16}/i;
+                    serverHost = 'http://localhost:8008';
 
             var  tabContent = $( "#tab_content" ),
                     tabTemplate = "<li><a href='#{href}'>#{label}</a><span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span></li>",
@@ -403,7 +401,7 @@
                 if (text.length <= 0 || $.trim(text) == '') {
                     return;
                 }
-                socketHelper.addParams({messageText: text, mode: patternCheckEmail.test(text) || patternCheckPhone.test(text), orderNum: orderNum});
+                socketHelper.addParams({messageText: text, orderNum: orderNum});
                 //socketHelper.messageText = text;
                 //socketHelper.mode = patternCheckEmail.test(text) || patternCheckPhone.test(text);
                 //console.log(socketHelper);
@@ -502,30 +500,36 @@
             }
 
             function connectAction(a) {
-                socket.emit("request get all messages", socketHelper.get_all_messages_params_client);
-                addTab(a);
-                currTab = tabs.find("#" + a);
-                currTab.find(".chat-wrap .messages-wrap").html('');
-                currTab.find(".chat-wrap .btn-send-msg").removeClass('disabled').on("click", function() {
-                    sendMessage();
-                });
-                setVolumeControlButton();
-                setFocusOnMessageField();
-                currTab.find(".chat-wrap .volume-on").on("click", function() {
-                    $.cookie('volume_msg', '0');
-                    setVolumeControlButton();
-                });
-                currTab.find(".chat-wrap .volume-off").on("click", function() {
-                    $.cookie('volume_msg', '1');
-                    setVolumeControlButton();
-                });
-                currTab.find(".chat-wrap .message-text").on("keydown", function(e) {
-                    if (e.keyCode === 13 && e.ctrlKey) {
+                if (arrUsedChat[a] != a) {
+                    arrUsedChat[a] = a;
+                    socket.emit("request get all messages", socketHelper.get_all_messages_params_client);
+                    addTab(a);
+                    currTab = tabs.find("#" + a);
+                    setFocusOnMessageField();
+                    currTab.find(".chat-wrap .messages-wrap").html('');
+                    currTab.find(".chat-wrap .btn-send-msg").removeClass('disabled').on("click", function() {
                         sendMessage();
-                    }
-                }).on("input", function(e) {
-                    socket.emit("request user write");
-                });
+                    });
+                    setVolumeControlButton();
+                    currTab.find(".chat-wrap .volume-on").on("click", function() {
+                        $.cookie('volume_msg', '0');
+                        setVolumeControlButton();
+                    });
+                    currTab.find(".chat-wrap .volume-off").on("click", function() {
+                        $.cookie('volume_msg', '1');
+                        setVolumeControlButton();
+                    });
+                    currTab.find(".chat-wrap .message-text").on("keydown", function(e) {
+                        if (e.keyCode === 13 && e.ctrlKey) {
+                            sendMessage();
+                        }
+                    }).on("input", function(e) {
+                        socket.emit("request user write");
+                    });
+                } else {
+                    currTab = tabs.find("#" + a);
+                    setFocusOnMessageField();
+                }
             }
 
 
@@ -600,7 +604,7 @@
                              console.log('Error connecting');
                              return;
                              }*/
-                            socketHelper = new SocketHelper({ channel: channel, authorLogin: authorLogin, authorId: authorId, clientLogin: userLogin, userLogin: userLogin, orderId: orderId, userId: userId });
+                            socketHelper = new SocketHelper({ channel: channel, authorLogin: authorLogin, authorId: authorId, clientLogin: userLogin, userLogin: userLogin, userId: userId });
                             //console.log(socketHelper);
                             if (!socket) {
                                 try {
