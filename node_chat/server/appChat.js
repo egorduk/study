@@ -134,17 +134,13 @@ io.sockets.on('connection', function (client) {
     });
 
     client.on("create new message", function (data) {
-        var orderId = data.orderId,
-           // orderNum = data.orderNum,
-            mode = data.mode,
+        var orderId = arrOrderChannel[clientID],
             userId = arrUserId[clientID],
-            responseLogin = data.responseLogin,
             responseId = data.responseId,
             fullDate = getFullDate(new Date()),
             writerLogin = arrLogin[clientID],
-            //channel = data.channel,
-            channel = arrOrderChannel[clientID],
-            messageText = data.messageText;
+            messageText = data.messageText,
+            mode = checkIsValidateMessage(messageText);
         console.dir(data);
         connection.insert('webchat_message', {
             message: messageText,
@@ -155,7 +151,7 @@ io.sockets.on('connection', function (client) {
             if (error) {throw(error)}
             var data = { dateWrite: fullDate, messageText: messageText, userLogin: writerLogin };
             client.emit("show new message", data)
-                .to(channel).emit("show new message", data);
+                .to(orderId).emit("show new message", data);
            /* connection.select('user', 'id', {login: responseLogin}, '', function(error, row) {
                 if (error) {throw error}
                 client.to(row[0].id).emit("response get new message from client", {dateWrite: fullDate, messageText: messageText, userLogin: writerLogin, userId: userId, messageId: recordId, orderNum: orderNum});
@@ -502,6 +498,12 @@ io.sockets.on('connection', function (client) {
         }, function(error) {
             if (error) {throw(error)}
         })
+    }
+
+    function checkIsValidateMessage(a) {
+        var patternCheckEmail = /([a-z0-9_-]+\.)*[a-z0-9_-]+(@|sobaka|_|собака)[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}/i,
+            patternCheckPhone = /((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,16}/i;
+        return patternCheckEmail.test(a) || patternCheckPhone.test(a);
     }
 });
 
