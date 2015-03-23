@@ -38,7 +38,7 @@ var mysql = require('mysql'), mysqlUtilities = require('mysql-utilities'), conne
     database: 'study'
 });
 
-var arrLogin = [], arrChannel = [], arrUserId = [], arrOrderChannel = [];
+var arrLogin = [], arrUserId = [], arrOrderChannel = [], arrUid = [];
 
 connection.connect(function (err, db) {
     if (err) {throw err}
@@ -85,11 +85,11 @@ io.sockets.on('connection', function (client) {
         console.dir(data);
         var channel = data.channel;
         arrLogin[clientID] = data.userLogin;
-        //arrChannel[clientID] = channel;
         arrOrderChannel[clientID] = channel;
         arrUserId[clientID] = data.userId;
+        arrUid[data.userId] = clientID;
         client.join(channel);
-        console.log("Connected - " + arrLogin[clientID] + " to channel order - " + channel);
+        console.log("Connected - " + arrLogin[clientID] + " to channel ORDER - " + channel);
         /*Init variable for send mailing*/
         /*transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -149,9 +149,9 @@ io.sockets.on('connection', function (client) {
             user_order_id: orderId
         }, function(error, recordId) {
             if (error) {throw(error)}
-            var data = { dateWrite: fullDate, messageText: messageText, userLogin: writerLogin };
+            var data = { dateWrite: fullDate, messageText: messageText, writerLogin: writerLogin };
             client.emit("show new message", data)
-                .to(orderId).emit("show new message", data);
+                .to(arrUid[responseId]).emit("show new message", data);
            /* connection.select('user', 'id', {login: responseLogin}, '', function(error, row) {
                 if (error) {throw error}
                 client.to(row[0].id).emit("response get new message from client", {dateWrite: fullDate, messageText: messageText, userLogin: writerLogin, userId: userId, messageId: recordId, orderNum: orderNum});
@@ -162,6 +162,7 @@ io.sockets.on('connection', function (client) {
                     message_id: recordId
                 }, function(error) {
                     if (error) {throw(error)}
+                    console.log('New banned message - ' + recordId);
                 });
                 /*transporter.sendMail({
                  from: 'Test email <egorduk91@gmail.com>',
@@ -210,17 +211,21 @@ io.sockets.on('connection', function (client) {
     client.on("request get all messages", function (data) {
         var orderId = arrOrderChannel[clientID],
             userId = arrUserId[clientID],
-            authorId = data.authorId;
-        //console.log("Now channel - " + channel);
+            otherUserId = data.authorId ? data.authorId : data.clientId;
         connection.queryHash(
             'SELECT wm.id, wm.message AS messageText, DATE_FORMAT(date_write,"%d.%m.%Y %T") AS dateWrite, u.login AS writerLogin, u.id AS writerId FROM webchat_message wm' +
                 ' INNER JOIN user u ON wm.writer_id = u.id' +
                 ' INNER JOIN user u1 ON wm.response_id = u1.id' +
-                ' WHERE wm.user_order_id = ' + orderId + ' AND (wm.writer_id = ' + authorId + ' OR wm.response_id = ' + authorId + ')' +
+                ' WHERE wm.user_order_id = ' + orderId + ' AND (wm.writer_id = ' + otherUserId + ' OR wm.response_id = ' + otherUserId + ')' +
                 ' AND (wm.writer_id = ' + userId + ' OR wm.response_id = ' + userId + ')',
             function(error, rows) {
                 //console.dir(rows);
                 if (error) {throw error}
+                for (var key in rows) {
+                    if (checkIsValidateMessage(rows[key].messageText)) {
+                        rows[key].messageText = replaceIncorrectMessage(rows[key].messageText);
+                    }
+                }
                 client.emit('response get all messages', rows);
                /* connection.update('webchat_message', { is_read: 1 }, { user_order_id: orderId, response_id: userId, is_read: 0 }, function(error) {
                     if (error) {throw error}
@@ -230,21 +235,23 @@ io.sockets.on('connection', function (client) {
     });
 
     client.on("disconnect", function() {
-        var channel = arrChannel[clientID], login = arrLogin[clientID];
-        console.dir("Disconnected - " + login + " from channel " + channel);
+        var channel = arrOrderChannel[clientID];
+        console.log("Disconnected - " + arrLogin[clientID] + " from channel ORDER - " + channel);
         client.to(channel).emit("response disconnect user");
-        delete arrChannel[clientID];
+        delete arrOrderChannel[clientID];
         delete arrLogin[clientID];
+        delete arrUid[arrUserId[clientID]];
+        delete arrUserId[clientID];
         // client.leave(room); //Rooms are left automatically upon disconnection.
     });
 
     client.on("request view current online", function() {
-        var channel = arrChannel[clientID];
+        var channel = arrOrderChannel[clientID];
         client.to(channel).emit("response view current online");
     });
 
     client.on("request user write", function() {
-        var channel = arrChannel[clientID];
+        var channel = arrOrderChannel[clientID];
         client.to(channel).emit("response user write");
     });
 
@@ -282,7 +289,7 @@ io.sockets.on('connection', function (client) {
     });
 
     client.on("request get new messages from db", function () {
-        var userId = arrChannel[clientID];
+        var userId = arrOrderChannel[clientID];
         //connection.select('webchat_message', 'message, user_order_id AS orderId, date_write, user_id', {is_read: 0, user_id: userId, channel: channel}, '', function(error, rows) {
         connection.queryHash(
             'SELECT wm.id AS messageId, uo.num AS orderNum, message, DATE_FORMAT(date_write,"%d.%m.%Y %T") AS dateWrite, login AS userLogin, wm.user_id AS userId FROM webchat_message wm' +
@@ -296,7 +303,7 @@ io.sockets.on('connection', function (client) {
     });
 
     client.on("request read message", function (data) {
-        var messageId = data.messageId, userId = arrChannel[clientID];
+        var messageId = data.messageId, userId = arrOrderChannel[clientID];
         connection.select('webchat_message', 'id', {user_id: userId, id: messageId, is_read: 0}, '', function(error, row) {
             if (error) {throw error}
             if (row.length) {
@@ -314,7 +321,7 @@ io.sockets.on('connection', function (client) {
         connection.update('user_bid', {is_show_client: 0}, {id: bidId, user_order_id: orderId, is_show_client: 1}, function(error) {
             if (error) {throw error}
             client.emit('response hide bid');
-            var channel = arrChannel[clientID];
+            var channel = arrOrderChannel[clientID];
             createSystemMsg({orderId: orderId, type: 'hide_author_bid', channel: channel});
         });
     });
@@ -360,7 +367,7 @@ io.sockets.on('connection', function (client) {
             price = data.price.replace(/\s/g, ""),
             day = data.day,
             authorLogin = data.authorLogin,
-            channel = arrChannel[clientID];
+            channel = arrOrderChannel[clientID];
         if (validator.isLength(price, 3, 7) && validator.isLength(day, 1, 3) && validator.isInt(price) && validator.isInt(day)) {
             connection.select('user', 'id, email', {login: authorLogin}, '', function(error, row) {
                 if (error) {throw error}
@@ -504,6 +511,13 @@ io.sockets.on('connection', function (client) {
         var patternCheckEmail = /([a-z0-9_-]+\.)*[a-z0-9_-]+(@|sobaka|_|собака)[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}/i,
             patternCheckPhone = /((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,16}/i;
         return patternCheckEmail.test(a) || patternCheckPhone.test(a);
+    }
+
+    function replaceIncorrectMessage(a) {
+        var patternCheckEmail = /([a-z0-9_-]+\.)*[a-z0-9_-]+(@|sobaka|_|собака)[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}/i,
+            patternCheckPhone = /((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,16}/i,
+            r = a.replace(patternCheckEmail, "Warning");
+        return r.replace(patternCheckPhone, " Warning ");
     }
 });
 
