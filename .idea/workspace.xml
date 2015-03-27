@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b457e0f6-959f-42f7-b55c-fad5bac8232a" name="Default" comment="1&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_chat/server/appChat.js" afterPath="$PROJECT_DIR$/node_chat/server/appChat.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_select.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Author/order_select.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig" afterPath="$PROJECT_DIR$/src/Acme/SecureBundle/Resources/views/Client/order_select.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bundles/js/script_socket_helper.js" afterPath="$PROJECT_DIR$/web/bundles/js/script_socket_helper.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="b457e0f6-959f-42f7-b55c-fad5bac8232a" name="Default" comment="1&#10;" />
     <ignored path="study.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
