@@ -16,10 +16,11 @@ function SocketHelper(data) {
     //this.get_all_messages_params_author = { userId: this.userId, clientId: this.clientId };
 
     this.addParams =  function (data) {
-        this.mode = data.mode;
+        //this.mode = data.mode;
         this.messageText = data.messageText;
         this.orderNum = data.orderNum;
-        this.create_new_message_params_client = { messageText: this.messageText, writerLogin: this.userLogin, responseId: this.authorId, mode: this.mode };
+        this.create_new_message_params_client = { messageText: this.messageText, writerLogin: this.userLogin, responseId: this.authorId };
+        this.create_new_message_params_author = { messageText: this.messageText, writerLogin: this.userLogin, responseId: this.clientId };
     };
 
 

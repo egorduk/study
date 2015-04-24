@@ -238,7 +238,6 @@
                     flagIsWriting = 0,
                     mode = false,
                     modalConfirmClientBid = $('#modal-confirm-client-bid'),
-                    //channel,
                     socketHelper,
                     serverHost = 'http://localhost:8008';
 
@@ -290,8 +289,7 @@
                 //systemMsg('Соединение установленно!');
                 //socket.emit("get all messages", {orderId: orderId});
                 //var channel = jqgridHelper.getChannel(userId, clientId, 'none-jqgrid');
-                var channel = orderId;
-                socketHelper = new SocketHelper({channel: channel, authorLogin: userLogin, clientLogin: clientLogin, userLogin: userLogin, userId: userId, clientId: clientId});
+                socketHelper = new SocketHelper({channel: orderId, authorLogin: userLogin, clientLogin: clientLogin, userLogin: userLogin, userId: userId, clientId: clientId});
                 console.log(socketHelper);
                 this.emit("join to channel order", socketHelper.join_to_channel_order_params)
                         .emit("request get all messages", socketHelper.get_all_messages_params_author);
@@ -310,15 +308,19 @@
             }).on("response get all messages", function(data) {
                 var countRows = 0;
                 for (var key in data) {
+                    if (data[key].writerId != 17) {
+                        userMsg(data[key].writerLogin, data[key].messageText, data[key].dateWrite);
+                    } else {
+                        systemMsg(data[key].writerLogin, data[key].messageText, data[key].dateWrite);
+                    }
                     countRows++;
-                    userMsg(data[key].userLogin, data[key].messageText, data[key].dateWrite);
                 }
                 setSidebarCountRecords(countRows);
             }).on("show new message", function(data) {
-                if ($.cookie('volume_msg') == 1 && data.userLogin != userLogin) {
+                if ($.cookie('volume_msg') == 1 && data.writerLogin != userLogin) {
                     ion.sound.play("button_tiny");
                 }
-                userMsg(data.userLogin, data.messageText, data.dateWrite);
+                userMsg(data.writerLogin, data.messageText, data.dateWrite);
                 increaseCountMsg();
                 message_txt.focus();
             }).on("user in room", function() {
@@ -386,7 +388,7 @@
                 if (text.length <= 0 || $.trim(text) == '') {
                     return;
                 }
-                socketHelper.addParams({messageText: text, mode: checkIsEmail(text) || checkIsPhone(text), orderNum: orderNum});
+                socketHelper.addParams({messageText: text, orderNum: orderNum});
                 socket.emit("create new message", socketHelper.create_new_message_params_author);
             }
 
@@ -414,7 +416,7 @@
             function userMsg(login, message, dateWrite) {
                 var m = '<div class="msg">' +
                         '<p class="user">' + login + ':</p> ' +
-                        '<div class="message">' + (message) + '</div>' +
+                        '<div class="message">' + message + '</div>' +
                         '<p class="date">' + dateWrite + '</p>' +
                         '</div>';
                 messages.append(m).scrollTop(messages[0].scrollHeight);
@@ -424,9 +426,9 @@
                 blockCountMsg.append('<span>Кол-во сообщений: <span id="dig-count">' + countRows + '</span></span>');
             }
 
-            function getChannel() {
+            /*function getChannel() {
                 return  userId + '_' + clientId;
-            }
+            }*/
 
             //document.title = "Просмотр заказа №" + {{ order.num }};
             $.fn.button.noConflict();

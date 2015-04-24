@@ -286,13 +286,13 @@
                     socketHelper,
                     serverHost = 'http://localhost:8008';
 
-            var  tabContent = $( "#tab_content" ),
-                    tabTemplate = "<li><a href='#{href}'>#{label}</a><span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span></li>",
+            var  tabTemplate = "<li><a href='#{href}'>#{label}</a><span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span></li>",
                     tabs = $("#tabs");
             tabs.tabs({
                 activate: function(e, ui) {
-                    socketHelper.channel = ui.newPanel.attr('id');
-                    currTab = tabs.find("#" + socketHelper.channel);
+                    socketHelper.authorLogin = ui.newPanel.attr('id');
+                    socketHelper.authorId = ui.newPanel.attr('data-id');
+                    currTab = tabs.find("#" + socketHelper.authorLogin);
                     setFocusOnMessageField();
                 }
             }).addClass("ui-tabs-vertical ui-helper-clearfix");
@@ -304,13 +304,13 @@
             });
             tabs.find("li").removeClass("ui-corner-top").addClass("ui-corner-left");
             tabs.delegate("span.ui-icon-close", "click", function() {
-                var panelId = $(this).closest("li").remove().attr("aria-controls");
+               /* var panelId = $(this).closest("li").remove().attr("aria-controls");
                 $("#" + panelId).remove();
                 disconnectUser(panelId);
                 arrOpenChat[panelId].disconnect();
                 delete arrUsedChat[panelId];
                 delete arrOpenChat[panelId];
-                tabs.tabs("refresh");
+                tabs.tabs("refresh");*/
             });
             /*tabs.bind("keyup", function(event) {
              if (event.altKey && event.keyCode === $.ui.keyCode.BACKSPACE) {
@@ -319,11 +319,10 @@
              tabs.tabs("refresh");
              }
              });*/
-            function addTab(a) {
-                var label = a, id = a, li;
-                li = $(tabTemplate.replace(/#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label));
+            function addTab(a, b) {
+                var li = $(tabTemplate.replace(/#\{href\}/g, "#" + a ).replace( /#\{label\}/g, a));
                 tabs.find(".ui-tabs-nav").append(li);
-                tabs.append("<div id='" + id + "'>" +
+                tabs.append("<div data-id='" + b + "' id='" + a + "'>" +
                         "<div class='block-chat'>" +
                         "<div class='chat-wrap'>" +
                         "<div class='messages-wrap'></div>" +
@@ -402,14 +401,10 @@
                     return;
                 }
                 socketHelper.addParams({messageText: text, orderNum: orderNum});
-                //socketHelper.messageText = text;
-                //socketHelper.mode = patternCheckEmail.test(text) || patternCheckPhone.test(text);
-                //console.log(socketHelper);
                 socket.emit("create new message", socketHelper.create_new_message_params_client);
             }
 
             function clearSidebarCountRecords() {
-
             }
 
             function increaseCountMsg() {
@@ -461,9 +456,10 @@
             }
 
             function filterStr(str) {
-                var r = str.replace(patternCheckEmail, "Warning");
+                /*var r = str.replace(patternCheckEmail, "Warning");
                 r = r.replace(patternCheckPhone, " Warning ");
-                return r;
+                return r;*/
+                return str;
             }
 
             function selectCurrentTab() {
@@ -499,11 +495,11 @@
                 delete arrOpenChat[channel];
             }
 
-            function connectAction(a) {
+            function connectAction(a, b) {
                 if (arrUsedChat[a] != a) {
                     arrUsedChat[a] = a;
                     socket.emit("request get all messages", socketHelper.get_all_messages_params_client);
-                    addTab(a);
+                    addTab(a, b);
                     currTab = tabs.find("#" + a);
                     setFocusOnMessageField();
                     currTab.find(".chat-wrap .messages-wrap").html('');
@@ -590,7 +586,6 @@
                         var row = jqgridHelper.getRow($(this));
                         if (row && jqgridHelper.getRowId(e)) {
                             var authorLogin = jqgridHelper.getAuthorLogin(row),
-                                    channel = orderId,
                                     authorId = jqgridHelper.getAuthorId(row);
                             /*try {
                              if (arrUsedChat[channel] != channel) {
@@ -604,7 +599,7 @@
                              console.log('Error connecting');
                              return;
                              }*/
-                            socketHelper = new SocketHelper({ channel: channel, authorLogin: authorLogin, authorId: authorId, clientLogin: userLogin, userLogin: userLogin, userId: userId });
+                            socketHelper = new SocketHelper({ channel: orderId, authorLogin: authorLogin, authorId: authorId, clientLogin: userLogin, userLogin: userLogin, userId: userId });
                             //console.log(socketHelper);
                             if (!socket) {
                                 try {
@@ -617,7 +612,7 @@
                                     this.emit("join to channel order", socketHelper.join_to_channel_order_params);
                                     //.emit("join to channel self")
                                     // .emit("request get all messages", socketHelper.get_all_messages_params_client);
-                                    connectAction(authorLogin);
+                                    connectAction(authorLogin, authorId);
                                     //  btnConfirmWork.removeClass('disabled');
                                 }).on("response get all messages", function(data) {
                                     var countRows = 0;
@@ -657,10 +652,10 @@
                                     arrOpenChat[channel].emit("request view current online");
                                 }).on("show new message", function(data) {
                                     //console.dir(data);
-                                    if ($.cookie('volume_msg') == 1 && data.userLogin != userLogin) {
+                                    if ($.cookie('volume_msg') == 1 && data.writerLogin != userLogin) {
                                         ion.sound.play("button_tiny");
                                     }
-                                    userMsg(data.userLogin, data.messageText, data.dateWrite);
+                                    userMsg(data.writerLogin, data.messageText, data.dateWrite);
                                     increaseCountMsg();
                                     //setFocusOnMessageField();
                                 }).on("show system message", function(data) {
@@ -673,7 +668,7 @@
                                     //disconnectUser();
                                 });
                             } else {
-                                connectAction(authorLogin);
+                                connectAction(authorLogin, authorId);
                             }
 
                             // }
