@@ -2,11 +2,141 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link rel="shortcut icon" href="/static/favicon.ico">
+    <link rel="stylesheet" href="static/main.css">
     <meta name="robots" content="noindex,nofollow"/>
-    <title>Чат сервер</title>
+    <title>Webchat</title>
 </head>
 <body>
-<p>Чат сервер 008</p>
+<div class="demo">
+    <div class="chat">
+        <div class="messages" id="messages"></div>
+        <div class="panel">
+            <span class="nick"></span>
+            <input type="text" name="message_text" id="message_text">
+            <button type="button" id="message_btn">Отправить</button>
+        </div>
+        <div id="sidebar">
+            <div id="count-records"></div>
+            <div id="online"></div>
+        </div>
+    </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://localhost:8111/socket.io/socket.io.js" defer></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var messages = $("#messages");
+
+        try {
+            var socket = io.connect('http://localhost:8111');
+        } catch(e) {
+            msg_system("Server is down");
+            return;
+        }
+
+        var name = 'User_' + (Math.round(Math.random() * 10000));
+
+        var message_txt = $("#message_text");
+        $('.chat .nick').text(name);
+
+        socket.on('connecting', function () {
+            msg_system('Соединение...');
+           // socket.emit("log connecting");
+        });
+
+        //socket.set('nickname', name);
+
+        socket.on('connect', function () {
+            msg_system('Соединение установленно!');
+
+            //socket.emit("log connection", {name: name});
+            //socket.emit('log connecting');
+
+            socket.emit('request_join_channel', {userLogin: name, userId: 1, channel: 1});
+        });
+
+       /* socket.on('message', function (data) {
+            msg(data.name, data.message, data.date_write);
+            message_txt.focus();
+        });*/
+
+        socket.on('response_join_channel', function (data) {
+            socket.emit('request_get_all_messages');
+            socket.emit('request_view_online_user');
+        });
+
+        socket.on('response_user_online', function (data) {
+            setSidebarOnlineUser(data);
+        });
+
+        socket.on('response_get_all_messages', function (data) {
+            $.each(data, function (key, val) {
+                msg(val.writerLogin, val.messageText, val.dateWrite);
+            });
+
+            setSidebarCountRecords(Object.keys(data).length);
+        });
+
+        socket.on('disconnect', function () {
+            msg_system('Server off');
+
+            //socket.emit('disconnect client', {name: name});
+        });
+
+        socket.on('disconnect user', function (data) {
+           // msg_system("Server off");
+            //socket.emit('disconnect');
+            //console.log(data);
+             $("#online").find("p[data-value=" + data + "]").remove();
+        });
+
+        socket.on('test1', function (data) {
+            // msg_system("Server off");
+            //socket.emit('disconnect');
+            console.log(data);
+        });
+
+        function msg(login, message, dateWrite) {
+            var m = '<div class="msg">' +
+                    '<p class="user">' + (login) + ':</p> ' +
+                    '<p class="message">' + (message) + '</p>' +
+                    '<p class="date">' + dateWrite + '</p>' +
+                    '</div>';
+            messages.append(m).scrollTop(messages[0].scrollHeight);
+        }
+
+        function msg_system(message) {
+            var m = '<div class="msg system">' + safe(message) + '</div>';
+            messages.append(m).scrollTop(messages[0].scrollHeight);
+        }
+
+        function setSidebarCountRecords(countRows) {
+            $('#count-records').append('<span>Кол-во сообщений: ' + countRows + '</span>');
+        }
+
+        function setSidebarOnlineUser(data) {
+
+            $('#online')
+                .empty()
+                .append('<p data-value="' + data.userId + '">' + data.userLogin + '</p>');
+        }
+
+        $("#message_btn").click(function () {
+            var text = $("#message_text").val();
+
+            if (text.length <= 0) {
+                return;
+            }
+
+            message_txt.val("");
+
+            socket.emit('request_add_new_message', {message: text});
+        });
+
+        function safe(str) {
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+    });
+</script>
 </body>
 </html>

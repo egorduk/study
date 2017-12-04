@@ -1,0 +1,27 @@
+{
+  "requires": true,
+  "lockfileVersion": 1,
+  "dependencies": {
+    "@ionic/cli-utils": "^1.19.0",
+    "cross-spawn": "^5.1.0",
+    "dateformat": "^3.0.2",
+    "express": "^4.16.2",
+    "http": "0.0.0",
+    "mysql": "^2.15.0",
+    "mysql-utilities": "^1.0.10",
+    "path": "^0.12.7",
+    "socket.io": "^2.0.4",
+    "validator": "^9.1.2"
+  },
+  "name": "server",
+  "version": "1.0.0",
+  "main": "appChat.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

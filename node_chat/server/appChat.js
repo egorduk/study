@@ -1,4 +1,4 @@
-var PORT = 8008, options = {
+var PORT = 8111, options = {
     //'log level': 1
 };
 var express = require('express'),
@@ -10,10 +10,36 @@ var express = require('express'),
     io = require('socket.io').listen(server, options);
 
 server.listen(PORT);
-/*app.use('/static', express.static(__dirname + '/static'));
- app.get('/', function (req, res) {
- //res.sendfile(__dirname + '/index.html');
- });*/
+
+app.use('/static', express.static(__dirname + '/static'));
+app.get('/', function (req, res) {
+    res.sendFile(__dirname + '/index.html');
+});
+
+/*var pool = mysql.createPool({
+ canRetry: true,
+ database: 'study',
+ host: 'localhost',
+ user: 'root',
+ password: '',
+ port: 3306,
+ connectionLimit: 8,
+ waitForConnections: true,
+ queueLimit: 0
+ });
+ // Attempt to catch disconnects
+ pool.on('connection', function(connection) {
+ console.log('Connection established');
+
+ // Below never get called
+ connection.on('error', function(err) {
+ console.error(new Date(), 'MySQL error', err.code);
+ });
+ connection.on('close', function(err) {
+ console.error(new Date(), 'MySQL close', err);
+ });
+ });
+ module.exports = pool;*/
 
 //var log4js = require('log4js');
 //var logger = log4js.getLogger();
@@ -25,37 +51,33 @@ server.listen(PORT);
  userListDB = db.collection('users');
  chatDB = db.collection('chat');
  });*/
+/*
+ var transporter,
+ nodemailer = require('nodemailer'),
+ userEmail = 'egorduk91@gmail.com',
+ passEmail = 'rezistor';*/
 
-var transporter,
-    nodemailer = require('nodemailer'),
-    userEmail = 'egorduk91@gmail.com',
-    passEmail = 'rezistor';
+var mysql = require('mysql'),
+    mysqlUtilities = require('mysql-utilities'),
+    connection = mysql.createConnection({
+        host:     'localhost',
+        user:     'root',
+        password: '',
+        database: 'study'
+    });
 
-var mysql = require('mysql'), mysqlUtilities = require('mysql-utilities'), connection = mysql.createConnection({
-    host:     'localhost',
-    user:     'root',
-    password: '',
-    database: 'study'
-});
+var arrUserLogin = [],
+    arrUserId = [],
+    arrOrderChannel = [],
+    arrUid = [];
 
-var arrLogin = [], arrUserId = [], arrOrderChannel = [], arrUid = [];
 
 connection.connect(function (err, db) {
-    if (err) {throw err}
-    /*if (err) {
-     var error = new Error('something broke');
-     console.error( error.stack );
-     }*/
+    if (err) {
+        throw err;
+    }
     // userListDB = db.collection('users');
-    // chatDB = db.collection('chat');
 });
-
-/*connection.queryRow(
- 'SELECT * FROM user where LanguageId=?', [3],
- function(err, row) {
- console.dir({queryRow:row});
- }
- );*/
 
 // Mix-in for Data Access Methods and SQL Autogenerating Methods
 mysqlUtilities.upgrade(connection);
@@ -73,75 +95,82 @@ mysqlUtilities.introspection(connection);
 // Release connection
 //connection.end();
 
-
-
 var validator = require('validator');
 
 io.sockets.on('connection', function (client) {
     var clientID = (client.id).toString();
-    //console.log(clientID);
 
-    client.on("join to channel order", function(data) {
-        console.dir(data);
+    console.log('ClientID - ' + clientID);
+
+    client.on('request_join_channel', function(data) {
+        //console.dir(data);
         var channel = data.channel;
-        arrLogin[clientID] = data.userLogin;
-        arrOrderChannel[clientID] = channel;
+
+        arrUserLogin[clientID] = data.userLogin;
         arrUserId[clientID] = data.userId;
-        arrUid[data.userId] = clientID;
+        arrOrderChannel[clientID] = channel;
+        //arrUid[data.userId] = clientID;
+
         client.join(channel);
-        console.log("Connected - " + arrLogin[clientID] + " to channel ORDER - " + channel);
+
+        console.log('Connected - ' + arrUserLogin[clientID] + " to channel ORDER - " + channel);
+
+        client.emit('response_join_channel');
+        client.to(channel).emit('response_user_online', data);
+
         /*Init variable for send mailing*/
         /*transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: userEmail,
-                pass: passEmail
-            }
-        }, function(error) {
-            if (error) {throw error}
-        });*/
+         service: 'gmail',
+         auth: {
+         user: userEmail,
+         pass: passEmail
+         }
+         }, function(error) {
+         if (error) {throw error}
+         });*/
         /*var typeConnection = data.type;
-        if (typeConnection == 'client_index') {
-        } else if (typeConnection == 'client_select_author') {
-            *//* var params = { 'min-price': 100, 'max-price': 999999, 'max-day': 999, 'min-day': 1 };
-             client.emit("response set params", {data: params});*//*
-        }*/
+         if (typeConnection == 'client_index') {
+         } else if (typeConnection == 'client_select_author') {
+         *//* var params = { 'min-price': 100, 'max-price': 999999, 'max-day': 999, 'min-day': 1 };
+         client.emit("response set params", {data: params});*//*
+         }*/
     });
 
-    client.on("join to channel messages", function(data) {
-        checkCredentials({userId: data.channel, token: data.token}, function(a) {
-            console.log(a);
-            if (a) {
-                var channel = data.channel;
-                arrLogin[clientID] = data.userLogin;
-                arrChannel[clientID] = channel;
-                client.join(channel);
-                console.log("Connected - " + arrLogin[clientID] + " to channel messages - " + channel);
-                connection.update('user', {is_active: 1}, {login: data.userLogin, is_active: 0}, function(error) {
-                    if (error) {throw error}
-                    //client.to(channel).emit("request set online status");
-                });
-            } else {
-                createErrorLog({userId: data.channel, channel: data.channel, token: data.token, type: 'join_channel_messages'});
-            }
-        });
-    });
+    /*client.on("join to channel messages", function(data) {
+     checkCredentials({userId: data.channel, token: data.token}, function(a) {
+     console.log(a);
+     if (a) {
+     var channel = data.channel;
+     arrUserLogin[clientID] = data.userLogin;
+     arrChannelOrder[clientID] = channel;
+     client.join(channel);
+     console.log("Connected - " + arrLogin[clientID] + " to channel messages - " + channel);
+     connection.update('user', {is_active: 1}, {login: data.userLogin, is_active: 0}, function(error) {
+     if (error) {throw error}
+     //client.to(channel).emit("request set online status");
+     });
+     } else {
+     createErrorLog({userId: data.channel, channel: data.channel, token: data.token, type: 'join_channel_messages'});
+     }
+     });
+     });
 
-    client.on("join to channel self", function() {
-        var channel = arrUserId[clientID];
-        client.join(channel);
-        console.log("Connected - " + arrLogin[clientID] + " to channel self - " + channel);
-    });
+     client.on("join to channel self", function() {
+     var channel = arrUserId[clientID];
+     client.join(channel);
+     console.log("Connected - " + arrLogin[clientID] + " to channel self - " + channel);
+     });*/
 
-    client.on("create new message", function (data) {
+    client.on('request_add_new_message', function (data) {
         var orderId = arrOrderChannel[clientID],
             userId = arrUserId[clientID],
             responseId = data.responseId,
             fullDate = getFullDate(new Date()),
-            writerLogin = arrLogin[clientID],
+            writerLogin = arrUserLogin[clientID],
             messageText = data.messageText,
             mode = checkIsValidateMessage(messageText);
         console.dir(data);
+
         connection.insert('webchat_message', {
             message: messageText,
             response_id: responseId,
@@ -152,10 +181,10 @@ io.sockets.on('connection', function (client) {
             var data = { dateWrite: fullDate, messageText: messageText, writerLogin: writerLogin };
             client.emit("show new message", data)
                 .to(arrUid[responseId]).emit("show new message", data);
-           /* connection.select('user', 'id', {login: responseLogin}, '', function(error, row) {
-                if (error) {throw error}
-                client.to(row[0].id).emit("response get new message from client", {dateWrite: fullDate, messageText: messageText, userLogin: writerLogin, userId: userId, messageId: recordId, orderNum: orderNum});
-            });*/
+            /* connection.select('user', 'id', {login: responseLogin}, '', function(error, row) {
+             if (error) {throw error}
+             client.to(row[0].id).emit("response get new message from client", {dateWrite: fullDate, messageText: messageText, userLogin: writerLogin, userId: userId, messageId: recordId, orderNum: orderNum});
+             });*/
             if (mode) {
                 // Send about denied rules
                 connection.insert('ban_message', {
@@ -208,46 +237,77 @@ io.sockets.on('connection', function (client) {
         //client.disconnect();
     });
 
-    client.on("request get all messages", function (data) {
+    client.on('request_get_all_messages', function (data) {
         var orderId = arrOrderChannel[clientID],
-            userId = arrUserId[clientID],
-            otherUserId = data.authorId ? data.authorId : data.clientId;
+            userId = arrUserId[clientID];
+        //otherUserId = data.authorId ? data.authorId : data.clientId;
+
         connection.queryHash(
-            'SELECT wm.id, wm.message AS messageText, DATE_FORMAT(date_write,"%d.%m.%Y %T") AS dateWrite, u.login AS writerLogin, u.id AS writerId FROM webchat_message wm' +
-                ' INNER JOIN user u ON wm.writer_id = u.id' +
-                ' INNER JOIN user u1 ON wm.response_id = u1.id' +
-                ' WHERE wm.user_order_id = ' + orderId + ' AND (wm.writer_id = ' + otherUserId + ' OR wm.response_id = ' + otherUserId + ')' +
-                ' AND (wm.writer_id = ' + userId + ' OR wm.response_id = ' + userId + ')',
+            'SELECT wm.id, wm.message messageText, DATE_FORMAT(date_write,"%d.%m.%Y %T") dateWrite, u.login writerLogin, u.id writerId ' +
+            'FROM webchat_message wm ' +
+            'INNER JOIN user u ON wm.writer_id = u.id ' +
+            //' INNER JOIN user u1 ON wm.response_id = u1.id' +
+            //' WHERE wm.user_order_id = ' + orderId + ' AND (wm.writer_id = ' + otherUserId + ' OR wm.response_id = ' + otherUserId + ')' +
+            'WHERE wm.user_order_id = ' + orderId + ' AND (wm.writer_id = ' + userId + ' OR wm.response_id = ' + userId + ') ' +
+            'AND (wm.writer_id = ' + userId + ' OR wm.response_id = ' + userId + ')',
+
             function(error, rows) {
                 //console.dir(rows);
                 if (error) {throw error}
-                for (var key in rows) {
+
+                /*for (var key in rows) {
                     if (checkIsValidateMessage(rows[key].messageText)) {
                         rows[key].messageText = replaceIncorrectMessage(rows[key].messageText);
                     }
-                }
-                client.emit('response get all messages', rows);
-               /* connection.update('webchat_message', { is_read: 1 }, { user_order_id: orderId, response_id: userId, is_read: 0 }, function(error) {
-                    if (error) {throw error}
-                });*/
+                }*/
+
+                client.emit('response_get_all_messages', rows);
+                /* connection.update('webchat_message', { is_read: 1 }, { user_order_id: orderId, response_id: userId, is_read: 0 }, function(error) {
+                 if (error) {throw error}
+                 });*/
             }
         );
     });
 
     client.on("disconnect", function() {
         var channel = arrOrderChannel[clientID];
-        console.log("Disconnected - " + arrLogin[clientID] + " from channel ORDER - " + channel);
+
+        console.log("Disconnected - " + arrUserLogin[clientID] + " from channel ORDER - " + channel);
+
         client.to(channel).emit("response disconnect user");
+
         delete arrOrderChannel[clientID];
-        delete arrLogin[clientID];
+        delete arrUserLogin[clientID];
         delete arrUid[arrUserId[clientID]];
         delete arrUserId[clientID];
         // client.leave(room); //Rooms are left automatically upon disconnection.
     });
 
-    client.on("request view current online", function() {
+    client.on('request_view_online_user', function() {
         var channel = arrOrderChannel[clientID];
-        client.to(channel).emit("response view current online");
+
+        var res = []
+            // the default namespace is "/"
+            , ns = io.of("/");
+
+        if (ns) {
+            for (var id in ns.connected) {
+                if(channel) {
+                    //var index = ns.connected[id].rooms.indexOf(channel);
+                    console.dir(ns.connected[id].rooms);
+                    /*if(index !== -1) {
+                        res.push(ns.connected[id]);
+                    }*/
+                } else {
+                    res.push(ns.connected[id]);
+                }
+            }
+        }
+
+        console.dir(res);
+
+
+        //client.to(channel).emit('response_user_online', data);
     });
 
     client.on("request user write", function() {
@@ -293,12 +353,12 @@ io.sockets.on('connection', function (client) {
         //connection.select('webchat_message', 'message, user_order_id AS orderId, date_write, user_id', {is_read: 0, user_id: userId, channel: channel}, '', function(error, rows) {
         connection.queryHash(
             'SELECT wm.id AS messageId, uo.num AS orderNum, message, DATE_FORMAT(date_write,"%d.%m.%Y %T") AS dateWrite, login AS userLogin, wm.user_id AS userId FROM webchat_message wm' +
-                ' INNER JOIN user u ON user_id = u.id' +
-                ' INNER JOIN user_order uo ON wm.user_order_id = uo.id' +
-                ' WHERE wm.is_read = 0 AND channel REGEXP "_' + userId + '$"', function(error, rows) {
+            ' INNER JOIN user u ON user_id = u.id' +
+            ' INNER JOIN user_order uo ON wm.user_order_id = uo.id' +
+            ' WHERE wm.is_read = 0 AND channel REGEXP "_' + userId + '$"', function(error, rows) {
                 if (error) {throw error}
                 //console.dir(rows);
-                client.emit("response get new messages from db", rows);
+                client.emit('response_get_new_messages', rows);
             });
     });
 
@@ -447,20 +507,20 @@ io.sockets.on('connection', function (client) {
             subject = 'Заказчик предлагает свои условия';
             text = 'Text of message';
         }
-        transporter.sendMail({
-            from: from,
-            address: userEmail,
-            to: to,
-            subject: subject,
-            text: text
-            //html: '<i>html</i>'
-        }, function(error, info){
-            if (error) {
-                console.log(error);
-            } else {
-                console.log('Message sent: ' + info.response);
-            }
-        });
+        /*transporter.sendMail({
+         from: from,
+         address: userEmail,
+         to: to,
+         subject: subject,
+         text: text
+         //html: '<i>html</i>'
+         }, function(error, info){
+         if (error) {
+         console.log(error);
+         } else {
+         console.log('Message sent: ' + info.response);
+         }
+         });*/
     }
 
     function createSystemMsg(data) {
